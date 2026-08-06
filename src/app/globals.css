@@ -81,10 +81,9 @@
 @theme inline {
   --radius-media: var(--radius-xl);
 
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
-  --font-editorial: var(--font-display);
-  --font-sans: var(--font-body);
+  --font-display: var(--font-spectral), ui-serif, Georgia, serif;
 }
 
 @theme {
@@ -145,6 +144,11 @@
 
 @theme {
   --gutter-x: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem);
+
+  /* Spacing Design System Tokens */
+  --spacing-section-py: clamp(3.5rem, 2.25rem + 2.5vw, 6rem);
+  --spacing-section-py-compact: clamp(2rem, 1.25rem + 1.5vw, 3.25rem);
+  --spacing-section-py-hero: clamp(2.5rem, 1.75rem + 2vw, 4.5rem);
 }
 
 @utility gutter-x {
@@ -156,7 +160,15 @@
 }
 
 @utility section-y {
-  padding-block: clamp(4rem, 2.5714rem + 7.1429vw, 9rem);
+  padding-block: var(--spacing-section-py);
+}
+
+@utility section-y-compact {
+  padding-block: var(--spacing-section-py-compact);
+}
+
+@utility section-y-hero {
+  padding-block: var(--spacing-section-py-hero);
 }
 
 @utility field-ink {

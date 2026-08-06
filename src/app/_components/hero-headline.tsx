@@ -48,7 +48,7 @@ export function HeroHeadline({ lead, tail, className }: HeroHeadlineProps) {
   return (
     <h1
       className={cn(
-        "font-editorial text-6xl font-normal tracking-normal text-ink",
+        "font-display text-6xl font-normal tracking-normal text-ink",
         className,
       )}
       ref={root}

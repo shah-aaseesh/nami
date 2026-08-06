@@ -5,7 +5,7 @@ import { Parallax } from "@/components/motion/parallax";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H3, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, Standfirst } from "@/components/ui/typography";
 import type {
   ContentLink,
   NamedEntity,
@@ -26,8 +26,6 @@ import {
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { HeroHeadline } from "./hero-headline";
-
-const numberFormat = new Intl.NumberFormat("en-US");
 
 const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
   facebook: FacebookIcon,
@@ -69,18 +67,49 @@ function HeroCta({
   );
 }
 
-function HeroRail({ lines }: { lines: readonly string[] }) {
+function HeroRail({
+  lines,
+  profiles,
+}: {
+  lines: readonly string[];
+  profiles: readonly SocialProfile[];
+}) {
   return (
-    <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-6 flex-col items-center gap-6 pt-2 lg:flex">
-      <span className="h-16 w-px bg-border" />
-      {lines.map((line) => (
-        <p
-          className="rotate-180 font-body text-xs tracking-widest text-ink-muted uppercase [writing-mode:vertical-rl]"
-          key={line}
-        >
-          {line}
-        </p>
-      ))}
+    <div className="absolute inset-y-0 left-0 hidden w-6 flex-col items-center justify-between pb-6 pt-2 lg:flex">
+      <div className="flex flex-col items-center gap-6">
+        <span className="h-16 w-px bg-border" />
+        {lines.map((line) => (
+          <p
+            className="rotate-180 font-body text-xs tracking-widest text-ink-muted uppercase [writing-mode:vertical-rl]"
+            key={line}
+          >
+            {line}
+          </p>
+        ))}
+      </div>
+
+      {profiles.length === 0 ? null : (
+        <div className="flex flex-col items-center gap-6">
+          <ul className="flex flex-col items-center gap-5">
+            {profiles.map((profile) => (
+              <li key={profile.platform}>
+                <Link
+                  className="block text-ink-muted transition-colors hover:text-accent"
+                  href={profile.href as Route}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <Icon icon={SOCIAL_GLYPHS[profile.platform]} />
+                  <span className="sr-only">{profile.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="rotate-180 font-body text-xs tracking-widest text-ink-muted uppercase [writing-mode:vertical-rl]">
+            Follow
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -104,7 +133,7 @@ function HeroBadge({
     <div className="relative size-32 shrink-0 lg:size-36">
       <svg
         aria-label={ring.replaceAll(" * ", ", ")}
-        className="size-full"
+        className="size-full motion-safe:animate-[spin_20s_linear_infinite]"
         role="img"
         viewBox="0 0 160 160"
       >
@@ -112,7 +141,7 @@ function HeroBadge({
           <path d={BADGE_ARC} fill="none" id="hero-badge-arc" />
         </defs>
         <text
-          className="fill-ink-muted font-body"
+          className="fill-ink-muted font-display font-bold text-sm"
           fontSize="11"
           textLength={2 * Math.PI * BADGE_RADIUS}
         >
@@ -136,10 +165,16 @@ function HeroBadge({
   );
 }
 
-function HeroSocials({ profiles }: { profiles: readonly SocialProfile[] }) {
+function HeroSocials({
+  className,
+  profiles,
+}: {
+  className?: string;
+  profiles: readonly SocialProfile[];
+}) {
   return (
-    <div className="flex items-center gap-6 lg:flex-col lg:items-start lg:gap-6">
-      <ul className="flex items-center gap-6 lg:flex-col lg:items-start lg:gap-5">
+    <div className={cn("flex items-center gap-6", className)}>
+      <ul className="flex items-center gap-6">
         {profiles.map((profile) => (
           <li key={profile.platform}>
             <Link
@@ -154,7 +189,7 @@ function HeroSocials({ profiles }: { profiles: readonly SocialProfile[] }) {
           </li>
         ))}
       </ul>
-      <p className="font-body text-xs tracking-widest text-ink-muted uppercase lg:rotate-180 lg:[writing-mode:vertical-rl]">
+      <p className="font-body text-xs tracking-widest text-ink-muted uppercase">
         Follow
       </p>
     </div>
@@ -162,14 +197,12 @@ function HeroSocials({ profiles }: { profiles: readonly SocialProfile[] }) {
 }
 
 export async function Hero() {
-  const [copy, stats, institution] = await Promise.all([
+  const [copy, institution] = await Promise.all([
     content.getHomeCopy(),
-    content.getStats(),
     content.getInstitution(),
   ]);
 
   const { hero } = copy;
-  const heroStats = stats.filter((stat) => stat.placement === "hero");
   const socials = institution.contact.socialProfiles.filter(
     (profile) => profile.destination === "external",
   );
@@ -185,7 +218,9 @@ export async function Hero() {
   return (
     <section className="relative isolate gutter-x section-y" id="hero">
       <div className="relative mx-auto max-w-page lg:ps-14">
-        {railLines.length === 0 ? null : <HeroRail lines={railLines} />}
+        {railLines.length === 0 ? null : (
+          <HeroRail lines={railLines} profiles={socials} />
+        )}
 
         <Reveal atFold className="flex items-center gap-4">
           <Icon className="size-6 text-accent" icon={MortarboardIcon} />
@@ -222,7 +257,9 @@ export async function Hero() {
               motto={institution.motto}
               watch={watch ?? null}
             />
-            {socials.length === 0 ? null : <HeroSocials profiles={socials} />}
+            {socials.length === 0 ? null : (
+              <HeroSocials className="lg:hidden" profiles={socials} />
+            )}
           </Reveal>
 
           {hero.image === null ? null : (
@@ -242,32 +279,6 @@ export async function Hero() {
             </figure>
           )}
         </div>
-
-        {heroStats.length === 0 ? null : (
-          <Reveal
-            atFold
-            className="mt-16 border-t pt-8 lg:mt-20"
-            delay={0.6}
-            stagger={0.08}
-          >
-            <dl className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
-              {heroStats.map((stat) => (
-                <RevealItem
-                  className="flex flex-col-reverse gap-2"
-                  key={stat.id}
-                >
-                  <dt className="font-body text-sm text-ink-muted">
-                    {stat.label}
-                  </dt>
-                  <H3 as="dd">
-                    {numberFormat.format(stat.value)}
-                    {stat.suffix}
-                  </H3>
-                </RevealItem>
-              ))}
-            </dl>
-          </Reveal>
-        )}
       </div>
     </section>
   );

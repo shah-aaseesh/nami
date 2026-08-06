@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 function titleStep(title: string): string {
   if (title.length <= 24) return "text-4xl";
   if (title.length <= 36) return "text-3xl";
-  return "text-2xl";
+  return "text-xl";
 }
 
 function bodyStep(): string {
-  return "text-3xl";
+  return "text-2xl";
 }
 
 function MarqueeRow({
@@ -30,7 +30,7 @@ function MarqueeRow({
     <ul className="flex items-center whitespace-nowrap">
       {items.map((item) => (
         <li className="flex items-center gap-8 pe-8" key={item}>
-          <span className={cn("font-editorial tracking-normal", step(item))}>
+          <span className={cn("font-display tracking-normal", step(item))}>
             {item}
           </span>
           <Icon
@@ -58,7 +58,7 @@ export async function ProgrammeMarquee() {
   ];
 
   return (
-    <section className="gutter-x section-y" id="programmes">
+    <section className="gutter-x section-y-compact" id="programmes">
       <div className="mx-auto max-w-page">
         {section.eyebrow === null ? null : (
           <Reveal className="flex items-center gap-5 lg:w-7/12">
@@ -69,22 +69,22 @@ export async function ProgrammeMarquee() {
 
         <SplitText
           as="h2"
-          className="mt-8 font-display text-5xl lg:mt-12 lg:w-8/12"
+          className="mt-6 font-display text-5xl lg:mt-8 lg:w-8/12"
         >
           {section.heading}
         </SplitText>
 
         {programmes.length === 0 && section.emptyState !== null ? (
-          <P className="mt-16 lg:w-5/12">{section.emptyState}</P>
+          <P className="mt-10 lg:w-5/12">{section.emptyState}</P>
         ) : null}
       </div>
 
       {programmes.length === 0 ? null : (
-        <Reveal className="bleed-x mt-16 lg:mt-24" stagger={0.12}>
+        <Reveal className="bleed-x mt-10 lg:mt-14" stagger={0.12}>
           <RevealItem className="field-ink py-4">
             <Marquee label="Programmes" speed={70}>
               <MarqueeRow
-                glyphClassName="size-6"
+                glyphClassName="size-5"
                 items={titles}
                 step={titleStep}
               />
@@ -94,7 +94,7 @@ export async function ProgrammeMarquee() {
           <RevealItem className="field-brand py-5">
             <Marquee copies={3} label="Awarding bodies" reverse speed={50}>
               <MarqueeRow
-                glyphClassName="size-5"
+                glyphClassName="size-4"
                 items={bodies}
                 step={bodyStep}
               />

@@ -132,7 +132,7 @@ export async function Updates() {
 
             <SplitText
               as="h2"
-              className="mt-6 font-editorial text-5xl font-normal tracking-normal lg:mt-8"
+              className="mt-6 font-display text-5xl font-normal tracking-normal lg:mt-8"
             >
               {section.heading}
             </SplitText>

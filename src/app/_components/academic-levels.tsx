@@ -48,7 +48,7 @@ export async function AcademicLevels() {
 
           <SplitText
             as="h2"
-            className="mt-8 font-editorial text-5xl font-normal tracking-normal lg:mt-10"
+            className="mt-8 font-display text-5xl font-normal tracking-normal lg:mt-10"
           >
             {section.heading}
           </SplitText>

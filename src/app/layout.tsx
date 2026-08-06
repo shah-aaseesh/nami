@@ -1,21 +1,22 @@
-import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
 import { StructuredData } from "@/components/seo/structured-data";
 import { createMetadata, siteConfig } from "@/lib/seo";
+import type { Metadata, Viewport } from "next";
+import { Inter, Spectral } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const spectral = Spectral({
+  variable: "--font-spectral",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = createMetadata({ path: "/" });
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${instrumentSerif.variable} font-sans antialiased`}
+      className={`${inter.variable} ${spectral.variable} font-sans antialiased`}
     >
       <body>
         <StructuredData />

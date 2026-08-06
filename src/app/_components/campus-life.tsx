@@ -27,7 +27,7 @@ export async function CampusLife() {
 
           <SplitText
             as="h2"
-            className="mt-8 font-editorial text-7xl font-normal tracking-normal"
+            className="mt-8 font-display text-7xl font-normal tracking-normal"
           >
             {section.heading}
           </SplitText>

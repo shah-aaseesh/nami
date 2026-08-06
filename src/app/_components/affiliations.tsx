@@ -5,7 +5,6 @@ import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, H1, H5, H6, P, Standfirst } from "@/components/ui/typography";
 import type { Affiliation, Partner, SectionCopy } from "@/lib/content";
 import { content } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 function SectionHead({ copy }: { copy: SectionCopy }) {
   return (
@@ -53,7 +52,7 @@ function AffiliationStation({ item }: { item: Affiliation }) {
       </H6>
       <P className="mt-3 text-sm">{item.scope}</P>
       {item.note === null ? null : (
-        <p className="mt-5 inline-block rounded-full border px-4 py-1.5 font-body text-xs text-ink">
+        <p className="mt-5 inline-block rounded-lg border px-3 py-2 font-body text-xs text-ink">
           {item.note}
         </p>
       )}
@@ -155,12 +154,7 @@ export async function Affiliations() {
           )}
 
           {networkPartners.length === 0 ? null : (
-            <Reveal
-              className={cn(
-                "mt-12 lg:mt-16",
-                leadPartners.length === 0 ? null : "border-t pt-10 lg:pt-12",
-              )}
-            >
+            <Reveal className="mt-12 rounded-3xl border bg-surface-raised p-8 sm:p-10 lg:mt-16 lg:p-12 xl:p-14">
               <ul className="flex flex-wrap items-baseline gap-x-5 gap-y-3">
                 {networkPartners.map((partner, index) => (
                   <li className="flex items-baseline gap-x-5" key={partner.id}>

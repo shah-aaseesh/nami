@@ -1,67 +1,9 @@
-import Image from "next/image";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H6, P, Standfirst } from "@/components/ui/typography";
-import type { Testimonial } from "@/lib/content";
+import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import { content } from "@/lib/content";
-import { cn } from "@/lib/utils";
-
-function quoteStep(quote: string): string {
-  if (quote.length <= 140) return "text-5xl";
-  if (quote.length <= 450) return "text-4xl";
-  return "text-3xl";
-}
-
-function Voice({ testimonial }: { testimonial: Testimonial }) {
-  const { portrait } = testimonial;
-
-  return (
-    <figure>
-      <blockquote>
-        <p
-          className={cn(
-            "font-editorial font-normal tracking-normal text-ink text-pretty",
-            quoteStep(testimonial.quote),
-          )}
-        >
-          <span aria-hidden="true" className="text-accent">
-            &ldquo;
-          </span>
-          {testimonial.quote}
-          <span aria-hidden="true" className="text-accent">
-            &rdquo;
-          </span>
-        </p>
-      </blockquote>
-
-      <figcaption className="mt-8 flex items-center gap-5 lg:mt-10">
-        {portrait === null ? null : (
-          <Image
-            alt={portrait.alt}
-            className="size-16 shrink-0 rounded-full object-cover"
-            height={portrait.height}
-            sizes="64px"
-            src={portrait.src}
-            width={portrait.width}
-          />
-        )}
-        <span>
-          <H6 as="span" className="block">
-            {testimonial.name}
-          </H6>
-          <span className="mt-1 block font-body text-sm text-ink-muted">
-            {testimonial.programme}
-          </span>
-          {testimonial.graduatedYear === null ? null : (
-            <span className="block font-body text-sm text-ink-muted">
-              {testimonial.graduatedYear}
-            </span>
-          )}
-        </span>
-      </figcaption>
-    </figure>
-  );
-}
+import { TestimonialCard } from "./testimonials-card";
+import { TestimonialsCarousel } from "./testimonials-carousel";
 
 export async function Testimonials() {
   const [copy, testimonials] = await Promise.all([
@@ -70,11 +12,12 @@ export async function Testimonials() {
   ]);
 
   const section = copy.sections.testimonials;
+  const single = testimonials.length === 1 ? testimonials[0] : undefined;
 
   return (
     <section className="gutter-x section-y" id="testimonials">
-      <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-8">
-        <div className="lg:col-span-3">
+      <div className="mx-auto max-w-page">
+        <div className="lg:w-7/12">
           {section.eyebrow === null ? null : (
             <Reveal className="flex items-center gap-5">
               <Eyebrow>{section.eyebrow}</Eyebrow>
@@ -93,24 +36,22 @@ export async function Testimonials() {
           )}
         </div>
 
-        <div className="mt-12 lg:col-span-8 lg:col-start-5 lg:mt-0">
-          {testimonials.length === 0 ? (
-            section.emptyState === null ? null : (
-              <P>{section.emptyState}</P>
-            )
-          ) : (
-            <Reveal delay={0.25} stagger={0.08}>
-              {testimonials.map((testimonial) => (
-                <RevealItem
-                  className="mt-12 border-t pt-12 first:mt-0 first:border-0 first:pt-0"
-                  key={testimonial.id}
-                >
-                  <Voice testimonial={testimonial} />
-                </RevealItem>
-              ))}
-            </Reveal>
-          )}
-        </div>
+        {testimonials.length === 0 ? (
+          section.emptyState === null ? null : (
+            <P className="mt-12 lg:w-5/12">{section.emptyState}</P>
+          )
+        ) : (
+          <Reveal className="mt-12 lg:mt-16" delay={0.3} y={32}>
+            {single === undefined ? (
+              <TestimonialsCarousel
+                items={testimonials}
+                label={section.eyebrow ?? section.heading}
+              />
+            ) : (
+              <TestimonialCard testimonial={single} />
+            )}
+          </Reveal>
+        )}
       </div>
     </section>
   );

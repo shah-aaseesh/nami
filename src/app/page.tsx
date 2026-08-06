@@ -5,7 +5,6 @@ import { Affiliations } from "./_components/affiliations";
 import { CampusLife } from "./_components/campus-life";
 import { Hero } from "./_components/hero";
 import { ProgrammeMarquee } from "./_components/programme-marquee";
-import { Stats } from "./_components/stats";
 import { Testimonials } from "./_components/testimonials";
 import { Updates } from "./_components/updates";
 
@@ -18,7 +17,6 @@ export default function Home() {
       <AcademicLevels />
       <Affiliations />
       <CampusLife />
-      <Stats />
       <Testimonials />
       <Updates />
       <AdmissionCta />

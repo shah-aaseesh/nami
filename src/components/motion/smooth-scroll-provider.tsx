@@ -40,7 +40,7 @@ export function SmoothScrollProvider({
       const smoother = ScrollSmoother.create({
         wrapper: wrapperRef.current,
         content: contentRef.current,
-        smooth: 1.2,
+        smooth: 1.8,
         effects: true,
       });
       return () => smoother.kill();

@@ -133,48 +133,60 @@ The font block uses `@theme inline` for the opposite reason: `--font-body` point
 
 ### 3.1 The scale
 
-Fifteen steps, `text-xs` → `text-11xl`. **Every step is a `clamp()` and carries its own `line-height` and `letter-spacing`** — line-height tightens and tracking goes negative as size grows, which is what keeps a 120px display line from reading as loose.
+Fifteen steps, `text-xs` → `text-11xl`. **Every step carries its own `line-height`, and no step carries a `letter-spacing`** — see §7.1 for why the tracking keys are gone.
 
 Every `clamp()` in this system — type, `gutter-x`, `section-y` — interpolates over the **same 320px → 1440px viewport range**. Below 320 and above 1440 the value is flat. This is why there are no per-breakpoint type jumps anywhere and why there should not be any: `md:text-4xl` fights the scale rather than extending it.
 
-| Step | 320px | 1440px | line-height | tracking |
-|:--|--:|--:|--:|--:|
-| `text-xs` | 12px | 13px | 1.6 | `0.02em` |
-| `text-sm` | 14px | 15px | 1.6 | `0.01em` |
-| `text-base` | 16px | 17px | 1.65 | `0` |
-| `text-lg` | 17px | 19px | 1.6 | `-0.005em` |
-| `text-xl` | 18px | 22px | 1.5 | `-0.01em` |
-| `text-2xl` | 22px | 28px | 1.35 | `-0.015em` |
-| `text-3xl` | 26px | 36px | 1.25 | `-0.02em` |
-| `text-4xl` | 30px | 46px | 1.15 | `-0.025em` |
-| `text-5xl` | 36px | 60px | 1.08 | `-0.03em` |
-| `text-6xl` | 42px | 76px | 1.05 | `-0.032em` |
-| `text-7xl` | 48px | 96px | 1 | `-0.035em` |
-| `text-8xl` | 56px | 120px | 0.95 | `-0.038em` |
-| `text-9xl` | 64px | 152px | 0.92 | `-0.04em` |
-| `text-10xl` | 72px | 192px | 0.88 | `-0.042em` |
-| `text-11xl` | 80px | 240px | 0.85 | `-0.045em` |
+**The 1440px column is measured against the unipix reference (§7.2), not chosen.** `text-base`, `text-xl`, `text-5xl` and `text-6xl` land exactly on the reference's body, lead, `h2` and `h1` — size *and* line-height. The starred rows are those four; the rest are interpolated to keep the ladder monotone.
 
-`text-base` bottoms out at 16px — the iOS input-zoom floor and the WCAG text-resize floor, both satisfied by construction.
+| Step | 320px | 1440px | line-height | reference |
+|:--|--:|--:|--:|:--|
+| `text-xs` | 12px | 13px | 1.6 | |
+| `text-sm` | 14px | 15px | 1.7 | small text 15px |
+| `text-base` | 16px | 16px | 1.625 | ★ body 16 / 26 |
+| `text-lg` | 17px | 18px | 1.55 | |
+| `text-xl` | 18px | 20px | 1.5 | ★ lead 20 / 30 |
+| `text-2xl` | 20px | 24px | 1.24 | `h5` 24 / 29.76 |
+| `text-3xl` | 23px | 30px | 1.25 | |
+| `text-4xl` | 27px | 40px | 1.25 | `h3` 40 / 50 |
+| `text-5xl` | 31px | 48px | 1.23 | ★ `h2` 48 / 59.04 |
+| `text-6xl` | 42px | 76px | 1.118 | ★ `h1` 76 / 85 |
+| `text-7xl` | 48px | 96px | 1.1 | |
+| `text-8xl` | 56px | 120px | 1.05 | |
+| `text-9xl` | 64px | 152px | 1 | |
+| `text-10xl` | 72px | 192px | 0.95 | |
+| `text-11xl` | 80px | 240px | 0.9 | |
+
+**`text-base` is a flat `1rem`, not a clamp, and that is deliberate.** The reference's body copy is 16px at every width, and 16px is simultaneously the iOS input-zoom floor and the WCAG text-resize floor. A fluid body that bottoms out at the floor and rises to 17px bought nothing and made the floor an endpoint rather than a constant. It is the one step with no `clamp()`.
+
+**The `text-5xl` → `text-6xl` jump is 48 → 76 (×1.58), far wider than the ×1.25–1.33 elsewhere.** That gap is the reference's own structure — it has a 76px `h1` and a 48px `h2` and nothing between them. It is not a missing step; do not fill it.
+
+**`text-7xl` and up did not move.** They are the editorial register (§3.2) and the sections composed against them were tuned at those sizes. Only their line-heights loosened, because the sub-1 leadings were set for a grotesque and collide the long descenders of the serif that is now the display face (§7).
 
 Never a fixed-px font size. Never `text-[13px]`. If a step is missing, the scale is wrong — fix the scale, not the call site.
 
 ### 3.2 The ten roles — `src/components/ui/typography.tsx`
 
-| Role | Default tag | Scale | Face / weight | Extras |
-|:--|:--|:--|:--|:--|
-| `Display` | `h1` | `text-8xl` | display / semibold | `text-balance` |
-| `H1` | `h1` | `text-6xl` | display / semibold | `text-balance` |
-| `H2` | `h2` | `text-5xl` | display / semibold | `text-balance` |
-| `H3` | `h3` | `text-4xl` | display / semibold | `text-balance` |
-| `H4` | `h4` | `text-3xl` | display / semibold | `text-balance` |
-| `H5` | `h5` | `text-2xl` | display / semibold | `text-balance` |
-| `H6` | `h6` | `text-xl` | display / semibold | `text-balance` |
-| `Eyebrow` | `p` | `text-xs` | body / medium | `uppercase tracking-widest text-accent` |
-| `Standfirst` | `p` | `text-xl` | body / normal | `text-pretty text-ink-muted` |
-| `P` | `p` | `text-base` | body / normal | `text-pretty text-ink-muted` |
+| Role | Default tag | Scale | 1440px | Face / weight | Extras |
+|:--|:--|:--|--:|:--|:--|
+| `Display` | `h1` | `text-7xl` | 96px | display / normal | `text-balance` |
+| `H1` | `h1` | `text-6xl` | 76px | display / normal | `text-balance` |
+| `H2` | `h2` | `text-5xl` | 48px | display / normal | `text-balance` |
+| `H3` | `h3` | `text-4xl` | 40px | display / normal | `text-balance` |
+| `H4` | `h4` | `text-3xl` | 30px | display / normal | `text-balance` |
+| `H5` | `h5` | `text-2xl` | 24px | display / normal | `text-balance` |
+| `H6` | `h6` | `text-xl` | 20px | display / normal | `text-balance` |
+| `Eyebrow` | `p` | `text-xs` | 13px | body / medium | `uppercase tracking-widest text-accent` |
+| `Standfirst` | `p` | `text-xl` | 20px | body / normal | `text-pretty text-ink-muted` |
+| `P` | `p` | `text-base` | 16px | body / normal | `text-pretty text-ink-muted` |
 
-`text-7xl`, `text-9xl`, `text-10xl` and `text-11xl` are **deliberately unclaimed**. They are the editorial register — constraint 2's "type is the layout" — applied to a specific element in a specific section, not routed through a role. Use them consciously; do not invent a `Display2`.
+**Every heading role is weight 400, not semibold.** The display face ships one weight (§7), the reference sets every heading at 400, and a bolder heading is not expressible — `font-semibold` on the display face is a no-op, not a heavier heading (§7.1).
+
+**`H2` does not carry `capitalize`, and the reference's does.** Its `h2`s are two-to-four-word title labels ("Our Programs") where title case reads as styling. Ours are full editorial sentences carrying acronyms and Nepali proper nouns, where `capitalize` produces "British Degrees, Cambridge A-Levels, NEB — Taught Where They Belong." A call site that wants it writes `<H2 className="capitalize">`; the role does not impose it.
+
+`text-8xl`, `text-9xl`, `text-10xl` and `text-11xl` are **deliberately unclaimed**. They are the editorial register — constraint 2's "type is the layout" — applied to a specific element in a specific section, not routed through a role. Use them consciously; do not invent a `Display2`.
+
+**`Display`, `H1` and `H2` currently have zero call sites** — sections write the raw step (`font-display text-5xl`) instead. That is why the roles are not the whole story and a change to the *scale* is what actually moves the rendered page. Prefer the role; the raw-step sections are a known divergence, not a licence.
 
 ### 3.3 The `as` prop, and why every role restates its face
 
@@ -300,24 +312,35 @@ Type and section rhythm **do not need breakpoints** — the `clamp()`s already c
 
 ---
 
-## 5. Radius — capped at 8px
+## 5. Radius — components capped at 8px, media at 10px
 
-| Class | Value |
-|:--|--:|
-| `rounded-xs` | 1px |
-| `rounded-sm` | 2px |
-| `rounded-md` | 3px |
-| `rounded-lg` | 4px |
-| `rounded-xl` | 6px |
-| `rounded-2xl` | **8px — the cap** |
-| `rounded-3xl` | **unset** |
-| `rounded-4xl` | **unset** |
+| Class | Value | Applies to |
+|:--|--:|:--|
+| `rounded-xs` | 1px | components |
+| `rounded-sm` | 2px | components |
+| `rounded-md` | 3px | components |
+| `rounded-lg` | 4px | components |
+| `rounded-xl` | 6px | components |
+| `rounded-2xl` | **8px — the component cap** | components |
+| `rounded-media` | **10px** | **imagery only** |
+| `rounded-3xl` | **unset** | — |
+| `rounded-4xl` | **unset** | — |
 
 The whole stock Tailwind ramp is shifted down. `rounded-lg` is 4px here, not 8px. Nothing in this system is softer than 8px, because a soft radius is the visual signature of the card grid constraint 1 rejects.
 
-`--radius-3xl` and `--radius-4xl` are set to `initial`, which **removes the keys from the theme** — so `rounded-3xl` and `rounded-4xl` compile to nothing at all. They are not "large radii", they are dead classes. This has a consequence in `cn()`; see §8.
+### 5.1 `rounded-media` — the one exception, and its exact boundary
+
+**`rounded-media` (10px) is for imagery: `<Image>`, `<video>`, and a wrapper whose only job is to clip one of them.** Nothing else. It is the reference's own image radius, measured off the live page at 1440 — every content image and every media thumbnail there is exactly `10px`, and avatars are `50%`.
+
+**The 8px component cap is unchanged and still governs everything that is not media.** Buttons, panels, inputs, badges, section shells, list rows and anything with a border or a background do not get `rounded-media`. That cap is the mechanical enforcement of constraint 1 — "this must not look like a rounded-card site" — and the reason a cold review found zero `rounded-*` on the whole page. Relaxing it for photography does not relax it for chrome: a photograph with a soft corner reads as a print artefact, a *panel* with one reads as a card, and the second is the thing the constraint exists to prevent.
+
+So the test is not "how big is the radius" but "**is the thing being rounded a picture?**" If you are reaching for `rounded-media` on an element that has a `bg-*` or a `border`, it is the wrong token and probably the wrong idea.
 
 `rounded-full` remains legitimate for a shape that is a circle or a capsule by nature (an avatar, a pill), because no radius token can express "half my own height".
+
+**`rounded-media` clips only if something clips.** On a bare `<Image>` the radius applies to the element itself. On a wrapper it needs `overflow-hidden`, and on a wrapper that is also a ScrollSmoother parallax layer, `overflow-hidden` creates a containing block — check the layer still moves.
+
+`--radius-3xl` and `--radius-4xl` are set to `initial`, which **removes the keys from the theme** — so `rounded-3xl` and `rounded-4xl` compile to nothing at all. They are not "large radii", they are dead classes. This has a consequence in `cn()`; see §8.
 
 ---
 
@@ -397,29 +420,41 @@ The trigger is `text-xl`, hovers to `text-accent`, and rotates its chevron via `
 
 ## 7. Fonts
 
-Three faces, all `next/font/google`, all wired as CSS variables on `<html>`:
+**Two faces**, both `next/font/google`, both wired as CSS variables on `<html>` — matching the reference, which also uses exactly two (§7.2).
 
 | Token | Face | Used by |
 |:--|:--|:--|
-| `--font-display` | **Bricolage Grotesque** | `h1`–`h6` (base rule) and every `font-display` role |
-| `--font-body` | **Inter Tight** | everything else; `--font-sans` aliases to it |
-| `--font-editorial` | **Instrument Serif**, weight 400 only | the hero headline and the programme marquee bands — nothing else |
+| `--font-display` | **Instrument Serif**, weight 400 only | `h1`–`h6` (base rule), every `font-display` role, the hero headline, the marquee bands |
+| `--font-body` | **Inter** | everything else; `--font-sans` aliases to it |
+| `--font-editorial` | *alias of `--font-display`* | kept only so existing `font-editorial` call sites keep compiling |
 
-Swapping any face is a one-line change in `layout.tsx` plus the `@theme inline` mapping. Nothing else references a font name.
+**`--font-display` is the single swap point.** The face is named in exactly two places — this token, and the `next/font` call in `layout.tsx` that defines the variable it reads. **No component names a font.** If the Canela licence is ever bought (§7.2), it drops in by changing those two lines and nothing else.
 
-### 7.1 `font-editorial` is a display-only face, and it resets tracking
+**`--font-editorial` is now an alias, not a third face.** It was not deleted, because `font-editorial` appears at live call sites and a removed theme key makes the class compile to *nothing* — the silent dead-class failure of §13, which no gate catches. New code writes `font-display`.
 
-Instrument Serif is the house's high-contrast editorial serif, added for the reference-derived hero and marquee (§7.2). It ships **one weight, 400**, and that is the whole point: it is never bolded, and a `font-semibold` next to `font-editorial` is drift. Bricolage Grotesque remains the display face for every heading role in §3.2 — `font-editorial` is applied to specific elements, never routed through a typography role.
+**Bricolage Grotesque was retired.** It was the display face until the reference's own two-face structure was measured; keeping it loaded for zero call sites is a font download nobody reads.
 
-**It is only legible as a display face.** Use it at `text-5xl` and above. Below that its stroke contrast closes up and it reads as a defect, not a choice.
+### 7.1 The display face is a 400-only serif — three consequences
 
-**Every `font-editorial` call site also writes `tracking-normal`.** The scale's negative tracking (§3.1, down to `-0.045em`) is tuned for Bricolage Grotesque, which is a wide grotesque; applying it to a narrow high-contrast serif collides the thin strokes. The scale is not wrong — the tracking is a property of the *face*, and a second face needs its own. This is the one sanctioned per-face override of a scale value, and it is why there is no `font-editorial` utility bundling the two: a call site that writes only `font-editorial` should look wrong, so the pair stays visible.
+Instrument Serif ships **one weight, 400**, and is now the face behind every heading. That single fact drives everything below.
+
+**1 — `font-semibold` on a heading does nothing, and must not be relied on.** There is no bold to reach. Browsers would normally *synthesize* one by smearing the strokes, which on a high-contrast serif looks like a rendering fault. So `globals.css` sets `font-synthesis-weight: none` on `html`, and a stray `font-semibold` degrades to the correct 400 rather than to a smear. Do not write it; if you find it, delete it rather than "fixing" the weight.
+
+**2 — the scale carries no `letter-spacing`, and `tracking-normal` is now a no-op.** The old scale ran negative tracking down to `-0.045em`, tuned for a wide grotesque. On a narrow high-contrast serif that collides the thin strokes, which is why every `font-editorial` call site used to have to write `tracking-normal` by hand. With the serif as *the* display face, the negative tracking has no remaining consumer, so the `--text-*--letter-spacing` keys were removed outright — the fix belongs in the scale, not in a ritual repeated at every call site. The reference sets `letter-spacing: normal` everywhere too. Existing `tracking-normal` classes are harmless; new code omits them.
+
+**3 — the legibility floor moved, deliberately.** The old rule was "serif at `text-5xl` and above" — correct when it was an accent face on two elements. It is now the face of `H6` (20px) through `Display` (96px), which was checked on the rendered page before being written down. **Below `text-xl` (20px), use the body face** — that is where the stroke contrast closes up. The reference draws the same line: its `h6` at 20px is Inter, not Canela.
+
+Line-heights above `text-6xl` were loosened for the same reason (§3.1): the old sub-1 leadings assumed a grotesque's short descenders, and this serif's collide.
 
 ### 7.2 The hero and the marquee follow the unipix reference; the rest of the page does not
 
 `DEC-005` holds that the reference supplies the section spine only. **Asmit narrowed it for these two sections only** (2026-08-06) — the hero and the programme marquee follow the reference's *composition*. Everything else on the page keeps the house language.
 
-What that buys, and its boundary: the reference's headline face is **Canela, a commercial trial licence the template is using unlicensed**. It is not shippable and was not copied. `--font-editorial` is a free stand-in of the same register, chosen for the same 400-weight display usage. **Composition came from the reference; the type roles, colour tokens, spacing utilities and primitives stayed the house's.**
+What that buys, and its boundary: the reference's headline face is **Canela, a commercial trial licence the template is using unlicensed**. It is not shippable and was not copied. Instrument Serif is a free stand-in of the same register, chosen for the same 400-weight display usage. **Composition came from the reference; the colour tokens, spacing utilities and primitives stayed the house's.**
+
+**The type scale itself is now measured from the reference (§3.1), and so are the faces (§7).** Asmit's directive (2026-08-06) was *"use same font as used in reference website... typography also stays same"*, after *"everything feels too big"*. Every size, line-height and weight that is ours to control was matched at 1440. **One thing was not: Canela.** The template runs it on a **trial** licence — i.e. in violation — and shipping it on a real college's production domain would put an unlicensed commercial face on a client's live site. Instrument Serif carries the substitution, isolated behind `--font-display` so licensing Canela later is a two-line change touching no component (§7).
+
+**`Standfirst` keeps the body face, and the reference is genuinely ambiguous here.** Its two lead paragraphs disagree: `.about p` is Canela 20/30, `.banner p` (the hero) is Inter 16/26 — one role, two treatments. `Standfirst` matches the *size* (20 / 30 / 400) and stays on the body face, because it is the lead-copy role and a serif lead is a display choice a section can opt into with `<Standfirst className="font-display">`. Picking one silently would have made the hero's lead a serif on the strength of a spec that does not say so.
 
 The hero maps every reference element onto real content — there is no invented copy:
 
@@ -445,7 +480,7 @@ The hero maps every reference element onto real content — there is no invented
 `cn()` is `clsx` + an **`extendTailwindMerge`** instance. Three things stock `tailwind-merge` gets wrong in this project:
 
 1. **`max-w-page`** — `container: ["page"]` registers our custom container key, so `max-w-page` participates in the `max-w-*` merge group instead of surviving alongside a conflicting width.
-2. **The dead radii** — `theme.radius` is overridden to `["xs","sm","md","lg","xl","2xl"]`, dropping `3xl`/`4xl`. Because those keys are `initial` (§5), stock merge would let a `rounded-3xl` — which emits **nothing** — silently cancel a working `rounded-sm`, leaving a square corner and no error anywhere.
+2. **The dead radii and the custom one** — `theme.radius` is overridden to `["xs","sm","md","lg","xl","2xl","media"]`: it drops `3xl`/`4xl` and adds `media`. Because `3xl`/`4xl` are `initial` (§5), stock merge would let a `rounded-3xl` — which emits **nothing** — silently cancel a working `rounded-sm`, leaving a square corner and no error anywhere. And `media` is a custom key stock merge has never heard of, so without it `cn("rounded-media", "rounded-none")` would leave **both** alive and let stylesheet order decide.
 3. **The custom utilities** — `gutter-x`, `section-y`, `bleed-x` and the `field-*` group are registered, and `gutter-x` is declared to conflict with `p`/`px` (both directions), `section-y` with `p`/`py`, `bleed-x` with `m`/`mx`. So `cn("gutter-x", "px-8")` resolves to `px-8` and `cn("px-8", "gutter-x")` resolves to `gutter-x`, instead of both surviving and the winner being decided by Tailwind's emission order.
 
 The `field-*` classes form their own merge group, so passing `field-teal` over a `field-ink` base replaces it rather than stacking two colour fields on one element.
@@ -502,7 +537,11 @@ Components that use CSS transitions instead (`Accordion`, `Tabs`) carry `motion-
 | `Marquee` | infinite horizontal loop, scroll-velocity linked via `Observer` | `copies` (2), `speed` (80), `reverse`, `velocity`, `maxBoost` |
 | `Parallax` | depth layer | **markup only** — see below |
 | `Tilt` | 3D pointer tilt, `max` 8° | `(pointer: fine)` + full-motion only; no-ops on touch |
-| `SmoothScrollProvider` | wraps the app in ScrollSmoother | `(pointer: fine)` + full-motion only; required `chrome` slot renders outside the smoothed content (§9.6); re-scans parallax effects on route change (§9.5) |
+| `SmoothScrollProvider` | wraps the app in ScrollSmoother, `smooth: 1.8` | `(pointer: fine)` + full-motion only; required `chrome` slot renders outside the smoothed content (§9.6); re-scans parallax effects on route change (§9.5) |
+
+**`smooth: 1.8` is seconds-to-catch-up, so bigger is slower.** It reads like a speed and is the opposite: it is how long the content takes to settle onto the real scroll position. It was raised from `1.2` on Asmit's *"slow down lenis, it is too fast"* (there is no Lenis — DEC-001 replaced it with ScrollSmoother; he was describing this value). Above roughly `2` the page starts to feel detached from the wheel rather than weighted, which is why this stopped at 1.8.
+
+**It is also the parallax dial.** The `data-speed` layers (§9.5) ride this same smoother, so raising it deepens their separation as a side effect. Retune it and the depth of every parallax layer on the site changes with it — check a parallax section, not just a plain one.
 
 ### 9.4 The at-fold rule
 
@@ -615,6 +654,9 @@ A reader who does not know something was a decision will assume it was an oversi
 | **`--destructive` / `--warning` / `--success` aliases** | No prop without a consumer. This is a marketing site with no destructive actions and no form validation yet. Add them **with** the feature that needs them. |
 | **`--color-secondary` / `--color-secondary-foreground` aliases** | Same reasoning as `--destructive`, one step further: where shadcn's meaning **collides** with our brand meaning, our brand meaning wins and the alias goes. The alias bought one thing — a pasted shadcn component compiling unmodified — and the CLI is banned here, so components are hand-adapted anyway. It cost a permanent trap (`bg-secondary` white vs `bg-secondary-700` teal) in the namespace a section builder reaches for most. Port to `bg-surface-raised` / `text-ink` (§2.3). |
 | **`rounded-3xl` / `rounded-4xl`** | Unset on purpose (§5). They are dead classes, not large radii. |
+| **`letter-spacing` on any type step** | Removed with the display-face change (§7.1). The negative tracking existed to serve a wide grotesque that is no longer in the build; the reference sets `normal` throughout. Do not reintroduce a `--text-*--letter-spacing` key to "tighten" a heading — if a heading looks loose, the line-height or the step is wrong. `tracking-widest` on `Eyebrow` is a per-role choice for uppercase micro-copy and is not part of the scale. |
+| **A `text-*` step between 48px and 76px** | The `text-5xl` → `text-6xl` gap is the reference's own `h2`/`h1` structure (§3.1), not an omission. |
+| **A bold display weight** | The display face has one weight (§7.1). `font-semibold` on a heading is a no-op, not a defect to fix by loading a second weight. |
 | **A viewport-edge bleed from *inside* the content column** (`margin-inline: calc(50% - 50vw)`) | The one case `bleed-x` does not cover (§4.3): an element that must stay a child of the content column — a grid cell keeping its place in the editorial grid — and still paint to the viewport edge above 1568px. The formula is correct and needs no coupling to `gutter-x` at all, but it costs three things `bleed-x` does not. **`50vw` includes the classic scrollbar**, so it overflows ~7–8px each side and raises a horizontal scrollbar everywhere ScrollSmoother is not already clipping — and the smoother is off on touch, on coarse pointers, and under reduced motion (§9.5). That makes an `overflow-x: clip` on the shell a *prerequisite*, not a tidy-up, and putting overflow on `html`/`body` is exactly what GSAP's own guidance warns against next to ScrollTrigger. It also silently requires a **horizontally centred** containing block, and the moment it is used in an asymmetric flex or grid cell it fails by *mispositioning* rather than by not working — the failure shape nothing in this stack catches. No section has asked for it; three asked for `bleed-x`. Add it **with** the section that needs it and **with** its clipping ancestor, verified together — not before. |
 | **A default OG image** | `createMetadata` accepts an `image` and falls back to `twitter: { card: "summary" }` without one. The brand asset (and the vector logo) have not been supplied. |
 | **`components/layout/`** | Header and footer are blocked on the vector logo. |

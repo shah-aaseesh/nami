@@ -7,7 +7,7 @@ const twMerge = extendTailwindMerge<
   override: {
     // `--radius-3xl`/`--radius-4xl` are unset in globals.css, so those classes emit
     // nothing — merging them would drop a working radius in favour of a dead one.
-    theme: { radius: ["xs", "sm", "md", "lg", "xl", "2xl"] },
+    theme: { radius: ["xs", "sm", "md", "lg", "xl", "2xl", "media"] },
   },
   extend: {
     theme: { container: ["page"] },

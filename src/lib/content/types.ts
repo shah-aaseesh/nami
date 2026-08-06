@@ -190,12 +190,30 @@ export type HomeCopy = {
   readonly sections: Readonly<Record<HomeSectionId, SectionCopy>>;
 };
 
-export type AboutSectionId = "chronology" | "emblem" | "creed" | "recognition";
+export type LeaderGroup = "board" | "management" | "academics";
 
-export type AboutSection = {
-  readonly heading: string;
-  readonly standfirst: string | null;
+export type Leader = ContentEntry & {
+  readonly name: string;
+  readonly title: string;
+  readonly group: LeaderGroup;
+  readonly brief: string;
+  readonly portrait: ContentImage | null;
 };
+
+export type LeadershipProfile = {
+  readonly board: readonly Leader[];
+  readonly management: readonly Leader[];
+  readonly academics: readonly Leader[];
+};
+
+export type AboutSectionId =
+  | "chronology"
+  | "emblem"
+  | "creed"
+  | "recognition"
+  | "stats"
+  | "leadership"
+  | "testimonials";
 
 export type AboutCopy = {
   readonly metaTitle: string;
@@ -203,6 +221,8 @@ export type AboutCopy = {
   readonly title: string;
   readonly standfirst: string;
   readonly openingImage: ContentImage | null;
+  readonly overviewImage: ContentImage | null;
+  readonly statsImage: ContentImage | null;
   readonly creedImage: ContentImage | null;
-  readonly sections: Readonly<Record<AboutSectionId, AboutSection>>;
+  readonly sections: Readonly<Record<AboutSectionId, SectionCopy>>;
 };

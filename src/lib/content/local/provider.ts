@@ -6,6 +6,7 @@ import { affiliations } from "./affiliations";
 import { campusLife } from "./campus-life";
 import { homeCopy } from "./home-copy";
 import { institution } from "./institution";
+import { leadership } from "./leadership";
 import { partners } from "./partners";
 import { stats } from "./stats";
 import { testimonials } from "./testimonials";
@@ -24,6 +25,7 @@ export const localContentProvider: ContentProvider = {
   getUpdates: (limit) =>
     Promise.resolve(limit === undefined ? updates : updates.slice(0, limit)),
   getTestimonials: () => Promise.resolve(testimonials),
+  getLeadership: () => Promise.resolve(leadership),
   getHomeCopy: () => Promise.resolve(homeCopy),
   getAboutCopy: () => Promise.resolve(aboutCopy),
 };

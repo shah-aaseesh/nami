@@ -1,17 +1,14 @@
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import type { SectionCopy } from "@/lib/content";
 import { content } from "@/lib/content";
 import { TestimonialCard } from "./testimonials-card";
 import { TestimonialsCarousel } from "./testimonials-carousel";
 
-export async function Testimonials() {
-  const [copy, testimonials] = await Promise.all([
-    content.getHomeCopy(),
-    content.getTestimonials(),
-  ]);
+export async function Testimonials({ section }: { section: SectionCopy }) {
+  const testimonials = await content.getTestimonials();
 
-  const section = copy.sections.testimonials;
   const single = testimonials.length === 1 ? testimonials[0] : undefined;
 
   return (

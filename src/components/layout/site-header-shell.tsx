@@ -18,6 +18,7 @@ import {
 const FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 const SCROLLED_AT = 24;
+const HIDE_AFTER = 96;
 const SMOOTH_WRAPPER = "smooth-wrapper";
 const HIDE_DURATION = 0.2;
 
@@ -145,7 +146,7 @@ export function SiteHeaderShell({
               tween.progress(1);
               return;
             }
-            if (self.direction === -1) {
+            if (self.direction === -1 || self.scroll() < HIDE_AFTER) {
               tween.play();
             } else {
               tween.reverse();

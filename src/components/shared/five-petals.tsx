@@ -45,8 +45,8 @@ export function FivePetals({ petals }: { petals: readonly Petal[] }) {
   );
 
   return (
-    <div className="mx-auto max-w-page pb-24" ref={container}>
-      <div className="mt-16 mb-10 lg:mt-24">
+    <div className="mx-auto max-w-page" ref={container}>
+      <div className="mb-10 lg:mb-12">
         <Eyebrow>The Five Petals & Core Values</Eyebrow>
       </div>
 

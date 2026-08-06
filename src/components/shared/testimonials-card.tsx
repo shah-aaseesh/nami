@@ -6,8 +6,8 @@ import { QuoteIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 function quoteStep(quote: string): string {
-  if (quote.length <= 140) return "text-4xl lg:text-5xl";
-  if (quote.length <= 450) return "text-3xl lg:text-4xl";
+  if (quote.length <= 140) return "text-2xl lg:text-3xl";
+  if (quote.length <= 450) return "text-2xl lg:text-3xl";
   return "text-2xl lg:text-3xl";
 }
 

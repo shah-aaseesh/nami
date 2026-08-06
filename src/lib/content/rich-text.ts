@@ -9,3 +9,7 @@ export function richText(...paragraphs: readonly string[]): RichText {
 export function richTextFromHtml(html: string): RichText {
   return { kind: "html", html };
 }
+
+export function paragraphsOf(text: RichText): readonly string[] {
+  return text.kind === "blocks" ? text.paragraphs : [];
+}

@@ -6,6 +6,7 @@ import type {
   CampusLifePillar,
   HomeCopy,
   InstitutionProfile,
+  LeadershipProfile,
   Partner,
   Programme,
   Stat,
@@ -35,6 +36,7 @@ export type ContentProvider = {
   getAdmissionCalls(): Promise<readonly AdmissionCall[]>;
   getUpdates(limit?: number): Promise<readonly Update[]>;
   getTestimonials(): Promise<readonly Testimonial[]>;
+  getLeadership(): Promise<LeadershipProfile>;
   getHomeCopy(): Promise<HomeCopy>;
   getAboutCopy(): Promise<AboutCopy>;
 };

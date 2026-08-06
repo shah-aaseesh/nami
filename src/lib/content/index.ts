@@ -23,7 +23,12 @@ export {
   type ContentProvider,
   ContentSourceUnavailableError,
 } from "./provider";
-export { type RichText, richText, richTextFromHtml } from "./rich-text";
+export {
+  paragraphsOf,
+  type RichText,
+  richText,
+  richTextFromHtml,
+} from "./rich-text";
 export type * from "./types";
 
 export const content: ContentProvider = localContentProvider;

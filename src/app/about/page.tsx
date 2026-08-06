@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SiteCtaBand } from "@/components/layout/site-cta-band";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { Creed } from "./_components/creed";
@@ -17,21 +16,13 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default async function AboutPage() {
-  const institution = await content.getInstitution();
-  const email = institution.contact.email ?? "info@nami.edu.np";
-
+export default function AboutPage() {
   return (
     <>
       <Opening />
       <Emblem />
       <Creed />
       <Recognition />
-      <SiteCtaBand
-        email={email}
-        heading="Have questions about NAMI College?"
-        standfirst="Reach out to our admissions and institutional enquiry team directly."
-      />
     </>
   );
 }

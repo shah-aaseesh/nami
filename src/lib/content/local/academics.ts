@@ -1,0 +1,167 @@
+import { entryOf, slug } from "../identifiers";
+import { richText } from "../rich-text";
+import type { AcademicLevel, Programme } from "../types";
+import { AWARDING_BODIES } from "./awarding-bodies";
+import { levelImage } from "./placeholders";
+
+export const academicLevels: readonly AcademicLevel[] = [
+  {
+    ...entryOf("school"),
+    title: "School",
+    stage: "Grade 1–7",
+    summary: richText(
+      "NAMI International School opened its primary division in 2024 with Grades 1 to 5, has since extended to Grade 7, and adds one grade each year towards Grade 10.",
+      "Teaching stays within the framework of the Government of Nepal's National Curriculum, with Mandarin introduced as a foreign language from Grade I and computer instruction from the first grade.",
+    ),
+    highlights: [
+      "National Curriculum, Government of Nepal",
+      "Mandarin from Grade I",
+      "Service Learning projects run by students",
+      "Interactive-board classrooms and ICT from Grade 1",
+      "Fine arts, performing arts and physical education",
+    ],
+    enrolment: [{ value: 176, label: "students in Grades 1–7" }],
+    campusSlug: slug("gokarneshwor"),
+    image: levelImage,
+  },
+  {
+    ...entryOf("plus-two"),
+    title: "+2 NEB",
+    stage: "Grade 11–12, Science and Management",
+    summary: richText(
+      "NAMI International School has offered National Examination Board affiliated +2 programmes in Science and Management since 2019, building academic foundations, practical competencies and holistic student development.",
+      "Students learn in modern classrooms with well-equipped science laboratories, ICT facilities and a well-stocked library, supported by extracurricular activities, internships, volunteer engagement and structured career counselling.",
+    ),
+    highlights: [
+      "Science and Management streams",
+      "Well-equipped science and ICT laboratories",
+      "Internships and volunteer engagement",
+      "Structured career counselling",
+    ],
+    enrolment: [
+      { value: 350, label: "students in Grade 11" },
+      { value: 454, label: "students in Grade 12" },
+    ],
+    campusSlug: slug("gokarneshwor"),
+    image: levelImage,
+  },
+  {
+    ...entryOf("a-level"),
+    title: "Cambridge A-Level",
+    stage: "Entry from SEE, GCSE, CBSE or equivalent",
+    summary: richText(
+      "NAMI College offers the globally recognised Cambridge A-Level programme. The International A Level, regarded as the gold standard by Cambridge Assessment International Education, holds the same value as its UK equivalent for university admissions.",
+      "Since 2024 the college has been recognised as an independent CAIE examination centre, and offers subject combinations that prepare students for university study in Science, Medicine, Engineering, Business, Humanities and Liberal Arts.",
+    ),
+    highlights: [
+      "Independent CAIE examination centre since 2024",
+      "Science and non-science subject combinations",
+      "Entry from SEE, GCSE, CBSE or equivalent",
+      "Routes into Science, Medicine, Engineering, Business, Humanities and Liberal Arts",
+    ],
+    enrolment: [{ value: 71, label: "students enrolled" }],
+    campusSlug: slug("gokarneshwor"),
+    image: levelImage,
+  },
+  {
+    ...entryOf("bachelor-master"),
+    title: "Bachelor & Master",
+    stage: "Undergraduate and postgraduate",
+    summary: richText(
+      "NAMI has been in academic collaboration with The University of Northampton, UK since 2012, teaching British degrees in Kathmandu across computing, engineering, environmental science and business administration.",
+      "A Bachelor's programme in Environmental Studies affiliated with Kathmandu University begins in August 2026, combining environmental science, sustainability, policy development and practical field-based learning.",
+    ),
+    highlights: [
+      "British degrees taught in Kathmandu since 2012",
+      "MSc Computer Science",
+      "BSc Environmental Studies with Kathmandu University from August 2026",
+      "AWS Academy curriculum and certifications",
+    ],
+    enrolment: [{ value: 239, label: "undergraduate students" }],
+    campusSlug: slug("new-baneshwor"),
+    image: levelImage,
+  },
+];
+
+export const programmes: readonly Programme[] = [
+  {
+    ...entryOf("bsc-computer-science"),
+    title: "Computer Science",
+    qualification: "BSc (Hons)",
+    awardingBody: AWARDING_BODIES.northampton,
+    levelSlug: slug("bachelor-master"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("bsc-software-engineering"),
+    title: "Software Engineering",
+    qualification: "BSc (Hons)",
+    awardingBody: AWARDING_BODIES.northampton,
+    levelSlug: slug("bachelor-master"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("bsc-networking-engineering"),
+    title: "Networking Engineering",
+    qualification: "BSc (Hons)",
+    awardingBody: AWARDING_BODIES.northampton,
+    levelSlug: slug("bachelor-master"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("bsc-environmental-science"),
+    title: "Environmental Science",
+    qualification: "BSc (Hons)",
+    awardingBody: AWARDING_BODIES.northampton,
+    levelSlug: slug("bachelor-master"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("bsc-business-administration"),
+    title: "Business Administration",
+    qualification: "BSc (Hons)",
+    awardingBody: AWARDING_BODIES.northampton,
+    levelSlug: slug("bachelor-master"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("msc-computer-science"),
+    title: "Computer Science",
+    qualification: "MSc",
+    awardingBody: AWARDING_BODIES.northampton,
+    levelSlug: slug("bachelor-master"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("bsc-environmental-studies"),
+    title: "Environmental Studies",
+    qualification: "BSc",
+    awardingBody: AWARDING_BODIES.kathmanduUniversity,
+    levelSlug: slug("bachelor-master"),
+    startingFrom: "August 2026",
+  },
+  {
+    ...entryOf("a-level-programme"),
+    title: "Science and non-science subject combinations",
+    qualification: "Cambridge International A-Level",
+    awardingBody: AWARDING_BODIES.cambridge,
+    levelSlug: slug("a-level"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("neb-science"),
+    title: "Science",
+    qualification: "NEB 10+2",
+    awardingBody: AWARDING_BODIES.neb,
+    levelSlug: slug("plus-two"),
+    startingFrom: null,
+  },
+  {
+    ...entryOf("neb-management"),
+    title: "Management",
+    qualification: "NEB 10+2",
+    awardingBody: AWARDING_BODIES.neb,
+    levelSlug: slug("plus-two"),
+    startingFrom: null,
+  },
+];

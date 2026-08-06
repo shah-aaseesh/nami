@@ -1,10 +1,10 @@
+import type { Metadata, Viewport } from "next";
+import { Inter, Spectral } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
 import { StructuredData } from "@/components/seo/structured-data";
 import { createMetadata, siteConfig } from "@/lib/seo";
-import type { Metadata, Viewport } from "next";
-import { Inter, Spectral } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({

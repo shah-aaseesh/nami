@@ -2,10 +2,8 @@ import { Parallax } from "@/components/motion/parallax";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, H4, H6, P, Standfirst } from "@/components/ui/typography";
-import type { NamedEntity, RichText } from "@/lib/content";
+import type { RichText } from "@/lib/content";
 import { content } from "@/lib/content";
-
-const ENTITY_ORDER = ["institute", "college", "school"] as const;
 
 function paragraphsOf(text: RichText): readonly string[] {
   return text.kind === "blocks" ? text.paragraphs : [];
@@ -33,21 +31,6 @@ function Creed({
         ))}
       </div>
     </div>
-  );
-}
-
-function EntityLine({ entity }: { entity: NamedEntity }) {
-  return (
-    <li className="border-t pt-4 pb-5 sm:pb-0" data-reveal-item="">
-      <H6 as="span" className="block">
-        {entity.name}
-      </H6>
-      {entity.establishedYear === null ? null : (
-        <span className="mt-1 block font-body text-sm text-ink-muted">
-          Established {entity.establishedYear}
-        </span>
-      )}
-    </li>
   );
 }
 
@@ -96,18 +79,6 @@ export async function About() {
               </Parallax>
             </Reveal>
           )}
-
-          <Reveal
-            className="mt-10 lg:col-span-12 lg:col-start-1 lg:row-start-2 lg:mt-12"
-            delay={0.3}
-            stagger={0.06}
-          >
-            <ul className="sm:grid sm:grid-cols-3 sm:gap-x-10">
-              {ENTITY_ORDER.map((role) => (
-                <EntityLine entity={institution.entities[role]} key={role} />
-              ))}
-            </ul>
-          </Reveal>
         </div>
 
         <Reveal className="mt-12 lg:mt-16" y={32}>

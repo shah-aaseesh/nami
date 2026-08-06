@@ -4,7 +4,7 @@ import Link from "next/link";
 import { RevealItem } from "@/components/motion/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H5, P } from "@/components/ui/typography";
+import { H5, P } from "@/components/ui/typography";
 import type { ContentLink, Update, UpdateKind } from "@/lib/content";
 import {
   ArrowRightIcon,
@@ -70,6 +70,7 @@ export function EventCard({ item }: { item: Update }) {
                 strokeWidth={1.2}
                 viewBox="0 0 24 24"
               >
+                <title>Event image placeholder</title>
                 <rect height="14" rx="2" width="18" x="3" y="5" />
                 <path d="M3 10h18M8 5V3m8 2V3" />
               </svg>

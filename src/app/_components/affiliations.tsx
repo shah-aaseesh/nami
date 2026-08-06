@@ -1,9 +1,7 @@
-import type { Route } from "next";
-import Link from "next/link";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H1, H5, H6, P, Standfirst } from "@/components/ui/typography";
-import type { Affiliation, Partner, SectionCopy } from "@/lib/content";
+import { Eyebrow, H1, H6, P, Standfirst } from "@/components/ui/typography";
+import type { Affiliation, SectionCopy } from "@/lib/content";
 import { content } from "@/lib/content";
 
 function SectionHead({ copy }: { copy: SectionCopy }) {
@@ -60,53 +58,14 @@ function AffiliationStation({ item }: { item: Affiliation }) {
   );
 }
 
-function PartnerName({ partner }: { partner: Partner }) {
-  if (partner.href === null) return <>{partner.name}</>;
-
-  return (
-    <Link
-      className="transition-colors hover:text-accent motion-reduce:transition-none"
-      href={partner.href as Route}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      {partner.name}
-    </Link>
-  );
-}
-
-function LeadPartner({ partner }: { partner: Partner }) {
-  return (
-    <RevealItem className="border-t pt-6">
-      <Eyebrow as="span" className="block">
-        {partner.kind}
-      </Eyebrow>
-      <H5 as="h3" className="mt-4">
-        <PartnerName partner={partner} />
-      </H5>
-      {partner.blurb === null ? null : (
-        <P className="mt-3 text-sm">{partner.blurb}</P>
-      )}
-    </RevealItem>
-  );
-}
-
 export async function Affiliations() {
-  const [copy, affiliations, partners] = await Promise.all([
+  const [copy, affiliations] = await Promise.all([
     content.getHomeCopy(),
     content.getAffiliations(),
-    content.getPartners(),
   ]);
 
   const accreditation = copy.sections.affiliations;
-  const industry = copy.sections.partners;
   const timeline = [...affiliations].sort((a, b) => a.sinceYear - b.sinceYear);
-  const leadPartners = partners.filter(
-    (partner) => partner.kind !== "industry",
-  );
-  const networkPartners = partners.filter(
-    (partner) => partner.kind === "industry",
-  );
 
   return (
     <section className="gutter-x section-y" id="affiliations">
@@ -130,8 +89,6 @@ export async function Affiliations() {
             </ul>
           </Reveal>
         )}
-
-
       </div>
     </section>
   );

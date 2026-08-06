@@ -51,3 +51,8 @@ next-env.d.ts
 .claude/
 .playwright-mcp/
 
+
+# agent visual-verification artifacts (repo root only)
+/*.png
+/*.jpeg
+/*.jpg

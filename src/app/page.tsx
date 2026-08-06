@@ -1,6 +1,5 @@
 import { About } from "./_components/about";
 import { AcademicLevels } from "./_components/academic-levels";
-import { AdmissionCta } from "./_components/admission-cta";
 import { Affiliations } from "./_components/affiliations";
 import { CampusLife } from "./_components/campus-life";
 import { Hero } from "./_components/hero";
@@ -16,7 +15,6 @@ export default function Home() {
       <About />
       <AcademicLevels />
       <Affiliations />
-      <AdmissionCta />
       <CampusLife />
       <Testimonials />
       <Updates />

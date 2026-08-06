@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Reveal } from "@/components/motion/reveal";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
-import { UpdateIndex, yearSpan } from "@/components/shared/update-index";
+import { yearSpan } from "@/components/shared/update-index";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Display, Eyebrow, P, Standfirst } from "@/components/ui/typography";
@@ -9,6 +10,7 @@ import { content } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
 import { createMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { EventCard } from "./_components/event-card";
 import { eventsCopy, eventsTrail } from "./_components/events-copy";
 
 export const metadata: Metadata = createMetadata({
@@ -55,8 +57,20 @@ export default async function EventsPage() {
           </div>
         </div>
 
+        {/* Event cards grid */}
         <div className="mt-16 lg:mt-24">
-          <UpdateIndex emptyState={eventsCopy.emptyState} items={events} />
+          {events.length === 0 ? (
+            <P className="max-w-xl">{eventsCopy.emptyState}</P>
+          ) : (
+            <Reveal
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+              stagger={0.06}
+            >
+              {events.map((event) => (
+                <EventCard item={event} key={event.id} />
+              ))}
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

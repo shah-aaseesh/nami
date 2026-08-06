@@ -1,7 +1,9 @@
 "use client";
 
 import type { Route } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -9,7 +11,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { buttonVariants } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
 import { H3, P } from "@/components/ui/typography";
+import { gsap, useGSAP } from "@/lib/gsap";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LocationIcon,
+  MailIcon,
+  PhoneIcon,
+  TwitterIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { SiteHeaderWordmark } from "./site-header-wordmark";
 import type { SiteNavItem } from "./site-nav-sections";
 
 export type SiteMetaLink = {
@@ -23,23 +37,46 @@ export type SiteNavPanelProps = {
   items: readonly SiteNavItem[];
   places: readonly string[];
   links: readonly SiteMetaLink[];
+  wordmark: { lead: string; tail: string | null };
   onNavigate: () => void;
 };
 
 export function SiteNavPanel({
   items,
   labelId,
-  links,
-  onNavigate,
   places,
+  links,
+  wordmark,
+  onNavigate,
 }: SiteNavPanelProps) {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!container.current) return;
+
+      gsap.from(container.current.querySelectorAll(".nav-anim-item"), {
+        y: 20,
+        opacity: 0,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: "power2.out",
+        delay: 0.1,
+      });
+    },
+    { scope: container },
+  );
+
   return (
-    <div className="mt-8 flex h-full w-full flex-col">
+    <div ref={container} className="mt-8 flex h-full w-full flex-col">
       {/* Mobile Navigation */}
       <nav aria-labelledby={labelId} className="flex flex-col gap-1 lg:hidden">
         <Accordion className="border-none w-full">
           {items.map((item, index) => (
-            <div key={item.label} className="border-t border-border w-full">
+            <div
+              key={item.label}
+              className="border-t border-border w-full nav-anim-item"
+            >
               {item.children ? (
                 <AccordionItem
                   value={item.label}
@@ -85,55 +122,106 @@ export function SiteNavPanel({
         </Accordion>
       </nav>
 
-      {/* Desktop Advertisement Banner */}
-      <div className="hidden lg:flex flex-col gap-6 justify-center bg-surface-muted/50 p-8 rounded-xl border border-border">
-        <H3>Admissions Open for 2026</H3>
-        <P>
-          Join NAMI College and unlock your potential with world-class UK
-          degrees.
-        </P>
-        <Link
-          href={"/admissions" as Route}
-          onClick={onNavigate}
-          className={buttonVariants({ className: "w-full" })}
-        >
-          Apply Now
-        </Link>
-      </div>
+      {/* Desktop View Content */}
+      <div className="hidden lg:flex flex-col items-center text-center nav-anim-item gap-6">
+        <SiteHeaderWordmark
+          lead={wordmark.lead}
+          tail={wordmark.tail}
+          className="scale-125 my-4"
+        />
+        <p className="text-sm text-ink-muted leading-relaxed px-2">
+          A modern HTML template for education, offering intuitive design &
+          essential features for seamless learning experiences.
+        </p>
 
-      <div className="mt-16 flex flex-col gap-10 lg:mt-auto border-t border-border pt-8">
-        {places.length === 0 ? null : (
-          <ul className="flex flex-col gap-2">
-            {places.map((place) => (
-              <li className="font-body text-sm text-ink-muted" key={place}>
-                {place}
-              </li>
-            ))}
-          </ul>
-        )}
+        {/* Banner */}
+        <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden mt-4 shadow-md">
+          <Image
+            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=600&auto=format&fit=crop"
+            alt="Banner"
+            fill
+            className="absolute inset-0 object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute bottom-6 inset-x-6">
+            <Link
+              href={"/admissions" as Route}
+              onClick={onNavigate}
+              className={cn(
+                buttonVariants(),
+                "w-full bg-accent hover:bg-accent/90 text-white border-none",
+              )}
+            >
+              Apply Now
+            </Link>
+          </div>
+        </div>
 
-        {links.length === 0 ? null : (
-          <ul className="flex flex-col gap-2">
-            {links.map((link) => (
-              <li key={link.label}>
-                {link.href === null ? (
-                  <span className="font-body text-sm text-ink-muted">
-                    {link.label}
+        {/* Contact Info */}
+        <div className="flex flex-col gap-4 w-full text-left mt-6 border-t border-border pt-8">
+          {places.length > 0 && (
+            <div className="flex items-start gap-3 text-ink-muted">
+              <Icon
+                icon={LocationIcon}
+                className="size-5 shrink-0 mt-0.5 text-accent"
+              />
+              <div className="flex flex-col gap-1">
+                {places.map((place) => (
+                  <span key={place} className="text-sm">
+                    {place}
                   </span>
-                ) : (
+                ))}
+              </div>
+            </div>
+          )}
+
+          {links.length > 0 && (
+            <div className="flex items-start gap-3 text-ink-muted">
+              <Icon
+                icon={PhoneIcon}
+                className="size-5 shrink-0 mt-0.5 text-accent"
+              />
+              <div className="flex flex-col gap-1">
+                {links.map((link) => (
                   <Link
-                    className="font-body text-sm text-ink underline decoration-1 underline-offset-4 hover:decoration-2"
+                    key={link.label}
                     href={link.href as Route}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    target={link.external ? "_blank" : undefined}
+                    className="text-sm hover:text-accent transition-colors"
                   >
                     {link.label}
                   </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Social Links */}
+        <div className="flex items-center gap-4 w-full mt-4">
+          <span className="text-sm font-semibold text-ink uppercase tracking-wider">
+            Follow Us
+          </span>
+          <div className="flex items-center gap-4">
+            <Link
+              href={"#" as Route}
+              className="text-ink-muted hover:text-accent transition-colors"
+            >
+              <Icon icon={FacebookIcon} className="size-5" />
+            </Link>
+            <Link
+              href={"#" as Route}
+              className="text-ink-muted hover:text-accent transition-colors"
+            >
+              <Icon icon={TwitterIcon} className="size-5" />
+            </Link>
+            <Link
+              href={"#" as Route}
+              className="text-ink-muted hover:text-accent transition-colors"
+            >
+              <Icon icon={InstagramIcon} className="size-5" />
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

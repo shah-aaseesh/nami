@@ -4,21 +4,17 @@ import type { Route } from "next";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Icon } from "@/components/ui/icon";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { ChevronDownIcon, MenuIcon, PhoneIcon } from "@/lib/icons";
+import { ChevronDownIcon, CloseIcon, MenuIcon, PhoneIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWordmark } from "./site-header-wordmark";
 import { type SiteMetaLink, SiteNavPanel } from "./site-nav-panel";
@@ -36,11 +32,101 @@ export type SiteHeaderShellProps = {
   call: SiteMetaLink | null;
 };
 
+function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
+  const container = useRef<HTMLLIElement>(null);
+  const dropdown = useRef<HTMLDivElement>(null);
+  const icon = useRef<SVGSVGElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const hoverAnim = useRef<gsap.core.Timeline | null>(null);
+
+  useGSAP(
+    () => {
+      if (!dropdown.current || !icon.current) return;
+
+      // Set initial state
+      gsap.set(dropdown.current, { autoAlpha: 0, y: -10, display: "none" });
+
+      // Create a timeline that can be played forward/backward
+      const tl = gsap
+        .timeline({ paused: true })
+        .to(
+          dropdown.current,
+          {
+            autoAlpha: 1,
+            y: 0,
+            display: "block",
+            duration: 0.2,
+            ease: "power2.out",
+          },
+          0,
+        )
+        .to(
+          icon.current,
+          {
+            rotation: 180,
+            duration: 0.2,
+            ease: "power2.out",
+          },
+          0,
+        );
+
+      hoverAnim.current = tl;
+
+      return () => {
+        tl.kill();
+        hoverAnim.current = null;
+      };
+    },
+    { scope: container },
+  );
+
+  useEffect(() => {
+    if (hoverAnim.current) {
+      if (hovered) hoverAnim.current.play();
+      else hoverAnim.current.reverse();
+    }
+  }, [hovered]);
+
+  return (
+    <li
+      ref={container}
+      className="relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <button
+        type="button"
+        className="flex items-center gap-1 font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent outline-none cursor-pointer"
+      >
+        {item.label}{" "}
+        <Icon ref={icon} icon={ChevronDownIcon} className="size-4" />
+      </button>
+
+      <div
+        ref={dropdown}
+        className="absolute top-full left-0 pt-4 w-48 invisible"
+      >
+        <div className="bg-surface shadow-lg rounded-md p-1.5 flex flex-col gap-1">
+          {item.children?.map((child) => (
+            <Link
+              key={child.label}
+              href={child.href as Route}
+              className="font-body text-sm text-ink hover:text-accent hover:bg-accent/5 focus:bg-accent/10 focus:text-accent py-2 px-3 rounded-sm transition-colors block"
+            >
+              {child.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </li>
+  );
+}
+
 export function SiteHeaderShell({
   call,
   items,
-  links,
   places,
+  links,
   wordmark,
 }: SiteHeaderShellProps) {
   const [open, setOpen] = useState(false);
@@ -125,8 +211,8 @@ export function SiteHeaderShell({
 
       <div
         className={cn(
-          "pointer-events-auto border-b transition-colors gutter-x",
-          scrolled ? "border-border bg-surface" : "border-transparent",
+          "pointer-events-auto border-b transition-colors gutter-x bg-surface",
+          scrolled ? "border-border" : "border-transparent",
         )}
         ref={bar}
       >
@@ -145,41 +231,20 @@ export function SiteHeaderShell({
             className="hidden flex-1 justify-center lg:flex"
           >
             <ul className="flex items-center gap-x-5 xl:gap-x-8">
-              {items.map((item) => (
-                <li key={item.label}>
-                  {item.children ? (
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="flex items-center gap-1 font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent outline-none">
-                        {item.label}{" "}
-                        <Icon icon={ChevronDownIcon} className="size-4" />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        align="start"
-                        className="w-48 bg-surface border border-border"
-                      >
-                        {item.children.map((child) => (
-                          <DropdownMenuItem
-                            key={child.label}
-                            asChild
-                            className="cursor-pointer font-body text-sm text-ink hover:text-accent focus:bg-accent/10 focus:text-accent py-2 px-4 outline-none"
-                          >
-                            <Link href={child.href as Route}>
-                              {child.label}
-                            </Link>
-                          </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  ) : (
+              {items.map((item) =>
+                item.children ? (
+                  <DesktopNavDropdown key={item.label} item={item} />
+                ) : (
+                  <li key={item.label}>
                     <Link
                       className="font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent"
                       href={item.href as Route}
                     >
                       {item.label}
                     </Link>
-                  )}
-                </li>
-              ))}
+                  </li>
+                ),
+              )}
             </ul>
           </nav>
 
@@ -195,24 +260,34 @@ export function SiteHeaderShell({
             )}
 
             <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild>
-                <Button size="sm" variant="quiet">
-                  Menu
-                  <Icon icon={MenuIcon} />
-                </Button>
-              </SheetTrigger>
+              <SheetTrigger
+                render={
+                  <Button size="sm" variant="quiet">
+                    Menu
+                    <Icon icon={MenuIcon} />
+                  </Button>
+                }
+              />
               <SheetContent
-                className="w-full sm:max-w-md lg:max-w-sm flex flex-col outline-none overflow-y-auto px-6 py-6"
+                className="w-full sm:max-w-md lg:max-w-sm flex flex-col outline-none overflow-y-auto p-0"
                 side="right"
+                hideClose
               >
-                <SheetTitle className="sr-only">Menu</SheetTitle>
-                <SiteNavPanel
-                  items={items}
-                  labelId={labelId}
-                  links={links}
-                  onNavigate={() => setOpen(false)}
-                  places={places}
-                />
+                <SheetClose className="absolute top-0 left-0 bg-accent text-white p-3 hover:bg-accent/90 transition-colors cursor-pointer z-10 flex items-center justify-center">
+                  <Icon icon={CloseIcon} className="size-6" />
+                  <span className="sr-only">Close</span>
+                </SheetClose>
+                <div className="px-6 pb-6 pt-16 lg:py-10 h-full w-full flex flex-col overflow-y-auto">
+                  <SheetTitle className="sr-only">Menu</SheetTitle>
+                  <SiteNavPanel
+                    items={items}
+                    labelId={labelId}
+                    places={places}
+                    links={links}
+                    wordmark={wordmark}
+                    onNavigate={() => setOpen(false)}
+                  />
+                </div>
               </SheetContent>
             </Sheet>
           </div>

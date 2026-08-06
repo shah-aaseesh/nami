@@ -3,6 +3,8 @@ import {
   type ButtonProps as ButtonPrimitiveProps,
 } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
+import type { Route } from "next";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
@@ -27,10 +29,27 @@ export const buttonVariants = cva(
   },
 );
 
-export type ButtonProps = Omit<ButtonPrimitiveProps, "className"> &
-  VariantProps<typeof buttonVariants> & { className?: string };
+export type ButtonProps = Omit<ButtonPrimitiveProps, "className" | "href"> &
+  VariantProps<typeof buttonVariants> & { className?: string; href?: string };
 
-export function Button({ className, variant, size, ...props }: ButtonProps) {
+export function Button({
+  className,
+  variant,
+  size,
+  href,
+  ...props
+}: ButtonProps) {
+  if (href) {
+    return (
+      <ButtonPrimitive
+        render={<Link href={href as Route} />}
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size }), className)}
+        {...props}
+      />
+    );
+  }
+
   return (
     <ButtonPrimitive
       data-slot="button"

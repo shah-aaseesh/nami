@@ -21,6 +21,10 @@ export async function SiteHeader() {
   const { shortName } = institution.entities.college;
   const spaceAt = shortName.indexOf(" ");
 
+  const dialled = institution.contact.phones.find(
+    (phone) => !isPlaceholder(phone),
+  );
+
   const places = institution.campuses.map(
     (campus) => `${campus.locality}, ${campus.city}`,
   );
@@ -33,18 +37,14 @@ export async function SiteHeader() {
       href: site.destination === "legacy" ? null : site.href,
       external: site.destination === "external",
     })),
-  ].filter((link) => link !== null);
-
-  const dialled = institution.contact.phones.find(
-    (phone) => !isPlaceholder(phone),
-  );
+  ].filter((link) => link !== null) as SiteMetaLink[];
 
   return (
     <SiteHeaderShell
       call={dialled === undefined ? null : channel(dialled, "tel:")}
       items={items}
-      links={links}
       places={places}
+      links={links}
       wordmark={{
         lead: spaceAt === -1 ? shortName : shortName.slice(0, spaceAt),
         tail: spaceAt === -1 ? null : shortName.slice(spaceAt + 1),

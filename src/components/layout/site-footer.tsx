@@ -17,7 +17,7 @@ const detailLink = cn(buttonVariants({ size: "md", variant: "link" }));
 const columnHeading =
   "font-body text-xl font-medium text-ink underline decoration-1 underline-offset-8";
 const quietLink =
-  "font-body text-base text-ink-muted transition-colors hover:text-accent motion-reduce:transition-none";
+  "font-body text-base text-ink-muted transition-colors hover:text-accent";
 
 function WebsiteLink({ link }: { link: ContentLink }) {
   if (link.destination === "legacy") {

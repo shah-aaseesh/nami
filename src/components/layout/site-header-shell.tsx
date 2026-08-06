@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { ScrollSmoother } from "@/lib/gsap";
+import { gsap, ScrollSmoother, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { CloseIcon, MenuIcon, PhoneIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWordmark } from "./site-header-wordmark";
@@ -19,6 +19,7 @@ const FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 const SCROLLED_AT = 24;
 const SMOOTH_WRAPPER = "smooth-wrapper";
+const HIDE_DURATION = 0.2;
 
 export type SiteHeaderShellProps = {
   wordmark: { lead: string; tail: string | null };
@@ -39,6 +40,9 @@ export function SiteHeaderShell({
   const [scrolled, setScrolled] = useState(false);
   const root = useRef<HTMLElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
+  const bar = useRef<HTMLDivElement>(null);
+  const showAnim = useRef<gsap.core.Tween | null>(null);
+  const openRef = useRef(open);
   const panelId = useId();
   const labelId = useId();
 
@@ -111,6 +115,54 @@ export function SiteHeaderShell({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [close, open]);
 
+  useEffect(() => {
+    openRef.current = open;
+    if (open) showAnim.current?.progress(1);
+  }, [open]);
+
+  useGSAP(
+    () => {
+      const barEl = bar.current;
+      if (barEl === null) return;
+
+      const tween = gsap
+        .from(barEl, {
+          yPercent: -100,
+          paused: true,
+          duration: HIDE_DURATION,
+        })
+        .progress(1);
+      showAnim.current = tween;
+
+      let trigger: ScrollTrigger | undefined;
+
+      const frame = requestAnimationFrame(() => {
+        trigger = ScrollTrigger.create({
+          start: "top top",
+          end: "max",
+          onUpdate: (self) => {
+            if (openRef.current) {
+              tween.progress(1);
+              return;
+            }
+            if (self.direction === -1) {
+              tween.play();
+            } else {
+              tween.reverse();
+            }
+          },
+        });
+      });
+
+      return () => {
+        cancelAnimationFrame(frame);
+        trigger?.kill();
+        showAnim.current = null;
+      };
+    },
+    { scope: root },
+  );
+
   return (
     <header
       className={cn(
@@ -123,7 +175,7 @@ export function SiteHeaderShell({
         <Link
           className={cn(
             buttonVariants({ size: "sm" }),
-            "pointer-events-none fixed top-4 left-4 z-10 opacity-0 transition-opacity focus:pointer-events-auto focus:opacity-100 motion-reduce:transition-none",
+            "pointer-events-none fixed top-4 left-4 z-10 opacity-0 transition-opacity focus:pointer-events-auto focus:opacity-100",
           )}
           href={"#main" as Route}
         >
@@ -133,14 +185,15 @@ export function SiteHeaderShell({
 
       <div
         className={cn(
-          "border-b border-transparent transition-colors motion-reduce:transition-none gutter-x",
+          "border-b border-transparent transition-colors gutter-x",
           scrolled && !open && "pointer-events-auto border-border bg-surface",
           open && "pointer-events-auto",
         )}
+        ref={bar}
       >
         <div
           className={cn(
-            "mx-auto flex max-w-page items-center justify-between gap-6 transition-[height] duration-300 motion-reduce:transition-none",
+            "mx-auto flex max-w-page items-center justify-between gap-6 transition-[height] duration-300",
             scrolled && !open ? "h-16" : "h-20",
           )}
         >
@@ -149,11 +202,7 @@ export function SiteHeaderShell({
             href="/"
             onClick={open ? close : undefined}
           >
-            <SiteHeaderWordmark
-              lead={wordmark.lead}
-              onInk={open}
-              tail={wordmark.tail}
-            />
+            <SiteHeaderWordmark lead={wordmark.lead} tail={wordmark.tail} />
           </Link>
 
           {open ? null : (
@@ -165,7 +214,7 @@ export function SiteHeaderShell({
                 {items.map((item) => (
                   <li key={item.hash}>
                     <Link
-                      className="font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent motion-reduce:transition-none"
+                      className="font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent"
                       href={item.hash as Route}
                     >
                       {item.label}
@@ -179,7 +228,7 @@ export function SiteHeaderShell({
           <div className="flex items-center gap-x-5">
             {open || call === null || call.href === null ? null : (
               <Link
-                className="pointer-events-auto hidden items-center gap-x-2 font-body text-sm font-medium text-ink transition-colors hover:text-accent motion-reduce:transition-none xl:inline-flex"
+                className="pointer-events-auto hidden items-center gap-x-2 font-body text-sm font-medium text-ink transition-colors hover:text-accent xl:inline-flex"
                 href={call.href as Route}
               >
                 <Icon className="size-4" icon={PhoneIcon} />

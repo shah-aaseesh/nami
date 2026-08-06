@@ -17,7 +17,7 @@ export function Breadcrumb({ trail }: { trail: readonly Crumb[] }) {
               </span>
             ) : (
               <Link
-                className="text-ink transition-colors hover:text-accent motion-reduce:transition-none"
+                className="text-ink transition-colors hover:text-accent"
                 href={crumb.path as Route}
               >
                 {crumb.name}

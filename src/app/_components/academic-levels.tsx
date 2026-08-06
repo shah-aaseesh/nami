@@ -36,7 +36,7 @@ export async function AcademicLevels() {
   }));
 
   return (
-    <section className="field-teal gutter-x section-y" id="levels">
+    <section className="field-brand gutter-x section-y" id="levels">
       <div className="mx-auto grid max-w-page gap-x-16 gap-y-14 xl:grid-cols-12">
         <AcademicLevelsIntro className="xl:col-span-5">
           {section.eyebrow === null ? null : (

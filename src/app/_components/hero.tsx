@@ -20,7 +20,6 @@ import {
   InstagramIcon,
   LinkedInIcon,
   MortarboardIcon,
-  PlayIcon,
   TwitterIcon,
   YouTubeIcon,
 } from "@/lib/icons";
@@ -37,6 +36,9 @@ const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
 
 const BADGE_RADIUS = 66;
 const BADGE_ARC = `M 80,80 m 0,-${BADGE_RADIUS} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,${BADGE_RADIUS * 2} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,-${BADGE_RADIUS * 2}`;
+const MARK_SRC = "/logo.png";
+const MARK_WIDTH = 176;
+const MARK_HEIGHT = 132;
 
 function leadClause(sentence: string): string {
   const splitAt = sentence.indexOf(", ");
@@ -133,7 +135,7 @@ function HeroBadge({
     <div className="relative size-32 shrink-0 lg:size-36">
       <svg
         aria-label={ring.replaceAll(" * ", ", ")}
-        className="size-full motion-safe:animate-[spin_20s_linear_infinite]"
+        className="size-full animate-[spin_20s_linear_infinite]"
         role="img"
         viewBox="0 0 160 160"
       >
@@ -152,12 +154,19 @@ function HeroBadge({
       </svg>
       {watch === null ? null : (
         <Link
-          className="absolute inset-0 m-auto flex size-12 items-center justify-center rounded-full border border-border-strong transition-colors hover:bg-ink hover:text-surface"
+          className="absolute inset-0 m-auto flex size-16 items-center justify-center rounded-full"
           href={watch.href as Route}
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Icon className="ms-0.5" icon={PlayIcon} />
+          <Image
+            alt=""
+            className="h-12 w-auto"
+            height={MARK_HEIGHT}
+            sizes="96px"
+            src={MARK_SRC}
+            width={MARK_WIDTH}
+          />
           <span className="sr-only">{`Watch ${entity.name} on ${watch.label}`}</span>
         </Link>
       )}

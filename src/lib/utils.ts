@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
 const twMerge = extendTailwindMerge<
-  "color-field" | "gutter-x" | "section-y" | "bleed-x"
+  "color-field" | "gutter-x" | "section-y" | "bleed-x" | "text-outline"
 >({
   extend: {
     theme: { container: ["page"], radius: ["media"] },
@@ -11,6 +11,7 @@ const twMerge = extendTailwindMerge<
       "gutter-x": ["gutter-x"],
       "section-y": ["section-y"],
       "bleed-x": ["bleed-x"],
+      "text-outline": ["text-outline"],
     },
     conflictingClassGroups: {
       p: ["gutter-x", "section-y"],

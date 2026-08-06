@@ -1,18 +1,49 @@
 "use client";
 
-import { type KeyboardEvent, useCallback, useRef, useState } from "react";
+import {
+  type KeyboardEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import type { Testimonial } from "@/lib/content";
-import { ArrowRightIcon } from "@/lib/icons";
+import { gsap, matchMotion, useGSAP } from "@/lib/gsap";
+import { ArrowRightIcon, QuoteIcon } from "@/lib/icons";
 import { TestimonialCard } from "./testimonials-card";
 
-function slideTargets(track: HTMLElement): readonly number[] {
-  const first = track.firstElementChild;
-  if (!(first instanceof HTMLElement)) return [];
+const AUTOPLAY_SECONDS = 5;
+const RING_RADIUS = 20;
+const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
-  return Array.from(track.children, (slide) =>
-    slide instanceof HTMLElement ? slide.offsetLeft - first.offsetLeft : 0,
+function Slide({ testimonial }: { testimonial: Testimonial }) {
+  const panel = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () =>
+      matchMotion(
+        {
+          motion: () => {
+            const el = panel.current;
+            if (el === null) return;
+            gsap.fromTo(
+              el,
+              { opacity: 0, y: 24 },
+              { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+            );
+          },
+        },
+        panel,
+      ),
+    { scope: panel },
+  );
+
+  return (
+    <div ref={panel} className="mt-6 lg:mt-8">
+      <TestimonialCard panel={false} testimonial={testimonial} />
+    </div>
   );
 }
 
@@ -23,116 +54,161 @@ export function TestimonialsCarousel({
   items: readonly Testimonial[];
   label: string;
 }) {
-  const track = useRef<HTMLUListElement>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const ring = useRef<SVGCircleElement>(null);
   const [index, setIndex] = useState(0);
+  const [inView, setInView] = useState(false);
 
-  const goTo = useCallback((slide: number) => {
-    const el = track.current;
+  const count = items.length;
+  const current = items[index];
+
+  useEffect(() => {
+    const el = root.current;
     if (el === null) return;
-
-    const targets = slideTargets(el);
-    const left = targets[Math.min(Math.max(slide, 0), targets.length - 1)];
-    if (left === undefined) return;
-
-    el.scrollTo({
-      left,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-    });
+    const observer = new IntersectionObserver(
+      (entries) => setInView(entries[0]?.isIntersecting ?? false),
+      { threshold: 0.4 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
-  const syncIndex = useCallback(() => {
-    const el = track.current;
-    if (el === null) return;
+  const autoplay = inView && count > 1;
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-    const targets = slideTargets(el);
-    let nearest = 0;
-    targets.forEach((left, slide) => {
-      const best = targets[nearest] ?? 0;
-      if (Math.abs(left - el.scrollLeft) < Math.abs(best - el.scrollLeft) - 1) {
-        nearest = slide;
-      }
-    });
-    setIndex(nearest);
+  const stopRing = useCallback(() => {
+    if (tweenRef.current !== null) {
+      tweenRef.current.kill();
+      tweenRef.current = null;
+    }
+    const circle = ring.current;
+    if (circle !== null) {
+      gsap.set(circle, { strokeDashoffset: RING_CIRCUMFERENCE });
+    }
   }, []);
 
-  const onKeyDown = (event: KeyboardEvent<HTMLUListElement>) => {
-    const keys: Record<string, number> = {
-      ArrowLeft: index - 1,
-      ArrowRight: index + 1,
-      Home: 0,
-      End: items.length - 1,
+  const startRing = useCallback(() => {
+    const circle = ring.current;
+    if (circle === null) return;
+    stopRing();
+    if (!autoplay) return;
+    tweenRef.current = gsap.to(circle, {
+      strokeDashoffset: 0,
+      duration: AUTOPLAY_SECONDS,
+      ease: "none",
+      onComplete: () => {
+        tweenRef.current = null;
+        setIndex((currentIndex) => (currentIndex + 1) % count);
+        startRing();
+      },
+    });
+  }, [autoplay, count, stopRing]);
+
+  useEffect(() => {
+    startRing();
+    return () => {
+      stopRing();
     };
-    const slide = keys[event.key];
-    if (slide === undefined) return;
+  }, [startRing, stopRing]);
 
+  const goTo = useCallback(
+    (slide: number) => {
+      setIndex(((slide % count) + count) % count);
+      startRing();
+    },
+    [count, startRing],
+  );
+
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const actions: Record<string, () => void> = {
+      ArrowLeft: () => goTo(index - 1),
+      ArrowRight: () => goTo(index + 1),
+      Home: () => goTo(0),
+      End: () => goTo(count - 1),
+    };
+    const action = actions[event.key];
+    if (action === undefined) return;
     event.preventDefault();
-    goTo(slide);
+    action();
   };
 
-  const atStart = index === 0;
-  const atEnd = index === items.length - 1;
+  if (current === undefined) return null;
 
   return (
-    <div>
-      <div className="flex items-center justify-end gap-5">
-        <p
-          aria-hidden="true"
-          className="font-body text-sm text-ink-muted tabular-nums"
-        >
-          {String(index + 1).padStart(2, "0")} /{" "}
-          {String(items.length).padStart(2, "0")}
-        </p>
-        <p aria-live="polite" className="sr-only">
-          Testimonial {index + 1} of {items.length}
-        </p>
+    <section
+      aria-label={label}
+      aria-roledescription="carousel"
+      className="outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4"
+      onKeyDown={onKeyDown}
+      ref={root}
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: the carousel region must be reachable by keyboard
+      tabIndex={0}
+    >
+      <div className="rounded-3xl border border-border-strong bg-surface-raised p-6 sm:p-10 lg:p-14">
+        <div className="flex flex-col items-start gap-10 lg:flex-row lg:gap-48">
+          <div className="flex items-center gap-3">
+            <Button
+              aria-label="Previous testimonial"
+              className="rounded-full"
+              onClick={() => goTo(index - 1)}
+              size="icon"
+              variant="quiet"
+            >
+              <Icon className="rotate-180" icon={ArrowRightIcon} />
+            </Button>
+            <div className="relative">
+              <Button
+                aria-label="Next testimonial"
+                className="rounded-full"
+                onClick={() => goTo(index + 1)}
+                size="icon"
+                variant="quiet"
+              >
+                <Icon icon={ArrowRightIcon} />
+              </Button>
+              <svg
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 size-full -rotate-90"
+                focusable="false"
+                viewBox="0 0 44 44"
+              >
+                <circle
+                  className="stroke-accent"
+                  cx="22"
+                  cy="22"
+                  fill="none"
+                  r={RING_RADIUS}
+                  ref={ring}
+                  strokeDasharray={RING_CIRCUMFERENCE}
+                  strokeDashoffset={RING_CIRCUMFERENCE}
+                  strokeLinecap="round"
+                  strokeWidth="2"
+                />
+              </svg>
+            </div>
+          </div>
 
-        <div className="flex items-center gap-2">
-          <Button
-            aria-disabled={atStart}
-            aria-label="Previous testimonial"
-            className="rounded-full aria-disabled:opacity-40"
-            onClick={() => goTo(index - 1)}
-            size="icon"
-            variant="quiet"
-          >
-            <Icon className="rotate-180" icon={ArrowRightIcon} />
-          </Button>
-          <Button
-            aria-disabled={atEnd}
-            aria-label="Next testimonial"
-            className="rounded-full aria-disabled:opacity-40"
-            onClick={() => goTo(index + 1)}
-            size="icon"
-            variant="quiet"
-          >
-            <Icon icon={ArrowRightIcon} />
-          </Button>
+          <div className="min-w-0 grow">
+            <div className="flex items-center justify-between gap-6">
+              <Icon
+                className="size-8 text-accent lg:size-10"
+                icon={QuoteIcon}
+              />
+              <p
+                aria-hidden="true"
+                className="font-body text-sm text-ink-muted tabular-nums"
+              >
+                {String(index + 1).padStart(2, "0")} /{" "}
+                {String(count).padStart(2, "0")}
+              </p>
+            </div>
+            <p aria-live="polite" className="sr-only">
+              Testimonial {index + 1} of {count}
+            </p>
+            <Slide key={current.id} testimonial={current} />
+          </div>
         </div>
       </div>
-
-      <ul
-        aria-label={label}
-        aria-roledescription="carousel"
-        className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] sm:gap-6 lg:mt-8"
-        onKeyDown={onKeyDown}
-        onScroll={syncIndex}
-        ref={track}
-        // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be reachable by keyboard
-        tabIndex={0}
-      >
-        {items.map((testimonial, slide) => (
-          <li
-            aria-label={`${slide + 1} of ${items.length}`}
-            aria-roledescription="slide"
-            className="w-full shrink-0 snap-start"
-            key={testimonial.id}
-          >
-            <TestimonialCard className="h-full" testimonial={testimonial} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    </section>
   );
 }

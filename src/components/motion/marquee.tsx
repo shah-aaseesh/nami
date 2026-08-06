@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { gsap, matchMotion, Observer, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
@@ -30,24 +30,27 @@ export function Marquee({
 }: MarqueeProps) {
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
-  const [reduced, setReduced] = useState(false);
 
   useGSAP(
     () =>
       matchMotion(
         {
           motion: () => {
-            setReduced(false);
             const el = track.current;
             if (!el) return;
 
             const base = reverse ? -1 : 1;
+            const duration = el.scrollWidth / copies / speed;
             const loop = gsap.to(el, {
               xPercent: -100 / copies,
-              duration: el.scrollWidth / copies / speed,
+              duration,
               ease: "none",
               repeat: -1,
             });
+
+            // Advance totalTime safely into the future so that playing backward
+            // (timeScale < 0) never hits the 0 boundary, which would stop it.
+            loop.totalTime(duration * 1000);
             loop.timeScale(base);
 
             if (!velocity) return;
@@ -77,9 +80,6 @@ export function Marquee({
 
             return () => observer.kill();
           },
-          reduced: () => {
-            setReduced(true);
-          },
         },
         root,
       ),
@@ -87,21 +87,17 @@ export function Marquee({
   );
 
   const copyKeys = Array.from(
-    { length: reduced ? 1 : copies },
+    { length: copies },
     (_, index) => `marquee-copy-${index}`,
   );
 
   return (
-    // biome-ignore lint/a11y/useSemanticElements: <fieldset> groups form controls; this names the scroll container that the reduced-motion path makes focusable.
+    // biome-ignore lint/a11y/useSemanticElements: <fieldset> groups form controls; this names a scroll region, not a form group.
     <div
       aria-label={label}
-      className={cn(
-        reduced ? "overflow-x-auto overflow-y-hidden" : "overflow-hidden",
-        className,
-      )}
+      className={cn("overflow-hidden", className)}
       ref={root}
       role="group"
-      tabIndex={reduced ? 0 : undefined}
     >
       <div
         className={cn("flex w-max will-change-transform", trackClassName)}

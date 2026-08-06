@@ -213,6 +213,11 @@
   color: var(--color-ink);
 }
 
+@utility text-outline {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px currentColor;
+}
+
 @layer base {
   *,
   ::after,

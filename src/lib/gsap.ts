@@ -18,12 +18,10 @@ gsap.registerPlugin(
   Observer,
 );
 
-export const FULL_MOTION_QUERY = "(prefers-reduced-motion: no-preference)";
-export const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+export const FULL_MOTION_QUERY = "all";
 
 type MotionBranches = {
   motion: gsap.ContextFunc;
-  reduced?: gsap.ContextFunc;
 };
 
 export function matchMotion(
@@ -32,9 +30,6 @@ export function matchMotion(
 ): () => void {
   const mm = gsap.matchMedia(scope);
   mm.add(FULL_MOTION_QUERY, branches.motion);
-  if (branches.reduced) {
-    mm.add(REDUCED_MOTION_QUERY, branches.reduced);
-  }
   return () => {
     mm.revert();
   };

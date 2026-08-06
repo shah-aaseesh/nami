@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Icon } from "@/components/ui/icon";
 import { H6 } from "@/components/ui/typography";
 import type { Testimonial } from "@/lib/content";
@@ -6,66 +6,82 @@ import { QuoteIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 function quoteStep(quote: string): string {
-  if (quote.length <= 140) return "text-5xl";
-  if (quote.length <= 450) return "text-4xl";
-  return "text-3xl";
+  if (quote.length <= 140) return "text-4xl lg:text-5xl";
+  if (quote.length <= 450) return "text-3xl lg:text-4xl";
+  return "text-2xl lg:text-3xl";
+}
+
+function initialsOf(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
 }
 
 export function TestimonialCard({
   className,
+  panel = true,
   testimonial,
 }: {
   className?: string;
+  panel?: boolean;
   testimonial: Testimonial;
 }) {
   const { portrait } = testimonial;
 
   return (
-    <div
-      className={cn("flex rounded-3xl bg-accent p-4 sm:p-6 xl:p-8", className)}
+    <figure
+      className={cn(
+        panel &&
+          "rounded-3xl border border-border-strong bg-surface-raised p-6 sm:p-10 lg:p-12",
+        className,
+      )}
     >
-      <figure className="flex w-full flex-col rounded-2xl bg-surface-raised p-6 sm:p-10 lg:flex-row lg:items-start lg:gap-12 xl:gap-20 xl:p-14">
-        <div className="grow lg:order-2">
-          <Icon className="size-8 text-accent lg:size-10" icon={QuoteIcon} />
+      {panel ? (
+        <Icon className="size-8 text-accent lg:size-10" icon={QuoteIcon} />
+      ) : null}
 
-          <blockquote className="mt-6 lg:mt-8">
-            <p
-              className={cn(
-                "font-display text-ink text-pretty",
-                quoteStep(testimonial.quote),
-              )}
-            >
-              {testimonial.quote}
-            </p>
-          </blockquote>
-        </div>
+      <blockquote className={panel ? "mt-6 lg:mt-8" : undefined}>
+        <p
+          className={cn(
+            "font-display text-ink text-pretty font-medium tracking-wide leading-relaxed",
+            quoteStep(testimonial.quote),
+          )}
+        >
+          {testimonial.quote}
+        </p>
+      </blockquote>
 
-        <figcaption className="mt-10 flex items-center gap-5 border-t pt-8 lg:order-1 lg:mt-0 lg:w-3/12 lg:shrink-0 lg:flex-col lg:items-start lg:gap-6 lg:border-t-0 lg:pt-3">
+      <figcaption className="mt-10 flex items-center gap-4 lg:mt-14 lg:gap-5">
+        <Avatar size="lg">
           {portrait === null ? null : (
-            <Image
+            <AvatarImage
               alt={portrait.alt}
-              className="size-16 shrink-0 rounded-full object-cover"
               height={portrait.height}
-              sizes="64px"
               src={portrait.src}
               width={portrait.width}
             />
           )}
-          <span>
-            <H6 as="span" className="block">
-              {testimonial.name}
-            </H6>
-            <span className="mt-1 block font-body text-sm text-ink-muted">
-              {testimonial.programme}
-            </span>
-            {testimonial.graduatedYear === null ? null : (
-              <span className="block font-body text-sm text-ink-muted">
-                {testimonial.graduatedYear}
-              </span>
-            )}
+          <AvatarFallback delay={portrait === null ? 0 : 400}>
+            {initialsOf(testimonial.name)}
+          </AvatarFallback>
+        </Avatar>
+        <span>
+          <H6 as="span" className="block">
+            {testimonial.name}
+          </H6>
+          <span className="mt-1 block font-body text-sm text-ink-muted">
+            {testimonial.programme}
           </span>
-        </figcaption>
-      </figure>
-    </div>
+          {testimonial.graduatedYear === null ? null : (
+            <span className="block font-body text-sm text-ink-muted">
+              {testimonial.graduatedYear}
+            </span>
+          )}
+        </span>
+      </figcaption>
+    </figure>
   );
 }

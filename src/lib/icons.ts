@@ -15,7 +15,6 @@ export {
   Menu01Icon as MenuIcon,
   Mortarboard01Icon as MortarboardIcon,
   NewTwitterIcon as TwitterIcon,
-  PlayIcon,
   QuoteUpIcon as QuoteIcon,
   Tick02Icon as CheckIcon,
   YoutubeIcon as YouTubeIcon,

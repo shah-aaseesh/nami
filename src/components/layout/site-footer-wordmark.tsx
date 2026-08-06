@@ -1,8 +1,9 @@
-"use client";
-
-import { useRef } from "react";
-import { gsap, matchMotion, SplitText, useGSAP } from "@/lib/gsap";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+
+const MARK_SRC = "/logo.png";
+const MARK_WIDTH = 176;
+const MARK_HEIGHT = 132;
 
 export type SiteFooterWordmarkProps = {
   lead: string;
@@ -15,49 +16,16 @@ export function SiteFooterWordmark({
   lead,
   tail,
 }: SiteFooterWordmarkProps) {
-  const root = useRef<HTMLHeadingElement>(null);
-
-  useGSAP(
-    () =>
-      matchMotion(
-        {
-          motion: () => {
-            const el = root.current;
-            if (!el) return;
-
-            const split = SplitText.create(el, {
-              type: "lines",
-              mask: "lines",
-              aria: "auto",
-              autoSplit: true,
-              onSplit: (self) =>
-                gsap.from(self.lines, {
-                  yPercent: 110,
-                  duration: 1.1,
-                  ease: "power4.out",
-                  stagger: 0.09,
-                  scrollTrigger: { trigger: el, start: "top 90%", once: true },
-                }),
-            });
-
-            return () => {
-              split.revert();
-            };
-          },
-        },
-        root,
-      ),
-    { scope: root },
-  );
-
   return (
-    <h2 className={cn("text-ink", className)} ref={root}>
-      <span className="block font-display text-3xl leading-none">{lead}</span>
-      {tail === null ? null : (
-        <span className="mt-2 block font-body text-xs font-medium tracking-widest uppercase">
-          {tail}
-        </span>
-      )}
+    <h2 className={cn(className)} data-slot="wordmark">
+      <Image
+        alt={tail === null ? lead : `${lead} ${tail}`}
+        className="h-12 w-auto"
+        height={MARK_HEIGHT}
+        sizes="64px"
+        src={MARK_SRC}
+        width={MARK_WIDTH}
+      />
     </h2>
   );
 }

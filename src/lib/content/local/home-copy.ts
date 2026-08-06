@@ -94,7 +94,11 @@ export const homeCopy: HomeCopy = {
       eyebrow: "Notices",
       heading: "What's happening at NAMI.",
       standfirst: null,
-      cta: null,
+      cta: {
+        label: "View all events",
+        href: "/events",
+        destination: "internal",
+      },
       emptyState: "No current notices.",
     },
     admission: {

@@ -55,7 +55,7 @@ export function AccordionTrigger({
         {children}
         <Icon
           icon={ChevronDownIcon}
-          className="text-ink-muted transition-transform duration-300 ease-out group-hover:text-accent group-data-panel-open:rotate-180 motion-reduce:transition-none"
+          className="text-ink-muted transition-transform duration-300 ease-out group-hover:text-accent group-data-panel-open:rotate-180"
         />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -70,7 +70,7 @@ export function AccordionPanel({
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-panel"
-      className="h-(--accordion-panel-height) overflow-hidden transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0 motion-reduce:transition-none"
+      className="h-(--accordion-panel-height) overflow-hidden transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0"
       {...props}
     >
       <div className={cn("pb-8 pe-8 text-base text-ink-muted", className)}>

@@ -98,7 +98,7 @@ export function SiteNavPanel({
                   <span className="flex flex-1 flex-col gap-y-2 lg:flex-row lg:items-baseline lg:gap-x-10">
                     <H3
                       as="span"
-                      className="block flex-1 transition-colors group-hover:text-accent motion-reduce:transition-none"
+                      className="block flex-1 transition-colors group-hover:text-accent"
                     >
                       {item.label}
                     </H3>

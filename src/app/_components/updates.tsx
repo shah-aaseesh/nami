@@ -6,7 +6,7 @@ import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
-import type { ContentLink, IsoDate, Update, UpdateKind } from "@/lib/content";
+import type { ContentLink, IsoDate, Update } from "@/lib/content";
 import { content } from "@/lib/content";
 import {
   ArrowRightIcon,
@@ -17,12 +17,6 @@ import {
 import { cn } from "@/lib/utils";
 
 const HOME_TEASER_COUNT = 3;
-
-const KIND_LABEL: Record<UpdateKind, string> = {
-  event: "Event",
-  news: "News",
-  notice: "Notice",
-};
 
 const dateFormat = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
@@ -59,53 +53,75 @@ function UpdateCta({
   );
 }
 
-function UpdateCard({ item }: { item: Update }) {
+function UpdateRow({ item, ordinal }: { item: Update; ordinal: number }) {
+  const alternate = ordinal % 2 === 1;
+
   return (
     <li
-      className="border-t border-border-strong pt-6 lg:pt-8"
+      className={cn(
+        "group relative grid gap-x-4 gap-y-4 border-b border-border px-5 py-6 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-x-8 sm:px-8 sm:py-8 lg:px-10 lg:py-9",
+        alternate
+          ? "bg-accent"
+          : "bg-surface-raised before:absolute before:inset-0 before:origin-top before:scale-y-0 before:bg-accent before:transition-transform before:duration-300 hover:before:scale-y-100",
+      )}
       data-reveal-item=""
+      key={item.id}
     >
-      {item.image === null ? null : (
-        <Image
-          alt={item.image.alt}
-          className="mb-6 h-auto w-full rounded-media object-cover"
-          height={item.image.height}
-          loading="lazy"
-          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
-          src={item.image.src}
-          width={item.image.width}
-        />
-      )}
-
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-body text-sm text-ink-muted">
-        <Eyebrow as="span">{KIND_LABEL[item.kind]}</Eyebrow>
-
-        <span className="inline-flex items-center gap-2">
-          <Icon className="size-4" icon={CalendarIcon} />
-          <span className="sr-only">Published </span>
-          <time dateTime={item.publishedAt}>
-            {formatDate(item.publishedAt)}
-          </time>
-        </span>
-
-        {item.venue === null ? null : (
-          <span className="inline-flex items-center gap-2">
-            <Icon className="size-4" icon={LocationIcon} />
-            <span className="sr-only">Venue </span>
-            {item.venue}
-          </span>
+      <p
+        aria-hidden="true"
+        className={cn(
+          "relative text-outline font-display text-7xl leading-none transition-colors duration-300",
+          alternate
+            ? "text-accent-ink"
+            : "text-neutral-400 group-hover:text-accent-ink",
         )}
+      >
+        {String(ordinal + 1).padStart(2, "0")}
+      </p>
+
+      <div
+        className={cn(
+          "relative transition-colors duration-300 sm:border-l sm:pl-6",
+          alternate
+            ? "sm:border-white"
+            : "sm:border-border sm:group-hover:border-white",
+        )}
+      >
+        <H5
+          as="h3"
+          className={cn(
+            "line-clamp-2 transition-colors duration-300",
+            alternate ? "text-accent-ink" : "group-hover:text-accent-ink",
+          )}
+        >
+          {item.title}
+        </H5>
+
+        <div
+          className={cn(
+            "mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-body text-sm transition-colors duration-300",
+            alternate
+              ? "text-accent-ink"
+              : "text-ink-muted group-hover:text-accent-ink",
+          )}
+        >
+          <span className="inline-flex items-center gap-2">
+            <Icon className="size-4" icon={CalendarIcon} />
+            <span className="sr-only">Published </span>
+            <time dateTime={item.publishedAt}>
+              {formatDate(item.publishedAt)}
+            </time>
+          </span>
+
+          {item.venue === null ? null : (
+            <span className="inline-flex items-center gap-2">
+              <Icon className="size-4" icon={LocationIcon} />
+              <span className="sr-only">Venue </span>
+              {item.venue}
+            </span>
+          )}
+        </div>
       </div>
-
-      <H5 as="h3" className="mt-4">
-        {item.title}
-      </H5>
-
-      <P className="mt-3">{item.excerpt}</P>
-
-      {item.link === null ? null : (
-        <UpdateCta className="mt-6" link={item.link} />
-      )}
     </li>
   );
 }
@@ -117,6 +133,10 @@ export async function Updates() {
   ]);
 
   const section = copy.sections.updates;
+  const featureImage =
+    updates.find((item) => item.image !== null)?.image ?? null;
+  const listColumns =
+    featureImage === null ? "lg:col-span-12" : "lg:col-span-7";
 
   return (
     <section className="gutter-x section-y" id="updates">
@@ -156,12 +176,33 @@ export async function Updates() {
         ) : null}
 
         {updates.length === 0 ? null : (
-          <Reveal className="mt-14 lg:mt-20" delay={0.25} stagger={0.08}>
-            <ul className="grid items-start gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {updates.map((item) => (
-                <UpdateCard item={item} key={item.id} />
-              ))}
-            </ul>
+          <Reveal className="mt-10 lg:mt-14" delay={0.25} stagger={0.08}>
+            <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-y-0">
+              <ul
+                className={cn(
+                  "grid auto-rows-fr border-t border-border",
+                  listColumns,
+                )}
+              >
+                {updates.map((item, index) => (
+                  <UpdateRow item={item} key={item.id} ordinal={index} />
+                ))}
+              </ul>
+
+              {featureImage === null ? null : (
+                <div className="lg:col-span-5" data-reveal-item="">
+                  <Image
+                    alt={featureImage.alt}
+                    className="h-auto w-full object-cover lg:h-full"
+                    height={featureImage.height}
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 42vw, 100vw"
+                    src={featureImage.src}
+                    width={featureImage.width}
+                  />
+                </div>
+              )}
+            </div>
           </Reveal>
         )}
       </div>

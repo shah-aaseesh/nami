@@ -1,8 +1,6 @@
 import { Marquee } from "@/components/motion/marquee";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, P } from "@/components/ui/typography";
 import { content } from "@/lib/content";
 import { AsteriskIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -44,12 +42,7 @@ function MarqueeRow({
 }
 
 export async function ProgrammeMarquee() {
-  const [copy, programmes] = await Promise.all([
-    content.getHomeCopy(),
-    content.getProgrammes(),
-  ]);
-
-  const section = copy.sections.programmes;
+  const programmes = await content.getProgrammes();
   const titles = [
     ...new Set(programmes.map((programme) => programme.shortTitle)),
   ];
@@ -59,28 +52,8 @@ export async function ProgrammeMarquee() {
 
   return (
     <section className="gutter-x section-y-compact" id="programmes">
-      <div className="mx-auto max-w-page">
-        {section.eyebrow === null ? null : (
-          <Reveal className="flex items-center gap-5 lg:w-7/12">
-            <Eyebrow>{section.eyebrow}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </Reveal>
-        )}
-
-        <SplitText
-          as="h2"
-          className="mt-6 font-display text-5xl lg:mt-8 lg:w-8/12"
-        >
-          {section.heading}
-        </SplitText>
-
-        {programmes.length === 0 && section.emptyState !== null ? (
-          <P className="mt-10 lg:w-5/12">{section.emptyState}</P>
-        ) : null}
-      </div>
-
       {programmes.length === 0 ? null : (
-        <Reveal className="bleed-x mt-10 lg:mt-14" stagger={0.12}>
+        <Reveal className="bleed-x" stagger={0.12}>
           <RevealItem className="field-ink py-4">
             <Marquee label="Programmes" speed={70}>
               <MarqueeRow

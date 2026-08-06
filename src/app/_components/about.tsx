@@ -1,9 +1,12 @@
+import Image from "next/image";
 import { Parallax } from "@/components/motion/parallax";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H4, H6, P, Standfirst } from "@/components/ui/typography";
+import { Tilt } from "@/components/motion/tilt";
+import { Eyebrow, H4, P, Standfirst } from "@/components/ui/typography";
 import type { RichText } from "@/lib/content";
 import { content } from "@/lib/content";
+import { FivePetals } from "./five-petals";
 
 function paragraphsOf(text: RichText): readonly string[] {
   return text.kind === "blocks" ? text.paragraphs : [];
@@ -96,38 +99,49 @@ export async function About() {
           </div>
         </Reveal>
 
-        <div className="mt-12 border-t pt-8 lg:mt-16">
-          <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.1}>
-            {emblemLead === undefined ? null : (
-              <RevealItem className="lg:col-span-5 lg:col-start-1">
-                <Standfirst className="text-ink">{emblemLead}</Standfirst>
-              </RevealItem>
-            )}
-            {emblemRest.length === 0 ? null : (
-              <RevealItem className="mt-6 flex flex-col gap-4 lg:col-span-6 lg:col-start-7 lg:mt-0">
-                {emblemRest.map((paragraph) => (
-                  <P key={paragraph}>{paragraph}</P>
-                ))}
-              </RevealItem>
-            )}
-          </Reveal>
-
-          {institution.values.length === 0 ? null : (
-            <Reveal className="mt-10" delay={0.2} stagger={0.06}>
-              <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
-                {institution.values.map((value) => (
-                  <RevealItem className="border-t pt-4" key={value.id}>
-                    <H6 as="dt">{value.name}</H6>
-                    <P as="dd" className="mt-2">
-                      {value.meaning}
-                    </P>
-                  </RevealItem>
-                ))}
-              </dl>
+        <div className="mt-12 border-t pt-12 lg:mt-24 lg:pt-16">
+          <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-10">
+            <Reveal className="lg:col-span-5 lg:col-start-1" y={48}>
+              <Tilt max={8} scale={1.04}>
+                <div className="group relative flex items-center justify-center py-10 lg:py-0">
+                  <div className="absolute -inset-10 -z-10 rounded-full bg-accent/5 blur-3xl transition-opacity duration-700 group-hover:bg-accent/10" />
+                  <Image
+                    alt="NAMI Emblem - Red Lotus"
+                    className="h-auto w-full max-w-sm object-contain mix-blend-multiply drop-shadow-2xl transition-transform duration-700 group-hover:scale-105 lg:max-w-md"
+                    height={408}
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 100vw, 450px"
+                    src="/lotus.png"
+                    width={612}
+                  />
+                </div>
+              </Tilt>
             </Reveal>
-          )}
+
+            <Reveal
+              className="mt-12 lg:col-span-6 lg:col-start-7 lg:mt-0"
+              stagger={0.12}
+            >
+              {emblemLead === undefined ? null : (
+                <RevealItem>
+                  <Standfirst className="text-ink">{emblemLead}</Standfirst>
+                </RevealItem>
+              )}
+              {emblemRest.length === 0 ? null : (
+                <RevealItem className="mt-6 flex flex-col gap-4">
+                  {emblemRest.map((paragraph) => (
+                    <P key={paragraph}>{paragraph}</P>
+                  ))}
+                </RevealItem>
+              )}
+            </Reveal>
+          </div>
         </div>
       </div>
+
+      {institution.values.length > 0 && (
+        <FivePetals petals={institution.values} />
+      )}
     </section>
   );
 }

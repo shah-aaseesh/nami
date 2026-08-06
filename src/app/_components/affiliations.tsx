@@ -2,9 +2,10 @@ import type { Route } from "next";
 import Link from "next/link";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H5, H6, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H1, H5, H6, P, Standfirst } from "@/components/ui/typography";
 import type { Affiliation, Partner, SectionCopy } from "@/lib/content";
 import { content } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 function SectionHead({ copy }: { copy: SectionCopy }) {
   return (
@@ -34,16 +35,25 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
   );
 }
 
-function AffiliationEntry({ item }: { item: Affiliation }) {
+function AffiliationStation({ item }: { item: Affiliation }) {
   return (
-    <li className="border-t pt-6" data-reveal-item="">
-      <Eyebrow as="span" className="block">{`Since ${item.sinceYear}`}</Eyebrow>
+    <li className="relative border-t pt-6" data-reveal-item="">
+      <span
+        aria-hidden="true"
+        className="absolute -top-px left-0 h-0.5 w-10 bg-accent"
+      />
+      <Eyebrow as="span" className="block text-ink-muted">
+        Since
+      </Eyebrow>
+      <H1 as="p" className="mt-2 text-accent">
+        {item.sinceYear}
+      </H1>
       <H6 as="h3" className="mt-4">
         {item.body}
       </H6>
       <P className="mt-3 text-sm">{item.scope}</P>
       {item.note === null ? null : (
-        <p className="mt-3 font-body text-sm font-medium text-accent">
+        <p className="mt-5 inline-block rounded-full border px-4 py-1.5 font-body text-xs text-ink">
           {item.note}
         </p>
       )}
@@ -66,6 +76,22 @@ function PartnerName({ partner }: { partner: Partner }) {
   );
 }
 
+function LeadPartner({ partner }: { partner: Partner }) {
+  return (
+    <RevealItem className="border-t pt-6">
+      <Eyebrow as="span" className="block">
+        {partner.kind}
+      </Eyebrow>
+      <H5 as="h3" className="mt-4">
+        <PartnerName partner={partner} />
+      </H5>
+      {partner.blurb === null ? null : (
+        <P className="mt-3 text-sm">{partner.blurb}</P>
+      )}
+    </RevealItem>
+  );
+}
+
 export async function Affiliations() {
   const [copy, affiliations, partners] = await Promise.all([
     content.getHomeCopy(),
@@ -75,6 +101,7 @@ export async function Affiliations() {
 
   const accreditation = copy.sections.affiliations;
   const industry = copy.sections.partners;
+  const timeline = [...affiliations].sort((a, b) => a.sinceYear - b.sinceYear);
   const leadPartners = partners.filter(
     (partner) => partner.kind !== "industry",
   );
@@ -87,15 +114,19 @@ export async function Affiliations() {
       <div className="mx-auto max-w-page">
         <SectionHead copy={accreditation} />
 
-        {affiliations.length === 0 ? (
+        {timeline.length === 0 ? (
           accreditation.emptyState === null ? null : (
             <P className="mt-12 lg:w-5/12">{accreditation.emptyState}</P>
           )
         ) : (
-          <Reveal className="mt-12 lg:mt-16" delay={0.4} stagger={0.08}>
-            <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-              {affiliations.map((item) => (
-                <AffiliationEntry item={item} key={item.id} />
+          <Reveal
+            className="field-ink mt-12 rounded-3xl p-8 sm:p-10 lg:mt-16 lg:p-12 xl:p-14"
+            delay={0.2}
+            stagger={0.08}
+          >
+            <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              {timeline.map((item) => (
+                <AffiliationStation item={item} key={item.id} />
               ))}
             </ul>
           </Reveal>
@@ -113,31 +144,29 @@ export async function Affiliations() {
 
           {leadPartners.length === 0 ? null : (
             <Reveal
-              className="mt-12 grid gap-x-8 gap-y-8 lg:mt-16 lg:grid-cols-2"
-              delay={0.4}
+              className="mt-12 grid gap-x-8 gap-y-10 lg:mt-16 lg:grid-cols-2"
+              delay={0.3}
               stagger={0.08}
             >
               {leadPartners.map((partner) => (
-                <RevealItem key={partner.id}>
-                  <H5 as="h3">
-                    <PartnerName partner={partner} />
-                  </H5>
-                  {partner.blurb === null ? null : (
-                    <P className="mt-3 text-sm">{partner.blurb}</P>
-                  )}
-                </RevealItem>
+                <LeadPartner key={partner.id} partner={partner} />
               ))}
             </Reveal>
           )}
 
           {networkPartners.length === 0 ? null : (
-            <Reveal className="mt-12 border-t pt-10 lg:mt-16">
-              <ul className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+            <Reveal
+              className={cn(
+                "mt-12 lg:mt-16",
+                leadPartners.length === 0 ? null : "border-t pt-10 lg:pt-12",
+              )}
+            >
+              <ul className="flex flex-wrap items-baseline gap-x-5 gap-y-3">
                 {networkPartners.map((partner, index) => (
                   <li className="flex items-baseline gap-x-5" key={partner.id}>
-                    <H6 as="span">
+                    <H5 as="span">
                       <PartnerName partner={partner} />
-                    </H6>
+                    </H5>
                     {index === networkPartners.length - 1 ? null : (
                       <span
                         aria-hidden="true"

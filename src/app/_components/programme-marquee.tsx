@@ -7,20 +7,30 @@ import { content } from "@/lib/content";
 import { AsteriskIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
+function titleStep(title: string): string {
+  if (title.length <= 24) return "text-4xl";
+  if (title.length <= 36) return "text-3xl";
+  return "text-2xl";
+}
+
+function bodyStep(): string {
+  return "text-3xl";
+}
+
 function MarqueeRow({
   glyphClassName,
   items,
-  textClassName,
+  step,
 }: {
   glyphClassName: string;
   items: readonly string[];
-  textClassName: string;
+  step: (item: string) => string;
 }) {
   return (
     <ul className="flex items-center whitespace-nowrap">
       {items.map((item) => (
-        <li className="flex items-center gap-10 pe-10" key={item}>
-          <span className={cn("font-editorial tracking-normal", textClassName)}>
+        <li className="flex items-center gap-8 pe-8" key={item}>
+          <span className={cn("font-editorial tracking-normal", step(item))}>
             {item}
           </span>
           <Icon
@@ -71,22 +81,22 @@ export async function ProgrammeMarquee() {
 
       {programmes.length === 0 ? null : (
         <Reveal className="bleed-x mt-16 lg:mt-24" stagger={0.12}>
-          <RevealItem className="field-ink py-6 lg:py-10">
+          <RevealItem className="field-ink py-4">
             <Marquee label="Programmes" speed={70}>
               <MarqueeRow
-                glyphClassName="size-10"
+                glyphClassName="size-6"
                 items={titles}
-                textClassName="text-6xl"
+                step={titleStep}
               />
             </Marquee>
           </RevealItem>
 
-          <RevealItem className="field-brand py-6 lg:py-10">
+          <RevealItem className="field-brand py-5">
             <Marquee copies={3} label="Awarding bodies" reverse speed={50}>
               <MarqueeRow
-                glyphClassName="size-8"
+                glyphClassName="size-5"
                 items={bodies}
-                textClassName="text-5xl"
+                step={bodyStep}
               />
             </Marquee>
           </RevealItem>

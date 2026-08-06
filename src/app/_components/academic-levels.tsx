@@ -2,6 +2,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import { content } from "@/lib/content";
+import { AcademicLevelsIntro } from "./academic-levels-intro";
 import {
   AcademicLevelsSequence,
   type LevelPanel,
@@ -37,7 +38,7 @@ export async function AcademicLevels() {
   return (
     <section className="field-teal gutter-x section-y" id="levels">
       <div className="mx-auto grid max-w-page gap-x-16 gap-y-14 xl:grid-cols-12">
-        <div className="max-w-xl xl:col-span-5">
+        <AcademicLevelsIntro className="xl:col-span-5">
           {section.eyebrow === null ? null : (
             <Reveal className="flex items-center gap-5">
               <Eyebrow>{section.eyebrow}</Eyebrow>
@@ -57,7 +58,7 @@ export async function AcademicLevels() {
               <Standfirst>{section.standfirst}</Standfirst>
             </Reveal>
           )}
-        </div>
+        </AcademicLevelsIntro>
 
         {panels.length > 0 ? (
           <AcademicLevelsSequence className="xl:col-span-7" panels={panels} />

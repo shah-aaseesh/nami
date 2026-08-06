@@ -1,7 +1,7 @@
 import { Parallax } from "@/components/motion/parallax";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H6, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H4, H6, P, Standfirst } from "@/components/ui/typography";
 import type { NamedEntity, RichText } from "@/lib/content";
 import { content } from "@/lib/content";
 
@@ -25,11 +25,11 @@ function Creed({
   return (
     <div className={className}>
       <Eyebrow as="h3">{label}</Eyebrow>
-      <div className="mt-4 flex flex-col gap-4">
+      <div className="mt-6 flex flex-col gap-5 lg:mt-8">
         {body.map((paragraph) => (
-          <Standfirst className="text-ink" key={paragraph}>
+          <H4 as="p" className="text-pretty" key={paragraph}>
             {paragraph}
-          </Standfirst>
+          </H4>
         ))}
       </div>
     </div>
@@ -110,20 +110,19 @@ export async function About() {
           </Reveal>
         </div>
 
-        <Reveal
-          className="mt-12 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10"
-          stagger={0.1}
-        >
-          <Creed
-            body={paragraphsOf(institution.mission)}
-            className="lg:col-span-5 lg:col-start-1"
-            label="Mission"
-          />
-          <Creed
-            body={paragraphsOf(institution.vision)}
-            className="mt-10 lg:col-span-6 lg:col-start-7 lg:mt-0"
-            label="Vision"
-          />
+        <Reveal className="mt-12 lg:mt-16" y={32}>
+          <div className="flex flex-col overflow-hidden rounded-3xl lg:flex-row">
+            <Creed
+              body={paragraphsOf(institution.mission)}
+              className="field-ink flex grow flex-col justify-end p-8 sm:p-10 lg:basis-7/12 xl:p-14"
+              label="Mission"
+            />
+            <Creed
+              body={paragraphsOf(institution.vision)}
+              className="field-brand grow p-8 sm:p-10 lg:basis-5/12 xl:p-14"
+              label="Vision"
+            />
+          </div>
         </Reveal>
 
         <div className="mt-12 border-t pt-8 lg:mt-16">

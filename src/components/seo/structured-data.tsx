@@ -9,7 +9,11 @@ import { absoluteUrl, siteUrl } from "@/lib/seo";
 import { JsonLd, type JsonLdNode } from "./json-ld";
 
 const ADDRESS_COUNTRY = "NP";
-const HOME_CRUMB = "Home";
+
+export type Crumb = {
+  readonly name: string;
+  readonly path: string;
+};
 
 function isPlainText(value: string): boolean {
   return !/[<>]/.test(value);
@@ -87,18 +91,28 @@ function organizationNode(
   };
 }
 
-function breadcrumbNode(): JsonLdNode {
-  return {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: HOME_CRUMB,
-        item: absoluteUrl("/"),
-      },
-    ],
-  };
+export function BreadcrumbJsonLd({
+  trail,
+}: {
+  readonly trail: readonly Crumb[];
+}) {
+  if (trail.length < 2) return null;
+
+  return (
+    <JsonLd
+      graph={[
+        {
+          "@type": "BreadcrumbList",
+          itemListElement: trail.map((crumb, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: crumb.name,
+            item: absoluteUrl(crumb.path),
+          })),
+        },
+      ]}
+    />
+  );
 }
 
 export async function StructuredData() {
@@ -107,9 +121,5 @@ export async function StructuredData() {
     content.getAffiliations(),
   ]);
 
-  return (
-    <JsonLd
-      graph={[organizationNode(profile, affiliations), breadcrumbNode()]}
-    />
-  );
+  return <JsonLd graph={[organizationNode(profile, affiliations)]} />;
 }

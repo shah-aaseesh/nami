@@ -29,6 +29,7 @@ export type SiteRoute = {
 
 export const siteRoutes: readonly SiteRoute[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
+  { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
 ];
 
 export type SocialImage = {

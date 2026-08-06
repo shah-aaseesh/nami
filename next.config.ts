@@ -10,7 +10,7 @@ const contentSecurityPolicy = [
   "font-src 'self'",
   "connect-src 'self'",
   "object-src 'none'",
-  "frame-src 'none'",
+  "frame-src https://www.google.com",
   "frame-ancestors 'none'",
   "base-uri 'none'",
   "form-action 'self'",

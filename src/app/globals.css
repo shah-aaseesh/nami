@@ -66,20 +66,21 @@
   --text-11xl: clamp(5rem, 2.1429rem + 14.2857vw, 15rem);
   --text-11xl--line-height: 0.9;
 
-  --radius-xs: 0.0625rem;
-  --radius-sm: 0.125rem;
-  --radius-md: 0.1875rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.375rem;
-  --radius-2xl: 0.5rem;
-  --radius-media: 0.625rem;
-  --radius-3xl: initial;
-  --radius-4xl: initial;
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
 
   --container-page: 90rem;
 }
 
 @theme inline {
+  --radius-media: var(--radius-xl);
+
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
   --font-editorial: var(--font-display);

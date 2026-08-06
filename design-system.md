@@ -31,13 +31,13 @@ Eight things. Each one is cheap to follow and expensive to discover later.
 
 Source: `PLAN.md`, the design brief. Every section is judged against these **before** it is judged against anything technical below. A build can satisfy every rule in §0–§10 and still fail here.
 
-1. **Editorial grid, not a card grid.** Units span unequal columns and start on unequal rows. Images bleed past the viewport edge; text overlaps imagery. Sections separate by whitespace, a hairline, or a colour-field change — **never by giving each item a border and a radius**.
+1. **Editorial grid, not a card grid.** Units span unequal columns and start on unequal rows. Images bleed past the viewport edge; text overlaps imagery. Sections separate by whitespace, a hairline, or a colour-field change — **never by giving every item the same box treatment**. *The radius half of this constraint is superseded* — it used to end "never by giving each item a border and a radius", enforced by capping the scale at 8px, and the operator has since directed that `rounded-xl` be the site default (§5). What survives is the **layout** claim: unequal spans, bleed, overlap, separation by whitespace and field change. What is gone is the ban on visible corners.
 2. **Type is the layout.** Oversized display type IS the structural element. Mixed size and weight inside a single heading. `clamp()`-fluid, `rem`-based, never per-breakpoint jumps.
 3. **Asymmetry is deliberate, not random.** One dominant axis per section, broken once. If a section reads as balanced left/right halves, it is wrong.
 4. **Depth without containers.** Parallax layers, scroll-scrubbed transforms, CSS 3D perspective on hover. Depth comes from motion and overlap, not from shadows on boxes.
 5. **Motion carries the youth.** GSAP only. Every motion has a `prefers-reduced-motion` path, and **no at-fold content hides behind a scroll reveal**.
 
-Constraint 1 is why there is no `Card` primitive (§9). Constraint 2 is why the type scale runs to `text-11xl` and only nine of its fifteen steps are claimed by a typography role. Constraint 4 is why there is no shadow token.
+Constraint 1 is why there is no `Card` primitive (§11). Constraint 2 is why the type scale runs to `text-11xl` and only nine of its fifteen steps are claimed by a typography role. Constraint 4 is why there is no shadow token.
 
 ---
 
@@ -312,35 +312,38 @@ Type and section rhythm **do not need breakpoints** — the `clamp()`s already c
 
 ---
 
-## 5. Radius — components capped at 8px, media at 10px
+## 5. Radius — `rounded-xl` is the site default
 
-| Class | Value | Applies to |
+**Rounding is sanctioned here, and `rounded-xl` (12px) is what you reach for by default.** Operator directive: *"make the hero section image rounded, like add rounded-xl as default rounded for this website in design system."* Nothing in this section is capped any more, and the ramp is now **exactly stock Tailwind v4** — no shifted scale to memorise, and a pasted shadcn component lands on the corner its author intended.
+
+| Class | Value | Reach for it when |
 |:--|--:|:--|
-| `rounded-xs` | 1px | components |
-| `rounded-sm` | 2px | components |
-| `rounded-md` | 3px | components |
-| `rounded-lg` | 4px | components |
-| `rounded-xl` | 6px | components |
-| `rounded-2xl` | **8px — the component cap** | components |
-| `rounded-media` | **10px** | **imagery only** |
-| `rounded-3xl` | **unset** | — |
-| `rounded-4xl` | **unset** | — |
+| `rounded-xs` | 2px | a hairline softening — a tag, a swatch |
+| `rounded-sm` | 4px | small chrome: buttons, inputs, badges |
+| `rounded-md` | 6px | small chrome that wants a touch more |
+| `rounded-lg` | 8px | a compact tile |
+| `rounded-xl` | **12px — the default** | **imagery, cards, tiles, anything without a stronger reason** |
+| `rounded-2xl` | 16px | a card sitting inside a filled panel |
+| `rounded-3xl` | 24px | the filled panel that contains those cards |
+| `rounded-4xl` | 32px | a full-bleed band or a hero-scale panel |
+| `rounded-media` | **alias of `rounded-xl`** | legacy — write `rounded-xl` in new code (§5.1) |
+| `rounded-full` | — | a circle or capsule by nature (avatar, pill) |
 
-The whole stock Tailwind ramp is shifted down. `rounded-lg` is 4px here, not 8px. Nothing in this system is softer than 8px, because a soft radius is the visual signature of the card grid constraint 1 rejects.
+**Why 12px and not 6px, 10px or 16px.** 6px was the old `xl` and reads as *almost square* — a large image at 6px looks like a rendering accident, not a decision, which is the opposite of the directive. The reference (`unipix`) uses **10px** as its workhorse — 60 of its 200-odd `border-radius` declarations, every content image among them — with **4px** for small chrome and a **20–30px** band on its large panels. 12px sits one notch above the reference's workhorse: unmistakably rounded at hero scale, still restrained on a 200px tile, and it is the stock Tailwind `xl` so it needs no translation. 16px was rejected as the *default* because it is the card value in the operator's reference image — making it the default would leave nothing for the panel to be rounder *than*, and the reference image's whole structure is a rounder panel containing less-round cards. That structure is now expressible: **cards `rounded-2xl` (16px) inside a panel `rounded-3xl` (24px)**, which is what the reference image shows and what the stats section should use.
 
-### 5.1 `rounded-media` — the one exception, and its exact boundary
+**The steps above and below all moved, and the ramp still ramps.** `xs`→`4xl` is monotonic 2·4·6·8·12·16·24·32. `3xl` and `4xl` are **revived**, not merely unblocked — with rounding sanctioned there is a real job for a panel radius and a band radius, and leaving them `initial` would have forced arbitrary `rounded-[24px]` at exactly the moment the design started needing them.
 
-**`rounded-media` (10px) is for imagery: `<Image>`, `<video>`, and a wrapper whose only job is to clip one of them.** Nothing else. It is the reference's own image radius, measured off the live page at 1440 — every content image and every media thumbnail there is exactly `10px`, and avatars are `50%`.
+**The old cap is gone, and it should not be reinstated by habit.** Radii used to stop at 8px with `3xl`/`4xl` set to `initial`. That was mechanical enforcement of constraint 1 — "this must not look like a rounded-card site" — and it worked: a cold review found zero `rounded-*` on the entire page. It is **superseded by the operator's own instruction** (see §1, constraint 1). Constraint 1 still governs *layout* — unequal columns, bleeding imagery, separation by whitespace and colour-field change rather than by boxing every item. It no longer governs *corners*. Do not re-cap the scale to "protect" it.
 
-**The 8px component cap is unchanged and still governs everything that is not media.** Buttons, panels, inputs, badges, section shells, list rows and anything with a border or a background do not get `rounded-media`. That cap is the mechanical enforcement of constraint 1 — "this must not look like a rounded-card site" — and the reason a cold review found zero `rounded-*` on the whole page. Relaxing it for photography does not relax it for chrome: a photograph with a soft corner reads as a print artefact, a *panel* with one reads as a card, and the second is the thing the constraint exists to prevent.
+### 5.1 `rounded-media` — now an alias, kept alive on purpose
 
-So the test is not "how big is the radius" but "**is the thing being rounded a picture?**" If you are reaching for `rounded-media` on an element that has a `bg-*` or a `border`, it is the wrong token and probably the wrong idea.
+`rounded-media` was a separate 10px token for imagery only, carved out while the 8px component cap was in force. With `rounded-xl` at 12px that carve-out has no job left: **two tokens 2px apart in one namespace is drift, not nuance** — indistinguishable in place, and a guaranteed source of two subtly different image radii once one engineer reaches for `rounded-media` and another for `rounded-xl` on the same page.
 
-`rounded-full` remains legitimate for a shape that is a circle or a capsule by nature (an avatar, a pill), because no radius token can express "half my own height".
+It is now declared in `@theme inline` as `--radius-media: var(--radius-xl)`, so `rounded-media` compiles to `border-radius: var(--radius-xl)` — **the same variable**, not a copy of its value. There is one source of truth and the two can never drift apart.
 
-**`rounded-media` clips only if something clips.** On a bare `<Image>` the radius applies to the element itself. On a wrapper it needs `overflow-hidden`, and on a wrapper that is also a ScrollSmoother parallax layer, `overflow-hidden` creates a containing block — check the layer still moves.
+**It is kept compiling rather than deleted** because call sites already carry it. A deleted key would make `rounded-media` emit *nothing* — a square corner with no error from `tsc`, lint, or the build, which is the exact failure class §13 names. **Write `rounded-xl` in new code**; leave existing `rounded-media` alone until someone is editing that line anyway.
 
-`--radius-3xl` and `--radius-4xl` are set to `initial`, which **removes the keys from the theme** — so `rounded-3xl` and `rounded-4xl` compile to nothing at all. They are not "large radii", they are dead classes. This has a consequence in `cn()`; see §8.
+**Either class clips only if something clips.** On a bare `<Image>` the radius applies to the element itself. On a wrapper it needs `overflow-hidden`, and on a wrapper that is also a ScrollSmoother parallax layer, `overflow-hidden` creates a containing block — check the layer still moves.
 
 ---
 
@@ -480,7 +483,7 @@ The hero maps every reference element onto real content — there is no invented
 `cn()` is `clsx` + an **`extendTailwindMerge`** instance. Three things stock `tailwind-merge` gets wrong in this project:
 
 1. **`max-w-page`** — `container: ["page"]` registers our custom container key, so `max-w-page` participates in the `max-w-*` merge group instead of surviving alongside a conflicting width.
-2. **The dead radii and the custom one** — `theme.radius` is overridden to `["xs","sm","md","lg","xl","2xl","media"]`: it drops `3xl`/`4xl` and adds `media`. Because `3xl`/`4xl` are `initial` (§5), stock merge would let a `rounded-3xl` — which emits **nothing** — silently cancel a working `rounded-sm`, leaving a square corner and no error anywhere. And `media` is a custom key stock merge has never heard of, so without it `cn("rounded-media", "rounded-none")` would leave **both** alive and let stylesheet order decide.
+2. **`rounded-media`** — `theme.radius` is **extended** with `["media"]`. Stock `tailwind-merge` matches the radius group with a t-shirt-size test, so every step in §5 is already handled; `media` is a custom key it has never heard of, and without registering it `cn("rounded-media", "rounded-none")` would leave **both** alive and let stylesheet order decide. This is `extend`, not `override`: the group used to be overridden with an explicit list that *dropped* `3xl`/`4xl` while those were dead classes, and reviving them (§5) made that list wrong — `cn("rounded-xl", "rounded-3xl")` returned **both**. Extending inherits the stock test, so a future step cannot fall out of the group again.
 3. **The custom utilities** — `gutter-x`, `section-y`, `bleed-x` and the `field-*` group are registered, and `gutter-x` is declared to conflict with `p`/`px` (both directions), `section-y` with `p`/`py`, `bleed-x` with `m`/`mx`. So `cn("gutter-x", "px-8")` resolves to `px-8` and `cn("px-8", "gutter-x")` resolves to `gutter-x`, instead of both surviving and the winner being decided by Tailwind's emission order.
 
 The `field-*` classes form their own merge group, so passing `field-teal` over a `field-ink` base replaces it rather than stacking two colour fields on one element.
@@ -649,11 +652,11 @@ A reader who does not know something was a decision will assume it was an oversi
 | Absent | Why |
 |:--|:--|
 | **Dark mode** | Light-only, by decision. `viewport.colorScheme` is `"light"`. "Dark" is a *design device* — the three colour fields — not a user theme. Never write a `dark:` variant. |
-| **`Card` primitive** | Constraint 1. A `Card` component is how the rounded-card grid gets back in. Separate with whitespace, a hairline, or a colour-field change. |
+| **`Card` primitive** | Constraint 1. A `Card` component is how the rounded-card grid gets back in. Separate with whitespace, a hairline, or a colour-field change. **Sanctioned rounding (§5) does not license this** — the constraint was always about *boxing every item uniformly*, and a `Card` primitive is what makes that the path of least resistance. A rounded panel built for one section is a section, not a primitive. |
 | **Shadow tokens** | Constraint 4 — depth comes from motion and overlap, not shadows on boxes. |
 | **`--destructive` / `--warning` / `--success` aliases** | No prop without a consumer. This is a marketing site with no destructive actions and no form validation yet. Add them **with** the feature that needs them. |
 | **`--color-secondary` / `--color-secondary-foreground` aliases** | Same reasoning as `--destructive`, one step further: where shadcn's meaning **collides** with our brand meaning, our brand meaning wins and the alias goes. The alias bought one thing — a pasted shadcn component compiling unmodified — and the CLI is banned here, so components are hand-adapted anyway. It cost a permanent trap (`bg-secondary` white vs `bg-secondary-700` teal) in the namespace a section builder reaches for most. Port to `bg-surface-raised` / `text-ink` (§2.3). |
-| **`rounded-3xl` / `rounded-4xl`** | Unset on purpose (§5). They are dead classes, not large radii. |
+| **A radius cap** | **There is no longer one.** `rounded-xl` (12px) is the site default and the ramp runs to 32px, `3xl`/`4xl` included (§5). This row exists so nobody reinstates the old 8px cap from memory: it was retired by operator directive, not by oversight. |
 | **`letter-spacing` on any type step** | Removed with the display-face change (§7.1). The negative tracking existed to serve a wide grotesque that is no longer in the build; the reference sets `normal` throughout. Do not reintroduce a `--text-*--letter-spacing` key to "tighten" a heading — if a heading looks loose, the line-height or the step is wrong. `tracking-widest` on `Eyebrow` is a per-role choice for uppercase micro-copy and is not part of the scale. |
 | **A `text-*` step between 48px and 76px** | The `text-5xl` → `text-6xl` gap is the reference's own `h2`/`h1` structure (§3.1), not an omission. |
 | **A bold display weight** | The display face has one weight (§7.1). `font-semibold` on a heading is a no-op, not a defect to fix by loading a second weight. |
@@ -680,7 +683,7 @@ A reader who does not know something was a decision will assume it was an oversi
 
 **This line is load-bearing for the file you are reading.**
 
-Tailwind v4's automatic source detection scans every non-ignored file in the project for class names, **including markdown**. Without that exclusion, every class name mentioned in this document — `bg-neutral-50`, `dark:*`, `rounded-3xl`, every "never write this" example — would be detected as used and **compiled into the production stylesheet**.
+Tailwind v4's automatic source detection scans every non-ignored file in the project for class names, **including markdown**. Without that exclusion, every class name mentioned in this document — `bg-neutral-50`, `dark:*`, `bg-secondary`, every "never write this" example — would be detected as used and **compiled into the production stylesheet**.
 
 The path is relative to `globals.css`, so `../../**/*.md` is every markdown file from the repo root down. It is not a leftover, it is not scoped too broadly, and removing it makes this document actively harmful to the bundle.
 
@@ -702,7 +705,7 @@ Corollary: **you cannot verify a class compiles by writing it in a `.md` file.**
 
 Two failure classes none of these catch, both of which have shipped in this house before:
 
-- **A dead Tailwind class.** `rounded-3xl` compiles to nothing here and no tool says so. When using a non-obvious variant or a custom utility, verify it actually emits.
+- **A dead Tailwind class.** A theme key set to `initial`, or a custom utility whose key was renamed, compiles to **nothing** — a square corner, an unpadded section — and `tsc`, lint and the build all stay green. `rounded-3xl` was dead here for exactly this reason until §5 revived it. When you add, rename or retire a theme key, **compile `globals.css` and assert the emitted rule**, with a class you know is undefined in the same run as a negative control, so you have proven the check can go red.
 - **An off-system colour.** `text-gray-500` and `bg-slate-900` are valid Tailwind and wrong here. Only review catches them.
 
 Comments in code: **default zero**, config files included. A short `WHY` comment (≤2 lines) is allowed where the code genuinely cannot show its own reason. A handful of sites qualify — the configured `cn()`, the single GSAP registration site, the two deliberately-empty content collections, and the School's null founding year — each guarding against a specific "fix" that would reintroduce a defect. Everything else belongs in this file. (This paragraph deliberately does not count them; an exact tally in prose drifts the moment one is added.)

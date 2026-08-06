@@ -30,7 +30,7 @@ export function AcademicLevelsSequence({
             key={panel.id}
           >
             {panel.image === null ? null : (
-              <figure className="relative aspect-[3/2] overflow-hidden xl:aspect-[4/3]">
+              <figure className="relative aspect-[3/2] overflow-hidden rounded-media xl:aspect-[4/3]">
                 <Image
                   alt={panel.image.alt}
                   className="h-full w-full object-cover"
@@ -51,7 +51,7 @@ export function AcademicLevelsSequence({
 
             <div className="mt-6 flex flex-col gap-4">
               <div className="flex items-center gap-4">
-                <span className="font-display text-sm font-semibold tracking-widest text-accent tabular-nums">
+                <span className="font-display text-sm tracking-widest text-accent tabular-nums">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="h-px flex-1 bg-border" />

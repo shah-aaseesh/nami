@@ -51,10 +51,12 @@ export function SiteFooterWordmark({
   );
 
   return (
-    <h2 className={cn("font-display text-ink", className)} ref={root}>
-      <span className="block text-10xl font-semibold">{lead}</span>
+    <h2 className={cn("text-ink", className)} ref={root}>
+      <span className="block font-display text-3xl leading-none">{lead}</span>
       {tail === null ? null : (
-        <span className="block text-6xl font-light">{tail}</span>
+        <span className="mt-2 block font-body text-xs font-medium tracking-widest uppercase">
+          {tail}
+        </span>
       )}
     </h2>
   );

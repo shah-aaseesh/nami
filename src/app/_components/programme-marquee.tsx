@@ -59,7 +59,7 @@ export async function ProgrammeMarquee() {
 
         <SplitText
           as="h2"
-          className="mt-8 font-display text-5xl font-semibold lg:mt-12 lg:w-8/12"
+          className="mt-8 font-display text-5xl lg:mt-12 lg:w-8/12"
         >
           {section.heading}
         </SplitText>

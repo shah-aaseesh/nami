@@ -6,7 +6,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { ScrollSmoother } from "@/lib/gsap";
-import { CloseIcon, MenuIcon } from "@/lib/icons";
+import { CloseIcon, MenuIcon, PhoneIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWordmark } from "./site-header-wordmark";
 import {
@@ -25,9 +25,11 @@ export type SiteHeaderShellProps = {
   items: readonly SiteNavItem[];
   places: readonly string[];
   links: readonly SiteMetaLink[];
+  call: SiteMetaLink | null;
 };
 
 export function SiteHeaderShell({
+  call,
   items,
   links,
   places,
@@ -154,18 +156,50 @@ export function SiteHeaderShell({
             />
           </Link>
 
-          <Button
-            aria-controls={open ? panelId : undefined}
-            aria-expanded={open}
-            className="pointer-events-auto"
-            onClick={() => (open ? close() : setOpen(true))}
-            ref={toggle}
-            size="sm"
-            variant="quiet"
-          >
-            {open ? "Close" : "Menu"}
-            <Icon icon={open ? CloseIcon : MenuIcon} />
-          </Button>
+          {open ? null : (
+            <nav
+              aria-label="Sections"
+              className="pointer-events-auto hidden flex-1 justify-center lg:flex"
+            >
+              <ul className="flex items-center gap-x-5 xl:gap-x-8">
+                {items.map((item) => (
+                  <li key={item.hash}>
+                    <Link
+                      className="font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent motion-reduce:transition-none"
+                      href={item.hash as Route}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+
+          <div className="flex items-center gap-x-5">
+            {open || call === null || call.href === null ? null : (
+              <Link
+                className="pointer-events-auto hidden items-center gap-x-2 font-body text-sm font-medium text-ink transition-colors hover:text-accent motion-reduce:transition-none xl:inline-flex"
+                href={call.href as Route}
+              >
+                <Icon className="size-4" icon={PhoneIcon} />
+                {call.label}
+              </Link>
+            )}
+
+            <Button
+              aria-controls={open ? panelId : undefined}
+              aria-expanded={open}
+              className="pointer-events-auto"
+              onClick={() => (open ? close() : setOpen(true))}
+              ref={toggle}
+              size="sm"
+              variant="quiet"
+            >
+              {open ? "Close" : "Menu"}
+              <Icon icon={open ? CloseIcon : MenuIcon} />
+            </Button>
+          </div>
         </div>
       </div>
 

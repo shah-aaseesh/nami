@@ -18,9 +18,7 @@ function Lockup({ className, lead, tail }: SiteHeaderWordmarkProps) {
       className={cn("inline-flex flex-col justify-center", className)}
       data-slot="wordmark"
     >
-      <span className="font-display text-2xl font-semibold leading-none lowercase">
-        {lead}
-      </span>
+      <span className="font-display text-2xl leading-none">{lead}</span>
       {tail === null ? null : (
         <span className="mt-1.5 font-body text-xs font-medium leading-none tracking-widest text-ink-muted uppercase">
           {tail}

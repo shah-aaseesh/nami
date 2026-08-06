@@ -1,16 +1,7 @@
-import type { HomeSectionId } from "@/lib/content";
 import { content, isPlaceholder } from "@/lib/content";
 import { SiteHeaderShell } from "./site-header-shell";
-import type { SiteMetaLink, SiteNavItem } from "./site-nav-panel";
-
-const NAV_SECTIONS: readonly { id: HomeSectionId; hash: string }[] = [
-  { id: "about", hash: "#about" },
-  { id: "levels", hash: "#levels" },
-  { id: "affiliations", hash: "#affiliations" },
-  { id: "campusLife", hash: "#campus-life" },
-  { id: "updates", hash: "#updates" },
-  { id: "admission", hash: "#admission" },
-];
+import type { SiteMetaLink } from "./site-nav-panel";
+import { siteNavItems } from "./site-nav-sections";
 
 function channel(
   value: string | null,
@@ -30,10 +21,7 @@ export async function SiteHeader() {
     content.getInstitution(),
   ]);
 
-  const items: SiteNavItem[] = NAV_SECTIONS.map(({ hash, id }) => {
-    const section = copy.sections[id];
-    return { hash, label: section.navLabel, descriptor: section.heading };
-  });
+  const items = siteNavItems(copy);
 
   const { shortName } = institution.entities.college;
   const spaceAt = shortName.indexOf(" ");
@@ -52,8 +40,13 @@ export async function SiteHeader() {
     })),
   ].filter((link) => link !== null);
 
+  const dialled = institution.contact.phones.find(
+    (phone) => !isPlaceholder(phone),
+  );
+
   return (
     <SiteHeaderShell
+      call={dialled === undefined ? null : channel(dialled, "tel:")}
       items={items}
       links={links}
       places={places}

@@ -227,13 +227,13 @@ export async function Hero() {
 
           {hero.image === null ? null : (
             <figure className="mt-12 lg:col-span-10 lg:col-start-3 lg:mt-0">
-              <div className="relative aspect-video overflow-hidden lg:aspect-[2/1]">
+              <div className="relative aspect-video overflow-hidden rounded-xl lg:aspect-[2/1]">
                 <Parallax className="absolute inset-0" speed={0.94}>
                   <Image
                     alt={hero.image.alt}
                     className="scale-110 object-cover"
                     fill
-                    priority
+                    preload
                     sizes="(min-width: 1024px) 75vw, 92vw"
                     src={hero.image.src}
                   />

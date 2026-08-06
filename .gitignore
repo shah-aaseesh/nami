@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# blaze
+.gitnexus/
+.claude/worktrees/
+
+# client source documents (local only)
+/docs
+
+# tool artifacts
+.claude/
+.playwright-mcp/
+

@@ -1,0 +1,77 @@
+import { entryOf } from "../identifiers";
+import type { Stat } from "../types";
+
+export const stats: readonly Stat[] = [
+  {
+    ...entryOf("enrolled-primary"),
+    group: "enrolment",
+    value: 176,
+    suffix: null,
+    label: "students in Grades 1–7",
+    detail: null,
+  },
+  {
+    ...entryOf("enrolled-grade-11"),
+    group: "enrolment",
+    value: 350,
+    suffix: null,
+    label: "students in Grade 11",
+    detail: null,
+  },
+  {
+    ...entryOf("enrolled-grade-12"),
+    group: "enrolment",
+    value: 454,
+    suffix: null,
+    label: "students in Grade 12",
+    detail: null,
+  },
+  {
+    ...entryOf("enrolled-a-level"),
+    group: "enrolment",
+    value: 71,
+    suffix: null,
+    label: "A-Level students",
+    detail: null,
+  },
+  {
+    ...entryOf("enrolled-undergraduate"),
+    group: "enrolment",
+    value: 239,
+    suffix: null,
+    label: "undergraduate students",
+    detail: null,
+  },
+  {
+    ...entryOf("graduates-neb"),
+    group: "graduates",
+    value: 5000,
+    suffix: "+",
+    label: "NEB 10+2 graduates",
+    detail: null,
+  },
+  {
+    ...entryOf("graduates-a-level"),
+    group: "graduates",
+    value: 500,
+    suffix: "+",
+    label: "Cambridge A-Level graduates",
+    detail: null,
+  },
+  {
+    ...entryOf("graduates-ug-pg"),
+    group: "graduates",
+    value: 2500,
+    suffix: "+",
+    label: "undergraduate and postgraduate graduates",
+    detail: null,
+  },
+  {
+    ...entryOf("alumni-total"),
+    group: "alumni",
+    value: 8000,
+    suffix: "+",
+    label: "alumni across all programmes",
+    detail: null,
+  },
+];

@@ -5,10 +5,15 @@ import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H3, H4, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
 import type { ContentLink, IsoDate, Update, UpdateKind } from "@/lib/content";
 import { content } from "@/lib/content";
-import { ArrowRightIcon, ArrowUpRightIcon } from "@/lib/icons";
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  CalendarIcon,
+  LocationIcon,
+} from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 const KIND_LABEL: Record<UpdateKind, string> = {
@@ -52,76 +57,53 @@ function UpdateCta({
   );
 }
 
-function UpdateSchedule({ item }: { item: Update }) {
-  if (item.happensAt === null && item.venue === null) return null;
-
-  return (
-    <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-4 font-body text-sm">
-      {item.happensAt === null ? null : (
-        <div className="border-t pt-4">
-          <dt className="text-ink-muted">Date</dt>
-          <dd className="mt-2 text-ink">
-            <time dateTime={item.happensAt}>{formatDate(item.happensAt)}</time>
-          </dd>
-        </div>
-      )}
-      {item.venue === null ? null : (
-        <div className="border-t pt-4">
-          <dt className="text-ink-muted">Venue</dt>
-          <dd className="mt-2 text-ink">{item.venue}</dd>
-        </div>
-      )}
-    </dl>
-  );
-}
-
-function UpdateRow({ item, lead }: { item: Update; lead: boolean }) {
+function UpdateCard({ item }: { item: Update }) {
   return (
     <li
-      className="group border-t py-10 lg:relative lg:py-14"
+      className="border-t border-border-strong pt-6 lg:pt-8"
       data-reveal-item=""
     >
-      <div className="grid gap-x-8 gap-y-6 lg:grid-cols-12">
-        <div className="lg:col-span-3">
-          <Eyebrow>{KIND_LABEL[item.kind]}</Eyebrow>
-          <time
-            className="mt-3 block font-body text-sm text-ink-muted"
-            dateTime={item.publishedAt}
-          >
+      {item.image === null ? null : (
+        <Image
+          alt={item.image.alt}
+          className="mb-6 h-auto w-full rounded-media object-cover"
+          height={item.image.height}
+          loading="lazy"
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
+          src={item.image.src}
+          width={item.image.width}
+        />
+      )}
+
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-body text-sm text-ink-muted">
+        <Eyebrow as="span">{KIND_LABEL[item.kind]}</Eyebrow>
+
+        <span className="inline-flex items-center gap-2">
+          <Icon className="size-4" icon={CalendarIcon} />
+          <span className="sr-only">Published </span>
+          <time dateTime={item.publishedAt}>
             {formatDate(item.publishedAt)}
           </time>
-        </div>
+        </span>
 
-        <div className="lg:col-span-8 lg:col-start-5">
-          {lead ? <H3>{item.title}</H3> : <H4 as="h3">{item.title}</H4>}
-
-          {lead ? (
-            <Standfirst className="mt-6">{item.excerpt}</Standfirst>
-          ) : (
-            <P className="mt-4">{item.excerpt}</P>
-          )}
-
-          <UpdateSchedule item={item} />
-
-          {item.link === null ? null : (
-            <UpdateCta className="mt-8" link={item.link} />
-          )}
-
-          {item.image === null ? null : (
-            <figure className="mt-10 motion-reduce:transition-none lg:pointer-events-none lg:absolute lg:top-0 lg:start-full lg:mt-0 lg:ms-8 lg:w-3/4 lg:scale-95 lg:opacity-0 lg:transition lg:duration-500 lg:ease-out lg:group-focus-within:scale-100 lg:group-focus-within:opacity-100 lg:group-hover:scale-100 lg:group-hover:opacity-100">
-              <Image
-                alt={item.image.alt}
-                className="h-auto w-full object-cover"
-                height={item.image.height}
-                loading="lazy"
-                sizes="(min-width: 1024px) 40vw, 92vw"
-                src={item.image.src}
-                width={item.image.width}
-              />
-            </figure>
-          )}
-        </div>
+        {item.venue === null ? null : (
+          <span className="inline-flex items-center gap-2">
+            <Icon className="size-4" icon={LocationIcon} />
+            <span className="sr-only">Venue </span>
+            {item.venue}
+          </span>
+        )}
       </div>
+
+      <H5 as="h3" className="mt-4">
+        {item.title}
+      </H5>
+
+      <P className="mt-3">{item.excerpt}</P>
+
+      {item.link === null ? null : (
+        <UpdateCta className="mt-6" link={item.link} />
+      )}
     </li>
   );
 }
@@ -135,45 +117,49 @@ export async function Updates() {
   const section = copy.sections.updates;
 
   return (
-    <section className="overflow-hidden gutter-x section-y" id="updates">
+    <section className="gutter-x section-y" id="updates">
       <div className="mx-auto max-w-page">
-        {section.eyebrow === null ? null : (
-          <Reveal className="flex items-center gap-5 lg:w-7/12">
-            <Eyebrow>{section.eyebrow}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </Reveal>
-        )}
+        <div className="lg:flex lg:items-end lg:justify-between lg:gap-x-12">
+          <div className="lg:max-w-2xl">
+            {section.eyebrow === null ? null : (
+              <Reveal className="flex items-center gap-5">
+                <Eyebrow>{section.eyebrow}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </Reveal>
+            )}
 
-        <SplitText
-          as="h2"
-          className="mt-8 font-display text-5xl font-semibold lg:mt-12 lg:w-8/12"
-        >
-          {section.heading}
-        </SplitText>
+            <SplitText
+              as="h2"
+              className="mt-6 font-editorial text-5xl font-normal tracking-normal lg:mt-8"
+            >
+              {section.heading}
+            </SplitText>
 
-        {section.standfirst === null ? null : (
-          <Reveal className="mt-12 lg:mt-14 lg:ms-auto lg:w-5/12" delay={0.25}>
-            <Standfirst>{section.standfirst}</Standfirst>
-          </Reveal>
-        )}
+            {section.standfirst === null ? null : (
+              <Reveal className="mt-6" delay={0.2}>
+                <Standfirst>{section.standfirst}</Standfirst>
+              </Reveal>
+            )}
+          </div>
 
-        {updates.length === 0 ? null : (
-          <Reveal className="mt-16 lg:mt-24" delay={0.25} stagger={0.08}>
-            <ul className="border-b lg:w-7/12">
-              {updates.map((item, index) => (
-                <UpdateRow item={item} key={item.id} lead={index === 0} />
-              ))}
-            </ul>
-          </Reveal>
-        )}
+          {section.cta === null ? null : (
+            <Reveal className="mt-8 lg:mt-0 lg:shrink-0" delay={0.3}>
+              <UpdateCta link={section.cta} />
+            </Reveal>
+          )}
+        </div>
 
         {updates.length === 0 && section.emptyState !== null ? (
-          <P className="mt-16 lg:w-5/12">{section.emptyState}</P>
+          <P className="mt-12 max-w-xl">{section.emptyState}</P>
         ) : null}
 
-        {section.cta === null ? null : (
-          <Reveal className="mt-16 lg:mt-24 lg:w-7/12" delay={0.4}>
-            <UpdateCta link={section.cta} />
+        {updates.length === 0 ? null : (
+          <Reveal className="mt-14 lg:mt-20" delay={0.25} stagger={0.08}>
+            <ul className="grid items-start gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {updates.map((item) => (
+                <UpdateCard item={item} key={item.id} />
+              ))}
+            </ul>
           </Reveal>
         )}
       </div>

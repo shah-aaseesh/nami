@@ -1,69 +1,55 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H3, H4, H5, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H5, H6, P, Standfirst } from "@/components/ui/typography";
 import type { Affiliation, Partner, SectionCopy } from "@/lib/content";
 import { content } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
-function SectionHead({
-  copy,
-  standfirstClassName,
-}: {
-  copy: SectionCopy;
-  standfirstClassName: string;
-}) {
+function SectionHead({ copy }: { copy: SectionCopy }) {
   return (
-    <>
-      {copy.eyebrow === null ? null : (
-        <Reveal className="flex items-center gap-5 lg:w-7/12">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <span className="h-px flex-1 bg-border" />
-        </Reveal>
-      )}
+    <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
+      <div className="lg:col-span-7">
+        {copy.eyebrow === null ? null : (
+          <Reveal className="flex items-center gap-5">
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </Reveal>
+        )}
 
-      <SplitText
-        as="h2"
-        className="mt-8 font-display text-5xl font-semibold lg:mt-12 lg:w-8/12"
-      >
-        {copy.heading}
-      </SplitText>
+        <SplitText
+          as="h2"
+          className="mt-6 font-display text-5xl font-semibold lg:mt-8"
+        >
+          {copy.heading}
+        </SplitText>
+      </div>
 
       {copy.standfirst === null ? null : (
-        <Reveal className={standfirstClassName} delay={0.25}>
+        <Reveal
+          className="mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0"
+          delay={0.25}
+        >
           <Standfirst>{copy.standfirst}</Standfirst>
         </Reveal>
       )}
-    </>
+    </div>
   );
 }
 
-function AffiliationRow({ item }: { item: Affiliation }) {
+function AffiliationEntry({ item }: { item: Affiliation }) {
   return (
-    <li
-      className="grid gap-y-6 border-t py-10 lg:grid-cols-12 lg:gap-x-8 lg:py-12"
-      data-reveal-item=""
-    >
-      <p className="lg:col-span-2">
-        <span className="block font-body text-sm text-ink-muted">Since</span>
-        <H3 as="span" className="block">
-          {item.sinceYear}
-        </H3>
-      </p>
-
-      <H4 as="h3" className="lg:col-span-5 lg:col-start-4">
+    <li className="border-t pt-6" data-reveal-item="">
+      <Eyebrow as="span" className="block">{`Since ${item.sinceYear}`}</Eyebrow>
+      <H6 as="h3" className="mt-4">
         {item.body}
-      </H4>
-
-      <div className="lg:col-span-3 lg:col-start-10">
-        <P>{item.scope}</P>
-        {item.note === null ? null : (
-          <p className="mt-4 font-body text-sm font-medium text-accent">
-            {item.note}
-          </p>
-        )}
-      </div>
+      </H6>
+      <P className="mt-3 text-sm">{item.scope}</P>
+      {item.note === null ? null : (
+        <p className="mt-3 font-body text-sm font-medium text-accent">
+          {item.note}
+        </p>
+      )}
     </li>
   );
 }
@@ -80,23 +66,6 @@ function PartnerName({ partner }: { partner: Partner }) {
     >
       {partner.name}
     </Link>
-  );
-}
-
-function LeadPartner({ partner, index }: { partner: Partner; index: number }) {
-  return (
-    <li
-      className={cn(
-        "lg:col-span-5",
-        index % 2 === 0 ? "lg:col-start-1" : "lg:col-start-8 lg:mt-24",
-      )}
-      data-reveal-item=""
-    >
-      <H4 as="h3">
-        <PartnerName partner={partner} />
-      </H4>
-      {partner.blurb === null ? null : <P className="mt-4">{partner.blurb}</P>}
-    </li>
   );
 }
 
@@ -117,63 +86,65 @@ export async function Affiliations() {
   );
 
   return (
-    <>
-      <section className="gutter-x section-y" id="affiliations">
-        <div className="mx-auto max-w-page">
-          <SectionHead
-            copy={accreditation}
-            standfirstClassName="mt-12 lg:mt-14 lg:ms-auto lg:w-5/12"
-          />
+    <section className="gutter-x section-y" id="affiliations">
+      <div className="mx-auto max-w-page">
+        <SectionHead copy={accreditation} />
 
-          {affiliations.length === 0 ? null : (
-            <Reveal className="mt-16 lg:mt-24" delay={0.4} stagger={0.08}>
-              <ul>
-                {affiliations.map((item) => (
-                  <AffiliationRow item={item} key={item.id} />
-                ))}
-              </ul>
-            </Reveal>
-          )}
+        {affiliations.length === 0 ? (
+          accreditation.emptyState === null ? null : (
+            <P className="mt-12 lg:w-5/12">{accreditation.emptyState}</P>
+          )
+        ) : (
+          <Reveal className="mt-12 lg:mt-16" delay={0.4} stagger={0.08}>
+            <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {affiliations.map((item) => (
+                <AffiliationEntry item={item} key={item.id} />
+              ))}
+            </ul>
+          </Reveal>
+        )}
 
-          {affiliations.length === 0 && accreditation.emptyState !== null ? (
-            <P className="mt-16 lg:w-5/12">{accreditation.emptyState}</P>
+        <section
+          className="mt-20 border-t pt-16 lg:mt-28 lg:pt-20"
+          id="partners"
+        >
+          <SectionHead copy={industry} />
+
+          {partners.length === 0 && industry.emptyState !== null ? (
+            <P className="mt-12 lg:w-5/12">{industry.emptyState}</P>
           ) : null}
-        </div>
-      </section>
-
-      <section className="gutter-x section-y" id="partners">
-        <div className="mx-auto max-w-page">
-          <SectionHead
-            copy={industry}
-            standfirstClassName="mt-12 lg:mt-14 lg:w-5/12"
-          />
 
           {leadPartners.length === 0 ? null : (
-            <Reveal className="mt-16 lg:mt-24" delay={0.4} stagger={0.08}>
-              <ul className="flex flex-col gap-12 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-0">
-                {leadPartners.map((partner, index) => (
-                  <LeadPartner
-                    index={index}
-                    key={partner.id}
-                    partner={partner}
-                  />
-                ))}
-              </ul>
+            <Reveal
+              className="mt-12 grid gap-x-8 gap-y-8 lg:mt-16 lg:grid-cols-2"
+              delay={0.4}
+              stagger={0.08}
+            >
+              {leadPartners.map((partner) => (
+                <RevealItem key={partner.id}>
+                  <H5 as="h3">
+                    <PartnerName partner={partner} />
+                  </H5>
+                  {partner.blurb === null ? null : (
+                    <P className="mt-3 text-sm">{partner.blurb}</P>
+                  )}
+                </RevealItem>
+              ))}
             </Reveal>
           )}
 
           {networkPartners.length === 0 ? null : (
-            <Reveal className="mt-16 lg:mt-24">
-              <ul className="flex flex-wrap items-baseline gap-x-6 gap-y-3">
+            <Reveal className="mt-12 border-t pt-10 lg:mt-16">
+              <ul className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
                 {networkPartners.map((partner, index) => (
-                  <li className="flex items-baseline gap-x-6" key={partner.id}>
-                    <H5 as="span">
+                  <li className="flex items-baseline gap-x-5" key={partner.id}>
+                    <H6 as="span">
                       <PartnerName partner={partner} />
-                    </H5>
+                    </H6>
                     {index === networkPartners.length - 1 ? null : (
                       <span
                         aria-hidden="true"
-                        className="font-body text-xl text-accent"
+                        className="font-body text-base text-accent"
                       >
                         /
                       </span>
@@ -183,12 +154,8 @@ export async function Affiliations() {
               </ul>
             </Reveal>
           )}
-
-          {partners.length === 0 && industry.emptyState !== null ? (
-            <P className="mt-16 lg:w-5/12">{industry.emptyState}</P>
-          ) : null}
-        </div>
-      </section>
-    </>
+        </section>
+      </div>
+    </section>
   );
 }

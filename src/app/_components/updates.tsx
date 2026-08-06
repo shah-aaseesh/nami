@@ -16,6 +16,8 @@ import {
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
+const HOME_TEASER_COUNT = 3;
+
 const KIND_LABEL: Record<UpdateKind, string> = {
   event: "Event",
   news: "News",
@@ -111,7 +113,7 @@ function UpdateCard({ item }: { item: Update }) {
 export async function Updates() {
   const [copy, updates] = await Promise.all([
     content.getHomeCopy(),
-    content.getUpdates(),
+    content.getUpdates(HOME_TEASER_COUNT),
   ]);
 
   const section = copy.sections.updates;

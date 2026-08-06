@@ -29,10 +29,22 @@ export type Campus = ContentEntry & {
   readonly mapUrl: string | null;
 };
 
+export type SocialPlatform =
+  | "facebook"
+  | "instagram"
+  | "linkedin"
+  | "twitter"
+  | "youtube";
+
+export type SocialProfile = ContentLink & {
+  readonly platform: SocialPlatform;
+};
+
 export type ContactChannel = {
-  readonly phone: string | null;
+  readonly phones: readonly string[];
   readonly email: string | null;
   readonly websites: readonly ContentLink[];
+  readonly socialProfiles: readonly SocialProfile[];
 };
 
 export type EntityRole = "institute" | "college" | "school";
@@ -58,7 +70,10 @@ export type InstitutionProfile = {
 
 export type StatGroup = "enrolment" | "graduates" | "alumni";
 
+export type StatPlacement = "hero" | "stats";
+
 export type Stat = ContentEntry & {
+  readonly placement: StatPlacement;
   readonly group: StatGroup;
   readonly value: number;
   readonly suffix: string | null;
@@ -66,23 +81,18 @@ export type Stat = ContentEntry & {
   readonly detail: string | null;
 };
 
-export type EnrolmentFigure = {
-  readonly value: number;
-  readonly label: string;
-};
-
 export type AcademicLevel = ContentEntry & {
   readonly title: string;
   readonly stage: string;
   readonly summary: RichText;
   readonly highlights: readonly string[];
-  readonly enrolment: readonly EnrolmentFigure[];
   readonly campusSlug: Slug;
   readonly image: ContentImage | null;
 };
 
 export type Programme = ContentEntry & {
   readonly title: string;
+  readonly shortTitle: string;
   readonly qualification: string;
   readonly awardingBody: string;
   readonly levelSlug: Slug;
@@ -158,6 +168,7 @@ export type HomeSectionId =
   | "admission";
 
 export type SectionCopy = {
+  readonly navLabel: string;
   readonly eyebrow: string | null;
   readonly heading: string;
   readonly standfirst: string | null;
@@ -171,7 +182,6 @@ export type HeroCopy = {
   readonly standfirst: string;
   readonly primaryCta: ContentLink;
   readonly secondaryCta: ContentLink;
-  readonly statSlugs: readonly Slug[];
   readonly image: ContentImage | null;
 };
 

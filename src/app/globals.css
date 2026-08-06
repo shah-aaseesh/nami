@@ -96,6 +96,7 @@
 @theme inline {
   --font-body: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bricolage-grotesque), var(--font-body);
+  --font-editorial: var(--font-instrument-serif), ui-serif, Georgia, serif;
   --font-sans: var(--font-body);
 }
 
@@ -155,8 +156,16 @@
   }
 }
 
+@theme {
+  --gutter-x: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem);
+}
+
 @utility gutter-x {
-  padding-inline: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem);
+  padding-inline: var(--gutter-x);
+}
+
+@utility bleed-x {
+  margin-inline: calc(-1 * var(--gutter-x));
 }
 
 @utility section-y {

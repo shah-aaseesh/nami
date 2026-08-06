@@ -1,6 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Inter_Tight } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Instrument_Serif,
+  Inter_Tight,
+} from "next/font/google";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
 import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
+import { StructuredData } from "@/components/seo/structured-data";
 import { createMetadata, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
@@ -14,6 +21,12 @@ const interTight = Inter_Tight({
   subsets: ["latin"],
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export const metadata: Metadata = createMetadata({ path: "/" });
 
 export const viewport: Viewport = {
@@ -25,14 +38,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${bricolageGrotesque.variable} ${interTight.variable} font-sans antialiased`}
+      className={`${bricolageGrotesque.variable} ${interTight.variable} ${instrumentSerif.variable} font-sans antialiased`}
     >
       <body>
-        <SmoothScrollProvider chrome={null}>
+        <StructuredData />
+        <SmoothScrollProvider chrome={<SiteHeader />}>
           <div className="flex min-h-svh flex-col">
-            <main id="main" className="flex-1">
+            <main id="main" className="flex-1 pt-20">
               {children}
             </main>
+            <SiteFooter />
           </div>
         </SmoothScrollProvider>
       </body>

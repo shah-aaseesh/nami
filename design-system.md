@@ -195,11 +195,12 @@ Each role also emits a `data-slot` (`display`, `h1`, … `eyebrow`, `standfirst`
 
 ## 4. Space and layout
 
-### 4.1 Three utilities
+### 4.1 Four utilities
 
 | Utility | Value | Means |
 |:--|:--|:--|
-| `gutter-x` | `padding-inline: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem)` | 20px → 64px, the horizontal page gutter |
+| `gutter-x` | `padding-inline: var(--gutter-x)` | 20px → 64px, the horizontal page gutter |
+| `bleed-x` | `margin-inline: calc(-1 * var(--gutter-x))` | −20px → −64px, cancels exactly one `gutter-x` |
 | `section-y` | `padding-block: clamp(4rem, 2.5714rem + 7.1429vw, 9rem)` | 64px → 144px, the vertical section rhythm |
 | `max-w-page` | `--container-page: 90rem` | 1440px, the content column |
 
@@ -231,9 +232,67 @@ With a colour field, the field goes on the `<section>` so it bleeds, and the inn
 
 **If one section skips the split, its width silently disagrees with every other section on the page.** There is no gate for this. It is the single most likely way Phases 2–4 drift apart, because each phase is built in its own worktree and no per-section reviewer sees the others.
 
-An element that must bleed past the content column (constraint 1 — "images bleed past the viewport edge") escapes the inner `div`, it does not remove it.
+An element that must bleed past the content column (constraint 1 — "images bleed past the viewport edge") escapes the inner `div`, it does not remove it. `bleed-x` is how it escapes — §4.3.
 
-### 4.3 Responsive
+### 4.3 `bleed-x` — the sanctioned way out of the gutter
+
+Constraint 1 requires images that bleed past the viewport edge, and §4.2 requires every section to own `gutter-x`. `bleed-x` is the one sanctioned exit: it cancels **exactly one `gutter-x`**, and it is defined against the **same custom property the gutter itself reads**:
+
+```css
+@theme {
+  --gutter-x: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem);
+}
+
+@utility gutter-x {
+  padding-inline: var(--gutter-x);
+}
+
+@utility bleed-x {
+  margin-inline: calc(-1 * var(--gutter-x));
+}
+```
+
+**The clamp is written once.** A hand-copied negative margin is the drift this project has already paid for twice: retune the gutter and the copy silently stops cancelling it, with every gate still green. The three declarations sit adjacent in `globals.css` so the coupling is visible as well as enforced. Do not restate the clamp at a call site, and do not give `bleed-x` a value of its own.
+
+Tailwind prunes an unused `@theme` key, but it keeps any key an emitted rule references — so `--gutter-x` is present exactly when `gutter-x` or `bleed-x` is, and cannot dangle. That is a property of *being referenced*; a theme variable nothing references does get dropped, so do not carry this as a general licence.
+
+#### Where you apply it decides whether it reaches the viewport edge
+
+`bleed-x` cancels the gutter. It knows nothing about the `mx-auto max-w-page` column — and above `max-w-page` the column is no longer the widest thing on the page, so the two placements stop agreeing. Measured on the compiled stylesheet at a 1920px viewport (gutter capped at 64px, column 1440px centred at 240 → 1680):
+
+| `bleed-x` applied to | Spans at 1920px | Reaches the viewport edge? |
+|:--|:--|:--|
+| a direct child of the `<section>` | 0 → 1920 | **yes — at every width** |
+| a child of the inner `mx-auto max-w-page` div | 176 → 1744 (1568 wide) | **no — stops 176px short on each side** |
+
+Below the crossover the two are identical, because the column has not yet hit its 1440px cap: measured at 1568px both span 0 → 1568, and at 1042px both span 0 → 1042. The crossover is `max-w-page + 2 × gutter-x` = 1440 + 128 = **1568px**.
+
+So:
+
+- **To bleed to the viewport edge at any width, the element is a child of the `<section>`, not of the content column.** This is §4.2's escape rule, and `bleed-x` is what makes it land exactly on the edge instead of on a typed-in negative margin.
+- **Inside the content column, `bleed-x` means "overhang the column by one gutter"** — which happens to be a full-bleed up to 1568px and is a fixed 64px overhang beyond it. That is a legitimate editorial effect. It is not a viewport bleed on a large desktop, and describing it as one is how a section ships looking correct on the laptop it was built on and wrong on the monitor it is reviewed on.
+
+`bleed-x` is horizontal only. There is no `bleed-y`: `section-y` is rhythm between sections, and cancelling it is a request to change the rhythm, not to bleed.
+
+#### The worked example — the programme marquee bands
+
+`ProgrammeMarquee` is the live consumer of row 1 of that table, and the shape is worth copying verbatim:
+
+```tsx
+<section className="gutter-x section-y" id="programmes">
+  <div className="mx-auto max-w-page">…eyebrow + heading…</div>
+  <Reveal className="bleed-x mt-16 lg:mt-24">   {/* direct child of <section> */}
+    <RevealItem className="field-ink py-6 lg:py-10">…</RevealItem>
+    <RevealItem className="field-brand py-6 lg:py-10">…</RevealItem>
+  </Reveal>
+</section>
+```
+
+The heading keeps the content column; the bands escape it. **The `Reveal` is what carries `bleed-x`, because `Reveal` renders a plain `div` and that div is the section's direct child** — wrapping the bands in one more div "for tidiness" would put `bleed-x` a level too deep and silently reintroduce the 176px-short defect above 1568px.
+
+Measured on this build: bands span `0 → 1425` at a 1440 viewport and `0 → 1905` at 1920, in both cases exactly `documentElement.clientWidth`, with `scrollWidth - clientWidth === 0`. The content column in the same section measures `64 → 1361` and `232 → 1672` respectively — so that one measurement distinguishes a real bleed from a column-relative overhang, and is the check to run when a band "looks" full width.
+
+### 4.4 Responsive
 
 Mobile-first. Base classes are the small screen; step up with `sm:` / `md:` / `lg:` / `xl:`.
 
@@ -316,7 +375,11 @@ Wraps `HugeiconsIcon`. Defaults: `size-5`, `strokeWidth={1.5}`, `aria-hidden`, `
 
 Icons are decorative by default — the wrapper hides them from the accessibility tree. **An icon carrying meaning on its own needs a visible or `sr-only` text label next to it**, not an `aria-label` on the icon.
 
-Every glyph comes through **the one barrel, `@/lib/icons`**, which re-exports Hugeicons under house names (`ChevronDownIcon`, `ArrowRightIcon`, `ArrowUpRightIcon`, `CalendarIcon`, `PhoneIcon`, `CloseIcon`, `GlobeIcon`, `LocationIcon`, `MailIcon`, `MenuIcon`, `QuoteIcon`, `CheckIcon`). Need a new glyph → add it to the barrel with a house name; do not import from `@hugeicons/core-free-icons` in a component.
+Every glyph comes through **the one barrel, `@/lib/icons`**, which re-exports Hugeicons under house names (`ChevronDownIcon`, `ArrowRightIcon`, `ArrowUpRightIcon`, `AsteriskIcon`, `CalendarIcon`, `PhoneIcon`, `CloseIcon`, `GlobeIcon`, `LocationIcon`, `MailIcon`, `MenuIcon`, `MortarboardIcon`, `PlayIcon`, `QuoteIcon`, `CheckIcon`, and the five social marks `FacebookIcon`, `InstagramIcon`, `LinkedInIcon`, `TwitterIcon`, `YouTubeIcon`). Need a new glyph → add it to the barrel with a house name; do not import from `@hugeicons/core-free-icons` in a component.
+
+The social marks are keyed to content, not chosen per call site: `SocialPlatform` (`facebook` | `instagram` | `linkedin` | `twitter` | `youtube`) indexes a `Record<SocialPlatform, IconSvgElement>` map, so adding a platform to the content layer fails `tsc` until its glyph exists. Do not reach for a social glyph with a conditional.
+
+**`Icon` is `aria-hidden` by default, which is what makes it the correct separator in a marquee.** The `*` between marquee items is an `AsteriskIcon`, not a text character — so it is decorative to assistive tech for free, and it cannot be read out as content between every programme name.
 
 ### 6.3 `Accordion`
 
@@ -334,14 +397,46 @@ The trigger is `text-xl`, hovers to `text-accent`, and rotates its chevron via `
 
 ## 7. Fonts
 
-Two faces, both `next/font/google`, both wired as CSS variables on `<html>`:
+Three faces, all `next/font/google`, all wired as CSS variables on `<html>`:
 
 | Token | Face | Used by |
 |:--|:--|:--|
 | `--font-display` | **Bricolage Grotesque** | `h1`–`h6` (base rule) and every `font-display` role |
 | `--font-body` | **Inter Tight** | everything else; `--font-sans` aliases to it |
+| `--font-editorial` | **Instrument Serif**, weight 400 only | the hero headline and the programme marquee bands — nothing else |
 
-Swapping either face is a one-line change in `layout.tsx` plus the `@theme inline` mapping. Nothing else references a font name.
+Swapping any face is a one-line change in `layout.tsx` plus the `@theme inline` mapping. Nothing else references a font name.
+
+### 7.1 `font-editorial` is a display-only face, and it resets tracking
+
+Instrument Serif is the house's high-contrast editorial serif, added for the reference-derived hero and marquee (§7.2). It ships **one weight, 400**, and that is the whole point: it is never bolded, and a `font-semibold` next to `font-editorial` is drift. Bricolage Grotesque remains the display face for every heading role in §3.2 — `font-editorial` is applied to specific elements, never routed through a typography role.
+
+**It is only legible as a display face.** Use it at `text-5xl` and above. Below that its stroke contrast closes up and it reads as a defect, not a choice.
+
+**Every `font-editorial` call site also writes `tracking-normal`.** The scale's negative tracking (§3.1, down to `-0.045em`) is tuned for Bricolage Grotesque, which is a wide grotesque; applying it to a narrow high-contrast serif collides the thin strokes. The scale is not wrong — the tracking is a property of the *face*, and a second face needs its own. This is the one sanctioned per-face override of a scale value, and it is why there is no `font-editorial` utility bundling the two: a call site that writes only `font-editorial` should look wrong, so the pair stays visible.
+
+### 7.2 The hero and the marquee follow the unipix reference; the rest of the page does not
+
+`DEC-005` holds that the reference supplies the section spine only. **Asmit narrowed it for these two sections only** (2026-08-06) — the hero and the programme marquee follow the reference's *composition*. Everything else on the page keeps the house language.
+
+What that buys, and its boundary: the reference's headline face is **Canela, a commercial trial licence the template is using unlicensed**. It is not shippable and was not copied. `--font-editorial` is a free stand-in of the same register, chosen for the same 400-weight display usage. **Composition came from the reference; the type roles, colour tokens, spacing utilities and primitives stayed the house's.**
+
+The hero maps every reference element onto real content — there is no invented copy:
+
+| Reference element | NAMI source |
+|:--|:--|
+| eyebrow (icon + brand-colour line) | `MortarboardIcon` + `homeCopy.hero.eyebrow` |
+| serif headline | `homeCopy.hero.headline` (the motto), split at the comma into two lines |
+| right column body + CTA | `hero.standfirst`, `hero.primaryCta` (solid) + `hero.secondaryCta` (link, ↗) |
+| circular badge text | `institution.entities.college` — `name` **and** `establishedYear` off the **same** entity (§0.8) |
+| badge play button | `contact.socialProfiles` → `platform: "youtube"`, the real channel |
+| social stack | `contact.socialProfiles`, glyphs via `SOCIAL_GLYPHS` off the `@/lib/icons` barrel |
+| far-left vertical rail | `institution.campuses` — the reference's opening hours do not exist for NAMI and were **not** invented |
+| landscape image | `hero.image` |
+
+**The badge does not rotate, and that is a decision.** A rotating ring is a `gsap.to()` loop, which §9.2 makes a mandatory `reduced` branch — for an element whose correct reduced state is simply "not rotating", i.e. its natural one. Building it static satisfies the reduced-motion contract by construction and removes an at-fold animation from the LCP section entirely. The ring is `role="img"` + `aria-label` with the plain string, so the `*` separators are never announced (§9.7's reasoning, applied to `<textPath>`).
+
+**The play button links to the real YouTube channel.** There is no NAMI video asset. A play affordance that opens the actual channel is honest; a dead player is not.
 
 ---
 
@@ -351,11 +446,15 @@ Swapping either face is a one-line change in `layout.tsx` plus the `@theme inlin
 
 1. **`max-w-page`** — `container: ["page"]` registers our custom container key, so `max-w-page` participates in the `max-w-*` merge group instead of surviving alongside a conflicting width.
 2. **The dead radii** — `theme.radius` is overridden to `["xs","sm","md","lg","xl","2xl"]`, dropping `3xl`/`4xl`. Because those keys are `initial` (§5), stock merge would let a `rounded-3xl` — which emits **nothing** — silently cancel a working `rounded-sm`, leaving a square corner and no error anywhere.
-3. **The custom utilities** — `gutter-x`, `section-y` and the `field-*` group are registered, and `gutter-x` is declared to conflict with `p`/`px` (both directions), `section-y` with `p`/`py`. So `cn("gutter-x", "px-8")` resolves to `px-8` and `cn("px-8", "gutter-x")` resolves to `gutter-x`, instead of both surviving and the winner being decided by Tailwind's emission order.
+3. **The custom utilities** — `gutter-x`, `section-y`, `bleed-x` and the `field-*` group are registered, and `gutter-x` is declared to conflict with `p`/`px` (both directions), `section-y` with `p`/`py`, `bleed-x` with `m`/`mx`. So `cn("gutter-x", "px-8")` resolves to `px-8` and `cn("px-8", "gutter-x")` resolves to `gutter-x`, instead of both surviving and the winner being decided by Tailwind's emission order.
 
 The `field-*` classes form their own merge group, so passing `field-teal` over a `field-ink` base replaces it rather than stacking two colour fields on one element.
 
+**`gutter-x`, `section-y` and `bleed-x` are shorthands, and they are registered the way stock `tailwind-merge` registers `px` and `py` — asymmetrically, on purpose.** A later shorthand replaces the longhands beneath it (`cn("pl-8", "gutter-x")` → `gutter-x`, `cn("ml-8", "bleed-x")` → `bleed-x`), but a later **longhand does not remove the shorthand**, because it only overrides one side (`cn("bleed-x", "ml-8")` → both survive). Registering that second direction as well would silently delete the end-side bleed that a call site writing `ml-8` never asked to lose.
+
 **Consequence: add a custom `@utility` to `globals.css` → register it in `cn()` too.** An unregistered utility is invisible to the merger, and conflicts against it are resolved by stylesheet order, which is not something you control from a call site.
+
+**And declare its group id as a type parameter, not only in the config object.** `extendTailwindMerge<"color-field" | "gutter-x" | "section-y" | "bleed-x">` is what makes those ids assignable inside `classGroups` / `conflictingClassGroups`. Adding a utility to the config and forgetting the union runs perfectly at runtime and fails `tsc` — this house has shipped that exact runtime-green / `tsc`-red shape before.
 
 Two more merge facts that bite and are invisible to `tsc` and lint:
 
@@ -516,6 +615,7 @@ A reader who does not know something was a decision will assume it was an oversi
 | **`--destructive` / `--warning` / `--success` aliases** | No prop without a consumer. This is a marketing site with no destructive actions and no form validation yet. Add them **with** the feature that needs them. |
 | **`--color-secondary` / `--color-secondary-foreground` aliases** | Same reasoning as `--destructive`, one step further: where shadcn's meaning **collides** with our brand meaning, our brand meaning wins and the alias goes. The alias bought one thing — a pasted shadcn component compiling unmodified — and the CLI is banned here, so components are hand-adapted anyway. It cost a permanent trap (`bg-secondary` white vs `bg-secondary-700` teal) in the namespace a section builder reaches for most. Port to `bg-surface-raised` / `text-ink` (§2.3). |
 | **`rounded-3xl` / `rounded-4xl`** | Unset on purpose (§5). They are dead classes, not large radii. |
+| **A viewport-edge bleed from *inside* the content column** (`margin-inline: calc(50% - 50vw)`) | The one case `bleed-x` does not cover (§4.3): an element that must stay a child of the content column — a grid cell keeping its place in the editorial grid — and still paint to the viewport edge above 1568px. The formula is correct and needs no coupling to `gutter-x` at all, but it costs three things `bleed-x` does not. **`50vw` includes the classic scrollbar**, so it overflows ~7–8px each side and raises a horizontal scrollbar everywhere ScrollSmoother is not already clipping — and the smoother is off on touch, on coarse pointers, and under reduced motion (§9.5). That makes an `overflow-x: clip` on the shell a *prerequisite*, not a tidy-up, and putting overflow on `html`/`body` is exactly what GSAP's own guidance warns against next to ScrollTrigger. It also silently requires a **horizontally centred** containing block, and the moment it is used in an asymmetric flex or grid cell it fails by *mispositioning* rather than by not working — the failure shape nothing in this stack catches. No section has asked for it; three asked for `bleed-x`. Add it **with** the section that needs it and **with** its clipping ancestor, verified together — not before. |
 | **A default OG image** | `createMetadata` accepts an `image` and falls back to `twitter: { card: "summary" }` without one. The brand asset (and the vector logo) have not been supplied. |
 | **`components/layout/`** | Header and footer are blocked on the vector logo. |
 | **`components/shared/`** | Extraction happens **last**, on the merged tree, once a second route actually needs a section. Extracting before a real second consumer exists is the over-abstraction smell. |

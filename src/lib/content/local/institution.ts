@@ -2,8 +2,6 @@ import { entryOf } from "../identifiers";
 import { richText } from "../rich-text";
 import type { InstitutionProfile } from "../types";
 import {
-  contactEmail,
-  contactPhone,
   gokarneshworMapUrl,
   gokarneshworStreetAddress,
   newBaneshworMapUrl,
@@ -102,8 +100,8 @@ export const institution: InstitutionProfile = {
     },
   ],
   contact: {
-    phone: contactPhone,
-    email: contactEmail,
+    phones: ["+977 1 4917444", "+977 1 4917441"],
+    email: "info@nami.edu.np",
     websites: [
       {
         label: "school.nami.edu.np",
@@ -114,6 +112,38 @@ export const institution: InstitutionProfile = {
         label: "college.nami.edu.np",
         href: "https://college.nami.edu.np",
         destination: "legacy",
+      },
+    ],
+    socialProfiles: [
+      {
+        platform: "facebook",
+        label: "Facebook",
+        href: "https://www.facebook.com/NamiCollege/",
+        destination: "external",
+      },
+      {
+        platform: "instagram",
+        label: "Instagram",
+        href: "https://www.instagram.com/namicollege/",
+        destination: "external",
+      },
+      {
+        platform: "linkedin",
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/company/nami-college",
+        destination: "external",
+      },
+      {
+        platform: "twitter",
+        label: "Twitter",
+        href: "https://twitter.com/NamiCollege",
+        destination: "external",
+      },
+      {
+        platform: "youtube",
+        label: "YouTube",
+        href: "https://www.youtube.com/user/naminepal",
+        destination: "external",
       },
     ],
   },

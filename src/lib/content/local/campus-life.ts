@@ -1,7 +1,7 @@
 import { entryOf } from "../identifiers";
 import { richText } from "../rich-text";
 import type { CampusLifePillar } from "../types";
-import { campusImage } from "./placeholders";
+import { serviceCamp } from "./images";
 
 export const campusLife: readonly CampusLifePillar[] = [
   {
@@ -20,7 +20,7 @@ export const campusLife: readonly CampusLifePillar[] = [
       "Support for prototype development, market research and venture growth",
       "A collaborative workspace for creativity and teamwork",
     ],
-    image: campusImage,
+    image: null,
   },
   {
     ...entryOf("service-learning"),
@@ -35,7 +35,7 @@ export const campusLife: readonly CampusLifePillar[] = [
       "Coordination, leadership and communication skills",
       "Reflective essays, diaries and project journals",
     ],
-    image: campusImage,
+    image: serviceCamp,
   },
   {
     ...entryOf("leadership-and-careers"),
@@ -50,7 +50,7 @@ export const campusLife: readonly CampusLifePillar[] = [
       '"Motivational Stories by Inspirational Leaders of Change"',
       "NAMI Golden Z Club",
     ],
-    image: campusImage,
+    image: null,
   },
   {
     ...entryOf("industry-exposure"),
@@ -64,7 +64,7 @@ export const campusLife: readonly CampusLifePillar[] = [
       "Mentorship from working professionals",
       "Collaborative research projects",
     ],
-    image: campusImage,
+    image: null,
   },
   {
     ...entryOf("sustainability"),
@@ -79,6 +79,6 @@ export const campusLife: readonly CampusLifePillar[] = [
       "Waste segregation, recycling and a plastic-free zone",
       "Curriculum, research and community engagement on environmental challenges",
     ],
-    image: campusImage,
+    image: null,
   },
 ];

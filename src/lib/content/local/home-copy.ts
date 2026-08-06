@@ -1,6 +1,5 @@
-import { slug } from "../identifiers";
 import type { HomeCopy } from "../types";
-import { heroImage } from "./placeholders";
+import { mustangTrip } from "./images";
 
 export const homeCopy: HomeCopy = {
   hero: {
@@ -18,15 +17,11 @@ export const homeCopy: HomeCopy = {
       href: "#admission",
       destination: "internal",
     },
-    statSlugs: [
-      slug("graduates-neb"),
-      slug("graduates-a-level"),
-      slug("graduates-ug-pg"),
-    ],
-    image: heroImage,
+    image: mustangTrip,
   },
   sections: {
     about: {
+      navLabel: "About NAMI",
       eyebrow: "NAMI since 2012",
       heading: "A Nepali institution, built to world standards.",
       standfirst: null,
@@ -34,6 +29,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     levels: {
+      navLabel: "Academic levels",
       eyebrow: "Four levels",
       heading: "Grade 1 to Master's, on one pathway.",
       standfirst:
@@ -42,6 +38,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     programmes: {
+      navLabel: "Programmes",
       eyebrow: "What you can study",
       heading:
         "British degrees, Cambridge A-Levels, NEB — taught in Kathmandu.",
@@ -50,6 +47,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     affiliations: {
+      navLabel: "Accreditation",
       eyebrow: "Recognition",
       heading: "Accredited where it counts.",
       standfirst:
@@ -58,6 +56,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     partners: {
+      navLabel: "Industry partners",
       eyebrow: "Industry",
       heading: "The people our students work with before they graduate.",
       standfirst:
@@ -66,6 +65,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     campusLife: {
+      navLabel: "Campus life",
       eyebrow: "Beyond the timetable",
       heading: "Where ideas get built.",
       standfirst: null,
@@ -73,6 +73,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     stats: {
+      navLabel: "NAMI in numbers",
       eyebrow: "The record",
       heading: "The institution, in numbers.",
       standfirst: null,
@@ -80,6 +81,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     testimonials: {
+      navLabel: "Alumni",
       eyebrow: "Alumni",
       heading: "Where NAMIANS end up.",
       standfirst: null,
@@ -88,6 +90,7 @@ export const homeCopy: HomeCopy = {
         "NAMI is collecting alumni stories — this space is reserved for them.",
     },
     updates: {
+      navLabel: "Notices",
       eyebrow: "Notices",
       heading: "What's happening at NAMI.",
       standfirst: null,
@@ -95,6 +98,7 @@ export const homeCopy: HomeCopy = {
       emptyState: "No current notices.",
     },
     admission: {
+      navLabel: "Admissions",
       eyebrow: "Admissions",
       heading: "Start where you are.",
       standfirst: "Every level has its own entry route. Pick yours.",

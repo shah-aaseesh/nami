@@ -7,6 +7,18 @@ import { FULL_MOTION_QUERY, gsap, ScrollSmoother, useGSAP } from "@/lib/gsap";
 const SMOOTH_SCROLL_QUERY = `${FULL_MOTION_QUERY} and (pointer: fine)`;
 const EFFECT_TARGETS = "[data-speed], [data-lag]";
 
+function hashTarget(): HTMLElement | null {
+  const raw = window.location.hash.slice(1);
+  if (raw === "") return null;
+  let id = raw;
+  try {
+    id = decodeURIComponent(raw);
+  } catch {
+    id = raw;
+  }
+  return document.getElementById(id);
+}
+
 export type SmoothScrollProviderProps = {
   children: ReactNode;
   chrome: ReactNode;
@@ -36,6 +48,33 @@ export function SmoothScrollProvider({
 
     return () => mm.revert();
   });
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    // The smoother fakes the scroll position, so a native scroll intent (hash nav,
+    // focus, find-in-page) lands on the fixed wrapper instead of moving the page.
+    const adoptNativeScroll = () => {
+      const nudge = wrapper.scrollTop;
+      const smoother = ScrollSmoother.get();
+      if (nudge === 0 || !smoother) return;
+      wrapper.scrollTop = 0;
+      smoother.scrollTo(smoother.scrollTop() + nudge, false);
+    };
+
+    wrapper.addEventListener("scroll", adoptNativeScroll);
+
+    // The browser's own hash landing already happened, against the pre-smoother
+    // layout; redo it now that the smoother owns the scroll position.
+    const smoother = ScrollSmoother.get();
+    const target = hashTarget();
+    if (smoother && target) {
+      smoother.scrollTo(target, false, "top top");
+    }
+
+    return () => wrapper.removeEventListener("scroll", adoptNativeScroll);
+  }, []);
 
   useEffect(() => {
     // ScrollSmoother's own `effects: true` scan already covered the first route;

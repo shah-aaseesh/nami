@@ -1,12 +1,13 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap, matchMotion, Observer, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 export type MarqueeProps = {
   children: ReactNode;
+  label: string;
   className?: string;
   trackClassName?: string;
   speed?: number;
@@ -18,6 +19,7 @@ export type MarqueeProps = {
 
 export function Marquee({
   children,
+  label,
   className,
   trackClassName,
   speed = 80,
@@ -28,12 +30,14 @@ export function Marquee({
 }: MarqueeProps) {
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
+  const [reduced, setReduced] = useState(false);
 
   useGSAP(
     () =>
       matchMotion(
         {
           motion: () => {
+            setReduced(false);
             const el = track.current;
             if (!el) return;
 
@@ -74,10 +78,7 @@ export function Marquee({
             return () => observer.kill();
           },
           reduced: () => {
-            const el = track.current;
-            if (!el) return;
-            gsap.set(root.current, { overflowX: "auto" });
-            gsap.set(Array.from(el.children).slice(1), { display: "none" });
+            setReduced(true);
           },
         },
         root,
@@ -86,12 +87,22 @@ export function Marquee({
   );
 
   const copyKeys = Array.from(
-    { length: copies },
+    { length: reduced ? 1 : copies },
     (_, index) => `marquee-copy-${index}`,
   );
 
   return (
-    <div className={cn("overflow-hidden", className)} ref={root}>
+    // biome-ignore lint/a11y/useSemanticElements: <fieldset> groups form controls; this names the scroll container that the reduced-motion path makes focusable.
+    <div
+      aria-label={label}
+      className={cn(
+        reduced ? "overflow-x-auto overflow-y-hidden" : "overflow-hidden",
+        className,
+      )}
+      ref={root}
+      role="group"
+      tabIndex={reduced ? 0 : undefined}
+    >
       <div
         className={cn("flex w-max will-change-transform", trackClassName)}
         ref={track}

@@ -1,15 +1,27 @@
-import { Eyebrow, H1, Standfirst } from "@/components/ui/typography";
+import { About } from "./_components/about";
+import { AcademicLevels } from "./_components/academic-levels";
+import { AdmissionCta } from "./_components/admission-cta";
+import { Affiliations } from "./_components/affiliations";
+import { CampusLife } from "./_components/campus-life";
+import { Hero } from "./_components/hero";
+import { ProgrammeMarquee } from "./_components/programme-marquee";
+import { Stats } from "./_components/stats";
+import { Testimonials } from "./_components/testimonials";
+import { Updates } from "./_components/updates";
 
 export default function Home() {
   return (
-    <section className="gutter-x section-y">
-      <div className="mx-auto flex max-w-page flex-col gap-6">
-        <Eyebrow>Naaya Aayam Multi-Disciplinary Institute</Eyebrow>
-        <H1 className="max-w-5xl">Transform yourself, to lead the world</H1>
-        <Standfirst className="max-w-2xl">
-          Kathmandu, Nepal. Established 2012.
-        </Standfirst>
-      </div>
-    </section>
+    <>
+      <Hero />
+      <ProgrammeMarquee />
+      <About />
+      <AcademicLevels />
+      <Affiliations />
+      <CampusLife />
+      <Stats />
+      <Testimonials />
+      <Updates />
+      <AdmissionCta />
+    </>
   );
 }

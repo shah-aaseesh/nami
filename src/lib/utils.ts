@@ -1,7 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
-const twMerge = extendTailwindMerge<"color-field" | "gutter-x" | "section-y">({
+const twMerge = extendTailwindMerge<
+  "color-field" | "gutter-x" | "section-y" | "bleed-x"
+>({
   override: {
     // `--radius-3xl`/`--radius-4xl` are unset in globals.css, so those classes emit
     // nothing — merging them would drop a working radius in favour of a dead one.
@@ -13,13 +15,17 @@ const twMerge = extendTailwindMerge<"color-field" | "gutter-x" | "section-y">({
       "color-field": [{ field: ["ink", "brand", "teal"] }],
       "gutter-x": ["gutter-x"],
       "section-y": ["section-y"],
+      "bleed-x": ["bleed-x"],
     },
     conflictingClassGroups: {
       p: ["gutter-x", "section-y"],
       px: ["gutter-x"],
       py: ["section-y"],
-      "gutter-x": ["p", "px"],
-      "section-y": ["p", "py"],
+      m: ["bleed-x"],
+      mx: ["bleed-x"],
+      "gutter-x": ["p", "px", "ps", "pe", "pl", "pr"],
+      "section-y": ["p", "py", "pt", "pb"],
+      "bleed-x": ["m", "mx", "ms", "me", "ml", "mr"],
     },
   },
 });

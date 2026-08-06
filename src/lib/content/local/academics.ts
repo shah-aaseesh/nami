@@ -2,7 +2,12 @@ import { entryOf, slug } from "../identifiers";
 import { richText } from "../rich-text";
 import type { AcademicLevel, Programme } from "../types";
 import { AWARDING_BODIES } from "./awarding-bodies";
-import { levelImage } from "./placeholders";
+import {
+  readingRoom,
+  schoolTransport,
+  scienceLaboratory,
+  studentsOnCampus,
+} from "./images";
 
 export const academicLevels: readonly AcademicLevel[] = [
   {
@@ -20,9 +25,8 @@ export const academicLevels: readonly AcademicLevel[] = [
       "Interactive-board classrooms and ICT from Grade 1",
       "Fine arts, performing arts and physical education",
     ],
-    enrolment: [{ value: 176, label: "students in Grades 1–7" }],
     campusSlug: slug("gokarneshwor"),
-    image: levelImage,
+    image: schoolTransport,
   },
   {
     ...entryOf("plus-two"),
@@ -38,12 +42,8 @@ export const academicLevels: readonly AcademicLevel[] = [
       "Internships and volunteer engagement",
       "Structured career counselling",
     ],
-    enrolment: [
-      { value: 350, label: "students in Grade 11" },
-      { value: 454, label: "students in Grade 12" },
-    ],
     campusSlug: slug("gokarneshwor"),
-    image: levelImage,
+    image: scienceLaboratory,
   },
   {
     ...entryOf("a-level"),
@@ -59,9 +59,8 @@ export const academicLevels: readonly AcademicLevel[] = [
       "Entry from SEE, GCSE, CBSE or equivalent",
       "Routes into Science, Medicine, Engineering, Business, Humanities and Liberal Arts",
     ],
-    enrolment: [{ value: 71, label: "students enrolled" }],
     campusSlug: slug("gokarneshwor"),
-    image: levelImage,
+    image: studentsOnCampus,
   },
   {
     ...entryOf("bachelor-master"),
@@ -77,9 +76,8 @@ export const academicLevels: readonly AcademicLevel[] = [
       "BSc Environmental Studies with Kathmandu University from August 2026",
       "AWS Academy curriculum and certifications",
     ],
-    enrolment: [{ value: 239, label: "undergraduate students" }],
     campusSlug: slug("new-baneshwor"),
-    image: levelImage,
+    image: readingRoom,
   },
 ];
 
@@ -87,6 +85,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("bsc-computer-science"),
     title: "Computer Science",
+    shortTitle: "Computer Science",
     qualification: "BSc (Hons)",
     awardingBody: AWARDING_BODIES.northampton,
     levelSlug: slug("bachelor-master"),
@@ -95,6 +94,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("bsc-software-engineering"),
     title: "Software Engineering",
+    shortTitle: "Software Engineering",
     qualification: "BSc (Hons)",
     awardingBody: AWARDING_BODIES.northampton,
     levelSlug: slug("bachelor-master"),
@@ -103,6 +103,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("bsc-networking-engineering"),
     title: "Networking Engineering",
+    shortTitle: "Networking Engineering",
     qualification: "BSc (Hons)",
     awardingBody: AWARDING_BODIES.northampton,
     levelSlug: slug("bachelor-master"),
@@ -111,6 +112,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("bsc-environmental-science"),
     title: "Environmental Science",
+    shortTitle: "Environmental Science",
     qualification: "BSc (Hons)",
     awardingBody: AWARDING_BODIES.northampton,
     levelSlug: slug("bachelor-master"),
@@ -119,6 +121,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("bsc-business-administration"),
     title: "Business Administration",
+    shortTitle: "Business Administration",
     qualification: "BSc (Hons)",
     awardingBody: AWARDING_BODIES.northampton,
     levelSlug: slug("bachelor-master"),
@@ -127,6 +130,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("msc-computer-science"),
     title: "Computer Science",
+    shortTitle: "Computer Science",
     qualification: "MSc",
     awardingBody: AWARDING_BODIES.northampton,
     levelSlug: slug("bachelor-master"),
@@ -135,6 +139,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("bsc-environmental-studies"),
     title: "Environmental Studies",
+    shortTitle: "Environmental Studies",
     qualification: "BSc",
     awardingBody: AWARDING_BODIES.kathmanduUniversity,
     levelSlug: slug("bachelor-master"),
@@ -143,6 +148,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("a-level-programme"),
     title: "Science and non-science subject combinations",
+    shortTitle: "Science & Non-Science",
     qualification: "Cambridge International A-Level",
     awardingBody: AWARDING_BODIES.cambridge,
     levelSlug: slug("a-level"),
@@ -151,6 +157,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("neb-science"),
     title: "Science",
+    shortTitle: "Science",
     qualification: "NEB 10+2",
     awardingBody: AWARDING_BODIES.neb,
     levelSlug: slug("plus-two"),
@@ -159,6 +166,7 @@ export const programmes: readonly Programme[] = [
   {
     ...entryOf("neb-management"),
     title: "Management",
+    shortTitle: "Management",
     qualification: "NEB 10+2",
     awardingBody: AWARDING_BODIES.neb,
     levelSlug: slug("plus-two"),

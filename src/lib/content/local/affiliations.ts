@@ -1,7 +1,6 @@
 import { entryOf, slug } from "../identifiers";
 import type { Affiliation } from "../types";
 import { AWARDING_BODIES } from "./awarding-bodies";
-import { logoImage } from "./placeholders";
 
 export const affiliations: readonly Affiliation[] = [
   {
@@ -12,7 +11,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("school"),
     campusSlug: slug("gokarneshwor"),
     note: null,
-    logo: logoImage,
+    logo: null,
   },
   {
     ...entryOf("neb-plus-two"),
@@ -22,7 +21,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("plus-two"),
     campusSlug: slug("gokarneshwor"),
     note: null,
-    logo: logoImage,
+    logo: null,
   },
   {
     ...entryOf("cambridge"),
@@ -32,7 +31,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("a-level"),
     campusSlug: slug("gokarneshwor"),
     note: "Independent CAIE examination centre since 2024",
-    logo: logoImage,
+    logo: null,
   },
   {
     ...entryOf("northampton"),
@@ -42,7 +41,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelor-master"),
     campusSlug: slug("new-baneshwor"),
     note: null,
-    logo: logoImage,
+    logo: null,
   },
   {
     ...entryOf("kathmandu-university"),
@@ -52,6 +51,6 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelor-master"),
     campusSlug: slug("new-baneshwor"),
     note: "First intake August 2026",
-    logo: logoImage,
+    logo: null,
   },
 ];

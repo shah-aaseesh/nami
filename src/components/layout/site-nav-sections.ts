@@ -1,18 +1,47 @@
-import type { HomeCopy, HomeSectionId } from "@/lib/content";
-import type { SiteNavItem } from "./site-nav-panel";
+export type SiteNavItem = {
+  readonly label: string;
+  readonly href: string;
+  readonly descriptor?: string;
+  readonly children?: { label: string; href: string }[];
+};
 
-const NAV_SECTIONS: readonly { id: HomeSectionId; hash: string }[] = [
-  { id: "about", hash: "#about" },
-  { id: "levels", hash: "#levels" },
-  { id: "affiliations", hash: "#affiliations" },
-  { id: "campusLife", hash: "#campus-life" },
-  { id: "updates", hash: "#updates" },
-  { id: "admission", hash: "#admission" },
+export const SITE_NAV_ITEMS: SiteNavItem[] = [
+  { label: "Home", href: "/", descriptor: "Start your journey here." },
+  {
+    label: "About Us",
+    href: "/about",
+    descriptor: "Discover our mission, vision, and values.",
+  },
+  {
+    label: "Academics",
+    href: "/programs",
+    descriptor: "Explore our academic offerings.",
+    children: [
+      { label: "School", href: "/programs#school" },
+      { label: "+2 NEB", href: "/programs#neb" },
+      { label: "A-Level", href: "/programs#a-level" },
+      { label: "Bachelor / Master", href: "/programs#bachelors" },
+    ],
+  },
+  {
+    label: "Admissions",
+    href: "/admissions",
+    descriptor: "Join our diverse community.",
+  },
+  {
+    label: "Student Life",
+    href: "/student-life",
+    descriptor: "Experience vibrant campus life.",
+  },
+  {
+    label: "Events & News",
+    href: "/events",
+    descriptor: "Stay updated with latest happenings.",
+  },
+  {
+    label: "Gallery",
+    href: "/gallery",
+    descriptor: "A visual tour of our campus.",
+  },
+  { label: "Contact", href: "/contact", descriptor: "Get in touch with us." },
 ];
-
-export function siteNavItems(copy: HomeCopy): SiteNavItem[] {
-  return NAV_SECTIONS.map(({ hash, id }) => {
-    const section = copy.sections[id];
-    return { hash, label: section.navLabel, descriptor: section.heading };
-  });
-}

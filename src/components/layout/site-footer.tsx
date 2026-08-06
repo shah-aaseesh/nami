@@ -10,7 +10,7 @@ import { ArrowUpRightIcon, LocationIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteCtaBand } from "./site-cta-band";
 import { SiteFooterWordmark } from "./site-footer-wordmark";
-import { siteNavItems } from "./site-nav-sections";
+import { SITE_NAV_ITEMS } from "./site-nav-sections";
 
 const metaLink = cn(buttonVariants({ size: "sm", variant: "link" }));
 const detailLink = cn(buttonVariants({ size: "md", variant: "link" }));
@@ -94,10 +94,7 @@ function CampusEntry({ campus }: { campus: Campus }) {
 }
 
 export async function SiteFooter() {
-  const [copy, institution] = await Promise.all([
-    content.getHomeCopy(),
-    content.getInstitution(),
-  ]);
+  const institution = await content.getInstitution();
   const { campuses, contact, entities } = institution;
   const college = entities.college;
   const institute = entities.institute;
@@ -106,7 +103,7 @@ export async function SiteFooter() {
   const lead = splitAt === -1 ? college.name : college.name.slice(0, splitAt);
   const tail = splitAt === -1 ? null : college.name.slice(splitAt + 1);
 
-  const navItems = siteNavItems(copy);
+  const navItems = SITE_NAV_ITEMS;
   const cities = [...new Set(campuses.map((campus) => campus.city))].join(", ");
   const place =
     campuses.length === 0
@@ -165,8 +162,8 @@ export async function SiteFooter() {
               </h3>
               <ul className="mt-8 flex flex-col gap-y-2.5">
                 {navItems.map((item) => (
-                  <li key={item.hash}>
-                    <Link className={quietLink} href={item.hash as Route}>
+                  <li key={item.href}>
+                    <Link className={quietLink} href={item.href as Route}>
                       {item.label}
                     </Link>
                   </li>

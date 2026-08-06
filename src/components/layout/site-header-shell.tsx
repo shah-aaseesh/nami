@@ -2,25 +2,31 @@
 
 import type { Route } from "next";
 import Link from "next/link";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Icon } from "@/components/ui/icon";
-import { gsap, ScrollSmoother, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { CloseIcon, MenuIcon, PhoneIcon } from "@/lib/icons";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { ChevronDownIcon, MenuIcon, PhoneIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWordmark } from "./site-header-wordmark";
-import {
-  type SiteMetaLink,
-  type SiteNavItem,
-  SiteNavPanel,
-} from "./site-nav-panel";
+import { type SiteMetaLink, SiteNavPanel } from "./site-nav-panel";
+import type { SiteNavItem } from "./site-nav-sections";
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-const SCROLLED_AT = 24;
 const HIDE_AFTER = 96;
-const SMOOTH_WRAPPER = "smooth-wrapper";
 const HIDE_DURATION = 0.2;
+const SCROLLED_AT = 24;
 
 export type SiteHeaderShellProps = {
   wordmark: { lead: string; tail: string | null };
@@ -40,17 +46,10 @@ export function SiteHeaderShell({
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const root = useRef<HTMLElement>(null);
-  const toggle = useRef<HTMLButtonElement>(null);
   const bar = useRef<HTMLDivElement>(null);
   const showAnim = useRef<gsap.core.Tween | null>(null);
   const openRef = useRef(open);
-  const panelId = useId();
   const labelId = useId();
-
-  const close = useCallback(() => {
-    setOpen(false);
-    toggle.current?.focus({ preventScroll: true });
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > SCROLLED_AT);
@@ -58,63 +57,6 @@ export function SiteHeaderShell({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const smoother = ScrollSmoother.get();
-    smoother?.paused(true);
-    const html = document.documentElement;
-    const restore = html.style.overflow;
-    html.style.overflow = "hidden";
-    const wrapper = document.getElementById(SMOOTH_WRAPPER);
-    wrapper?.setAttribute("inert", "");
-
-    return () => {
-      wrapper?.removeAttribute("inert");
-      html.style.overflow = restore;
-      smoother?.paused(false);
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        close();
-        return;
-      }
-      if (event.key !== "Tab") return;
-
-      const el = root.current;
-      if (el === null) return;
-
-      const stops = Array.from(el.querySelectorAll<HTMLElement>(FOCUSABLE));
-      const first = stops.at(0);
-      const last = stops.at(-1);
-      if (first === undefined || last === undefined) return;
-
-      const active = document.activeElement;
-      if (!(active instanceof HTMLElement) || !el.contains(active)) {
-        event.preventDefault();
-        first.focus();
-        return;
-      }
-      if (event.shiftKey && active === first) {
-        event.preventDefault();
-        last.focus();
-        return;
-      }
-      if (!event.shiftKey && active === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [close, open]);
 
   useEffect(() => {
     openRef.current = open;
@@ -166,10 +108,7 @@ export function SiteHeaderShell({
 
   return (
     <header
-      className={cn(
-        "pointer-events-none fixed inset-x-0 top-0 z-50 flex flex-col",
-        open && "field-ink pointer-events-auto bottom-0",
-      )}
+      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex flex-col"
       ref={root}
     >
       {open ? null : (
@@ -186,50 +125,68 @@ export function SiteHeaderShell({
 
       <div
         className={cn(
-          "border-b border-transparent transition-colors gutter-x",
-          scrolled && !open && "pointer-events-auto border-border bg-surface",
-          open && "pointer-events-auto",
+          "pointer-events-auto border-b transition-colors gutter-x",
+          scrolled ? "border-border bg-surface" : "border-transparent",
         )}
         ref={bar}
       >
         <div
           className={cn(
             "mx-auto flex max-w-page items-center justify-between gap-6 transition-[height] duration-300",
-            scrolled && !open ? "h-16" : "h-20",
+            scrolled ? "h-16" : "h-20 lg:h-24",
           )}
         >
-          <Link
-            className="pointer-events-auto"
-            href="/"
-            onClick={open ? close : undefined}
-          >
+          <Link href="/">
             <SiteHeaderWordmark lead={wordmark.lead} tail={wordmark.tail} />
           </Link>
 
-          {open ? null : (
-            <nav
-              aria-label="Sections"
-              className="pointer-events-auto hidden flex-1 justify-center lg:flex"
-            >
-              <ul className="flex items-center gap-x-5 xl:gap-x-8">
-                {items.map((item) => (
-                  <li key={item.hash}>
+          <nav
+            aria-label="Sections"
+            className="hidden flex-1 justify-center lg:flex"
+          >
+            <ul className="flex items-center gap-x-5 xl:gap-x-8">
+              {items.map((item) => (
+                <li key={item.label}>
+                  {item.children ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="flex items-center gap-1 font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent outline-none">
+                        {item.label}{" "}
+                        <Icon icon={ChevronDownIcon} className="size-4" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align="start"
+                        className="w-48 bg-surface border border-border"
+                      >
+                        {item.children.map((child) => (
+                          <DropdownMenuItem
+                            key={child.label}
+                            asChild
+                            className="cursor-pointer font-body text-sm text-ink hover:text-accent focus:bg-accent/10 focus:text-accent py-2 px-4 outline-none"
+                          >
+                            <Link href={child.href as Route}>
+                              {child.label}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : (
                     <Link
                       className="font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent"
-                      href={item.hash as Route}
+                      href={item.href as Route}
                     >
                       {item.label}
                     </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <div className="flex items-center gap-x-5">
-            {open || call === null || call.href === null ? null : (
+            {call === null || call.href === null ? null : (
               <Link
-                className="pointer-events-auto hidden items-center gap-x-2 font-body text-sm font-medium text-ink transition-colors hover:text-accent xl:inline-flex"
+                className="hidden items-center gap-x-2 font-body text-sm font-medium text-ink transition-colors hover:text-accent xl:inline-flex"
                 href={call.href as Route}
               >
                 <Icon className="size-4" icon={PhoneIcon} />
@@ -237,32 +194,30 @@ export function SiteHeaderShell({
               </Link>
             )}
 
-            <Button
-              aria-controls={open ? panelId : undefined}
-              aria-expanded={open}
-              className="pointer-events-auto"
-              onClick={() => (open ? close() : setOpen(true))}
-              ref={toggle}
-              size="sm"
-              variant="quiet"
-            >
-              {open ? "Close" : "Menu"}
-              <Icon icon={open ? CloseIcon : MenuIcon} />
-            </Button>
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button size="sm" variant="quiet">
+                  Menu
+                  <Icon icon={MenuIcon} />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                className="w-full sm:max-w-md lg:max-w-sm flex flex-col outline-none overflow-y-auto px-6 py-6"
+                side="right"
+              >
+                <SheetTitle className="sr-only">Menu</SheetTitle>
+                <SiteNavPanel
+                  items={items}
+                  labelId={labelId}
+                  links={links}
+                  onNavigate={() => setOpen(false)}
+                  places={places}
+                />
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
-
-      {open ? (
-        <SiteNavPanel
-          id={panelId}
-          items={items}
-          labelId={labelId}
-          links={links}
-          onNavigate={close}
-          places={places}
-        />
-      ) : null}
     </header>
   );
 }

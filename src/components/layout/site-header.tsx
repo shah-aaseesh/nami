@@ -1,7 +1,7 @@
 import { content, isPlaceholder } from "@/lib/content";
 import { SiteHeaderShell } from "./site-header-shell";
 import type { SiteMetaLink } from "./site-nav-panel";
-import { siteNavItems } from "./site-nav-sections";
+import { SITE_NAV_ITEMS } from "./site-nav-sections";
 
 function channel(
   value: string | null,
@@ -16,13 +16,8 @@ function channel(
 }
 
 export async function SiteHeader() {
-  const [copy, institution] = await Promise.all([
-    content.getHomeCopy(),
-    content.getInstitution(),
-  ]);
-
-  const items = siteNavItems(copy);
-
+  const institution = await content.getInstitution();
+  const items = SITE_NAV_ITEMS;
   const { shortName } = institution.entities.college;
   const spaceAt = shortName.indexOf(" ");
 

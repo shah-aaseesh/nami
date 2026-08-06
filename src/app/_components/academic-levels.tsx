@@ -24,44 +24,47 @@ export async function AcademicLevels() {
 
   const panels: readonly LevelPanel[] = levels.map((level) => ({
     campus: campuses.get(level.campusSlug) ?? null,
-    highlights: level.highlights,
     id: level.id,
     image: level.image,
-    paragraphs: level.summary.kind === "blocks" ? level.summary.paragraphs : [],
+    lead:
+      level.summary.kind === "blocks"
+        ? (level.summary.paragraphs[0] ?? null)
+        : null,
     stage: level.stage,
     title: level.title,
   }));
 
   return (
-    <section
-      className="field-teal gutter-x section-y overflow-hidden"
-      id="levels"
-    >
-      <div className="mx-auto max-w-page">
-        {section.eyebrow === null ? null : (
-          <Reveal className="flex items-center gap-5 lg:w-7/12">
-            <Eyebrow>{section.eyebrow}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </Reveal>
-        )}
+    <section className="field-teal gutter-x section-y" id="levels">
+      <div className="mx-auto grid max-w-page gap-x-16 gap-y-14 xl:grid-cols-12">
+        <div className="max-w-xl xl:col-span-5">
+          {section.eyebrow === null ? null : (
+            <Reveal className="flex items-center gap-5">
+              <Eyebrow>{section.eyebrow}</Eyebrow>
+              <span className="h-px flex-1 bg-border" />
+            </Reveal>
+          )}
 
-        <SplitText
-          as="h2"
-          className="mt-8 font-display text-5xl font-semibold lg:mt-12 lg:w-8/12"
-        >
-          {section.heading}
-        </SplitText>
+          <SplitText
+            as="h2"
+            className="mt-8 font-editorial text-5xl font-normal tracking-normal lg:mt-10"
+          >
+            {section.heading}
+          </SplitText>
 
-        {section.standfirst === null ? null : (
-          <Reveal className="mt-12 lg:mt-14 lg:ms-auto lg:w-5/12" delay={0.25}>
-            <Standfirst>{section.standfirst}</Standfirst>
-          </Reveal>
-        )}
+          {section.standfirst === null ? null : (
+            <Reveal className="mt-8 lg:mt-10" delay={0.2}>
+              <Standfirst>{section.standfirst}</Standfirst>
+            </Reveal>
+          )}
+        </div>
 
-        {panels.length > 0 ? <AcademicLevelsSequence panels={panels} /> : null}
+        {panels.length > 0 ? (
+          <AcademicLevelsSequence className="xl:col-span-7" panels={panels} />
+        ) : null}
 
         {panels.length === 0 && section.emptyState !== null ? (
-          <P className="mt-16 lg:w-5/12">{section.emptyState}</P>
+          <P className="xl:col-span-7">{section.emptyState}</P>
         ) : null}
       </div>
     </section>

@@ -1,4 +1,5 @@
 import type { ContentProvider } from "../provider";
+import { aboutCopy } from "./about-copy";
 import { academicLevels, programmes } from "./academics";
 import { admissionCalls } from "./admissions";
 import { affiliations } from "./affiliations";
@@ -24,4 +25,5 @@ export const localContentProvider: ContentProvider = {
     Promise.resolve(limit === undefined ? updates : updates.slice(0, limit)),
   getTestimonials: () => Promise.resolve(testimonials),
   getHomeCopy: () => Promise.resolve(homeCopy),
+  getAboutCopy: () => Promise.resolve(aboutCopy),
 };

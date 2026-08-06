@@ -1,5 +1,6 @@
 import type { Route } from "next";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Display, Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -14,7 +15,6 @@ import {
   YouTubeIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { Breadcrumb } from "./breadcrumb";
 import { contactCopy, contactTrail } from "./contact-copy";
 
 const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {

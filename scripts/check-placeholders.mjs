@@ -35,6 +35,7 @@ const graph = {
   updates: await content.getUpdates(),
   testimonials: await content.getTestimonials(),
   homeCopy: await content.getHomeCopy(),
+  aboutCopy: await content.getAboutCopy(),
 };
 
 const occurrences = new Map();

@@ -30,9 +30,23 @@ export const studentsOnCampus: ContentImage = {
 
 export const readingRoom: ContentImage = {
   src: "/nami/level-bachelor-master.jpg",
-  alt: "NAMI's library reading room, rows of study desks facing a projection screen beneath a silence sign.",
+  alt: "NAMI's library, metal shelving stacked with books and a newspaper rack standing behind the library help desk.",
   width: 1200,
   height: 900,
+};
+
+export const readingHall: ContentImage = {
+  src: "/nami/campus-library.jpg",
+  alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
+  width: 1280,
+  height: 853,
+};
+
+export const auditoriumGathering: ContentImage = {
+  src: "/nami/campus-auditorium.jpg",
+  alt: "Students and staff seated on sofas and stacking chairs in the NAMI auditorium, maroon acoustic panelling on the wall behind them.",
+  width: 999,
+  height: 666,
 };
 
 export const serviceCamp: ContentImage = {

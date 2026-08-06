@@ -189,3 +189,20 @@ export type HomeCopy = {
   readonly hero: HeroCopy;
   readonly sections: Readonly<Record<HomeSectionId, SectionCopy>>;
 };
+
+export type AboutSectionId = "chronology" | "emblem" | "creed" | "recognition";
+
+export type AboutSection = {
+  readonly heading: string;
+  readonly standfirst: string | null;
+};
+
+export type AboutCopy = {
+  readonly metaTitle: string;
+  readonly metaDescription: string;
+  readonly title: string;
+  readonly standfirst: string;
+  readonly openingImage: ContentImage | null;
+  readonly creedImage: ContentImage | null;
+  readonly sections: Readonly<Record<AboutSectionId, AboutSection>>;
+};

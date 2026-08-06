@@ -1,4 +1,5 @@
 import type {
+  AboutCopy,
   AcademicLevel,
   AdmissionCall,
   Affiliation,
@@ -35,4 +36,5 @@ export type ContentProvider = {
   getUpdates(limit?: number): Promise<readonly Update[]>;
   getTestimonials(): Promise<readonly Testimonial[]>;
   getHomeCopy(): Promise<HomeCopy>;
+  getAboutCopy(): Promise<AboutCopy>;
 };

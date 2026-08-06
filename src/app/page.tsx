@@ -16,10 +16,10 @@ export default function Home() {
       <About />
       <AcademicLevels />
       <Affiliations />
+      <AdmissionCta />
       <CampusLife />
       <Testimonials />
       <Updates />
-      <AdmissionCta />
     </>
   );
 }

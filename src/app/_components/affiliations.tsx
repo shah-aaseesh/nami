@@ -131,50 +131,7 @@ export async function Affiliations() {
           </Reveal>
         )}
 
-        <section
-          className="mt-20 border-t pt-16 lg:mt-28 lg:pt-20"
-          id="partners"
-        >
-          <SectionHead copy={industry} />
 
-          {partners.length === 0 && industry.emptyState !== null ? (
-            <P className="mt-12 lg:w-5/12">{industry.emptyState}</P>
-          ) : null}
-
-          {leadPartners.length === 0 ? null : (
-            <Reveal
-              className="mt-12 grid gap-x-8 gap-y-10 lg:mt-16 lg:grid-cols-2"
-              delay={0.3}
-              stagger={0.08}
-            >
-              {leadPartners.map((partner) => (
-                <LeadPartner key={partner.id} partner={partner} />
-              ))}
-            </Reveal>
-          )}
-
-          {networkPartners.length === 0 ? null : (
-            <Reveal className="mt-12 rounded-3xl border bg-surface-raised p-8 sm:p-10 lg:mt-16 lg:p-12 xl:p-14">
-              <ul className="flex flex-wrap items-baseline gap-x-5 gap-y-3">
-                {networkPartners.map((partner, index) => (
-                  <li className="flex items-baseline gap-x-5" key={partner.id}>
-                    <H5 as="span">
-                      <PartnerName partner={partner} />
-                    </H5>
-                    {index === networkPartners.length - 1 ? null : (
-                      <span
-                        aria-hidden="true"
-                        className="font-body text-base text-accent"
-                      >
-                        /
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          )}
-        </section>
       </div>
     </section>
   );

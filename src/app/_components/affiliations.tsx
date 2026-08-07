@@ -45,7 +45,7 @@ function AffiliationStation({ item }: { item: Affiliation }) {
       />
 
       {item.logo && (
-        <div className="relative h-16 w-full max-w-[160px] mb-8 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+        <div className="relative h-16 w-full max-w-[160px] mb-8">
           <Image
             src={typeof item.logo === "string" ? item.logo : item.logo.src}
             alt={item.body}
@@ -102,11 +102,7 @@ export async function Affiliations() {
             <P className="mt-12 lg:w-5/12">{accreditation.emptyState}</P>
           )
         ) : (
-          <Reveal
-            className="field-ink mt-12 rounded-[2.5rem] p-8 sm:p-12 lg:mt-16 lg:p-16"
-            delay={0.2}
-            stagger={0.08}
-          >
+          <Reveal className="mt-12 lg:mt-16" delay={0.2} stagger={0.08}>
             <ul className="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
               {timeline.map((item) => (
                 <AffiliationStation item={item} key={item.id} />

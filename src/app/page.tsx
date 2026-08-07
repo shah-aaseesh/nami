@@ -1,3 +1,4 @@
+import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { About } from "./_components/about";
@@ -23,6 +24,7 @@ export default async function Home() {
       <Affiliations />
       <CampusLife />
       <Testimonials section={copy.sections.testimonials} />
+      <AdmissionsFormSection />
       <Updates />
     </>
   );

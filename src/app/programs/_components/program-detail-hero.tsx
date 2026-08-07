@@ -16,11 +16,9 @@ import { cn } from "@/lib/utils";
 export function ProgramDetailHero({
   level,
   campusName,
-  admissionNoticeUrl,
 }: {
   readonly level: AcademicLevel;
   readonly campusName: string;
-  readonly admissionNoticeUrl: string | null;
 }) {
   const paragraphs = paragraphsOf(level.summary);
   const standfirst = paragraphs[0] ?? "";
@@ -32,6 +30,21 @@ export function ProgramDetailHero({
         <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Reveal atFold>
+              <div className="mb-6 h-12 sm:h-14">
+                <Image
+                  src={
+                    level.slug === "school"
+                      ? "/universities/nami-school.png"
+                      : level.slug === "a-level"
+                        ? "/universities/nami-college.png"
+                        : "/logo.png"
+                  }
+                  alt={`${level.title} logo`}
+                  width={200}
+                  height={80}
+                  className="h-full w-auto object-contain object-left"
+                />
+              </div>
               <div className="flex flex-wrap items-center gap-3">
                 <Eyebrow>{level.stage}</Eyebrow>
                 <span className="h-4 w-px bg-border" />
@@ -62,31 +75,26 @@ export function ProgramDetailHero({
               className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 lg:mt-10"
               delay={0.3}
             >
-              {admissionNoticeUrl === null ? (
-                <Link
-                  className={cn(
-                    buttonVariants(),
-                    "w-full justify-center gap-2 rounded-full border-none bg-accent px-6 text-white hover:bg-accent/90 sm:w-auto",
-                  )}
-                  href="/admissions"
-                >
-                  <span>Apply for Admission</span>
-                  <Icon className="size-4" icon={ArrowRightIcon} />
-                </Link>
-              ) : (
-                <Link
-                  className={cn(
-                    buttonVariants(),
-                    "w-full justify-center gap-2 rounded-full border-none bg-accent px-6 text-white hover:bg-accent/90 sm:w-auto",
-                  )}
-                  href={admissionNoticeUrl as Route}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <span>Apply for Admission</span>
-                  <Icon className="size-4" icon={ArrowRightIcon} />
-                </Link>
-              )}
+              <Link
+                className={cn(
+                  buttonVariants(),
+                  "w-full justify-center gap-2 rounded-full border-none bg-accent px-6 text-white hover:bg-accent/90 sm:w-auto",
+                )}
+                href={
+                  (level.slug === "school"
+                    ? "https://school.nami.edu.np"
+                    : "https://college.nami.edu.np/") as Route
+                }
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span>
+                  {level.slug === "school"
+                    ? "Visit School Website"
+                    : "Visit College Website"}
+                </span>
+                <Icon className="size-4" icon={ArrowRightIcon} />
+              </Link>
             </Reveal>
           </div>
         </div>

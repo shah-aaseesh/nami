@@ -7,7 +7,6 @@ import { AboutEmblem } from "./_components/about-emblem";
 import { AboutHero } from "./_components/about-hero";
 import { AboutOverview } from "./_components/about-overview";
 import { AboutStats } from "./_components/about-stats";
-import { Leadership } from "./_components/leadership";
 
 export async function generateMetadata(): Promise<Metadata> {
   const about = await content.getAboutCopy();
@@ -20,11 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [copy, institution, stats, leadership] = await Promise.all([
+  const [copy, institution, stats] = await Promise.all([
     content.getAboutCopy(),
     content.getInstitution(),
     content.getStats(),
-    content.getLeadership(),
   ]);
 
   return (
@@ -45,7 +43,6 @@ export default async function AboutPage() {
         section={copy.sections.creed}
         vision={institution.vision}
       />
-      <Leadership leadership={leadership} section={copy.sections.leadership} />
       <AboutEmblem
         emblemStory={institution.emblemStory}
         petals={institution.values}

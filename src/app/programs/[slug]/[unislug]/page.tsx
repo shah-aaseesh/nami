@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { Icon } from "@/components/ui/icon";
 import {
   Display,
@@ -102,24 +103,18 @@ export default async function UniversityDetailPage({ params }: PageProps) {
                 </span>
                 <span>{campusName}</span>
               </div>
-
-              <Standfirst className="mt-8 max-w-xl">
-                {affiliation.scope}
-              </Standfirst>
             </div>
 
             {affiliation.logo !== null ? (
               <div className="mt-10 lg:col-span-4 lg:col-start-9 lg:mt-0">
-                <div className="flex items-center justify-center rounded-3xl border border-border bg-card p-10 shadow-sm sm:p-14">
-                  <div className="relative h-20 w-56 sm:h-24 sm:w-64">
-                    <Image
-                      src={affiliation.logo}
-                      alt={affiliation.body}
-                      fill
-                      sizes="(min-width: 640px) 256px, 224px"
-                      className="object-contain"
-                    />
-                  </div>
+                <div className="relative h-24 w-64 sm:h-32 sm:w-80">
+                  <Image
+                    src={affiliation.logo}
+                    alt={affiliation.body}
+                    fill
+                    sizes="(min-width: 640px) 320px, 256px"
+                    className="object-contain object-left lg:object-center"
+                  />
                 </div>
               </div>
             ) : null}
@@ -226,6 +221,8 @@ export default async function UniversityDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      <AdmissionsFormSection />
     </>
   );
 }

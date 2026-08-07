@@ -12,8 +12,8 @@ export const admissionCalls: readonly AdmissionCall[] = [
     title: "School, Grade 1–7",
     note: "Application form for NAMI International School.",
     link: {
-      label: "View admission notice",
-      href: "https://school.nami.edu.np/notice/2",
+      label: "Visit School Website",
+      href: "https://school.nami.edu.np",
       destination: "external",
     },
   },
@@ -30,9 +30,9 @@ export const admissionCalls: readonly AdmissionCall[] = [
     title: "Cambridge A-Level",
     note: null,
     link: {
-      label: "View admission notice",
-      href: "https://college.nami.edu.np/notice/2",
-      destination: "legacy",
+      label: "Visit College Website",
+      href: "https://college.nami.edu.np/",
+      destination: "external",
     },
   },
   {

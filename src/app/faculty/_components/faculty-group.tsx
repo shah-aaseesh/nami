@@ -18,7 +18,7 @@ export function FacultyGroup({
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const isScrollable = leaders.length > 3;
+  const isScrollable = leaders.length > 4; // changed to 4 since we make cards smaller
 
   useGSAP(
     () => {
@@ -43,10 +43,11 @@ export function FacultyGroup({
           pin: true,
           animation: tween,
           scrub: 1,
+          start: "top top", // reverted start position
           end: () => `+=${getScrollAmount()}`,
           invalidateOnRefresh: true,
           snap: {
-            snapTo: 1 / (leaders.length - 3),
+            snapTo: 1 / (leaders.length - 4),
             duration: 0.2,
             ease: "power1.inOut",
           },
@@ -71,7 +72,7 @@ export function FacultyGroup({
           className={
             isScrollable
               ? "flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:overflow-visible lg:flex-nowrap"
-              : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+              : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8"
           }
           ref={trackRef}
         >
@@ -79,7 +80,7 @@ export function FacultyGroup({
             <div
               className={`group flex flex-col shrink-0 snap-center ${
                 isScrollable
-                  ? "w-[85vw] sm:w-[45vw] lg:w-[calc((100%-4rem)/3)]"
+                  ? "w-[75vw] max-w-[260px] sm:w-[40vw] sm:max-w-[280px] lg:w-[calc((100%-6rem)/4)] lg:max-w-none"
                   : "w-full"
               }`}
               key={leader.id}
@@ -90,7 +91,7 @@ export function FacultyGroup({
                     alt={leader.portrait.alt}
                     className="absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-105"
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 260px, (max-width: 1024px) 280px, 25vw"
                     src={leader.portrait.src}
                   />
                 ) : (
@@ -126,11 +127,11 @@ export function FacultyGroup({
                 </div>
               </div>
 
-              <div className="mt-5">
+              <div className="mt-4">
                 <p className="font-body text-[10px] font-bold uppercase tracking-widest text-accent">
                   {leader.title}
                 </p>
-                <h4 className="mt-1.5 font-display text-xl font-medium text-ink">
+                <h4 className="mt-1 font-display text-lg font-medium text-ink">
                   {leader.name}
                 </h4>
                 <P className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">

@@ -27,22 +27,14 @@ export const newBaneshworMapUrl = placeholderText(
 );
 
 export const plusTwoAdmissionLink: ContentLink = {
-  label: "View admission notice",
-  href: placeholderText(
-    "admissionCalls[admission-plus-two].link.href",
-    "link",
-    "https://nami.example/admissions/plus-two",
-  ),
+  label: "Visit College Website",
+  href: "https://college.nami.edu.np/",
   destination: "external",
 };
 
 export const bachelorMasterAdmissionLink: ContentLink = {
-  label: "View admission notice",
-  href: placeholderText(
-    "admissionCalls[admission-bachelor-master].link.href",
-    "link",
-    "https://nami.example/admissions/bachelor-master",
-  ),
+  label: "Visit College Website",
+  href: "https://college.nami.edu.np/",
   destination: "external",
 };
 

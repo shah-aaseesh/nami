@@ -30,40 +30,65 @@ export function ProgramAffiliations({
 
           <div className="mt-10 sm:mt-12 lg:col-span-7 lg:mt-0">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
-              {affiliations.map((aff) => (
-                <Link
-                  href={`/programs/${aff.levelSlug}/${aff.slug}`}
-                  scroll
-                  className="group relative flex flex-col items-center text-center rounded-2xl bg-white border border-border p-8 transition-all duration-500 hover:border-accent hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                  key={aff.id}
-                >
-                  <span className="absolute top-4 left-4 sm:top-6 sm:left-6 font-body text-xs font-bold uppercase tracking-widest text-accent bg-accent/10 px-3 py-1 rounded-full shrink-0">
-                    Since {aff.sinceYear}
-                  </span>
+              {affiliations.map((aff) => {
+                const isClickable = !["neb", "cambridge"].includes(aff.slug);
+                const className = `group relative flex flex-col items-center text-center rounded-2xl bg-white border border-border p-8 transition-all duration-500 ${
+                  isClickable
+                    ? "hover:border-accent hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                    : ""
+                }`;
 
-                  <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex size-10 items-center justify-center rounded-full border border-border text-ink-muted transition-all duration-500 group-hover:-rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-white">
-                    <Icon className="size-4" icon={ArrowRightIcon} />
-                  </div>
+                const content = (
+                  <>
+                    <span className="absolute top-4 left-4 sm:top-6 sm:left-6 font-body text-xs font-bold uppercase tracking-widest text-accent bg-accent/10 px-3 py-1 rounded-full shrink-0">
+                      Since {aff.sinceYear}
+                    </span>
 
-                  <div className="flex-1 flex items-center justify-center w-full min-h-[120px] mb-6 mt-4">
-                    {aff.logo !== null ? (
-                      <div className="relative h-20 w-full mix-blend-multiply">
-                        <Image
-                          src={aff.logo}
-                          alt={aff.body}
-                          fill
-                          sizes="(max-width: 640px) calc(100vw - 7rem), (max-width: 1024px) calc(50vw - 6.5rem), calc(25vw - 3rem)"
-                          className="object-contain"
-                        />
+                    {isClickable && (
+                      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex size-10 items-center justify-center rounded-full border border-border text-ink-muted transition-all duration-500 group-hover:-rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-white">
+                        <Icon className="size-4" icon={ArrowRightIcon} />
                       </div>
-                    ) : null}
-                  </div>
+                    )}
 
-                  <h4 className="font-display text-xl font-medium text-ink">
-                    {aff.body}
-                  </h4>
-                </Link>
-              ))}
+                    <div className="flex-1 flex items-center justify-center w-full min-h-[120px] mb-6 mt-4">
+                      {aff.logo !== null ? (
+                        <div className="relative h-20 w-full mix-blend-multiply">
+                          <Image
+                            src={aff.logo}
+                            alt={aff.body}
+                            fill
+                            sizes="(max-width: 640px) calc(100vw - 7rem), (max-width: 1024px) calc(50vw - 6.5rem), calc(25vw - 3rem)"
+                            className="object-contain"
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+
+                    <h4 className="font-display text-xl font-medium text-ink">
+                      {aff.body}
+                    </h4>
+                  </>
+                );
+
+                if (!isClickable) {
+                  return (
+                    <div className={className} key={aff.id}>
+                      {content}
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    href={`/programs/${aff.levelSlug}/${aff.slug}` as any}
+                    scroll
+                    className={className}
+                    key={aff.id}
+                  >
+                    {content}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

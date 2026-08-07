@@ -33,48 +33,15 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { H2, H3, P } from "@/components/ui/typography";
-import { ArrowRightIcon, CalendarIcon, CheckIcon } from "@/lib/icons";
+import {
+  ArrowRightIcon,
+  CalendarIcon,
+  CheckIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@/lib/icons";
 import { type AdmissionsFormData, admissionsSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
-
-const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <title>Add</title>
-    <path d="M5 12h14" />
-    <path d="M12 5v14" />
-  </svg>
-);
-
-const TrashIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <title>Remove</title>
-    <path d="M3 6h18" />
-    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-  </svg>
-);
 
 const STEPS = [
   "Course Details",
@@ -106,7 +73,7 @@ function QualificationRow({
           onClick={onRemove}
           className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
         >
-          <TrashIcon className="size-4" />
+          <Icon icon={TrashIcon} className="size-4" />
         </button>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
@@ -190,7 +157,7 @@ function EmploymentRow({
           onClick={onRemove}
           className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
         >
-          <TrashIcon className="size-4" />
+          <Icon icon={TrashIcon} className="size-4" />
         </button>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
@@ -561,7 +528,7 @@ export function MultiStepForm() {
                 onClick={addQualification}
                 className="gap-2 shrink-0 bg-transparent border border-border text-ink hover:bg-surface-muted shadow-none"
               >
-                <PlusIcon className="size-4" /> Add
+                <Icon icon={PlusIcon} className="size-4" /> Add
               </Button>
             </div>
 
@@ -606,7 +573,7 @@ export function MultiStepForm() {
                 onClick={addEmployment}
                 className="gap-2 shrink-0 bg-transparent border border-border text-ink hover:bg-surface-muted shadow-none"
               >
-                <PlusIcon className="size-4" /> Add
+                <Icon icon={PlusIcon} className="size-4" /> Add
               </Button>
             </div>
 
@@ -840,10 +807,10 @@ export function MultiStepForm() {
           <div className="mt-12 pt-6 border-t border-border flex items-center justify-between">
             <Button
               type="button"
-              variant="outline"
+              variant="quiet"
               onClick={() => goToStep(currentStep - 1)}
               disabled={currentStep === 0}
-              className="px-6 h-12"
+              className="px-6 h-12 border border-border"
             >
               Previous
             </Button>
@@ -868,5 +835,27 @@ export function MultiStepForm() {
         </div>
       </div>
     </div>
+  );
+}
+
+export function AdmissionsFormSection() {
+  return (
+    <section
+      className="bg-surface-muted border-t border-border section-y gutter-x"
+      id="apply"
+    >
+      <div className="text-center mb-12 max-w-3xl mx-auto">
+        <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
+          Start Your Application
+        </H2>
+        <P className="text-ink-muted text-lg">
+          Ready to apply? Submit your details through our comprehensive
+          application form below and our admissions team will guide you through
+          the process.
+        </P>
+      </div>
+
+      <MultiStepForm />
+    </section>
   );
 }

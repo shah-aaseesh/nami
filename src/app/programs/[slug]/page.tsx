@@ -423,11 +423,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <ProgramDetailHero
-        admissionNoticeUrl={admissionCall?.link?.href ?? null}
-        campusName={campusName}
-        level={level}
-      />
+      <ProgramDetailHero campusName={campusName} level={level} />
 
       <div id="highlights">
         <PinnedHighlightsPanels
@@ -435,7 +431,9 @@ export default async function ProgramDetailPage({ params }: PageProps) {
           levelTitle={level.title}
         />
       </div>
-      <ProgramAffiliations affiliations={levelAffiliations} />
+      {level.slug !== "school" && (
+        <ProgramAffiliations affiliations={levelAffiliations} />
+      )}
 
       <ScrubbedBentoGallery
         images={galleryImages}

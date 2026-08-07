@@ -263,12 +263,12 @@ export function SiteHeaderShell({
               <SheetTrigger
                 render={
                   <Button
-                    size="sm"
+                    size="icon"
                     variant="quiet"
-                    className="border border-border-strong rounded-md px-4 flex items-center justify-center gap-2"
+                    className="border border-border-strong rounded-md flex items-center justify-center"
+                    aria-label="Menu"
                   >
-                    Menu
-                    <Icon icon={MenuIcon} className="size-4" />
+                    <Icon icon={MenuIcon} className="size-5" />
                   </Button>
                 }
               />

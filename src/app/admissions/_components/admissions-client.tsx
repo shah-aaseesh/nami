@@ -4,13 +4,13 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { H2, P } from "@/components/ui/typography";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { ArrowRightIcon, CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { MultiStepForm } from "./multi-step-form";
 
 const PROGRAMS = [
   {
@@ -220,23 +220,7 @@ export function AdmissionsClient() {
         </div>
       </section>
 
-      <section
-        className="bg-surface-muted border-t border-border section-y gutter-x"
-        id="apply"
-      >
-        <div className="text-center mb-12 max-w-3xl mx-auto">
-          <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
-            Start Your Application
-          </H2>
-          <P className="text-ink-muted text-lg">
-            Ready to apply? Submit your details through our comprehensive
-            application form below and our admissions team will guide you
-            through the process.
-          </P>
-        </div>
-
-        <MultiStepForm />
-      </section>
+      <AdmissionsFormSection />
     </div>
   );
 }

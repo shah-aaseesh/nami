@@ -12,7 +12,7 @@ export function StudentLifeMasthead({
   copy: StudentLifeMastheadCopy;
 }) {
   return (
-    <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
+    <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
       <Reveal atFold className="lg:col-span-7">
         <Eyebrow>Campus Life</Eyebrow>
         <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">

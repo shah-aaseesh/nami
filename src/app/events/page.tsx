@@ -25,9 +25,9 @@ export default async function EventsPage() {
   const span = yearSpan(events);
 
   return (
-    <section className="gutter-x section-y">
+    <section className="gutter-x section-y-masthead">
       <div className="mx-auto max-w-page">
-        <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>{eventsCopy.masthead.eyebrow}</Eyebrow>
             <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">

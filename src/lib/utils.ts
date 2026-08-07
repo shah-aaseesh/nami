@@ -9,7 +9,7 @@ const twMerge = extendTailwindMerge<
     classGroups: {
       "color-field": [{ field: ["ink", "brand", "teal"] }],
       "gutter-x": ["gutter-x"],
-      "section-y": ["section-y"],
+      "section-y": ["section-y", "section-y-hero", "section-y-masthead", "section-y-compact"],
       "bleed-x": ["bleed-x"],
       "text-outline": ["text-outline"],
     },

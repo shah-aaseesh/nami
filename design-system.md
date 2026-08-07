@@ -213,7 +213,10 @@ Each role also emits a `data-slot` (`display`, `h1`, … `eyebrow`, `standfirst`
 |:--|:--|:--|
 | `gutter-x` | `padding-inline: var(--gutter-x)` | 20px → 64px, the horizontal page gutter |
 | `bleed-x` | `margin-inline: calc(-1 * var(--gutter-x))` | −20px → −64px, cancels exactly one `gutter-x` |
-| `section-y` | `padding-block: clamp(4rem, 2.5714rem + 7.1429vw, 9rem)` | 64px → 144px, the vertical section rhythm |
+| `section-y` | `padding-block: var(--spacing-section-py)` | 56px → 96px, the default vertical section rhythm |
+| `section-y-compact` | `padding-block: var(--spacing-section-py-compact)` | 24px → 40px, for dense, stacked inner sections |
+| `section-y-hero` | `padding-block: var(--spacing-section-py-hero)` | 24px → 44px, strictly for the Home Page hero |
+| `section-y-masthead` | `padding-top: var(--spacing-section-pt-masthead); padding-bottom: var(--spacing-section-py-hero)` | 64px → 108px top, 24px → 44px bottom. Asymmetrical padding used on **ALL subpage heroes** to clear the 80px-96px fixed site header! |
 | `max-w-page` | `--container-page: 90rem` | 1440px, the content column |
 
 `gutter-x` and `section-y` are operator-tuned. Do not restate them as `px-*` / `py-*`, and do not "correct" them toward a measurement from a reference site. `cn()` knows they conflict with `p-*`/`px-*`/`py-*` (§8), so a later `px-8` genuinely replaces the gutter rather than fighting it — which is also why writing both is always a mistake.

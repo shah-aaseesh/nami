@@ -9,7 +9,7 @@ export type GalleryMastheadCopy = {
 
 export function GalleryMasthead({ copy }: { copy: GalleryMastheadCopy }) {
   return (
-    <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
+    <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
       <Reveal atFold className="lg:col-span-7">
         <Eyebrow>{copy.eyebrow}</Eyebrow>
         <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">

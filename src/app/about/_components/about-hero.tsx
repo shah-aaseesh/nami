@@ -16,9 +16,9 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
   const image = copy.openingImage;
 
   return (
-    <section className="gutter-x section-y-hero" id="about">
+    <section className="gutter-x section-y-masthead" id="about">
       <div className="mx-auto max-w-page">
-        <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Reveal atFold>
               <Eyebrow>About NAMI</Eyebrow>

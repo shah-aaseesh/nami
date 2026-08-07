@@ -4,9 +4,9 @@ import { Eyebrow, Standfirst } from "@/components/ui/typography";
 
 export function FacultyHero() {
   return (
-    <section className="gutter-x section-y-hero">
+    <section className="gutter-x section-y-masthead">
       <div className="mx-auto max-w-page">
-        <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Reveal atFold>
               <Eyebrow>Our People</Eyebrow>

@@ -149,6 +149,10 @@
   --spacing-section-py: clamp(3.5rem, 2rem + 3vw, 6rem);
   --spacing-section-py-compact: clamp(1.5rem, 1rem + 1vw, 2.5rem);
   --spacing-section-py-hero: clamp(1.5rem, 1.25rem + 1vw, 2.75rem);
+  --spacing-section-pt-masthead: calc(
+    var(--spacing-section-py-hero) +
+    clamp(2.5rem, 1.5rem + 2.5vw, 4rem)
+  );
 }
 
 @utility gutter-x {
@@ -169,6 +173,11 @@
 
 @utility section-y-hero {
   padding-block: var(--spacing-section-py-hero);
+}
+
+@utility section-y-masthead {
+  padding-top: var(--spacing-section-pt-masthead);
+  padding-bottom: var(--spacing-section-py-hero);
 }
 
 @utility field-ink {

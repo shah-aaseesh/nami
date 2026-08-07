@@ -35,7 +35,7 @@ export default async function AboutPage() {
         overview={institution.overview}
         section={copy.sections.chronology}
       />
-      <AboutPartners partners={partners} />
+      {/* <AboutPartners partners={partners} /> */}
 
       <AboutCreed
         mission={institution.mission}

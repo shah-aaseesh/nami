@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import type { AcademicLevel, Programme } from "@/lib/content";
 import { content, paragraphsOf } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import type { HighlightCard } from "../_components/pinned-highlights-panels";
 import { PinnedHighlightsPanels } from "../_components/pinned-highlights-panels";
-import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { ProgramAffiliations } from "../_components/program-affiliations";
 import { ProgramDetailHero } from "../_components/program-detail-hero";
 import { ProgrammesList } from "../_components/programmes-list";

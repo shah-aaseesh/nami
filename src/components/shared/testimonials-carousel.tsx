@@ -7,13 +7,13 @@ import {
   useRef,
   useState,
 } from "react";
+import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import type { Testimonial } from "@/lib/content";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { ArrowRightIcon, QuoteIcon } from "@/lib/icons";
 import { TestimonialCard } from "./testimonials-card";
-import { Reveal } from "@/components/motion/reveal";
 
 const AUTOPLAY_SECONDS = 5;
 const RING_RADIUS = 20;
@@ -21,7 +21,13 @@ const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
 function Slide({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <Reveal atFold y={24} duration={0.5} ease="power2.out" className="mt-6 lg:mt-8">
+    <Reveal
+      atFold
+      y={24}
+      duration={0.5}
+      ease="power2.out"
+      className="mt-6 lg:mt-8"
+    >
       <TestimonialCard panel={false} testimonial={testimonial} />
     </Reveal>
   );

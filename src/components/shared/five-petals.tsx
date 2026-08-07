@@ -14,7 +14,11 @@ export function FivePetals({ petals }: { petals: readonly Petal[] }) {
         <Eyebrow>The Five Petals & Core Values</Eyebrow>
       </div>
 
-      <Reveal stagger={0.1} start="top 85%" className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-5">
+      <Reveal
+        stagger={0.1}
+        start="top 85%"
+        className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-5"
+      >
         {petals.map((petal, i) => (
           <div
             className="border-t border-border pt-5"

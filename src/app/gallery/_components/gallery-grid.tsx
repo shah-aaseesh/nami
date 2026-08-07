@@ -33,66 +33,69 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
   );
   const prevActiveRef = useRef(active);
 
-  useGSAP(() => {
-    const root = rootRef.current;
-    const stage = stageRef.current;
-    if (!root || !stage) return;
-    if (prevActiveRef.current === active) return;
-    prevActiveRef.current = active;
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      const stage = stageRef.current;
+      if (!root || !stage) return;
+      if (prevActiveRef.current === active) return;
+      prevActiveRef.current = active;
 
-    const tiles = Array.from(
-      root.querySelectorAll<HTMLElement>("[data-gallery-tile]"),
-    );
-    if (tiles.length === 0) return;
+      const tiles = Array.from(
+        root.querySelectorAll<HTMLElement>("[data-gallery-tile]"),
+      );
+      if (tiles.length === 0) return;
 
-    const visible = new Set<string>();
-    for (const item of items) {
-      if (isVisible(active, item.category)) visible.add(item.id);
-    }
+      const visible = new Set<string>();
+      for (const item of items) {
+        if (isVisible(active, item.category)) visible.add(item.id);
+      }
 
-    const prevHeight = stage.offsetHeight;
+      const prevHeight = stage.offsetHeight;
 
-    const state = Flip.getState(tiles);
-    tiles.forEach((tile) => {
-      const id = tile.dataset.galleryTile ?? "";
-      tile.style.display = visible.has(id) ? "inline-block" : "none";
-    });
+      const state = Flip.getState(tiles);
+      tiles.forEach((tile) => {
+        const id = tile.dataset.galleryTile ?? "";
+        tile.style.display = visible.has(id) ? "inline-block" : "none";
+      });
 
-    const nextHeight = stage.offsetHeight;
+      const nextHeight = stage.offsetHeight;
 
-    stage.style.height = `${prevHeight}px`;
-    const heightTween = gsap.to(stage, {
-      height: nextHeight,
-      duration: 0.7,
-      ease: "power1.inOut",
-    });
+      stage.style.height = `${prevHeight}px`;
+      const heightTween = gsap.to(stage, {
+        height: nextHeight,
+        duration: 0.7,
+        ease: "power1.inOut",
+      });
 
-    const flip = Flip.from(state, {
-      duration: 0.7,
-      scale: true,
-      ease: "power1.inOut",
-      stagger: 0.04,
-      absolute: true,
-      onEnter: (elements) =>
-        gsap.fromTo(
-          elements,
-          { opacity: 0, scale: 0.8 },
-          { opacity: 1, scale: 1, duration: 0.6 },
-        ),
-      onLeave: (elements) =>
-        gsap.to(elements, { opacity: 0, scale: 0.8, duration: 0.4 }),
-      onComplete: () => {
-        stage.style.height = "";
+      const flip = Flip.from(state, {
+        duration: 0.7,
+        scale: true,
+        ease: "power1.inOut",
+        stagger: 0.04,
+        absolute: true,
+        onEnter: (elements) =>
+          gsap.fromTo(
+            elements,
+            { opacity: 0, scale: 0.8 },
+            { opacity: 1, scale: 1, duration: 0.6 },
+          ),
+        onLeave: (elements) =>
+          gsap.to(elements, { opacity: 0, scale: 0.8, duration: 0.4 }),
+        onComplete: () => {
+          stage.style.height = "";
+          heightTween.kill();
+        },
+      });
+
+      return () => {
+        flip.kill();
         heightTween.kill();
-      },
-    });
-
-    return () => {
-      flip.kill();
-      heightTween.kill();
-      stage.style.height = "";
-    };
-  }, { dependencies: [active, items], scope: rootRef });
+        stage.style.height = "";
+      };
+    },
+    { dependencies: [active, items], scope: rootRef },
+  );
 
   const toggle = (id: FilterId) => {
     setActive((prev) => {

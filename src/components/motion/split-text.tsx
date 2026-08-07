@@ -1,12 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  SplitText as GsapSplitText,
-  gsap,
-  matchMotion,
-  useGSAP,
-} from "@/lib/gsap";
+import { SplitText as GsapSplitText, gsap, useGSAP } from "@/lib/gsap";
 
 type SplitTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 
@@ -51,46 +46,44 @@ export function SplitText({
   const isHeading = as.length === 2 && as.startsWith("h");
 
   useGSAP(
-    () =>
-      matchMotion(
-        {
-          motion: () => {
-            const el = root.current;
-            if (!el) return;
+    () => {
+      const el = root.current;
+      if (!el) return;
 
-            let currentTween: gsap.core.Tween | null = null;
-            const split = GsapSplitText.create(el, {
-              type: SPLIT_TYPE[type],
-              mask: type,
-              aria: "auto",
-              autoSplit: true,
-              onSplit: (self) => {
-                currentTween?.kill();
-                currentTween = gsap.from(self[type], {
-                  yPercent,
-                  duration,
-                  delay,
-                  ease,
-                  stagger,
-                  scrollTrigger: atFold
-                    ? undefined
-                    : { trigger: el, start, once },
-                });
-              },
-            });
-
-            if (!isHeading) {
-              el.setAttribute("role", "img");
-            }
-
-            return () => {
-              split.revert();
-              el.removeAttribute("role");
-            };
-          },
+      let currentTween: gsap.core.Tween | null = null;
+      const split = GsapSplitText.create(el, {
+        type: SPLIT_TYPE[type],
+        mask: type,
+        aria: "auto",
+        autoSplit: true,
+        onSplit: (self) => {
+          currentTween?.kill();
+          currentTween = gsap.fromTo(
+            self[type],
+            {
+              yPercent,
+            },
+            {
+              yPercent: 0,
+              duration,
+              delay,
+              ease,
+              stagger,
+              scrollTrigger: atFold ? undefined : { trigger: el, start, once },
+            },
+          );
         },
-        root,
-      ),
+      });
+
+      if (!isHeading) {
+        el.setAttribute("role", "img");
+      }
+
+      return () => {
+        split.revert();
+        el.removeAttribute("role");
+      };
+    },
     { scope: root },
   );
 

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import { AcademicLevels } from "@/components/shared/academic-levels";
+import { Affiliations } from "@/components/shared/affiliations";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
-import { Affiliations } from "@/components/shared/affiliations";
-import { AcademicLevels } from "@/components/shared/academic-levels";
 import { ProgrammesCatalog } from "./_components/programmes-catalog";
 import { ProgramsHero } from "./_components/programs-hero";
 

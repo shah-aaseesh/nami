@@ -21,22 +21,6 @@ gsap.registerPlugin(
 );
 
 export const FULL_MOTION_QUERY = "all";
-
-type MotionBranches = {
-  motion: gsap.ContextFunc;
-};
-
-export function matchMotion(
-  branches: MotionBranches,
-  scope?: Element | string | object,
-): () => void {
-  const mm = gsap.matchMedia(scope);
-  mm.add(FULL_MOTION_QUERY, branches.motion);
-  return () => {
-    mm.revert();
-  };
-}
-
 export {
   Flip,
   gsap,

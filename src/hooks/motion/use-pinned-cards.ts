@@ -5,7 +5,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 
 export function usePinnedCards(
   containerRef: RefObject<HTMLElement | null>,
-  cardsWrapperRef: RefObject<HTMLElement | null>
+  cardsWrapperRef: RefObject<HTMLElement | null>,
 ) {
   useGSAP(
     () => {

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useRef } from "react";
-import { gsap, matchMotion, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 export type RevealProps = {
   children: ReactNode;
@@ -36,31 +36,33 @@ export function Reveal({
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
-    () =>
-      matchMotion(
+    () => {
+      const el = root.current;
+      if (!el) return;
+
+      const marked = el.querySelectorAll("[data-reveal-item]");
+      const targets =
+        stagger > 0 ? (marked.length > 0 ? marked : el.children) : el;
+
+      gsap.fromTo(
+        targets,
         {
-          motion: () => {
-            const el = root.current;
-            if (!el) return;
-
-            const marked = el.querySelectorAll("[data-reveal-item]");
-            const targets =
-              stagger > 0 ? (marked.length > 0 ? marked : el.children) : el;
-
-            gsap.from(targets, {
-              y,
-              x,
-              opacity: fade ? 0 : 1,
-              duration,
-              delay,
-              ease,
-              stagger,
-              scrollTrigger: atFold ? undefined : { trigger: el, start, once },
-            });
-          },
+          y,
+          x,
+          opacity: fade ? 0 : 1,
         },
-        root,
-      ),
+        {
+          y: 0,
+          x: 0,
+          opacity: 1,
+          duration,
+          delay,
+          ease,
+          stagger,
+          scrollTrigger: atFold ? undefined : { trigger: el, start, once },
+        },
+      );
+    },
     { scope: root },
   );
 

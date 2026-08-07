@@ -113,9 +113,7 @@ export function ProgrammesCatalog({
                 <div className="mt-6 border-border/60 border-t pt-4">
                   <Link
                     className="inline-flex items-center gap-1.5 font-body text-xs font-semibold uppercase tracking-widest text-accent transition-colors hover:text-primary-800"
-                    href={
-                      `/programs/${programme.levelSlug}` as Route
-                    }
+                    href={`/programs/${programme.levelSlug}` as Route}
                   >
                     <span>{parentLevel?.title ?? "Level"} Program Details</span>
                     <Icon className="size-3.5" icon={ArrowRightIcon} />

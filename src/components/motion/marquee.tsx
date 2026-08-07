@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useRef } from "react";
-import { gsap, matchMotion, Observer, useGSAP } from "@/lib/gsap";
+import { gsap, Observer, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 export type MarqueeProps = {
@@ -32,57 +32,50 @@ export function Marquee({
   const track = useRef<HTMLDivElement>(null);
 
   useGSAP(
-    () =>
-      matchMotion(
-        {
-          motion: () => {
-            const el = track.current;
-            if (!el) return;
+    () => {
+      const el = track.current;
+      if (!el) return;
 
-            const base = reverse ? -1 : 1;
-            const duration = el.scrollWidth / copies / speed;
-            const loop = gsap.to(el, {
-              xPercent: -100 / copies,
-              duration,
-              ease: "none",
-              repeat: -1,
-            });
+      const base = reverse ? -1 : 1;
+      const duration = el.scrollWidth / copies / speed;
+      const loop = gsap.to(el, {
+        xPercent: -100 / copies,
+        duration,
+        ease: "none",
+        repeat: -1,
+      });
 
-            // Advance totalTime safely into the future so that playing backward
-            // (timeScale < 0) never hits the 0 boundary, which would stop it.
-            loop.totalTime(duration * 1000);
-            loop.timeScale(base);
+      // Advance totalTime safely into the future so that playing backward
+      // (timeScale < 0) never hits the 0 boundary, which would stop it.
+      loop.totalTime(duration * 1000);
+      loop.timeScale(base);
 
-            if (!velocity) return;
+      if (!velocity) return;
 
-            const observer = Observer.create({
-              type: "wheel,touch,scroll",
-              onChangeY: (self) => {
-                const boost =
-                  1 +
-                  gsap.utils.clamp(0, maxBoost, Math.abs(self.velocityY) / 600);
-                const heading = self.deltaY > 0 ? 1 : -1;
-                gsap.to(loop, {
-                  timeScale: base * heading * boost,
-                  duration: 0.35,
-                  overwrite: true,
-                });
-              },
-              onStop: () => {
-                gsap.to(loop, {
-                  timeScale: base,
-                  duration: 0.9,
-                  overwrite: true,
-                });
-              },
-              onStopDelay: 0.2,
-            });
-
-            return () => observer.kill();
-          },
+      const observer = Observer.create({
+        type: "wheel,touch,scroll",
+        onChangeY: (self) => {
+          const boost =
+            1 + gsap.utils.clamp(0, maxBoost, Math.abs(self.velocityY) / 600);
+          const heading = self.deltaY > 0 ? 1 : -1;
+          gsap.to(loop, {
+            timeScale: base * heading * boost,
+            duration: 0.35,
+            overwrite: true,
+          });
         },
-        root,
-      ),
+        onStop: () => {
+          gsap.to(loop, {
+            timeScale: base,
+            duration: 0.9,
+            overwrite: true,
+          });
+        },
+        onStopDelay: 0.2,
+      });
+
+      return () => observer.kill();
+    },
     { scope: root },
   );
 

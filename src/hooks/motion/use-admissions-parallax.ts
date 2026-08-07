@@ -6,7 +6,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 export function useAdmissionsParallax(
   containerRef: RefObject<HTMLElement | null>,
   sectionRef: RefObject<HTMLElement | null>,
-  leftColRef: RefObject<HTMLElement | null>
+  leftColRef: RefObject<HTMLElement | null>,
 ) {
   useGSAP(
     () => {

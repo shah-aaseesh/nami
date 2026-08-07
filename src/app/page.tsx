@@ -1,9 +1,9 @@
+import { AcademicLevels } from "@/components/shared/academic-levels";
 import { AdmissionsFormSection } from "@/components/shared/admissions-form";
+import { Affiliations } from "@/components/shared/affiliations";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { About } from "./_components/about";
-import { AcademicLevels } from "@/components/shared/academic-levels";
-import { Affiliations } from "@/components/shared/affiliations";
 import { CampusLife } from "./_components/campus-life";
 import { Hero } from "./_components/hero";
 import { ProgrammeMarquee } from "./_components/programme-marquee";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, matchMotion, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 export type CounterProps = {
   value: number;
@@ -23,37 +23,31 @@ export function Counter({
   const node = useRef<HTMLSpanElement>(null);
 
   useGSAP(
-    () =>
-      matchMotion(
-        {
-          motion: () => {
-            const el = node.current;
-            if (el === null) return;
+    () => {
+      const el = node.current;
+      if (el === null) return;
 
-            const counter = { v: 0 };
-            gsap.set(counter, { v: 0 });
-            const tween = gsap.to(counter, {
-              v: value,
-              duration,
-              ease: "power2.out",
-              paused: true,
-              onUpdate: () => {
-                el.textContent = `${format(counter.v)}${suffix}`;
-              },
-            });
-
-            const trigger = ScrollTrigger.create({
-              trigger: el,
-              start: "top 90%",
-              once: true,
-              onEnter: () => tween.play(),
-            });
-
-            return () => trigger.kill();
-          },
+      const counter = { v: 0 };
+      gsap.set(counter, { v: 0 });
+      const tween = gsap.to(counter, {
+        v: value,
+        duration,
+        ease: "power2.out",
+        paused: true,
+        onUpdate: () => {
+          el.textContent = `${format(counter.v)}${suffix}`;
         },
-        node,
-      ),
+      });
+
+      const trigger = ScrollTrigger.create({
+        trigger: el,
+        start: "top 90%",
+        once: true,
+        onEnter: () => tween.play(),
+      });
+
+      return () => trigger.kill();
+    },
     { scope: node },
   );
 

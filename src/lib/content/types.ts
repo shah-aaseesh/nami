@@ -226,3 +226,21 @@ export type AboutCopy = {
   readonly creedImage: ContentImage | null;
   readonly sections: Readonly<Record<AboutSectionId, SectionCopy>>;
 };
+
+export const GALLERY_CATEGORIES = [
+  "campus",
+  "events",
+  "sports",
+  "academics",
+  "student-life",
+  "graduation",
+] as const;
+
+export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
+
+export type GalleryItem = ContentEntry & {
+  readonly category: GalleryCategory;
+  readonly title: string;
+  readonly image: ContentImage;
+  readonly date: IsoDate | null;
+};

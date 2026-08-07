@@ -4,6 +4,7 @@ import { academicLevels, programmes } from "./academics";
 import { admissionCalls } from "./admissions";
 import { affiliations } from "./affiliations";
 import { campusLife } from "./campus-life";
+import { gallery } from "./gallery";
 import { homeCopy } from "./home-copy";
 import { institution } from "./institution";
 import { leadership } from "./leadership";
@@ -26,6 +27,7 @@ export const localContentProvider: ContentProvider = {
     Promise.resolve(limit === undefined ? updates : updates.slice(0, limit)),
   getTestimonials: () => Promise.resolve(testimonials),
   getLeadership: () => Promise.resolve(leadership),
+  getGallery: () => Promise.resolve(gallery),
   getHomeCopy: () => Promise.resolve(homeCopy),
   getAboutCopy: () => Promise.resolve(aboutCopy),
 };

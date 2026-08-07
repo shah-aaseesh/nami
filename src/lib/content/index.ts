@@ -30,5 +30,6 @@ export {
   richTextFromHtml,
 } from "./rich-text";
 export type * from "./types";
+export { GALLERY_CATEGORIES } from "./types";
 
 export const content: ContentProvider = localContentProvider;

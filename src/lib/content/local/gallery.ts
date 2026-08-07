@@ -1,0 +1,192 @@
+import { entryOf, isoDate } from "../identifiers";
+import type { ContentImage, GalleryItem } from "../types";
+import {
+  auditoriumGathering,
+  bachelorOrientation,
+  basketballPrizeGiving,
+  christmasHall,
+  climatePanel,
+  convocationCeremony,
+  ecoClubFrame,
+  eliteCompetition,
+  mascotDesignEntry,
+  mustangTrip,
+  plantationProgramme,
+  readingHall,
+  readingRoom,
+  schoolTransport,
+  scienceLaboratory,
+  serviceCamp,
+  studentsOnCampus,
+} from "./images";
+
+const campusSports: ContentImage = {
+  src: "/nami/campus-sports.jpg",
+  alt: "Students on the NAMI college sports ground during a campus tournament or sports day.",
+  width: 1000,
+  height: 1500,
+};
+
+const campusInfirmary: ContentImage = {
+  src: "/nami/campus-infirmary.jpg",
+  alt: "The NAMI campus infirmary, a small treatment room kept ready for students.",
+  width: 400,
+  height: 600,
+};
+
+const campusBloodDonation: ContentImage = {
+  src: "/nami/campus-blood-donation.jpg",
+  alt: "NAMI A-Level students at the Christmas blood donation drive, donors seated beside the donation tables on campus.",
+  width: 709,
+  height: 1064,
+};
+
+export const gallery: readonly GalleryItem[] = [
+  {
+    ...entryOf("mustang-academic-trip"),
+    category: "student-life",
+    title: "Mustang Academic Trip",
+    image: mustangTrip,
+    date: isoDate("2023-12-08"),
+  },
+  {
+    ...entryOf("school-transport"),
+    category: "campus",
+    title: "School Transport",
+    image: schoolTransport,
+    date: null,
+  },
+  {
+    ...entryOf("chemistry-laboratory"),
+    category: "academics",
+    title: "Chemistry Laboratory",
+    image: scienceLaboratory,
+    date: null,
+  },
+  {
+    ...entryOf("students-on-campus"),
+    category: "student-life",
+    title: "Students on Campus",
+    image: studentsOnCampus,
+    date: null,
+  },
+  {
+    ...entryOf("college-library"),
+    category: "academics",
+    title: "College Library",
+    image: readingRoom,
+    date: null,
+  },
+  {
+    ...entryOf("reading-hall"),
+    category: "academics",
+    title: "Reading Hall",
+    image: readingHall,
+    date: null,
+  },
+  {
+    ...entryOf("auditorium-gathering"),
+    category: "campus",
+    title: "Auditorium Gathering",
+    image: auditoriumGathering,
+    date: null,
+  },
+  {
+    ...entryOf("service-camp-sindhupalchowk"),
+    category: "student-life",
+    title: "Service Camp, Sindhupalchowk",
+    image: serviceCamp,
+    date: isoDate("2024-01-27"),
+  },
+  {
+    ...entryOf("see-3x3-basketball-prize-giving"),
+    category: "sports",
+    title: "SEE 3x3 Basketball Prize-Giving",
+    image: basketballPrizeGiving,
+    date: isoDate("2024-05-16"),
+  },
+  {
+    ...entryOf("christmas-at-city-campus"),
+    category: "events",
+    title: "Christmas at City Campus",
+    image: christmasHall,
+    date: isoDate("2023-12-24"),
+  },
+  {
+    ...entryOf("eco-club-environment-day"),
+    category: "events",
+    title: "Eco Club Environment Day",
+    image: ecoClubFrame,
+    date: isoDate("2023-06-05"),
+  },
+  {
+    ...entryOf("mascot-design-competition"),
+    category: "events",
+    title: "Mascot Design Competition",
+    image: mascotDesignEntry,
+    date: isoDate("2023-05-03"),
+  },
+  {
+    ...entryOf("elite-2023"),
+    category: "graduation",
+    title: "ELITE 2023",
+    image: eliteCompetition,
+    date: isoDate("2023-03-31"),
+  },
+  {
+    ...entryOf("climate-change-panel"),
+    category: "events",
+    title: "Climate Change Panel",
+    image: climatePanel,
+    date: isoDate("2023-03-23"),
+  },
+  {
+    ...entryOf("bachelors-orientation-2022"),
+    category: "graduation",
+    title: "Bachelor's Orientation 2022",
+    image: bachelorOrientation,
+    date: isoDate("2022-11-14"),
+  },
+  {
+    ...entryOf("convocation-2022"),
+    category: "graduation",
+    title: "Convocation 2022",
+    image: convocationCeremony,
+    date: isoDate("2022-09-17"),
+  },
+  {
+    ...entryOf("world-environment-day-plantation"),
+    category: "student-life",
+    title: "World Environment Day Plantation",
+    image: plantationProgramme,
+    date: isoDate("2022-06-05"),
+  },
+  {
+    ...entryOf("campus-tournament"),
+    category: "sports",
+    title: "Campus Tournament",
+    image: campusSports,
+    date: null,
+  },
+  {
+    ...entryOf("inter-house-match"),
+    category: "sports",
+    title: "Inter-House Match",
+    image: campusSports,
+    date: null,
+  },
+  {
+    ...entryOf("campus-infirmary"),
+    category: "campus",
+    title: "Campus Infirmary",
+    image: campusInfirmary,
+    date: null,
+  },
+  {
+    ...entryOf("christmas-blood-donation-drive"),
+    category: "events",
+    title: "Christmas Blood Donation Drive",
+    image: campusBloodDonation,
+    date: isoDate("2023-12-22"),
+  },
+];

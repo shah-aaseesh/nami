@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 // biome-ignore-start lint/style/noRestrictedImports: this module IS the single registration site the rule points every other file at (DEC-002).
+import { Flip } from "gsap/Flip";
 import { Observer } from "gsap/Observer";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,6 +17,7 @@ gsap.registerPlugin(
   SplitText,
   ScrollSmoother,
   Observer,
+  Flip,
 );
 
 export const FULL_MOTION_QUERY = "all";
@@ -35,4 +37,12 @@ export function matchMotion(
   };
 }
 
-export { gsap, Observer, ScrollSmoother, ScrollTrigger, SplitText, useGSAP };
+export {
+  Flip,
+  gsap,
+  Observer,
+  ScrollSmoother,
+  ScrollTrigger,
+  SplitText,
+  useGSAP,
+};

@@ -30,6 +30,15 @@ export type SiteRoute = {
 export const siteRoutes: readonly SiteRoute[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/programs", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/programs/school", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/programs/plus-two", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/programs/a-level", changeFrequency: "monthly", priority: 0.8 },
+  {
+    path: "/programs/bachelor-master",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
   { path: "/events", changeFrequency: "monthly", priority: 0.8 },
   { path: "/news", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },

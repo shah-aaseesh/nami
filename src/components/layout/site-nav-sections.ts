@@ -17,10 +17,10 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     href: "/programs",
     descriptor: "Explore our academic offerings.",
     children: [
-      { label: "School", href: "/programs#school" },
-      { label: "+2 NEB", href: "/programs#neb" },
-      { label: "A-Level", href: "/programs#a-level" },
-      { label: "Bachelor / Master", href: "/programs#bachelors" },
+      { label: "School", href: "/programs/school" },
+      { label: "+2 NEB", href: "/programs/plus-two" },
+      { label: "A-Level", href: "/programs/a-level" },
+      { label: "Bachelor / Master", href: "/programs/bachelor-master" },
     ],
   },
   {

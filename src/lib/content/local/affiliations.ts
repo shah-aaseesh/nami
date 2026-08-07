@@ -30,7 +30,7 @@ export const affiliations: readonly Affiliation[] = [
     sinceYear: 2013,
     levelSlug: slug("a-level"),
     campusSlug: slug("gokarneshwor"),
-    note: null,
+    note: "Independent CAIE examination centre since 2024",
     logo: "/universities/cambridge.png",
   },
   {
@@ -50,7 +50,17 @@ export const affiliations: readonly Affiliation[] = [
     sinceYear: 2026,
     levelSlug: slug("bachelor-master"),
     campusSlug: slug("new-baneshwor"),
-    note: null,
+    note: "Program begins August 2026",
     logo: "/universities/Kathmandu_University_Logo.webp",
+  },
+  {
+    ...entryOf("hertfordshire"),
+    body: AWARDING_BODIES.hertfordshire,
+    scope: "Upcoming undergraduate and postgraduate programmes",
+    sinceYear: 2026,
+    levelSlug: slug("bachelor-master"),
+    campusSlug: slug("new-baneshwor"),
+    note: "Programmes commencing in 2026",
+    logo: "/universities/hertfordshire.png",
   },
 ];

@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H1, H6, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import type { Affiliation, SectionCopy } from "@/lib/content";
 import { content } from "@/lib/content";
 
@@ -34,21 +35,50 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
 
 function AffiliationStation({ item }: { item: Affiliation }) {
   return (
-    <li className="relative border-t pt-6" data-reveal-item="">
+    <li
+      className="relative border-t border-border-strong pt-8 flex flex-col h-full"
+      data-reveal-item=""
+    >
       <span
         aria-hidden="true"
-        className="absolute -top-px left-0 h-0.5 w-10 bg-accent"
+        className="absolute -top-px left-0 h-0.5 w-12 bg-accent"
       />
-      <Eyebrow as="span" className="block text-ink-muted">
-        Since
-      </Eyebrow>
-      <H1 as="p" className="mt-2 text-accent">
-        {item.sinceYear}
-      </H1>
-      <H6 as="h3" className="mt-4">
-        {item.body}
-      </H6>
-      <P className="mt-3 text-sm">{item.scope}</P>
+
+      {item.logo && (
+        <div className="relative h-16 w-full max-w-[160px] mb-8 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+          <Image
+            src={typeof item.logo === "string" ? item.logo : item.logo.src}
+            alt={item.body}
+            fill
+            sizes="160px"
+            className="object-contain object-left"
+          />
+        </div>
+      )}
+
+      <div className="flex flex-col flex-1">
+        <Eyebrow
+          as="span"
+          className="block text-ink-muted uppercase tracking-widest text-xs"
+        >
+          Since
+        </Eyebrow>
+        <p className="mt-2 font-display text-4xl text-accent">
+          {item.sinceYear}
+        </p>
+        <h3 className="mt-6 font-display text-2xl font-medium text-ink">
+          {item.body}
+        </h3>
+        <p className="mt-3 text-sm text-ink-muted leading-relaxed">
+          {item.scope}
+        </p>
+
+        {item.note && (
+          <p className="mt-auto pt-6 text-xs font-medium text-ink-muted opacity-80">
+            {item.note}
+          </p>
+        )}
+      </div>
     </li>
   );
 }
@@ -73,11 +103,11 @@ export async function Affiliations() {
           )
         ) : (
           <Reveal
-            className="field-ink mt-12 rounded-3xl p-8 sm:p-10 lg:mt-16 lg:p-12 xl:p-14"
+            className="field-ink mt-12 rounded-[2.5rem] p-8 sm:p-12 lg:mt-16 lg:p-16"
             delay={0.2}
             stagger={0.08}
           >
-            <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            <ul className="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
               {timeline.map((item) => (
                 <AffiliationStation item={item} key={item.id} />
               ))}

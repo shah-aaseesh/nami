@@ -3,4 +3,5 @@ export const AWARDING_BODIES = {
   cambridge: "Cambridge Assessment International Education",
   northampton: "The University of Northampton, UK",
   kathmanduUniversity: "Kathmandu University",
+  hertfordshire: "University of Hertfordshire",
 } as const;

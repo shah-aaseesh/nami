@@ -94,13 +94,13 @@ function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <button
-        type="button"
+      <Link
+        href={item.href as Route}
         className="flex items-center gap-1 font-body text-xs xl:text-sm font-medium text-ink uppercase transition-colors hover:text-accent outline-none cursor-pointer whitespace-nowrap"
       >
         {item.label}{" "}
         <Icon ref={icon} icon={ChevronDownIcon} className="size-4 shrink-0" />
-      </button>
+      </Link>
 
       <div
         ref={dropdown}

@@ -172,20 +172,7 @@ export function MultiStepForm() {
           <div className="space-y-6">
             <H3 className="text-xl font-display text-ink mb-6">Student Details</H3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <Label>Title</Label>
-                <Select onValueChange={(val) => handleInputChange("title", val)} value={formData.title}>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select title" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="mr">Mr.</SelectItem>
-                    <SelectItem value="ms">Ms.</SelectItem>
-                    <SelectItem value="mrs">Mrs.</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+
               <div className="flex flex-col gap-2">
                 <Label>First Name</Label>
                 <Input value={formData.firstName} onChange={(e) => handleInputChange("firstName", e.target.value)} />
@@ -198,7 +185,7 @@ export function MultiStepForm() {
                 <Label>Date of Birth</Label>
                 <Popover>
                   <PopoverTrigger render={
-                    <Button variant="outline" className={cn("w-full justify-start text-left font-normal", !formData.dob && "text-muted-foreground")}>
+                    <Button variant="outline" className={cn("w-full h-12 bg-surface border-border hover:bg-surface justify-start text-left font-normal text-base text-ink px-4 py-2", !formData.dob && "text-ink-muted")}>
                       <Icon icon={CalendarIcon} className="mr-2 h-4 w-4" />
                       {formData.dob ? format(formData.dob, "PPP") : <span>Pick a date</span>}
                     </Button>
@@ -340,7 +327,7 @@ export function MultiStepForm() {
                       <Label>Date Obtained</Label>
                       <Popover>
                         <PopoverTrigger render={
-                          <Button variant="outline" className={cn("w-full justify-start text-left font-normal", !qual.dateObtained && "text-muted-foreground")}>
+                          <Button variant="outline" className={cn("w-full h-12 bg-surface border-border hover:bg-surface justify-start text-left font-normal text-base text-ink px-4 py-2", !qual.dateObtained && "text-ink-muted")}>
                             <Icon icon={CalendarIcon} className="mr-2 h-4 w-4" />
                             {qual.dateObtained ? format(qual.dateObtained, "PPP") : <span>Pick a date</span>}
                           </Button>
@@ -472,7 +459,7 @@ export function MultiStepForm() {
                     <Label>Date</Label>
                     <Popover>
                       <PopoverTrigger render={
-                        <Button variant="outline" className={cn("w-full justify-start text-left font-normal", !formData.signatureDate && "text-muted-foreground")}>
+                        <Button variant="outline" className={cn("w-full h-12 bg-surface border-border hover:bg-surface justify-start text-left font-normal text-base text-ink px-4 py-2", !formData.signatureDate && "text-ink-muted")}>
                           <Icon icon={CalendarIcon} className="mr-2 h-4 w-4" />
                           {formData.signatureDate ? format(formData.signatureDate, "PPP") : <span>Pick a date</span>}
                         </Button>

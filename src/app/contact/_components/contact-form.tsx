@@ -264,7 +264,10 @@ export function ContactForm({
         </Field>
 
         <div className="flex flex-col items-start gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-          <button className={cn(buttonVariants({ size: "lg" }))} type="submit">
+          <button
+            className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}
+            type="submit"
+          >
             {copy.submit}
             <Icon icon={ArrowUpRightIcon} />
           </button>

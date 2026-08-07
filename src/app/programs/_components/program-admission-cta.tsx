@@ -21,13 +21,13 @@ export function ProgramAdmissionCta({
   return (
     <section className="gutter-x section-y bg-neutral-50/50">
       <div className="mx-auto max-w-page">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
           <div className="lg:col-span-7">
             <Eyebrow className="text-accent">Admissions & Enrollment</Eyebrow>
-            <H3 className="mt-4 text-3xl text-ink sm:text-4xl">
+            <H3 className="mt-4 text-2xl font-medium text-ink sm:text-3xl lg:text-4xl">
               Ready to Begin Your {levelTitle} Journey?
             </H3>
-            <P className="mt-4 max-w-xl text-ink-muted">
+            <P className="mt-4 max-w-xl text-sm sm:text-base text-ink-muted">
               Applications are currently open for upcoming intakes. Explore
               entry requirements, scholarship options, and online registration.
             </P>
@@ -38,10 +38,10 @@ export function ProgramAdmissionCta({
               </p>
             )}
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 sm:mt-8">
               {link === null ? (
                 <Link
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-white shadow-md transition-transform hover:scale-105 hover:bg-accent/90 active:scale-95"
+                  className="inline-flex w-full justify-center items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-white shadow-md transition-transform hover:scale-105 hover:bg-accent/90 active:scale-95 sm:w-auto"
                   href="/admissions"
                 >
                   <span>Go to Admissions Portal</span>
@@ -49,7 +49,7 @@ export function ProgramAdmissionCta({
                 </Link>
               ) : link.destination === "internal" ? (
                 <Link
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-white shadow-md transition-transform hover:scale-105 hover:bg-accent/90 active:scale-95"
+                  className="inline-flex w-full justify-center items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-white shadow-md transition-transform hover:scale-105 hover:bg-accent/90 active:scale-95 sm:w-auto"
                   href={link.href as Route}
                 >
                   <span>{link.label}</span>
@@ -57,7 +57,7 @@ export function ProgramAdmissionCta({
                 </Link>
               ) : (
                 <Link
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-white shadow-md transition-transform hover:scale-105 hover:bg-accent/90 active:scale-95"
+                  className="inline-flex w-full justify-center items-center gap-2 rounded-full bg-accent px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-white shadow-md transition-transform hover:scale-105 hover:bg-accent/90 active:scale-95 sm:w-auto"
                   href={link.href as Route}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -68,7 +68,7 @@ export function ProgramAdmissionCta({
               )}
 
               <Link
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-ink shadow-xs transition-colors hover:bg-neutral-50"
+                className="inline-flex w-full justify-center items-center gap-2 rounded-full border border-border bg-white px-6 py-3 font-body text-xs font-semibold uppercase tracking-widest text-ink shadow-xs transition-colors hover:bg-neutral-50 sm:w-auto"
                 href="/contact"
               >
                 <span>Contact Admissions Office</span>
@@ -77,8 +77,8 @@ export function ProgramAdmissionCta({
           </div>
 
           <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-border bg-white p-6 shadow-xl lg:p-8">
-              <h4 className="font-display text-xl font-medium text-ink">
+            <div className="rounded-2xl border border-border bg-white p-5 sm:p-6 lg:p-8">
+              <h4 className="font-display text-lg font-medium text-ink sm:text-xl">
                 Admission Counseling & Inquiries
               </h4>
               <p className="mt-2 font-body text-xs text-ink-muted">
@@ -89,15 +89,15 @@ export function ProgramAdmissionCta({
               <div className="mt-6 space-y-4 border-t border-border pt-6">
                 {phone === null ? null : (
                   <div className="flex items-center gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-full bg-brand/10 text-brand">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
                       <Icon className="size-4" icon={PhoneIcon} />
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <p className="font-body text-xs text-ink-muted">
                         Phone Inquiry
                       </p>
                       <Link
-                        className="font-body text-sm font-semibold text-brand hover:underline"
+                        className="font-body text-sm font-semibold text-brand hover:underline break-all sm:break-normal"
                         href={`tel:${phone}` as Route}
                       >
                         {phone}
@@ -108,15 +108,15 @@ export function ProgramAdmissionCta({
 
                 {email === null ? null : (
                   <div className="flex items-center gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-full bg-brand/10 text-brand">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
                       <Icon className="size-4" icon={MailIcon} />
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <p className="font-body text-xs text-ink-muted">
                         Email Inquiry
                       </p>
                       <Link
-                        className="font-body text-sm font-semibold text-brand hover:underline"
+                        className="font-body text-sm font-semibold text-brand hover:underline break-all sm:break-normal"
                         href={`mailto:${email}` as Route}
                       >
                         {email}

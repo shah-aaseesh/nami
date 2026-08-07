@@ -2,17 +2,18 @@ import type { Route } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd, type Crumb } from "@/components/seo/structured-data";
 
-export function Breadcrumb({ 
-  trail, 
-  theme = "light" 
-}: { 
+export function Breadcrumb({
+  trail,
+  theme = "light",
+}: {
   trail: readonly Crumb[];
   theme?: "light" | "dark";
 }) {
   const lastIndex = trail.length - 1;
 
   const activeColor = theme === "dark" ? "text-white" : "text-ink";
-  const hoverColor = theme === "dark" ? "hover:text-accent" : "hover:text-accent";
+  const hoverColor =
+    theme === "dark" ? "hover:text-accent" : "hover:text-accent";
   const mutedColor = theme === "dark" ? "text-white/60" : "text-ink-muted";
 
   return (

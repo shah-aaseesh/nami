@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/shared/breadcrumb";
+
 import { UpdateIndex } from "@/components/shared/update-index";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -9,7 +9,7 @@ import { content } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
 import { createMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-import { newsCopy, newsTrail } from "./_components/news-copy";
+import { newsCopy } from "./_components/news-copy";
 
 export const metadata: Metadata = createMetadata({
   path: "/news",
@@ -24,12 +24,12 @@ export default async function NewsPage() {
   return (
     <section className="gutter-x section-y">
       <div className="mx-auto max-w-page">
-        <Breadcrumb trail={newsTrail} />
-
         <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>{newsCopy.masthead.eyebrow}</Eyebrow>
-            <Display className="mt-5">{newsCopy.masthead.heading}</Display>
+            <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+              {newsCopy.masthead.heading}
+            </Display>
           </div>
 
           <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">

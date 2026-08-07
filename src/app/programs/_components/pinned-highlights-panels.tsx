@@ -97,13 +97,13 @@ export function PinnedHighlightsPanels({
         </div>
 
         <div
-          className="relative min-h-[480px] md:h-[500px] lg:h-[540px] md:overflow-hidden md:rounded-3xl"
+          className="relative md:h-[500px] lg:h-[540px] md:overflow-hidden md:rounded-3xl"
           ref={cardsWrapperRef}
         >
           {cards.map((card, idx) => (
             <article
               className={cn(
-                "relative top-0 left-0 mb-8 flex w-full flex-col justify-between rounded-2xl border border-neutral-800 bg-neutral-900/95 p-6 shadow-2xl backdrop-blur-md md:absolute md:mb-0 md:h-full md:p-10 lg:p-12",
+                "relative top-0 left-0 mb-6 last:mb-0 flex w-full flex-col justify-between rounded-2xl border border-neutral-800 bg-neutral-900/95 p-5 sm:p-6 shadow-2xl backdrop-blur-md md:absolute md:mb-0 md:h-full md:p-10 lg:p-12",
                 card.accentClass,
               )}
               data-pinned-panel=""
@@ -112,26 +112,26 @@ export function PinnedHighlightsPanels({
             >
               <div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-display font-light text-4xl text-primary-400 tabular-nums lg:text-5xl">
+                  <span className="font-display font-light text-3xl sm:text-4xl text-primary-400 tabular-nums lg:text-5xl">
                     {card.number}
                   </span>
-                  <span className="rounded-full border border-neutral-700 bg-neutral-800 px-4 py-1 font-body text-xs font-medium uppercase tracking-widest text-neutral-300">
+                  <span className="rounded-full border border-neutral-700 bg-neutral-800 px-3 sm:px-4 py-1 font-body text-[10px] sm:text-xs font-medium uppercase tracking-widest text-neutral-300">
                     {card.badge}
                   </span>
                 </div>
-                <H3 className="mt-6 text-2xl font-medium text-neutral-50 lg:text-3xl">
+                <H3 className="mt-4 sm:mt-6 text-xl sm:text-2xl font-medium text-neutral-50 lg:text-3xl">
                   {card.title}
                 </H3>
-                <p className="mt-2 font-body text-sm font-medium text-neutral-400">
+                <p className="mt-2 font-body text-xs sm:text-sm font-medium text-neutral-400">
                   {card.subtitle}
                 </p>
-                <P className="mt-4 max-w-3xl text-base text-neutral-300 leading-relaxed">
+                <P className="mt-3 sm:mt-4 max-w-3xl text-sm sm:text-base text-neutral-300 leading-relaxed">
                   {card.description}
                 </P>
               </div>
 
-              <div className="mt-8 border-neutral-800/80 border-t pt-6">
-                <ul className="grid grid-cols-1 gap-3 text-neutral-200 text-sm sm:grid-cols-2">
+              <div className="mt-6 sm:mt-8 border-neutral-800/80 border-t pt-5 sm:pt-6">
+                <ul className="grid grid-cols-1 gap-2.5 sm:gap-3 text-neutral-200 text-xs sm:text-sm sm:grid-cols-2">
                   {card.points.map((point) => (
                     <li className="flex items-start gap-2" key={point}>
                       <Icon

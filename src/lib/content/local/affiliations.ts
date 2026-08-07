@@ -30,7 +30,7 @@ export const affiliations: readonly Affiliation[] = [
     sinceYear: 2013,
     levelSlug: slug("a-level"),
     campusSlug: slug("gokarneshwor"),
-    note: "Independent CAIE examination centre since 2024",
+    note: null,
     logo: null,
   },
   {
@@ -50,7 +50,7 @@ export const affiliations: readonly Affiliation[] = [
     sinceYear: 2026,
     levelSlug: slug("bachelor-master"),
     campusSlug: slug("new-baneshwor"),
-    note: "First intake August 2026",
+    note: null,
     logo: null,
   },
 ];

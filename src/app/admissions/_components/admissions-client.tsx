@@ -8,7 +8,7 @@ import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { H2, H3, P } from "@/components/ui/typography";
+import { H2, P } from "@/components/ui/typography";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { ArrowRightIcon, CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -163,7 +163,7 @@ export function AdmissionsClient() {
               <div
                 key={prog.id}
                 className={cn(
-                  "program-section flex flex-col justify-center min-h-[60vh] py-16 lg:py-32",
+                  "program-section flex flex-col justify-center py-8 sm:py-16 lg:py-32 lg:min-h-[60vh]",
                   i === PROGRAMS.length - 1 ? "" : "border-b border-border",
                 )}
               >
@@ -179,7 +179,9 @@ export function AdmissionsClient() {
                   <div className="absolute inset-0 bg-black/10" />
                 </div>
 
-                <H2 className="mb-4 font-display text-3xl">{prog.title}</H2>
+                <H2 className="mb-4 font-display text-2xl sm:text-3xl">
+                  {prog.title}
+                </H2>
                 <P className="text-ink-muted mb-8 text-lg">
                   {prog.description}
                 </P>
@@ -221,14 +223,16 @@ export function AdmissionsClient() {
       <section className="bg-surface-muted border-t border-border section-y gutter-x">
         <div className="mx-auto max-w-3xl">
           <div className="text-center mb-12">
-            <H2 className="font-display mb-4">Start Your Application</H2>
+            <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
+              Start Your Application
+            </H2>
             <P className="text-ink-muted text-lg">
               Have questions or ready to apply? Submit your details below and
               our admissions team will guide you through the process.
             </P>
           </div>
 
-          <div className="bg-surface border border-border rounded-2xl p-8 sm:p-12 shadow-sm relative overflow-hidden">
+          <div className="bg-surface border border-border rounded-2xl p-6 sm:p-12 shadow-sm relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-accent" />
 
             <form

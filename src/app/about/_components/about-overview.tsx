@@ -32,7 +32,7 @@ export function AboutOverview({
             )}
             <SplitText
               as="h2"
-              className="mt-4 font-display text-4xl font-normal tracking-tight text-ink text-balance lg:text-5xl"
+              className="mt-4 font-display text-3xl sm:text-4xl font-normal tracking-tight text-ink text-balance lg:text-5xl"
             >
               {section.heading}
             </SplitText>

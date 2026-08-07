@@ -82,7 +82,7 @@ export function SiteNavPanel({
                   value={item.label}
                   className="border-none w-full"
                 >
-                  <AccordionTrigger className="py-4 text-xl font-medium w-full !text-ink">
+                  <AccordionTrigger className="py-4 text-xl font-body font-medium w-full text-ink">
                     <span className="flex items-baseline gap-4 w-full">
                       <span className="w-6 shrink-0 font-body text-sm text-ink-muted tabular-nums">
                         {String(index + 1).padStart(2, "0")}
@@ -123,33 +123,34 @@ export function SiteNavPanel({
       </nav>
 
       {/* Desktop View Content */}
-      <div className="hidden lg:flex flex-col items-center text-center nav-anim-item gap-6">
+      <div className="hidden lg:flex flex-col items-center text-center nav-anim-item gap-4 pb-4">
         <SiteHeaderWordmark
           lead={wordmark.lead}
           tail={wordmark.tail}
-          className="scale-125 my-4"
+          className="scale-125 my-6"
         />
-        <p className="text-sm text-ink-muted leading-relaxed px-2">
-          A modern HTML template for education, offering intuitive design &
-          essential features for seamless learning experiences.
+        <p className="text-sm text-ink-muted leading-relaxed px-4">
+          NAMI College provides world-class education with state-of-the-art
+          facilities, empowering students to become future leaders and
+          innovators.
         </p>
 
         {/* Banner */}
-        <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden mt-4 shadow-md">
+        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mt-2 shadow-lg">
           <Image
             src="/nami/campus-library.jpg"
             alt="Campus Library"
             fill
             className="absolute inset-0 object-cover"
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-6 inset-x-6">
             <Link
               href={"/admissions" as Route}
               onClick={onNavigate}
               className={cn(
                 buttonVariants(),
-                "w-full bg-accent hover:bg-accent/90 text-white border-none",
+                "w-full bg-accent hover:bg-accent/90 text-white border-none shadow-md",
               )}
             >
               Apply Now
@@ -158,14 +159,14 @@ export function SiteNavPanel({
         </div>
 
         {/* Contact Info */}
-        <div className="flex flex-col gap-4 w-full text-left mt-6 border-t border-border pt-8">
+        <div className="flex flex-col gap-6 w-full text-left mt-6 border-t border-border pt-10">
           {places.length > 0 && (
-            <div className="flex items-start gap-3 text-ink-muted">
+            <div className="flex items-start gap-4 text-ink-muted">
               <Icon
                 icon={LocationIcon}
                 className="size-5 shrink-0 mt-0.5 text-accent"
               />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 {places.map((place) => (
                   <span key={place} className="text-sm">
                     {place}
@@ -176,47 +177,53 @@ export function SiteNavPanel({
           )}
 
           {links.length > 0 && (
-            <div className="flex items-start gap-3 text-ink-muted">
+            <div className="flex items-start gap-4 text-ink-muted">
               <Icon
                 icon={PhoneIcon}
                 className="size-5 shrink-0 mt-0.5 text-accent"
               />
-              <div className="flex flex-col gap-1">
-                {links.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href as Route}
-                    className="text-sm hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+              <div className="flex flex-col gap-2">
+                {links.map((link) =>
+                  link.href ? (
+                    <Link
+                      key={link.label}
+                      href={link.href as Route}
+                      className="text-sm hover:text-accent transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <span key={link.label} className="text-sm text-ink-muted">
+                      {link.label}
+                    </span>
+                  ),
+                )}
               </div>
             </div>
           )}
         </div>
 
         {/* Social Links */}
-        <div className="flex items-center gap-4 w-full mt-4">
-          <span className="text-sm font-semibold text-ink uppercase tracking-wider">
+        <div className="flex flex-col gap-5 w-full mt-8 pb-8">
+          <span className="text-xs font-bold text-ink uppercase tracking-widest text-left">
             Follow Us
           </span>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <Link
               href={"#" as Route}
-              className="text-ink-muted hover:text-accent transition-colors"
+              className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors hover:bg-accent hover:text-white"
             >
               <Icon icon={FacebookIcon} className="size-5" />
             </Link>
             <Link
               href={"#" as Route}
-              className="text-ink-muted hover:text-accent transition-colors"
+              className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors hover:bg-accent hover:text-white"
             >
               <Icon icon={TwitterIcon} className="size-5" />
             </Link>
             <Link
               href={"#" as Route}
-              className="text-ink-muted hover:text-accent transition-colors"
+              className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors hover:bg-accent hover:text-white"
             >
               <Icon icon={InstagramIcon} className="size-5" />
             </Link>

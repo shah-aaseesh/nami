@@ -11,6 +11,10 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     label: "About Us",
     href: "/about",
     descriptor: "Discover our mission, vision, and values.",
+    children: [
+      { label: "Our Story", href: "/about" },
+      { label: "Faculty & Leadership", href: "/faculty" },
+    ],
   },
   {
     label: "Academics",

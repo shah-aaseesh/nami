@@ -28,7 +28,7 @@ export function ProgrammesList({
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {programmes.map((prog) => (
             <article
-              className="group flex flex-col justify-between rounded-xl border border-border bg-card p-6 shadow-xs transition-all duration-300 hover:border-accent hover:shadow-md"
+              className="group flex flex-col justify-between rounded-xl border border-border bg-card p-5 shadow-xs transition-all duration-300 hover:border-accent hover:shadow-md sm:p-6"
               id={prog.slug}
               key={prog.id}
             >

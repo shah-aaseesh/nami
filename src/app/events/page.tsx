@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
-import { Breadcrumb } from "@/components/shared/breadcrumb";
+
 import { yearSpan } from "@/components/shared/update-index";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -11,7 +11,7 @@ import { ArrowRightIcon } from "@/lib/icons";
 import { createMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { EventCard } from "./_components/event-card";
-import { eventsCopy, eventsTrail } from "./_components/events-copy";
+import { eventsCopy } from "./_components/events-copy";
 
 export const metadata: Metadata = createMetadata({
   path: "/events",
@@ -27,12 +27,12 @@ export default async function EventsPage() {
   return (
     <section className="gutter-x section-y">
       <div className="mx-auto max-w-page">
-        <Breadcrumb trail={eventsTrail} />
-
         <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>{eventsCopy.masthead.eyebrow}</Eyebrow>
-            <Display className="mt-5">{eventsCopy.masthead.heading}</Display>
+            <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+              {eventsCopy.masthead.heading}
+            </Display>
           </div>
 
           <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">

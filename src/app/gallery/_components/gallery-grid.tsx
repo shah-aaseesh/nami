@@ -126,7 +126,7 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
             <button
               aria-pressed={on}
               className={cn(
-                "rounded-full border px-5 py-2 font-body text-xs font-medium uppercase tracking-widest transition-colors duration-200 cursor-pointer",
+                "rounded-full border px-4 py-2.5 sm:px-5 sm:py-2 font-body text-xs font-medium uppercase tracking-widest transition-colors duration-200 cursor-pointer min-h-[40px] flex items-center justify-center",
                 on
                   ? "border-accent bg-accent text-accent-ink"
                   : "border-border text-ink-muted hover:border-ink hover:text-ink",
@@ -147,7 +147,7 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
       >
         {items.map((item) => (
           <div
-            className="relative h-40 w-56 shrink-0 overflow-hidden rounded-xl bg-muted sm:h-48 sm:w-72 lg:h-56 lg:w-80"
+            className="relative h-36 w-48 shrink-0 overflow-hidden rounded-xl bg-muted sm:h-48 sm:w-72 lg:h-56 lg:w-80"
             data-gallery-tile={item.id}
             key={item.id}
           >

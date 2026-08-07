@@ -25,32 +25,35 @@ export function ScrubbedBentoGallery({
 
       const mm = gsap.matchMedia();
 
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const tiles =
-          container.querySelectorAll<HTMLElement>("[data-bento-tile]");
-        if (tiles.length === 0) return;
+      mm.add(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const tiles =
+            container.querySelectorAll<HTMLElement>("[data-bento-tile]");
+          if (tiles.length === 0) return;
 
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: "top 80%",
-            end: "bottom 20%",
-            scrub: 1,
-          },
-        });
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: container,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: 1,
+            },
+          });
 
-        tiles.forEach((tile, index) => {
-          const dir = index % 2 === 0 ? 1 : -1;
-          const yDist = 30 + (index % 3) * 20;
+          tiles.forEach((tile, index) => {
+            const dir = index % 2 === 0 ? 1 : -1;
+            const yDist = 30 + (index % 3) * 20;
 
-          timeline.fromTo(
-            tile,
-            { y: yDist * dir, scale: 0.94, opacity: 0.8 },
-            { y: 0, scale: 1, opacity: 1, ease: "power2.out" },
-            0,
-          );
-        });
-      });
+            timeline.fromTo(
+              tile,
+              { y: yDist * dir, scale: 0.94, opacity: 0.8 },
+              { y: 0, scale: 1, opacity: 1, ease: "power2.out" },
+              0,
+            );
+          });
+        },
+      );
     },
     { scope: containerRef },
   );
@@ -69,16 +72,16 @@ export function ScrubbedBentoGallery({
           <Standfirst className="mt-4">{subtitle}</Standfirst>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
           {images.map((img, idx) => {
             const isLarge = idx === 0;
             const spanClass = isLarge
-              ? "sm:col-span-2 lg:col-span-8 lg:row-span-2 aspect-[16/9] lg:aspect-auto min-h-[300px] lg:min-h-[420px]"
+              ? "sm:col-span-2 lg:col-span-8 lg:row-span-2 aspect-[16/9] lg:aspect-auto min-h-[220px] sm:min-h-[300px] lg:min-h-[420px]"
               : idx === 1
-                ? "lg:col-span-4 aspect-[4/3]"
+                ? "sm:col-span-1 lg:col-span-4 aspect-[4/3]"
                 : idx === 2
-                  ? "lg:col-span-4 aspect-[4/3]"
-                  : "sm:col-span-2 lg:col-span-4 aspect-[16/9]";
+                  ? "sm:col-span-1 lg:col-span-4 aspect-[4/3]"
+                  : "sm:col-span-1 lg:col-span-4 aspect-[16/9]";
 
             return (
               <figure
@@ -102,8 +105,8 @@ export function ScrubbedBentoGallery({
                   width={img.width}
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
-                <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white">
-                  <p className="font-body text-sm font-medium leading-snug">
+                <figcaption className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-white">
+                  <p className="font-body text-xs sm:text-sm font-medium leading-snug">
                     {img.alt}
                   </p>
                 </figcaption>

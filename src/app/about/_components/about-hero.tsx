@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Breadcrumb } from "@/components/shared/breadcrumb";
+
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -12,19 +12,12 @@ import type { AboutCopy } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
-const aboutTrail = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-] as const;
-
 export function AboutHero({ copy }: { copy: AboutCopy }) {
   const image = copy.openingImage;
 
   return (
     <section className="gutter-x section-y-hero" id="about">
       <div className="mx-auto max-w-page">
-        <Breadcrumb trail={aboutTrail} />
-
         <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Reveal atFold>
@@ -33,7 +26,7 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
             <SplitText
               as="h1"
               atFold
-              className="mt-5 font-display text-7xl font-normal text-balance text-ink"
+              className="mt-5 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-balance text-ink"
             >
               {copy.title}
             </SplitText>
@@ -51,7 +44,7 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
               <Link
                 className={cn(
                   buttonVariants({ variant: "quiet" }),
-                  "group gap-2 rounded-full px-5",
+                  "group gap-2 rounded-full px-5 w-full sm:w-auto inline-flex justify-between sm:justify-start",
                 )}
                 href={"#leadership" as Route}
               >

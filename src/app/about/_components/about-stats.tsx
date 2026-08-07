@@ -49,7 +49,7 @@ export function AboutStats({
             )}
             <SplitText
               as="h2"
-              className="mt-4 font-display text-4xl font-normal tracking-tight text-ink text-balance lg:text-5xl"
+              className="mt-4 font-display text-3xl sm:text-4xl font-normal tracking-tight text-ink text-balance lg:text-5xl"
             >
               {section.heading}
             </SplitText>
@@ -63,12 +63,12 @@ export function AboutStats({
             )}
 
             <Reveal
-              className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10"
+              className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-10"
               stagger={0.1}
             >
               {rows.map((stat) => (
                 <RevealItem key={stat.id}>
-                  <p className="font-display text-5xl font-normal tracking-tight text-ink lg:text-6xl">
+                  <p className="font-display text-4xl sm:text-5xl font-normal tracking-tight text-ink lg:text-6xl">
                     <Counter suffix={stat.suffix ?? ""} value={stat.value} />
                   </p>
                   <p className="mt-2 font-body text-sm text-ink-muted">

@@ -59,12 +59,12 @@ export function AboutCreed({
           <div className="flex flex-col overflow-hidden rounded-3xl lg:flex-row">
             <Creed
               body={missionBody}
-              className="field-ink flex grow flex-col justify-end p-8 sm:p-10 lg:basis-7/12 xl:p-14"
+              className="field-ink flex grow flex-col justify-end p-6 sm:p-10 lg:basis-7/12 xl:p-14"
               label="Mission"
             />
             <Creed
               body={visionBody}
-              className="field-brand grow p-8 sm:p-10 lg:basis-5/12 xl:p-14"
+              className="field-brand grow p-6 sm:p-10 lg:basis-5/12 xl:p-14"
               label="Vision"
             />
           </div>

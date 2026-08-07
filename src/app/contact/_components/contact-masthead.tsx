@@ -1,6 +1,6 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/shared/breadcrumb";
+
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Display, Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -15,7 +15,7 @@ import {
   YouTubeIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { contactCopy, contactTrail } from "./contact-copy";
+import { contactCopy } from "./contact-copy";
 
 const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
   facebook: FacebookIcon,
@@ -46,12 +46,12 @@ export async function ContactMasthead() {
   return (
     <section className="gutter-x section-y">
       <div className="mx-auto max-w-page">
-        <Breadcrumb trail={contactTrail} />
-
         <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <Display className="mt-5">{copy.heading}</Display>
+            <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+              {copy.heading}
+            </Display>
           </div>
           <Standfirst className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
             {copy.standfirst}
@@ -63,7 +63,10 @@ export async function ContactMasthead() {
             <div className="lg:col-span-5">
               <h2 className={channelHeading}>{copy.emailLabel}</h2>
               <Link
-                className={cn(channelLink, "mt-4 max-w-full text-xl")}
+                className={cn(
+                  channelLink,
+                  "mt-4 max-w-full text-lg sm:text-xl",
+                )}
                 href={`mailto:${email}` as Route}
               >
                 <span className="truncate">{email}</span>

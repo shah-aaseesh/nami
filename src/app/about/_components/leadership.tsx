@@ -62,7 +62,7 @@ export function Leadership({
           )}
           <SplitText
             as="h2"
-            className="mt-4 font-display text-4xl font-normal tracking-tight text-ink text-balance lg:text-5xl"
+            className="mt-4 font-display text-3xl sm:text-4xl font-normal tracking-tight text-ink text-balance lg:text-5xl"
           >
             {section.heading}
           </SplitText>
@@ -73,19 +73,19 @@ export function Leadership({
           )}
         </div>
 
-        <Parallax className="mt-14 flex flex-col gap-20" speed={1.02}>
+        <Parallax className="mt-14 flex flex-col gap-16 lg:gap-20" speed={1.02}>
           <LeaderGroup
-            columns="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-2"
+            columns="grid gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-12 sm:grid-cols-2 lg:grid-cols-2"
             label="Board of Directors"
             leaders={leadership.board}
           />
           <LeaderGroup
-            columns="grid gap-x-8 gap-y-12 sm:grid-cols-1 lg:grid-cols-1"
+            columns="grid gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-12 sm:grid-cols-1 lg:grid-cols-1"
             label="Management"
             leaders={leadership.management}
           />
           <LeaderGroup
-            columns="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
+            columns="grid gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
             label="Academic Heads & Principals"
             leaders={leadership.academics}
           />

@@ -1,6 +1,6 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/shared/breadcrumb";
+
 import { Display, Eyebrow, Standfirst } from "@/components/ui/typography";
 import type { AcademicLevel } from "@/lib/content";
 
@@ -9,16 +9,9 @@ export function ProgramsHero({
 }: {
   readonly levels: readonly AcademicLevel[];
 }) {
-  const trail = [
-    { name: "Home", path: "/" },
-    { name: "Academic Programs", path: "/programs" },
-  ];
-
   return (
     <section className="gutter-x section-y pb-10 lg:pb-16">
       <div className="mx-auto max-w-page">
-        <Breadcrumb trail={trail} />
-
         <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>Academics at NAMI</Eyebrow>

@@ -88,7 +88,9 @@ export async function CampusLocations() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-5">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <H2 className="mt-5">{copy.heading}</H2>
+            <H2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+              {copy.heading}
+            </H2>
           </div>
           <Standfirst className="mt-6 lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
             {copy.standfirst}
@@ -96,7 +98,7 @@ export async function CampusLocations() {
         </div>
 
         <Reveal className="mt-14 lg:mt-24" stagger={0.12}>
-          <ul className="flex flex-col gap-y-16 lg:gap-y-28">
+          <ul className="flex flex-col gap-y-12 sm:gap-y-16 lg:gap-y-28">
             {institution.campuses.map((campus, index) => (
               <CampusEntry campus={campus} index={index} key={campus.id} />
             ))}

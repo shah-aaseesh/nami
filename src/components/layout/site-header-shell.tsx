@@ -269,7 +269,7 @@ export function SiteHeaderShell({
                 }
               />
               <SheetContent
-                className="w-full sm:max-w-md lg:max-w-sm flex flex-col outline-none overflow-y-auto p-0"
+                className="w-full sm:max-w-md lg:max-w-sm flex flex-col outline-none overflow-y-auto p-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                 side="right"
                 hideClose
               >
@@ -277,7 +277,7 @@ export function SiteHeaderShell({
                   <Icon icon={CloseIcon} className="size-6" />
                   <span className="sr-only">Close</span>
                 </SheetClose>
-                <div className="px-6 pb-6 pt-16 lg:py-10 h-full w-full flex flex-col overflow-y-auto">
+                <div className="px-6 pb-6 pt-16 lg:py-10 h-full w-full flex flex-col overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   <SheetTitle className="sr-only">Menu</SheetTitle>
                   <SiteNavPanel
                     items={items}

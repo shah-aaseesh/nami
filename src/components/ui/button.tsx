@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Button as ButtonPrimitive,
   type ButtonProps as ButtonPrimitiveProps,
@@ -32,18 +33,20 @@ export const buttonVariants = cva(
 export type ButtonProps = Omit<ButtonPrimitiveProps, "className" | "href"> &
   VariantProps<typeof buttonVariants> & { className?: string; href?: string };
 
-export function Button({
-  className,
-  variant,
-  size,
-  href,
-  ...props
-}: ButtonProps) {
+export const Button = React.forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  ButtonProps
+>(({ className, variant, size, href, ...props }, ref) => {
   if (href) {
     return (
       <ButtonPrimitive
         nativeButton={false}
-        render={<Link href={href as Route} />}
+        render={
+          <Link
+            href={href as Route}
+            ref={ref as React.Ref<HTMLAnchorElement>}
+          />
+        }
         data-slot="button"
         className={cn(buttonVariants({ variant, size }), className)}
         {...props}
@@ -53,9 +56,11 @@ export function Button({
 
   return (
     <ButtonPrimitive
+      ref={ref as React.Ref<HTMLButtonElement>}
       data-slot="button"
       className={cn(buttonVariants({ variant, size }), className)}
       {...props}
     />
   );
-}
+});
+Button.displayName = "Button";

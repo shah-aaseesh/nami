@@ -49,11 +49,6 @@ function AffiliationStation({ item }: { item: Affiliation }) {
         {item.body}
       </H6>
       <P className="mt-3 text-sm">{item.scope}</P>
-      {item.note === null ? null : (
-        <p className="mt-5 inline-block rounded-lg border px-3 py-2 font-body text-xs text-ink">
-          {item.note}
-        </p>
-      )}
     </li>
   );
 }

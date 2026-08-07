@@ -25,7 +25,9 @@ export async function ContactFormSection() {
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <div className="lg:col-span-4">
           <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <H2 className="mt-5">{copy.heading}</H2>
+          <H2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+            {copy.heading}
+          </H2>
           <Standfirst className="mt-6">{copy.standfirst(email)}</Standfirst>
         </div>
 

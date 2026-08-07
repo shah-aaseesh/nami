@@ -16,25 +16,25 @@ export function ProgramAffiliations({
     <section className="gutter-x section-y bg-neutral-50" id="affiliations">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12">
-          
           {/* Sticky Left Column */}
           <div className="lg:sticky lg:top-32 lg:col-span-5 lg:pb-12">
             <Eyebrow className="text-accent">Global Recognition</Eyebrow>
-            <H3 className="mt-6 font-display text-4xl leading-tight text-ink sm:text-5xl lg:text-6xl">
+            <H3 className="mt-4 font-display text-3xl leading-tight text-ink sm:mt-6 sm:text-5xl lg:text-6xl">
               Accreditation & Partner Bodies
             </H3>
-            <P className="mt-6 max-w-md text-lg text-ink-muted">
-              NAMI College maintains rigorous academic quality assurance in direct
-              partnership with renowned international and national awarding bodies.
+            <P className="mt-4 max-w-md text-base text-ink-muted sm:mt-6 sm:text-lg">
+              NAMI College maintains rigorous academic quality assurance in
+              direct partnership with renowned international and national
+              awarding bodies.
             </P>
           </div>
 
           {/* Scrolling Right Column (List) */}
-          <div className="mt-16 lg:col-span-7 lg:mt-0">
+          <div className="mt-10 sm:mt-12 lg:col-span-7 lg:mt-0">
             <div className="flex flex-col border-t border-border">
               {affiliations.map((aff) => (
                 <article
-                  className="group relative flex flex-col border-b border-border py-10 transition-colors duration-500 hover:border-accent lg:py-12"
+                  className="group relative flex flex-col border-b border-border py-6 transition-colors duration-500 hover:border-accent sm:py-8 lg:py-12"
                   key={aff.id}
                 >
                   <div className="flex flex-wrap items-center justify-between gap-4">
@@ -46,25 +46,36 @@ export function ProgramAffiliations({
                     </div>
                   </div>
 
-                  <h4 className="mt-8 font-display text-3xl font-medium text-ink transition-transform duration-500 group-hover:translate-x-2 sm:text-4xl">
+                  <h4 className="mt-4 font-display text-2xl font-medium text-ink transition-transform duration-500 group-hover:translate-x-2 sm:mt-8 sm:text-4xl">
                     {aff.body}
                   </h4>
 
-                  <div className="mt-6 space-y-4 transition-transform duration-500 group-hover:translate-x-2">
-                    <p className="font-body text-base text-ink-muted">
-                      Academic Scope: <span className="font-medium text-ink">{aff.scope}</span>
+                  <div className="mt-4 space-y-3 transition-transform duration-500 group-hover:translate-x-2 sm:mt-6 sm:space-y-4">
+                    <p className="font-body text-sm text-ink-muted sm:text-base">
+                      Academic Scope:{" "}
+                      <span className="font-medium text-ink">{aff.scope}</span>
                     </p>
 
                     {aff.note === null ? null : (
                       <div className="flex items-start gap-2 text-ink-muted">
-                        <Icon className="mt-1 size-4 shrink-0 text-accent" icon={AsteriskIcon} />
-                        <span className="font-body text-sm">{aff.note}</span>
+                        <Icon
+                          className="mt-1 size-4 shrink-0 text-accent"
+                          icon={AsteriskIcon}
+                        />
+                        <span className="font-body text-xs sm:text-sm">
+                          {aff.note}
+                        </span>
                       </div>
                     )}
 
                     <div className="flex items-start gap-2 text-ink-muted">
-                      <Icon className="mt-1 size-4 shrink-0 text-primary-400" icon={LocationIcon} />
-                      <span className="font-body text-sm">Delivered at NAMI Gokarneshwor & New Baneshwor Campuses.</span>
+                      <Icon
+                        className="mt-1 size-4 shrink-0 text-primary-400"
+                        icon={LocationIcon}
+                      />
+                      <span className="font-body text-xs sm:text-sm">
+                        Delivered at NAMI Gokarneshwor & New Baneshwor Campuses.
+                      </span>
                     </div>
                   </div>
                 </article>

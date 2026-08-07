@@ -42,6 +42,7 @@ export function Button({
   if (href) {
     return (
       <ButtonPrimitive
+        nativeButton={false}
         render={<Link href={href as Route} />}
         data-slot="button"
         className={cn(buttonVariants({ variant, size }), className)}

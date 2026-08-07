@@ -20,9 +20,9 @@ export function SiteFooterWordmark({
     <h2 className={cn(className)} data-slot="wordmark">
       <Image
         alt={tail === null ? lead : `${lead} ${tail}`}
-        className="h-12 w-auto"
+        className="h-20 w-auto"
         height={MARK_HEIGHT}
-        sizes="64px"
+        sizes="128px"
         src={MARK_SRC}
         width={MARK_WIDTH}
       />

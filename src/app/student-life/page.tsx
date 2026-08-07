@@ -16,11 +16,9 @@ export default async function StudentLifePage() {
   const pillars = await content.getCampusLife();
 
   return (
-    <section className="gutter-x section-y">
-      <div className="mx-auto max-w-page">
-        <StudentLifeMasthead copy={studentLifeCopy.masthead} />
-        <CampusLifeList pillars={pillars} />
-      </div>
-    </section>
+    <>
+      <StudentLifeMasthead copy={studentLifeCopy.masthead} />
+      <CampusLifeList pillars={pillars} />
+    </>
   );
 }

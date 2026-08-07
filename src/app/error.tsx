@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import type { Route } from "next";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 import { Eyebrow, P } from "@/components/ui/typography";
 
 export default function ErrorPage({
@@ -41,9 +42,9 @@ export default function ErrorPage({
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button onClick={() => reset()}>Try Again</Button>
-            <Button variant="quiet" href={"/" as Route}>
+            <Link href="/" className={buttonVariants({ variant: "quiet" })}>
               Return to Homepage
-            </Button>
+            </Link>
           </div>
         </Reveal>
       </div>

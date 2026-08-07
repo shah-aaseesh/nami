@@ -3,7 +3,8 @@
 import type { Route } from "next";
 import Image from "next/image";
 import { useRef } from "react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +13,7 @@ import { H2, P } from "@/components/ui/typography";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { ArrowRightIcon, CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
+import { MultiStepForm } from "./multi-step-form";
 
 const PROGRAMS = [
   {
@@ -205,103 +207,29 @@ export function AdmissionsClient() {
                   </ul>
                 </div>
 
-                <Button
-                  variant="quiet"
+                <Link 
                   href={`https://${prog.link}` as Route}
-                  className="w-full sm:w-auto self-start"
+                  className={buttonVariants({ variant: "quiet", className: "w-full sm:w-auto self-start" })}
                 >
-                  Download Form{" "}
-                  <Icon icon={ArrowRightIcon} className="ml-2 size-4" />
-                </Button>
+                  Download Form <Icon icon={ArrowRightIcon} className="ml-2 size-4" />
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Inquiry Form Section */}
       <section className="bg-surface-muted border-t border-border section-y gutter-x">
-        <div className="mx-auto max-w-3xl">
-          <div className="text-center mb-12">
-            <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
-              Start Your Application
-            </H2>
-            <P className="text-ink-muted text-lg">
-              Have questions or ready to apply? Submit your details below and
-              our admissions team will guide you through the process.
-            </P>
-          </div>
-
-          <div className="bg-surface border border-border rounded-2xl p-6 sm:p-12 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-accent" />
-
-            <form
-              className="flex flex-col gap-6"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input id="firstName" placeholder="Jane" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input id="lastName" placeholder="Doe" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="jane@example.com"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="+977 9800000000" />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="program">Program of Interest</Label>
-                <div className="relative">
-                  <select
-                    id="program"
-                    defaultValue=""
-                    className="flex h-12 w-full rounded-md border border-border bg-surface px-4 py-2 text-base text-ink focus:outline-none focus:ring-2 focus:ring-accent transition-colors appearance-none"
-                  >
-                    <option value="" disabled>
-                      Select a program
-                    </option>
-                    <option value="school">School Level (I-VII)</option>
-                    <option value="plus2">+2 Programs</option>
-                    <option value="alevel">Cambridge A-Level</option>
-                    <option value="bachelor">Bachelor Programs</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-ink-muted">
-                    <Icon icon={ArrowRightIcon} className="size-4 rotate-90" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="message">Any Questions?</Label>
-                <Textarea
-                  id="message"
-                  placeholder="How can we help you?"
-                  className="min-h-[150px]"
-                />
-              </div>
-
-              <Button type="submit" size="lg" className="w-full mt-4">
-                Submit Inquiry
-              </Button>
-            </form>
-          </div>
+        <div className="text-center mb-12 max-w-3xl mx-auto">
+          <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
+            Start Your Application
+          </H2>
+          <P className="text-ink-muted text-lg">
+            Ready to apply? Submit your details through our comprehensive application form below and our admissions team will guide you through the process.
+          </P>
         </div>
+        
+        <MultiStepForm />
       </section>
     </div>
   );

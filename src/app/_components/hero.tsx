@@ -50,7 +50,7 @@ function HeroCta({
   variant,
 }: {
   link: ContentLink;
-  variant: "solid" | "link";
+  variant: "default" | "link";
 }) {
   if (link.destination === "legacy") return null;
 
@@ -249,7 +249,7 @@ export async function Hero() {
               <Standfirst>{hero.standfirst}</Standfirst>
             </RevealItem>
             <RevealItem className="flex flex-wrap items-center gap-x-8 gap-y-4">
-              <HeroCta link={hero.primaryCta} variant="solid" />
+              <HeroCta link={hero.primaryCta} variant="default" />
               <HeroCta link={hero.secondaryCta} variant="link" />
             </RevealItem>
           </Reveal>

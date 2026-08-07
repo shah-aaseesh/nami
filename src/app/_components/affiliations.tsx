@@ -36,12 +36,12 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
 function AffiliationStation({ item }: { item: Affiliation }) {
   return (
     <li
-      className="relative border-t border-border-strong pt-8 flex flex-col h-full"
+      className="group relative border-t border-border-strong pt-8 flex flex-col h-full transition-transform duration-500 ease-out hover:-translate-y-2"
       data-reveal-item=""
     >
       <span
         aria-hidden="true"
-        className="absolute -top-px left-0 h-0.5 w-12 bg-accent"
+        className="absolute -top-px left-0 h-0.5 w-12 bg-accent transition-all duration-500 ease-out group-hover:w-full"
       />
 
       {item.logo && (

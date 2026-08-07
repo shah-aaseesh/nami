@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import gsap from "gsap";
-import type React from "react";
 import { useRef, useState } from "react";
 import {
   type Control,
@@ -730,7 +729,6 @@ export function MultiStepForm() {
   return (
     <div className="mx-auto w-full max-w-5xl" ref={containerRef}>
       <div className="bg-surface border border-border rounded-2xl shadow-sm flex flex-col md:flex-row min-h-[600px]">
-        {/* Left Sidebar / Progress */}
         <div className="bg-surface-muted w-full md:w-64 lg:w-80 p-6 md:p-8 shrink-0 border-b md:border-b-0 md:border-r border-border rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
           <div className="sticky top-24 lg:top-32">
             <H2 className="font-display text-xl font-semibold text-ink mb-8">
@@ -746,7 +744,6 @@ export function MultiStepForm() {
                     key={step}
                     className="flex items-center gap-4 relative group"
                   >
-                    {/* Vertical line connector */}
                     {index !== STEPS.length - 1 && (
                       <div
                         className={cn(
@@ -797,13 +794,11 @@ export function MultiStepForm() {
           </div>
         </div>
 
-        {/* Right Content Area */}
         <div className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-between">
           <div ref={formRef} className="flex-1">
             {renderStepContent()}
           </div>
 
-          {/* Navigation Buttons */}
           <div className="mt-12 pt-6 border-t border-border flex items-center justify-between">
             <Button
               type="button"

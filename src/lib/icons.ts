@@ -11,6 +11,7 @@ export {
   CallIcon as PhoneIcon,
   Cancel01Icon as CloseIcon,
   Delete02Icon as TrashIcon,
+  Download01Icon as DownloadIcon,
   Facebook01Icon as FacebookIcon,
   GlobalIcon as GlobeIcon,
   InstagramIcon,
@@ -23,6 +24,7 @@ export {
   PlusSignIcon as PlusIcon,
   QuoteUpIcon as QuoteIcon,
   Tick02Icon as CheckIcon,
+  TiktokIcon as TikTokIcon,
   YoutubeIcon as YouTubeIcon,
 } from "@hugeicons/core-free-icons";
 export type { IconSvgElement } from "@hugeicons/react";

@@ -6,6 +6,7 @@ import { AboutCreed } from "./_components/about-creed";
 import { AboutEmblem } from "./_components/about-emblem";
 import { AboutHero } from "./_components/about-hero";
 import { AboutOverview } from "./_components/about-overview";
+import { AboutPartners } from "./_components/about-partners";
 import { AboutStats } from "./_components/about-stats";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,10 +20,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [copy, institution, stats] = await Promise.all([
+  const [copy, institution, stats, partners] = await Promise.all([
     content.getAboutCopy(),
     content.getInstitution(),
     content.getStats(),
+    content.getPartners(),
   ]);
 
   return (
@@ -33,11 +35,8 @@ export default async function AboutPage() {
         overview={institution.overview}
         section={copy.sections.chronology}
       />
-      <AboutStats
-        image={copy.statsImage}
-        section={copy.sections.stats}
-        stats={stats}
-      />
+      <AboutPartners partners={partners} />
+
       <AboutCreed
         mission={institution.mission}
         section={copy.sections.creed}
@@ -47,6 +46,11 @@ export default async function AboutPage() {
         emblemStory={institution.emblemStory}
         petals={institution.values}
         section={copy.sections.emblem}
+      />
+      <AboutStats
+        image={copy.statsImage}
+        section={copy.sections.stats}
+        stats={stats}
       />
       <Testimonials section={copy.sections.testimonials} />
     </>

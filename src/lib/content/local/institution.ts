@@ -145,6 +145,12 @@ export const institution: InstitutionProfile = {
         href: "https://www.youtube.com/user/naminepal",
         destination: "external",
       },
+      {
+        platform: "tiktok",
+        label: "TikTok",
+        href: "https://www.tiktok.com/@namicollege",
+        destination: "external",
+      },
     ],
   },
 };

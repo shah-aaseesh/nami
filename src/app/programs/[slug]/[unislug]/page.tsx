@@ -4,14 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { Icon } from "@/components/ui/icon";
-import {
-  Display,
-  Eyebrow,
-  H3,
-  H4,
-  P,
-  Standfirst,
-} from "@/components/ui/typography";
+import { Display, Eyebrow, H3, H4, P } from "@/components/ui/typography";
 import { content } from "@/lib/content";
 import { ArrowRightIcon, CheckIcon, MortarboardIcon } from "@/lib/icons";
 import { createMetadata } from "@/lib/seo";

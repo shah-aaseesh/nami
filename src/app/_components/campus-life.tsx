@@ -48,12 +48,21 @@ export async function CampusLife() {
             <dl className="grid gap-x-8 sm:grid-cols-2">
               {pillars.map((pillar) => (
                 <div
-                  className="border-t pt-5 pb-6"
+                  className="group relative border-t pt-5 pb-6 transition-all duration-500 ease-out hover:-translate-y-2"
                   data-reveal-item=""
                   key={pillar.id}
                 >
-                  <H6 as="dt">{pillar.title}</H6>
-                  <P as="dd" className="mt-2">
+                  <span className="absolute -top-px left-0 h-px w-0 bg-accent transition-all duration-700 ease-out group-hover:w-full" />
+                  <H6
+                    as="dt"
+                    className="transition-colors duration-500 group-hover:text-accent"
+                  >
+                    {pillar.title}
+                  </H6>
+                  <P
+                    as="dd"
+                    className="mt-2 transition-opacity duration-500 group-hover:opacity-80"
+                  >
                     {pillar.lead}
                   </P>
                 </div>

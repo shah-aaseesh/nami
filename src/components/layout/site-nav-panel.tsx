@@ -128,9 +128,8 @@ export function SiteNavPanel({
           className="scale-125 my-6"
         />
         <p className="text-sm text-ink-muted leading-relaxed px-4">
-          NAMI College provides world-class education with state-of-the-art
-          facilities, empowering students to become future leaders and
-          innovators.
+          NAMI provides world-class education with state-of-the-art facilities,
+          empowering students to become future leaders and innovators.
         </p>
 
         {/* Banner */}

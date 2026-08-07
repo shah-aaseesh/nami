@@ -200,7 +200,7 @@ function buildHighlightCards(level: AcademicLevel): readonly HighlightCard[] {
         title: "Independent CAIE Examination Centre",
         subtitle: "Recognised by Cambridge Assessment International Education",
         description:
-          "NAMI College is an independent CAIE exam centre operating under strict Cambridge standards, offering global validation for A-Level candidates.",
+          "NAMI is an independent CAIE exam centre operating under strict Cambridge standards, offering global validation for A-Level candidates.",
         points: [
           "Independent CAIE exam centre status since 2024",
           "Official Cambridge past papers & marking schemes",
@@ -366,7 +366,7 @@ export async function generateMetadata({
     ? `${programme.title} (${programme.qualification})`
     : level.title;
   const paragraphs = paragraphsOf(level.summary);
-  const description = paragraphs[0] ?? `Explore ${title} at NAMI College.`;
+  const description = paragraphs[0] ?? `Explore ${title} at NAMI.`;
 
   return createMetadata({
     path: `/programs/${level.slug}`,

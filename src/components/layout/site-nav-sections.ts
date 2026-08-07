@@ -38,14 +38,14 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     descriptor: "Experience vibrant campus life.",
   },
   {
-    label: "Events & News",
+    label: "Resources",
     href: "/events",
-    descriptor: "Stay updated with latest happenings.",
-  },
-  {
-    label: "Gallery",
-    href: "/gallery",
-    descriptor: "A visual tour of our campus.",
+    descriptor: "Stay updated with latest happenings and view our gallery.",
+    children: [
+      { label: "Events", href: "/events" },
+      // { label: "News", href: "/news" },
+      { label: "Gallery", href: "/gallery" },
+    ],
   },
   { label: "Contact", href: "/contact", descriptor: "Get in touch with us." },
 ];

@@ -2,10 +2,10 @@ import type { AboutCopy } from "../types";
 import { auditoriumGathering, readingHall, studentsOnCampus } from "./images";
 
 export const aboutCopy: AboutCopy = {
-  metaTitle: "About NAMI College",
+  metaTitle: "About NAMI",
   metaDescription:
-    "The institution behind NAMI College in Kathmandu — its story and scale, mission and vision, the people who govern and teach it, and the red lotus the five values its petals carry.",
-  title: "The institution behind NAMI College.",
+    "The institution behind NAMI in Kathmandu — its story and scale, mission and vision, the people who govern and teach it, and the red lotus the five values its petals carry.",
+  title: "The institution behind NAMI.",
   standfirst:
     "One institute, two schools, and the five values carried in the petals of a red lotus.",
   openingImage: readingHall,

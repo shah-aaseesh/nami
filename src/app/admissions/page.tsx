@@ -7,7 +7,7 @@ import { AdmissionsClient } from "./_components/admissions-client";
 export const metadata: Metadata = createMetadata({
   path: "/admissions",
   title: "Admissions",
-  description: "Apply for admission to NAMI College and International School.",
+  description: "Apply for admission to NAMI and International School.",
 });
 
 export default function AdmissionsPage() {

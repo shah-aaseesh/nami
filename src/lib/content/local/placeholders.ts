@@ -71,7 +71,7 @@ export const placeholderNews: readonly Update[] = [
     kind: "news",
     title: "Placeholder news story, medium headline",
     excerpt:
-      "Placeholder copy. Nothing here is a statement about NAMI College; replace it with a real announcement before launch.",
+      "Placeholder copy. Nothing here is a statement about NAMI; replace it with a real announcement before launch.",
     publishedAt: isoDate("2023-11-10"),
     happensAt: null,
     venue: null,

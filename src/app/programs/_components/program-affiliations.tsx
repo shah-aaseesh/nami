@@ -22,9 +22,9 @@ export function ProgramAffiliations({
               Accreditation & Partner Bodies
             </H3>
             <P className="mt-4 max-w-md text-base text-ink-muted sm:mt-6 sm:text-lg">
-              NAMI College maintains rigorous academic quality assurance in
-              direct partnership with renowned international and national
-              awarding bodies.
+              NAMI maintains rigorous academic quality assurance in direct
+              partnership with renowned international and national awarding
+              bodies.
             </P>
           </div>
 

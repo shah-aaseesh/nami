@@ -23,8 +23,8 @@ export function FacultyHero() {
             <Reveal atFold delay={0.15}>
               <Standfirst className="text-ink-muted">
                 Meet the visionary leaders, dedicated academics, and experienced
-                management team who shape the future of NAMI College and inspire
-                our students to achieve greatness.
+                management team who shape the future of NAMI and inspire our
+                students to achieve greatness.
               </Standfirst>
             </Reveal>
           </div>

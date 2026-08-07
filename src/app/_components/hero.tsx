@@ -148,7 +148,7 @@ function HeroBadge({
           textLength={2 * Math.PI * BADGE_RADIUS}
         >
           <textPath href="#hero-badge-arc" lengthAdjust="spacing">
-            {`${ring} * `}
+            {` ${ring} * `}
           </textPath>
         </text>
       </svg>

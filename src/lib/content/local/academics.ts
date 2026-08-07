@@ -50,7 +50,7 @@ export const academicLevels: readonly AcademicLevel[] = [
     title: "Cambridge A-Level",
     stage: "Entry from SEE, GCSE, CBSE or equivalent",
     summary: richText(
-      "NAMI College offers the globally recognised Cambridge A-Level programme. The International A Level, regarded as the gold standard by Cambridge Assessment International Education, holds the same value as its UK equivalent for university admissions.",
+      "NAMI offers the globally recognised Cambridge A-Level programme. The International A Level, regarded as the gold standard by Cambridge Assessment International Education, holds the same value as its UK equivalent for university admissions.",
       "Since 2024 the college has been recognised as an independent CAIE examination centre, and offers subject combinations that prepare students for university study in Science, Medicine, Engineering, Business, Humanities and Liberal Arts.",
     ),
     highlights: [

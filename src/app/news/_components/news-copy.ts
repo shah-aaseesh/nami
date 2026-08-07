@@ -9,7 +9,7 @@ export const newsCopy = {
   meta: {
     title: "News and notices",
     description:
-      "Announcements and notices from NAMI College, Kathmandu — admissions, registration and everything the college needs students and parents to read.",
+      "Announcements and notices from NAMI, Kathmandu — admissions, registration and everything the college needs students and parents to read.",
   },
   masthead: {
     eyebrow: "News & notices",

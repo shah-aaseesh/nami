@@ -106,7 +106,7 @@ export type Affiliation = ContentEntry & {
   readonly levelSlug: Slug;
   readonly campusSlug: Slug;
   readonly note: string | null;
-  readonly logo: string | null;
+  readonly logo: string | ContentImage | null;
 };
 
 export type PartnerKind = "industry" | "technology" | "ecosystem";

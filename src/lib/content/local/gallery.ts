@@ -22,7 +22,7 @@ import {
 
 const campusSports: ContentImage = {
   src: "/nami/campus-sports.jpg",
-  alt: "Students on the NAMI college sports ground during a campus tournament or sports day.",
+  alt: "Students on the NAMI sports ground during a campus tournament or sports day.",
   width: 1000,
   height: 1500,
 };

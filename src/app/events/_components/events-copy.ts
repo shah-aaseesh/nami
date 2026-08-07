@@ -9,7 +9,7 @@ export const eventsCopy = {
   meta: {
     title: "Events",
     description:
-      "Tournaments, service camps, academic tours, orientations and guest lectures at NAMI College, Kathmandu — the college's own record of what it has hosted, newest first.",
+      "Tournaments, service camps, academic tours, orientations and guest lectures at NAMI, Kathmandu — the college's own record of what it has hosted, newest first.",
   },
   masthead: {
     eyebrow: "Events",

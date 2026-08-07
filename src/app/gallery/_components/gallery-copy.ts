@@ -19,7 +19,7 @@ export const galleryCopy = {
   meta: {
     title: "Gallery",
     description:
-      "Twenty photographs from a year at NAMI College, Kathmandu — campus, events, sport, academics, student life and graduation, filtered by category.",
+      "Twenty photographs from a year at NAMI, Kathmandu — campus, events, sport, academics, student life and graduation, filtered by category.",
   },
   masthead: {
     eyebrow: "Gallery",

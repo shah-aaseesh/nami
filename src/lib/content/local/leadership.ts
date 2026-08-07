@@ -101,10 +101,10 @@ const academics: readonly Leader[] = [
   {
     ...entryOf("leader-phillip-hilario"),
     name: "Mr. Phillip Badikar Hilario",
-    title: "A Level Principal, NAMI College",
+    title: "A Level Principal, NAMI",
     group: "academics",
     brief:
-      "A Level Principal at NAMI College with 21+ years in business and accounting education. Leads academic coordination, curriculum implementation and student development toward a culture of academic excellence.",
+      "A Level Principal at NAMI with 21+ years in business and accounting education. Leads academic coordination, curriculum implementation and student development toward a culture of academic excellence.",
     portrait: null,
   },
 ];

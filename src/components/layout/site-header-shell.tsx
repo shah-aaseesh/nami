@@ -96,10 +96,10 @@ function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
     >
       <button
         type="button"
-        className="flex items-center gap-1 font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent outline-none cursor-pointer"
+        className="flex items-center gap-1 font-body text-xs xl:text-sm font-medium text-ink uppercase transition-colors hover:text-accent outline-none cursor-pointer whitespace-nowrap"
       >
         {item.label}{" "}
-        <Icon ref={icon} icon={ChevronDownIcon} className="size-4" />
+        <Icon ref={icon} icon={ChevronDownIcon} className="size-4 shrink-0" />
       </button>
 
       <div
@@ -222,22 +222,22 @@ export function SiteHeaderShell({
             scrolled ? "h-16" : "h-20 lg:h-24",
           )}
         >
-          <Link href="/" className="flex items-center h-full">
+          <Link href="/" className="flex items-center h-full shrink-0">
             <SiteHeaderWordmark lead={wordmark.lead} tail={wordmark.tail} />
           </Link>
 
           <nav
             aria-label="Sections"
-            className="hidden flex-1 justify-center lg:flex"
+            className="hidden flex-1 justify-end lg:flex"
           >
-            <ul className="flex items-center gap-x-5 xl:gap-x-8">
+            <ul className="flex items-center gap-x-3 lg:gap-x-4 xl:gap-x-6 2xl:gap-x-8">
               {items.map((item) =>
                 item.children ? (
                   <DesktopNavDropdown key={item.label} item={item} />
                 ) : (
                   <li key={item.label}>
                     <Link
-                      className="font-body text-sm font-medium text-ink uppercase transition-colors hover:text-accent"
+                      className="font-body text-xs xl:text-sm font-medium text-ink uppercase transition-colors hover:text-accent whitespace-nowrap"
                       href={item.href as Route}
                     >
                       {item.label}
@@ -248,13 +248,13 @@ export function SiteHeaderShell({
             </ul>
           </nav>
 
-          <div className="flex items-center gap-x-5">
+          <div className="flex items-center gap-x-3 xl:gap-x-5 shrink-0">
             {call === null || call.href === null ? null : (
               <Link
-                className="hidden items-center gap-x-2 font-body text-sm font-medium text-ink transition-colors hover:text-accent xl:inline-flex"
+                className="hidden items-center gap-x-2 font-body text-xs xl:text-sm font-medium text-ink transition-colors hover:text-accent whitespace-nowrap xl:inline-flex"
                 href={call.href as Route}
               >
-                <Icon className="size-4" icon={PhoneIcon} />
+                <Icon className="size-4 shrink-0" icon={PhoneIcon} />
                 {call.label}
               </Link>
             )}

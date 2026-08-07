@@ -9,12 +9,12 @@ export const homeCopy: HomeCopy = {
       "Grade 1 to a Master's degree on one academic pathway — NEB, Cambridge and British qualifications, taught in Kathmandu.",
     primaryCta: {
       label: "Explore programmes",
-      href: "#programmes",
+      href: "/programs",
       destination: "internal",
     },
     secondaryCta: {
       label: "Admissions",
-      href: "#admission",
+      href: "/admissions",
       destination: "internal",
     },
     image: mustangTrip,

@@ -9,12 +9,12 @@ export const siteOrigin = (
 export const siteUrl = new URL(siteOrigin);
 
 export const siteConfig = {
-  name: "NAMI College",
+  name: "NAMI",
   legalName: "Naaya Aayam Multi-Disciplinary Institute",
-  title: "NAMI College — Transform yourself, to lead the world",
-  titleTemplate: "%s | NAMI College",
+  title: "NAMI — Transform yourself, to lead the world",
+  titleTemplate: "%s | NAMI",
   description:
-    "NAMI College, Kathmandu, established 2013 — Cambridge A-Level, +2 NEB and University of Northampton degree programmes at Naaya Aayam Multi-Disciplinary Institute.",
+    "NAMI, Kathmandu, established 2013 — Cambridge A-Level, +2 NEB and University of Northampton degree programmes at Naaya Aayam Multi-Disciplinary Institute.",
   locale: "en_US",
   themeColor: "#bc2125",
 } as const;

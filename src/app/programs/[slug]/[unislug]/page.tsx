@@ -51,8 +51,8 @@ export async function generateMetadata({
 
   return createMetadata({
     path: `/programs/${slug}/${unislug}`,
-    title: `${affiliation.body} — Programs at NAMI College`,
-    description: `Explore ${affiliation.scope} programmes offered in partnership with ${affiliation.body} at NAMI College.`,
+    title: `${affiliation.body} — Programs at NAMI`,
+    description: `Explore ${affiliation.scope} programmes offered in partnership with ${affiliation.body} at NAMI.`,
   });
 }
 

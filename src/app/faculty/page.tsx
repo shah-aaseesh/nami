@@ -7,7 +7,7 @@ import { FacultyHero } from "./_components/faculty-hero";
 export const metadata: Metadata = {
   title: "Faculty & Leadership",
   description:
-    "Meet the visionary leaders, dedicated academics, and experienced management team who shape the future of NAMI College.",
+    "Meet the visionary leaders, dedicated academics, and experienced management team who shape the future of NAMI.",
 };
 
 export default async function FacultyPage() {

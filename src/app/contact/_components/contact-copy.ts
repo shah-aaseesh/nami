@@ -9,7 +9,7 @@ export const contactCopy = {
   meta: {
     title: "Contact",
     description:
-      "Reach NAMI College in Kathmandu — email, phone, campus locations at Gokarneshwor-7 and New Baneshwor, and a message form for admissions and general enquiries.",
+      "Reach NAMI in Kathmandu — email, phone, campus locations at Gokarneshwor-7 and New Baneshwor, and a message form for admissions and general enquiries.",
   },
   masthead: {
     eyebrow: "Contact",

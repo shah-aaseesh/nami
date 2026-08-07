@@ -65,7 +65,7 @@ export const basketballPrizeGiving: ContentImage = {
 
 export const pragatiRaiPortrait: ContentImage = {
   src: "/nami/alumna-pragati-rai.jpg",
-  alt: "Portrait of Pragati Rai, NAMI College A-Level alumna.",
+  alt: "Portrait of Pragati Rai, NAMI A-Level alumna.",
   width: 192,
   height: 192,
 };
@@ -86,7 +86,7 @@ export const ecoClubFrame: ContentImage = {
 
 export const mascotDesignEntry: ContentImage = {
   src: "/nami/event-mascot.jpg",
-  alt: "A mascot design entry titled The Swan — a white swan rising from a red lotus, laid out beside the NAMI College wordmark on a red and white board.",
+  alt: "A mascot design entry titled The Swan — a white swan rising from a red lotus, laid out beside the NAMI wordmark on a red and white board.",
   width: 800,
   height: 563,
 };
@@ -114,7 +114,7 @@ export const bachelorOrientation: ContentImage = {
 
 export const convocationCeremony: ContentImage = {
   src: "/nami/event-convocation-2022.jpg",
-  alt: "NAMI graduands in gowns and blue hoods throwing their caps in the air in front of a Convocation Ceremony 2022 backdrop carrying the NAMI College and University of Northampton marks.",
+  alt: "NAMI graduands in gowns and blue hoods throwing their caps in the air in front of a Convocation Ceremony 2022 backdrop carrying the NAMI and University of Northampton marks.",
   width: 800,
   height: 449,
 };

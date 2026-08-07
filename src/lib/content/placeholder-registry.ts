@@ -28,12 +28,6 @@ export function isPlaceholderShaped(value: string): boolean {
   return MARKER_PATTERNS.some((pattern) => pattern.test(value));
 }
 
-function claimPath(path: string): void {
-  if (records.has(path)) {
-    throw new TypeError(`Duplicate placeholder path: "${path}"`);
-  }
-}
-
 function collectStrings(data: unknown, into: string[]): void {
   if (typeof data === "string") {
     into.push(data);
@@ -57,7 +51,6 @@ export function placeholderText(
   kind: PlaceholderKind,
   value: string,
 ): string {
-  claimPath(path);
   if (!isPlaceholderShaped(value)) {
     throw new TypeError(
       `Placeholder "${path}" does not read as a placeholder: "${value}"`,
@@ -73,7 +66,6 @@ export function placeholderData<T>(
   kind: PlaceholderKind,
   data: T,
 ): T {
-  claimPath(path);
   const strings: string[] = [];
   collectStrings(data, strings);
   const marked = strings.filter(isPlaceholderShaped);

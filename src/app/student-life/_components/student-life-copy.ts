@@ -2,7 +2,7 @@ export const studentLifeCopy = {
   meta: {
     title: "Student Life at NAMI",
     description:
-      "Discover the vibrant student life, sustainability initiatives, and community at NAMI College.",
+      "Discover the vibrant student life, sustainability initiatives, and community at NAMI.",
   },
   masthead: {
     title: "Student Life",

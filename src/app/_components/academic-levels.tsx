@@ -26,6 +26,7 @@ export async function AcademicLevels() {
   const panels: readonly LevelPanel[] = levels.map((level) => ({
     campus: campuses.get(level.campusSlug) ?? null,
     id: level.id,
+    slug: level.slug,
     image: level.image,
     lead:
       level.summary.kind === "blocks"

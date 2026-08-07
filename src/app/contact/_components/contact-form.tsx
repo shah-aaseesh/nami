@@ -6,6 +6,15 @@ import type { FocusEvent, FormEvent, ReactNode } from "react";
 import { useId, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { H5, P } from "@/components/ui/typography";
 import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -17,8 +26,7 @@ type FieldName = (typeof FIELDS)[number];
 type FieldErrors = Partial<Record<FieldName, string>>;
 type FormControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
-const controlStyles =
-  "w-full rounded-sm border border-input bg-surface-raised px-4 py-3 font-body text-base text-ink placeholder:text-ink-muted";
+const controlStyles = "font-body text-base text-ink placeholder:text-ink-muted";
 const labelStyles = "block font-body text-sm font-medium text-ink";
 const errorStyles = "mt-2 font-body text-sm text-accent";
 
@@ -175,7 +183,7 @@ export function ContactForm({
           htmlFor={fieldId("name")}
           label={copy.labels.name}
         >
-          <input
+          <Input
             aria-describedby={describedBy("name")}
             aria-invalid={errors.name !== undefined}
             autoComplete="name"
@@ -192,7 +200,7 @@ export function ContactForm({
           htmlFor={fieldId("email")}
           label={copy.labels.email}
         >
-          <input
+          <Input
             aria-describedby={describedBy("email")}
             aria-invalid={errors.email !== undefined}
             autoComplete="email"
@@ -209,7 +217,7 @@ export function ContactForm({
           htmlFor={fieldId("phone")}
           label={copy.labels.phone}
         >
-          <input
+          <Input
             aria-describedby={describedBy("phone")}
             aria-invalid={errors.phone !== undefined}
             autoComplete="tel"
@@ -225,24 +233,23 @@ export function ContactForm({
           htmlFor={fieldId("topic")}
           label={copy.labels.topic}
         >
-          <select
-            aria-describedby={describedBy("topic")}
-            aria-invalid={errors.topic !== undefined}
-            className={controlStyles}
-            defaultValue=""
-            id={fieldId("topic")}
-            name="topic"
-            required
-          >
-            <option disabled value="">
-              {copy.topicPlaceholder}
-            </option>
-            {topics.map((topic) => (
-              <option key={topic} value={topic}>
-                {topic}
-              </option>
-            ))}
-          </select>
+          <Select name="topic" required>
+            <SelectTrigger
+              id={fieldId("topic")}
+              aria-describedby={describedBy("topic")}
+              aria-invalid={errors.topic !== undefined}
+              className={controlStyles}
+            >
+              <SelectValue placeholder={copy.topicPlaceholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {topics.map((topic) => (
+                <SelectItem key={topic} value={topic}>
+                  {topic}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </Field>
 
         <Field
@@ -251,7 +258,7 @@ export function ContactForm({
           htmlFor={fieldId("message")}
           label={copy.labels.message}
         >
-          <textarea
+          <Textarea
             aria-describedby={describedBy("message")}
             aria-invalid={errors.message !== undefined}
             className={cn(controlStyles, "resize-y")}

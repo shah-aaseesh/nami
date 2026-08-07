@@ -83,6 +83,15 @@ export function SmoothScrollProvider({
     scannedPath.current = pathname;
 
     const smoother = ScrollSmoother.get();
+    if (smoother) {
+      const target = hashTarget();
+      if (target) {
+        smoother.scrollTo(target, true, "top top");
+      } else {
+        smoother.scrollTo(0, false);
+      }
+    }
+
     const content = contentRef.current;
     if (!smoother || !content) return;
 

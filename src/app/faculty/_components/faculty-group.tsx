@@ -1,19 +1,13 @@
 "use client";
 
-import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import { Icon } from "@/components/ui/icon";
 import { H3, P } from "@/components/ui/typography";
 import type { Leader } from "@/lib/content";
-import { Icon } from "@/components/ui/icon";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { LinkedInIcon, TwitterIcon } from "@/lib/icons";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
-}
 
 export function FacultyGroup({
   leaders,
@@ -26,38 +20,43 @@ export function FacultyGroup({
   const trackRef = useRef<HTMLDivElement>(null);
   const isScrollable = leaders.length > 3;
 
-  useGSAP(() => {
-    if (!isScrollable || !trackRef.current || !sectionRef.current) return;
+  useGSAP(
+    () => {
+      if (!isScrollable || !trackRef.current || !sectionRef.current) return;
 
-    let mm = gsap.matchMedia();
+      const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1024px)", () => {
-      const getScrollAmount = () => {
-        return trackRef.current ? trackRef.current.scrollWidth - trackRef.current.offsetWidth : 0;
-      };
+      mm.add("(min-width: 1024px)", () => {
+        const getScrollAmount = () => {
+          return trackRef.current
+            ? trackRef.current.scrollWidth - trackRef.current.offsetWidth
+            : 0;
+        };
 
-      const tween = gsap.to(trackRef.current, {
-        x: () => -getScrollAmount(),
-        ease: "none",
+        const tween = gsap.to(trackRef.current, {
+          x: () => -getScrollAmount(),
+          ease: "none",
+        });
+
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          pin: true,
+          animation: tween,
+          scrub: 1,
+          end: () => `+=${getScrollAmount()}`,
+          invalidateOnRefresh: true,
+          snap: {
+            snapTo: 1 / (leaders.length - 3),
+            duration: 0.2,
+            ease: "power1.inOut",
+          },
+        });
       });
 
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        pin: true,
-        animation: tween,
-        scrub: 1,
-        end: () => `+=${getScrollAmount()}`,
-        invalidateOnRefresh: true,
-        snap: {
-          snapTo: 1 / (leaders.length - 3),
-          duration: 0.2,
-          ease: "power1.inOut"
-        }
-      });
-    });
-
-    return () => mm.revert();
-  }, { dependencies: [isScrollable], scope: sectionRef });
+      return () => mm.revert();
+    },
+    { dependencies: [isScrollable], scope: sectionRef },
+  );
 
   if (leaders.length === 0) return null;
 
@@ -68,21 +67,21 @@ export function FacultyGroup({
           {title}
         </H3>
 
-        <div 
+        <div
           className={
-            isScrollable 
-              ? "flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:overflow-visible lg:flex-nowrap" 
+            isScrollable
+              ? "flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:overflow-visible lg:flex-nowrap"
               : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           }
           ref={trackRef}
         >
           {leaders.map((leader) => (
-            <div 
+            <div
               className={`group flex flex-col shrink-0 snap-center ${
-                isScrollable 
-                  ? "w-[85vw] sm:w-[45vw] lg:w-[calc((100%-4rem)/3)]" 
+                isScrollable
+                  ? "w-[85vw] sm:w-[45vw] lg:w-[calc((100%-4rem)/3)]"
                   : "w-full"
-              }`} 
+              }`}
               key={leader.id}
             >
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-neutral-100 border border-border/40">
@@ -107,14 +106,20 @@ export function FacultyGroup({
                   </div>
                 )}
                 <div className="absolute inset-0 ring-1 ring-inset ring-ink/10 rounded-2xl" />
-                
+
                 {/* Hover Overlay with Social Icons */}
                 <div className="absolute inset-0 bg-ink/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center gap-4">
-                  <Link href="#" className="flex size-10 items-center justify-center rounded-full bg-white text-ink hover:bg-accent hover:text-white transition-colors translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 duration-500 delay-75">
+                  <Link
+                    href="#"
+                    className="flex size-10 items-center justify-center rounded-full bg-white text-ink hover:bg-accent hover:text-white transition-colors translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 duration-500 delay-75"
+                  >
                     <Icon icon={LinkedInIcon} className="size-4" />
                     <span className="sr-only">LinkedIn</span>
                   </Link>
-                  <Link href="#" className="flex size-10 items-center justify-center rounded-full bg-white text-ink hover:bg-accent hover:text-white transition-colors translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 duration-500 delay-150">
+                  <Link
+                    href="#"
+                    className="flex size-10 items-center justify-center rounded-full bg-white text-ink hover:bg-accent hover:text-white transition-colors translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 duration-500 delay-150"
+                  >
                     <Icon icon={TwitterIcon} className="size-4" />
                     <span className="sr-only">Twitter</span>
                   </Link>

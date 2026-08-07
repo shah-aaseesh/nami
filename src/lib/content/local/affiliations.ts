@@ -11,7 +11,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("school"),
     campusSlug: slug("gokarneshwor"),
     note: null,
-    logo: null,
+    logo: "/universities/neb.png",
   },
   {
     ...entryOf("neb-plus-two"),
@@ -21,7 +21,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("plus-two"),
     campusSlug: slug("gokarneshwor"),
     note: null,
-    logo: null,
+    logo: "/universities/neb.png",
   },
   {
     ...entryOf("cambridge"),
@@ -31,7 +31,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("a-level"),
     campusSlug: slug("gokarneshwor"),
     note: null,
-    logo: null,
+    logo: "/universities/cambridge.png",
   },
   {
     ...entryOf("northampton"),
@@ -41,7 +41,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelor-master"),
     campusSlug: slug("new-baneshwor"),
     note: null,
-    logo: null,
+    logo: "/universities/northampton.png",
   },
   {
     ...entryOf("kathmandu-university"),
@@ -51,6 +51,6 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelor-master"),
     campusSlug: slug("new-baneshwor"),
     note: null,
-    logo: null,
+    logo: "/universities/Kathmandu_University_Logo.webp",
   },
 ];

@@ -183,7 +183,7 @@ function HeroSocials({
 }) {
   return (
     <div className={cn("flex items-center gap-6", className)}>
-      <ul className="flex items-center gap-6">
+      <ul className="flex flex-col items-center gap-5">
         {profiles.map((profile) => (
           <li key={profile.platform}>
             <Link
@@ -198,9 +198,6 @@ function HeroSocials({
           </li>
         ))}
       </ul>
-      <p className="font-body text-xs tracking-widest text-ink-muted uppercase">
-        Follow
-      </p>
     </div>
   );
 }
@@ -258,7 +255,7 @@ export async function Hero() {
         <div className="mt-16 lg:mt-24 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <Reveal
             atFold
-            className="flex flex-wrap items-center gap-x-10 gap-y-8 lg:col-span-2 lg:flex-col lg:items-start lg:gap-12"
+            className="relative flex items-center justify-center lg:col-span-2 lg:flex-col lg:items-start lg:gap-12"
             delay={0.5}
           >
             <HeroBadge
@@ -267,7 +264,10 @@ export async function Hero() {
               watch={watch ?? null}
             />
             {socials.length === 0 ? null : (
-              <HeroSocials className="lg:hidden" profiles={socials} />
+              <HeroSocials
+                className="absolute left-0 top-1/2 -translate-y-1/2 flex-col lg:hidden"
+                profiles={socials}
+              />
             )}
           </Reveal>
 

@@ -22,7 +22,9 @@ export function FacultyHero() {
           <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:flex lg:flex-col lg:justify-between lg:self-end">
             <Reveal atFold delay={0.15}>
               <Standfirst className="text-ink-muted">
-                Meet the visionary leaders, dedicated academics, and experienced management team who shape the future of NAMI College and inspire our students to achieve greatness.
+                Meet the visionary leaders, dedicated academics, and experienced
+                management team who shape the future of NAMI College and inspire
+                our students to achieve greatness.
               </Standfirst>
             </Reveal>
           </div>

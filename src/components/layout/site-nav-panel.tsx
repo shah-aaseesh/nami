@@ -12,13 +12,11 @@ import {
 } from "@/components/ui/accordion";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { H3, P } from "@/components/ui/typography";
 import { gsap, useGSAP } from "@/lib/gsap";
 import {
   FacebookIcon,
   InstagramIcon,
   LocationIcon,
-  MailIcon,
   PhoneIcon,
   TwitterIcon,
 } from "@/lib/icons";
@@ -141,6 +139,7 @@ export function SiteNavPanel({
             src="/nami/campus-library.jpg"
             alt="Campus Library"
             fill
+            sizes="336px"
             className="absolute inset-0 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

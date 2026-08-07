@@ -11,10 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function FacultyPage() {
-  const [leadership, institution] = await Promise.all([
-    content.getLeadership(),
-    content.getInstitution(),
-  ]);
+  const leadership = await content.getLeadership();
 
   return (
     <main className="flex-1 bg-white">
@@ -30,8 +27,6 @@ export default async function FacultyPage() {
 
         <FacultyGroup leaders={leadership.board} title="Board of Directors" />
       </div>
-
-
     </main>
   );
 }

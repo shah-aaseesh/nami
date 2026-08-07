@@ -435,19 +435,14 @@ export default async function ProgramDetailPage({ params }: PageProps) {
           levelTitle={level.title}
         />
       </div>
-
-      <ProgrammesList levelTitle={level.title} programmes={levelProgrammes} />
+      <ProgramAffiliations affiliations={levelAffiliations} />
 
       <ScrubbedBentoGallery
         images={galleryImages}
         subtitle="Take a visual tour of our campus, specialized laboratories, library reading rooms, and active student spaces."
         title={`${level.title} Learning Environment`}
       />
-
-      <ProgramAffiliations
-        affiliations={levelAffiliations}
-        levelTitle={level.title}
-      />
+      <ProgrammesList levelTitle={level.title} programmes={levelProgrammes} />
 
       <ProgramAdmissionCta
         admissionCall={admissionCall}

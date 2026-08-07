@@ -97,13 +97,18 @@ export function PinnedHighlightsPanels({
         </div>
 
         <div
-          className="relative md:h-[500px] lg:h-[540px] md:overflow-hidden md:rounded-3xl"
+          className={cn(
+            "relative",
+            cards.length > 1 &&
+              "md:h-[500px] lg:h-[540px] md:overflow-hidden md:rounded-3xl",
+          )}
           ref={cardsWrapperRef}
         >
           {cards.map((card, idx) => (
             <article
               className={cn(
-                "relative top-0 left-0 mb-6 last:mb-0 flex w-full flex-col justify-between rounded-2xl border border-neutral-800 bg-neutral-900/95 p-5 sm:p-6 shadow-2xl backdrop-blur-md md:absolute md:mb-0 md:h-full md:p-10 lg:p-12",
+                "relative top-0 left-0 mb-6 last:mb-0 flex w-full flex-col justify-between rounded-2xl border border-neutral-800 bg-neutral-900/95 p-5 sm:p-6 shadow-2xl backdrop-blur-md md:p-10 lg:p-12",
+                cards.length > 1 && "md:absolute md:mb-0 md:h-full",
                 card.accentClass,
               )}
               data-pinned-panel=""

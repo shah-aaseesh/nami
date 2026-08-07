@@ -149,9 +149,9 @@ export function TestimonialsCarousel({
           <div className="flex items-center gap-3">
             <Button
               aria-label="Previous testimonial"
-              className="rounded-full"
+              className="rounded-full border border-border-strong text-ink hover:border-accent hover:text-accent"
               onClick={() => goTo(index - 1)}
-              size="icon"
+              size="icon-lg"
               variant="quiet"
             >
               <Icon className="rotate-180" icon={ArrowRightIcon} />
@@ -159,9 +159,9 @@ export function TestimonialsCarousel({
             <div className="relative">
               <Button
                 aria-label="Next testimonial"
-                className="rounded-full"
+                className="rounded-full border border-border-strong text-ink hover:border-accent hover:text-accent"
                 onClick={() => goTo(index + 1)}
-                size="icon"
+                size="icon-lg"
                 variant="quiet"
               >
                 <Icon icon={ArrowRightIcon} />

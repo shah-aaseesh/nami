@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
-import type { Route } from "next";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Button, buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
 import { Eyebrow, P } from "@/components/ui/typography";
 
 export default function ErrorPage({

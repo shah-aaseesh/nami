@@ -110,8 +110,8 @@ export const institution: InstitutionProfile = {
       },
       {
         label: "college.nami.edu.np",
-        href: "https://college.nami.edu.np",
-        destination: "legacy",
+        href: "https://college.nami.edu.np/",
+        destination: "external",
       },
     ],
     socialProfiles: [

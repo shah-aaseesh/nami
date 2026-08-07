@@ -222,7 +222,7 @@ export function SiteHeaderShell({
             scrolled ? "h-16" : "h-20 lg:h-24",
           )}
         >
-          <Link href="/">
+          <Link href="/" className="flex items-center h-full">
             <SiteHeaderWordmark lead={wordmark.lead} tail={wordmark.tail} />
           </Link>
 
@@ -262,9 +262,13 @@ export function SiteHeaderShell({
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
                 render={
-                  <Button size="sm" variant="quiet">
+                  <Button
+                    size="sm"
+                    variant="quiet"
+                    className="border border-border-strong rounded-md px-4 flex items-center justify-center gap-2"
+                  >
                     Menu
-                    <Icon icon={MenuIcon} />
+                    <Icon icon={MenuIcon} className="size-4" />
                   </Button>
                 }
               />

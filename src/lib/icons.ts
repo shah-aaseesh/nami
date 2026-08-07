@@ -1,9 +1,10 @@
 export {
   ArrowDown01Icon as ChevronDownIcon,
+  ArrowLeft01Icon as ArrowLeftIcon,
   ArrowLeft01Icon as ChevronLeftIcon,
   ArrowRight01Icon as ChevronRightIcon,
-  ArrowUp01Icon as ChevronUpIcon,
   ArrowRight01Icon as ArrowRightIcon,
+  ArrowUp01Icon as ChevronUpIcon,
   ArrowUpRight01Icon as ArrowUpRightIcon,
   Asterisk02Icon as AsteriskIcon,
   Calendar03Icon as CalendarIcon,

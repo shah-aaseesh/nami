@@ -66,7 +66,6 @@ function CampusEntry({ campus }: { campus: Campus }) {
   return (
     <li>
       <H6 as="h4">{campus.locality}</H6>
-      <p className="mt-1 font-body text-sm text-ink-muted">{campus.city}</p>
       <ul className="mt-4 flex flex-col gap-y-1 font-body text-sm text-ink-muted">
         {campus.hosts.map((host) => (
           <li key={host}>{host}</li>

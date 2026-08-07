@@ -2,13 +2,10 @@
 
 import type { Route } from "next";
 import Image from "next/image";
-import { useRef } from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { useRef } from "react";
+import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { H2, P } from "@/components/ui/typography";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { ArrowRightIcon, CheckIcon } from "@/lib/icons";
@@ -207,11 +204,15 @@ export function AdmissionsClient() {
                   </ul>
                 </div>
 
-                <Link 
+                <Link
                   href={`https://${prog.link}` as Route}
-                  className={buttonVariants({ variant: "quiet", className: "w-full sm:w-auto self-start" })}
+                  className={buttonVariants({
+                    variant: "quiet",
+                    className: "w-full sm:w-auto self-start",
+                  })}
                 >
-                  Download Form <Icon icon={ArrowRightIcon} className="ml-2 size-4" />
+                  Download Form{" "}
+                  <Icon icon={ArrowRightIcon} className="ml-2 size-4" />
                 </Link>
               </div>
             ))}
@@ -219,16 +220,21 @@ export function AdmissionsClient() {
         </div>
       </section>
 
-      <section className="bg-surface-muted border-t border-border section-y gutter-x">
+      <section
+        className="bg-surface-muted border-t border-border section-y gutter-x"
+        id="apply"
+      >
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
             Start Your Application
           </H2>
           <P className="text-ink-muted text-lg">
-            Ready to apply? Submit your details through our comprehensive application form below and our admissions team will guide you through the process.
+            Ready to apply? Submit your details through our comprehensive
+            application form below and our admissions team will guide you
+            through the process.
           </P>
         </div>
-        
+
         <MultiStepForm />
       </section>
     </div>

@@ -71,7 +71,7 @@ export function ProgrammesList({
               <div className="mt-6 border-border/60 border-t pt-4">
                 <Link
                   className="inline-flex items-center gap-1.5 font-body text-xs font-semibold uppercase tracking-widest text-accent transition-colors hover:text-primary-800"
-                  href="/admissions"
+                  href="/admissions#apply"
                 >
                   <span>Apply for This Stream</span>
                   <Icon className="size-3.5" icon={ArrowRightIcon} />

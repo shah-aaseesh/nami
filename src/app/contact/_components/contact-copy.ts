@@ -46,7 +46,7 @@ export const contactCopy = {
     topicPlaceholder: "Choose a subject",
     topicGeneral: "General enquiry",
     topicOther: "Something else",
-    submit: "Open email and send",
+    submit: "Send",
     subjectPrefix: "Website enquiry",
     draftHeading: "Your email app should be open.",
     draftBody: (email: string) =>

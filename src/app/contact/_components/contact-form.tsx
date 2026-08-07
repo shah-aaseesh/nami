@@ -1,9 +1,11 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { Route } from "next";
 import Link from "next/link";
 import type { FocusEvent, FormEvent, ReactNode } from "react";
 import { useId, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
@@ -17,13 +19,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { H5, P } from "@/components/ui/typography";
 import { ArrowUpRightIcon } from "@/lib/icons";
+import { type ContactFormData, contactSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 import { contactCopy } from "./contact-copy";
 
 const FIELDS = ["name", "email", "phone", "topic", "message"] as const;
 
 type FieldName = (typeof FIELDS)[number];
-type FieldErrors = Partial<Record<FieldName, string>>;
 type FormControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 const controlStyles = "font-body text-base text-ink placeholder:text-ink-muted";
@@ -43,9 +45,8 @@ function controlOf(form: HTMLFormElement, name: FieldName): FormControl | null {
   return isFormControl(node) ? node : null;
 }
 
-function draftHref(email: string, form: HTMLFormElement): string {
-  const data = new FormData(form);
-  const read = (name: FieldName) => String(data.get(name) ?? "").trim();
+function draftHref(email: string, values: ContactFormData): string {
+  const read = (name: FieldName) => values[name].trim();
   const phone = read("phone");
   const topic = read("topic");
 
@@ -102,37 +103,51 @@ export function ContactForm({
   topics: readonly string[];
 }) {
   const uid = useId();
-  const [errors, setErrors] = useState<FieldErrors>({});
   const [attempted, setAttempted] = useState(false);
   const [draft, setDraft] = useState<string | null>(null);
   const copy = contactCopy.form;
+  const {
+    control,
+    register,
+    trigger,
+    getValues,
+    getFieldState,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    mode: "onTouched",
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      topic: "",
+      message: "",
+    },
+  });
 
   const fieldId = (name: FieldName) => `${uid}-${name}`;
+  const errorOf = (name: FieldName) => errors[name]?.message;
   const describedBy = (name: FieldName) =>
-    errors[name] === undefined ? undefined : `${fieldId(name)}-error`;
+    errorOf(name) === undefined ? undefined : `${fieldId(name)}-error`;
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     setAttempted(true);
 
-    const next: FieldErrors = {};
-    for (const name of FIELDS) {
-      const control = controlOf(form, name);
-      if (control !== null && !control.checkValidity()) {
-        next[name] = control.validationMessage;
-      }
-    }
-    setErrors(next);
-
-    const firstInvalid = FIELDS.find((name) => next[name] !== undefined);
-    if (firstInvalid !== undefined) {
+    const valid = await trigger();
+    if (!valid) {
       setDraft(null);
-      controlOf(form, firstInvalid)?.focus();
+      const firstInvalid = FIELDS.find(
+        (name) => getFieldState(name).error !== undefined,
+      );
+      if (firstInvalid !== undefined) {
+        controlOf(form, firstInvalid)?.focus();
+      }
       return;
     }
 
-    const href = draftHref(email, form);
+    const href = draftHref(email, getValues());
     setDraft(href);
     window.location.href = href;
   }
@@ -143,11 +158,7 @@ export function ContactForm({
     if (!isFormControl(control)) return;
     const name = FIELDS.find((field) => field === control.name);
     if (name === undefined) return;
-
-    setErrors((current) => ({
-      ...current,
-      [name]: control.checkValidity() ? undefined : control.validationMessage,
-    }));
+    void trigger(name);
   }
 
   return (
@@ -179,7 +190,7 @@ export function ContactForm({
         onSubmit={handleSubmit}
       >
         <Field
-          error={errors.name}
+          error={errorOf("name")}
           htmlFor={fieldId("name")}
           label={copy.labels.name}
         >
@@ -189,14 +200,14 @@ export function ContactForm({
             autoComplete="name"
             className={controlStyles}
             id={fieldId("name")}
-            name="name"
             required
             type="text"
+            {...register("name")}
           />
         </Field>
 
         <Field
-          error={errors.email}
+          error={errorOf("email")}
           htmlFor={fieldId("email")}
           label={copy.labels.email}
         >
@@ -206,14 +217,14 @@ export function ContactForm({
             autoComplete="email"
             className={controlStyles}
             id={fieldId("email")}
-            name="email"
             required
             type="email"
+            {...register("email")}
           />
         </Field>
 
         <Field
-          error={errors.phone}
+          error={errorOf("phone")}
           htmlFor={fieldId("phone")}
           label={copy.labels.phone}
         >
@@ -223,38 +234,49 @@ export function ContactForm({
             autoComplete="tel"
             className={controlStyles}
             id={fieldId("phone")}
-            name="phone"
             type="tel"
+            {...register("phone")}
           />
         </Field>
 
         <Field
-          error={errors.topic}
+          error={errorOf("topic")}
           htmlFor={fieldId("topic")}
           label={copy.labels.topic}
         >
-          <Select name="topic" required>
-            <SelectTrigger
-              id={fieldId("topic")}
-              aria-describedby={describedBy("topic")}
-              aria-invalid={errors.topic !== undefined}
-              className={controlStyles}
-            >
-              <SelectValue placeholder={copy.topicPlaceholder} />
-            </SelectTrigger>
-            <SelectContent>
-              {topics.map((topic) => (
-                <SelectItem key={topic} value={topic}>
-                  {topic}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <Controller
+            control={control}
+            name="topic"
+            render={({ field }) => (
+              <Select
+                name="topic"
+                required
+                value={field.value}
+                onValueChange={field.onChange}
+              >
+                <SelectTrigger
+                  id={fieldId("topic")}
+                  aria-describedby={describedBy("topic")}
+                  aria-invalid={errors.topic !== undefined}
+                  className={controlStyles}
+                >
+                  <SelectValue placeholder={copy.topicPlaceholder} />
+                </SelectTrigger>
+                <SelectContent>
+                  {topics.map((topic) => (
+                    <SelectItem key={topic} value={topic}>
+                      {topic}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
         </Field>
 
         <Field
           className="sm:col-span-2"
-          error={errors.message}
+          error={errorOf("message")}
           htmlFor={fieldId("message")}
           label={copy.labels.message}
         >
@@ -264,9 +286,9 @@ export function ContactForm({
             className={cn(controlStyles, "resize-y")}
             id={fieldId("message")}
             maxLength={2000}
-            name="message"
             required
             rows={6}
+            {...register("message")}
           />
         </Field>
 

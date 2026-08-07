@@ -1,9 +1,18 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import gsap from "gsap";
 import type React from "react";
 import { useRef, useState } from "react";
+import {
+  type Control,
+  Controller,
+  type UseFormRegister,
+  useFieldArray,
+  useForm,
+  useWatch,
+} from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -25,6 +34,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { H2, H3, P } from "@/components/ui/typography";
 import { ArrowRightIcon, CalendarIcon, CheckIcon } from "@/lib/icons";
+import { type AdmissionsFormData, admissionsSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
 const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -75,126 +85,227 @@ const STEPS = [
   "Additional Info & Signatures",
 ];
 
+function QualificationRow({
+  control,
+  register,
+  index,
+  showRemove,
+  onRemove,
+}: {
+  control: Control<AdmissionsFormData>;
+  register: UseFormRegister<AdmissionsFormData>;
+  index: number;
+  showRemove: boolean;
+  onRemove: () => void;
+}) {
+  return (
+    <div className="p-5 rounded-xl border border-border bg-surface-muted/50 relative">
+      {showRemove && (
+        <button
+          type="button"
+          onClick={onRemove}
+          className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
+        >
+          <TrashIcon className="size-4" />
+        </button>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+        <div className="flex flex-col gap-2">
+          <Label>Place of Study</Label>
+          <Input {...register(`qualifications.${index}.place`)} />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label>Dates Attended</Label>
+          <Input
+            placeholder="e.g. 2018 - 2022"
+            {...register(`qualifications.${index}.dates`)}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label>Awards / Grades</Label>
+          <Input
+            placeholder="e.g. GPA 3.8 / A+"
+            {...register(`qualifications.${index}.awards`)}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label>Date Obtained</Label>
+          <Controller
+            control={control}
+            name={`qualifications.${index}.dateObtained`}
+            render={({ field }) => (
+              <Popover>
+                <PopoverTrigger
+                  render={
+                    <Button
+                      type="button"
+                      className={cn(
+                        "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
+                        !field.value && "text-ink-muted",
+                      )}
+                    >
+                      <Icon icon={CalendarIcon} className="mr-2 h-4 w-4" />
+                      {field.value ? (
+                        format(new Date(field.value), "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                    </Button>
+                  }
+                />
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value ? new Date(field.value) : undefined}
+                    onSelect={(date) =>
+                      field.onChange(date ? date.toISOString() : null)
+                    }
+                  />
+                </PopoverContent>
+              </Popover>
+            )}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EmploymentRow({
+  register,
+  index,
+  showRemove,
+  onRemove,
+}: {
+  register: UseFormRegister<AdmissionsFormData>;
+  index: number;
+  showRemove: boolean;
+  onRemove: () => void;
+}) {
+  return (
+    <div className="p-5 rounded-xl border border-border bg-surface-muted/50 relative">
+      {showRemove && (
+        <button
+          type="button"
+          onClick={onRemove}
+          className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
+        >
+          <TrashIcon className="size-4" />
+        </button>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+        <div className="flex flex-col gap-2">
+          <Label>Employer Name & Address</Label>
+          <Input {...register(`employment.${index}.employer`)} />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label>Dates (From - To)</Label>
+          <Input
+            placeholder="e.g. Jan 2021 - Present"
+            {...register(`employment.${index}.dates`)}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label>Position Held</Label>
+          <Input {...register(`employment.${index}.position`)} />
+        </div>
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <Label>Brief Description of Duties</Label>
+          <Textarea {...register(`employment.${index}.duties`)} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function MultiStepForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const formRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // --- Form State ---
-  const [formData, setFormData] = useState({
-    program: "",
-    proposedCourse: "",
-    title: "",
-    surname: "",
-    firstName: "",
-    dob: null as Date | null,
-    nationality: "",
-    telephone: "",
-    email: "",
-    photo: null as File | null,
-    specialNeeds: false,
-    fatherName: "",
-    fatherContact: "",
-    fatherEmail: "",
-    fatherJob: "",
-    motherName: "",
-    motherContact: "",
-    motherEmail: "",
-    motherJob: "",
-    secondaryContact: "",
-    relationship: "",
-    qualifications: [
-      {
-        id: 1,
-        place: "",
-        dates: "",
-        awards: "",
-        dateObtained: null as Date | null,
-      },
-    ],
-    pendingQualifications: "",
-    employment: [{ id: 1, dates: "", employer: "", position: "", duties: "" }],
-    personalStatement: "",
-    howDidYouHear: [] as string[],
-    criminalRecord: null as File | null,
-    signature: "",
-    signatureDate: null as Date | null,
-  });
-
-  const handleInputChange = (
-    field: string,
-    value:
-      | string
-      | boolean
-      | File
-      | Date
-      | readonly string[]
-      | null
-      | undefined,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const addQualification = () => {
-    setFormData((prev) => ({
-      ...prev,
+  const { control, register, setValue } = useForm<AdmissionsFormData>({
+    resolver: zodResolver(admissionsSchema),
+    defaultValues: {
+      program: "",
+      proposedCourse: "",
+      title: "",
+      surname: "",
+      firstName: "",
+      dob: null,
+      nationality: "",
+      telephone: "",
+      email: "",
+      photo: null,
+      specialNeeds: false,
+      fatherName: "",
+      fatherContact: "",
+      fatherEmail: "",
+      fatherJob: "",
+      motherName: "",
+      motherContact: "",
+      motherEmail: "",
+      motherJob: "",
+      secondaryContact: "",
+      relationship: "",
       qualifications: [
-        ...prev.qualifications,
         {
-          id: Date.now(),
+          id: "1",
           place: "",
           dates: "",
           awards: "",
           dateObtained: null,
         },
       ],
-    }));
-  };
+      pendingQualifications: "",
+      employment: [
+        { id: "1", dates: "", employer: "", position: "", duties: "" },
+      ],
+      personalStatement: "",
+      howDidYouHear: [],
+      criminalRecord: null,
+      signature: "",
+      signatureDate: null,
+    },
+  });
 
-  const removeQualification = (id: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      qualifications: prev.qualifications.filter((q) => q.id !== id),
-    }));
-  };
+  const {
+    fields: qualificationFields,
+    append: appendQualification,
+    remove: removeQualification,
+  } = useFieldArray({
+    control,
+    name: "qualifications",
+  });
 
-  const updateQualification = (
-    id: number,
-    field: string,
-    value: string | Date | null | undefined,
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      qualifications: prev.qualifications.map((q) =>
-        q.id === id ? { ...q, [field]: value } : q,
-      ),
-    }));
+  const {
+    fields: employmentFields,
+    append: appendEmployment,
+    remove: removeEmployment,
+  } = useFieldArray({
+    control,
+    name: "employment",
+  });
+
+  const howDidYouHear = useWatch({ control, name: "howDidYouHear" }) ?? [];
+
+  const addQualification = () => {
+    appendQualification({
+      id: crypto.randomUUID(),
+      place: "",
+      dates: "",
+      awards: "",
+      dateObtained: null,
+    });
   };
 
   const addEmployment = () => {
-    setFormData((prev) => ({
-      ...prev,
-      employment: [
-        ...prev.employment,
-        { id: Date.now(), dates: "", employer: "", position: "", duties: "" },
-      ],
-    }));
-  };
-
-  const removeEmployment = (id: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      employment: prev.employment.filter((e) => e.id !== id),
-    }));
-  };
-
-  const updateEmployment = (id: number, field: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      employment: prev.employment.map((e) =>
-        e.id === id ? { ...e, [field]: value } : e,
-      ),
-    }));
+    appendEmployment({
+      id: crypto.randomUUID(),
+      dates: "",
+      employer: "",
+      position: "",
+      duties: "",
+    });
   };
 
   const goToStep = (step: number) => {
@@ -226,29 +337,35 @@ export function MultiStepForm() {
             <div className="space-y-4">
               <div className="flex flex-col gap-2">
                 <Label>Program</Label>
-                <Select
-                  onValueChange={(val) => handleInputChange("program", val)}
-                  value={formData.program}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a program" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="school">School Level (I-VII)</SelectItem>
-                    <SelectItem value="plus2">+2 Programs</SelectItem>
-                    <SelectItem value="alevel">Cambridge A-Level</SelectItem>
-                    <SelectItem value="bachelor">Bachelor Programs</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Controller
+                  control={control}
+                  name="program"
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a program" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="school">
+                          School Level (I-VII)
+                        </SelectItem>
+                        <SelectItem value="plus2">+2 Programs</SelectItem>
+                        <SelectItem value="alevel">
+                          Cambridge A-Level
+                        </SelectItem>
+                        <SelectItem value="bachelor">
+                          Bachelor Programs
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <Label>Proposed Course/s</Label>
                 <Input
                   placeholder="e.g. Science, Management, BSc Computing..."
-                  value={formData.proposedCourse}
-                  onChange={(e) =>
-                    handleInputChange("proposedCourse", e.target.value)
-                  }
+                  {...register("proposedCourse")}
                 />
               </div>
             </div>
@@ -263,76 +380,66 @@ export function MultiStepForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
                 <Label>First Name</Label>
-                <Input
-                  value={formData.firstName}
-                  onChange={(e) =>
-                    handleInputChange("firstName", e.target.value)
-                  }
-                />
+                <Input {...register("firstName")} />
               </div>
               <div className="flex flex-col gap-2">
                 <Label>Surname</Label>
-                <Input
-                  value={formData.surname}
-                  onChange={(e) => handleInputChange("surname", e.target.value)}
-                />
+                <Input {...register("surname")} />
               </div>
               <div className="flex flex-col gap-2">
                 <Label>Date of Birth</Label>
-                <Popover>
-                  <PopoverTrigger
-                    render={
-                      <Button
-                        type="button"
-                        className={cn(
-                          "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
-                          !formData.dob && "text-ink-muted",
-                        )}
-                      >
-                        <Icon icon={CalendarIcon} className="mr-2 h-4 w-4" />
-                        {formData.dob ? (
-                          format(formData.dob, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    }
-                  />
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={formData.dob ?? undefined}
-                      onSelect={(date) => handleInputChange("dob", date)}
-                    />
-                  </PopoverContent>
-                </Popover>
+                <Controller
+                  control={control}
+                  name="dob"
+                  render={({ field }) => (
+                    <Popover>
+                      <PopoverTrigger
+                        render={
+                          <Button
+                            type="button"
+                            className={cn(
+                              "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
+                              !field.value && "text-ink-muted",
+                            )}
+                          >
+                            <Icon
+                              icon={CalendarIcon}
+                              className="mr-2 h-4 w-4"
+                            />
+                            {field.value ? (
+                              format(new Date(field.value), "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                          </Button>
+                        }
+                      />
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={
+                            field.value ? new Date(field.value) : undefined
+                          }
+                          onSelect={(date) =>
+                            field.onChange(date ? date.toISOString() : null)
+                          }
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <Label>Nationality</Label>
-                <Input
-                  value={formData.nationality}
-                  onChange={(e) =>
-                    handleInputChange("nationality", e.target.value)
-                  }
-                />
+                <Input {...register("nationality")} />
               </div>
               <div className="flex flex-col gap-2">
                 <Label>Telephone Number</Label>
-                <Input
-                  type="tel"
-                  value={formData.telephone}
-                  onChange={(e) =>
-                    handleInputChange("telephone", e.target.value)
-                  }
-                />
+                <Input type="tel" {...register("telephone")} />
               </div>
               <div className="flex flex-col gap-2">
                 <Label>Email Address</Label>
-                <Input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                />
+                <Input type="email" {...register("email")} />
               </div>
               <div className="flex flex-col gap-2 md:col-span-2">
                 <Label>Photo Upload</Label>
@@ -340,17 +447,23 @@ export function MultiStepForm() {
                   type="file"
                   accept="image/*"
                   onChange={(e) =>
-                    handleInputChange("photo", e.target.files?.[0] || null)
+                    setValue("photo", e.target.files?.[0] || null)
                   }
                 />
               </div>
               <div className="flex items-start space-x-3 md:col-span-2 mt-2">
-                <Checkbox
-                  id="specialNeeds"
-                  checked={formData.specialNeeds}
-                  onCheckedChange={(checked) =>
-                    handleInputChange("specialNeeds", checked)
-                  }
+                <Controller
+                  control={control}
+                  name="specialNeeds"
+                  render={({ field }) => (
+                    <Checkbox
+                      id="specialNeeds"
+                      checked={field.value}
+                      onCheckedChange={(checked) =>
+                        field.onChange(checked === true)
+                      }
+                    />
+                  )}
                 />
                 <Label
                   htmlFor="specialNeeds"
@@ -377,41 +490,19 @@ export function MultiStepForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
                   <Label>Name</Label>
-                  <Input
-                    value={formData.fatherName}
-                    onChange={(e) =>
-                      handleInputChange("fatherName", e.target.value)
-                    }
-                  />
+                  <Input {...register("fatherName")} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Contact Number</Label>
-                  <Input
-                    type="tel"
-                    value={formData.fatherContact}
-                    onChange={(e) =>
-                      handleInputChange("fatherContact", e.target.value)
-                    }
-                  />
+                  <Input type="tel" {...register("fatherContact")} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Email</Label>
-                  <Input
-                    type="email"
-                    value={formData.fatherEmail}
-                    onChange={(e) =>
-                      handleInputChange("fatherEmail", e.target.value)
-                    }
-                  />
+                  <Input type="email" {...register("fatherEmail")} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Job Designation</Label>
-                  <Input
-                    value={formData.fatherJob}
-                    onChange={(e) =>
-                      handleInputChange("fatherJob", e.target.value)
-                    }
-                  />
+                  <Input {...register("fatherJob")} />
                 </div>
               </div>
             </div>
@@ -423,41 +514,19 @@ export function MultiStepForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
                   <Label>Name</Label>
-                  <Input
-                    value={formData.motherName}
-                    onChange={(e) =>
-                      handleInputChange("motherName", e.target.value)
-                    }
-                  />
+                  <Input {...register("motherName")} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Contact Number</Label>
-                  <Input
-                    type="tel"
-                    value={formData.motherContact}
-                    onChange={(e) =>
-                      handleInputChange("motherContact", e.target.value)
-                    }
-                  />
+                  <Input type="tel" {...register("motherContact")} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Email</Label>
-                  <Input
-                    type="email"
-                    value={formData.motherEmail}
-                    onChange={(e) =>
-                      handleInputChange("motherEmail", e.target.value)
-                    }
-                  />
+                  <Input type="email" {...register("motherEmail")} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Job Designation</Label>
-                  <Input
-                    value={formData.motherJob}
-                    onChange={(e) =>
-                      handleInputChange("motherJob", e.target.value)
-                    }
-                  />
+                  <Input {...register("motherJob")} />
                 </div>
               </div>
             </div>
@@ -469,22 +538,11 @@ export function MultiStepForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
                   <Label>Secondary Contact Number</Label>
-                  <Input
-                    type="tel"
-                    value={formData.secondaryContact}
-                    onChange={(e) =>
-                      handleInputChange("secondaryContact", e.target.value)
-                    }
-                  />
+                  <Input type="tel" {...register("secondaryContact")} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Relationship to Student</Label>
-                  <Input
-                    value={formData.relationship}
-                    onChange={(e) =>
-                      handleInputChange("relationship", e.target.value)
-                    }
-                  />
+                  <Input {...register("relationship")} />
                 </div>
               </div>
             </div>
@@ -508,87 +566,15 @@ export function MultiStepForm() {
             </div>
 
             <div className="space-y-6">
-              {formData.qualifications.map((qual) => (
-                <div
-                  key={qual.id}
-                  className="p-5 rounded-xl border border-border bg-surface-muted/50 relative"
-                >
-                  {formData.qualifications.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeQualification(qual.id)}
-                      className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
-                    >
-                      <TrashIcon className="size-4" />
-                    </button>
-                  )}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    <div className="flex flex-col gap-2">
-                      <Label>Place of Study</Label>
-                      <Input
-                        value={qual.place}
-                        onChange={(e) =>
-                          updateQualification(qual.id, "place", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label>Dates Attended</Label>
-                      <Input
-                        placeholder="e.g. 2018 - 2022"
-                        value={qual.dates}
-                        onChange={(e) =>
-                          updateQualification(qual.id, "dates", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label>Awards / Grades</Label>
-                      <Input
-                        placeholder="e.g. GPA 3.8 / A+"
-                        value={qual.awards}
-                        onChange={(e) =>
-                          updateQualification(qual.id, "awards", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label>Date Obtained</Label>
-                      <Popover>
-                        <PopoverTrigger
-                          render={
-                            <Button
-                              type="button"
-                              className={cn(
-                                "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
-                                !qual.dateObtained && "text-ink-muted",
-                              )}
-                            >
-                              <Icon
-                                icon={CalendarIcon}
-                                className="mr-2 h-4 w-4"
-                              />
-                              {qual.dateObtained ? (
-                                format(qual.dateObtained, "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                            </Button>
-                          }
-                        />
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={qual.dateObtained ?? undefined}
-                            onSelect={(date) =>
-                              updateQualification(qual.id, "dateObtained", date)
-                            }
-                          />
-                        </PopoverContent>
-                      </Popover>
-                    </div>
-                  </div>
-                </div>
+              {qualificationFields.map((field, index) => (
+                <QualificationRow
+                  key={field.id}
+                  control={control}
+                  register={register}
+                  index={index}
+                  showRemove={qualificationFields.length > 1}
+                  onRemove={() => removeQualification(index)}
+                />
               ))}
             </div>
 
@@ -600,11 +586,8 @@ export function MultiStepForm() {
                 <Label>Are you currently awaiting any results?</Label>
                 <Textarea
                   placeholder="Please list any exams taken for which results are pending..."
-                  value={formData.pendingQualifications}
-                  onChange={(e) =>
-                    handleInputChange("pendingQualifications", e.target.value)
-                  }
                   className="min-h-[100px]"
+                  {...register("pendingQualifications")}
                 />
               </div>
             </div>
@@ -628,60 +611,14 @@ export function MultiStepForm() {
             </div>
 
             <div className="space-y-6">
-              {formData.employment.map((emp) => (
-                <div
-                  key={emp.id}
-                  className="p-5 rounded-xl border border-border bg-surface-muted/50 relative"
-                >
-                  {formData.employment.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeEmployment(emp.id)}
-                      className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
-                    >
-                      <TrashIcon className="size-4" />
-                    </button>
-                  )}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    <div className="flex flex-col gap-2">
-                      <Label>Employer Name & Address</Label>
-                      <Input
-                        value={emp.employer}
-                        onChange={(e) =>
-                          updateEmployment(emp.id, "employer", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label>Dates (From - To)</Label>
-                      <Input
-                        placeholder="e.g. Jan 2021 - Present"
-                        value={emp.dates}
-                        onChange={(e) =>
-                          updateEmployment(emp.id, "dates", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label>Position Held</Label>
-                      <Input
-                        value={emp.position}
-                        onChange={(e) =>
-                          updateEmployment(emp.id, "position", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2 md:col-span-2">
-                      <Label>Brief Description of Duties</Label>
-                      <Textarea
-                        value={emp.duties}
-                        onChange={(e) =>
-                          updateEmployment(emp.id, "duties", e.target.value)
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
+              {employmentFields.map((field, index) => (
+                <EmploymentRow
+                  key={field.id}
+                  register={register}
+                  index={index}
+                  showRemove={employmentFields.length > 1}
+                  onRemove={() => removeEmployment(index)}
+                />
               ))}
             </div>
           </div>
@@ -700,11 +637,8 @@ export function MultiStepForm() {
                   Please provide a brief statement supporting your application.
                 </P>
                 <Textarea
-                  value={formData.personalStatement}
-                  onChange={(e) =>
-                    handleInputChange("personalStatement", e.target.value)
-                  }
                   className="min-h-[120px]"
+                  {...register("personalStatement")}
                 />
               </div>
 
@@ -722,19 +656,17 @@ export function MultiStepForm() {
                     <div key={option} className="flex items-center space-x-2">
                       <Checkbox
                         id={`hear-${option}`}
-                        checked={formData.howDidYouHear.includes(option)}
+                        checked={howDidYouHear.includes(option)}
                         onCheckedChange={(checked) => {
                           if (checked) {
-                            handleInputChange("howDidYouHear", [
-                              ...formData.howDidYouHear,
+                            setValue("howDidYouHear", [
+                              ...howDidYouHear,
                               option,
                             ]);
                           } else {
-                            handleInputChange(
+                            setValue(
                               "howDidYouHear",
-                              formData.howDidYouHear.filter(
-                                (o) => o !== option,
-                              ),
+                              howDidYouHear.filter((o) => o !== option),
                             );
                           }
                         }}
@@ -758,10 +690,7 @@ export function MultiStepForm() {
                 <Input
                   type="file"
                   onChange={(e) =>
-                    handleInputChange(
-                      "criminalRecord",
-                      e.target.files?.[0] || null,
-                    )
+                    setValue("criminalRecord", e.target.files?.[0] || null)
                   }
                 />
               </div>
@@ -776,47 +705,50 @@ export function MultiStepForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                   <div className="flex flex-col gap-2">
                     <Label>Student Signature (Type Name)</Label>
-                    <Input
-                      value={formData.signature}
-                      onChange={(e) =>
-                        handleInputChange("signature", e.target.value)
-                      }
-                    />
+                    <Input {...register("signature")} />
                   </div>
                   <div className="flex flex-col gap-2">
                     <Label>Date</Label>
-                    <Popover>
-                      <PopoverTrigger
-                        render={
-                          <Button
-                            type="button"
-                            className={cn(
-                              "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
-                              !formData.signatureDate && "text-ink-muted",
-                            )}
-                          >
-                            <Icon
-                              icon={CalendarIcon}
-                              className="mr-2 h-4 w-4"
+                    <Controller
+                      control={control}
+                      name="signatureDate"
+                      render={({ field }) => (
+                        <Popover>
+                          <PopoverTrigger
+                            render={
+                              <Button
+                                type="button"
+                                className={cn(
+                                  "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
+                                  !field.value && "text-ink-muted",
+                                )}
+                              >
+                                <Icon
+                                  icon={CalendarIcon}
+                                  className="mr-2 h-4 w-4"
+                                />
+                                {field.value ? (
+                                  format(new Date(field.value), "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                              </Button>
+                            }
+                          />
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={
+                                field.value ? new Date(field.value) : undefined
+                              }
+                              onSelect={(date) =>
+                                field.onChange(date ? date.toISOString() : null)
+                              }
                             />
-                            {formData.signatureDate ? (
-                              format(formData.signatureDate, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                          </Button>
-                        }
-                      />
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.signatureDate ?? undefined}
-                          onSelect={(date) =>
-                            handleInputChange("signatureDate", date)
-                          }
-                        />
-                      </PopoverContent>
-                    </Popover>
+                          </PopoverContent>
+                        </Popover>
+                      )}
+                    />
                   </div>
                 </div>
               </div>

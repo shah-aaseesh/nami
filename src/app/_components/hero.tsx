@@ -144,7 +144,7 @@ export async function Hero() {
   const railLines = institution.campuses.map((campus) => campus.locality);
 
   return (
-    <section className="relative isolate gutter-x section-y" id="hero">
+    <section className="relative isolate gutter-x section-y-hero" id="hero">
       <div className="relative mx-auto max-w-page lg:ps-14">
         {railLines.length === 0 ? null : <HeroRail lines={railLines} />}
 

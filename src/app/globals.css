@@ -146,9 +146,9 @@
   --gutter-x: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem);
 
   /* Spacing Design System Tokens */
-  --spacing-section-py: clamp(2.5rem, 1.5rem + 2vw, 4.5rem);
+  --spacing-section-py: clamp(3.5rem, 2rem + 3vw, 6rem);
   --spacing-section-py-compact: clamp(1.5rem, 1rem + 1vw, 2.5rem);
-  --spacing-section-py-hero: clamp(2rem, 1.5rem + 1.5vw, 3.5rem);
+  --spacing-section-py-hero: clamp(1.5rem, 1.25rem + 1vw, 2.75rem);
 }
 
 @utility gutter-x {

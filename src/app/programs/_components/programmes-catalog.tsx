@@ -114,7 +114,7 @@ export function ProgrammesCatalog({
                   <Link
                     className="inline-flex items-center gap-1.5 font-body text-xs font-semibold uppercase tracking-widest text-accent transition-colors hover:text-primary-800"
                     href={
-                      `/programs/${programme.levelSlug}#${programme.slug}` as Route
+                      `/programs/${programme.levelSlug}` as Route
                     }
                   >
                     <span>{parentLevel?.title ?? "Level"} Program Details</span>

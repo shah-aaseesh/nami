@@ -10,7 +10,7 @@ export function ProgramsHero({
   readonly levels: readonly AcademicLevel[];
 }) {
   return (
-    <section className="gutter-x section-y pb-10 lg:pb-16">
+    <section className="gutter-x section-y-hero">
       <div className="mx-auto max-w-page">
         <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">

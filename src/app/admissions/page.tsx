@@ -13,7 +13,7 @@ export const metadata: Metadata = createMetadata({
 export default function AdmissionsPage() {
   return (
     <>
-      <section className="gutter-x section-y pb-0 lg:pb-0">
+      <section className="gutter-x section-y">
         <div className="mx-auto max-w-page">
           <div className="mt-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:gap-x-10">
             <div className="lg:col-span-7">

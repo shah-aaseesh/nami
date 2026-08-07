@@ -123,7 +123,7 @@ export function AdmissionsClient() {
   return (
     <div ref={container} className="w-full">
       {/* ScrollTrigger Pinned Image Section */}
-      <section className="gutter-x mt-16 lg:mt-24 mb-24">
+      <section className="gutter-x mt-16 lg:mt-24">
         <div
           ref={sectionRef}
           className="mx-auto max-w-page relative lg:grid lg:grid-cols-12 lg:gap-16"

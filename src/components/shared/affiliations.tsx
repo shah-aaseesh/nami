@@ -83,23 +83,18 @@ function AffiliationStation({ item }: { item: Affiliation }) {
   );
 }
 
-export async function Affiliations() {
-  const [copy, affiliations] = await Promise.all([
-    content.getHomeCopy(),
-    content.getAffiliations(),
-  ]);
-
-  const accreditation = copy.sections.affiliations;
+export async function Affiliations({ section }: { section: SectionCopy }) {
+  const affiliations = await content.getAffiliations();
   const timeline = [...affiliations].sort((a, b) => a.sinceYear - b.sinceYear);
 
   return (
     <section className="gutter-x section-y" id="affiliations">
       <div className="mx-auto max-w-page">
-        <SectionHead copy={accreditation} />
+        <SectionHead copy={section} />
 
         {timeline.length === 0 ? (
-          accreditation.emptyState === null ? null : (
-            <P className="mt-12 lg:w-5/12">{accreditation.emptyState}</P>
+          section.emptyState === null ? null : (
+            <P className="mt-12 lg:w-5/12">{section.emptyState}</P>
           )
         ) : (
           <Reveal className="mt-12 lg:mt-16" delay={0.2} stagger={0.08}>

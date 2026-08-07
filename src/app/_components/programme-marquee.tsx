@@ -51,7 +51,7 @@ export async function ProgrammeMarquee() {
   ];
 
   return (
-    <section className="gutter-x section-y-compact" id="programmes">
+    <section className="gutter-x section-y" id="programmes">
       {programmes.length === 0 ? null : (
         <Reveal className="bleed-x" stagger={0.12}>
           <RevealItem className="field-ink py-4">

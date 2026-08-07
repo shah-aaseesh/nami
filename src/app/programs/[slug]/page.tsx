@@ -5,7 +5,7 @@ import { content, paragraphsOf } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import type { HighlightCard } from "../_components/pinned-highlights-panels";
 import { PinnedHighlightsPanels } from "../_components/pinned-highlights-panels";
-import { ProgramAdmissionCta } from "../_components/program-admission-cta";
+import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { ProgramAffiliations } from "../_components/program-affiliations";
 import { ProgramDetailHero } from "../_components/program-detail-hero";
 import { ProgrammesList } from "../_components/programmes-list";
@@ -442,11 +442,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
       />
       <ProgrammesList levelTitle={level.title} programmes={levelProgrammes} />
 
-      <ProgramAdmissionCta
-        admissionCall={admissionCall}
-        contact={institution.contact}
-        levelTitle={level.title}
-      />
+      <AdmissionsFormSection />
     </>
   );
 }

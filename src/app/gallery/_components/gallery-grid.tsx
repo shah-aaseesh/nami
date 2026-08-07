@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   GALLERY_CATEGORIES,
   type GalleryCategory,
   type GalleryItem,
 } from "@/lib/content";
-import { Flip, gsap } from "@/lib/gsap";
+import { Flip, gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { galleryCategoryLabel } from "./gallery-copy";
 
@@ -33,7 +33,7 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
   );
   const prevActiveRef = useRef(active);
 
-  useEffect(() => {
+  useGSAP(() => {
     const root = rootRef.current;
     const stage = stageRef.current;
     if (!root || !stage) return;
@@ -92,7 +92,7 @@ export function GalleryGrid({ items }: { items: readonly GalleryItem[] }) {
       heightTween.kill();
       stage.style.height = "";
     };
-  }, [active, items]);
+  }, { dependencies: [active, items], scope: rootRef });
 
   const toggle = (id: FilterId) => {
     setActive((prev) => {

@@ -1,0 +1,5 @@
+ Fixed Accessibility Defaults: Enforced the matchMotion wrapper in admissions-client.tsx so that users with prefers-reduced-motion enabled are respected.# [FRONTEND]
+
+- **ScrollSmoother + Next.js Dynamic Routing:** ScrollTrigger coordinates will become stale if late-loading images or client-side navigation push content down after GSAP initialization. Always attach a debounced `ResizeObserver` to the smooth-content wrapper to call `ScrollTrigger.refresh()` (e.g. 150ms debounce) and ensure a small timeout refresh on pathname changes. Do not use an un-debounced ResizeObserver if continuous height animations (like Flip filters) are used, as it causes massive jank by recalculating every frame.
+- **Strict Mode + Flip/useGSAP:** Always use `useGSAP()` or explicit cleanup for `Flip.getState`/`Flip.from` in React. Raw `useEffect` leaves zombie tweens and orphaned states on double-mount in Strict Mode.
+- **SplitText on Resize:** If `SplitText` invokes an `onSplit` callback that creates a `ScrollTrigger`, ensure the previous tween/trigger is `.kill()`ed before creating the new one to avoid memory leaks.

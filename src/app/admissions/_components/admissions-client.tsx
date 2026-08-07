@@ -8,7 +8,7 @@ import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { H2, P } from "@/components/ui/typography";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { useAdmissionsParallax } from "@/hooks/motion/use-admissions-parallax";
 import { ArrowRightIcon, CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
@@ -72,53 +72,7 @@ export function AdmissionsClient() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      if (!container.current) return;
-
-      const section = sectionRef.current;
-      const leftCol = leftColRef.current;
-      const sections = gsap.utils.toArray<HTMLElement>(".program-section");
-      const images = gsap.utils.toArray<HTMLElement>(".program-image");
-
-      if (section && leftCol) {
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top 128px",
-          end: "bottom bottom",
-          pin: leftCol,
-          anticipatePin: 1,
-        });
-      }
-
-      sections.forEach((sec, i) => {
-        ScrollTrigger.create({
-          trigger: sec,
-          start: "top center",
-          end: "bottom center",
-          onEnter: () => {
-            images.forEach((img, index) => {
-              gsap.to(img, {
-                opacity: i === index ? 1 : 0,
-                duration: 0.4,
-                overwrite: "auto",
-              });
-            });
-          },
-          onEnterBack: () => {
-            images.forEach((img, index) => {
-              gsap.to(img, {
-                opacity: i === index ? 1 : 0,
-                duration: 0.4,
-                overwrite: "auto",
-              });
-            });
-          },
-        });
-      });
-    },
-    { scope: container },
-  );
+  useAdmissionsParallax(container, sectionRef, leftColRef);
 
   return (
     <div ref={container} className="w-full">

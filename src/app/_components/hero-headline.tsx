@@ -21,18 +21,21 @@ export function HeroHeadline({ lead, tail, className }: HeroHeadlineProps) {
             const el = root.current;
             if (!el) return;
 
+            let currentTween: gsap.core.Tween | null = null;
             const split = SplitText.create(el, {
               type: "lines",
               mask: "lines",
               aria: "auto",
               autoSplit: true,
-              onSplit: (self) =>
-                gsap.from(self.lines, {
+              onSplit: (self) => {
+                currentTween?.kill();
+                currentTween = gsap.from(self.lines, {
                   yPercent: 110,
                   duration: 1.1,
                   ease: "power4.out",
                   stagger: 0.09,
-                }),
+                });
+              },
             });
 
             return () => {

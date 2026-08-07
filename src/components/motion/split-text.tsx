@@ -58,13 +58,15 @@ export function SplitText({
             const el = root.current;
             if (!el) return;
 
+            let currentTween: gsap.core.Tween | null = null;
             const split = GsapSplitText.create(el, {
               type: SPLIT_TYPE[type],
               mask: type,
               aria: "auto",
               autoSplit: true,
-              onSplit: (self) =>
-                gsap.from(self[type], {
+              onSplit: (self) => {
+                currentTween?.kill();
+                currentTween = gsap.from(self[type], {
                   yPercent,
                   duration,
                   delay,
@@ -73,7 +75,8 @@ export function SplitText({
                   scrollTrigger: atFold
                     ? undefined
                     : { trigger: el, start, once },
-                }),
+                });
+              },
             });
 
             if (!isHeading) {

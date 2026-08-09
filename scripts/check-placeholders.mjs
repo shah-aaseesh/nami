@@ -33,6 +33,7 @@ const graph = {
   campusLife: await content.getCampusLife(),
   admissionCalls: await content.getAdmissionCalls(),
   updates: await content.getUpdates(),
+  gallery: await content.getGallery(),
   testimonials: await content.getTestimonials(),
   homeCopy: await content.getHomeCopy(),
   aboutCopy: await content.getAboutCopy(),

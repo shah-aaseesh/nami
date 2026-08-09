@@ -12,12 +12,16 @@ import {
   plantationProgramme,
   serviceCamp,
 } from "./images";
-import { placeholderNews, preRegistrationNoticeExcerpt } from "./placeholders";
+import {
+  placeholderUpdates,
+  preRegistrationNoticeExcerpt,
+} from "./placeholders";
 
 const published: readonly Update[] = [
   {
     ...entryOf("motivational-stories-second-session"),
     kind: "event",
+    institution: "institute",
     title:
       "Second Session of the most awaited talk program “Motivational Stories by Inspirational Leaders of Change”",
     excerpt:
@@ -35,6 +39,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("motivational-stories-first-session"),
     kind: "event",
+    institution: null,
     title: "Motivational Stories by Inspirational Leaders of Change",
     excerpt:
       "NAMI is proud to launch a new monthly series featuring three motivational speakers from various walks of life. NAMI kicked off our series of motivational speeches featuring the country's best in their respective fields, Ms. Vidushi Rana, Dr. Bishal Dhakal and Mr. Anil Keshary Shah. The stories shared by all three speakers were relatable, motivational, and deeply moving.",
@@ -51,6 +56,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("nami-see-3x3-basketball-tournament"),
     kind: "event",
+    institution: null,
     title: "NAMI SEE 3x3 Basketball Tournament",
     excerpt:
       "We are thrilled to announce the successful conclusion of the NAMI SEE 3x3 Basketball Tournament! A huge thank you to all the participants for their dedication and sportsmanship.",
@@ -67,6 +73,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("pre-registration-open-for-a-level"),
     kind: "notice",
+    institution: "college",
     title: "Pre Registration open for A Level",
     excerpt: preRegistrationNoticeExcerpt,
     publishedAt: isoDate("2024-04-02"),
@@ -82,6 +89,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("social-camp"),
     kind: "event",
+    institution: null,
     title: "Social Camp",
     excerpt:
       "NAMI organized a transformative Social Camp at Shree Ganesh Basic School in Sindhupalchowk from January 27th to 28th, aimed at making a positive impact on the local community. The primary focus of the event was to extend assistance to underprivileged children and uplift the overall welfare of the community.",
@@ -98,6 +106,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("christmas-event-city-campus"),
     kind: "event",
+    institution: null,
     title: "Christmas Event, NAMI City Campus",
     excerpt:
       "We are delighted to share the tremendous success of the X-Mas Event, a culmination of festive cheer, laughter, and camaraderie, aimed to provide an unforgettable experience for both students and faculty. The venue was transformed into a festive wonderland, adorned with vibrant Christmas decorations, including two beautifully crafted trees made of cardboard boxes and paper.",
@@ -114,6 +123,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("christmas-blood-donation-drive"),
     kind: "event",
+    institution: "college",
     title:
       "NAMI A-Level Students Embrace the Spirit of Giving through Christmas Blood Donation Drive",
     excerpt:
@@ -131,6 +141,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("tour-of-mustang-and-muktinath"),
     kind: "event",
+    institution: "college",
     title: "NAMI A-Levels students Tour of Mustang & Muktinath",
     excerpt:
       "The NAMI organized an enriching 3 Nights, 4 Days Tour for A-Levels students to explore the picturesque region of Mustang and visit the sacred Muktinath temple.",
@@ -147,6 +158,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("welcome-programme-kwality-beach-resort"),
     kind: "event",
+    institution: "college",
     title: "NAMI A-Levels: A Welcoming Spectacle at Kwality Beach Resort",
     excerpt:
       "NAMI hosted a vibrant welcome Program on July 29, 2023, for its A-Level students at Kwality Beach Resort, Mulkot, and the event was nothing short of magical.",
@@ -163,6 +175,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("eco-club-environment-day"),
     kind: "event",
+    institution: null,
     title: "Eco Club's Environment Day Program",
     excerpt:
       'NAMI Eco Club orchestrated a captivating Environment Day program that left a lasting impact on approximately 30 participants. The event, dedicated to fostering environmental awareness, featured a thought-provoking photo exhibition and an engaging photo contest centered around the theme of "Nature."',
@@ -179,6 +192,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("mascot-design-competition"),
     kind: "event",
+    institution: null,
     title:
       "Unleashing Creativity: The Ultimate College Mascot Design Competition",
     excerpt:
@@ -196,6 +210,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("elite-2023"),
     kind: "event",
+    institution: "institute",
     title: "ELITE 2023",
     excerpt:
       "Elite 2023, an inter-college business competition was meticulously organized to showcase undergraduates' skills in finance, marketing, and management.",
@@ -212,6 +227,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("climate-change-panel-discussion"),
     kind: "event",
+    institution: null,
     title:
       'Panel Discussion on "Climate Change: Impacts and the Global Response"',
     excerpt:
@@ -229,6 +245,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("welcome-undergrads-orientation-2022"),
     kind: "event",
+    institution: "institute",
     title: "Welcome Undergrads Orientation 2022",
     excerpt:
       "NAMI welcomes the new batch of BSc. Computing, BSc. Environment Science, and BBA Management. The orientation was held at Diamond Hill Resort with a fun-packed orientation session, skillful activities, and a gaming session.",
@@ -245,6 +262,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("convocation-day-2022"),
     kind: "event",
+    institution: "institute",
     title:
       "Triumph and Transition: NAMI's Grand Convocation Day 2022 at YAK & YETI Hotel",
     excerpt:
@@ -262,6 +280,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("world-environment-day-plantation"),
     kind: "event",
+    institution: null,
     title: "Plantation program on the occasion of World Environment Day",
     excerpt:
       "NAMI organized a Plantation program along with Nature Art Competition in collaboration with WCN (Wildlife Conservation Nepal) and Gokarneshwor Municipality on 5th June at NAMI premises.",
@@ -279,5 +298,5 @@ const published: readonly Update[] = [
 
 export const updates: readonly Update[] = [
   ...published,
-  ...placeholderNews,
+  ...placeholderUpdates,
 ].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));

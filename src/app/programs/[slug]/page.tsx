@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import type { AcademicLevel, Programme } from "@/lib/content";
 import { content, paragraphsOf } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
@@ -441,8 +440,6 @@ export default async function ProgramDetailPage({ params }: PageProps) {
         title={`${level.title} Learning Environment`}
       />
       <ProgrammesList levelTitle={level.title} programmes={levelProgrammes} />
-
-      <AdmissionsFormSection />
     </>
   );
 }

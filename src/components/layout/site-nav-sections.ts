@@ -39,11 +39,10 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
   },
   {
     label: "Resources",
-    href: "/events",
+    href: "/notices",
     descriptor: "Stay updated with latest happenings and view our gallery.",
     children: [
-      { label: "Events", href: "/events" },
-      // { label: "News", href: "/news" },
+      { label: "Notices", href: "/notices" },
       { label: "Gallery", href: "/gallery" },
     ],
   },

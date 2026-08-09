@@ -95,8 +95,8 @@ export const homeCopy: HomeCopy = {
       heading: "What's happening at NAMI.",
       standfirst: null,
       cta: {
-        label: "View all events",
-        href: "/events",
+        label: "View all notices",
+        href: "/notices",
         destination: "internal",
       },
       emptyState: "No current notices.",

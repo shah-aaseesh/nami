@@ -1,5 +1,4 @@
 import { AcademicLevels } from "@/components/shared/academic-levels";
-import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { Affiliations } from "@/components/shared/affiliations";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
@@ -24,7 +23,6 @@ export default async function Home() {
       <Affiliations section={copy.sections.affiliations} />
       <CampusLife />
       <Testimonials section={copy.sections.testimonials} />
-      <AdmissionsFormSection />
       <Updates />
     </>
   );

@@ -7,43 +7,47 @@ import {
   parseInstitutionFilter,
 } from "@/lib/institution-filter";
 import { createMetadata } from "@/lib/seo";
-import { GalleryArchive } from "./_components/gallery-archive";
-import { galleryCopy } from "./_components/gallery-copy";
-import { GalleryMasthead } from "./_components/gallery-masthead";
+import { noticesCopy } from "./_components/notices-copy";
+import { NoticesMasthead } from "./_components/notices-masthead";
+import { UpdatesArchive } from "./_components/updates-archive";
+import {
+  parseUpdateKindFilter,
+  UPDATE_KIND_PARAM,
+} from "./_components/updates-filter";
 
 type PageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export const metadata: Metadata = createMetadata({
-  path: "/gallery",
-  title: galleryCopy.meta.title,
-  description: galleryCopy.meta.description,
+  path: "/notices",
+  title: noticesCopy.meta.title,
+  description: noticesCopy.meta.description,
 });
 
-export default async function GalleryPage({ searchParams }: PageProps) {
+export default async function NoticesPage({ searchParams }: PageProps) {
   const [items, institution, query] = await Promise.all([
-    content.getGallery(),
+    content.getUpdates(),
     content.getInstitution(),
     searchParams,
   ]);
 
-  const initialFilter = parseInstitutionFilter(query[INSTITUTION_PARAM]);
-
   return (
     <>
-      <GalleryMasthead copy={galleryCopy.masthead} />
+      <NoticesMasthead />
       {items.length === 0 ? (
         <section className="gutter-x section-y border-t border-border">
           <div className="mx-auto max-w-page">
-            <P className="max-w-xl">{galleryCopy.emptyArchive}</P>
+            <P className="max-w-xl">{noticesCopy.emptyArchive}</P>
           </div>
         </section>
       ) : (
-        <GalleryArchive
+        <UpdatesArchive
           entities={institution.entities}
-          initialFilter={initialFilter}
+          initialInstitution={parseInstitutionFilter(query[INSTITUTION_PARAM])}
+          initialKind={parseUpdateKindFilter(query[UPDATE_KIND_PARAM])}
           items={items}
+          today={new Date().toISOString().slice(0, 10)}
         />
       )}
     </>

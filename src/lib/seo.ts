@@ -39,8 +39,7 @@ export const siteRoutes: readonly SiteRoute[] = [
     changeFrequency: "monthly",
     priority: 0.8,
   },
-  { path: "/events", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/news", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/notices", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/gallery", changeFrequency: "monthly", priority: 0.7 },
 ];

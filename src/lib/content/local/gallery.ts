@@ -23,28 +23,29 @@ import {
 const campusSports: ContentImage = {
   src: "/nami/campus-sports.jpg",
   alt: "Students on the NAMI sports ground during a campus tournament or sports day.",
-  width: 1000,
-  height: 1500,
+  width: 1500,
+  height: 1000,
 };
 
 const campusInfirmary: ContentImage = {
   src: "/nami/campus-infirmary.jpg",
   alt: "The NAMI campus infirmary, a small treatment room kept ready for students.",
-  width: 400,
-  height: 600,
+  width: 600,
+  height: 400,
 };
 
 const campusBloodDonation: ContentImage = {
   src: "/nami/campus-blood-donation.jpg",
   alt: "NAMI A-Level students at the Christmas blood donation drive, donors seated beside the donation tables on campus.",
-  width: 709,
-  height: 1064,
+  width: 1064,
+  height: 709,
 };
 
 export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("mustang-academic-trip"),
     category: "student-life",
+    institution: "college",
     title: "Mustang Academic Trip",
     image: mustangTrip,
     date: isoDate("2023-12-08"),
@@ -52,6 +53,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-transport"),
     category: "campus",
+    institution: "school",
     title: "School Transport",
     image: schoolTransport,
     date: null,
@@ -59,6 +61,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("chemistry-laboratory"),
     category: "academics",
+    institution: null,
     title: "Chemistry Laboratory",
     image: scienceLaboratory,
     date: null,
@@ -66,6 +69,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("students-on-campus"),
     category: "student-life",
+    institution: null,
     title: "Students on Campus",
     image: studentsOnCampus,
     date: null,
@@ -73,6 +77,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("college-library"),
     category: "academics",
+    institution: null,
     title: "College Library",
     image: readingRoom,
     date: null,
@@ -80,6 +85,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("reading-hall"),
     category: "academics",
+    institution: null,
     title: "Reading Hall",
     image: readingHall,
     date: null,
@@ -87,6 +93,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("auditorium-gathering"),
     category: "campus",
+    institution: null,
     title: "Auditorium Gathering",
     image: auditoriumGathering,
     date: null,
@@ -94,6 +101,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("service-camp-sindhupalchowk"),
     category: "student-life",
+    institution: null,
     title: "Service Camp, Sindhupalchowk",
     image: serviceCamp,
     date: isoDate("2024-01-27"),
@@ -101,6 +109,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("see-3x3-basketball-prize-giving"),
     category: "sports",
+    institution: null,
     title: "SEE 3x3 Basketball Prize-Giving",
     image: basketballPrizeGiving,
     date: isoDate("2024-05-16"),
@@ -108,6 +117,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("christmas-at-city-campus"),
     category: "events",
+    institution: null,
     title: "Christmas at City Campus",
     image: christmasHall,
     date: isoDate("2023-12-24"),
@@ -115,6 +125,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("eco-club-environment-day"),
     category: "events",
+    institution: null,
     title: "Eco Club Environment Day",
     image: ecoClubFrame,
     date: isoDate("2023-06-05"),
@@ -122,6 +133,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("mascot-design-competition"),
     category: "events",
+    institution: null,
     title: "Mascot Design Competition",
     image: mascotDesignEntry,
     date: isoDate("2023-05-03"),
@@ -129,6 +141,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("elite-2023"),
     category: "graduation",
+    institution: "institute",
     title: "ELITE 2023",
     image: eliteCompetition,
     date: isoDate("2023-03-31"),
@@ -136,6 +149,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("climate-change-panel"),
     category: "events",
+    institution: null,
     title: "Climate Change Panel",
     image: climatePanel,
     date: isoDate("2023-03-23"),
@@ -143,6 +157,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("bachelors-orientation-2022"),
     category: "graduation",
+    institution: "institute",
     title: "Bachelor's Orientation 2022",
     image: bachelorOrientation,
     date: isoDate("2022-11-14"),
@@ -150,6 +165,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("convocation-2022"),
     category: "graduation",
+    institution: "institute",
     title: "Convocation 2022",
     image: convocationCeremony,
     date: isoDate("2022-09-17"),
@@ -157,6 +173,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("world-environment-day-plantation"),
     category: "student-life",
+    institution: null,
     title: "World Environment Day Plantation",
     image: plantationProgramme,
     date: isoDate("2022-06-05"),
@@ -164,6 +181,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("campus-tournament"),
     category: "sports",
+    institution: null,
     title: "Campus Tournament",
     image: campusSports,
     date: null,
@@ -171,6 +189,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("inter-house-match"),
     category: "sports",
+    institution: null,
     title: "Inter-House Match",
     image: campusSports,
     date: null,
@@ -178,6 +197,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("campus-infirmary"),
     category: "campus",
+    institution: null,
     title: "Campus Infirmary",
     image: campusInfirmary,
     date: null,
@@ -185,6 +205,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("christmas-blood-donation-drive"),
     category: "events",
+    institution: "college",
     title: "Christmas Blood Donation Drive",
     image: campusBloodDonation,
     date: isoDate("2023-12-22"),

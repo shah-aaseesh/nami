@@ -132,6 +132,7 @@ export type UpdateKind = "notice" | "event" | "news";
 
 export type Update = ContentEntry & {
   readonly kind: UpdateKind;
+  readonly institution: EntityRole | null;
   readonly title: string;
   readonly excerpt: string;
   readonly publishedAt: IsoDate;
@@ -241,6 +242,7 @@ export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
 export type GalleryItem = ContentEntry & {
   readonly category: GalleryCategory;
+  readonly institution: EntityRole | null;
   readonly title: string;
   readonly image: ContentImage;
   readonly date: IsoDate | null;

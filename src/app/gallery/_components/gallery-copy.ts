@@ -1,30 +1,30 @@
 import type { Crumb } from "@/components/seo/structured-data";
-import type { GalleryCategory } from "@/lib/content";
 
 export const galleryTrail: readonly Crumb[] = [
   { name: "Home", path: "/" },
   { name: "Gallery", path: "/gallery" },
 ];
 
-export const galleryCategoryLabel: Record<GalleryCategory, string> = {
-  campus: "Campus",
-  events: "Events",
-  sports: "Sports",
-  academics: "Academics",
-  "student-life": "Student Life",
-  graduation: "Graduation",
-};
-
 export const galleryCopy = {
   meta: {
     title: "Gallery",
     description:
-      "Twenty photographs from a year at NAMI, Kathmandu — campus, events, sport, academics, student life and graduation, filtered by category.",
+      "The NAMI group's photographic record of the year in Kathmandu — classrooms and campuses, tournaments and service camps, orientations and convocations, filterable by institution.",
   },
   masthead: {
     eyebrow: "Gallery",
     heading: "A year, in pictures.",
     standfirst:
-      "Campus and classrooms, tournaments and service camps, convocations and quiet corners — twenty photographs from the year, sorted by category.",
+      "Classrooms and campuses, tournaments and service camps, orientations and convocations. One archive across the school, the college and the institute — filter it by institution, or read the whole year straight through.",
   },
+  allLabel: "All",
+  filterGroupLabel: "Filter by institution",
+  filterOptionLabel: (label: string, name: string | null) =>
+    name === null ? label : `${label} — ${name}`,
+  unattributedNote:
+    "Some photographs are not yet attributed to an institution, and appear under All only.",
+  emptyState:
+    "Nothing in the archive is attributed to this institution yet. Choose All to see the whole year.",
+  emptyArchive:
+    "There are no photographs on record yet. They will appear here as the group publishes them.",
 } as const;

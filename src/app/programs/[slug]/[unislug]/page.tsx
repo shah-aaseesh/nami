@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AdmissionsFormSection } from "@/components/shared/admissions-form";
 import { Icon } from "@/components/ui/icon";
 import { Display, Eyebrow, H3, H4, P } from "@/components/ui/typography";
 import { content } from "@/lib/content";
@@ -214,8 +213,6 @@ export default async function UniversityDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
-
-      <AdmissionsFormSection />
     </>
   );
 }

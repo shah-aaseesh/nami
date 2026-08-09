@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
 import type { ContentLink, IsoDate, Update } from "@/lib/content";
-import { content } from "@/lib/content";
+import { content, isPlaceholder } from "@/lib/content";
 import {
   ArrowRightIcon,
   ArrowUpRightIcon,
@@ -127,10 +127,14 @@ function UpdateRow({ item, ordinal }: { item: Update; ordinal: number }) {
 }
 
 export async function Updates() {
-  const [copy, updates] = await Promise.all([
+  const [copy, allUpdates] = await Promise.all([
     content.getHomeCopy(),
-    content.getUpdates(HOME_TEASER_COUNT),
+    content.getUpdates(),
   ]);
+
+  const updates = allUpdates
+    .filter((item) => !isPlaceholder(item.title))
+    .slice(0, HOME_TEASER_COUNT);
 
   const section = copy.sections.updates;
   const featureImage =

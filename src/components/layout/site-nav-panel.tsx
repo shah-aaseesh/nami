@@ -17,7 +17,7 @@ import {
   FacebookIcon,
   InstagramIcon,
   LocationIcon,
-  PhoneIcon,
+  MailIcon,
   TwitterIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -173,7 +173,7 @@ export function SiteNavPanel({
           {links.length > 0 && (
             <div className="flex items-start gap-4 text-ink-muted">
               <Icon
-                icon={PhoneIcon}
+                icon={MailIcon}
                 className="size-5 shrink-0 mt-0.5 text-accent"
               />
               <div className="flex flex-col gap-2">

@@ -13,9 +13,9 @@ export const academicLevels: readonly AcademicLevel[] = [
   {
     ...entryOf("school"),
     title: "School",
-    stage: "Grade 1–7",
+    stage: "Grade 1–6",
     summary: richText(
-      "NAMI International School opened its primary division in 2024 with Grades 1 to 5, has since extended to Grade 7, and adds one grade each year towards Grade 10.",
+      "NAMI International School opened its primary division in 2024 with Grades 1 to 5 and has since extended to Grade 6.",
       "Teaching stays within the framework of the Government of Nepal's National Curriculum, with Mandarin introduced as a foreign language from Grade I and computer instruction from the first grade.",
     ),
     highlights: [

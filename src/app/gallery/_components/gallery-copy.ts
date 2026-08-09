@@ -15,7 +15,7 @@ export const galleryCopy = {
     eyebrow: "Gallery",
     heading: "A year, in pictures.",
     standfirst:
-      "Classrooms and campuses, tournaments and service camps, orientations and convocations. One archive across the school, the college and the institute — filter it by institution, or read the whole year straight through.",
+      "Every campus, classroom, and event in one archive. Filter by institution or read straight through.",
   },
   allLabel: "All",
   filterGroupLabel: "Filter by institution",

@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { ChevronDownIcon, CloseIcon, MenuIcon, PhoneIcon } from "@/lib/icons";
+import { ChevronDownIcon, CloseIcon, MenuIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWordmark } from "./site-header-wordmark";
 import { type SiteMetaLink, SiteNavPanel } from "./site-nav-panel";
@@ -29,7 +29,6 @@ export type SiteHeaderShellProps = {
   items: readonly SiteNavItem[];
   places: readonly string[];
   links: readonly SiteMetaLink[];
-  call: SiteMetaLink | null;
 };
 
 function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
@@ -123,7 +122,6 @@ function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
 }
 
 export function SiteHeaderShell({
-  call,
   items,
   places,
   links,
@@ -249,16 +247,6 @@ export function SiteHeaderShell({
           </nav>
 
           <div className="flex items-center gap-x-3 xl:gap-x-5 shrink-0">
-            {call === null || call.href === null ? null : (
-              <Link
-                className="hidden items-center gap-x-2 font-body text-xs xl:text-sm font-medium text-ink transition-colors hover:text-accent whitespace-nowrap xl:inline-flex"
-                href={call.href as Route}
-              >
-                <Icon className="size-4 shrink-0" icon={PhoneIcon} />
-                {call.label}
-              </Link>
-            )}
-
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
                 render={

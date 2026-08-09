@@ -6,6 +6,7 @@ import {
   gokarneshworStreetAddress,
   newBaneshworMapUrl,
   newBaneshworStreetAddress,
+  whatsappContactLink,
 } from "./placeholders";
 
 export const institution: InstitutionProfile = {
@@ -83,7 +84,7 @@ export const institution: InstitutionProfile = {
       locality: "Gokarneshwor-7",
       city: "Kathmandu",
       hosts: [
-        "School, Grade 1–7",
+        "School, Grade 1–6",
         "+2 NEB, Science and Management",
         "Cambridge A-Level",
       ],
@@ -102,6 +103,7 @@ export const institution: InstitutionProfile = {
   contact: {
     phones: ["+977 1 4917444", "+977 1 4917441"],
     email: "info@nami.edu.np",
+    whatsapp: whatsappContactLink,
     websites: [
       {
         label: "school.nami.edu.np",

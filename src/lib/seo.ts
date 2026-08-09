@@ -1,6 +1,6 @@
 import type { Metadata, MetadataRoute } from "next";
 
-const FALLBACK_SITE_ORIGIN = "https://college.nami.edu.np";
+const FALLBACK_SITE_ORIGIN = "https://nami.edu.np";
 
 export const siteOrigin = (
   process.env.SITE_URL ?? FALLBACK_SITE_ORIGIN

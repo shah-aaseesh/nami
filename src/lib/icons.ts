@@ -25,6 +25,7 @@ export {
   QuoteUpIcon as QuoteIcon,
   Tick02Icon as CheckIcon,
   TiktokIcon as TikTokIcon,
+  WhatsappIcon as WhatsAppIcon,
   YoutubeIcon as YouTubeIcon,
 } from "@hugeicons/core-free-icons";
 export type { IconSvgElement } from "@hugeicons/react";

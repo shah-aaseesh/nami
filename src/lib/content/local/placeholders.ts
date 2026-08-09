@@ -32,6 +32,16 @@ export const newBaneshworMapUrl = placeholderText(
   "https://maps.example/placeholder/new-baneshwor",
 );
 
+export const whatsappContactLink = placeholderData<ContentLink>(
+  "institution.contact.whatsapp",
+  "contact",
+  {
+    label: "WhatsApp",
+    href: "https://wa.example/placeholder/nami-college",
+    destination: "external",
+  },
+);
+
 export const plusTwoAdmissionLink: ContentLink = {
   label: "Visit College Website",
   href: "https://college.nami.edu.np/",

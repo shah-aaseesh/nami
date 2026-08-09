@@ -44,7 +44,7 @@ export const stats: readonly Stat[] = [
     group: "enrolment",
     value: 176,
     suffix: null,
-    label: "students in Grades 1–7",
+    label: "students in Grades 1–6",
     detail: null,
   },
   {

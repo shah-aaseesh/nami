@@ -9,7 +9,7 @@ export const admissionCalls: readonly AdmissionCall[] = [
   {
     ...entryOf("admission-school"),
     levelSlug: slug("school"),
-    title: "School, Grade 1–7",
+    title: "School, Grade 1–6",
     note: "Application form for NAMI International School.",
     link: {
       label: "Visit School Website",

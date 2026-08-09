@@ -1,11 +1,14 @@
+import type { Route } from "next";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
+import { content } from "@/lib/content";
 import {
   DownloadIcon,
   InstagramIcon,
   LinkedInIcon,
   TikTokIcon,
   TwitterIcon,
+  WhatsAppIcon,
   YouTubeIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -53,7 +56,23 @@ export type FloatingSocialsProps = {
   className?: string;
 };
 
-export function FloatingSocials({ className }: FloatingSocialsProps) {
+export async function FloatingSocials({ className }: FloatingSocialsProps) {
+  const institution = await content.getInstitution();
+  const { whatsapp } = institution.contact;
+
+  const links =
+    whatsapp === null
+      ? FLOATING_SOCIAL_LINKS
+      : [
+          ...FLOATING_SOCIAL_LINKS,
+          {
+            platform: "whatsapp",
+            label: whatsapp.label,
+            href: whatsapp.href,
+            icon: WhatsAppIcon,
+          },
+        ];
+
   return (
     <aside
       aria-label="Social Media Links"
@@ -63,22 +82,20 @@ export function FloatingSocials({ className }: FloatingSocialsProps) {
       )}
     >
       <ul className="flex flex-col divide-y divide-primary-800/50">
-        {FLOATING_SOCIAL_LINKS.map(
-          ({ platform, label, href, icon: SocialIcon }) => (
-            <li key={platform}>
-              <Link
-                aria-label={label}
-                className="flex size-11 items-center justify-center text-white transition-colors hover:bg-primary-800/80 focus-visible:bg-primary-800"
-                href={href}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <Icon className="size-5 text-white" icon={SocialIcon} />
-                <span className="sr-only">{label}</span>
-              </Link>
-            </li>
-          ),
-        )}
+        {links.map(({ platform, label, href, icon: SocialIcon }) => (
+          <li key={platform}>
+            <Link
+              aria-label={label}
+              className="flex size-11 items-center justify-center text-white transition-colors hover:bg-primary-800/80 focus-visible:bg-primary-800"
+              href={href as Route}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Icon className="size-5 text-white" icon={SocialIcon} />
+              <span className="sr-only">{label}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </aside>
   );

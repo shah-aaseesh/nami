@@ -10,7 +10,7 @@ export const metadata: Metadata = createMetadata({
   path: "/programs",
   title: "Academic Programs",
   description:
-    "Explore academic programs at NAMI, from NAMI International School (Grade 1-7), +2 NEB Science and Management, Cambridge A-Level, to UK British Bachelor and Master degrees.",
+    "Explore academic programs at NAMI, from NAMI International School (Grade 1-6), +2 NEB Science and Management, Cambridge A-Level, to UK British Bachelor and Master degrees.",
 });
 
 export default async function ProgramsHubPage() {

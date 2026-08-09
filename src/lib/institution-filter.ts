@@ -17,7 +17,7 @@ export const INSTITUTION_ROLES: readonly EntityRole[] = [
 export const institutionLabel: Record<EntityRole, string> = {
   school: "School",
   college: "College",
-  institute: "Institute",
+  institute: "Bachelors/Masters",
 };
 
 export function parseInstitutionFilter(

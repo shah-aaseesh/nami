@@ -46,6 +46,7 @@ export type ContactChannel = {
   readonly email: string | null;
   readonly websites: readonly ContentLink[];
   readonly socialProfiles: readonly SocialProfile[];
+  readonly whatsapp: ContentLink | null;
 };
 
 export type EntityRole = "institute" | "college" | "school";

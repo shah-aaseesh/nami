@@ -11,7 +11,9 @@ import { noticesCopy } from "./_components/notices-copy";
 import { NoticesMasthead } from "./_components/notices-masthead";
 import { UpdatesArchive } from "./_components/updates-archive";
 import {
+  parseUpdateCategoryFilter,
   parseUpdateKindFilter,
+  UPDATE_CATEGORY_PARAM,
   UPDATE_KIND_PARAM,
 } from "./_components/updates-filter";
 
@@ -44,6 +46,9 @@ export default async function NoticesPage({ searchParams }: PageProps) {
       ) : (
         <UpdatesArchive
           entities={institution.entities}
+          initialCategory={parseUpdateCategoryFilter(
+            query[UPDATE_CATEGORY_PARAM],
+          )}
           initialInstitution={parseInstitutionFilter(query[INSTITUTION_PARAM])}
           initialKind={parseUpdateKindFilter(query[UPDATE_KIND_PARAM])}
           items={items}

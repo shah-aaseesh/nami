@@ -95,12 +95,8 @@ function CampusEntry({ campus }: { campus: Campus }) {
 export async function SiteFooter() {
   const institution = await content.getInstitution();
   const { campuses, contact, entities } = institution;
-  const college = entities.college;
-  const institute = entities.institute;
-
-  const splitAt = college.name.indexOf(" ");
-  const lead = splitAt === -1 ? college.name : college.name.slice(0, splitAt);
-  const tail = splitAt === -1 ? null : college.name.slice(splitAt + 1);
+  const group = entities.institute;
+  const lineage = `Three institutions under the ${group.shortName} name — ${entities.school.name}, ${entities.college.name} and ${group.name}.`;
 
   const navItems = SITE_NAV_ITEMS;
   const cities = [...new Set(campuses.map((campus) => campus.city))].join(", ");
@@ -124,10 +120,8 @@ export async function SiteFooter() {
       {email === null ? null : (
         <SiteCtaBand
           email={email}
-          heading={`Write to ${institute.shortName}.`}
-          standfirst={
-            cities === "" ? institute.name : `${institute.name} · ${cities}`
-          }
+          heading={`Write to ${group.shortName}.`}
+          standfirst={cities === "" ? group.name : `${group.name} · ${cities}`}
         />
       )}
 
@@ -138,11 +132,8 @@ export async function SiteFooter() {
             stagger={0.08}
           >
             <div className="lg:col-span-4" data-reveal-item="">
-              <SiteFooterWordmark lead={lead} tail={tail} />
-              <P className="mt-8 max-w-xs">
-                One institute, two schools — {entities.school.name} and{" "}
-                {college.name}.
-              </P>
+              <SiteFooterWordmark name={group.name} />
+              <P className="mt-8 max-w-xs">{lineage}</P>
               {place === null ? null : (
                 <p className="mt-6 flex items-start gap-x-2 font-body text-sm text-ink-muted">
                   <Icon className="mt-0.5 size-4" icon={LocationIcon} />
@@ -212,8 +203,8 @@ export async function SiteFooter() {
           </Reveal>
 
           <div className="flex flex-col gap-y-2 border-t py-4 font-body text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
-            <p>© {college.name}</p>
-            <p>{institute.name}</p>
+            <p>© {group.name}</p>
+            <p>{institution.motto}</p>
           </div>
         </div>
       </div>

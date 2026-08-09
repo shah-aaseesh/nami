@@ -7,7 +7,8 @@ import { AdmissionsClient } from "./_components/admissions-client";
 export const metadata: Metadata = createMetadata({
   path: "/admissions",
   title: "Admissions",
-  description: "Apply for admission to NAMI and International School.",
+  description:
+    "Apply for admission at NAMI — NAMI International School, NAMI College and Naaya Aayam Multi-Disciplinary Institute.",
 });
 
 export default function AdmissionsPage() {

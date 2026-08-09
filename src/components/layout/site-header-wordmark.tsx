@@ -6,19 +6,17 @@ const MARK_WIDTH = 176;
 const MARK_HEIGHT = 132;
 
 export type SiteHeaderWordmarkProps = {
-  lead: string;
-  tail: string | null;
+  name: string;
   className?: string;
 };
 
 export function SiteHeaderWordmark({
   className,
-  lead,
-  tail,
+  name,
 }: SiteHeaderWordmarkProps) {
   return (
     <Image
-      alt={tail === null ? lead : `${lead} ${tail}`}
+      alt={name}
       className={cn("h-14 w-auto", className)}
       data-slot="wordmark"
       height={MARK_HEIGHT}

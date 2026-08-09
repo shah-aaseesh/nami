@@ -35,7 +35,7 @@ export type SiteNavPanelProps = {
   items: readonly SiteNavItem[];
   places: readonly string[];
   links: readonly SiteMetaLink[];
-  wordmark: { lead: string; tail: string | null };
+  siteName: string;
   onNavigate: () => void;
 };
 
@@ -44,7 +44,7 @@ export function SiteNavPanel({
   labelId,
   places,
   links,
-  wordmark,
+  siteName,
   onNavigate,
 }: SiteNavPanelProps) {
   const container = useRef<HTMLDivElement>(null);
@@ -122,11 +122,7 @@ export function SiteNavPanel({
 
       {/* Desktop View Content */}
       <div className="hidden lg:flex flex-col items-center text-center nav-anim-item gap-4 pb-4">
-        <SiteHeaderWordmark
-          lead={wordmark.lead}
-          tail={wordmark.tail}
-          className="scale-125 my-6"
-        />
+        <SiteHeaderWordmark name={siteName} className="scale-125 my-6" />
         <p className="text-sm text-ink-muted leading-relaxed px-4">
           NAMI provides world-class education with state-of-the-art facilities,
           empowering students to become future leaders and innovators.

@@ -74,13 +74,17 @@ function organizationNode(
     .map((site) => site.href);
 
   const url = absoluteUrl("/");
+  const { college, institute, school } = profile.entities;
 
   return {
-    ...entityNode(profile.entities.college),
+    ...entityNode(institute),
     "@id": `${url}#organization`,
     url,
     slogan: publishable(profile.motto),
-    parentOrganization: entityNode(profile.entities.institute),
+    subOrganization: [school, college].map((member) => ({
+      ...entityNode(member),
+      "@id": `${url}#${member.role}`,
+    })),
     address: profile.campuses.map(postalAddress),
     telephone: profile.contact.phones
       .map(publishable)

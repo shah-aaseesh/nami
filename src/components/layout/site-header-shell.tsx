@@ -25,7 +25,7 @@ const HIDE_DURATION = 0.2;
 const SCROLLED_AT = 24;
 
 export type SiteHeaderShellProps = {
-  wordmark: { lead: string; tail: string | null };
+  siteName: string;
   items: readonly SiteNavItem[];
   places: readonly string[];
   links: readonly SiteMetaLink[];
@@ -127,7 +127,7 @@ export function SiteHeaderShell({
   items,
   places,
   links,
-  wordmark,
+  siteName,
 }: SiteHeaderShellProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -223,7 +223,7 @@ export function SiteHeaderShell({
           )}
         >
           <Link href="/" className="flex items-center h-full shrink-0">
-            <SiteHeaderWordmark lead={wordmark.lead} tail={wordmark.tail} />
+            <SiteHeaderWordmark name={siteName} />
           </Link>
 
           <nav
@@ -288,7 +288,7 @@ export function SiteHeaderShell({
                     labelId={labelId}
                     places={places}
                     links={links}
-                    wordmark={wordmark}
+                    siteName={siteName}
                     onNavigate={() => setOpen(false)}
                   />
                 </div>

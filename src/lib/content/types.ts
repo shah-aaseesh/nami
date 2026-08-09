@@ -130,8 +130,20 @@ export type CampusLifePillar = ContentEntry & {
 
 export type UpdateKind = "notice" | "event" | "news";
 
+export const PROVISIONAL_UPDATE_CATEGORIES = [
+  "admissions",
+  "examinations",
+  "results",
+  "events",
+  "holidays",
+  "general",
+] as const;
+
+export type UpdateCategory = (typeof PROVISIONAL_UPDATE_CATEGORIES)[number];
+
 export type Update = ContentEntry & {
   readonly kind: UpdateKind;
+  readonly category: UpdateCategory;
   readonly institution: EntityRole | null;
   readonly title: string;
   readonly excerpt: string;

@@ -1,5 +1,5 @@
 import type { Crumb } from "@/components/seo/structured-data";
-import type { UpdateKind } from "@/lib/content";
+import type { UpdateCategory, UpdateKind } from "@/lib/content";
 
 export const noticesTrail: readonly Crumb[] = [
   { name: "Home", path: "/" },
@@ -18,6 +18,15 @@ const updateKindPlural: Record<UpdateKind, string> = {
   news: "News",
 };
 
+export const updateCategoryLabel: Record<UpdateCategory, string> = {
+  admissions: "Admissions",
+  examinations: "Examinations",
+  results: "Results",
+  events: "Events",
+  holidays: "Holidays",
+  general: "General",
+};
+
 export const noticesCopy = {
   meta: {
     title: "News and notices",
@@ -33,9 +42,12 @@ export const noticesCopy = {
   institutionGroupLabel: "Filter by institution",
   kindGroupLabel: "Filter by type",
   yearGroupLabel: "Filter by year",
+  categoryGroupLabel: "Filter by category",
   allInstitutions: "All",
   allYears: "All",
+  allCategories: "All",
   kindOption: (kind: UpdateKind) => updateKindPlural[kind],
+  categoryOption: (category: UpdateCategory) => updateCategoryLabel[category],
   institutionOptionLabel: (label: string, name: string | null) =>
     name === null ? label : `${label} — ${name}`,
   unattributedNote:
@@ -51,8 +63,8 @@ export const noticesCopy = {
   },
   empty: {
     eyebrow: "Nothing here",
-    heading: "No update matches that pair.",
-    body: "Widen one of the two filters and the board fills again. Everything NAMI has published is still on this page.",
+    heading: "No update matches that combination.",
+    body: "Widen one of the filters and the board fills again. Everything NAMI has published is still on this page.",
     reset: "Reset filters",
   },
   emptyArchive:

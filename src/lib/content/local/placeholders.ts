@@ -54,6 +54,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[news-placeholder-long]", "update", {
     ...entryOf("news-placeholder-long"),
     kind: "news",
+    category: "general",
     institution: null,
     title:
       "Placeholder news story with a headline long enough to wrap onto a second line in the listing",
@@ -68,6 +69,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[news-placeholder-medium]", "update", {
     ...entryOf("news-placeholder-medium"),
     kind: "news",
+    category: "results",
     institution: null,
     title: "Placeholder news story, medium headline",
     excerpt:
@@ -81,6 +83,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[news-placeholder-short]", "update", {
     ...entryOf("news-placeholder-short"),
     kind: "news",
+    category: "holidays",
     institution: null,
     title: "Placeholder news story",
     excerpt: "Placeholder copy awaiting a real NAMI announcement.",
@@ -94,6 +97,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[school-placeholder-uniform]", "update", {
     ...entryOf("school-placeholder-uniform"),
     kind: "notice",
+    category: "admissions",
     institution: "school",
     title: "Placeholder notice — uniform and stationery collection window",
     excerpt:
@@ -107,6 +111,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[school-placeholder-sports-day]", "update", {
     ...entryOf("school-placeholder-sports-day"),
     kind: "event",
+    category: "events",
     institution: "school",
     title: "Placeholder event — junior school sports day",
     excerpt:
@@ -120,6 +125,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[school-placeholder-library]", "update", {
     ...entryOf("school-placeholder-library"),
     kind: "news",
+    category: "general",
     institution: "school",
     title: "Placeholder news — the junior library reopens after refurbishment",
     excerpt:
@@ -133,6 +139,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[school-placeholder-parents]", "update", {
     ...entryOf("school-placeholder-parents"),
     kind: "notice",
+    category: "examinations",
     institution: "school",
     title: "Placeholder notice — parents' evening scheduling",
     excerpt:
@@ -150,6 +157,7 @@ export const placeholderUpdates: readonly Update[] = [
     {
       ...entryOf("college-placeholder-registration"),
       kind: "notice",
+      category: "admissions",
       institution: "college",
       title: "Placeholder notice — A-Level registration window",
       excerpt:
@@ -168,6 +176,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[college-placeholder-quiz]", "update", {
     ...entryOf("college-placeholder-quiz"),
     kind: "event",
+    category: "events",
     institution: "college",
     title: "Placeholder event — inter-house quiz final",
     excerpt:
@@ -184,6 +193,7 @@ export const placeholderUpdates: readonly Update[] = [
     {
       ...entryOf("college-placeholder-orientation"),
       kind: "event",
+      category: "events",
       institution: "college",
       title: "Placeholder event — A-Level intake orientation",
       excerpt:
@@ -198,6 +208,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[college-placeholder-results]", "update", {
     ...entryOf("college-placeholder-results"),
     kind: "news",
+    category: "results",
     institution: "college",
     title: "Placeholder news — a note on the last examination session",
     excerpt:
@@ -212,6 +223,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[institute-placeholder-thesis]", "update", {
     ...entryOf("institute-placeholder-thesis"),
     kind: "notice",
+    category: "examinations",
     institution: "institute",
     title: "Placeholder notice — undergraduate thesis submission",
     excerpt:
@@ -225,6 +237,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[institute-placeholder-research]", "update", {
     ...entryOf("institute-placeholder-research"),
     kind: "event",
+    category: "events",
     institution: "institute",
     title: "Placeholder event — undergraduate research day",
     excerpt:
@@ -241,6 +254,7 @@ export const placeholderUpdates: readonly Update[] = [
     {
       ...entryOf("institute-placeholder-partnership"),
       kind: "news",
+      category: "holidays",
       institution: "institute",
       title:
         "Placeholder news — an undated story with no date attached to it at all",
@@ -256,6 +270,7 @@ export const placeholderUpdates: readonly Update[] = [
   placeholderData<Update>("updates[institute-placeholder-careers]", "update", {
     ...entryOf("institute-placeholder-careers"),
     kind: "event",
+    category: "events",
     institution: "institute",
     title: "Placeholder event — graduate careers fair",
     excerpt:

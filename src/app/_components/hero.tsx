@@ -77,14 +77,19 @@ function HeroBadge({
 }) {
   const founded =
     entity.establishedYear === null ? null : `Estd. ${entity.establishedYear}`;
-  const ring = [entity.name, founded, leadClause(motto)]
-    .filter((part) => part !== null)
-    .join(" * ");
+  const ringParts = [entity.shortName, founded, leadClause(motto)].filter(
+    (part) => part !== null,
+  );
+  const ring = ringParts.join(" * ");
+  const accessibleLabelParts = [entity.name, founded, leadClause(motto)].filter(
+    (part) => part !== null,
+  );
+  const accessibleLabel = accessibleLabelParts.join(", ");
 
   return (
     <div className="relative size-32 shrink-0 lg:size-36">
       <svg
-        aria-label={ring.replaceAll(" * ", ", ")}
+        aria-label={accessibleLabel}
         className="size-full animate-[spin_20s_linear_infinite]"
         role="img"
         viewBox="0 0 160 160"
@@ -180,7 +185,7 @@ export async function Hero() {
               delay={0.5}
             >
               <HeroBadge
-                entity={institution.entities.college}
+                entity={institution.entities.institute}
                 motto={institution.motto}
                 watch={watch ?? null}
               />

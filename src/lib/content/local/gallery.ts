@@ -61,7 +61,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("chemistry-laboratory"),
     category: "academics",
-    institution: null,
+    institution: "school",
     title: "Chemistry Laboratory",
     image: scienceLaboratory,
     date: null,
@@ -69,7 +69,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("students-on-campus"),
     category: "student-life",
-    institution: null,
+    institution: "college",
     title: "Students on Campus",
     image: studentsOnCampus,
     date: null,
@@ -77,7 +77,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("college-library"),
     category: "academics",
-    institution: null,
+    institution: "institute",
     title: "College Library",
     image: readingRoom,
     date: null,
@@ -85,7 +85,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("reading-hall"),
     category: "academics",
-    institution: null,
+    institution: "college",
     title: "Reading Hall",
     image: readingHall,
     date: null,
@@ -93,7 +93,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("auditorium-gathering"),
     category: "campus",
-    institution: null,
+    institution: "college",
     title: "Auditorium Gathering",
     image: auditoriumGathering,
     date: null,
@@ -101,7 +101,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("service-camp-sindhupalchowk"),
     category: "student-life",
-    institution: null,
+    institution: "school",
     title: "Service Camp, Sindhupalchowk",
     image: serviceCamp,
     date: isoDate("2024-01-27"),
@@ -109,7 +109,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("see-3x3-basketball-prize-giving"),
     category: "sports",
-    institution: null,
+    institution: "college",
     title: "SEE 3x3 Basketball Prize-Giving",
     image: basketballPrizeGiving,
     date: isoDate("2024-05-16"),
@@ -117,7 +117,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("christmas-at-city-campus"),
     category: "events",
-    institution: null,
+    institution: "institute",
     title: "Christmas at City Campus",
     image: christmasHall,
     date: isoDate("2023-12-24"),
@@ -125,7 +125,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("eco-club-environment-day"),
     category: "events",
-    institution: null,
+    institution: "college",
     title: "Eco Club Environment Day",
     image: ecoClubFrame,
     date: isoDate("2023-06-05"),
@@ -133,7 +133,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("mascot-design-competition"),
     category: "events",
-    institution: null,
+    institution: "college",
     title: "Mascot Design Competition",
     image: mascotDesignEntry,
     date: isoDate("2023-05-03"),
@@ -149,7 +149,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("climate-change-panel"),
     category: "events",
-    institution: null,
+    institution: "institute",
     title: "Climate Change Panel",
     image: climatePanel,
     date: isoDate("2023-03-23"),
@@ -173,7 +173,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("world-environment-day-plantation"),
     category: "student-life",
-    institution: null,
+    institution: "college",
     title: "World Environment Day Plantation",
     image: plantationProgramme,
     date: isoDate("2022-06-05"),
@@ -181,7 +181,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("campus-tournament"),
     category: "sports",
-    institution: null,
+    institution: "college",
     title: "Campus Tournament",
     image: campusSports,
     date: null,
@@ -189,7 +189,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("inter-house-match"),
     category: "sports",
-    institution: null,
+    institution: "college",
     title: "Inter-House Match",
     image: campusSports,
     date: null,
@@ -197,7 +197,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("campus-infirmary"),
     category: "campus",
-    institution: null,
+    institution: "school",
     title: "Campus Infirmary",
     image: campusInfirmary,
     date: null,

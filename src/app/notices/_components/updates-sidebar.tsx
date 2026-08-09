@@ -9,13 +9,17 @@ import { Eyebrow } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 import { noticesCopy } from "./notices-copy";
 import {
+  ALL_CATEGORIES,
   ALL_YEARS,
+  type UpdateCategoryFilter,
   type UpdateKindFilter,
   type YearFilter,
 } from "./updates-filter";
 
 const YEAR_LABEL_ID = "updates-year-label";
 const YEAR_SELECT_ID = "updates-year";
+const CATEGORY_LABEL_ID = "updates-category-label";
+const CATEGORY_SELECT_ID = "updates-category";
 
 export type SidebarOption<T extends string> = {
   readonly id: T;
@@ -78,17 +82,23 @@ export function SidebarTabs<T extends string>({
 }
 
 export function UpdatesSidebar({
+  category,
+  categoryOptions,
   controls,
   kind,
   kindOptions,
+  onSelectCategory,
   onSelectKind,
   onSelectYear,
   year,
   yearOptions,
 }: {
+  readonly category: UpdateCategoryFilter;
+  readonly categoryOptions: readonly SidebarOption<UpdateCategoryFilter>[];
   readonly controls: string;
   readonly kind: UpdateKindFilter;
   readonly kindOptions: readonly SidebarOption<UpdateKindFilter>[];
+  readonly onSelectCategory: (id: UpdateCategoryFilter) => void;
   readonly onSelectKind: (id: UpdateKindFilter) => void;
   readonly onSelectYear: (id: YearFilter) => void;
   readonly year: YearFilter;
@@ -97,6 +107,10 @@ export function UpdatesSidebar({
   const yearLabel =
     yearOptions.find((option) => option.id === year)?.label ??
     noticesCopy.allYears;
+
+  const categoryLabel =
+    categoryOptions.find((option) => option.id === category)?.label ??
+    noticesCopy.allCategories;
 
   return (
     <div className="border-b border-border pb-10 lg:border-b-0 lg:pb-12">
@@ -133,6 +147,39 @@ export function UpdatesSidebar({
           </SelectTrigger>
           <SelectContent>
             {yearOptions.map((option) => (
+              <SelectItem key={option.id} value={option.id}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="mt-10 max-w-xs lg:max-w-none">
+        <Eyebrow
+          as="label"
+          className="text-ink-muted"
+          htmlFor={CATEGORY_SELECT_ID}
+          id={CATEGORY_LABEL_ID}
+        >
+          {noticesCopy.categoryGroupLabel}
+        </Eyebrow>
+        <Select
+          onValueChange={(next: UpdateCategoryFilter | null) =>
+            onSelectCategory(next ?? ALL_CATEGORIES)
+          }
+          value={category}
+        >
+          <SelectTrigger
+            aria-controls={controls}
+            aria-labelledby={`${CATEGORY_LABEL_ID} ${CATEGORY_SELECT_ID}`}
+            className="mt-4 w-full"
+            id={CATEGORY_SELECT_ID}
+          >
+            <SelectValue>{categoryLabel}</SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {categoryOptions.map((option) => (
               <SelectItem key={option.id} value={option.id}>
                 {option.label}
               </SelectItem>

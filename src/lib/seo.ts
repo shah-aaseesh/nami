@@ -14,7 +14,7 @@ export const siteConfig = {
   title: "NAMI — Transform yourself, to lead the world",
   titleTemplate: "%s | NAMI",
   description:
-    "NAMI, Kathmandu, established 2013 — Cambridge A-Level, +2 NEB and University of Northampton degree programmes at Naaya Aayam Multi-Disciplinary Institute.",
+    "NAMI, Kathmandu, est. 2012 — NAMI International School (10+2 NEB), NAMI College (Cambridge A-Level) and Naaya Aayam Multi-Disciplinary Institute (degrees).",
   locale: "en_US",
   themeColor: "#bc2125",
 } as const;

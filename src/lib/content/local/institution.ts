@@ -18,9 +18,9 @@ export const institution: InstitutionProfile = {
     },
     college: {
       role: "college",
-      name: "NAMI",
+      name: "NAMI College",
       shortName: "NAMI",
-      establishedYear: 2012,
+      establishedYear: 2013,
     },
     school: {
       // The brand book gives the school no founding year — 2019 and 2024 are

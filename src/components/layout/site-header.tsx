@@ -18,8 +18,7 @@ function channel(
 export async function SiteHeader() {
   const institution = await content.getInstitution();
   const items = SITE_NAV_ITEMS;
-  const { shortName } = institution.entities.college;
-  const spaceAt = shortName.indexOf(" ");
+  const group = institution.entities.institute;
 
   const dialled = institution.contact.phones.find(
     (phone) => !isPlaceholder(phone),
@@ -45,10 +44,7 @@ export async function SiteHeader() {
       items={items}
       places={places}
       links={links}
-      wordmark={{
-        lead: spaceAt === -1 ? shortName : shortName.slice(0, spaceAt),
-        tail: spaceAt === -1 ? null : shortName.slice(spaceAt + 1),
-      }}
+      siteName={group.name}
     />
   );
 }

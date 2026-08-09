@@ -19,11 +19,15 @@ import { cn } from "@/lib/utils";
 import { noticesCopy } from "./notices-copy";
 import { UpdateCard } from "./update-card";
 import {
+  ALL_CATEGORIES,
   ALL_YEARS,
   DEFAULT_UPDATE_KIND,
+  matchesUpdateCategory,
   matchesUpdateKind,
   matchesYear,
+  UPDATE_CATEGORIES,
   UPDATE_KINDS,
+  type UpdateCategoryFilter,
   type UpdateKindFilter,
   upcomingFirst,
   type YearFilter,
@@ -40,12 +44,14 @@ const CARD_IMAGE_SIZES =
 
 export function UpdatesArchive({
   entities,
+  initialCategory,
   initialInstitution,
   initialKind,
   items,
   today,
 }: {
   readonly entities: Readonly<Record<EntityRole, NamedEntity>>;
+  readonly initialCategory: UpdateCategoryFilter;
   readonly initialInstitution: InstitutionFilter;
   readonly initialKind: UpdateKindFilter;
   readonly items: readonly Update[];
@@ -53,12 +59,14 @@ export function UpdatesArchive({
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const appliedRef = useRef(
-    `${initialInstitution}|${initialKind}|${ALL_YEARS}|1`,
+    `${initialInstitution}|${initialKind}|${ALL_YEARS}|${initialCategory}|1`,
   );
   const [institution, setInstitution] =
     useState<InstitutionFilter>(initialInstitution);
   const [kind, setKind] = useState<UpdateKindFilter>(initialKind);
   const [year, setYear] = useState<YearFilter>(ALL_YEARS);
+  const [category, setCategory] =
+    useState<UpdateCategoryFilter>(initialCategory);
   const [page, setPage] = useState(1);
 
   const byKindAndInstitution = items.filter(
@@ -70,7 +78,10 @@ export function UpdatesArchive({
   const activeYear = years.includes(year) ? year : ALL_YEARS;
 
   const visible = upcomingFirst(
-    byKindAndInstitution.filter((item) => matchesYear(item, activeYear)),
+    byKindAndInstitution.filter(
+      (item) =>
+        matchesYear(item, activeYear) && matchesUpdateCategory(item, category),
+    ),
     today,
   );
 
@@ -81,7 +92,7 @@ export function UpdatesArchive({
   useGSAP(
     () => {
       const stage = stageRef.current;
-      const selection = `${institution}|${kind}|${activeYear}|${current}`;
+      const selection = `${institution}|${kind}|${activeYear}|${category}|${current}`;
       if (!stage || appliedRef.current === selection) return;
       appliedRef.current = selection;
 
@@ -102,7 +113,10 @@ export function UpdatesArchive({
 
       return () => mm.revert();
     },
-    { dependencies: [institution, kind, activeYear, current], scope: stageRef },
+    {
+      dependencies: [institution, kind, activeYear, category, current],
+      scope: stageRef,
+    },
   );
 
   const institutionOptions: readonly FilterOption<InstitutionFilter>[] = [
@@ -128,6 +142,14 @@ export function UpdatesArchive({
     ...years.map((value) => ({ id: value, label: value })),
   ];
 
+  const categoryOptions: readonly SidebarOption<UpdateCategoryFilter>[] = [
+    { id: ALL_CATEGORIES, label: noticesCopy.allCategories },
+    ...UPDATE_CATEGORIES.map((value) => ({
+      id: value,
+      label: noticesCopy.categoryOption(value),
+    })),
+  ];
+
   const selectInstitution = (next: InstitutionFilter) => {
     setInstitution(next);
     setPage(1);
@@ -143,10 +165,16 @@ export function UpdatesArchive({
     setPage(1);
   };
 
+  const selectCategory = (next: UpdateCategoryFilter) => {
+    setCategory(next);
+    setPage(1);
+  };
+
   const resetFilters = () => {
     setInstitution("all");
     setKind(DEFAULT_UPDATE_KIND);
     setYear(ALL_YEARS);
+    setCategory(ALL_CATEGORIES);
     setPage(1);
   };
 
@@ -159,9 +187,12 @@ export function UpdatesArchive({
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <UpdatesSidebarPin className="lg:col-span-3">
           <UpdatesSidebar
+            category={category}
+            categoryOptions={categoryOptions}
             controls={RESULTS_ID}
             kind={kind}
             kindOptions={kindOptions}
+            onSelectCategory={selectCategory}
             onSelectKind={selectKind}
             onSelectYear={selectYear}
             year={activeYear}

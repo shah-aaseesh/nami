@@ -6,20 +6,18 @@ const MARK_WIDTH = 176;
 const MARK_HEIGHT = 132;
 
 export type SiteFooterWordmarkProps = {
-  lead: string;
-  tail: string | null;
+  name: string;
   className?: string;
 };
 
 export function SiteFooterWordmark({
   className,
-  lead,
-  tail,
+  name,
 }: SiteFooterWordmarkProps) {
   return (
     <h2 className={cn(className)} data-slot="wordmark">
       <Image
-        alt={tail === null ? lead : `${lead} ${tail}`}
+        alt={name}
         className="h-20 w-auto"
         height={MARK_HEIGHT}
         sizes="128px"

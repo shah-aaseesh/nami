@@ -21,6 +21,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("motivational-stories-second-session"),
     kind: "event",
+    category: "events",
     institution: "institute",
     title:
       "Second Session of the most awaited talk program “Motivational Stories by Inspirational Leaders of Change”",
@@ -39,6 +40,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("motivational-stories-first-session"),
     kind: "event",
+    category: "events",
     institution: null,
     title: "Motivational Stories by Inspirational Leaders of Change",
     excerpt:
@@ -56,6 +58,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("nami-see-3x3-basketball-tournament"),
     kind: "event",
+    category: "events",
     institution: null,
     title: "NAMI SEE 3x3 Basketball Tournament",
     excerpt:
@@ -73,6 +76,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("pre-registration-open-for-a-level"),
     kind: "notice",
+    category: "admissions",
     institution: "college",
     title: "Pre Registration open for A Level",
     excerpt: preRegistrationNoticeExcerpt,
@@ -89,6 +93,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("social-camp"),
     kind: "event",
+    category: "events",
     institution: null,
     title: "Social Camp",
     excerpt:
@@ -106,6 +111,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("christmas-event-city-campus"),
     kind: "event",
+    category: "events",
     institution: null,
     title: "Christmas Event, NAMI City Campus",
     excerpt:
@@ -123,6 +129,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("christmas-blood-donation-drive"),
     kind: "event",
+    category: "events",
     institution: "college",
     title:
       "NAMI A-Level Students Embrace the Spirit of Giving through Christmas Blood Donation Drive",
@@ -141,6 +148,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("tour-of-mustang-and-muktinath"),
     kind: "event",
+    category: "events",
     institution: "college",
     title: "NAMI A-Levels students Tour of Mustang & Muktinath",
     excerpt:
@@ -158,6 +166,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("welcome-programme-kwality-beach-resort"),
     kind: "event",
+    category: "events",
     institution: "college",
     title: "NAMI A-Levels: A Welcoming Spectacle at Kwality Beach Resort",
     excerpt:
@@ -175,6 +184,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("eco-club-environment-day"),
     kind: "event",
+    category: "events",
     institution: null,
     title: "Eco Club's Environment Day Program",
     excerpt:
@@ -192,6 +202,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("mascot-design-competition"),
     kind: "event",
+    category: "events",
     institution: null,
     title:
       "Unleashing Creativity: The Ultimate College Mascot Design Competition",
@@ -210,6 +221,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("elite-2023"),
     kind: "event",
+    category: "events",
     institution: "institute",
     title: "ELITE 2023",
     excerpt:
@@ -227,6 +239,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("climate-change-panel-discussion"),
     kind: "event",
+    category: "events",
     institution: null,
     title:
       'Panel Discussion on "Climate Change: Impacts and the Global Response"',
@@ -245,6 +258,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("welcome-undergrads-orientation-2022"),
     kind: "event",
+    category: "events",
     institution: "institute",
     title: "Welcome Undergrads Orientation 2022",
     excerpt:
@@ -262,6 +276,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("convocation-day-2022"),
     kind: "event",
+    category: "events",
     institution: "institute",
     title:
       "Triumph and Transition: NAMI's Grand Convocation Day 2022 at YAK & YETI Hotel",
@@ -280,6 +295,7 @@ const published: readonly Update[] = [
   {
     ...entryOf("world-environment-day-plantation"),
     kind: "event",
+    category: "events",
     institution: null,
     title: "Plantation program on the occasion of World Environment Day",
     excerpt:

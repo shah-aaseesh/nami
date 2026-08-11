@@ -13,6 +13,11 @@ const SPLIT_TYPE: Record<SplitUnit, string> = {
   chars: "chars,words,lines",
 };
 
+const AT_FOLD_Y_PERCENT = 10;
+const BELOW_FOLD_Y_PERCENT = 110;
+const AT_FOLD_DURATION = 0.6;
+const BELOW_FOLD_DURATION = 1;
+
 export type SplitTextProps = {
   children: string;
   as?: SplitTag;
@@ -33,9 +38,9 @@ export function SplitText({
   as = "h2",
   className,
   type = "lines",
-  yPercent = 110,
+  yPercent,
   stagger = 0.08,
-  duration = 1,
+  duration,
   delay = 0,
   ease = "power4.out",
   atFold = false,
@@ -44,35 +49,36 @@ export function SplitText({
 }: SplitTextProps) {
   const root = useRef<HTMLElement | null>(null);
   const isHeading = as.length === 2 && as.startsWith("h");
+  const fromYPercent =
+    yPercent ?? (atFold ? AT_FOLD_Y_PERCENT : BELOW_FOLD_Y_PERCENT);
+  const runDuration =
+    duration ?? (atFold ? AT_FOLD_DURATION : BELOW_FOLD_DURATION);
 
   useGSAP(
     () => {
       const el = root.current;
       if (!el) return;
 
-      let currentTween: gsap.core.Tween | null = null;
       const split = GsapSplitText.create(el, {
         type: SPLIT_TYPE[type],
         mask: type,
         aria: "auto",
         autoSplit: true,
-        onSplit: (self) => {
-          currentTween?.kill();
-          currentTween = gsap.fromTo(
+        onSplit: (self) =>
+          gsap.fromTo(
             self[type],
             {
-              yPercent,
+              yPercent: fromYPercent,
             },
             {
               yPercent: 0,
-              duration,
+              duration: runDuration,
               delay,
               ease,
               stagger,
               scrollTrigger: atFold ? undefined : { trigger: el, start, once },
             },
-          );
-        },
+          ),
       });
 
       if (!isHeading) {

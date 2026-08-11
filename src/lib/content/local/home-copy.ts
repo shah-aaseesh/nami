@@ -8,13 +8,13 @@ export const homeCopy: HomeCopy = {
     standfirst:
       "Grade 1 to a Master's degree on one academic pathway — NEB, Cambridge and British qualifications, taught in Kathmandu.",
     primaryCta: {
-      label: "Explore programmes",
-      href: "/programs",
+      label: "Start an application",
+      href: "/admissions",
       destination: "internal",
     },
     secondaryCta: {
-      label: "Admissions",
-      href: "/admissions",
+      label: "Our story",
+      href: "/about",
       destination: "internal",
     },
     image: mustangTrip,
@@ -29,11 +29,11 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     levels: {
-      navLabel: "Academic levels",
-      eyebrow: "Four levels",
-      heading: "Grade 1 to Master's, on one pathway.",
+      navLabel: "Institutions",
+      eyebrow: "Three institutions",
+      heading: "Three institutions, one pathway.",
       standfirst:
-        "Each level stands on its own accreditation — and leads into the next.",
+        "Grade 1 to a Master's degree, under one name. Each institution stands on its own accreditation — and leads into the next.",
       cta: null,
       emptyState: null,
     },

@@ -1,5 +1,6 @@
 import { entryOf } from "../identifiers";
 import { richText } from "../rich-text";
+import { schoolGrades } from "../school-grades";
 import type { InstitutionProfile } from "../types";
 import {
   gokarneshworMapUrl,
@@ -84,7 +85,7 @@ export const institution: InstitutionProfile = {
       locality: "Gokarneshwor-7",
       city: "Kathmandu",
       hosts: [
-        "School, Grade 1–6",
+        `School, ${schoolGrades.label}`,
         "+2 NEB, Science and Management",
         "Cambridge A-Level",
       ],

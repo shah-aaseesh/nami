@@ -12,6 +12,8 @@ import {
 
 const SMOOTH_SCROLL_QUERY = `${FULL_MOTION_QUERY} and (pointer: fine)`;
 const EFFECT_TARGETS = "[data-speed], [data-lag]";
+const WRAPPER_ID = "smooth-wrapper";
+const CONTENT_ID = "smooth-content";
 
 function hashTarget(): HTMLElement | null {
   const raw = window.location.hash.slice(1);
@@ -23,6 +25,26 @@ function hashTarget(): HTMLElement | null {
     id = raw;
   }
   return document.getElementById(id);
+}
+
+function MountSmootherBeforeSiblings() {
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add(SMOOTH_SCROLL_QUERY, () => {
+      const smoother = ScrollSmoother.create({
+        content: `#${CONTENT_ID}`,
+        effects: true,
+        smooth: 1.8,
+        wrapper: `#${WRAPPER_ID}`,
+      });
+      return () => smoother.kill();
+    });
+
+    return () => mm.revert();
+  });
+
+  return null;
 }
 
 export type SmoothScrollProviderProps = {
@@ -38,50 +60,6 @@ export function SmoothScrollProvider({
   const contentRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const scannedPath = useRef(pathname);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-
-      mm.add(SMOOTH_SCROLL_QUERY, () => {
-        const smoother = ScrollSmoother.create({
-          wrapper: wrapperRef.current,
-          content: contentRef.current,
-          smooth: 1.8,
-          effects: true,
-        });
-        return () => smoother.kill();
-      });
-
-      // Global data-attribute animation scanner
-      const animatedElements =
-        gsap.utils.toArray<HTMLElement>("[data-animate]");
-      animatedElements.forEach((el) => {
-        const type = el.dataset.animate;
-        const delay = el.dataset.delay
-          ? Number.parseFloat(el.dataset.delay)
-          : 0;
-
-        if (type === "fade-up") {
-          gsap.from(el, {
-            y: 40,
-            opacity: 0,
-            duration: 0.9,
-            delay,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              once: true,
-            },
-          });
-        }
-      });
-
-      return () => mm.revert();
-    },
-    { scope: wrapperRef },
-  );
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -115,8 +93,8 @@ export function SmoothScrollProvider({
     if (!content) return;
 
     let timeoutId: ReturnType<typeof setTimeout>;
-    // Refresh ScrollTrigger when content size changes (e.g. late image/font loads)
-    // Debounced to avoid thrashing during continuous animations
+    // ScrollSmoother runs an equivalent observer, but only where it is created;
+    // this one is the sole content-resize refresh on coarse-pointer viewports.
     const ro = new ResizeObserver(() => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
@@ -137,7 +115,6 @@ export function SmoothScrollProvider({
     if (scannedPath.current === pathname) return;
     scannedPath.current = pathname;
 
-    // Refresh triggers after a route change and a short delay for React mounting
     const timeoutId = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 100);
@@ -174,9 +151,10 @@ export function SmoothScrollProvider({
 
   return (
     <>
+      <MountSmootherBeforeSiblings />
       {chrome}
-      <div id="smooth-wrapper" ref={wrapperRef}>
-        <div id="smooth-content" ref={contentRef}>
+      <div id={WRAPPER_ID} ref={wrapperRef}>
+        <div id={CONTENT_ID} ref={contentRef}>
           {children}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { entryOf, slug } from "../identifiers";
+import { schoolGrades } from "../school-grades";
 import type { AdmissionCall } from "../types";
 import {
   bachelorMasterAdmissionLink,
@@ -9,7 +10,7 @@ export const admissionCalls: readonly AdmissionCall[] = [
   {
     ...entryOf("admission-school"),
     levelSlug: slug("school"),
-    title: "School, Grade 1–6",
+    title: `School, ${schoolGrades.label}`,
     note: "Application form for NAMI International School.",
     link: {
       label: "Visit School Website",
@@ -19,14 +20,14 @@ export const admissionCalls: readonly AdmissionCall[] = [
   },
   {
     ...entryOf("admission-plus-two"),
-    levelSlug: slug("plus-two"),
+    levelSlug: slug("school"),
     title: "+2 NEB, Science and Management",
     note: null,
     link: plusTwoAdmissionLink,
   },
   {
     ...entryOf("admission-a-level"),
-    levelSlug: slug("a-level"),
+    levelSlug: slug("college"),
     title: "Cambridge A-Level",
     note: null,
     link: {
@@ -37,7 +38,7 @@ export const admissionCalls: readonly AdmissionCall[] = [
   },
   {
     ...entryOf("admission-bachelor-master"),
-    levelSlug: slug("bachelor-master"),
+    levelSlug: slug("bachelors"),
     title: "Bachelor & Master",
     note: null,
     link: bachelorMasterAdmissionLink,

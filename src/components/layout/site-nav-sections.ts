@@ -17,14 +17,16 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     ],
   },
   {
-    label: "Academics",
-    href: "/programs",
-    descriptor: "Explore our academic offerings.",
+    label: "Institutions",
+    href: "/institutions/college",
+    descriptor: "Three institutions, one academic pathway.",
     children: [
-      { label: "School", href: "/programs/school" },
-      { label: "+2 NEB", href: "/programs/plus-two" },
-      { label: "A-Level", href: "/programs/a-level" },
-      { label: "Bachelor / Master", href: "/programs/bachelor-master" },
+      { label: "NAMI International School", href: "/institutions/school" },
+      { label: "NAMI College", href: "/institutions/college" },
+      {
+        label: "Multi-Disciplinary Institute",
+        href: "/institutions/bachelors",
+      },
     ],
   },
   {

@@ -84,7 +84,7 @@ export type Stat = ContentEntry & {
 };
 
 export type AcademicLevel = ContentEntry & {
-  readonly title: string;
+  readonly entity: EntityRole;
   readonly stage: string;
   readonly summary: RichText;
   readonly highlights: readonly string[];

@@ -1,4 +1,5 @@
 import { entryOf, slug } from "../identifiers";
+import { schoolGrades } from "../school-grades";
 import type { Affiliation } from "../types";
 import { AWARDING_BODIES } from "./awarding-bodies";
 
@@ -6,7 +7,7 @@ export const affiliations: readonly Affiliation[] = [
   {
     ...entryOf("neb-school"),
     body: AWARDING_BODIES.neb,
-    scope: "Grades One to Seven",
+    scope: schoolGrades.labelPlural,
     sinceYear: 2024,
     levelSlug: slug("school"),
     campusSlug: slug("gokarneshwor"),
@@ -18,7 +19,7 @@ export const affiliations: readonly Affiliation[] = [
     body: AWARDING_BODIES.neb,
     scope: "10+2, Science and Management",
     sinceYear: 2019,
-    levelSlug: slug("plus-two"),
+    levelSlug: slug("school"),
     campusSlug: slug("gokarneshwor"),
     note: null,
     logo: "/universities/neb.png",
@@ -28,7 +29,7 @@ export const affiliations: readonly Affiliation[] = [
     body: AWARDING_BODIES.cambridge,
     scope: "A-Level programme, science and non-science",
     sinceYear: 2013,
-    levelSlug: slug("a-level"),
+    levelSlug: slug("college"),
     campusSlug: slug("gokarneshwor"),
     note: "Independent CAIE examination centre since 2024",
     logo: "/universities/cambridge.png",
@@ -38,7 +39,7 @@ export const affiliations: readonly Affiliation[] = [
     body: AWARDING_BODIES.northampton,
     scope: "Undergraduate and postgraduate",
     sinceYear: 2012,
-    levelSlug: slug("bachelor-master"),
+    levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
     note: null,
     logo: "/universities/northampton.png",
@@ -48,7 +49,7 @@ export const affiliations: readonly Affiliation[] = [
     body: AWARDING_BODIES.kathmanduUniversity,
     scope: "BSc Environmental Studies",
     sinceYear: 2026,
-    levelSlug: slug("bachelor-master"),
+    levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
     note: "Program begins August 2026",
     logo: "/universities/Kathmandu_University_Logo.webp",
@@ -58,7 +59,7 @@ export const affiliations: readonly Affiliation[] = [
     body: AWARDING_BODIES.hertfordshire,
     scope: "Upcoming undergraduate and postgraduate programmes",
     sinceYear: 2026,
-    levelSlug: slug("bachelor-master"),
+    levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
     note: "Programmes commencing in 2026",
     logo: "/universities/hertfordshire.png",

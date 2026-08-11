@@ -24,26 +24,17 @@ export function HeroBadgePin({ children, className }: HeroBadgePinProps) {
         const columnEl = column.current;
         if (!trackEl || !columnEl) return;
 
-        let trigger: ScrollTrigger | undefined;
-
-        // ScrollSmoother claims the scroller in the provider's effect, which runs
-        // after this one; a pin built before that pins against the viewport.
-        const frame = requestAnimationFrame(() => {
-          trigger = ScrollTrigger.create({
-            end: () =>
-              `+=${Math.max(0, trackEl.offsetHeight - columnEl.offsetHeight)}`,
-            invalidateOnRefresh: true,
-            pin: columnEl,
-            pinSpacing: false,
-            start: `top ${PIN_TOP}px`,
-            trigger: trackEl,
-          });
+        const trigger = ScrollTrigger.create({
+          end: () =>
+            `+=${Math.max(0, trackEl.offsetHeight - columnEl.offsetHeight)}`,
+          invalidateOnRefresh: true,
+          pin: columnEl,
+          pinSpacing: false,
+          start: `top ${PIN_TOP}px`,
+          trigger: trackEl,
         });
 
-        return () => {
-          cancelAnimationFrame(frame);
-          trigger?.kill();
-        };
+        return () => trigger.kill();
       });
 
       return () => mm.revert();

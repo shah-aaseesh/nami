@@ -1,4 +1,5 @@
 import { entryOf } from "../identifiers";
+import { schoolGrades } from "../school-grades";
 import type { Stat } from "../types";
 
 export const stats: readonly Stat[] = [
@@ -44,7 +45,7 @@ export const stats: readonly Stat[] = [
     group: "enrolment",
     value: 176,
     suffix: null,
-    label: "students in Grades 1–6",
+    label: `students in ${schoolGrades.labelPlural}`,
     detail: null,
   },
   {

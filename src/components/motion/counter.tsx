@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
+const START_RATIO = 0.9;
+
 export type CounterProps = {
   value: number;
   suffix?: string;
@@ -27,8 +29,13 @@ export function Counter({
       const el = node.current;
       if (el === null) return;
 
+      const startsBelowFold =
+        el.getBoundingClientRect().top >= window.innerHeight * START_RATIO;
+      if (!startsBelowFold) return;
+
       const counter = { v: 0 };
-      gsap.set(counter, { v: 0 });
+      el.textContent = `${format(counter.v)}${suffix}`;
+
       const tween = gsap.to(counter, {
         v: value,
         duration,
@@ -41,7 +48,7 @@ export function Counter({
 
       const trigger = ScrollTrigger.create({
         trigger: el,
-        start: "top 90%",
+        start: `top ${START_RATIO * 100}%`,
         once: true,
         onEnter: () => tween.play(),
       });

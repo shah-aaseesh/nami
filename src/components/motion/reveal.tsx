@@ -4,6 +4,11 @@ import type { ReactNode } from "react";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 
+const AT_FOLD_Y = 8;
+const BELOW_FOLD_Y = 40;
+const AT_FOLD_DURATION = 0.6;
+const BELOW_FOLD_DURATION = 0.9;
+
 export type RevealProps = {
   children: ReactNode;
   className?: string;
@@ -22,18 +27,21 @@ export type RevealProps = {
 export function Reveal({
   children,
   className,
-  y = 40,
+  y,
   x = 0,
   atFold = false,
   fade = !atFold,
   stagger = 0,
-  duration = 0.9,
+  duration,
   delay = 0,
   ease = "power3.out",
   start = "top 85%",
   once = true,
 }: RevealProps) {
   const root = useRef<HTMLDivElement>(null);
+  const fromY = y ?? (atFold ? AT_FOLD_Y : BELOW_FOLD_Y);
+  const runDuration =
+    duration ?? (atFold ? AT_FOLD_DURATION : BELOW_FOLD_DURATION);
 
   useGSAP(
     () => {
@@ -47,7 +55,7 @@ export function Reveal({
       gsap.fromTo(
         targets,
         {
-          y,
+          y: fromY,
           x,
           opacity: fade ? 0 : 1,
         },
@@ -55,7 +63,7 @@ export function Reveal({
           y: 0,
           x: 0,
           opacity: 1,
-          duration,
+          duration: runDuration,
           delay,
           ease,
           stagger,

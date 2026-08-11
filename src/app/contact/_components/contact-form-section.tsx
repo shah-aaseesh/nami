@@ -16,7 +16,7 @@ export async function ContactFormSection() {
 
   const topics = [
     copy.topicGeneral,
-    ...levels.map((level) => level.title),
+    ...levels.map((level) => institution.entities[level.entity].name),
     copy.topicOther,
   ];
 

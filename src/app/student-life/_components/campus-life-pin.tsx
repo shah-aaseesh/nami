@@ -24,24 +24,17 @@ export function CampusLifePin({ children, className }: CampusLifePinProps) {
         const columnEl = column.current;
         if (!trackEl || !columnEl) return;
 
-        let trigger: ScrollTrigger | undefined;
-
-        const frame = requestAnimationFrame(() => {
-          trigger = ScrollTrigger.create({
-            end: () =>
-              `+=${Math.max(0, trackEl.offsetHeight - columnEl.offsetHeight)}`,
-            invalidateOnRefresh: true,
-            pin: columnEl,
-            pinSpacing: false,
-            start: `top ${PIN_TOP}px`,
-            trigger: trackEl,
-          });
+        const trigger = ScrollTrigger.create({
+          end: () =>
+            `+=${Math.max(0, trackEl.offsetHeight - columnEl.offsetHeight)}`,
+          invalidateOnRefresh: true,
+          pin: columnEl,
+          pinSpacing: false,
+          start: `top ${PIN_TOP}px`,
+          trigger: trackEl,
         });
 
-        return () => {
-          cancelAnimationFrame(frame);
-          trigger?.kill();
-        };
+        return () => trigger.kill();
       });
 
       return () => mm.revert();

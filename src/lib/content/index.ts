@@ -29,6 +29,7 @@ export {
   richText,
   richTextFromHtml,
 } from "./rich-text";
+export { schoolGrades } from "./school-grades";
 export type * from "./types";
 export { GALLERY_CATEGORIES, PROVISIONAL_UPDATE_CATEGORIES } from "./types";
 

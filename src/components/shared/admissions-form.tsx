@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { H2, H3, P } from "@/components/ui/typography";
+import { schoolGrades } from "@/lib/content/school-grades";
 import {
   ArrowRightIcon,
   CalendarIcon,
@@ -313,7 +314,7 @@ export function MultiStepForm() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="school">
-                          School Level (I-VII)
+                          {`School Level (${schoolGrades.label})`}
                         </SelectItem>
                         <SelectItem value="plus2">+2 Programs</SelectItem>
                         <SelectItem value="alevel">

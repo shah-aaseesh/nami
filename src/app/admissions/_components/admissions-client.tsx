@@ -9,13 +9,14 @@ import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { H2, P } from "@/components/ui/typography";
 import { useAdmissionsParallax } from "@/hooks/motion/use-admissions-parallax";
+import { schoolGrades } from "@/lib/content/school-grades";
 import { ArrowRightIcon, CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 const PROGRAMS = [
   {
     id: "school",
-    title: "School Level (I-VII)",
+    title: `School Level (${schoolGrades.label})`,
     description:
       "NAMI International School offers a diverse and balanced curriculum within the framework of the Nepal Government's National Curriculum, focusing on experiential learning.",
     requirements: [
@@ -36,7 +37,7 @@ const PROGRAMS = [
       "Completed admission application form",
       "Character certificate",
     ],
-    link: "Application_form_nami_international_school_plus_2.pdf",
+    link: "school.nami.edu.np/notice/2",
     image: "/nami/level-plus-two.jpg",
   },
   {

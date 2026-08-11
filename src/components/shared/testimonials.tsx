@@ -1,18 +1,26 @@
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
-import type { SectionCopy } from "@/lib/content";
+import type { SectionCopy, Testimonial } from "@/lib/content";
 import { content } from "@/lib/content";
 import { TestimonialCard } from "./testimonials-card";
 import { TestimonialsCarousel } from "./testimonials-carousel";
 
-export async function Testimonials({ section }: { section: SectionCopy }) {
-  const testimonials = await content.getTestimonials();
+export async function Testimonials({
+  id = "testimonials",
+  items,
+  section,
+}: {
+  id?: string;
+  items?: readonly Testimonial[];
+  section: SectionCopy;
+}) {
+  const testimonials = items ?? (await content.getTestimonials());
 
   const single = testimonials.length === 1 ? testimonials[0] : undefined;
 
   return (
-    <section className="gutter-x section-y" id="testimonials">
+    <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <div className="lg:w-7/12">
           {section.eyebrow === null ? null : (

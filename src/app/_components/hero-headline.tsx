@@ -4,6 +4,9 @@ import { useRef } from "react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
+const AT_FOLD_Y_PERCENT = 10;
+const AT_FOLD_DURATION = 0.6;
+
 export type HeroHeadlineProps = {
   lead: string;
   tail: string | null;
@@ -18,27 +21,24 @@ export function HeroHeadline({ lead, tail, className }: HeroHeadlineProps) {
       const el = root.current;
       if (!el) return;
 
-      let currentTween: gsap.core.Tween | null = null;
       const split = SplitText.create(el, {
         type: "lines",
         mask: "lines",
         aria: "auto",
         autoSplit: true,
-        onSplit: (self) => {
-          currentTween?.kill();
-          currentTween = gsap.fromTo(
+        onSplit: (self) =>
+          gsap.fromTo(
             self.lines,
             {
-              yPercent: 110,
+              yPercent: AT_FOLD_Y_PERCENT,
             },
             {
               yPercent: 0,
-              duration: 1.1,
+              duration: AT_FOLD_DURATION,
               ease: "power4.out",
               stagger: 0.09,
             },
-          );
-        },
+          ),
       });
 
       return () => {

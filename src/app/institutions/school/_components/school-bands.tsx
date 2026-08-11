@@ -1,14 +1,18 @@
+import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
-import type { Affiliation } from "@/lib/content";
+import type { ContentImage } from "@/lib/content";
+
 import { CheckIcon } from "@/lib/icons";
 
 export type SchoolStream = {
   readonly name: string;
   readonly note: string;
   readonly subjects: readonly string[];
+  readonly photo?: ContentImage;
 };
 
 export type SchoolBand = {
@@ -27,126 +31,138 @@ export type SchoolBandsCopy = {
   readonly standfirst: string;
   readonly primary: SchoolBand;
   readonly secondary: SchoolBand;
+  readonly photo: ContentImage;
 };
 
-function BandRung({
-  affiliations,
-  band,
-}: {
-  readonly affiliations: readonly Affiliation[];
-  readonly band: SchoolBand;
-}) {
-  const affiliation =
-    affiliations.find((item) => item.slug === band.affiliationSlug) ?? null;
-
+function BandContent({ band }: { readonly band: SchoolBand }) {
   return (
-    <RevealItem className="grid gap-y-8 border-b border-border py-10 lg:grid-cols-12 lg:gap-x-10 lg:py-16">
-      <div className="lg:col-span-4">
-        <h3 className="font-display text-5xl font-normal text-balance text-ink">
-          {band.label}
-        </h3>
+    <div>
+      <P className="max-w-2xl text-ink-muted leading-relaxed">{band.body}</P>
 
-        {affiliation === null ? null : (
-          <p className="mt-5 font-body text-xs font-medium tracking-widest text-accent uppercase">
-            {band.sinceLabel} {affiliation.sinceYear}
-          </p>
-        )}
-
-        {band.enrolment === null ? null : (
-          <p className="mt-3 font-body text-sm text-ink-muted">
-            {band.enrolment}
-          </p>
-        )}
-      </div>
-
-      <div className="lg:col-span-7 lg:col-start-6">
-        <P className="max-w-2xl text-lg text-ink">{band.body}</P>
-
-        {band.notes.length === 0 ? null : (
-          <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-            {band.notes.map((note) => (
-              <li
-                className="flex gap-3 font-body text-sm text-ink-muted"
-                key={note}
-              >
-                <Icon
-                  className="mt-1 size-4 shrink-0 text-accent"
-                  icon={CheckIcon}
-                />
-                {note}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {band.streams.length === 0 ? null : (
-          <div className="mt-12 grid gap-10 sm:grid-cols-2">
-            {band.streams.map((stream) => (
-              <div className="border-t border-border pt-6" key={stream.name}>
-                <h4 className="font-display text-2xl font-normal text-ink">
-                  {stream.name}
-                </h4>
-                <p className="mt-3 font-body text-sm text-ink-muted">
-                  {stream.note}
-                </p>
-                <ul className="mt-6 flex flex-col gap-2">
-                  {stream.subjects.map((subject) => (
-                    <li
-                      className="font-body text-sm text-ink-muted"
-                      key={subject}
-                    >
-                      {subject}
-                    </li>
-                  ))}
-                </ul>
+      {band.notes.length === 0 ? null : (
+        <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+          {band.notes.map((note) => (
+            <li
+              className="flex items-start gap-3 font-body text-sm text-ink-muted"
+              key={note}
+            >
+              <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-surface-raised">
+                <Icon className="size-3 text-accent" icon={CheckIcon} />
               </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </RevealItem>
+              <span className="leading-snug">{note}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {band.streams.length === 0 ? null : (
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {band.streams.map((stream) => (
+            <div
+              key={stream.name}
+              className="rounded-2xl bg-surface-raised/40 p-6 transition-colors hover:bg-surface-raised/80"
+            >
+              {stream.photo && (
+                <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl">
+                  <Image
+                    alt={stream.photo.alt}
+                    className="object-cover"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    src={stream.photo.src}
+                  />
+                </div>
+              )}
+              <h4 className="font-display text-xl font-normal text-ink">
+                {stream.name}
+              </h4>
+              <p className="mt-2 font-body text-sm text-ink-muted">
+                {stream.note}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {stream.subjects.map((subject) => (
+                  <span
+                    className="rounded-full bg-surface px-3 py-1 font-body text-xs text-ink-muted ring-1 ring-border"
+                    key={subject}
+                  >
+                    {subject}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
 export function SchoolBands({
-  affiliations,
   copy,
   id,
 }: {
-  readonly affiliations: readonly Affiliation[];
   readonly copy: SchoolBandsCopy;
   readonly id?: string;
 }) {
   return (
-    <section className="field-ink gutter-x section-y" id={id}>
+    <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
+          <div className="grid lg:grid-cols-12 lg:gap-16 items-start">
+            <div className="lg:col-span-7">
+              <RevealItem className="flex items-center gap-5">
+                <Eyebrow>{copy.eyebrow}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </RevealItem>
 
-          <SplitText
-            as="h2"
-            className="mt-6 max-w-4xl font-display text-5xl font-normal text-balance text-ink lg:mt-8"
-          >
-            {copy.heading}
-          </SplitText>
+              <SplitText
+                as="h2"
+                className="mt-6 font-display text-4xl font-normal text-balance text-ink lg:mt-8 lg:text-5xl"
+              >
+                {copy.heading}
+              </SplitText>
 
-          <RevealItem className="mt-6 max-w-2xl">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </RevealItem>
+              <RevealItem className="mt-6 max-w-2xl">
+                <Standfirst>{copy.standfirst}</Standfirst>
+              </RevealItem>
+            </div>
+
+            <div className="hidden lg:col-span-5 lg:block">
+              <RevealItem>
+                <div className="relative aspect-video w-full overflow-hidden rounded-3xl">
+                  <Image
+                    alt={copy.photo.alt}
+                    className="object-cover"
+                    fill
+                    sizes="(max-width: 1024px) 0vw, 40vw"
+                    src={copy.photo.src}
+                  />
+                </div>
+              </RevealItem>
+            </div>
+          </div>
         </Reveal>
 
-        <Reveal
-          className="mt-14 border-t border-border lg:mt-20"
-          stagger={0.1}
-          y={28}
-        >
-          <BandRung affiliations={affiliations} band={copy.primary} />
+        <RevealItem className="mt-14 lg:mt-20">
+          <Tabs defaultValue="primary" className="w-full">
+            <TabsList className="mb-10">
+              <TabsTab value="primary" className="text-base sm:text-lg">
+                {copy.primary.label}
+              </TabsTab>
+              <TabsTab value="secondary" className="text-base sm:text-lg">
+                {copy.secondary.label}
+              </TabsTab>
+            </TabsList>
 
-          <BandRung affiliations={affiliations} band={copy.secondary} />
-        </Reveal>
+            <TabsPanel value="primary">
+              <BandContent band={copy.primary} />
+            </TabsPanel>
+
+            <TabsPanel value="secondary">
+              <BandContent band={copy.secondary} />
+            </TabsPanel>
+          </Tabs>
+        </RevealItem>
       </div>
     </section>
   );

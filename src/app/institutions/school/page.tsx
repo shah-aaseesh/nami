@@ -9,7 +9,7 @@ import { SchoolAdmission } from "./_components/school-admission";
 import { SchoolBands } from "./_components/school-bands";
 import { dummyParentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
-import { SchoolMasthead } from "./_components/school-masthead";
+import { SchoolHero } from "./_components/school-hero";
 
 export const metadata: Metadata = createMetadata({
   path: "/institutions/school",
@@ -18,42 +18,24 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function SchoolPage() {
-  const [institution, leadership, levels, affiliations] = await Promise.all([
+  const [institution, leadership] = await Promise.all([
     content.getInstitution(),
     content.getLeadership(),
-    content.getAcademicLevels(),
-    content.getAffiliations(),
   ]);
 
-  const campus =
-    institution.campuses.find((item) => item.slug === schoolCopy.campusSlug) ??
-    null;
-  const level =
-    levels.find((item) => item.slug === schoolCopy.levelSlug) ?? null;
   const principal =
     leadership.academics.find(
       (item) => item.slug === schoolCopy.principal.slug,
     ) ?? null;
-  const schoolAffiliations = affiliations.filter(
-    (item) => item.levelSlug === schoolCopy.levelSlug,
-  );
-  const phone = institution.contact.phones[0] ?? null;
 
   return (
     <>
-      <SchoolMasthead
-        campus={campus}
+      <SchoolHero
         copy={schoolCopy.masthead}
         entity={institution.entities.school}
-        image={level?.image ?? null}
-        phone={phone}
       />
 
-      <SchoolBands
-        affiliations={schoolAffiliations}
-        copy={schoolCopy.bands}
-        id="academics"
-      />
+      <SchoolBands copy={schoolCopy.bands} id="academics" />
 
       {principal === null ? null : (
         <PrincipalMessage
@@ -83,11 +65,7 @@ export default async function SchoolPage() {
         section={schoolCopy.parents}
       />
 
-      <SchoolAdmission
-        copy={schoolCopy.admission}
-        id="admission"
-        phone={phone}
-      />
+      <SchoolAdmission copy={schoolCopy.admission} id="admission" />
 
       <InstitutionNotices
         copy={schoolCopy.notices}

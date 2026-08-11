@@ -22,7 +22,30 @@ const academicHeadPortrait: ContentImage = {
   height: 430,
 };
 
+const heroSlides: readonly ContentImage[] = [
+  {
+    src: "/nami/level-bachelor-master.jpg",
+    alt: "NAMI's library, metal shelving stacked with books and a newspaper rack standing behind the library help desk.",
+    width: 1200,
+    height: 900,
+  },
+  {
+    src: "/nami/campus-science-lab.jpg",
+    alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
+    width: 1280,
+    height: 853,
+  },
+  {
+    src: "/nami/campus-library.jpg",
+    alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
+    width: 1280,
+    height: 853,
+  },
+];
+
 const masthead: BachelorsMastheadCopy = {
+  heroLabel: "NAMI campus at New Baneshwor",
+  slides: heroSlides,
   motto: "Transform yourself, to lead the world",
   heading: "Degrees from our partner universities, taught in Kathmandu.",
   standfirst:

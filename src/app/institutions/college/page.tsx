@@ -18,18 +18,15 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function CollegePage() {
-  const [institution, leadership, levels, testimonials] = await Promise.all([
+  const [institution, leadership, testimonials] = await Promise.all([
     content.getInstitution(),
     content.getLeadership(),
-    content.getAcademicLevels(),
     content.getTestimonials(),
   ]);
 
   const campus =
     institution.campuses.find((item) => item.slug === collegeCopy.campusSlug) ??
     null;
-  const level =
-    levels.find((item) => item.slug === collegeCopy.levelSlug) ?? null;
   const principal =
     leadership.academics.find(
       (item) => item.slug === collegeCopy.principal.slug,
@@ -42,7 +39,6 @@ export default async function CollegePage() {
         campus={campus}
         copy={collegeCopy.masthead}
         entity={institution.entities.college}
-        image={level?.image ?? null}
       />
 
       {principal === null ? null : (

@@ -145,6 +145,30 @@
 @theme {
   --gutter-x: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem);
 
+  /* School hero — hero-progress must match AUTOPLAY_MS in school-hero-slider.tsx */
+  --animate-hero-progress: hero-progress 6.5s linear forwards;
+  --animate-hero-fade: hero-fade 0.7s ease-out both;
+
+  @keyframes hero-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* Spacing Design System Tokens */
   --spacing-section-py: clamp(3.5rem, 2rem + 3vw, 6rem);
   --spacing-section-py-compact: clamp(1.5rem, 1rem + 1vw, 2.5rem);
@@ -161,6 +185,15 @@
 
 @utility bleed-x {
   margin-inline: calc(-1 * var(--gutter-x));
+}
+
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @utility section-y {

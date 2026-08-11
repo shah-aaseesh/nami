@@ -1,7 +1,6 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { Parallax } from "@/components/motion/parallax";
+import { HeroSlider } from "@/components/shared/hero-slider";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -15,6 +14,8 @@ import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 export type CollegeMastheadCopy = {
+  readonly heroLabel: string;
+  readonly slides: readonly ContentImage[];
   readonly heading: string;
   readonly standfirst: string;
   readonly cta: ContentLink;
@@ -28,12 +29,10 @@ export function CollegeMasthead({
   campus,
   copy,
   entity,
-  image,
 }: {
   readonly campus: Campus | null;
   readonly copy: CollegeMastheadCopy;
   readonly entity: NamedEntity;
-  readonly image: ContentImage | null;
 }) {
   const external = copy.cta.destination === "external";
 
@@ -59,7 +58,7 @@ export function CollegeMasthead({
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>{entity.name}</Eyebrow>
-            <h1 className="mt-5 font-display text-4xl font-normal text-balance text-ink sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="mt-5 font-display text-3xl font-normal text-balance text-ink sm:text-4xl md:text-5xl lg:text-6xl">
               {copy.heading}
             </h1>
           </div>
@@ -94,22 +93,11 @@ export function CollegeMasthead({
           ))}
         </div>
 
-        {image === null ? null : (
-          <Parallax
-            className="mt-12 overflow-hidden rounded-3xl lg:mt-16"
-            speed={1.05}
-          >
-            <Image
-              alt={image.alt}
-              className="h-[42vh] w-full object-cover lg:h-[58vh]"
-              height={image.height}
-              loading="eager"
-              sizes="(max-width: 1024px) 100vw, 1200px"
-              src={image.src}
-              width={image.width}
-            />
-          </Parallax>
-        )}
+        <HeroSlider
+          className="mt-12 lg:mt-16"
+          label={copy.heroLabel}
+          slides={copy.slides}
+        />
       </div>
     </section>
   );

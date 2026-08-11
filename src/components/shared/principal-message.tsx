@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
+import { Icon } from "@/components/ui/icon";
 import { Eyebrow, P } from "@/components/ui/typography";
 import type { ContentImage, RichText } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content";
-import { cn } from "@/lib/utils";
+import { ImageIcon } from "@/lib/icons";
 
 export type PrincipalMessagePerson = {
   readonly name: string;
@@ -20,6 +21,37 @@ export type PrincipalMessageProps = {
   readonly person: PrincipalMessagePerson;
 };
 
+function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
+  const { portrait } = person;
+
+  return (
+    <figure className="mb-8 w-full sm:float-right sm:mb-6 sm:ml-10 sm:w-64 lg:w-72">
+      <div className="overflow-hidden rounded-t-xl border border-border border-b-0 bg-surface-raised">
+        {portrait === null ? (
+          <div className="grid aspect-4/5 w-full place-items-center">
+            <Icon className="size-8 text-ink-muted/50" icon={ImageIcon} />
+          </div>
+        ) : (
+          <Image
+            alt={portrait.alt}
+            className="aspect-4/5 w-full object-cover"
+            height={portrait.height}
+            loading="lazy"
+            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 256px, 288px"
+            src={portrait.src}
+            width={portrait.width}
+          />
+        )}
+      </div>
+
+      <figcaption className="rounded-b-xl border border-border bg-surface px-4 py-3">
+        <p className="font-body text-sm font-medium text-ink">{person.name}</p>
+        <p className="mt-0.5 font-body text-xs text-accent">{person.title}</p>
+      </figcaption>
+    </figure>
+  );
+}
+
 export function PrincipalMessage({
   eyebrow,
   heading,
@@ -28,76 +60,43 @@ export function PrincipalMessage({
   person,
 }: PrincipalMessageProps) {
   const [salutation, ...letter] = paragraphsOf(message);
-  const { portrait } = person;
 
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-10">
-          {portrait === null ? null : (
-            <Reveal className="lg:col-span-3" y={24}>
-              <Image
-                alt={portrait.alt}
-                className="h-auto w-full max-w-64 rounded-xl sm:max-w-72"
-                height={portrait.height}
-                loading="lazy"
-                sizes="(max-width: 639px) 256px, 288px"
-                src={portrait.src}
-                width={portrait.width}
-              />
-            </Reveal>
-          )}
+        <Reveal className="flex flex-col gap-5">
+          <Eyebrow>{eyebrow}</Eyebrow>
 
-          <div
-            className={cn(
-              "flex flex-col gap-10",
-              portrait === null
-                ? "lg:col-span-9"
-                : "lg:col-span-8 lg:col-start-5",
-            )}
+          <SplitText
+            as="h2"
+            className="max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl"
           >
-            <div className="flex flex-col gap-4">
-              <Reveal>
-                <Eyebrow>{eyebrow}</Eyebrow>
-              </Reveal>
+            {heading}
+          </SplitText>
 
-              <SplitText
-                as="h2"
-                className="font-display text-5xl font-normal text-balance text-ink"
-              >
-                {heading}
-              </SplitText>
+          <span className="block h-1 w-16 rounded-full bg-accent" />
+        </Reveal>
+
+        <Reveal className="mt-8" stagger={0.1}>
+          <RevealItem className="mt-10 block">
+            <PortraitCard person={person} />
+
+            <div className="flex flex-col gap-5">
+              {letter.map((paragraph, index) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
+                <P className="text-sm text-ink-muted lg:text-base" key={index}>
+                  {paragraph}
+                </P>
+              ))}
             </div>
+          </RevealItem>
 
-            <Reveal className="flex max-w-2xl flex-col gap-10" stagger={0.1}>
-              <div className="flex flex-col gap-6">
-                {salutation === undefined ? null : (
-                  <RevealItem>
-                    <P className="text-lg text-ink">{salutation}</P>
-                  </RevealItem>
-                )}
-
-                <RevealItem className="flex flex-col gap-5">
-                  {letter.map((paragraph, index) => (
-                    // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
-                    <P key={index}>{paragraph}</P>
-                  ))}
-                </RevealItem>
-              </div>
-
-              <RevealItem className="flex flex-col gap-6">
-                <span className="block h-px w-16 bg-accent" />
-
-                <div className="flex flex-col gap-3">
-                  <p className="font-display text-3xl text-ink">
-                    {person.name}
-                  </p>
-                  <Eyebrow>{person.title}</Eyebrow>
-                </div>
-              </RevealItem>
-            </Reveal>
-          </div>
-        </div>
+          <RevealItem className="clear-both">
+            <p className="font-display text-3xl text-ink italic lg:text-4xl">
+              {person.name}
+            </p>
+          </RevealItem>
+        </Reveal>
       </div>
     </section>
   );

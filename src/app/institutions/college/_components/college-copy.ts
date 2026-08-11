@@ -14,7 +14,30 @@ const principalPortrait: ContentImage = {
   height: 430,
 };
 
+const heroSlides: readonly ContentImage[] = [
+  {
+    src: "/nami/campus-basketball-award.jpg",
+    alt: "Prize-giving for the NAMI SEE 3x3 Basketball Tournament on the college auditorium stage, both teams wearing medals and holding certificates behind the winners' trophy and the tournament cheques.",
+    width: 1500,
+    height: 1000,
+  },
+  {
+    src: "/nami/campus-science-lab-2.jpg",
+    alt: "A NAMI practical laboratory, blue-topped stools ranked along a long bench of sinks and glassware with microscopes set out on the counter opposite.",
+    width: 1280,
+    height: 853,
+  },
+  {
+    src: "/nami/campus-sports.jpg",
+    alt: "Students on the NAMI sports ground during a campus tournament or sports day.",
+    width: 1500,
+    height: 1000,
+  },
+];
+
 const masthead: CollegeMastheadCopy = {
+  heroLabel: "NAMI College campus",
+  slides: heroSlides,
   heading: "Cambridge A Levels",
   standfirst:
     "An independent Cambridge Assessment International Education examination centre, and an accredited Cambridge International Home Centre in Nepal since June 2024.",

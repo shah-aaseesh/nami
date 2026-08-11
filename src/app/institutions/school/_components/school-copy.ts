@@ -5,7 +5,7 @@ import { entryOf, richText, schoolGrades } from "@/lib/content";
 import type { SchoolAdmissionCopy } from "./school-admission";
 import type { SchoolBandsCopy } from "./school-bands";
 import type { SchoolDayCopy } from "./school-day";
-import type { SchoolMastheadCopy } from "./school-masthead";
+import type { SchoolHeroCopy, SchoolHeroSlide } from "./school-hero";
 
 // Stand-in portrait until the school supplies its own — Asmit directive 2026-08-11.
 const principalPortrait: ContentImage = {
@@ -15,18 +15,65 @@ const principalPortrait: ContentImage = {
   height: 430,
 };
 
-const masthead: SchoolMastheadCopy = {
-  heading: "Nurturing minds, shaping tomorrow together.",
-  standfirst:
-    "A primary division that opened in 2024 and a National Examination Board +2 that has run since 2019, on one campus in Gokarneshwor. Registered under the Ministry of Education in Nepal.",
-  cta: {
-    label: "Start an admission",
-    href: "/admissions",
+const heroSlides: readonly SchoolHeroSlide[] = [
+  {
+    src: "/nami/campus-service-camp.jpg",
+    alt: "Pupils in red uniforms seated around a hilltop school ground in Sindhupalchowk, facing stacks of red relief bags laid out on benches at a NAMI service camp.",
+    width: 1190,
+    height: 793,
+    caption: "Service camp, Sindhupalchowk",
+  },
+  {
+    src: "/nami/campus-science-lab.jpg",
+    alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
+    width: 1280,
+    height: 853,
+    caption: "The chemistry laboratory",
+  },
+  {
+    src: "/nami/campus-library.jpg",
+    alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
+    width: 1280,
+    height: 853,
+    caption: "The reading hall",
+  },
+  {
+    src: "/nami/campus-basketball-award.jpg",
+    alt: "Prize-giving for the NAMI SEE 3x3 Basketball Tournament on the college auditorium stage, both teams wearing medals and holding certificates behind the winners' trophy and the tournament cheques.",
+    width: 1500,
+    height: 1000,
+    caption: "SEE 3x3 basketball prize-giving",
+  },
+  {
+    src: "/nami/campus-auditorium.jpg",
+    alt: "Students and staff seated on sofas and stacking chairs in the NAMI auditorium, maroon acoustic panelling on the wall behind them.",
+    width: 999,
+    height: 666,
+    caption: "The school auditorium",
+  },
+];
+
+const masthead: SchoolHeroCopy = {
+  eyebrow: "Gokarneshwor-7, Kathmandu",
+  tagline: `From ${schoolGrades.labelPlural} to +2 in Science and Management — one campus, taught under the Government of Nepal's National Curriculum and the National Examination Board.`,
+  heroLabel: "NAMI International School campus",
+  logo: {
+    src: "/universities/nami-school.png",
+    alt: "NAMI International School logo",
+    width: 250,
+    height: 96,
+  },
+  slides: heroSlides,
+  admissionCta: {
+    label: "Apply for admission",
+    href: "#admission",
     destination: "internal",
   },
-  admissionLabel: "Admission",
-  campusLabel: "Campus",
-  phoneLabel: "Admissions line",
+  website: {
+    label: "Visit the school website",
+    href: "https://school.nami.edu.np",
+    destination: "external",
+  },
 };
 
 const bands: SchoolBandsCopy = {
@@ -75,6 +122,12 @@ const bands: SchoolBandsCopy = {
           "Biology",
           "Computer Science",
         ],
+        photo: {
+          src: "/nami/campus-science-lab.jpg",
+          alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
+          width: 1280,
+          height: 853,
+        },
       },
       {
         name: "Management",
@@ -90,8 +143,20 @@ const bands: SchoolBandsCopy = {
           "Hotel Management",
           "Tourism and Mountaineering",
         ],
+        photo: {
+          src: "/nami/campus-library.jpg",
+          alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
+          width: 1280,
+          height: 853,
+        },
       },
     ],
+  },
+  photo: {
+    src: "/nami/campus-library.jpg",
+    alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
+    width: 1280,
+    height: 853,
   },
 };
 
@@ -100,66 +165,107 @@ const day: SchoolDayCopy = {
   heading: "Care is the first thing a child is taught here.",
   standfirst:
     "The school sets out to be a place where every child feels seen, heard and supported — and the campus is built around that rather than around the timetable.",
-  approachLabel: "How the school teaches",
-  approach: [
-    {
-      title: "Progressive education",
-      body: "Holistic development first: creativity, critical thinking and inquiry-based learning, with teachers emphasising teamwork over instruction.",
-    },
-    {
-      title: "A values-driven curriculum",
-      body: "Respect, kindness, honesty and ethical behaviour are taught inside the ordinary subjects rather than bolted on beside them.",
-    },
-    {
-      title: "A caring, inclusive atmosphere",
-      body: "Differences are celebrated and every child is meant to feel important and included. Parents are treated as essential partners in the child's education.",
-    },
-    {
-      title: "Service and the environment",
-      body: "Community service programmes let students help others from a young age, and the school runs sustainable practices as an environmentally conscious institution.",
-    },
-  ],
   campusLabel: "What the campus holds",
   campus: [
     {
       title: "Three meals a day",
       body: "Breakfast, lunch and a snack for students of Grade 1 to 5, with a separate canteen for Grades 11 and 12.",
+      photo: {
+        src: "/nami/school/nami-school-cafeteria.jpg",
+        alt: "The school cafeteria, wooden tables and chairs ranked across a polished floor beside a glazed partition, with a stainless steel serving counter and a water dispenser against the orange wall.",
+        width: 1000,
+        height: 1333,
+      },
     },
     {
       title: "Fields and courts",
       body: "A mini football field, an NBA-standard basketball court, a table tennis court and an outdoor play area for the juniors.",
+      photo: {
+        src: "/nami/school/nami-minifootball.jpg",
+        alt: "The school's mini football field, a white goal frame standing on a walled lawn edged by a rainbow-coloured railing and terracotta planters.",
+        width: 993,
+        height: 1051,
+      },
     },
     {
       title: "Science laboratories",
       body: "Biology, Chemistry and Physics laboratories for hands-on study and experience of scientific method.",
+      photo: {
+        src: "/nami/school/nami-school-science-lab.jpg",
+        alt: "Students in white lab coats and safety goggles running a titration into a conical flask at a laboratory bench, reagent bottles ranked on the shelves behind them.",
+        width: 1000,
+        height: 666,
+      },
     },
     {
       title: "Computer laboratories",
       body: "Laboratories in both the junior and senior buildings, each furnished with computer systems on high-speed internet.",
+      photo: {
+        src: "/nami/school/nami-school-computer-lab.jpg",
+        alt: "Students in navy blazers and ties working at desktop computers along a row of wooden benches in the computer laboratory.",
+        width: 712,
+        height: 666,
+      },
     },
     {
       title: "Digital classrooms",
       body: "Interactive boards in the classrooms, used as an everyday teaching tool rather than a showpiece.",
+      photo: {
+        src: "/nami/school/nami-school-digital-classroom.jpeg",
+        alt: "A teacher mid-lesson at a wall-mounted interactive board, presenting a red quadrilateral she has drawn on its touchscreen.",
+        width: 1125,
+        height: 1066,
+      },
     },
     {
       title: "Library",
       body: "A school library for leisure reading, with classroom libraries kept in the primary grades.",
+      photo: {
+        src: "/nami/school/nami-school-library.jpg",
+        alt: "A young pupil stretched out reading in a padded yellow hexagonal alcove built into the library wall, beside floor-to-ceiling shelves of picture books.",
+        width: 1000,
+        height: 1333,
+      },
     },
     {
       title: "Infirmary and counsellor",
       body: "A fully equipped infirmary with trained medical staff on duty through school hours, and a qualified psycho-social counsellor for students and teachers.",
+      photo: {
+        src: "/nami/school/nami-school-infirmity.jpg",
+        alt: "The school infirmary, two single beds made up with pale blue linen and folded blankets beneath a wall fan and a curtained window.",
+        width: 1000,
+        height: 1333,
+      },
     },
     {
       title: "Auditorium",
       body: "A fully equipped auditorium seating 300 for assemblies, performing arts shows and exhibitions.",
+      photo: {
+        src: "/nami/school/nami-international-school-auditorium.jpg",
+        alt: "Primary pupils seated in rows of stacking chairs in the school auditorium, watching the front of the hall beneath maroon acoustic panelling.",
+        width: 1000,
+        height: 1333,
+      },
     },
     {
       title: "Air-conditioned classrooms",
       body: "Learning spaces are air-conditioned so they stay comfortable through the year.",
+      photo: {
+        src: "/nami/school/nami-school-air-conditioned-classroom.jpg",
+        alt: "Nine primary pupils in Nepali national dress standing with hands folded in namaste on the foam-mat floor of their classroom, alphabet charts and display boards on the walls behind them.",
+        width: 1000,
+        height: 750,
+      },
     },
     {
       title: "Transport",
       body: "Bus service picking up and dropping off students at set points.",
+      photo: {
+        src: "/nami/school/nami-school-bus.jpg",
+        alt: "Two yellow NAMI International School minibuses parked in the school forecourt, children looking out from the windows.",
+        width: 1000,
+        height: 602,
+      },
     },
   ],
 };
@@ -167,7 +273,7 @@ const day: SchoolDayCopy = {
 const parents: SectionCopy = {
   navLabel: "Parents",
   eyebrow: "Parent voices",
-  heading: "Six families, on the school their children come home from.",
+  heading: "The school their children come home from.",
   standfirst:
     "Parents across the primary division and the +2 years, on the teaching, the pastoral care, and what the first weeks actually felt like.",
   cta: null,
@@ -275,15 +381,6 @@ const admission: SchoolAdmissionCopy = {
       body: "Parents or guardians attend an Open House to receive the Parent's and Student's Handbook, the curriculum details and the other essential documents.",
     },
   ],
-  callHeading: "Ready to enrol?",
-  callBody:
-    "The admissions team will guide you through every step. Call the school, or start the enquiry online and they will come back to you.",
-  cta: {
-    label: "Start an admission",
-    href: "/admissions",
-    destination: "internal",
-  },
-  phoneLabel: "Call the school",
 };
 
 const gallery: InstitutionGalleryCopy = {
@@ -309,7 +406,6 @@ export const schoolCopy = {
     title: "NAMI International School",
     description: `NAMI International School teaches ${schoolGrades.labelPlural} within the Government of Nepal's National Curriculum and NEB +2 in Science and Management at Gokarneshwor-7, Kathmandu.`,
   },
-  campusSlug: "gokarneshwor",
   levelSlug: "school",
   masthead,
   bands,

@@ -1,21 +1,25 @@
+import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, Standfirst } from "@/components/ui/typography";
+import type { ContentImage } from "@/lib/content";
 
-export type SchoolDayEntry = {
+export type SchoolCampusEntry = {
   readonly title: string;
   readonly body: string;
+  readonly photo?: ContentImage;
 };
 
 export type SchoolDayCopy = {
   readonly eyebrow: string;
   readonly heading: string;
   readonly standfirst: string;
-  readonly approachLabel: string;
-  readonly approach: readonly SchoolDayEntry[];
   readonly campusLabel: string;
-  readonly campus: readonly SchoolDayEntry[];
+  readonly campus: readonly SchoolCampusEntry[];
 };
+
+const CAMPUS_PHOTO_SIZES =
+  "(min-width: 1024px) 160px, (min-width: 640px) 144px, 112px";
 
 export function SchoolDay({
   copy,
@@ -45,61 +49,41 @@ export function SchoolDay({
           </RevealItem>
         </Reveal>
 
-        <div className="mt-14 lg:mt-20 lg:grid lg:grid-cols-12 lg:gap-x-10">
-          <Reveal
-            className="flex flex-col gap-10 lg:col-span-5"
-            stagger={0.1}
-            y={28}
-          >
-            <RevealItem>
-              <p className="font-body text-xs font-medium tracking-widest text-accent uppercase">
-                {copy.approachLabel}
-              </p>
-            </RevealItem>
+        <Reveal className="mt-14 lg:mt-20" stagger={0.06} y={24}>
+          <RevealItem>
+            <Eyebrow>{copy.campusLabel}</Eyebrow>
+          </RevealItem>
 
-            {copy.approach.map((entry) => (
-              <RevealItem
-                className="border-t border-border pt-6"
+          <ul className="mt-8 grid border-t border-border lg:grid-cols-2 lg:gap-x-16">
+            {copy.campus.map((entry) => (
+              <li
+                className="flex items-start gap-5 border-b border-border py-6"
+                data-reveal-item=""
                 key={entry.title}
               >
-                <h3 className="font-display text-2xl font-normal text-ink">
-                  {entry.title}
-                </h3>
-                <P className="mt-3">{entry.body}</P>
-              </RevealItem>
-            ))}
-          </Reveal>
+                {entry.photo ? (
+                  <Image
+                    alt={entry.photo.alt}
+                    className="aspect-[4/3] h-auto w-28 shrink-0 rounded-media object-cover sm:w-36 lg:w-40"
+                    height={entry.photo.height}
+                    sizes={CAMPUS_PHOTO_SIZES}
+                    src={entry.photo.src}
+                    width={entry.photo.width}
+                  />
+                ) : null}
 
-          <Reveal
-            className="mt-16 lg:col-span-6 lg:col-start-7 lg:mt-0"
-            stagger={0.06}
-            y={24}
-          >
-            <p
-              className="font-body text-xs font-medium tracking-widest text-accent uppercase"
-              data-reveal-item=""
-            >
-              {copy.campusLabel}
-            </p>
-
-            <ul className="@container mt-8 border-t border-border">
-              {copy.campus.map((entry) => (
-                <li
-                  className="grid gap-x-8 gap-y-2 border-b border-border py-5 @lg:grid-cols-[auto_minmax(0,1fr)]"
-                  data-reveal-item=""
-                  key={entry.title}
-                >
+                <div className="min-w-0">
                   <h3 className="font-display text-xl font-normal text-ink">
                     {entry.title}
                   </h3>
-                  <p className="font-body text-sm text-ink-muted">
+                  <p className="mt-2 font-body text-sm text-ink-muted">
                     {entry.body}
                   </p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

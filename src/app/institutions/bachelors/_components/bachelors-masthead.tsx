@@ -1,7 +1,6 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { Parallax } from "@/components/motion/parallax";
+import { HeroSlider } from "@/components/shared/hero-slider";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -26,6 +25,8 @@ export type BachelorsIncomingPartner = {
 };
 
 export type BachelorsMastheadCopy = {
+  readonly heroLabel: string;
+  readonly slides: readonly ContentImage[];
   readonly motto: string;
   readonly heading: string;
   readonly standfirst: string;
@@ -41,13 +42,11 @@ export function BachelorsMasthead({
   campus,
   copy,
   entity,
-  image,
   partnership,
 }: {
   readonly campus: Campus | null;
   readonly copy: BachelorsMastheadCopy;
   readonly entity: NamedEntity;
-  readonly image: ContentImage | null;
   readonly partnership: BachelorsPartnership | null;
 }) {
   const external = copy.cta.destination === "external";
@@ -61,7 +60,7 @@ export function BachelorsMasthead({
           <Eyebrow className="text-ink-muted">{copy.motto}</Eyebrow>
         </div>
 
-        <h1 className="mt-8 font-display text-6xl font-normal text-balance text-ink lg:mt-10 lg:text-8xl">
+        <h1 className="mt-8 font-display text-4xl font-normal text-balance text-ink sm:text-5xl lg:mt-10 lg:text-6xl">
           {copy.heading}
         </h1>
 
@@ -85,6 +84,12 @@ export function BachelorsMasthead({
             </Link>
           </div>
         </div>
+
+        <HeroSlider
+          className="mt-12 lg:mt-16"
+          label={copy.heroLabel}
+          slides={copy.slides}
+        />
       </div>
 
       {partnership === null || campus === null ? null : (
@@ -132,20 +137,6 @@ export function BachelorsMasthead({
             </div>
           </div>
         </div>
-      )}
-
-      {image === null ? null : (
-        <Parallax className="bleed-x mt-14 lg:mt-20" speed={1.06}>
-          <Image
-            alt={image.alt}
-            className="h-[38vh] w-full object-cover sm:h-[46vh] lg:h-[60vh]"
-            height={image.height}
-            priority
-            sizes="100vw"
-            src={image.src}
-            width={image.width}
-          />
-        </Parallax>
       )}
     </section>
   );

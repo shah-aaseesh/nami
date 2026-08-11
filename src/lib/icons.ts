@@ -14,6 +14,7 @@ export {
   Download01Icon as DownloadIcon,
   Facebook01Icon as FacebookIcon,
   GlobalIcon as GlobeIcon,
+  Image01Icon as ImageIcon,
   InstagramIcon,
   Linkedin01Icon as LinkedInIcon,
   Location01Icon as LocationIcon,

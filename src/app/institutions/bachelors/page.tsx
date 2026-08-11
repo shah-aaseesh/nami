@@ -19,28 +19,19 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function BachelorsPage() {
-  const [
-    institution,
-    leadership,
-    levels,
-    affiliations,
-    partners,
-    testimonials,
-  ] = await Promise.all([
-    content.getInstitution(),
-    content.getLeadership(),
-    content.getAcademicLevels(),
-    content.getAffiliations(),
-    content.getPartners(),
-    content.getTestimonials(),
-  ]);
+  const [institution, leadership, affiliations, partners, testimonials] =
+    await Promise.all([
+      content.getInstitution(),
+      content.getLeadership(),
+      content.getAffiliations(),
+      content.getPartners(),
+      content.getTestimonials(),
+    ]);
 
   const campus =
     institution.campuses.find(
       (item) => item.slug === bachelorsCopy.campusSlug,
     ) ?? null;
-  const level =
-    levels.find((item) => item.slug === bachelorsCopy.levelSlug) ?? null;
   const academicHead =
     leadership.academics.find(
       (item) => item.slug === bachelorsCopy.academicHead.slug,
@@ -67,7 +58,6 @@ export default async function BachelorsPage() {
         campus={campus}
         copy={bachelorsCopy.masthead}
         entity={institution.entities.institute}
-        image={level?.image ?? null}
         partnership={
           affiliation === null
             ? null

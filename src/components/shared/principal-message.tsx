@@ -59,7 +59,7 @@ export function PrincipalMessage({
   message,
   person,
 }: PrincipalMessageProps) {
-  const [salutation, ...letter] = paragraphsOf(message);
+  const letter = paragraphsOf(message);
 
   return (
     <section className="gutter-x section-y" id={id}>

@@ -1,5 +1,5 @@
 const FIRST_GRADE = 1;
-const LAST_GRADE = 6;
+const LAST_GRADE = 7;
 
 export const schoolGrades = {
   first: FIRST_GRADE,

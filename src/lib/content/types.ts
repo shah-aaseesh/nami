@@ -158,7 +158,8 @@ export type Update = ContentEntry & {
 export type Testimonial = ContentEntry & {
   readonly quote: string;
   readonly name: string;
-  readonly programme: string;
+  readonly programme: string | null;
+  readonly institution: EntityRole | null;
   readonly graduatedYear: number | null;
   readonly portrait: ContentImage | null;
 };

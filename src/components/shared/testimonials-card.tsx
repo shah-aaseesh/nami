@@ -72,9 +72,11 @@ export function TestimonialCard({
           <H6 as="span" className="block">
             {testimonial.name}
           </H6>
-          <span className="mt-1 block font-body text-sm text-ink-muted">
-            {testimonial.programme}
-          </span>
+          {testimonial.programme === null ? null : (
+            <span className="mt-1 block font-body text-sm text-ink-muted">
+              {testimonial.programme}
+            </span>
+          )}
           {testimonial.graduatedYear === null ? null : (
             <span className="block font-body text-sm text-ink-muted">
               {testimonial.graduatedYear}

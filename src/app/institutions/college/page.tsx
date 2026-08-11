@@ -11,8 +11,6 @@ import { CollegeEntry } from "./_components/college-entry";
 import { CollegeMasthead } from "./_components/college-masthead";
 import { CollegeSubjects } from "./_components/college-subjects";
 
-const A_LEVEL_PROGRAMME = /a[\s-]*level/i;
-
 export const metadata: Metadata = createMetadata({
   path: "/institutions/college",
   title: collegeCopy.meta.title,
@@ -36,9 +34,7 @@ export default async function CollegePage() {
     leadership.academics.find(
       (item) => item.slug === collegeCopy.principal.slug,
     ) ?? null;
-  const alumni = testimonials.filter((item) =>
-    A_LEVEL_PROGRAMME.test(item.programme),
-  );
+  const alumni = testimonials.filter((item) => item.institution === "college");
 
   return (
     <>

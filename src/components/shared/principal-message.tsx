@@ -6,6 +6,7 @@ import { Eyebrow, P } from "@/components/ui/typography";
 import type { ContentImage, RichText } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content";
 import { ImageIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type PrincipalMessagePerson = {
   readonly name: string;
@@ -16,6 +17,7 @@ export type PrincipalMessagePerson = {
 export type PrincipalMessageProps = {
   readonly eyebrow: string;
   readonly heading: string;
+  readonly headingClassName?: string;
   readonly id?: string;
   readonly message: RichText;
   readonly person: PrincipalMessagePerson;
@@ -55,6 +57,7 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
 export function PrincipalMessage({
   eyebrow,
   heading,
+  headingClassName,
   id,
   message,
   person,
@@ -69,7 +72,10 @@ export function PrincipalMessage({
 
           <SplitText
             as="h2"
-            className="max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl"
+            className={cn(
+              "max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl",
+              headingClassName,
+            )}
           >
             {heading}
           </SplitText>
@@ -88,13 +94,12 @@ export function PrincipalMessage({
                   {paragraph}
                 </P>
               ))}
+              <RevealItem className="mt-2">
+                <p className="font-display text-3xl text-ink italic lg:text-4xl">
+                  {person.name}
+                </p>
+              </RevealItem>
             </div>
-          </RevealItem>
-
-          <RevealItem className="clear-both">
-            <p className="font-display text-3xl text-ink italic lg:text-4xl">
-              {person.name}
-            </p>
           </RevealItem>
         </Reveal>
       </div>

@@ -7,6 +7,7 @@ import type { ContentImage, RichText } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content";
 import { ImageIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
+import { PrincipalPortraitPin } from "./principal-portrait-pin";
 
 export type PrincipalMessagePerson = {
   readonly name: string;
@@ -84,11 +85,11 @@ export function PrincipalMessage({
             <span className="block h-1 w-16 rounded-full bg-accent" />
           </Reveal>
 
-          <div className="max-w-xs lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:row-span-2 lg:max-w-none">
+          <PrincipalPortraitPin className="max-w-xs lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:row-span-2 lg:max-w-none">
             <Reveal>
               <PortraitCard person={person} />
             </Reveal>
-          </div>
+          </PrincipalPortraitPin>
 
           <Reveal className="lg:col-span-7 lg:row-start-2" stagger={0.1}>
             <RevealItem className="max-w-prose space-y-5">

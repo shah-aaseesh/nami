@@ -14,6 +14,14 @@ const northamptonLogo: ContentImage = {
   height: 407,
 };
 
+// Stand-in portrait until the institute supplies its own — Asmit directive 2026-08-11.
+const academicHeadPortrait: ContentImage = {
+  src: "/nami/principal-philip-badikar-hilario.jpg",
+  alt: "Philip Badikar Hilario, A Level Principal at NAMI College, standing in a checked jacket and holding a folder.",
+  width: 233,
+  height: 430,
+};
+
 const masthead: BachelorsMastheadCopy = {
   motto: "Transform yourself, to lead the world",
   heading: "Degrees from our partner universities, taught in Kathmandu.",
@@ -512,6 +520,7 @@ export const bachelorsCopy = {
     eyebrow: "From the Academic Head",
     heading:
       "A welcome to the Undergraduate and Graduate programmes at NAMI, in partnership with the University of Northampton.",
+    portrait: academicHeadPortrait,
     message: richText(
       "I extend a warm welcome to the Undergraduate and Graduate Program at NAMI, in partnership with the University of Northampton (UON), United Kingdom.",
       "As a valued student, you become part of a community known for its exceptional talents, energy, creativity, focus, and hard work.",

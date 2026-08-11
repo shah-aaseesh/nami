@@ -118,7 +118,7 @@ export function SchoolBands({
   readonly id?: string;
 }) {
   return (
-    <section className="field-teal gutter-x section-y" id={id}>
+    <section className="field-ink gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
           <RevealItem className="flex items-center gap-5">

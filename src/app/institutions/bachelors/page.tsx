@@ -90,7 +90,7 @@ export default async function BachelorsPage() {
           message={bachelorsCopy.academicHead.message}
           person={{
             name: academicHead.name,
-            portrait: academicHead.portrait,
+            portrait: bachelorsCopy.academicHead.portrait,
             title: academicHead.title,
           }}
         />

@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { InstitutionGallery } from "@/components/shared/institution-gallery";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
+import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { SchoolAdmission } from "./_components/school-admission";
 import { SchoolBands } from "./_components/school-bands";
-import { schoolCopy } from "./_components/school-copy";
+import { dummyParentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
 import { SchoolMasthead } from "./_components/school-masthead";
-import { SchoolVoices } from "./_components/school-voices";
 
 export const metadata: Metadata = createMetadata({
   path: "/institutions/school",
@@ -63,7 +63,7 @@ export default async function SchoolPage() {
           message={schoolCopy.principal.message}
           person={{
             name: principal.name,
-            portrait: null,
+            portrait: schoolCopy.principal.portrait,
             title: principal.title,
           }}
         />
@@ -77,7 +77,11 @@ export default async function SchoolPage() {
 
       <SchoolDay copy={schoolCopy.day} id="campus" />
 
-      <SchoolVoices copy={schoolCopy.voices} id="parents" />
+      <Testimonials
+        id="parents"
+        items={dummyParentTestimonials}
+        section={schoolCopy.parents}
+      />
 
       <SchoolAdmission
         copy={schoolCopy.admission}

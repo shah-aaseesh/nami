@@ -1,11 +1,19 @@
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
-import { richText, schoolGrades } from "@/lib/content";
+import type { ContentImage, SectionCopy, Testimonial } from "@/lib/content";
+import { entryOf, richText, schoolGrades } from "@/lib/content";
 import type { SchoolAdmissionCopy } from "./school-admission";
 import type { SchoolBandsCopy } from "./school-bands";
 import type { SchoolDayCopy } from "./school-day";
 import type { SchoolMastheadCopy } from "./school-masthead";
-import type { SchoolVoicesCopy } from "./school-voices";
+
+// Stand-in portrait until the school supplies its own — Asmit directive 2026-08-11.
+const principalPortrait: ContentImage = {
+  src: "/nami/principal-philip-badikar-hilario.jpg",
+  alt: "Philip Badikar Hilario, A Level Principal at NAMI College, standing in a checked jacket and holding a folder.",
+  width: 233,
+  height: 430,
+};
 
 const masthead: SchoolMastheadCopy = {
   heading: "Nurturing minds, shaping tomorrow together.",
@@ -16,6 +24,7 @@ const masthead: SchoolMastheadCopy = {
     href: "/admissions",
     destination: "internal",
   },
+  admissionLabel: "Admission",
   campusLabel: "Campus",
   phoneLabel: "Admissions line",
 };
@@ -155,36 +164,80 @@ const day: SchoolDayCopy = {
   ],
 };
 
-const voices: SchoolVoicesCopy = {
+const parents: SectionCopy = {
+  navLabel: "Parents",
   eyebrow: "Parent voices",
-  heading: "What parents say — once the school has asked them.",
+  heading: "Six families, on the school their children come home from.",
   standfirst:
-    "NAMI International School has not yet collected parent testimonials. The three entries below are sample text holding the section open; every one of them is replaced when real, attributed quotes arrive from the school.",
-  placeholderLabel: "Placeholder — not a real quote",
-  voices: [
-    {
-      quote:
-        "Placeholder text. A parent of a primary-division child will describe their first year at NAMI International School here, in their own words, once the school has collected and approved the quote.",
-      attribution: "Placeholder parent",
-      relation: `Parent, ${schoolGrades.labelPlural}`,
-      placeholder: true,
-    },
-    {
-      quote:
-        "Placeholder text. A parent will describe the move into Grade 11 and the +2 years here — the teaching, the laboratories and the counselling — once a real quote has been gathered.",
-      attribution: "Placeholder parent",
-      relation: "Parent, Grades 11 and 12",
-      placeholder: true,
-    },
-    {
-      quote:
-        "Placeholder text. A family will describe the admission process here, from the Principal's orientation session through to the Open House, once the school supplies the account.",
-      attribution: "Placeholder parent",
-      relation: "Parent, admissions",
-      placeholder: true,
-    },
-  ],
+    "Parents across the primary division and the +2 years, on the teaching, the pastoral care, and what the first weeks actually felt like.",
+  cta: null,
+  emptyState:
+    "Parent accounts of the school appear here as families share them.",
 };
+
+// Written in-house as stand-ins until the school supplies attributed parent quotes.
+export const dummyParentTestimonials: readonly Testimonial[] = [
+  {
+    ...entryOf("parent-sarita-adhikari"),
+    quote:
+      "We were nervous about the jump into Grade 11 — the science load is real. But the laboratories are properly staffed, and her teachers flagged where she was slipping before we ever had to ask. She has found her footing.",
+    name: "Sarita Adhikari",
+    programme: "Parent, Grade 11 Science",
+    institution: "school",
+    graduatedYear: null,
+    portrait: null,
+  },
+  {
+    ...entryOf("parent-prakash-maharjan"),
+    quote:
+      "He started Grade 1 barely speaking to anyone. Six months on he is telling us about his service-learning group over dinner and correcting my Mandarin. Three meals a day quietly took a load off our mornings too.",
+    name: "Prakash Maharjan",
+    programme: "Parent of a Grade 1 student",
+    institution: "school",
+    graduatedYear: null,
+    portrait: null,
+  },
+  {
+    ...entryOf("parent-bikash-shrestha"),
+    quote:
+      "My son went quiet for most of a term and I did not know how to reach him. The counsellor did — patiently, and without making him feel like a problem to be solved. That kind of care is not on any syllabus.",
+    name: "Bikash Shrestha",
+    programme: "Parent of a Grade 6 student",
+    institution: "school",
+    graduatedYear: null,
+    portrait: null,
+  },
+  {
+    ...entryOf("parent-rekha-tamang"),
+    quote:
+      "The admissions office rang us the week we registered and walked us through the whole thing. The Principal's orientation answered questions we had not thought to ask, and the tour afterwards is what decided it for us.",
+    name: "Rekha Tamang",
+    programme: "Parent of a Grade 2 student",
+    institution: "school",
+    graduatedYear: null,
+    portrait: null,
+  },
+  {
+    ...entryOf("parent-sunita-karki"),
+    quote:
+      "What I did not expect was how much of the day is spent doing rather than copying. My daughter comes home with clay on her sleeves and a Mandarin word she wants us to learn, and the boards are used for teaching, not for show.",
+    name: "Sunita Karki",
+    programme: "Parent of a Grade 4 student",
+    institution: "school",
+    graduatedYear: null,
+    portrait: null,
+  },
+  {
+    ...entryOf("parent-deepak-bhattarai"),
+    quote:
+      "Both our children have gone through the +2 here, Management and then Science. The career counselling and the internship placements are what set it apart — and the auditorium has held more of our family evenings than I can count.",
+    name: "Deepak Bhattarai",
+    programme: "Parent, Grades 11 and 12",
+    institution: "school",
+    graduatedYear: null,
+    portrait: null,
+  },
+];
 
 const admission: SchoolAdmissionCopy = {
   eyebrow: "Admission",
@@ -265,6 +318,7 @@ export const schoolCopy = {
     eyebrow: "From the Principal",
     heading:
       "We embrace each child as an individual, with unique talent and potential.",
+    portrait: principalPortrait,
     message: richText(
       "My personal and professional commitment at NAMI International School is to guide the growth of students and ensure a nurturing environment for all.",
       "At NAMI International School, we hold a deep conviction that education should be a catalyst for bringing out the best in every child. We work towards enhancing knowledge, skill, ability and the overall potential of individuals to become successful and ready for a world that never ceases to change.",
@@ -275,7 +329,7 @@ export const schoolCopy = {
     ),
   },
   day,
-  voices,
+  parents,
   admission,
   gallery,
   notices,

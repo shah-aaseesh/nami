@@ -35,13 +35,13 @@ export function PrincipalMessage({
       <div className="mx-auto max-w-page">
         <div className="flex flex-col gap-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-10">
           {portrait === null ? null : (
-            <Reveal className="lg:col-span-4" y={24}>
+            <Reveal className="lg:col-span-3" y={24}>
               <Image
                 alt={portrait.alt}
-                className="h-auto w-full max-w-64 rounded-xl sm:max-w-72 lg:max-w-80"
+                className="h-auto w-full max-w-64 rounded-xl sm:max-w-72"
                 height={portrait.height}
                 loading="lazy"
-                sizes="(max-width: 639px) 256px, (max-width: 1023px) 288px, 320px"
+                sizes="(max-width: 639px) 256px, 288px"
                 src={portrait.src}
                 width={portrait.width}
               />
@@ -53,7 +53,7 @@ export function PrincipalMessage({
               "flex flex-col gap-10",
               portrait === null
                 ? "lg:col-span-9"
-                : "lg:col-span-7 lg:col-start-6",
+                : "lg:col-span-8 lg:col-start-5",
             )}
           >
             <div className="flex flex-col gap-4">
@@ -69,7 +69,7 @@ export function PrincipalMessage({
               </SplitText>
             </div>
 
-            <Reveal className="flex max-w-xl flex-col gap-10" stagger={0.1}>
+            <Reveal className="flex max-w-2xl flex-col gap-10" stagger={0.1}>
               <div className="flex flex-col gap-6">
                 {salutation === undefined ? null : (
                   <RevealItem>

@@ -4,7 +4,7 @@ import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H3, H5, H6, P, Standfirst } from "@/components/ui/typography";
 import type { ContentLink } from "@/lib/content";
 import { ArrowUpRightIcon, PhoneIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -26,6 +26,146 @@ export type SchoolAdmissionCopy = {
   readonly phoneLabel: string;
 };
 
+const RING_RADIUS = 23;
+const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
+
+function StepRing({
+  label,
+  position,
+  total,
+}: {
+  readonly label: string;
+  readonly position: number;
+  readonly total: number;
+}) {
+  return (
+    <span className="relative grid size-12 shrink-0 place-items-center">
+      <svg
+        aria-hidden="true"
+        className="absolute inset-0 size-full -rotate-90"
+        fill="none"
+        viewBox="0 0 48 48"
+      >
+        <circle
+          className="stroke-border"
+          cx="24"
+          cy="24"
+          r={RING_RADIUS}
+          strokeWidth="1"
+        />
+        <circle
+          className="stroke-accent"
+          cx="24"
+          cy="24"
+          r={RING_RADIUS}
+          strokeDasharray={RING_LENGTH}
+          strokeDashoffset={RING_LENGTH * (1 - position / total)}
+          strokeLinecap="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+
+      <span className="relative font-display text-lg text-accent">
+        <span className="sr-only">{label} </span>
+        {position}
+      </span>
+    </span>
+  );
+}
+
+function StepArrow({ className }: { readonly className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={cn("absolute size-3 stroke-accent", className)}
+      fill="none"
+      viewBox="0 0 12 12"
+    >
+      <path
+        d="m4 2 4.5 4-4.5 4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
+function FlowStep({
+  index,
+  label,
+  step,
+  total,
+}: {
+  readonly index: number;
+  readonly label: string;
+  readonly step: SchoolAdmissionStep;
+  readonly total: number;
+}) {
+  const endsRowAtSm = index % 2 === 1;
+  const endsRowAtLg = index % 3 === 2;
+
+  return (
+    <li
+      className="relative flex items-start gap-x-4 sm:flex-col sm:gap-y-4"
+      data-reveal-item=""
+    >
+      <StepRing label={label} position={index + 1} total={total} />
+
+      <div>
+        <H6 as="h3" className="text-ink">
+          {step.title}
+        </H6>
+        <P className="mt-2">{step.body}</P>
+      </div>
+
+      <span
+        aria-hidden="true"
+        className="absolute top-14 -bottom-6 left-6 w-px bg-border sm:hidden"
+      >
+        <StepArrow className="-bottom-1 left-1/2 -translate-x-1/2 rotate-90" />
+      </span>
+
+      <span
+        aria-hidden="true"
+        className={cn(
+          "absolute top-6 left-14 -right-6 hidden h-px bg-border lg:-right-8",
+          endsRowAtSm ? "sm:hidden" : "sm:block",
+          endsRowAtLg ? "lg:hidden" : "lg:block",
+        )}
+      >
+        <StepArrow className="-right-1 top-1/2 -translate-y-1/2" />
+      </span>
+    </li>
+  );
+}
+
+function ArrivalStep({
+  label,
+  step,
+  total,
+}: {
+  readonly label: string;
+  readonly step: SchoolAdmissionStep;
+  readonly total: number;
+}) {
+  return (
+    <li
+      className="flex items-start gap-x-4 rounded-xl border border-border bg-surface-raised p-6 sm:col-span-2 sm:gap-x-6 sm:p-8 lg:col-span-3 lg:items-center lg:gap-x-8"
+      data-reveal-item=""
+    >
+      <StepRing label={label} position={total} total={total} />
+
+      <div className="lg:flex lg:flex-1 lg:items-center lg:gap-x-10">
+        <H5 as="h3" className="text-ink lg:basis-1/3">
+          {step.title}
+        </H5>
+        <P className="mt-2 lg:mt-0 lg:flex-1">{step.body}</P>
+      </div>
+    </li>
+  );
+}
+
 export function SchoolAdmission({
   copy,
   id,
@@ -36,6 +176,9 @@ export function SchoolAdmission({
   readonly phone: string | null;
 }) {
   const external = copy.cta.destination === "external";
+  const total = copy.steps.length;
+  const flow = copy.steps.slice(0, -1);
+  const arrival = copy.steps.at(-1) ?? null;
 
   return (
     <section className="gutter-x section-y" id={id}>
@@ -61,34 +204,30 @@ export function SchoolAdmission({
         </Reveal>
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.07} y={26}>
-          <ol className="border-t border-border">
-            {copy.steps.map((step, index) => (
-              <li
-                className="grid gap-x-10 gap-y-3 border-b border-border py-8 sm:grid-cols-[auto_minmax(0,1fr)] lg:py-10"
-                data-reveal-item=""
+          <ol className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-12">
+            {flow.map((step, index) => (
+              <FlowStep
+                index={index}
                 key={step.title}
-              >
-                <p className="font-display text-4xl text-accent sm:pt-1">
-                  <span className="sr-only">{copy.stepLabel} </span>
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-
-                <div>
-                  <h3 className="font-display text-2xl font-normal text-balance text-ink lg:text-3xl">
-                    {step.title}
-                  </h3>
-                  <P className="mt-3 max-w-3xl">{step.body}</P>
-                </div>
-              </li>
+                label={copy.stepLabel}
+                step={step}
+                total={total}
+              />
             ))}
+
+            {arrival === null ? null : (
+              <ArrivalStep
+                label={copy.stepLabel}
+                step={arrival}
+                total={total}
+              />
+            )}
           </ol>
         </Reveal>
 
         <Reveal className="mt-14 flex flex-col gap-8 border-t border-border-strong pt-10 lg:mt-20 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
           <div className="lg:max-w-xl">
-            <h3 className="font-display text-4xl font-normal text-balance text-ink">
-              {copy.callHeading}
-            </h3>
+            <H3 className="text-ink">{copy.callHeading}</H3>
             <P className="mt-4">{copy.callBody}</P>
           </div>
 

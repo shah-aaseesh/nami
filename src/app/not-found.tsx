@@ -25,7 +25,7 @@ export default function NotFound() {
           Page Not Found
         </SplitText>
 
-        <Reveal delay={0.2} y={30}>
+        <Reveal y={30}>
           <P className="mx-auto mt-8 max-w-lg text-lg text-ink-muted">
             The page you are looking for might have been removed, had its name
             changed, or is temporarily unavailable.

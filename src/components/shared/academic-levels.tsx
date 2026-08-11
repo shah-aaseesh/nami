@@ -2,7 +2,7 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, H3, P } from "@/components/ui/typography";
@@ -116,20 +116,20 @@ export async function AcademicLevels() {
     <section className="field-brand gutter-x section-y" id="institutions">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
-          <div className="lg:col-span-4 lg:row-start-1">
+          <Reveal className="lg:col-span-4 lg:row-start-1" stagger={0.08}>
             {section.eyebrow === null ? null : (
-              <Reveal className="flex items-center gap-5">
+              <RevealItem className="flex items-center gap-5">
                 <Eyebrow>{section.eyebrow}</Eyebrow>
                 <span className="h-px flex-1 bg-border" />
-              </Reveal>
+              </RevealItem>
             )}
 
             {section.standfirst === null ? null : (
-              <Reveal className="mt-6" delay={0.2}>
+              <RevealItem className="mt-6">
                 <P>{section.standfirst}</P>
-              </Reveal>
+              </RevealItem>
             )}
-          </div>
+          </Reveal>
 
           <SplitText
             as="h2"
@@ -144,7 +144,7 @@ export async function AcademicLevels() {
             <P className="mt-16 max-w-md">{section.emptyState}</P>
           )
         ) : (
-          <Reveal className="mt-16 lg:mt-24" delay={0.2} stagger={0.12}>
+          <Reveal className="mt-16 lg:mt-24" stagger={0.12}>
             <ol className="flex flex-col gap-y-16 lg:gap-y-28">
               {levels.map((level, index) => (
                 <InstitutionEntry

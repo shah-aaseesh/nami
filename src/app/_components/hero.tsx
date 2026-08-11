@@ -2,7 +2,6 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -153,43 +152,32 @@ export async function Hero() {
       <div className="relative mx-auto max-w-page lg:ps-14">
         {railLines.length === 0 ? null : <HeroRail lines={railLines} />}
 
-        <Reveal atFold className="flex items-center gap-4">
+        <div className="flex items-center gap-4">
           <Icon className="size-6 text-accent" icon={MortarboardIcon} />
           <Eyebrow>{hero.eyebrow}</Eyebrow>
-        </Reveal>
+        </div>
 
         <div className="mt-8 lg:mt-12 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <HeroHeadline className="lg:col-span-7" lead={lead} tail={tail} />
 
-          <Reveal
-            atFold
-            className="mt-12 flex flex-col items-start gap-8 lg:col-span-4 lg:col-start-9 lg:mt-0"
-            delay={0.25}
-            stagger={0.08}
-          >
-            <RevealItem>
-              <Standfirst>{hero.standfirst}</Standfirst>
-            </RevealItem>
-            <RevealItem className="flex flex-wrap items-center gap-x-8 gap-y-4">
+          <div className="mt-12 flex flex-col items-start gap-8 lg:col-span-4 lg:col-start-9 lg:mt-0">
+            <Standfirst>{hero.standfirst}</Standfirst>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
               <HeroCta link={hero.primaryCta} variant="default" />
               <HeroCta link={hero.secondaryCta} variant="link" />
-            </RevealItem>
-          </Reveal>
+            </div>
+          </div>
         </div>
 
         <div className="mt-10 lg:mt-14 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <HeroBadgePin className="lg:col-span-2">
-            <Reveal
-              atFold
-              className="relative flex items-start justify-start lg:flex-col lg:items-start lg:justify-start"
-              delay={0.5}
-            >
+            <div className="relative flex items-start justify-start lg:flex-col lg:items-start lg:justify-start">
               <HeroBadge
                 entity={institution.entities.institute}
                 motto={institution.motto}
                 watch={watch ?? null}
               />
-            </Reveal>
+            </div>
           </HeroBadgePin>
 
           {hero.image === null ? null : (

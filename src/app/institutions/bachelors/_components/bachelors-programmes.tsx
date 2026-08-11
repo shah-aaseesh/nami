@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import {
   Accordion,
@@ -84,11 +84,11 @@ export function BachelorsProgrammes({
   return (
     <section className="gutter-x section-y" id="programmes">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-6">
-            <Reveal>
+            <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
 
             <SplitText
               as="h2"
@@ -98,16 +98,13 @@ export function BachelorsProgrammes({
             </SplitText>
           </div>
 
-          <Reveal
-            className="mt-8 flex max-w-xl flex-col gap-4 lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end"
-            delay={0.15}
-          >
+          <RevealItem className="mt-8 flex max-w-xl flex-col gap-4 lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
             <P>{copy.offerNote}</P>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
 
-        <Reveal className="mt-14 lg:mt-20" delay={0.2}>
+        <Reveal className="mt-14 lg:mt-20">
           <Accordion multiple={false}>
             {copy.items.map((programme) => (
               <AccordionItem key={programme.key} value={programme.key}>

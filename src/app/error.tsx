@@ -33,7 +33,7 @@ export default function ErrorPage({
           Something went wrong
         </SplitText>
 
-        <Reveal delay={0.2} y={30}>
+        <Reveal y={30}>
           <P className="mx-auto mt-8 max-w-lg text-lg text-ink-muted">
             We apologize for the inconvenience. An unexpected error has occurred
             on this page.

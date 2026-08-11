@@ -120,25 +120,26 @@ export function SchoolBands({
   return (
     <section className="field-teal gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal className="flex items-center gap-5">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <span className="h-px flex-1 bg-border" />
-        </Reveal>
+        <Reveal stagger={0.08}>
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </RevealItem>
 
-        <SplitText
-          as="h2"
-          className="mt-6 max-w-4xl font-display text-5xl font-normal text-balance text-ink lg:mt-8"
-        >
-          {copy.heading}
-        </SplitText>
+          <SplitText
+            as="h2"
+            className="mt-6 max-w-4xl font-display text-5xl font-normal text-balance text-ink lg:mt-8"
+          >
+            {copy.heading}
+          </SplitText>
 
-        <Reveal className="mt-6 max-w-2xl" delay={0.2}>
-          <Standfirst>{copy.standfirst}</Standfirst>
+          <RevealItem className="mt-6 max-w-2xl">
+            <Standfirst>{copy.standfirst}</Standfirst>
+          </RevealItem>
         </Reveal>
 
         <Reveal
           className="mt-14 border-t border-border lg:mt-20"
-          delay={0.25}
           stagger={0.1}
           y={28}
         >

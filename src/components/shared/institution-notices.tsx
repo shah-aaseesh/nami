@@ -1,6 +1,6 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -58,45 +58,47 @@ export async function InstitutionNotices({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal className="flex items-center gap-5">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <span className="h-px flex-1 bg-border" />
-        </Reveal>
+        <Reveal stagger={0.08}>
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </RevealItem>
 
-        <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-8 lg:mt-8">
-          <SplitText
-            as="h2"
-            className="font-display text-5xl font-normal text-balance text-ink sm:max-w-2xl"
-          >
-            {copy.heading}
-          </SplitText>
-
-          <Reveal className="sm:shrink-0" delay={0.3}>
-            <Link
-              className={cn(
-                buttonVariants({ size: "md", variant: "link" }),
-                "min-h-11 inline-flex items-center",
-              )}
-              href={href}
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-8 lg:mt-8">
+            <SplitText
+              as="h2"
+              className="font-display text-5xl font-normal text-balance text-ink sm:max-w-2xl"
             >
-              {copy.ctaLabel}
-              <Icon icon={ArrowRightIcon} />
-            </Link>
-          </Reveal>
-        </div>
+              {copy.heading}
+            </SplitText>
 
-        <Reveal className="mt-6 max-w-2xl" delay={0.2}>
-          <Standfirst>{copy.standfirst}</Standfirst>
+            <RevealItem className="sm:shrink-0">
+              <Link
+                className={cn(
+                  buttonVariants({ size: "md", variant: "link" }),
+                  "min-h-11 inline-flex items-center",
+                )}
+                href={href}
+              >
+                {copy.ctaLabel}
+                <Icon icon={ArrowRightIcon} />
+              </Link>
+            </RevealItem>
+          </div>
+
+          <RevealItem className="mt-6 max-w-2xl">
+            <Standfirst>{copy.standfirst}</Standfirst>
+          </RevealItem>
         </Reveal>
 
         {notices.length === 0 ? (
-          <Reveal className="mt-12 lg:mt-16" delay={0.25}>
+          <Reveal className="mt-12 lg:mt-16">
             <P className="max-w-xl border-t border-border pt-8">
               {copy.emptyState}
             </P>
           </Reveal>
         ) : (
-          <Reveal className="mt-12 lg:mt-16" delay={0.25} stagger={0.08} y={28}>
+          <Reveal className="mt-12 lg:mt-16" stagger={0.08} y={28}>
             <ul className="border-t border-border">
               {notices.map((item) => (
                 <li

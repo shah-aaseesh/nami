@@ -14,7 +14,7 @@ export default async function FacultyPage() {
   const leadership = await content.getLeadership();
 
   return (
-    <main className="flex-1 bg-white">
+    <div className="bg-white">
       <FacultyHero />
 
       <div className="pb-12 lg:pb-24">
@@ -27,6 +27,6 @@ export default async function FacultyPage() {
 
         <FacultyGroup leaders={leadership.board} title="Board of Directors" />
       </div>
-    </main>
+    </div>
   );
 }

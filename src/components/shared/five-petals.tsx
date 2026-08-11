@@ -16,7 +16,6 @@ export function FivePetals({ petals }: { petals: readonly Petal[] }) {
 
       <Reveal
         stagger={0.1}
-        start="top 85%"
         className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-5"
       >
         {petals.map((petal, i) => (

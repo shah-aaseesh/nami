@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { Icon } from "@/components/ui/icon";
-import { H3, P } from "@/components/ui/typography";
+import { H2, P } from "@/components/ui/typography";
 import type { Leader } from "@/lib/content";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { LinkedInIcon, TwitterIcon } from "@/lib/icons";
@@ -64,9 +64,9 @@ export function FacultyGroup({
   return (
     <section className="gutter-x py-10 lg:py-16" ref={sectionRef}>
       <div className="mx-auto max-w-page overflow-hidden">
-        <H3 className="font-display text-2xl sm:text-3xl font-medium text-ink lg:text-4xl border-b border-border/60 pb-4 mb-8 sm:mb-12">
+        <H2 className="font-display text-2xl sm:text-3xl font-medium text-ink lg:text-4xl border-b border-border/60 pb-4 mb-8 sm:mb-12">
           {title}
-        </H3>
+        </H2>
 
         <div
           className={
@@ -131,9 +131,9 @@ export function FacultyGroup({
                 <p className="font-body text-[10px] font-bold uppercase tracking-widest text-accent">
                   {leader.title}
                 </p>
-                <h4 className="mt-1 font-display text-lg font-medium text-ink">
+                <h3 className="mt-1 font-display text-lg font-medium text-ink">
                   {leader.name}
-                </h4>
+                </h3>
                 <P className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
                   {leader.brief}
                 </P>

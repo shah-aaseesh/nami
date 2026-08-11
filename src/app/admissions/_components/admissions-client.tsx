@@ -141,9 +141,9 @@ export function AdmissionsClient() {
                 </P>
 
                 <div className="bg-surface-muted/50 rounded-xl p-6 mb-8 border border-border/50">
-                  <h4 className="font-semibold text-ink mb-4 tracking-wide text-sm uppercase">
+                  <h3 className="font-semibold text-ink mb-4 tracking-wide text-sm uppercase">
                     Key Requirements
-                  </h4>
+                  </h3>
                   <ul className="flex flex-col gap-3">
                     {prog.requirements.map((req) => (
                       <li

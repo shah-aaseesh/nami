@@ -54,11 +54,11 @@ export function Leadership({
   return (
     <section className="gutter-x section-y" id="leadership">
       <div className="mx-auto max-w-page">
-        <div className="lg:w-7/12">
+        <Reveal className="lg:w-7/12" stagger={0.08}>
           {section.eyebrow === null ? null : (
-            <Reveal>
+            <RevealItem>
               <Eyebrow>{section.eyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
           )}
           <SplitText
             as="h2"
@@ -67,11 +67,11 @@ export function Leadership({
             {section.heading}
           </SplitText>
           {section.standfirst === null ? null : (
-            <Reveal className="mt-6" delay={0.2}>
+            <RevealItem className="mt-6">
               <Standfirst>{section.standfirst}</Standfirst>
-            </Reveal>
+            </RevealItem>
           )}
-        </div>
+        </Reveal>
 
         <Parallax className="mt-14 flex flex-col gap-16 lg:gap-20" speed={1.02}>
           <LeaderGroup

@@ -1,7 +1,7 @@
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -43,9 +43,9 @@ export function BachelorsNorthampton({
   return (
     <section className="gutter-x section-y" id="northampton">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-7">
-            <Reveal className="flex items-center gap-5">
+            <RevealItem className="flex items-center gap-5">
               <Eyebrow>{copy.eyebrow}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
               {sinceYear === null ? null : (
@@ -53,7 +53,7 @@ export function BachelorsNorthampton({
                   {`${copy.sinceLabel} ${sinceYear}`}
                 </Eyebrow>
               )}
-            </Reveal>
+            </RevealItem>
 
             <SplitText
               as="h2"
@@ -63,13 +63,10 @@ export function BachelorsNorthampton({
             </SplitText>
           </div>
 
-          <Reveal
-            className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end"
-            delay={0.15}
-          >
+          <RevealItem className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
 
         <div className="mt-14 grid gap-x-10 gap-y-14 lg:mt-20 lg:grid-cols-2">
           {copy.sides.map((side, index) => (
@@ -129,7 +126,7 @@ export function BachelorsNorthampton({
           ))}
         </div>
 
-        <Reveal className="mt-12 lg:mt-16" delay={0.2}>
+        <Reveal className="mt-12 lg:mt-16">
           <Link
             className={cn(
               buttonVariants({ size: "md", variant: "link" }),

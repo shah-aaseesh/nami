@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import type { Affiliation, SectionCopy } from "@/lib/content";
@@ -7,13 +7,16 @@ import { content } from "@/lib/content";
 
 function SectionHead({ copy }: { copy: SectionCopy }) {
   return (
-    <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
+    <Reveal
+      className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8"
+      stagger={0.08}
+    >
       <div className="lg:col-span-7">
         {copy.eyebrow === null ? null : (
-          <Reveal className="flex items-center gap-5">
+          <RevealItem className="flex items-center gap-5">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
             <span className="h-px flex-1 bg-border" />
-          </Reveal>
+          </RevealItem>
         )}
 
         <SplitText as="h2" className="mt-6 font-display text-5xl lg:mt-8">
@@ -22,14 +25,11 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
       </div>
 
       {copy.standfirst === null ? null : (
-        <Reveal
-          className="mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0"
-          delay={0.25}
-        >
+        <RevealItem className="mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0">
           <Standfirst>{copy.standfirst}</Standfirst>
-        </Reveal>
+        </RevealItem>
       )}
-    </div>
+    </Reveal>
   );
 }
 
@@ -97,7 +97,7 @@ export async function Affiliations({ section }: { section: SectionCopy }) {
             <P className="mt-12 lg:w-5/12">{section.emptyState}</P>
           )
         ) : (
-          <Reveal className="mt-12 lg:mt-16" delay={0.2} stagger={0.08}>
+          <Reveal className="mt-12 lg:mt-16" stagger={0.08}>
             <ul className="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
               {timeline.map((item) => (
                 <AffiliationStation item={item} key={item.id} />

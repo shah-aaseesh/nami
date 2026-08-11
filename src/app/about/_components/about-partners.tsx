@@ -1,7 +1,7 @@
 "use client";
 
 import { Marquee } from "@/components/motion/marquee";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
 import type { Partner } from "@/lib/content";
@@ -80,27 +80,29 @@ export function AboutPartners({ partners }: { partners: readonly Partner[] }) {
       <div className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-96 w-[600px] -translate-x-1/2 rounded-full bg-accent/5 blur-3xl" />
 
       <div className="gutter-x mx-auto max-w-page mb-10 sm:mb-14">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <Reveal
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6"
+          stagger={0.08}
+        >
           <div className="max-w-2xl">
-            <Reveal atFold>
+            <RevealItem>
               <Eyebrow>Industry & Global Network</Eyebrow>
-            </Reveal>
+            </RevealItem>
             <SplitText
               as="h2"
-              atFold
               className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-balance text-ink"
             >
               {`Partnering with ${partners.length} Industry Leaders & Ecosystem Innovators`}
             </SplitText>
           </div>
-          <Reveal atFold className="shrink-0 lg:max-w-md" delay={0.15}>
+          <RevealItem className="shrink-0 lg:max-w-md">
             <Standfirst className="text-ink-muted">
               Our partner network spans cloud computing, financial institutions,
               software hubs, and incubator ecosystems, empowering students with
               direct career opportunities and global credentials.
             </Standfirst>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
       </div>
 
       <div className="relative flex flex-col gap-4 sm:gap-5 py-2">
@@ -125,11 +127,7 @@ export function AboutPartners({ partners }: { partners: readonly Partner[] }) {
       </div>
 
       <div className="gutter-x mx-auto max-w-page mt-12 sm:mt-16">
-        <Reveal
-          atFold
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-8 border-t border-border/60"
-          delay={0.25}
-        >
+        <Reveal className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-8 border-t border-border/60">
           <div className="flex items-center gap-4">
             <span className="font-display text-3xl sm:text-4xl font-semibold text-accent">
               21+

@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
@@ -126,11 +126,11 @@ export function CollegeSubjects({
   return (
     <section className="gutter-x section-y" id="subjects">
       <div className="mx-auto flex max-w-page flex-col gap-14 lg:gap-20">
-        <div className="flex flex-col gap-8">
+        <Reveal className="flex flex-col gap-8" stagger={0.08}>
           <div className="flex flex-col gap-4">
-            <Reveal>
+            <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
 
             <SplitText
               as="h2"
@@ -140,11 +140,11 @@ export function CollegeSubjects({
             </SplitText>
           </div>
 
-          <Reveal className="flex max-w-xl flex-col gap-4" delay={0.15}>
+          <RevealItem className="flex max-w-xl flex-col gap-4">
             <Standfirst>{copy.standfirst}</Standfirst>
             <P>{copy.compulsoryNote}</P>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
 
         <div className="grid gap-x-10 gap-y-14 md:grid-cols-2">
           {copy.streams.map((stream) => (

@@ -7,7 +7,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import type { Testimonial } from "@/lib/content";
@@ -20,16 +19,21 @@ const RING_RADIUS = 20;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
 function Slide({ testimonial }: { testimonial: Testimonial }) {
+  const root = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const el = root.current;
+      if (!el) return;
+      gsap.fromTo(el, { y: 24 }, { y: 0, duration: 0.5, ease: "power2.out" });
+    },
+    { scope: root },
+  );
+
   return (
-    <Reveal
-      atFold
-      y={24}
-      duration={0.5}
-      ease="power2.out"
-      className="mt-6 lg:mt-8"
-    >
+    <div className="mt-6 lg:mt-8" ref={root}>
       <TestimonialCard panel={false} testimonial={testimonial} />
-    </Reveal>
+    </div>
   );
 }
 

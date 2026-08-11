@@ -30,12 +30,12 @@ export function SchoolVoices({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-7">
-            <Reveal className="flex items-center gap-5">
+            <RevealItem className="flex items-center gap-5">
               <Eyebrow>{copy.eyebrow}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
-            </Reveal>
+            </RevealItem>
 
             <SplitText
               as="h2"
@@ -45,17 +45,13 @@ export function SchoolVoices({
             </SplitText>
           </div>
 
-          <Reveal
-            className="mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end"
-            delay={0.2}
-          >
+          <RevealItem className="mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
 
         <Reveal
           className="mt-14 border-t border-border lg:mt-20"
-          delay={0.25}
           stagger={0.1}
           y={28}
         >

@@ -1,7 +1,7 @@
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -145,13 +145,16 @@ export async function Updates() {
   return (
     <section className="gutter-x section-y" id="updates">
       <div className="mx-auto max-w-page">
-        <div className="lg:flex lg:items-end lg:justify-between lg:gap-x-12">
+        <Reveal
+          className="lg:flex lg:items-end lg:justify-between lg:gap-x-12"
+          stagger={0.08}
+        >
           <div className="lg:max-w-2xl">
             {section.eyebrow === null ? null : (
-              <Reveal className="flex items-center gap-5">
+              <RevealItem className="flex items-center gap-5">
                 <Eyebrow>{section.eyebrow}</Eyebrow>
                 <span className="h-px flex-1 bg-border" />
-              </Reveal>
+              </RevealItem>
             )}
 
             <SplitText
@@ -162,25 +165,25 @@ export async function Updates() {
             </SplitText>
 
             {section.standfirst === null ? null : (
-              <Reveal className="mt-6" delay={0.2}>
+              <RevealItem className="mt-6">
                 <Standfirst>{section.standfirst}</Standfirst>
-              </Reveal>
+              </RevealItem>
             )}
           </div>
 
           {section.cta === null ? null : (
-            <Reveal className="mt-8 lg:mt-0 lg:shrink-0" delay={0.3}>
+            <RevealItem className="mt-8 lg:mt-0 lg:shrink-0">
               <UpdateCta link={section.cta} />
-            </Reveal>
+            </RevealItem>
           )}
-        </div>
+        </Reveal>
 
         {updates.length === 0 && section.emptyState !== null ? (
           <P className="mt-12 max-w-xl">{section.emptyState}</P>
         ) : null}
 
         {updates.length === 0 ? null : (
-          <Reveal className="mt-10 lg:mt-14" delay={0.25} stagger={0.08}>
+          <Reveal className="mt-10 lg:mt-14" stagger={0.08}>
             <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-y-0">
               <ul
                 className={cn(

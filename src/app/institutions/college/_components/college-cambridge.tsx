@@ -23,11 +23,11 @@ export function CollegeCambridge({
   return (
     <section className="field-ink gutter-x section-y" id="cambridge">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-5">
-            <Reveal>
+            <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
             <SplitText
               as="h2"
               className="mt-4 font-display text-5xl font-normal text-balance text-ink"
@@ -36,13 +36,10 @@ export function CollegeCambridge({
             </SplitText>
           </div>
 
-          <Reveal
-            className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end"
-            delay={0.15}
-          >
+          <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
 
         <Reveal
           className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4"

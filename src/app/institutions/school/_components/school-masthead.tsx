@@ -1,8 +1,6 @@
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -41,21 +39,17 @@ export function SchoolMasthead({
   return (
     <section className="gutter-x section-y-masthead">
       <div className="mx-auto max-w-page">
-        <Reveal atFold className="flex items-center gap-5">
+        <div className="flex items-center gap-5">
           <Eyebrow>{entity.name}</Eyebrow>
           <span className="h-px flex-1 bg-border" />
-        </Reveal>
+        </div>
 
-        <SplitText
-          as="h1"
-          atFold
-          className="mt-8 max-w-4xl font-display text-6xl font-normal text-balance text-ink"
-        >
+        <h1 className="mt-8 max-w-4xl font-display text-6xl font-normal text-balance text-ink">
           {copy.heading}
-        </SplitText>
+        </h1>
 
         <div className="mt-10 lg:mt-14 lg:grid lg:grid-cols-12 lg:gap-x-10">
-          <Reveal atFold className="lg:col-span-6 lg:col-start-6" delay={0.15}>
+          <div className="lg:col-span-6 lg:col-start-6">
             <Standfirst>{copy.standfirst}</Standfirst>
 
             <div className="mt-8 flex flex-col gap-y-7 sm:flex-row sm:items-center sm:gap-x-10">
@@ -93,12 +87,12 @@ export function SchoolMasthead({
                 )}
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
 
       {image === null ? null : (
-        <Reveal atFold className="bleed-x mt-14 lg:mt-20" delay={0.2}>
+        <div className="bleed-x mt-14 lg:mt-20">
           <Image
             alt={image.alt}
             className="h-[46vh] w-full object-cover sm:h-[56vh] lg:h-[70vh]"
@@ -108,7 +102,7 @@ export function SchoolMasthead({
             src={image.src}
             width={image.width}
           />
-        </Reveal>
+        </div>
       )}
     </section>
   );

@@ -2,8 +2,6 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -60,23 +58,13 @@ export function CollegeMasthead({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
-            <Reveal atFold>
-              <Eyebrow>{entity.name}</Eyebrow>
-            </Reveal>
-            <SplitText
-              as="h1"
-              atFold
-              className="mt-5 font-display text-4xl font-normal text-balance text-ink sm:text-5xl md:text-6xl lg:text-7xl"
-            >
+            <Eyebrow>{entity.name}</Eyebrow>
+            <h1 className="mt-5 font-display text-4xl font-normal text-balance text-ink sm:text-5xl md:text-6xl lg:text-7xl">
               {copy.heading}
-            </SplitText>
+            </h1>
           </div>
 
-          <Reveal
-            atFold
-            className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end"
-            delay={0.15}
-          >
+          <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
             <Link
               className={cn(
@@ -90,28 +78,21 @@ export function CollegeMasthead({
               <span>{copy.cta.label}</span>
               <Icon className="size-4" icon={ArrowUpRightIcon} />
             </Link>
-          </Reveal>
+          </div>
         </div>
 
-        <Reveal
-          atFold
-          className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-3 lg:mt-16"
-          stagger={0.08}
-        >
+        <div className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-3 lg:mt-16">
           {facts.map((fact) => (
-            <RevealItem
-              className="border-t border-border pt-6"
-              key={fact.label}
-            >
+            <div className="border-t border-border pt-6" key={fact.label}>
               <p className="font-body text-xs font-medium tracking-widest text-accent uppercase">
                 {fact.label}
               </p>
               <p className="mt-3 font-display text-2xl text-ink">
                 {fact.value}
               </p>
-            </RevealItem>
+            </div>
           ))}
-        </Reveal>
+        </div>
 
         {image === null ? null : (
           <Parallax

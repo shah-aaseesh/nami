@@ -1,6 +1,6 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -40,25 +40,27 @@ export function SchoolAdmission({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal className="flex items-center gap-5">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <span className="h-px flex-1 bg-border" />
+        <Reveal stagger={0.08}>
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </RevealItem>
+
+          <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
+            <SplitText
+              as="h2"
+              className="font-display text-5xl font-normal text-balance text-ink lg:max-w-2xl"
+            >
+              {copy.heading}
+            </SplitText>
+
+            <RevealItem className="lg:max-w-md">
+              <Standfirst>{copy.standfirst}</Standfirst>
+            </RevealItem>
+          </div>
         </Reveal>
 
-        <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-          <SplitText
-            as="h2"
-            className="font-display text-5xl font-normal text-balance text-ink lg:max-w-2xl"
-          >
-            {copy.heading}
-          </SplitText>
-
-          <Reveal className="lg:max-w-md" delay={0.2}>
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </Reveal>
-        </div>
-
-        <Reveal className="mt-14 lg:mt-20" delay={0.25} stagger={0.07} y={26}>
+        <Reveal className="mt-14 lg:mt-20" stagger={0.07} y={26}>
           <ol className="border-t border-border">
             {copy.steps.map((step, index) => (
               <li
@@ -82,10 +84,7 @@ export function SchoolAdmission({
           </ol>
         </Reveal>
 
-        <Reveal
-          className="mt-14 flex flex-col gap-8 border-t border-border-strong pt-10 lg:mt-20 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16"
-          delay={0.2}
-        >
+        <Reveal className="mt-14 flex flex-col gap-8 border-t border-border-strong pt-10 lg:mt-20 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
           <div className="lg:max-w-xl">
             <h3 className="font-display text-4xl font-normal text-balance text-ink">
               {copy.callHeading}

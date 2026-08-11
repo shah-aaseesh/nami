@@ -28,17 +28,17 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
     <section className="field-ink gutter-x section-y" id="entry">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
-          <div className="lg:col-span-5">
-            <Reveal>
+          <Reveal className="lg:col-span-5" stagger={0.08}>
+            <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
             <SplitText
               as="h2"
               className="mt-4 font-display text-5xl font-normal text-balance text-ink"
             >
               {copy.heading}
             </SplitText>
-            <Reveal className="mt-10" delay={0.2}>
+            <RevealItem className="mt-10">
               <Link
                 className={cn(
                   buttonVariants({ size: "lg" }),
@@ -51,8 +51,8 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
                 <span>{copy.cta.label}</span>
                 <Icon className="size-4" icon={ArrowUpRightIcon} />
               </Link>
-            </Reveal>
-          </div>
+            </RevealItem>
+          </Reveal>
 
           <Reveal
             className="mt-14 flex flex-col gap-10 lg:col-span-6 lg:col-start-7 lg:mt-0"

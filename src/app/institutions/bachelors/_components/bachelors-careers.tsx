@@ -31,11 +31,11 @@ export function BachelorsCareers({
   return (
     <section className="field-ink gutter-x section-y" id="careers">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-7">
-            <Reveal>
+            <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
 
             <SplitText
               as="h2"
@@ -45,13 +45,10 @@ export function BachelorsCareers({
             </SplitText>
           </div>
 
-          <Reveal
-            className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end"
-            delay={0.15}
-          >
+          <RevealItem className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
 
         <Reveal
           className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3"
@@ -85,11 +82,14 @@ export function BachelorsCareers({
           ))}
         </Reveal>
 
-        <div className="mt-20 flex flex-col gap-6 lg:mt-28 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+        <Reveal
+          className="mt-20 flex flex-col gap-6 lg:mt-28 lg:flex-row lg:items-end lg:justify-between lg:gap-10"
+          stagger={0.08}
+        >
           <div className="lg:max-w-2xl">
-            <Reveal>
+            <RevealItem>
               <Eyebrow>{copy.railEyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
 
             <SplitText
               as="h3"
@@ -99,13 +99,13 @@ export function BachelorsCareers({
             </SplitText>
           </div>
 
-          <Reveal className="lg:max-w-md" delay={0.15}>
+          <RevealItem className="lg:max-w-md">
             <P>{copy.railNote}</P>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
       </div>
 
-      <Reveal className="mt-12 md:bleed-x lg:mt-16" delay={0.2}>
+      <Reveal className="mt-12 md:bleed-x lg:mt-16">
         <PartnerCarousel items={partners} label={copy.railLabel} />
       </Reveal>
     </section>

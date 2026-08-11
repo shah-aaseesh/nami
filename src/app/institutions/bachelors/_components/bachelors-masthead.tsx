@@ -2,8 +2,6 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
-import { Reveal } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -57,26 +55,22 @@ export function BachelorsMasthead({
   return (
     <section className="gutter-x section-y-masthead">
       <div className="mx-auto max-w-page">
-        <Reveal atFold className="flex flex-wrap items-center gap-x-5 gap-y-3">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
           <Eyebrow>{entity.name}</Eyebrow>
           <span className="hidden h-px flex-1 bg-border sm:block" />
           <Eyebrow className="text-ink-muted">{copy.motto}</Eyebrow>
-        </Reveal>
+        </div>
 
-        <SplitText
-          as="h1"
-          atFold
-          className="mt-8 font-display text-6xl font-normal text-balance text-ink lg:mt-10 lg:text-8xl"
-        >
+        <h1 className="mt-8 font-display text-6xl font-normal text-balance text-ink lg:mt-10 lg:text-8xl">
           {copy.heading}
-        </SplitText>
+        </h1>
 
         <div className="mt-10 flex flex-col gap-10 lg:mt-16 lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-10">
-          <Reveal atFold className="max-w-xl lg:col-span-6" delay={0.15}>
+          <div className="max-w-xl lg:col-span-6">
             <Standfirst>{copy.standfirst}</Standfirst>
-          </Reveal>
+          </div>
 
-          <Reveal atFold className="lg:col-span-4 lg:col-start-9" delay={0.25}>
+          <div className="lg:col-span-4 lg:col-start-9">
             <Link
               className={cn(
                 buttonVariants({ size: "lg" }),
@@ -89,12 +83,12 @@ export function BachelorsMasthead({
               <span>{copy.cta.label}</span>
               <Icon className="size-4" icon={ArrowRightIcon} />
             </Link>
-          </Reveal>
+          </div>
         </div>
       </div>
 
       {partnership === null || campus === null ? null : (
-        <Reveal atFold className="bleed-x mt-14 lg:mt-20" delay={0.3}>
+        <div className="bleed-x mt-14 lg:mt-20">
           <div className="gutter-x border-y border-border bg-surface-raised py-10 lg:py-14">
             <div className="mx-auto grid max-w-page gap-8 lg:grid-cols-12 lg:items-start lg:gap-x-10">
               <div className="lg:col-span-7">
@@ -137,7 +131,7 @@ export function BachelorsMasthead({
               </div>
             </div>
           </div>
-        </Reveal>
+        </div>
       )}
 
       {image === null ? null : (

@@ -27,11 +27,11 @@ export function SchoolDay({
   return (
     <section className="field-ink gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-6">
-            <Reveal>
+            <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
-            </Reveal>
+            </RevealItem>
             <SplitText
               as="h2"
               className="mt-4 font-display text-5xl font-normal text-balance text-ink"
@@ -40,13 +40,10 @@ export function SchoolDay({
             </SplitText>
           </div>
 
-          <Reveal
-            className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end"
-            delay={0.15}
-          >
+          <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
-          </Reveal>
-        </div>
+          </RevealItem>
+        </Reveal>
 
         <div className="mt-14 lg:mt-20 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <Reveal
@@ -75,7 +72,6 @@ export function SchoolDay({
 
           <Reveal
             className="mt-16 lg:col-span-6 lg:col-start-7 lg:mt-0"
-            delay={0.2}
             stagger={0.06}
             y={24}
           >

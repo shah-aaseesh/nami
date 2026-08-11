@@ -68,7 +68,7 @@ export function PartnerCarousel({
 
       const spin = { angle: 0 };
       const loop = gsap.to(spin, {
-        angle: 360,
+        angle: -360,
         duration: SPIN_SECONDS,
         ease: "none",
         repeat: -1,
@@ -117,22 +117,9 @@ export function PartnerCarousel({
         onStopDelay: 0.2,
       });
 
-      const hold = () => loop.pause();
-      const release = () => {
-        if (trigger.isActive) loop.play();
-      };
-      const finePointer = window.matchMedia("(pointer: fine)").matches;
-
-      if (finePointer) {
-        rootEl.addEventListener("mouseenter", hold);
-        rootEl.addEventListener("mouseleave", release);
-      }
-
       return () => {
         observer.kill();
         trigger.kill();
-        rootEl.removeEventListener("mouseenter", hold);
-        rootEl.removeEventListener("mouseleave", release);
       };
     },
     { scope: root },

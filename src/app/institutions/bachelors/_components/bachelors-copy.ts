@@ -7,19 +7,46 @@ import type {
   SectionCopy,
 } from "@/lib/content";
 import { richText } from "@/lib/content";
-import type { BachelorsCareersCopy } from "./bachelors-careers";
-import type { BachelorsNorthamptonCopy } from "./bachelors-northampton";
-import type { BachelorsProgrammesCopy } from "./bachelors-programmes";
+import type { BachelorsAwardingCopy } from "./bachelors-awarding";
+import type { BachelorsPartnersCopy } from "./bachelors-partners";
 
-export type BachelorsPartnership = {
-  readonly body: string;
-  readonly sinceYear: number;
+export type ProgrammeModule = {
+  readonly code: string;
+  readonly title: string;
 };
 
-export type BachelorsIncomingPartner = {
-  readonly body: string;
-  readonly scope: string;
-  readonly status: string;
+export type ProgrammeStage = {
+  readonly key: string;
+  readonly label: string;
+  readonly note: string | null;
+  readonly modules: readonly ProgrammeModule[];
+};
+
+export type BachelorsProgramme = {
+  readonly key: string;
+  readonly qualification: string;
+  readonly title: string;
+  readonly image: ContentImage;
+  readonly awardingBody: string;
+  readonly startingFrom: string | null;
+  readonly format: string | null;
+  readonly summary: readonly string[];
+  readonly entryLabel: string;
+  readonly entry: readonly string[];
+  readonly careersLabel: string;
+  readonly careers: string | null;
+  readonly pendingNote: string | null;
+  readonly stages: readonly ProgrammeStage[];
+};
+
+export type BachelorsProgrammesCopy = {
+  readonly eyebrow: string;
+  readonly heading: string;
+  readonly standfirst: string;
+  readonly awardedLabel: string;
+  readonly startingLabel: string;
+  readonly pendingLabel: string;
+  readonly items: readonly BachelorsProgramme[];
 };
 
 export type BachelorsMastheadCopy = {
@@ -30,47 +57,55 @@ export type BachelorsMastheadCopy = {
   readonly heading: string;
   readonly standfirst: string;
   readonly cta: ContentLink;
-  readonly awardedLabel: string;
-  readonly awardedPlace: string;
-  readonly incoming: BachelorsIncomingPartner | null;
-  readonly taughtLabel: string;
-  readonly sinceLabel: string;
-};
-
-const northamptonLogo: ContentImage = {
-  src: "/universities/northampton.png",
-  alt: "The University of Northampton coat of arms and wordmark.",
-  width: 612,
-  height: 407,
 };
 
 // Stand-in portrait until the institute supplies its own — Asmit directive 2026-08-11.
 const academicHeadPortrait: ContentImage = {
   src: "/nami/principal-philip-badikar-hilario.jpg",
-  alt: "Philip Badikar Hilario, A Level Principal at NAMI College, standing in a checked jacket and holding a folder.",
+  alt: "Stand-in portrait: an educator in a checked jacket holding a folder.",
   width: 233,
   height: 430,
 };
 
+const readingRoom: ContentImage = {
+  src: "/nami/level-bachelor-master.jpg",
+  alt: "NAMI's library, metal shelving stacked with books and a newspaper rack standing behind the library help desk.",
+  width: 1200,
+  height: 900,
+};
+
+const scienceLaboratory: ContentImage = {
+  src: "/nami/campus-science-lab.jpg",
+  alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
+  width: 1280,
+  height: 853,
+};
+
+const readingHall: ContentImage = {
+  src: "/nami/campus-library.jpg",
+  alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
+  width: 1280,
+  height: 853,
+};
+
+const plantationProgramme: ContentImage = {
+  src: "/nami/event-plantation-2022.jpg",
+  alt: "Staff and volunteers crouched on the grass settling a sapling into the ground, one of them wearing a Nepal Prakriti Pathshala shirt from Wildlife Conservation Nepal.",
+  width: 800,
+  height: 753,
+};
+
+const auditoriumGathering: ContentImage = {
+  src: "/nami/campus-auditorium.jpg",
+  alt: "Students and staff seated on sofas and stacking chairs in the NAMI auditorium, maroon acoustic panelling on the wall behind them.",
+  width: 999,
+  height: 666,
+};
+
 const heroSlides: readonly ContentImage[] = [
-  {
-    src: "/nami/level-bachelor-master.jpg",
-    alt: "NAMI's library, metal shelving stacked with books and a newspaper rack standing behind the library help desk.",
-    width: 1200,
-    height: 900,
-  },
-  {
-    src: "/nami/campus-science-lab.jpg",
-    alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
-    width: 1280,
-    height: 853,
-  },
-  {
-    src: "/nami/campus-library.jpg",
-    alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
-    width: 1280,
-    height: 853,
-  },
+  readingRoom,
+  scienceLaboratory,
+  readingHall,
 ];
 
 const masthead: BachelorsMastheadCopy = {
@@ -91,87 +126,16 @@ const masthead: BachelorsMastheadCopy = {
     href: "/admissions",
     destination: "internal",
   },
-  awardedLabel: "Awarded by",
-  awardedPlace: "Northampton, United Kingdom",
-  incoming: {
-    body: "Kathmandu University",
-    scope: "BSc Environmental Studies",
-    status: "Begins August 2026",
-  },
-  taughtLabel: "Taught at",
-  sinceLabel: "in partnership since",
 };
 
-const northampton: BachelorsNorthamptonCopy = {
-  eyebrow: "The founding partnership",
-  sinceLabel: "Since",
-  heading: "Awarded in Northampton. Taught in New Baneshwor.",
+const awarding: BachelorsAwardingCopy = {
+  eyebrow: "Awarding universities",
+  heading: "The universities awarding the degrees taught on this campus.",
   standfirst:
-    "NAMI stands as the first educational institute in Nepal to forge a partnership with a UK university, facilitating a joint academic delivery.",
-  logo: northamptonLogo,
-  sides: [
-    {
-      key: "awarding",
-      kicker: "The awarding university",
-      title: "University of Northampton",
-      place: "Northampton, United Kingdom",
-      points: [
-        {
-          term: "The university",
-          detail:
-            "The University of Northampton is a higher education establishment based in Northampton, United Kingdom, offering undergraduate and postgraduate programmes.",
-        },
-        {
-          term: "Top 50, and first for employability",
-          detail:
-            "It ranks amongst the top 50 UK universities (Guardian league table 2014/15) and is England’s No. 1 university for employability.",
-        },
-        {
-          term: "Social innovation",
-          detail:
-            "It is also the first university to adopt and encourage social innovation.",
-        },
-        {
-          term: "Vice Chancellor",
-          detail:
-            "Professor Anne-Marie Kilday is Vice Chancellor and Professor of Criminal History at the University of Northampton, and joined the University on 1 August 2022.",
-        },
-      ],
-    },
-    {
-      key: "delivery",
-      kicker: "The teaching campus",
-      title: "Naaya Aayam Multi-Disciplinary Institute",
-      place: "New Baneshwor, Kathmandu",
-      points: [
-        {
-          term: "Institutional Approval",
-          detail:
-            "The University of Northampton has granted NAMI Institutional Approval. Throughout the training period, UON staff visited NAMI in Nepal, imparting the UON methodology to the NAMI staff.",
-        },
-        {
-          term: "Three visits every academic year",
-          detail:
-            "The Heads of Departments for Computing and Environmental Science at UON each make three visits an academic year — to interact with NAMI lecturers and students, to understand the socio-cultural context of Nepal’s youth, and to guide the delivery of quality education.",
-        },
-        {
-          term: "An internship year in the UK",
-          detail:
-            "The visits open an interaction platform for NAMI students with their senior counterparts at UON in the United Kingdom during the internship year.",
-        },
-        {
-          term: "Nile",
-          detail:
-            "Coursework, submissions and results run through Blackboard Learn — the Northampton Integrated Learning Environment, known to students as Nile.",
-        },
-      ],
-    },
-  ],
-  cta: {
-    label: "NAMI on the University of Northampton’s partner directory",
-    href: "https://www.northampton.ac.uk/community/partners/tne-partners/naaya-aayaam-multidisciplinary-institute-nami-kathmandu-nepal/",
-    destination: "external",
-  },
+    "Since 2012, every degree taught at New Baneshwor has been awarded by the University of Northampton. From August 2026, Kathmandu University joins it, awarding the BSc in Environmental Studies.",
+  sinceLabel: "Since",
+  offerNote:
+    "All decisions regarding an offer letter for a University of Northampton programme are made by the University of Northampton, UK.",
 };
 
 const undergraduateEntry: readonly string[] = [
@@ -188,9 +152,7 @@ const programmes: BachelorsProgrammesCopy = {
   eyebrow: "Academics",
   heading: "Every degree taught here, and who awards it.",
   standfirst:
-    "Every degree running on this campus today is awarded by the University of Northampton, UK. Environmental Studies is awarded by Kathmandu University and begins in August 2026. Open one for its modules, its entry requirements and where it leads.",
-  offerNote:
-    "All decisions regarding an offer letter for a University of Northampton programme are made by the University of Northampton, UK.",
+    "Every degree running on this campus today is awarded by the University of Northampton, UK. Environmental Studies is awarded by Kathmandu University and begins in August 2026.",
   awardedLabel: "Awarded by",
   startingLabel: "Begins",
   pendingLabel: "Programme detail",
@@ -199,6 +161,7 @@ const programmes: BachelorsProgrammesCopy = {
       key: "computer-science",
       qualification: "BSc (Hons)",
       title: "Computer Science",
+      image: readingRoom,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
@@ -263,6 +226,7 @@ const programmes: BachelorsProgrammesCopy = {
       key: "environmental-science",
       qualification: "BSc (Hons)",
       title: "Environmental Science",
+      image: scienceLaboratory,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
@@ -330,6 +294,7 @@ const programmes: BachelorsProgrammesCopy = {
       key: "environmental-studies",
       qualification: "BSc",
       title: "Environmental Studies",
+      image: plantationProgramme,
       awardingBody: "Kathmandu University",
       startingFrom: "August 2026",
       format: null,
@@ -349,6 +314,7 @@ const programmes: BachelorsProgrammesCopy = {
       key: "business-administration",
       qualification: "Bachelor",
       title: "Business Administration",
+      image: auditoriumGathering,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
@@ -419,6 +385,7 @@ const programmes: BachelorsProgrammesCopy = {
       key: "msc-computing",
       qualification: "MSc",
       title: "Computing",
+      image: readingHall,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Postgraduate degree",
@@ -458,56 +425,10 @@ const programmes: BachelorsProgrammesCopy = {
   ],
 };
 
-const careers: BachelorsCareersCopy = {
-  eyebrow: "Careers",
-  heading: "Where the degree takes graduates.",
-  standfirst:
-    "Students can be directly involved in organisational projects without intensive training, and the research ability the degree builds carries into consultancy and independent research.",
-  lanes: [
-    {
-      key: "computing",
-      label: "Computing and technology",
-      items: [
-        "Software industries",
-        "Internet service providers",
-        "Cyber security",
-        "Banks, airlines and hydropower",
-        "Automobile industries",
-        "Educational institutions",
-        "Digital marketing",
-      ],
-    },
-    {
-      key: "environment",
-      label: "Environment and sustainability",
-      items: [
-        "Air, water and noise pollution monitoring",
-        "Conservation and wildlife",
-        "Natural resource management",
-        "Climate change and CDM projects",
-        "IEE, EIA and environmental consultancy",
-        "UNEP, UNDP, FAO, WWF, WHO and UNICEF",
-        "World Bank, ADB and Winrock International Nepal",
-      ],
-    },
-    {
-      key: "business",
-      label: "Business and management",
-      items: [
-        "Marketing and brand management",
-        "Finance and accounting",
-        "Project management",
-        "Human resources",
-        "Hospitality and the service sector",
-        "Entrepreneurship and small business",
-      ],
-    },
-  ],
-  railEyebrow: "Industry network",
-  railHeading: "The organisations our students meet before they graduate.",
-  railLabel: "NAMI industry and technology partners",
-  railNote:
-    "Live projects, internships and graduate roles across banking, technology, media, hospitality and the startup ecosystem.",
+const partners: BachelorsPartnersCopy = {
+  eyebrow: "Industry network",
+  heading: "The organisations our students meet before they graduate.",
+  label: "NAMI industry and technology partners",
 };
 
 const alumni: SectionCopy = {
@@ -569,16 +490,13 @@ export const bachelorsCopy = {
     description:
       "Naaya Aayam Multi-Disciplinary Institute teaches partner-university degrees at New Baneshwor, Kathmandu — BSc (Hons) Computer Science, BSc (Hons) Environmental Science, Bachelor in Business Administration and MSc Computing awarded by the University of Northampton, UK, and BSc Environmental Studies awarded by Kathmandu University from August 2026.",
   },
-  campusSlug: "new-baneshwor",
   levelSlug: "bachelors",
-  affiliationSlug: "northampton",
   masthead,
-  northampton,
+  awarding,
   academicHead: {
     slug: "leader-nischal-khadka",
     eyebrow: "From the Academic Head",
-    heading:
-      "A welcome to the Undergraduate and Graduate programmes at NAMI, in partnership with the University of Northampton.",
+    heading: "A welcome to the Undergraduate and Graduate programmes at NAMI.",
     portrait: academicHeadPortrait,
     message: richText(
       "I extend a warm welcome to the Undergraduate and Graduate Program at NAMI, in partnership with the University of Northampton (UON), United Kingdom.",
@@ -588,7 +506,7 @@ export const bachelorsCopy = {
     ),
   },
   programmes,
-  careers,
+  partners,
   alumni,
   gallery,
   notices,

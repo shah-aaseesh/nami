@@ -6,11 +6,10 @@ import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
-import { BachelorsCareers } from "./_components/bachelors-careers";
+import { BachelorsAwarding } from "./_components/bachelors-awarding";
 import { bachelorsCopy } from "./_components/bachelors-copy";
-import { BachelorsMastheadPartnership } from "./_components/bachelors-masthead-partnership";
-import { BachelorsNorthampton } from "./_components/bachelors-northampton";
-import { BachelorsProgrammes } from "./_components/bachelors-programmes";
+import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
+import { BachelorsPartners } from "./_components/bachelors-partners";
 import type { CareerPartner } from "./_components/partner-carousel";
 
 export const metadata: Metadata = createMetadata({
@@ -29,22 +28,15 @@ export default async function BachelorsPage() {
       content.getTestimonials(),
     ]);
 
-  const campus =
-    institution.campuses.find(
-      (item) => item.slug === bachelorsCopy.campusSlug,
-    ) ?? null;
   const academicHead =
     leadership.academics.find(
       (item) => item.slug === bachelorsCopy.academicHead.slug,
     ) ?? null;
-  const affiliation =
-    affiliations.find((item) => item.slug === bachelorsCopy.affiliationSlug) ??
-    null;
   const alumni = testimonials.filter(
     (item) => item.institution === "institute",
   );
 
-  const railPartners: readonly CareerPartner[] = partners.map((partner) => ({
+  const networkPartners: readonly CareerPartner[] = partners.map((partner) => ({
     id: partner.id,
     name: partner.name,
     tag:
@@ -65,23 +57,14 @@ export default async function BachelorsPage() {
         primaryCta={bachelorsCopy.masthead.cta}
         logo={bachelorsCopy.masthead.logo}
       />
-      <BachelorsMastheadPartnership
-        campus={campus}
-        copy={bachelorsCopy.masthead}
-        entity={institution.entities.institute}
-        partnership={
-          affiliation === null
-            ? null
-            : { body: affiliation.body, sinceYear: affiliation.sinceYear }
-        }
+      <BachelorsAwarding
+        affiliations={affiliations}
+        copy={bachelorsCopy.awarding}
+        id="awarding"
+        levelSlug={bachelorsCopy.levelSlug}
       />
 
-      <BachelorsNorthampton
-        copy={bachelorsCopy.northampton}
-        sinceYear={affiliation?.sinceYear ?? null}
-      />
-
-      <BachelorsProgrammes copy={bachelorsCopy.programmes} />
+      <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
 
       {academicHead === null ? null : (
         <PrincipalMessage
@@ -97,11 +80,18 @@ export default async function BachelorsPage() {
         />
       )}
 
-      <BachelorsCareers copy={bachelorsCopy.careers} partners={railPartners} />
+      <BachelorsPartners
+        copy={bachelorsCopy.partners}
+        id="partners"
+        partners={networkPartners}
+      />
 
       <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
 
-      <SharedCampusGallery institution={institution.entities.institute.role} />
+      <SharedCampusGallery
+        institution={institution.entities.institute.role}
+        tone="ink"
+      />
 
       <InstitutionNotices
         copy={bachelorsCopy.notices}

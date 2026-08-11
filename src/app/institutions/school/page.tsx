@@ -55,11 +55,7 @@ export default async function SchoolPage() {
       )}
 
       <SchoolBands copy={schoolCopy.bands} id="academics" />
-
-      <SharedCampusGallery
-        institution={institution.entities.school.role}
-        tone="ink"
-      />
+      <SchoolAdmission copy={schoolCopy.admission} id="admission" />
 
       <SchoolDay copy={schoolCopy.day} id="campus" />
 
@@ -68,8 +64,10 @@ export default async function SchoolPage() {
         items={dummyParentTestimonials}
         section={schoolCopy.parents}
       />
-
-      <SchoolAdmission copy={schoolCopy.admission} id="admission" />
+      <SharedCampusGallery
+        institution={institution.entities.school.role}
+        tone="ink"
+      />
 
       <InstitutionNotices
         copy={schoolCopy.notices}

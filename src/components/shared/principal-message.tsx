@@ -27,7 +27,7 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
   const { portrait } = person;
 
   return (
-    <figure className="mb-8 w-full sm:float-right sm:mb-6 sm:ml-10 sm:w-64 lg:w-72">
+    <figure className="w-full">
       <div className="overflow-hidden rounded-t-xl border border-border border-b-0 bg-surface-raised">
         {portrait === null ? (
           <div className="grid aspect-4/5 w-full place-items-center">
@@ -39,7 +39,7 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
             className="aspect-4/5 w-full object-cover"
             height={portrait.height}
             loading="lazy"
-            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 256px, 288px"
+            sizes="(max-width: 1023px) 320px, 32vw"
             src={portrait.src}
             width={portrait.width}
           />
@@ -67,41 +67,45 @@ export function PrincipalMessage({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal className="flex flex-col gap-5">
-          <Eyebrow>{eyebrow}</Eyebrow>
+        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:gap-x-10">
+          <Reveal className="flex flex-col gap-5 lg:col-span-7 lg:row-start-1">
+            <Eyebrow>{eyebrow}</Eyebrow>
 
-          <SplitText
-            as="h2"
-            className={cn(
-              "max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl",
-              headingClassName,
-            )}
-          >
-            {heading}
-          </SplitText>
+            <SplitText
+              as="h2"
+              className={cn(
+                "max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl",
+                headingClassName,
+              )}
+            >
+              {heading}
+            </SplitText>
 
-          <span className="block h-1 w-16 rounded-full bg-accent" />
-        </Reveal>
+            <span className="block h-1 w-16 rounded-full bg-accent" />
+          </Reveal>
 
-        <Reveal className="mt-8" stagger={0.1}>
-          <RevealItem className="mt-10 block">
-            <PortraitCard person={person} />
+          <div className="max-w-xs lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:row-span-2 lg:max-w-none">
+            <Reveal>
+              <PortraitCard person={person} />
+            </Reveal>
+          </div>
 
-            <div className="flex flex-col gap-5">
+          <Reveal className="lg:col-span-7 lg:row-start-2" stagger={0.1}>
+            <RevealItem className="max-w-prose space-y-5">
               {letter.map((paragraph, index) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
                 <P className="text-sm text-ink-muted lg:text-base" key={index}>
                   {paragraph}
                 </P>
               ))}
-              <RevealItem className="mt-2">
+              <RevealItem>
                 <p className="font-display text-3xl text-ink italic lg:text-4xl">
                   {person.name}
                 </p>
               </RevealItem>
-            </div>
-          </RevealItem>
-        </Reveal>
+            </RevealItem>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

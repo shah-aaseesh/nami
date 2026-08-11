@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { H2, H3, P } from "@/components/ui/typography";
-import { schoolGrades } from "@/lib/content/school-grades";
+import { INSTITUTIONS } from "@/lib/content/institutions";
 import {
   ArrowRightIcon,
   CalendarIcon,
@@ -313,16 +313,14 @@ export function MultiStepForm() {
                         <SelectValue placeholder="Select a program" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="school">
-                          {`School Level (${schoolGrades.label})`}
-                        </SelectItem>
-                        <SelectItem value="plus2">+2 Programs</SelectItem>
-                        <SelectItem value="alevel">
-                          Cambridge A-Level
-                        </SelectItem>
-                        <SelectItem value="bachelor">
-                          Bachelor Programs
-                        </SelectItem>
+                        {INSTITUTIONS.map((institution) => (
+                          <SelectItem
+                            key={institution.id}
+                            value={institution.id}
+                          >
+                            {institution.applyLabel}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   )}
@@ -731,68 +729,66 @@ export function MultiStepForm() {
     <div className="mx-auto w-full max-w-5xl" ref={containerRef}>
       <div className="bg-surface border border-border rounded-2xl shadow-sm flex flex-col md:flex-row min-h-[600px]">
         <div className="bg-surface-muted w-full md:w-64 lg:w-80 p-6 md:p-8 shrink-0 border-b md:border-b-0 md:border-r border-border rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
-          <div className="sticky top-24 lg:top-32">
-            <H2 className="font-display text-xl font-semibold text-ink mb-8">
-              Application Form
-            </H2>
-            <ul className="space-y-6">
-              {STEPS.map((step, index) => {
-                const isActive = index === currentStep;
-                const isPast = index < currentStep;
+          <H2 className="font-display text-xl font-semibold text-ink mb-8">
+            Application Form
+          </H2>
+          <ul className="space-y-6">
+            {STEPS.map((step, index) => {
+              const isActive = index === currentStep;
+              const isPast = index < currentStep;
 
-                return (
-                  <li
-                    key={step}
-                    className="flex items-center gap-4 relative group"
-                  >
-                    {index !== STEPS.length - 1 && (
-                      <div
-                        className={cn(
-                          "absolute left-[13px] top-8 w-[2px] h-8 -z-10 transition-colors duration-500",
-                          isPast ? "bg-accent" : "bg-border",
-                        )}
-                      />
+              return (
+                <li
+                  key={step}
+                  className="flex items-center gap-4 relative group"
+                >
+                  {index !== STEPS.length - 1 && (
+                    <div
+                      className={cn(
+                        "absolute left-[13px] top-8 w-[2px] h-8 -z-10 transition-colors duration-500",
+                        isPast ? "bg-accent" : "bg-border",
+                      )}
+                    />
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => isPast && goToStep(index)}
+                    disabled={!isPast && !isActive}
+                    className={cn(
+                      "flex items-center justify-center size-7 rounded-full text-xs font-semibold shrink-0 transition-all duration-300 outline-none",
+                      isActive
+                        ? "bg-accent text-white ring-4 ring-accent/20 scale-110"
+                        : isPast
+                          ? "bg-accent text-white cursor-pointer hover:scale-110"
+                          : "bg-surface text-ink-muted border border-border",
                     )}
-
-                    <button
-                      type="button"
-                      onClick={() => isPast && goToStep(index)}
-                      disabled={!isPast && !isActive}
-                      className={cn(
-                        "flex items-center justify-center size-7 rounded-full text-xs font-semibold shrink-0 transition-all duration-300 outline-none",
-                        isActive
-                          ? "bg-accent text-white ring-4 ring-accent/20 scale-110"
-                          : isPast
-                            ? "bg-accent text-white cursor-pointer hover:scale-110"
-                            : "bg-surface text-ink-muted border border-border",
-                      )}
-                    >
-                      {isPast ? (
-                        <Icon icon={CheckIcon} className="size-3" />
-                      ) : (
-                        index + 1
-                      )}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => isPast && goToStep(index)}
-                      disabled={!isPast && !isActive}
-                      className={cn(
-                        "text-sm font-medium text-left transition-colors duration-300 outline-none",
-                        isActive
-                          ? "text-ink"
-                          : isPast
-                            ? "text-ink cursor-pointer group-hover:text-accent"
-                            : "text-ink-muted",
-                      )}
-                    >
-                      {step}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+                  >
+                    {isPast ? (
+                      <Icon icon={CheckIcon} className="size-3" />
+                    ) : (
+                      index + 1
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => isPast && goToStep(index)}
+                    disabled={!isPast && !isActive}
+                    className={cn(
+                      "text-sm font-medium text-left transition-colors duration-300 outline-none",
+                      isActive
+                        ? "text-ink"
+                        : isPast
+                          ? "text-ink cursor-pointer group-hover:text-accent"
+                          : "text-ink-muted",
+                    )}
+                  >
+                    {step}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
         <div className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-between">

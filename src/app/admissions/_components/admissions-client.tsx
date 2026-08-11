@@ -1,6 +1,5 @@
 "use client";
 
-import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -9,64 +8,58 @@ import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { H2, P } from "@/components/ui/typography";
 import { useAdmissionsParallax } from "@/hooks/motion/use-admissions-parallax";
+import { INSTITUTIONS, type InstitutionId } from "@/lib/content/institutions";
 import { schoolGrades } from "@/lib/content/school-grades";
 import { ArrowRightIcon, CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
-const PROGRAMS = [
+const PROGRAM_CONTENT: Record<
+  InstitutionId,
   {
-    id: "school",
-    title: `School Level (${schoolGrades.label})`,
-    description:
-      "NAMI International School offers a diverse and balanced curriculum within the framework of the Nepal Government's National Curriculum, focusing on experiential learning.",
+    description: string;
+    requirements: readonly string[];
+    image: string;
+    cta: string;
+  }
+> = {
+  school: {
+    description: `NAMI International School offers a diverse, experiential curriculum within the framework of the Nepal Government's National Curriculum for ${schoolGrades.labelPlural}, continuing into NEB +2 in Science and Management with state-of-the-art facilities and experienced faculty.`,
     requirements: [
-      "Must pass the entrance examination",
-      "Previous school academic transcripts",
-      "Birth certificate copy",
+      "Entrance examination (school) or SEE / CBSE minimum grade (+2)",
+      "Previous academic transcripts and character certificate",
+      "Birth certificate copy and completed admission application form",
     ],
-    link: "school.nami.edu.np/notice/2",
     image: "/nami/level-school.jpg",
+    cta: "Visit the School",
   },
-  {
-    id: "plus2",
-    title: "+2 Programs",
+  college: {
     description:
-      "Offering 10+2 in Science and Management Academia with state-of-the-art facilities and experienced faculty.",
-    requirements: [
-      "SEE / CBSE or equivalent minimum grade",
-      "Completed admission application form",
-      "Character certificate",
-    ],
-    link: "school.nami.edu.np/notice/2",
-    image: "/nami/level-plus-two.jpg",
-  },
-  {
-    id: "alevel",
-    title: "Cambridge A-Level",
-    description:
-      "The 'gold standard' by Cambridge Assessment International Education. Globally recognized equivalent for university admissions.",
+      "Home to the Cambridge International A Level — the 'gold standard' of Cambridge Assessment International Education — globally recognized for university admissions.",
     requirements: [
       "SEE / GCSE / CBSE or equivalent courses at time of admission",
       "Strong academic record",
       "Entrance interview",
     ],
-    link: "college.nami.edu.np/notice/2",
     image: "/nami/level-a-level.jpg",
+    cta: "Explore NAMI College",
   },
-  {
-    id: "bachelor",
-    title: "Bachelor Programs",
+  bachelors: {
     description:
-      "World-class UK degrees right here in Nepal. Expand your horizons with our industry-focused undergraduate courses.",
+      "World-class partner-university degrees right here in Nepal. Expand your horizons with industry-focused undergraduate and postgraduate courses.",
     requirements: [
       "Completed +2 / A-Level or equivalent",
       "Minimum academic threshold",
       "English language proficiency",
     ],
-    link: "college.nami.edu.np/notice/2",
     image: "/nami/level-bachelor-master.jpg",
+    cta: "See the Programmes",
   },
-];
+};
+
+const PROGRAMS = INSTITUTIONS.map((institution) => ({
+  ...institution,
+  ...PROGRAM_CONTENT[institution.id],
+}));
 
 export function AdmissionsClient() {
   const container = useRef<HTMLDivElement>(null);
@@ -77,13 +70,11 @@ export function AdmissionsClient() {
 
   return (
     <div ref={container} className="w-full">
-      {/* ScrollTrigger Pinned Image Section */}
       <section className="gutter-x mt-16 lg:mt-24">
         <div
           ref={sectionRef}
           className="mx-auto max-w-page relative lg:grid lg:grid-cols-12 lg:gap-16"
         >
-          {/* Left Side: Pinned Images */}
           <div className="hidden lg:block lg:col-span-6 relative">
             <div
               ref={leftColRef}
@@ -111,7 +102,6 @@ export function AdmissionsClient() {
             </div>
           </div>
 
-          {/* Right Side: Scrolling Content */}
           <div className="lg:col-span-6 flex flex-col">
             {PROGRAMS.map((prog, i) => (
               <div
@@ -121,7 +111,6 @@ export function AdmissionsClient() {
                   i === PROGRAMS.length - 1 ? "" : "border-b border-border",
                 )}
               >
-                {/* Mobile Image */}
                 <div className="lg:hidden w-full aspect-[4/3] relative rounded-xl overflow-hidden mb-8 shadow-sm">
                   <Image
                     src={prog.image}
@@ -160,13 +149,13 @@ export function AdmissionsClient() {
                 </div>
 
                 <Link
-                  href={`https://${prog.link}` as Route}
+                  href={prog.href}
                   className={buttonVariants({
                     variant: "quiet",
                     className: "w-full sm:w-auto self-start",
                   })}
                 >
-                  Download Form{" "}
+                  {prog.cta}{" "}
                   <Icon icon={ArrowRightIcon} className="ml-2 size-4" />
                 </Link>
               </div>

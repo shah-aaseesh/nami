@@ -56,7 +56,10 @@ export default async function SchoolPage() {
 
       <SchoolBands copy={schoolCopy.bands} id="academics" />
 
-      <SharedCampusGallery institution={institution.entities.school.role} />
+      <SharedCampusGallery
+        institution={institution.entities.school.role}
+        tone="ink"
+      />
 
       <SchoolDay copy={schoolCopy.day} id="campus" />
 

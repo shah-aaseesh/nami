@@ -25,7 +25,7 @@ export type SchoolHeroCopy = {
 // Stand-in portrait until the school supplies its own — Asmit directive 2026-08-11.
 const principalPortrait: ContentImage = {
   src: "/nami/principal-philip-badikar-hilario.jpg",
-  alt: "Philip Badikar Hilario, A Level Principal at NAMI College, standing in a checked jacket and holding a folder.",
+  alt: "Stand-in portrait: an educator in a checked jacket holding a folder.",
   width: 233,
   height: 430,
 };

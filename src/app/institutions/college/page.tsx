@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { InstitutionGallery } from "@/components/shared/institution-gallery";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
+import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
+import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { CollegeCambridge } from "./_components/college-cambridge";
 import { collegeCopy } from "./_components/college-copy";
 import { CollegeEntry } from "./_components/college-entry";
-import { CollegeMasthead } from "./_components/college-masthead";
+import { CollegeMastheadFacts } from "./_components/college-masthead-facts";
 import { CollegeSubjects } from "./_components/college-subjects";
 
 export const metadata: Metadata = createMetadata({
@@ -35,7 +36,22 @@ export default async function CollegePage() {
 
   return (
     <>
-      <CollegeMasthead
+      <SharedHero
+        entity={institution.entities.college}
+        heroLabel={collegeCopy.masthead.heroLabel}
+        slides={collegeCopy.masthead.slides}
+        heading={collegeCopy.masthead.heading}
+        standfirst={collegeCopy.masthead.standfirst}
+        primaryCta={collegeCopy.masthead.cta}
+        logo={{
+          src: "/universities/nami-college.png",
+          alt: "NAMI College",
+          width: 250,
+          height: 96,
+        }}
+      />
+
+      <CollegeMastheadFacts
         campus={campus}
         copy={collegeCopy.masthead}
         entity={institution.entities.college}
@@ -45,6 +61,7 @@ export default async function CollegePage() {
         <PrincipalMessage
           eyebrow={collegeCopy.principal.eyebrow}
           heading={collegeCopy.principal.heading}
+          headingClassName="!text-3xl sm:!text-4xl whitespace-pre-line"
           id="principal"
           message={collegeCopy.principal.message}
           person={{
@@ -58,10 +75,8 @@ export default async function CollegePage() {
       <CollegeCambridge copy={collegeCopy.cambridge} />
       <CollegeSubjects copy={collegeCopy.subjects} />
 
-      <InstitutionGallery
-        copy={collegeCopy.gallery}
-        id="gallery"
-        institution="college"
+      <SharedCampusGallery
+        institution={institution.entities.college.role}
         tone="ink"
       />
 

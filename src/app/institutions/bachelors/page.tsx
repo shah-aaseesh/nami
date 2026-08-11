@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { InstitutionGallery } from "@/components/shared/institution-gallery";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
+import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
+import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { BachelorsCareers } from "./_components/bachelors-careers";
 import { bachelorsCopy } from "./_components/bachelors-copy";
-import { BachelorsMasthead } from "./_components/bachelors-masthead";
+import { BachelorsMastheadPartnership } from "./_components/bachelors-masthead-partnership";
 import { BachelorsNorthampton } from "./_components/bachelors-northampton";
 import { BachelorsProgrammes } from "./_components/bachelors-programmes";
 import type { CareerPartner } from "./_components/partner-carousel";
@@ -54,7 +55,17 @@ export default async function BachelorsPage() {
 
   return (
     <>
-      <BachelorsMasthead
+      <SharedHero
+        entity={institution.entities.institute}
+        heroLabel={bachelorsCopy.masthead.heroLabel}
+        slides={bachelorsCopy.masthead.slides}
+        heading={bachelorsCopy.masthead.heading}
+        headingClassName="!text-3xl sm:!text-4xl lg:!text-[4rem]"
+        standfirst={bachelorsCopy.masthead.standfirst}
+        primaryCta={bachelorsCopy.masthead.cta}
+        logo={bachelorsCopy.masthead.logo}
+      />
+      <BachelorsMastheadPartnership
         campus={campus}
         copy={bachelorsCopy.masthead}
         entity={institution.entities.institute}
@@ -90,11 +101,7 @@ export default async function BachelorsPage() {
 
       <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
 
-      <InstitutionGallery
-        copy={bachelorsCopy.gallery}
-        id="gallery"
-        institution="institute"
-      />
+      <SharedCampusGallery institution={institution.entities.institute.role} />
 
       <InstitutionNotices
         copy={bachelorsCopy.notices}

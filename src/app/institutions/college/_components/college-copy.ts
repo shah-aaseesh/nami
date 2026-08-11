@@ -1,11 +1,22 @@
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
-import type { ContentImage, SectionCopy } from "@/lib/content";
+import type { ContentImage, ContentLink, SectionCopy } from "@/lib/content";
 import { richText } from "@/lib/content";
 import type { CollegeCambridgeCopy } from "./college-cambridge";
 import type { CollegeEntryCopy } from "./college-entry";
-import type { CollegeMastheadCopy } from "./college-masthead";
 import type { CollegeSubjectsCopy } from "./college-subjects";
+
+export type CollegeMastheadCopy = {
+  readonly heroLabel: string;
+  readonly slides: readonly ContentImage[];
+  readonly heading: string;
+  readonly standfirst: string;
+  readonly cta: ContentLink;
+  readonly establishedLabel: string;
+  readonly statusLabel: string;
+  readonly statusValue: string;
+  readonly campusLabel: string;
+};
 
 const principalPortrait: ContentImage = {
   src: "/nami/principal-philip-badikar-hilario.jpg",
@@ -38,7 +49,7 @@ const heroSlides: readonly ContentImage[] = [
 const masthead: CollegeMastheadCopy = {
   heroLabel: "NAMI College campus",
   slides: heroSlides,
-  heading: "Cambridge A Levels",
+  heading: "NAMI College",
   standfirst:
     "An independent Cambridge Assessment International Education examination centre, and an accredited Cambridge International Home Centre in Nepal since June 2024.",
   cta: {
@@ -211,7 +222,7 @@ export const collegeCopy = {
     slug: "leader-phillip-hilario",
     eyebrow: "From the Principal",
     heading:
-      "At NAMI College, we are not only educating minds, we are cultivating a community of thinkers and scholars.",
+      "At NAMI College, we are not only\neducating minds, we are cultivating a\ncommunity of thinkers and scholars.",
     portrait: principalPortrait,
     message: richText(
       "Dear Parents and well-wishers,",

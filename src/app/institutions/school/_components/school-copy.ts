@@ -1,11 +1,26 @@
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
-import type { ContentImage, SectionCopy, Testimonial } from "@/lib/content";
+import type { SharedHeroSlide } from "@/components/shared/shared-hero";
+import type {
+  ContentImage,
+  ContentLink,
+  SectionCopy,
+  Testimonial,
+} from "@/lib/content";
 import { entryOf, richText, schoolGrades } from "@/lib/content";
 import type { SchoolAdmissionCopy } from "./school-admission";
 import type { SchoolBandsCopy } from "./school-bands";
 import type { SchoolDayCopy } from "./school-day";
-import type { SchoolHeroCopy, SchoolHeroSlide } from "./school-hero";
+
+export type SchoolHeroCopy = {
+  readonly eyebrow: string;
+  readonly tagline: string;
+  readonly heroLabel: string;
+  readonly logo: ContentImage;
+  readonly slides: readonly SharedHeroSlide[];
+  readonly admissionCta: ContentLink;
+  readonly website: ContentLink;
+};
 
 // Stand-in portrait until the school supplies its own — Asmit directive 2026-08-11.
 const principalPortrait: ContentImage = {
@@ -15,7 +30,7 @@ const principalPortrait: ContentImage = {
   height: 430,
 };
 
-const heroSlides: readonly SchoolHeroSlide[] = [
+const heroSlides: readonly SharedHeroSlide[] = [
   {
     src: "/nami/campus-service-camp.jpg",
     alt: "Pupils in red uniforms seated around a hilltop school ground in Sindhupalchowk, facing stacks of red relief bags laid out on benches at a NAMI service camp.",

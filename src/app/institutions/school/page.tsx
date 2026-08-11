@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { InstitutionGallery } from "@/components/shared/institution-gallery";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
+import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
+import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
@@ -9,7 +10,6 @@ import { SchoolAdmission } from "./_components/school-admission";
 import { SchoolBands } from "./_components/school-bands";
 import { dummyParentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
-import { SchoolHero } from "./_components/school-hero";
 
 export const metadata: Metadata = createMetadata({
   path: "/institutions/school",
@@ -30,12 +30,15 @@ export default async function SchoolPage() {
 
   return (
     <>
-      <SchoolHero
-        copy={schoolCopy.masthead}
+      <SharedHero
         entity={institution.entities.school}
+        heroLabel={schoolCopy.masthead.heroLabel}
+        slides={schoolCopy.masthead.slides}
+        logo={schoolCopy.masthead.logo}
+        standfirst={schoolCopy.masthead.tagline}
+        primaryCta={schoolCopy.masthead.admissionCta}
+        secondaryCta={schoolCopy.masthead.website}
       />
-
-      <SchoolBands copy={schoolCopy.bands} id="academics" />
 
       {principal === null ? null : (
         <PrincipalMessage
@@ -51,11 +54,9 @@ export default async function SchoolPage() {
         />
       )}
 
-      <InstitutionGallery
-        copy={schoolCopy.gallery}
-        id="gallery"
-        institution="school"
-      />
+      <SchoolBands copy={schoolCopy.bands} id="academics" />
+
+      <SharedCampusGallery institution={institution.entities.school.role} />
 
       <SchoolDay copy={schoolCopy.day} id="campus" />
 

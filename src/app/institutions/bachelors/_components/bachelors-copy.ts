@@ -1,11 +1,41 @@
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
-import type { ContentImage, PartnerKind, SectionCopy } from "@/lib/content";
+import type {
+  ContentImage,
+  ContentLink,
+  PartnerKind,
+  SectionCopy,
+} from "@/lib/content";
 import { richText } from "@/lib/content";
 import type { BachelorsCareersCopy } from "./bachelors-careers";
-import type { BachelorsMastheadCopy } from "./bachelors-masthead";
 import type { BachelorsNorthamptonCopy } from "./bachelors-northampton";
 import type { BachelorsProgrammesCopy } from "./bachelors-programmes";
+
+export type BachelorsPartnership = {
+  readonly body: string;
+  readonly sinceYear: number;
+};
+
+export type BachelorsIncomingPartner = {
+  readonly body: string;
+  readonly scope: string;
+  readonly status: string;
+};
+
+export type BachelorsMastheadCopy = {
+  readonly heroLabel: string;
+  readonly slides: readonly ContentImage[];
+  readonly logo: ContentImage;
+  readonly motto: string;
+  readonly heading: string;
+  readonly standfirst: string;
+  readonly cta: ContentLink;
+  readonly awardedLabel: string;
+  readonly awardedPlace: string;
+  readonly incoming: BachelorsIncomingPartner | null;
+  readonly taughtLabel: string;
+  readonly sinceLabel: string;
+};
 
 const northamptonLogo: ContentImage = {
   src: "/universities/northampton.png",
@@ -46,10 +76,16 @@ const heroSlides: readonly ContentImage[] = [
 const masthead: BachelorsMastheadCopy = {
   heroLabel: "NAMI campus at New Baneshwor",
   slides: heroSlides,
+  logo: {
+    src: "/logo.png",
+    alt: "NAMI logo",
+    width: 250,
+    height: 96,
+  },
   motto: "Transform yourself, to lead the world",
-  heading: "Degrees from our partner universities, taught in Kathmandu.",
+  heading: "NAAYA AAYAM MULTI-DISCIPLINARY INSTITUTE",
   standfirst:
-    "NAMI has been developed as Nepal’s premium educational institution in partnership with the University of Northampton (UON), United Kingdom — a permanent presence, committed to enhancing the educational landscape. From August 2026 a Bachelor’s programme in Environmental Studies, awarded by Kathmandu University, joins it on this campus.",
+    "Nepal’s premium educational institution in partnership with the University of Northampton, UK and Kathmandu University.",
   cta: {
     label: "Start an application",
     href: "/admissions",

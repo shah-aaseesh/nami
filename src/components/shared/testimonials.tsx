@@ -1,10 +1,10 @@
+import { Marquee } from "@/components/motion/marquee";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import type { SectionCopy, Testimonial } from "@/lib/content";
 import { content } from "@/lib/content";
 import { TestimonialCard } from "./testimonials-card";
-import { TestimonialsCarousel } from "./testimonials-carousel";
 
 export async function Testimonials({
   id = "testimonials",
@@ -48,12 +48,25 @@ export async function Testimonials({
         ) : (
           <Reveal className="mt-12 lg:mt-16" y={32}>
             {single === undefined ? (
-              <TestimonialsCarousel
-                items={testimonials}
+              <Marquee
+                className="bleed-x"
+                copies={3}
                 label={section.eyebrow ?? section.heading}
-              />
+                speed={40}
+                velocity={false}
+              >
+                <div className="flex gap-4 pe-4 lg:gap-6 lg:pe-6">
+                  {testimonials.map((testimonial) => (
+                    <TestimonialCard
+                      className="w-72 sm:w-80 lg:w-96"
+                      key={testimonial.id}
+                      testimonial={testimonial}
+                    />
+                  ))}
+                </div>
+              </Marquee>
             ) : (
-              <TestimonialCard testimonial={single} />
+              <TestimonialCard className="lg:w-7/12" testimonial={single} />
             )}
           </Reveal>
         )}

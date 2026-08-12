@@ -5,8 +5,6 @@ import type { Testimonial } from "@/lib/content";
 import { QuoteIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
-const QUOTE_CLASS = "text-xl lg:text-2xl";
-
 function initialsOf(name: string): string {
   return name
     .split(/\s+/)
@@ -18,11 +16,9 @@ function initialsOf(name: string): string {
 
 export function TestimonialCard({
   className,
-  panel = true,
   testimonial,
 }: {
   className?: string;
-  panel?: boolean;
   testimonial: Testimonial;
 }) {
   const { portrait } = testimonial;
@@ -30,28 +26,20 @@ export function TestimonialCard({
   return (
     <figure
       className={cn(
-        panel &&
-          "rounded-3xl border border-border-strong bg-surface-raised p-6 sm:p-10 lg:p-12",
+        "flex h-full w-full flex-col rounded-2xl border border-border bg-surface-raised p-6 lg:p-8",
         className,
       )}
     >
-      {panel ? (
-        <Icon className="size-8 text-accent lg:size-10" icon={QuoteIcon} />
-      ) : null}
+      <Icon className="size-6 text-accent" icon={QuoteIcon} />
 
-      <blockquote className={panel ? "mt-6 lg:mt-8" : undefined}>
-        <p
-          className={cn(
-            "font-display text-ink text-pretty font-medium tracking-wide leading-relaxed",
-            QUOTE_CLASS,
-          )}
-        >
+      <blockquote className="mt-4 grow">
+        <p className="font-display text-base text-ink text-pretty font-medium tracking-wide leading-relaxed lg:text-lg">
           {testimonial.quote}
         </p>
       </blockquote>
 
-      <figcaption className="mt-10 flex items-center gap-4 lg:mt-14 lg:gap-5">
-        <Avatar size="lg">
+      <figcaption className="mt-6 flex items-center gap-4">
+        <Avatar size="md">
           {portrait === null ? null : (
             <AvatarImage
               alt={portrait.alt}
@@ -64,12 +52,12 @@ export function TestimonialCard({
             {initialsOf(testimonial.name)}
           </AvatarFallback>
         </Avatar>
-        <span>
-          <H6 as="span" className="block">
+        <span className="min-w-0">
+          <H6 as="span" className="block text-base">
             {testimonial.name}
           </H6>
           {testimonial.programme === null ? null : (
-            <span className="mt-1 block font-body text-sm text-ink-muted">
+            <span className="block font-body text-sm text-ink-muted">
               {testimonial.programme}
             </span>
           )}

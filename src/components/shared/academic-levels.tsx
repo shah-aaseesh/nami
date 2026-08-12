@@ -11,7 +11,7 @@ import { content, paragraphsOf } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
-const MEDIA_SIZES = "(min-width: 768px) 40vw, 100vw";
+const MEDIA_SIZES = "(min-width: 1024px) 40vw, 100vw";
 
 function InstitutionEntry({
   campus,
@@ -26,20 +26,18 @@ function InstitutionEntry({
 }) {
   const flipped = index % 2 === 1;
   const lead = paragraphsOf(level.summary)[0] ?? null;
-  const meta = [
-    entity.establishedYear === null ? null : `Est. ${entity.establishedYear}`,
-    campus,
-  ].filter((item) => item !== null);
+  const established =
+    entity.establishedYear === null ? null : `Est. ${entity.establishedYear}`;
 
   return (
     <li
-      className="group relative grid gap-y-8 border-t border-border pt-8 md:grid-cols-12 md:gap-x-8 lg:pt-10"
+      className="group relative grid gap-y-8 border-t border-border pt-8 lg:grid-cols-12 lg:gap-x-8 lg:pt-10"
       data-reveal-item=""
     >
       <div
         className={cn(
-          "md:col-span-6 md:row-start-1",
-          flipped ? "md:col-start-7" : "md:col-start-1",
+          "lg:col-span-6 lg:row-start-1",
+          flipped ? "lg:col-start-7" : "lg:col-start-1",
         )}
       >
         <div className="flex items-center justify-between gap-5">
@@ -47,9 +45,9 @@ function InstitutionEntry({
             {String(index + 1).padStart(2, "0")}
           </span>
           <span className="flex items-center gap-4">
-            {meta.length === 0 ? null : (
+            {established === null ? null : (
               <span className="font-body text-xs tracking-widest text-ink-muted uppercase">
-                {meta.join(" · ")}
+                {established}
               </span>
             )}
             <Icon
@@ -71,13 +69,24 @@ function InstitutionEntry({
         <p className="mt-4 font-body text-sm text-ink-muted">{level.stage}</p>
 
         {lead === null ? null : <P className="mt-6 max-w-md">{lead}</P>}
+
+        {campus === null ? null : (
+          <p
+            className={cn(
+              "font-body text-sm text-ink-muted",
+              lead === null ? "mt-6" : "mt-4",
+            )}
+          >
+            {campus}
+          </p>
+        )}
       </div>
 
       {level.image === null ? null : (
         <Parallax
           className={cn(
-            "md:col-span-5 md:row-start-1",
-            flipped ? "md:col-start-1" : "md:col-start-8",
+            "lg:col-span-5 lg:row-start-1",
+            flipped ? "lg:col-start-1" : "lg:col-start-8",
           )}
           speed={flipped ? 0.94 : 1.06}
         >

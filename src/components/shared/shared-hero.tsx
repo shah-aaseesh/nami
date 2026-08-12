@@ -49,7 +49,7 @@ export function SharedHero({
       className="gutter-x section-y-masthead pt-10"
     >
       <div className="mx-auto max-w-page">
-        <div className="relative isolate flex aspect-21/9 flex-col justify-between overflow-hidden rounded-3xl bg-neutral-950 p-5 pb-20 sm:rounded-4xl sm:p-8 sm:pb-24 lg:px-10">
+        <div className="relative isolate flex flex-col justify-between gap-6 overflow-hidden rounded-3xl bg-neutral-950 p-5 pb-20 sm:rounded-4xl sm:p-8 sm:pb-24 lg:aspect-21/9 lg:gap-0 lg:px-10">
           <SharedHeroSlider label={heroLabel} slides={slides} />
 
           <div

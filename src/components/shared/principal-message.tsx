@@ -85,7 +85,7 @@ export function PrincipalMessage({
             <span className="block h-1 w-16 rounded-full bg-accent" />
           </Reveal>
 
-          <PrincipalPortraitPin className="max-w-xs lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:row-span-2 lg:max-w-none">
+          <PrincipalPortraitPin className="mx-auto max-w-xs lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:row-span-2 lg:mx-0 lg:max-w-none">
             <Reveal>
               <PortraitCard person={person} />
             </Reveal>
@@ -95,9 +95,7 @@ export function PrincipalMessage({
             <RevealItem className="max-w-prose space-y-5">
               {letter.map((paragraph, index) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
-                <P className="text-sm text-ink-muted lg:text-base" key={index}>
-                  {paragraph}
-                </P>
+                <P key={index}>{paragraph}</P>
               ))}
               <RevealItem>
                 <p className="font-display text-3xl text-ink italic lg:text-4xl">

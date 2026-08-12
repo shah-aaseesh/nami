@@ -2,8 +2,7 @@ import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
-import type { Affiliation, ContentId } from "@/lib/content";
-import { contentId } from "@/lib/content";
+import type { Affiliation } from "@/lib/content";
 
 export type BachelorsAwardingCopy = {
   readonly eyebrow: string;
@@ -12,11 +11,6 @@ export type BachelorsAwardingCopy = {
   readonly sinceLabel: string;
   readonly offerNote: string;
 };
-
-const EVIDENCED_AWARDING_BODY_IDS: ReadonlySet<ContentId> = new Set([
-  contentId("northampton"),
-  contentId("kathmandu-university"),
-]);
 
 function logoSrcOf(logo: Affiliation["logo"]): string | null {
   if (logo === null) return null;
@@ -28,11 +22,7 @@ function selectAwardingBodies(
   levelSlug: string,
 ): readonly Affiliation[] {
   return affiliations
-    .filter(
-      (item) =>
-        item.levelSlug === levelSlug &&
-        EVIDENCED_AWARDING_BODY_IDS.has(item.id),
-    )
+    .filter((item) => item.levelSlug === levelSlug)
     .sort((first, second) => first.sinceYear - second.sinceYear);
 }
 
@@ -61,7 +51,7 @@ function AwardingBodyCard({
               alt={item.body}
               className="object-contain"
               fill
-              sizes="(max-width: 639px) 128px, 160px"
+              sizes="(max-width: 767px) 128px, 160px"
               src={logo}
             />
           </div>
@@ -101,41 +91,37 @@ export function BachelorsAwarding({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="grid items-start gap-x-10 gap-y-12 lg:grid-cols-2 lg:gap-x-8 xl:grid-cols-12 xl:gap-x-16">
-          <Reveal className="xl:col-span-5" stagger={0.08}>
-            <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
-              <span className="h-px flex-1 bg-border" />
-            </RevealItem>
+        <Reveal stagger={0.08}>
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </RevealItem>
 
+          <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
             <SplitText
               as="h2"
-              className="mt-6 font-display text-4xl font-normal text-balance text-ink lg:mt-8 xl:text-5xl"
+              className="font-display text-4xl font-normal text-balance text-ink lg:max-w-2xl lg:text-5xl"
             >
               {copy.heading}
             </SplitText>
 
-            <RevealItem className="mt-6 max-w-xl">
+            <RevealItem className="lg:max-w-md">
               <Standfirst>{copy.standfirst}</Standfirst>
             </RevealItem>
-          </Reveal>
+          </div>
+        </Reveal>
 
-          <Reveal
-            className="xl:col-span-6 xl:col-start-7"
-            stagger={0.12}
-            y={24}
-          >
-            <ul className="grid gap-4 xl:gap-6 sm:grid-cols-2">
-              {awardingBodies.map((item) => (
-                <AwardingBodyCard
-                  item={item}
-                  key={item.id}
-                  sinceLabel={copy.sinceLabel}
-                />
-              ))}
-            </ul>
-          </Reveal>
-        </div>
+        <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {awardingBodies.map((item) => (
+              <AwardingBodyCard
+                item={item}
+                key={item.id}
+                sinceLabel={copy.sinceLabel}
+              />
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

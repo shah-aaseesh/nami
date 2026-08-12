@@ -15,6 +15,7 @@ export type CourseKey =
   | "environmental-science"
   | "environmental-studies"
   | "business-administration"
+  | "data-science"
   | "msc-computing";
 
 export type ModuleStatus = "Compulsory" | "Optional" | "Designated";
@@ -81,12 +82,11 @@ export type BachelorsMastheadCopy = {
   readonly cta: ContentLink;
 };
 
-// Stand-in portrait until the institute supplies its own — Asmit directive 2026-08-11.
 const academicHeadPortrait: ContentImage = {
-  src: "/nami/principal-philip-badikar-hilario.jpg",
-  alt: "Stand-in portrait: an educator in a checked jacket holding a folder.",
-  width: 233,
-  height: 430,
+  src: "/nami/bachelor-principal.jpeg",
+  alt: "Mr. Nischal Khadka, Academic Head, facing camera in a dark charcoal suit and dark shirt with a patterned tie, against a warm gold patterned backdrop.",
+  width: 281,
+  height: 381,
 };
 
 const readingRoom: ContentImage = {
@@ -124,6 +124,13 @@ const auditoriumGathering: ContentImage = {
   height: 666,
 };
 
+const bachelorOrientation: ContentImage = {
+  src: "/nami/event-orientation-2022.jpg",
+  alt: "Incoming NAMI undergraduates seated at round banquet tables with worksheets, beneath a banner reading Bachelor's Orientation Program 2079.",
+  width: 772,
+  height: 470,
+};
+
 const heroSlides: readonly ContentImage[] = [
   readingRoom,
   scienceLaboratory,
@@ -154,7 +161,7 @@ const awarding: BachelorsAwardingCopy = {
   eyebrow: "Awarding universities",
   heading: "The universities awarding the degrees taught on this campus.",
   standfirst:
-    "Since 2012, every degree taught at New Baneshwor has been awarded by the University of Northampton. From August 2026, Kathmandu University joins it, awarding the BSc in Environmental Studies.",
+    "Since 2012, every degree taught at New Baneshwor has been awarded by the University of Northampton. From 2026, Kathmandu University joins it with the BSc in Environmental Studies, and the University of Hertfordshire with the BSc (Hons) in Data Science.",
   sinceLabel: "Since",
   offerNote:
     "All decisions regarding an offer letter for a University of Northampton programme are made by the University of Northampton, UK.",
@@ -180,12 +187,13 @@ const undergraduateEntryNotes: readonly string[] = [
 ];
 
 const northamptonAward = "The University of Northampton, UK";
+const hertfordshireAward = "University of Hertfordshire";
 
 const programmes: BachelorsProgrammesCopy = {
   eyebrow: "Academics",
   heading: "Every degree taught here, and who awards it.",
   standfirst:
-    "Every degree running on this campus today is awarded by the University of Northampton, UK. Environmental Studies is awarded by Kathmandu University and begins in August 2026.",
+    "Every degree running on this campus today is awarded by the University of Northampton, UK. Environmental Studies is awarded by Kathmandu University and begins in August 2026; Data Science is awarded by the University of Hertfordshire and begins in September 2026.",
   awardedLabel: "Awarded by",
   startingLabel: "Begins",
   pendingLabel: "Programme detail",
@@ -734,6 +742,230 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 40,
               status: "Designated",
               prerequisites: "None",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      key: "data-science",
+      qualification: "BSc (Hons)",
+      title: "Data Science",
+      fullTitle: "BSc (Hons) Data Science",
+      metaDescription:
+        "BSc (Hons) Data Science at NAMI, Kathmandu — a three-year degree awarded by the University of Hertfordshire, UK, covering machine learning, data engineering and applied analytics, with the first intake in September 2026.",
+      image: bachelorOrientation,
+      awardingBody: hertfordshireAward,
+      startingFrom: "September 2026",
+      format: "Three-year degree",
+      summary: [
+        "A three-year degree in the methods and the engineering behind data-driven work — statistics, machine learning, and the pipelines that carry data from collection through to a decision someone acts on.",
+        "The first year builds the programming, mathematics and database foundations the rest of the degree depends on. The second moves into machine learning, statistical modelling and the engineering of large datasets, with a group project run to an external brief. The third is given over to a substantial individual project alongside specialist modules in deep learning, language processing and forecasting.",
+        "Throughout, the emphasis is on work that leaves the laboratory. Models are deployed rather than only trained, governance and privacy are treated as part of the practice rather than an afterthought, and every result has to be explained to an audience that is not made of data scientists.",
+      ],
+      entryLabel: "Eligibility",
+      entry: [
+        {
+          label: "+2 (NEB)",
+          requirement:
+            "Minimum of 60% (2.4 GPA) or equivalent, including Mathematics.",
+        },
+        {
+          label: "CBSE",
+          requirement: "Minimum of 60%, including Mathematics.",
+        },
+        {
+          label: "A Levels",
+          requirement:
+            "112 UCAS tariff points, including a pass in Mathematics.",
+        },
+        {
+          label: "English",
+          requirement:
+            "Minimum of 60 marks in English at +2 or CBSE, or an IELTS score of 6.0 with no band less than 5.5.",
+        },
+      ],
+      entryNotes: [
+        "Students awaiting their final results are encouraged to apply; an offer may be made conditional on the published grades.",
+        "Applicants without Mathematics at +2 level may be considered following a diagnostic assessment before registration.",
+        "All decisions regarding an offer letter are made by the University of Hertfordshire, UK.",
+      ],
+      careersLabel: "Career prospect",
+      careerSummary:
+        "The degree is built around what data teams actually do — cleaning and modelling data, putting a model into production, and explaining the result to the people who will act on it. Graduates move into analyst and engineering roles without intensive further training, and the final-year project provides the research grounding for postgraduate study or independent consultancy.",
+      careerSectors: [
+        "Banking and fintech",
+        "Insurance and risk",
+        "Telecommunications",
+        "Health informatics",
+        "Retail and e-commerce analytics",
+        "Machine learning engineering",
+        "Development and humanitarian agencies",
+        "Research and postgraduate study",
+      ],
+      pendingNote: null,
+      stagesNote:
+        "The degree runs on the University of Hertfordshire's 15- and 30-credit module structure, 120 credits a year. Optional modules are chosen in consultation with the programme leader at the start of each year.",
+      stages: [
+        {
+          key: "ds-year-1",
+          label: "Year I",
+          note: "Students must take all modules.",
+          modules: [
+            {
+              code: "4COM1068",
+              title: "Programming for Data Science",
+              credits: 30,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "4MAT1004",
+              title: "Mathematics and Statistics for Data Science",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "4COM1069",
+              title: "Data Structures and Databases",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "4COM1070",
+              title: "Foundations of Data Analytics",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "4COM1071",
+              title: "Computer Systems and Cloud Fundamentals",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "4COM1072",
+              title: "Data Visualisation and Reporting",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "4BUS1075",
+              title: "Data, Society and Professional Practice",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+          ],
+        },
+        {
+          key: "ds-year-2",
+          label: "Year II",
+          note: "Students must take all compulsory modules plus one optional module.",
+          modules: [
+            {
+              code: "5COM2018",
+              title: "Machine Learning",
+              credits: 30,
+              status: "Compulsory",
+              prerequisites: "4COM1068 and 4MAT1004",
+            },
+            {
+              code: "5COM2022",
+              title: "Applied Data Science Group Project",
+              credits: 30,
+              status: "Compulsory",
+              prerequisites: "4COM1068 and 4COM1070",
+            },
+            {
+              code: "5MAT2001",
+              title: "Statistical Modelling and Inference",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "4MAT1004",
+            },
+            {
+              code: "5COM2019",
+              title: "Big Data Engineering",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "4COM1069",
+            },
+            {
+              code: "5COM2020",
+              title: "Data Mining and Knowledge Discovery",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "4COM1070",
+            },
+            {
+              code: "5COM2021",
+              title: "Cloud Data Platforms",
+              credits: 15,
+              status: "Optional",
+              prerequisites: "4COM1071",
+            },
+          ],
+        },
+        {
+          key: "ds-year-3",
+          label: "Year III",
+          note: "Students must take all compulsory modules plus two optional modules.",
+          modules: [
+            {
+              code: "6COM2005",
+              title: "Data Science Project and Dissertation",
+              credits: 30,
+              status: "Compulsory",
+              prerequisites:
+                "Students undertaking this module should have successfully completed all level 4 modules and at least 90 credits at level 5, including 5COM2018.",
+            },
+            {
+              code: "6COM2006",
+              title: "Deep Learning and Neural Networks",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "5COM2018",
+            },
+            {
+              code: "6COM2011",
+              title: "MLOps and Model Deployment",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "5COM2019",
+            },
+            {
+              code: "6COM2008",
+              title: "Data Governance, Ethics and Privacy",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "6BUS2010",
+              title: "Decision Analytics for Business",
+              credits: 15,
+              status: "Compulsory",
+              prerequisites: "None",
+            },
+            {
+              code: "6COM2007",
+              title: "Natural Language Processing",
+              credits: 15,
+              status: "Optional",
+              prerequisites: "5COM2018",
+            },
+            {
+              code: "6COM2009",
+              title: "Time Series and Forecasting",
+              credits: 15,
+              status: "Optional",
+              prerequisites: "5MAT2001",
             },
           ],
         },

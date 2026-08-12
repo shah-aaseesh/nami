@@ -125,6 +125,15 @@ export const programmes: readonly Programme[] = [
     startingFrom: "August 2026",
   },
   {
+    ...entryOf("bsc-data-science"),
+    title: "Data Science",
+    shortTitle: "Data Science",
+    qualification: "BSc (Hons)",
+    awardingBody: AWARDING_BODIES.hertfordshire,
+    levelSlug: slug("bachelors"),
+    startingFrom: "September 2026",
+  },
+  {
     ...entryOf("a-level-programme"),
     title: "Science and non-science subject combinations",
     shortTitle: "Science & Non-Science",

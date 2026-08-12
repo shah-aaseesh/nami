@@ -54,8 +54,8 @@ export default async function SchoolPage() {
         />
       )}
 
-      <SchoolBands copy={schoolCopy.bands} id="academics" />
       <SchoolAdmission copy={schoolCopy.admission} id="admission" />
+      <SchoolBands copy={schoolCopy.bands} id="academics" />
 
       <SchoolDay copy={schoolCopy.day} id="campus" />
 

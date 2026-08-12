@@ -57,14 +57,14 @@ export default async function BachelorsPage() {
         primaryCta={bachelorsCopy.masthead.cta}
         logo={bachelorsCopy.masthead.logo}
       />
+      <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
+
       <BachelorsAwarding
         affiliations={affiliations}
         copy={bachelorsCopy.awarding}
         id="awarding"
         levelSlug={bachelorsCopy.levelSlug}
       />
-
-      <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
 
       {academicHead === null ? null : (
         <PrincipalMessage

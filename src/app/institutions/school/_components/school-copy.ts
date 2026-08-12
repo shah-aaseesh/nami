@@ -22,12 +22,11 @@ export type SchoolHeroCopy = {
   readonly website: ContentLink;
 };
 
-// Stand-in portrait until the school supplies its own — Asmit directive 2026-08-11.
 const principalPortrait: ContentImage = {
-  src: "/nami/principal-philip-badikar-hilario.jpg",
-  alt: "Stand-in portrait: an educator in a checked jacket holding a folder.",
-  width: 233,
-  height: 430,
+  src: "/nami/school-principal.jpg",
+  alt: "Ms. Anisha Panday Joshi, Principal of NAMI International School, smiling with hands clasped, wearing a deep red long coat over a patterned cream-and-red shawl, cut out on a white background.",
+  width: 378,
+  height: 442,
 };
 
 const heroSlides: readonly SharedHeroSlide[] = [
@@ -301,7 +300,7 @@ export const dummyParentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-sarita-adhikari"),
     quote:
-      "We were nervous about the jump into Grade 11 — the science load is real. But the laboratories are properly staffed, and her teachers flagged where she was slipping before we ever had to ask. She has found her footing.",
+      "The jump into Grade 11 science worried us. Her teachers flagged where she was slipping before we had to ask, and the laboratories are properly staffed.",
     name: "Sarita Adhikari",
     programme: "Parent, Grade 11 Science",
     institution: "school",
@@ -311,7 +310,7 @@ export const dummyParentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-prakash-maharjan"),
     quote:
-      "He started Grade 1 barely speaking to anyone. Six months on he is telling us about his service-learning group over dinner and correcting my Mandarin. Three meals a day quietly took a load off our mornings too.",
+      "He started Grade 1 barely speaking to anyone. Six months on he tells us about his service-learning group over dinner and corrects my Mandarin.",
     name: "Prakash Maharjan",
     programme: "Parent of a Grade 1 student",
     institution: "school",
@@ -321,7 +320,7 @@ export const dummyParentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-bikash-shrestha"),
     quote:
-      "My son went quiet for most of a term and I did not know how to reach him. The counsellor did — patiently, and without making him feel like a problem to be solved. That kind of care is not on any syllabus.",
+      "My son went quiet for most of a term and I could not reach him. The school counsellor did, patiently, without ever making him feel like a problem.",
     name: "Bikash Shrestha",
     programme: "Parent of a Grade 6 student",
     institution: "school",
@@ -331,7 +330,7 @@ export const dummyParentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-rekha-tamang"),
     quote:
-      "The admissions office rang us the week we registered and walked us through the whole thing. The Principal's orientation answered questions we had not thought to ask, and the tour afterwards is what decided it for us.",
+      "Admissions rang us the week we registered and walked us through every step. The Principal's orientation and the tour afterwards are what decided it.",
     name: "Rekha Tamang",
     programme: "Parent of a Grade 2 student",
     institution: "school",
@@ -341,7 +340,7 @@ export const dummyParentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-sunita-karki"),
     quote:
-      "What I did not expect was how much of the day is spent doing rather than copying. My daughter comes home with clay on her sleeves and a Mandarin word she wants us to learn, and the boards are used for teaching, not for show.",
+      "She comes home with clay on her sleeves and a Mandarin word she wants us to learn. Far more of her day is spent making things than copying them down.",
     name: "Sunita Karki",
     programme: "Parent of a Grade 4 student",
     institution: "school",
@@ -351,7 +350,7 @@ export const dummyParentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-deepak-bhattarai"),
     quote:
-      "Both our children have gone through the +2 here, Management and then Science. The career counselling and the internship placements are what set it apart — and the auditorium has held more of our family evenings than I can count.",
+      "Both our children finished +2 here, Management and then Science. The career counselling and the internship placements are what set this school apart.",
     name: "Deepak Bhattarai",
     programme: "Parent, Grades 11 and 12",
     institution: "school",

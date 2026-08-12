@@ -36,16 +36,16 @@ function AwardingBodyCard({
   const logo = logoSrcOf(item.logo);
 
   return (
-    <li className="flex flex-col items-center rounded-3xl border border-border bg-surface-raised p-6 text-center xl:p-8">
+    <li className="flex flex-col items-center rounded-3xl bg-primary-100 p-6 text-center xl:p-8">
       <Eyebrow
         as="span"
-        className="rounded-full bg-surface px-3 py-1 ring-1 ring-border"
+        className="rounded-full bg-primary-200 px-3 py-1 text-primary-800"
       >
         {`${sinceLabel} ${item.sinceYear}`}
       </Eyebrow>
 
       {logo === null ? null : (
-        <div className="mt-4 flex w-full items-center justify-center rounded-2xl bg-surface p-4">
+        <div className="mt-4 flex w-full items-center justify-center rounded-2xl bg-neutral-50 p-4">
           <div className="relative h-16 w-32 md:h-20 md:w-40">
             <Image
               alt={item.body}
@@ -58,16 +58,16 @@ function AwardingBodyCard({
         </div>
       )}
 
-      <h3 className="mt-6 font-display text-2xl font-normal text-balance text-ink">
+      <h3 className="mt-6 font-display text-2xl font-normal text-balance text-primary-800">
         {item.body}
       </h3>
 
-      <p className="mt-3 font-body text-sm text-pretty text-ink-muted">
+      <p className="mt-3 font-body text-sm text-pretty text-neutral-700">
         {item.scope}
       </p>
 
       {item.note === null ? null : (
-        <Eyebrow className="mt-auto pt-4">{item.note}</Eyebrow>
+        <Eyebrow className="mt-auto pt-4 text-primary-700">{item.note}</Eyebrow>
       )}
     </li>
   );
@@ -89,7 +89,7 @@ export function BachelorsAwarding({
   if (awardingBodies.length === 0) return null;
 
   return (
-    <section className="gutter-x section-y" id={id}>
+    <section className="field-brand gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
           <RevealItem className="flex items-center gap-5">

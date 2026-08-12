@@ -35,14 +35,14 @@ function StepRing({
         viewBox="0 0 48 48"
       >
         <circle
-          className="stroke-border"
+          className="stroke-primary-400"
           cx="24"
           cy="24"
           r={RING_RADIUS}
           strokeWidth="1"
         />
         <circle
-          className="stroke-accent"
+          className="stroke-primary-800"
           cx="24"
           cy="24"
           r={RING_RADIUS}
@@ -53,7 +53,7 @@ function StepRing({
         />
       </svg>
 
-      <span className="relative font-display text-lg text-accent">
+      <span className="relative font-display text-lg text-primary-800">
         <span className="sr-only">{label} </span>
         {position}
       </span>
@@ -73,7 +73,7 @@ export function SchoolAdmission({
   if (total === 0) return null;
 
   return (
-    <section className="gutter-x section-y" id={id}>
+    <section className="field-brand gutter-x section-y" id={id}>
       <SchoolAdmissionTrack
         heading={
           <>
@@ -98,7 +98,7 @@ export function SchoolAdmission({
       >
         {copy.steps.map((step, index) => (
           <li
-            className="flex w-4/5 shrink-0 snap-start flex-col gap-5 rounded-2xl border border-border bg-surface-raised p-6 sm:w-1/2 lg:p-8 xl:w-1/3"
+            className="flex w-4/5 shrink-0 snap-start flex-col gap-5 rounded-2xl bg-primary-100 p-6 sm:w-1/2 lg:p-8 xl:w-1/3"
             key={step.title}
           >
             <StepRing
@@ -108,10 +108,10 @@ export function SchoolAdmission({
             />
 
             <div>
-              <H6 as="h3" className="text-ink">
+              <H6 as="h3" className="text-primary-800">
                 {step.title}
               </H6>
-              <P className="mt-3 text-sm text-ink-muted">{step.body}</P>
+              <P className="mt-3 text-sm text-neutral-700">{step.body}</P>
             </div>
           </li>
         ))}

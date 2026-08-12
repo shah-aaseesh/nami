@@ -1,4 +1,3 @@
-import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
@@ -35,7 +34,7 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
                   buttonVariants({ variant: "quiet" }),
                   "group gap-2 rounded-full px-5 w-full sm:w-auto inline-flex justify-between sm:justify-start",
                 )}
-                href={"#leadership" as Route}
+                href={"/faculty"}
               >
                 <span>Meet the people behind NAMI</span>
                 <Icon

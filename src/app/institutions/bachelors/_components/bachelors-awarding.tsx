@@ -104,8 +104,8 @@ export function BachelorsAwarding({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="grid items-start gap-x-10 gap-y-12 lg:grid-cols-12 lg:gap-x-16">
-          <Reveal className="lg:col-span-5" stagger={0.08}>
+        <div className="grid items-start gap-x-10 gap-y-12 lg:grid-cols-2 lg:gap-x-8 xl:grid-cols-12 xl:gap-x-16">
+          <Reveal className="xl:col-span-5" stagger={0.08}>
             <RevealItem className="flex items-center gap-5">
               <Eyebrow>{copy.eyebrow}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
@@ -124,7 +124,7 @@ export function BachelorsAwarding({
           </Reveal>
 
           <Reveal
-            className="lg:col-span-6 lg:col-start-7"
+            className="xl:col-span-6 xl:col-start-7"
             stagger={0.12}
             y={24}
           >
@@ -140,7 +140,7 @@ export function BachelorsAwarding({
           </Reveal>
         </div>
 
-        <div className="mt-12 border-t border-border pt-6 lg:mt-16">
+        <div className="mt-12 border-t border-border pt-6 xl:mt-16">
           <p className="max-w-3xl font-body text-sm text-pretty text-ink-muted">
             {copy.offerNote}
           </p>

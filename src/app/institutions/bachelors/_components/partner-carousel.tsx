@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import type { CSSProperties } from "react";
-import { useRef } from "react";
+import type { CSSProperties, RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ContentImage } from "@/lib/content";
 import { gsap, Observer, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
@@ -16,12 +16,40 @@ export type CareerPartner = {
 const SPIN_SECONDS = 90;
 const MAX_BOOST = 3;
 const PLATE_WIDTH = 288;
+const MIN_PLATE_WIDTH = 240;
+const PLATE_WIDTH_RATIO = 0.3;
 const PLATE_GAP = 32;
 const VELOCITY_DIVISOR = 600;
 
-function ringRadius(count: number) {
+function ringRadius(count: number, plateWidth: number) {
   if (count < 3) return 0;
-  return Math.round((PLATE_WIDTH + PLATE_GAP) / 2 / Math.tan(Math.PI / count));
+  return Math.round((plateWidth + PLATE_GAP) / 2 / Math.tan(Math.PI / count));
+}
+
+function useRailPlateWidth(rail: RefObject<HTMLDivElement | null>) {
+  const [plateWidth, setPlateWidth] = useState(PLATE_WIDTH);
+
+  useEffect(() => {
+    const railEl = rail.current;
+    if (!railEl) return;
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      const width = entry?.contentRect.width;
+      if (width === undefined) return;
+      setPlateWidth(
+        gsap.utils.clamp(
+          MIN_PLATE_WIDTH,
+          PLATE_WIDTH,
+          width * PLATE_WIDTH_RATIO,
+        ),
+      );
+    });
+
+    resizeObserver.observe(railEl);
+    return () => resizeObserver.disconnect();
+  }, [rail]);
+
+  return plateWidth;
 }
 
 function PartnerPlate({ partner }: { readonly partner: CareerPartner }) {
@@ -59,6 +87,7 @@ export function PartnerCarousel({
 }) {
   const root = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLUListElement>(null);
+  const plateWidth = useRailPlateWidth(root);
 
   useGSAP(
     () => {
@@ -127,7 +156,7 @@ export function PartnerCarousel({
 
   if (items.length === 0) return null;
 
-  const radius = ringRadius(items.length);
+  const radius = ringRadius(items.length, plateWidth);
   const step = 360 / items.length;
 
   return (
@@ -135,7 +164,7 @@ export function PartnerCarousel({
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-linear-to-r from-surface to-transparent md:w-40" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-linear-to-l from-surface to-transparent md:w-40" />
 
-      <div className="md:h-80 md:[perspective:1500px]">
+      <div className="md:h-40 md:[perspective:1500px]">
         <ul
           aria-label={label}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:relative md:block md:h-full md:snap-none md:overflow-x-visible md:pb-0 md:[transform-style:preserve-3d] md:[transform:translateZ(calc(-1*var(--ring-radius)))_rotateY(var(--ring-spin))]"
@@ -143,6 +172,7 @@ export function PartnerCarousel({
           style={
             {
               "--ring-radius": `${radius}px`,
+              "--ring-plate-width": `${plateWidth}px`,
               "--ring-step": `${step.toFixed(4)}deg`,
               "--ring-spin": "0deg",
             } as CSSProperties
@@ -152,7 +182,7 @@ export function PartnerCarousel({
         >
           {items.map((partner, index) => (
             <li
-              className="w-64 shrink-0 snap-start md:absolute md:top-1/2 md:left-1/2 md:w-72 md:[backface-visibility:hidden] md:[transform:translate(-50%,-50%)_rotateY(calc(var(--ring-index)*var(--ring-step)))_translateZ(var(--ring-radius))]"
+              className="w-64 shrink-0 snap-start md:absolute md:top-1/2 md:left-1/2 md:w-[var(--ring-plate-width)] md:[backface-visibility:hidden] md:[transform:translate(-50%,-50%)_rotateY(calc(var(--ring-index)*var(--ring-step)))_translateZ(var(--ring-radius))]"
               key={partner.id}
               style={{ "--ring-index": String(index) } as CSSProperties}
             >

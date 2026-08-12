@@ -51,7 +51,7 @@ export function BachelorsCourseTrack({
             ease: "power1.inOut",
             snapTo: 1 / (total - VISIBLE_CARDS),
           },
-          start: "top 128px",
+          start: "top 96px",
           trigger: rail,
         });
       });
@@ -65,7 +65,7 @@ export function BachelorsCourseTrack({
     <div className="mx-auto max-w-page overflow-hidden" ref={railRef}>
       <ul
         aria-label={label}
-        className="scrollbar-hide mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 sm:gap-8 lg:mt-20 lg:motion-safe:snap-none lg:motion-safe:overflow-x-visible lg:motion-safe:pb-0"
+        className="scrollbar-hide flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 sm:gap-8 lg:motion-safe:snap-none lg:motion-safe:overflow-x-visible lg:motion-safe:pb-0"
         ref={trackRef}
         // biome-ignore lint/a11y/noNoninteractiveTabindex: the rail is a horizontal scroll region whose cards hold no focusable child, so WCAG 2.1.1 (axe scrollable-region-focusable) requires it be reachable by keyboard.
         tabIndex={0}

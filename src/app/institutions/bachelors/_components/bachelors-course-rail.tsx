@@ -87,11 +87,13 @@ export function BachelorsCourseRail({
         </div>
       </div>
 
-      <BachelorsCourseTrack label={copy.eyebrow} total={total}>
-        {copy.items.map((course) => (
-          <CourseCard copy={copy} course={course} key={course.key} />
-        ))}
-      </BachelorsCourseTrack>
+      <div className="mt-14 lg:mt-20">
+        <BachelorsCourseTrack label={copy.eyebrow} total={total}>
+          {copy.items.map((course) => (
+            <CourseCard copy={copy} course={course} key={course.key} />
+          ))}
+        </BachelorsCourseTrack>
+      </div>
     </section>
   );
 }

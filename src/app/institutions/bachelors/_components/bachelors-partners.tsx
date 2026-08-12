@@ -32,7 +32,7 @@ export function BachelorsPartners({
         </h2>
       </div>
 
-      <div className="md:bleed-x">
+      <div className="mt-14 md:bleed-x lg:mt-20">
         <PartnerCarousel items={partners} label={copy.label} />
       </div>
     </section>

@@ -6,7 +6,7 @@ import { Icon } from "@/components/ui/icon";
 import { H6, P } from "@/components/ui/typography";
 import type { Campus, ContentLink } from "@/lib/content";
 import { content, isPlaceholder } from "@/lib/content";
-import { ArrowUpRightIcon, LocationIcon } from "@/lib/icons";
+import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteCtaBand } from "./site-cta-band";
 import { SiteFooterWordmark } from "./site-footer-wordmark";
@@ -100,10 +100,6 @@ export async function SiteFooter() {
 
   const navItems = SITE_NAV_ITEMS;
   const cities = [...new Set(campuses.map((campus) => campus.city))].join(", ");
-  const place =
-    campuses.length === 0
-      ? null
-      : `${campuses.map((campus) => campus.locality).join(" · ")} — ${cities}`;
 
   const email =
     contact.email !== null && !isPlaceholder(contact.email)
@@ -128,23 +124,17 @@ export async function SiteFooter() {
       <div className="field-ink overflow-hidden gutter-x">
         <div className="mx-auto max-w-page">
           <Reveal
-            className="grid gap-y-14 py-16 md:grid-cols-2 md:gap-x-8 lg:grid-cols-12 lg:py-25"
+            className="grid gap-y-14 py-16 md:grid-cols-2 md:gap-x-8 xl:grid-cols-12 xl:py-25"
             stagger={0.08}
           >
-            <div className="lg:col-span-4" data-reveal-item="">
+            <div className="xl:col-span-4" data-reveal-item="">
               <SiteFooterWordmark name={group.name} />
               <P className="mt-8 max-w-xs">{lineage}</P>
-              {place === null ? null : (
-                <p className="mt-6 flex items-start gap-x-2 font-body text-sm text-ink-muted">
-                  <Icon className="mt-0.5 size-4" icon={LocationIcon} />
-                  {place}
-                </p>
-              )}
             </div>
 
             <nav
               aria-labelledby="site-footer-explore"
-              className="lg:col-span-2"
+              className="xl:col-span-2"
               data-reveal-item=""
             >
               <h3 className={columnHeading} id="site-footer-explore">
@@ -162,7 +152,7 @@ export async function SiteFooter() {
             </nav>
 
             {hasContact ? (
-              <div className="lg:col-span-2" data-reveal-item="">
+              <div className="xl:col-span-2" data-reveal-item="">
                 <h3 className={columnHeading}>Contact</h3>
                 <ul className="mt-8 flex flex-col items-start gap-y-2.5">
                   {contact.phones.map((phone) => (
@@ -191,9 +181,9 @@ export async function SiteFooter() {
             ) : null}
 
             {campuses.length === 0 ? null : (
-              <div className="lg:col-span-4" data-reveal-item="">
+              <div className="xl:col-span-4" data-reveal-item="">
                 <h3 className={columnHeading}>Campuses</h3>
-                <ul className="mt-8 grid gap-y-6 lg:grid-cols-2 lg:gap-x-8">
+                <ul className="mt-8 grid gap-y-6 xl:grid-cols-2 xl:gap-x-8">
                   {campuses.map((campus) => (
                     <CampusEntry campus={campus} key={campus.id} />
                   ))}

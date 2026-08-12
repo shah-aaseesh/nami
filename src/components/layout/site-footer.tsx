@@ -10,7 +10,7 @@ import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteCtaBand } from "./site-cta-band";
 import { SiteFooterWordmark } from "./site-footer-wordmark";
-import { SITE_NAV_ITEMS } from "./site-nav-sections";
+import { SITE_FOOTER_NAV_ITEMS } from "./site-nav-sections";
 
 const metaLink = cn(buttonVariants({ size: "sm", variant: "link" }));
 const detailLink = cn(buttonVariants({ size: "md", variant: "link" }));
@@ -98,7 +98,7 @@ export async function SiteFooter() {
   const group = entities.institute;
   const lineage = `Three institutions under the ${group.shortName} name — ${entities.school.name}, ${entities.college.name} and ${group.name}.`;
 
-  const navItems = SITE_NAV_ITEMS;
+  const navItems = SITE_FOOTER_NAV_ITEMS;
   const cities = [...new Set(campuses.map((campus) => campus.city))].join(", ");
 
   const email =

@@ -19,11 +19,9 @@ export default async function FacultyPage() {
 
       <div className="pb-12 lg:pb-24">
         <FacultyGroup
-          leaders={leadership.academics}
-          title="Academic Heads & Principals"
+          leaders={[...leadership.academics, ...leadership.management]}
+          title="Academic Heads & Management Team"
         />
-
-        <FacultyGroup leaders={leadership.management} title="Management Team" />
 
         <FacultyGroup leaders={leadership.board} title="Board of Directors" />
       </div>

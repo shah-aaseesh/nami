@@ -72,16 +72,16 @@ export function FacultyGroup({
           className={
             isScrollable
               ? "flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:overflow-visible lg:flex-nowrap"
-              : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8"
+              : "flex flex-wrap justify-center gap-6 sm:gap-8"
           }
           ref={trackRef}
         >
           {leaders.map((leader) => (
             <div
-              className={`group flex flex-col shrink-0 snap-center ${
+              className={`group flex flex-col snap-center ${
                 isScrollable
-                  ? "w-[75vw] max-w-[260px] sm:w-[40vw] sm:max-w-[280px] lg:w-[calc((100%-6rem)/4)] lg:max-w-none"
-                  : "w-full"
+                  ? "shrink-0 w-[75vw] max-w-[260px] sm:w-[40vw] sm:max-w-[280px] lg:w-[calc((100%-6rem)/4)] lg:max-w-none"
+                  : "w-full min-w-0 sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.333rem)] lg:w-[calc(25%-1.5rem)]"
               }`}
               key={leader.id}
             >

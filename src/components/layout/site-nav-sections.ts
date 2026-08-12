@@ -40,13 +40,20 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     descriptor: "Experience vibrant campus life.",
   },
   {
-    label: "Resources",
-    href: "/notices",
-    descriptor: "Stay updated with latest happenings and view our gallery.",
-    children: [
-      { label: "Notices", href: "/notices" },
-      { label: "Gallery", href: "/gallery" },
-    ],
+    label: "Gallery",
+    href: "/gallery",
+    descriptor: "View our photo gallery.",
   },
   { label: "Contact", href: "/contact", descriptor: "Get in touch with us." },
+];
+
+export const SITE_FOOTER_NAV_ITEMS: SiteNavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Institutions", href: "/institutions/college" },
+  { label: "Admissions", href: "/admissions" },
+  { label: "Student Life", href: "/student-life" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Notices", href: "/notices" },
+  { label: "Contact", href: "/contact" },
 ];

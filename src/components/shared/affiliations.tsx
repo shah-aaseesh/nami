@@ -19,13 +19,13 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
           </RevealItem>
         )}
 
-        <SplitText as="h2" className="mt-6 font-display text-5xl lg:mt-8">
+        <SplitText as="h2" className="mt-4 font-display text-5xl lg:mt-6">
           {copy.heading}
         </SplitText>
       </div>
 
       {copy.standfirst === null ? null : (
-        <RevealItem className="mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0">
+        <RevealItem className="mt-6 lg:col-span-4 lg:col-start-9 lg:mt-0">
           <Standfirst>{copy.standfirst}</Standfirst>
         </RevealItem>
       )}
@@ -36,7 +36,7 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
 function AffiliationStation({ item }: { item: Affiliation }) {
   return (
     <li
-      className="group relative border-t border-border-strong pt-8 flex flex-col h-full transition-transform duration-500 ease-out hover:-translate-y-2"
+      className="group relative border-t border-border-strong pt-6 flex flex-col h-full transition-transform duration-500 ease-out hover:-translate-y-2"
       data-reveal-item=""
     >
       <span
@@ -45,7 +45,7 @@ function AffiliationStation({ item }: { item: Affiliation }) {
       />
 
       {item.logo && (
-        <div className="relative h-16 w-full max-w-[160px] mb-8">
+        <div className="relative h-16 w-full max-w-[160px] mb-6">
           <Image
             src={typeof item.logo === "string" ? item.logo : item.logo.src}
             alt={item.body}
@@ -63,18 +63,18 @@ function AffiliationStation({ item }: { item: Affiliation }) {
         >
           Since
         </Eyebrow>
-        <p className="mt-2 font-display text-4xl text-accent">
+        <p className="mt-1.5 font-display text-4xl text-accent">
           {item.sinceYear}
         </p>
-        <h3 className="mt-6 font-display text-2xl font-medium text-ink">
+        <h3 className="mt-4 font-display text-2xl font-medium text-ink">
           {item.body}
         </h3>
-        <p className="mt-3 text-sm text-ink-muted leading-relaxed">
+        <p className="mt-2 text-sm text-ink-muted leading-relaxed">
           {item.scope}
         </p>
 
         {item.note && (
-          <p className="mt-auto pt-6 text-xs font-medium text-ink-muted opacity-80">
+          <p className="mt-auto pt-4 text-xs font-medium text-ink-muted opacity-80">
             {item.note}
           </p>
         )}
@@ -97,8 +97,8 @@ export async function Affiliations({ section }: { section: SectionCopy }) {
             <P className="mt-12 lg:w-5/12">{section.emptyState}</P>
           )
         ) : (
-          <Reveal className="mt-12 lg:mt-16" stagger={0.08}>
-            <ul className="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal className="mt-8 lg:mt-10" stagger={0.08}>
+            <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {timeline.map((item) => (
                 <AffiliationStation item={item} key={item.id} />
               ))}

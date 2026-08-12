@@ -92,34 +92,34 @@ export async function InstitutionNotices({
         </Reveal>
 
         {notices.length === 0 ? (
-          <Reveal className="mt-12 lg:mt-16">
+          <Reveal className="mt-10 lg:mt-14">
             <P className="max-w-xl border-t border-border pt-8">
               {copy.emptyState}
             </P>
           </Reveal>
         ) : (
-          <Reveal className="mt-12 lg:mt-16" stagger={0.08} y={28}>
+          <Reveal className="mt-10 lg:mt-14" stagger={0.08} y={28}>
             <ul className="border-t border-border">
               {notices.map((item) => (
                 <li
-                  className="grid gap-x-10 gap-y-3 border-b border-border py-7 sm:grid-cols-[auto_minmax(0,1fr)] lg:py-9"
+                  className="grid gap-x-8 gap-y-2 border-b border-border py-5 sm:grid-cols-[auto_minmax(0,1fr)] lg:py-7"
                   data-reveal-item=""
                   key={item.id}
                 >
                   <time
-                    className="font-body text-xs font-medium tracking-widest text-accent uppercase sm:pt-2"
+                    className="font-body text-xs font-medium tracking-widest text-accent uppercase sm:pt-1"
                     dateTime={item.publishedAt}
                   >
                     {formatDate(item.publishedAt)}
                   </time>
 
                   <div>
-                    <h3 className="font-display text-2xl font-normal text-balance text-ink lg:text-3xl">
+                    <h3 className="font-display text-2xl font-normal text-balance text-ink">
                       {item.title}
                     </h3>
 
                     {item.venue === null ? null : (
-                      <p className="mt-3 inline-flex items-center gap-2 font-body text-sm text-ink-muted">
+                      <p className="mt-2 inline-flex items-center gap-2 font-body text-sm text-ink-muted">
                         <Icon className="size-4" icon={LocationIcon} />
                         <span className="sr-only">Venue </span>
                         {item.venue}

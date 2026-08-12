@@ -1,8 +1,7 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Icon } from "@/components/ui/icon";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
-import { CheckIcon } from "@/lib/icons";
 
 export type SubjectGroupKey = "s1" | "s2" | "ns1" | "ns2";
 
@@ -39,82 +38,71 @@ export type CollegeSubjectsCopy = {
   readonly notOfferedLabel: (group: string) => string;
 };
 
-function SubjectGroupHeader({
-  groups,
+function GroupSubjects({
+  copy,
+  group,
+  stream,
 }: {
-  readonly groups: readonly SubjectGroup[];
+  readonly copy: CollegeSubjectsCopy;
+  readonly group: SubjectGroup;
+  readonly stream: CollegeSubjectStream;
 }) {
   return (
-    <div
-      aria-hidden="true"
-      className="flex items-baseline justify-between gap-4"
-      data-reveal-item=""
-    >
-      <span />
-
-      <p className="flex shrink-0 gap-3 font-body text-sm font-medium tracking-widest text-ink-muted uppercase sm:gap-4">
-        {groups.map((group) => (
-          <span className="w-10 text-right" key={group.key}>
-            {group.short}
-          </span>
+    // biome-ignore lint/a11y/noRedundantRoles: Tailwind preflight's list-style:none drops the implicit list role in Safari
+    <ul className="flex flex-col gap-4" role="list">
+      {stream.subjects
+        .filter((subject) => subject.groups.includes(group.key))
+        .map((subject) => (
+          <li
+            className="font-display text-xl font-normal text-ink"
+            key={subject.name}
+          >
+            {subject.name}
+            {subject.compulsory ? (
+              <span className="ml-2 align-middle font-body text-xs font-medium tracking-widest text-accent uppercase">
+                {copy.compulsoryLabel}
+              </span>
+            ) : null}
+          </li>
         ))}
-      </p>
-    </div>
+    </ul>
   );
 }
 
-function SubjectRow({
+function StreamCard({
   copy,
-  groups,
-  subject,
+  stream,
 }: {
   readonly copy: CollegeSubjectsCopy;
-  readonly groups: readonly SubjectGroup[];
-  readonly subject: CollegeSubject;
+  readonly stream: CollegeSubjectStream;
 }) {
   return (
-    <li
-      className="flex items-baseline justify-between gap-4 py-3 sm:py-4"
-      data-reveal-item=""
-    >
-      <p className="min-w-0 font-display text-2xl font-normal text-ink">
-        {subject.name}
-        {subject.compulsory ? (
-          <span className="ml-2 align-middle font-body text-xs font-medium tracking-widest text-accent uppercase">
-            {copy.compulsoryLabel}
-          </span>
-        ) : null}
-      </p>
+    <div className="flex h-full flex-col rounded-3xl border border-border bg-surface-raised p-6 sm:p-8 lg:p-10">
+      <h3 className="font-display text-3xl font-normal text-ink lg:text-4xl">
+        {stream.label}
+      </h3>
 
-      <p className="flex shrink-0 gap-3 font-body text-sm font-medium tracking-widest text-accent uppercase sm:gap-4">
-        {groups.map((group) => {
-          const offered = subject.groups.includes(group.key);
+      <Tabs className="mt-6 flex-1" defaultValue={stream.groups[0]?.key}>
+        <TabsList aria-label={stream.label}>
+          {stream.groups.map((group) => (
+            <TabsTab className="text-base" key={group.key} value={group.key}>
+              {group.label}
+            </TabsTab>
+          ))}
+        </TabsList>
 
-          return (
-            <span className="w-10 text-right" key={group.key}>
-              {offered ? (
-                <Icon
-                  className="inline-block size-4 align-middle text-accent"
-                  icon={CheckIcon}
-                />
-              ) : (
-                <span
-                  aria-hidden="true"
-                  className="font-normal text-ink-muted/50"
-                >
-                  &mdash;
-                </span>
-              )}
-              <span className="sr-only">
-                {offered
-                  ? copy.offeredLabel(group.label)
-                  : copy.notOfferedLabel(group.label)}
-              </span>
-            </span>
-          );
-        })}
-      </p>
-    </li>
+        {stream.groups.map((group) => (
+          <TabsPanel key={group.key} value={group.key}>
+            <GroupSubjects copy={copy} group={group} stream={stream} />
+          </TabsPanel>
+        ))}
+      </Tabs>
+
+      <div className="mt-10 border-t border-border pt-6">
+        <P className="text-sm">{stream.minimumNote}</P>
+        <P className="mt-3 text-sm">{stream.overlapNote}</P>
+      </div>
+    </div>
   );
 }
 
@@ -125,63 +113,40 @@ export function CollegeSubjects({
 }) {
   return (
     <section className="gutter-x section-y" id="subjects">
-      <div className="mx-auto flex max-w-page flex-col gap-14 lg:gap-20">
-        <Reveal className="flex flex-col gap-8" stagger={0.08}>
-          <div className="flex flex-col gap-4">
+      <div className="mx-auto max-w-page">
+        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
+          <div className="lg:col-span-6">
             <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
             </RevealItem>
 
             <SplitText
               as="h2"
-              className="max-w-3xl font-display text-5xl font-normal text-balance text-ink"
+              className="mt-4 font-display text-5xl font-normal text-balance text-ink"
             >
               {copy.heading}
             </SplitText>
           </div>
 
-          <RevealItem className="flex max-w-xl flex-col gap-4">
+          <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
-            <P>{copy.compulsoryNote}</P>
+            <P className="mt-6 border-t border-border pt-5 text-sm">
+              {copy.compulsoryNote}
+            </P>
           </RevealItem>
         </Reveal>
 
-        <div className="grid gap-x-10 gap-y-14 md:grid-cols-2">
+        <Reveal
+          className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-2 lg:gap-8"
+          stagger={0.12}
+          y={24}
+        >
           {copy.streams.map((stream) => (
-            <div
-              className="flex flex-col gap-8 border-t border-border-strong pt-6 lg:gap-10 lg:pt-8"
-              key={stream.key}
-            >
-              <SplitText
-                as="h3"
-                className="font-display text-4xl font-normal text-ink"
-              >
-                {stream.label}
-              </SplitText>
-
-              <Reveal className="flex flex-col gap-3" stagger={0.05} y={24}>
-                <SubjectGroupHeader groups={stream.groups} />
-
-                {/* biome-ignore lint/a11y/noRedundantRoles: Tailwind preflight's list-style:none drops the implicit list role in Safari */}
-                <ul aria-label={stream.listLabel} role="list">
-                  {stream.subjects.map((subject) => (
-                    <SubjectRow
-                      copy={copy}
-                      groups={stream.groups}
-                      key={subject.name}
-                      subject={subject}
-                    />
-                  ))}
-                </ul>
-              </Reveal>
-
-              <Reveal className="flex max-w-lg flex-col gap-4">
-                <P>{stream.minimumNote}</P>
-                <P>{stream.overlapNote}</P>
-              </Reveal>
-            </div>
+            <RevealItem key={stream.key}>
+              <StreamCard copy={copy} stream={stream} />
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

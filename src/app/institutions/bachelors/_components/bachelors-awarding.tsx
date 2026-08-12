@@ -46,10 +46,7 @@ function AwardingBodyCard({
   const logo = logoSrcOf(item.logo);
 
   return (
-    <li
-      className="flex flex-col items-center rounded-3xl border border-border bg-surface-raised p-6 text-center sm:p-8"
-      data-reveal-item=""
-    >
+    <li className="flex flex-col items-center rounded-3xl border border-border bg-surface-raised p-6 text-center xl:p-8">
       <Eyebrow
         as="span"
         className="rounded-full bg-surface px-3 py-1 ring-1 ring-border"
@@ -58,8 +55,8 @@ function AwardingBodyCard({
       </Eyebrow>
 
       {logo === null ? null : (
-        <div className="mt-8 flex w-full items-center justify-center rounded-2xl bg-surface p-6">
-          <div className="relative h-16 w-32 sm:h-20 sm:w-40">
+        <div className="mt-4 flex w-full items-center justify-center rounded-2xl bg-surface p-4">
+          <div className="relative h-16 w-32 md:h-20 md:w-40">
             <Image
               alt={item.body}
               className="object-contain"
@@ -71,7 +68,7 @@ function AwardingBodyCard({
         </div>
       )}
 
-      <h3 className="mt-8 font-display text-2xl font-normal text-balance text-ink">
+      <h3 className="mt-6 font-display text-2xl font-normal text-balance text-ink">
         {item.body}
       </h3>
 
@@ -80,7 +77,7 @@ function AwardingBodyCard({
       </p>
 
       {item.note === null ? null : (
-        <Eyebrow className="mt-auto pt-6">{item.note}</Eyebrow>
+        <Eyebrow className="mt-auto pt-4">{item.note}</Eyebrow>
       )}
     </li>
   );
@@ -113,7 +110,7 @@ export function BachelorsAwarding({
 
             <SplitText
               as="h2"
-              className="mt-6 font-display text-4xl font-normal text-balance text-ink lg:mt-8 lg:text-5xl"
+              className="mt-6 font-display text-4xl font-normal text-balance text-ink lg:mt-8 xl:text-5xl"
             >
               {copy.heading}
             </SplitText>
@@ -128,7 +125,7 @@ export function BachelorsAwarding({
             stagger={0.12}
             y={24}
           >
-            <ul className="grid gap-6 sm:grid-cols-2">
+            <ul className="grid gap-4 xl:gap-6 sm:grid-cols-2">
               {awardingBodies.map((item) => (
                 <AwardingBodyCard
                   item={item}
@@ -138,12 +135,6 @@ export function BachelorsAwarding({
               ))}
             </ul>
           </Reveal>
-        </div>
-
-        <div className="mt-12 border-t border-border pt-6 xl:mt-16">
-          <p className="max-w-3xl font-body text-sm text-pretty text-ink-muted">
-            {copy.offerNote}
-          </p>
         </div>
       </div>
     </section>

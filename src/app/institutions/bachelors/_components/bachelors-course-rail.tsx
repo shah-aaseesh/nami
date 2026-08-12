@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Eyebrow, H4, P, Standfirst } from "@/components/ui/typography";
 import type {
   BachelorsProgramme,
@@ -19,7 +20,7 @@ function CourseCard({
   const lead = course.summary[0] ?? null;
 
   return (
-    <li className="group flex w-4/5 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised sm:w-1/2 lg:w-1/3">
+    <li className="group relative flex w-4/5 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong sm:w-1/2 lg:w-1/3">
       <div className="flex flex-1 flex-col gap-4 p-6 lg:p-8">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
           <Eyebrow as="span">{course.qualification}</Eyebrow>
@@ -32,7 +33,12 @@ function CourseCard({
         </div>
 
         <H4 as="h3" className="text-ink">
-          {course.title}
+          <Link
+            className="transition-colors after:absolute after:inset-0 group-hover:text-accent"
+            href={`/institutions/bachelors/${course.key}`}
+          >
+            {course.title}
+          </Link>
         </H4>
 
         {lead === null ? null : <P className="line-clamp-3 text-sm">{lead}</P>}

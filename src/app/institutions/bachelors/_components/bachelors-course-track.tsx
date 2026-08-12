@@ -4,6 +4,10 @@ import type { ReactNode } from "react";
 import { useRef } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
+// overflow-clip, not overflow-hidden: `hidden` is a programmatically scrollable box, so
+// focusing a card link inside the GSAP-transformed track scrolls it and desyncs the pin.
+const RAIL = "mx-auto max-w-page overflow-clip";
+
 const VISIBLE_CARDS = 3;
 const PINNED_QUERY =
   "(min-width: 1024px) and (prefers-reduced-motion: no-preference)";
@@ -62,13 +66,11 @@ export function BachelorsCourseTrack({
   );
 
   return (
-    <div className="mx-auto max-w-page overflow-hidden" ref={railRef}>
+    <div className={RAIL} ref={railRef}>
       <ul
         aria-label={label}
         className="scrollbar-hide flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 sm:gap-8 lg:motion-safe:snap-none lg:motion-safe:overflow-x-visible lg:motion-safe:pb-0"
         ref={trackRef}
-        // biome-ignore lint/a11y/noNoninteractiveTabindex: the rail is a horizontal scroll region whose cards hold no focusable child, so WCAG 2.1.1 (axe scrollable-region-focusable) requires it be reachable by keyboard.
-        tabIndex={0}
       >
         {children}
       </ul>

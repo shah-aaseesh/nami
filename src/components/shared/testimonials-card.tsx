@@ -5,11 +5,7 @@ import type { Testimonial } from "@/lib/content";
 import { QuoteIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
-function quoteStep(quote: string): string {
-  if (quote.length <= 140) return "text-2xl lg:text-3xl";
-  if (quote.length <= 450) return "text-2xl lg:text-3xl";
-  return "text-2xl lg:text-3xl";
-}
+const QUOTE_CLASS = "text-xl lg:text-2xl";
 
 function initialsOf(name: string): string {
   return name
@@ -47,7 +43,7 @@ export function TestimonialCard({
         <p
           className={cn(
             "font-display text-ink text-pretty font-medium tracking-wide leading-relaxed",
-            quoteStep(testimonial.quote),
+            QUOTE_CLASS,
           )}
         >
           {testimonial.quote}

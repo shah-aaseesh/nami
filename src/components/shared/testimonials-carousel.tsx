@@ -137,7 +137,7 @@ export function TestimonialsCarousel({
       tabIndex={0}
     >
       <div className="rounded-3xl border border-border-strong bg-surface-raised p-6 sm:p-10 lg:p-14">
-        <div className="flex flex-col items-start gap-10 lg:flex-row lg:gap-48">
+        <div className="flex flex-col items-start gap-10 lg:flex-row lg:gap-12 xl:gap-16">
           <div className="flex items-center gap-3">
             <Button
               aria-label="Previous testimonial"

@@ -151,7 +151,7 @@ export function AdmissionsClient() {
                 <Link
                   href={prog.href}
                   className={buttonVariants({
-                    variant: "quiet",
+                    variant: "default",
                     className: "w-full sm:w-auto self-start",
                   })}
                 >

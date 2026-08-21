@@ -32,25 +32,56 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { H2, H3, P } from "@/components/ui/typography";
-import { INSTITUTIONS } from "@/lib/content/institutions";
+import {
+  findInquiryCourse,
+  INQUIRY_COURSES,
+  type InquiryCourse,
+} from "@/lib/content/institutions";
 import {
   ArrowRightIcon,
   CalendarIcon,
   CheckIcon,
+  DownloadIcon,
   PlusIcon,
   TrashIcon,
 } from "@/lib/icons";
 import { type AdmissionsFormData, admissionsSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
-const STEPS = [
-  "Course Details",
-  "Student Details",
-  "Parent Details",
-  "Qualifications",
-  "Employment History",
-  "Additional Info & Signatures",
-];
+type Step = {
+  readonly key:
+    | "course"
+    | "student"
+    | "parents"
+    | "history"
+    | "employment"
+    | "additional";
+  readonly label: string;
+};
+
+function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
+  const steps: Step[] = [
+    { key: "course", label: "Course Details" },
+    { key: "student", label: "Student Details" },
+    { key: "parents", label: "Parent Details" },
+    { key: "history", label: course?.historyStepLabel ?? "Qualifications" },
+  ];
+  if (!course || course.asksEmploymentHistory) {
+    steps.push({ key: "employment", label: "Employment History" });
+  }
+  steps.push({ key: "additional", label: "Additional Info & Signatures" });
+  return steps;
+}
+
+function emptyEmployment() {
+  return {
+    id: crypto.randomUUID(),
+    dates: "",
+    employer: "",
+    position: "",
+    duties: "",
+  };
+}
 
 function QualificationRow({
   control,
@@ -187,53 +218,56 @@ function EmploymentRow({
 
 export function MultiStepForm() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isPreparingPdf, setIsPreparingPdf] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { control, register, setValue } = useForm<AdmissionsFormData>({
-    resolver: zodResolver(admissionsSchema),
-    defaultValues: {
-      program: "",
-      proposedCourse: "",
-      title: "",
-      surname: "",
-      firstName: "",
-      dob: null,
-      nationality: "",
-      telephone: "",
-      email: "",
-      photo: null,
-      specialNeeds: false,
-      fatherName: "",
-      fatherContact: "",
-      fatherEmail: "",
-      fatherJob: "",
-      motherName: "",
-      motherContact: "",
-      motherEmail: "",
-      motherJob: "",
-      secondaryContact: "",
-      relationship: "",
-      qualifications: [
-        {
-          id: "1",
-          place: "",
-          dates: "",
-          awards: "",
-          dateObtained: null,
-        },
-      ],
-      pendingQualifications: "",
-      employment: [
-        { id: "1", dates: "", employer: "", position: "", duties: "" },
-      ],
-      personalStatement: "",
-      howDidYouHear: [],
-      criminalRecord: null,
-      signature: "",
-      signatureDate: null,
-    },
-  });
+  const { control, register, setValue, getValues } =
+    useForm<AdmissionsFormData>({
+      resolver: zodResolver(admissionsSchema),
+      defaultValues: {
+        program: "",
+        proposedCourse: "",
+        title: "",
+        surname: "",
+        firstName: "",
+        dob: null,
+        nationality: "",
+        telephone: "",
+        email: "",
+        photo: null,
+        specialNeeds: false,
+        fatherName: "",
+        fatherContact: "",
+        fatherEmail: "",
+        fatherJob: "",
+        motherName: "",
+        motherContact: "",
+        motherEmail: "",
+        motherJob: "",
+        secondaryContact: "",
+        relationship: "",
+        qualifications: [
+          {
+            id: "1",
+            place: "",
+            dates: "",
+            awards: "",
+            dateObtained: null,
+          },
+        ],
+        pendingQualifications: "",
+        employment: [
+          { id: "1", dates: "", employer: "", position: "", duties: "" },
+        ],
+        personalStatement: "",
+        howDidYouHear: [],
+        criminalRecord: null,
+        signature: "",
+        signatureDate: null,
+      },
+    });
 
   const {
     fields: qualificationFields,
@@ -248,12 +282,18 @@ export function MultiStepForm() {
     fields: employmentFields,
     append: appendEmployment,
     remove: removeEmployment,
+    replace: replaceEmployment,
   } = useFieldArray({
     control,
     name: "employment",
   });
 
   const howDidYouHear = useWatch({ control, name: "howDidYouHear" }) ?? [];
+  const selectedProgram = useWatch({ control, name: "program" }) ?? "";
+  const course = findInquiryCourse(selectedProgram);
+  const steps = stepsForCourse(course);
+  const stepIndex = Math.min(currentStep, steps.length - 1);
+  const activeStep = steps[stepIndex];
 
   const addQualification = () => {
     appendQualification({
@@ -266,17 +306,38 @@ export function MultiStepForm() {
   };
 
   const addEmployment = () => {
-    appendEmployment({
-      id: crypto.randomUUID(),
-      dates: "",
-      employer: "",
-      position: "",
-      duties: "",
-    });
+    appendEmployment(emptyEmployment());
+  };
+
+  const selectCourse = (
+    value: string | null,
+    commit: (value: string) => void,
+  ) => {
+    commit(value ?? "");
+    const next = value ? findInquiryCourse(value) : undefined;
+    if (!next?.asksPendingQualifications) setValue("pendingQualifications", "");
+    if (!next?.asksEmploymentHistory) replaceEmployment([emptyEmployment()]);
+  };
+
+  const downloadPdf = async () => {
+    setPdfError(null);
+    setIsPreparingPdf(true);
+    try {
+      const { downloadInquiryPdf } = await import("@/lib/inquiry-pdf");
+      await downloadInquiryPdf(getValues());
+    } catch (error) {
+      setPdfError(
+        error instanceof Error
+          ? error.message
+          : "The PDF could not be created. Please try again.",
+      );
+    } finally {
+      setIsPreparingPdf(false);
+    }
   };
 
   const goToStep = (step: number) => {
-    if (step < 0 || step >= STEPS.length || step === currentStep) return;
+    if (step < 0 || step >= steps.length || step === stepIndex) return;
 
     gsap.to(formRef.current, {
       opacity: 0,
@@ -294,8 +355,8 @@ export function MultiStepForm() {
   };
 
   const renderStepContent = () => {
-    switch (currentStep) {
-      case 0:
+    switch (activeStep?.key) {
+      case "course":
         return (
           <div className="space-y-6">
             <H3 className="text-xl font-display text-ink mb-6">
@@ -308,17 +369,19 @@ export function MultiStepForm() {
                   control={control}
                   name="program"
                   render={({ field }) => (
-                    <Select onValueChange={field.onChange} value={field.value}>
+                    <Select
+                      onValueChange={(value) =>
+                        selectCourse(value, field.onChange)
+                      }
+                      value={field.value}
+                    >
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a program" />
                       </SelectTrigger>
                       <SelectContent>
-                        {INSTITUTIONS.map((institution) => (
-                          <SelectItem
-                            key={institution.id}
-                            value={institution.id}
-                          >
-                            {institution.applyLabel}
+                        {INQUIRY_COURSES.map((option) => (
+                          <SelectItem key={option.id} value={option.id}>
+                            {option.label}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -336,7 +399,7 @@ export function MultiStepForm() {
             </div>
           </div>
         );
-      case 1:
+      case "student":
         return (
           <div className="space-y-6">
             <H3 className="text-xl font-display text-ink mb-6">
@@ -408,6 +471,10 @@ export function MultiStepForm() {
               </div>
               <div className="flex flex-col gap-2 md:col-span-2">
                 <Label>Photo Upload</Label>
+                <P className="text-xs text-ink-muted">
+                  Files stay on this device. They are not sent anywhere and are
+                  not included in the PDF you download.
+                </P>
                 <Input
                   type="file"
                   accept="image/*"
@@ -441,7 +508,7 @@ export function MultiStepForm() {
             </div>
           </div>
         );
-      case 2:
+      case "parents":
         return (
           <div className="space-y-8">
             <H3 className="text-xl font-display text-ink mb-6">
@@ -513,12 +580,12 @@ export function MultiStepForm() {
             </div>
           </div>
         );
-      case 3:
+      case "history":
         return (
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <H3 className="text-xl font-display text-ink">
-                Qualifications Achieved
+                {course?.historyHeading ?? "Qualifications Achieved"}
               </H3>
               <Button
                 type="button"
@@ -543,22 +610,24 @@ export function MultiStepForm() {
               ))}
             </div>
 
-            <div className="space-y-4 pt-6 border-t border-border/50">
-              <H3 className="text-lg font-display text-ink">
-                Qualifications Pending
-              </H3>
-              <div className="flex flex-col gap-2">
-                <Label>Are you currently awaiting any results?</Label>
-                <Textarea
-                  placeholder="Please list any exams taken for which results are pending..."
-                  className="min-h-[100px]"
-                  {...register("pendingQualifications")}
-                />
+            {(!course || course.asksPendingQualifications) && (
+              <div className="space-y-4 pt-6 border-t border-border/50">
+                <H3 className="text-lg font-display text-ink">
+                  Qualifications Pending
+                </H3>
+                <div className="flex flex-col gap-2">
+                  <Label>Are you currently awaiting any results?</Label>
+                  <Textarea
+                    placeholder="Please list any exams taken for which results are pending..."
+                    className="min-h-[100px]"
+                    {...register("pendingQualifications")}
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         );
-      case 4:
+      case "employment":
         return (
           <div className="space-y-8">
             <div className="flex items-center justify-between">
@@ -588,7 +657,7 @@ export function MultiStepForm() {
             </div>
           </div>
         );
-      case 5:
+      case "additional":
         return (
           <div className="space-y-8">
             <H3 className="text-xl font-display text-ink mb-6">
@@ -651,6 +720,8 @@ export function MultiStepForm() {
                 <Label>Criminal Convictions</Label>
                 <P className="text-xs text-ink-muted">
                   Please upload your Police Record Certification if applicable.
+                  Files stay on this device. They are not sent anywhere and are
+                  not included in the PDF you download.
                 </P>
                 <Input
                   type="file"
@@ -730,19 +801,19 @@ export function MultiStepForm() {
       <div className="bg-surface border border-border rounded-2xl shadow-sm flex flex-col md:flex-row min-h-[600px]">
         <div className="bg-surface-muted w-full md:w-64 lg:w-80 p-6 md:p-8 shrink-0 border-b md:border-b-0 md:border-r border-border rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
           <H2 className="font-display text-xl font-semibold text-ink mb-8">
-            Application Form
+            Inquiry Form
           </H2>
           <ul className="space-y-6">
-            {STEPS.map((step, index) => {
-              const isActive = index === currentStep;
-              const isPast = index < currentStep;
+            {steps.map((step, index) => {
+              const isActive = index === stepIndex;
+              const isPast = index < stepIndex;
 
               return (
                 <li
-                  key={step}
+                  key={step.key}
                   className="flex items-center gap-4 relative group"
                 >
-                  {index !== STEPS.length - 1 && (
+                  {index !== steps.length - 1 && (
                     <div
                       className={cn(
                         "absolute left-[13px] top-8 w-[2px] h-8 -z-10 transition-colors duration-500",
@@ -783,7 +854,7 @@ export function MultiStepForm() {
                           : "text-ink-muted",
                     )}
                   >
-                    {step}
+                    {step.label}
                   </button>
                 </li>
               );
@@ -796,33 +867,61 @@ export function MultiStepForm() {
             {renderStepContent()}
           </div>
 
-          <div className="mt-12 pt-6 border-t border-border flex items-center justify-between">
-            <Button
-              type="button"
-              variant="quiet"
-              onClick={() => goToStep(currentStep - 1)}
-              disabled={currentStep === 0}
-              className="px-6 h-12 border border-border"
-            >
-              Previous
-            </Button>
-
-            {currentStep < STEPS.length - 1 ? (
-              <Button
-                type="button"
-                onClick={() => goToStep(currentStep + 1)}
-                className="gap-2 px-6 h-12"
-              >
-                Next Step <Icon icon={ArrowRightIcon} className="size-4" />
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                className="gap-2 px-6 h-12 bg-accent hover:bg-accent/90 text-white"
-              >
-                Submit Application <Icon icon={CheckIcon} className="size-4" />
-              </Button>
+          <div className="mt-12 pt-6 border-t border-border flex flex-col gap-4">
+            {activeStep?.key === "additional" && (
+              <P className="text-xs text-ink-muted">
+                Your PDF is created on this device. Nothing you have entered
+                leaves your browser, and the files you uploaded are not included
+                in it.
+              </P>
             )}
+
+            {pdfError && (
+              <P role="alert" className="text-xs text-accent">
+                {pdfError}
+              </P>
+            )}
+
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <Button
+                type="button"
+                variant="default"
+                onClick={() => goToStep(stepIndex - 1)}
+                disabled={stepIndex === 0}
+                className="px-6 h-12 border border-border"
+              >
+                Previous
+              </Button>
+
+              {stepIndex < steps.length - 1 ? (
+                <Button
+                  type="button"
+                  onClick={() => goToStep(stepIndex + 1)}
+                  className="gap-2 px-6 h-12"
+                >
+                  Next Step <Icon icon={ArrowRightIcon} className="size-4" />
+                </Button>
+              ) : (
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button
+                    type="button"
+                    variant="default"
+                    onClick={downloadPdf}
+                    disabled={isPreparingPdf}
+                    className="gap-2 px-6 h-12 border border-border"
+                  >
+                    {isPreparingPdf ? "Preparing PDF" : "Download PDF"}
+                    <Icon icon={DownloadIcon} className="size-4" />
+                  </Button>
+                  <Button
+                    type="button"
+                    className="gap-2 px-6 h-12 bg-accent hover:bg-accent/90 text-white"
+                  >
+                    Submit Inquiry <Icon icon={CheckIcon} className="size-4" />
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -838,9 +937,8 @@ export function AdmissionsFormSection() {
           Start Your Application
         </H2>
         <P className="text-ink-muted text-lg">
-          Ready to apply? Submit your details through our comprehensive
-          application form below and our admissions team will guide you through
-          the process.
+          Tell us about yourself in the inquiry form below, then download your
+          answers as a PDF. Everything stays on your device.
         </P>
       </div>
 

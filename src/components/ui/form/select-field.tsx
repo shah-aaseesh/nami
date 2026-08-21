@@ -31,6 +31,7 @@ export type SelectFieldProps<T extends FieldValues> = {
   placeholder?: string;
   description?: string;
   className?: string;
+  required?: boolean;
   onValueChange?: (value: string) => void;
 };
 
@@ -42,6 +43,7 @@ export function SelectField<T extends FieldValues>({
   placeholder,
   description,
   className,
+  required,
   onValueChange,
 }: SelectFieldProps<T>) {
   return (
@@ -56,6 +58,8 @@ export function SelectField<T extends FieldValues>({
           ) : null}
           <Select
             items={options}
+            name={field.name}
+            required={required}
             value={typeof field.value === "string" ? field.value : ""}
             onValueChange={(value) => {
               const next = typeof value === "string" ? value : "";

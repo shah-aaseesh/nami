@@ -81,10 +81,10 @@ export type BachelorsMastheadCopy = {
 };
 
 const academicHeadPortrait: ContentImage = {
-  src: "/team/nischal-khadka.jpg",
+  src: "/team/nischal-khadka.webp",
   alt: "Studio portrait of Mr. Nischal Khadka, Academic Head at NAMI, arms folded in a dark navy suit and patterned blue tie against a mottled blue-grey backdrop.",
-  width: 3278,
-  height: 4349,
+  width: 1507,
+  height: 2000,
 };
 
 const readingRoom: ContentImage = {

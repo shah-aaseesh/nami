@@ -1,7 +1,15 @@
 import { spawnSync } from "node:child_process";
+import { readdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
+import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+
+function readdirDeep(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = join(dir, entry.name);
+    return entry.isDirectory() ? readdirDeep(full) : [full];
+  });
+}
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG = join(ROOT, "scripts", "tsconfig.placeholders.json");
@@ -81,6 +89,32 @@ for (const [value, paths] of occurrences) {
   }
 }
 
+// Page-local copy never enters the ContentProvider graph, so it is scanned as SOURCE and is not
+// required in the registry — registry entries are validated against the graph.
+const localCopy = readdirDeep(join(ROOT, "src", "app")).filter((file) =>
+  file.endsWith("-copy.ts"),
+);
+const INVENTED_EXPORT =
+  /^export const (dummy|placeholder|fake|sample|lorem)\w*/gim;
+const STRING_LITERAL = /(["'`])((?:\\.|(?!\1)[^\\])*)\1/g;
+const invented = [];
+
+for (const file of localCopy) {
+  const source = readFileSync(file, "utf8");
+  const shown = relative(ROOT, file).replace(/\\/g, "/");
+
+  for (const [, , value] of source.matchAll(STRING_LITERAL)) {
+    if (value.length > 3 && isPlaceholderShaped(value)) {
+      failures.push(
+        `placeholder-shaped copy the registry cannot see: ${shown} = ${JSON.stringify(value)}`,
+      );
+    }
+  }
+  for (const [match] of source.matchAll(INVENTED_EXPORT)) {
+    invented.push({ file: shown, name: match.replace("export const ", "") });
+  }
+}
+
 const KIND_ORDER = [
   "contact",
   "address",
@@ -124,6 +158,12 @@ console.log(`\n  REAL, NOT PLACEHOLDER — leave these alone`);
 for (const call of realLinks) {
   console.log(`    admissionCalls[${call.slug}].link.href`);
   console.log(`      ${call.link.href}`);
+}
+
+for (const entry of invented) {
+  failures.push(
+    `invented content live and unmarked: ${entry.file} exports ${entry.name} — it reads as genuine to a visitor. Replace it with the client's real material, or drop the section.`,
+  );
 }
 
 if (failures.length > 0) {

@@ -34,7 +34,6 @@ export type SocialPlatform =
   | "instagram"
   | "linkedin"
   | "tiktok"
-  | "twitter"
   | "youtube";
 
 export type SocialProfile = ContentLink & {

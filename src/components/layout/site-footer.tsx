@@ -12,7 +12,6 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TikTokIcon,
-  TwitterIcon,
   YouTubeIcon,
 } from "@/lib/icons";
 import { INSTITUTION_ROLES } from "@/lib/institution-filter";
@@ -24,7 +23,6 @@ const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
   instagram: InstagramIcon,
   linkedin: LinkedInIcon,
   tiktok: TikTokIcon,
-  twitter: TwitterIcon,
   youtube: YouTubeIcon,
 };
 

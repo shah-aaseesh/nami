@@ -134,78 +134,78 @@ export const plantationProgramme: ContentImage = {
 };
 
 export const rameshwarThapaPortrait: ContentImage = {
-  src: "/team/rameshwar-thapa.jpg",
+  src: "/team/rameshwar-thapa.webp",
   alt: "Studio portrait of Capt. Rameshwar Thapa, Chairperson of NAMI, arms folded in a pale blue mandarin-collar shirt against a mottled blue-grey backdrop.",
-  width: 3066,
-  height: 4179,
+  width: 1467,
+  height: 2000,
 };
 
 export const sureshRajGhimirePortrait: ContentImage = {
-  src: "/team/suresh-raj-ghimire.jpg",
+  src: "/team/suresh-raj-ghimire.webp",
   alt: "Studio portrait of Mr. Suresh Raj Ghimire, Director at NAMI, arms folded in a light grey suit and patterned tie against a mottled blue-grey backdrop.",
-  width: 3058,
-  height: 4223,
+  width: 1448,
+  height: 2000,
 };
 
 export const soniJoshiPortrait: ContentImage = {
-  src: "/team/soni-joshi.jpg",
+  src: "/team/soni-joshi.webp",
   alt: "Studio portrait of Ms. Soni Joshi, Director at NAMI, hands clasped in a green and blue floral sari against a mottled blue-grey backdrop.",
-  width: 3154,
-  height: 4355,
+  width: 1448,
+  height: 2000,
 };
 
 export const yogRajKandelSharmaPortrait: ContentImage = {
-  src: "/team/yog-raj-kandel-sharma.jpg",
+  src: "/team/yog-raj-kandel-sharma.webp",
   alt: "Studio portrait of Mr. Yog Raj Kandel Sharma, Director at NAMI, arms folded in a navy suit and blue tie against a mottled blue-grey backdrop.",
-  width: 3161,
-  height: 4154,
+  width: 1522,
+  height: 2000,
 };
 
 export const robinRanaPortrait: ContentImage = {
-  src: "/team/robin-rana.jpg",
+  src: "/team/robin-rana.webp",
   alt: "Studio portrait of Mr. Robin Rana, Director at NAMI, arms folded in a slate blue suit and striped grey tie against a mottled blue-grey backdrop.",
-  width: 3240,
-  height: 4299,
+  width: 1507,
+  height: 2000,
 };
 
 export const samjhanaPhuyalPortrait: ContentImage = {
-  src: "/team/samjhana-phuyal.jpg",
+  src: "/team/samjhana-phuyal.webp",
   alt: "Studio portrait of Ms. Samjhana Phuyal, Director at NAMI, hands clasped in a cream embroidered sari over a red blouse against a mottled blue-grey backdrop.",
-  width: 3259,
-  height: 4500,
+  width: 1448,
+  height: 2000,
 };
 
 export const rameshPrasadTiwariPortrait: ContentImage = {
-  src: "/team/ramesh-prasad-tiwari.jpg",
+  src: "/team/ramesh-prasad-tiwari.webp",
   alt: "Studio portrait of Mr. Ramesh Prasad Tiwari, Director at NAMI, arms folded in a dark checked suit and red tie against a mottled blue-grey backdrop.",
-  width: 3328,
-  height: 4317,
+  width: 1542,
+  height: 2000,
 };
 
 export const pranilPandeyPortrait: ContentImage = {
-  src: "/team/pranil-pandey.jpg",
+  src: "/team/pranil-pandey.webp",
   alt: "Studio portrait of Mr. Pranil Pandey, Chief Executive Officer of NAMI, hands clasped in a blue suit and blue tie against a mottled blue-grey backdrop.",
-  width: 3174,
-  height: 4500,
+  width: 1411,
+  height: 2000,
 };
 
 export const nischalKhadkaPortrait: ContentImage = {
-  src: "/team/nischal-khadka.jpg",
+  src: "/team/nischal-khadka.webp",
   alt: "Studio portrait of Mr. Nischal Khadka, Academic Head at NAMI, arms folded in a dark navy suit and patterned blue tie against a mottled blue-grey backdrop.",
-  width: 3278,
-  height: 4349,
+  width: 1507,
+  height: 2000,
 };
 
 export const anishaPandayJoshiPortrait: ContentImage = {
-  src: "/team/anisha-panday-joshi.jpg",
+  src: "/team/anisha-panday-joshi.webp",
   alt: "Studio portrait of Ms. Anisha Panday Joshi, Principal of NAMI International School, hands clasped in an olive and red patterned sari over a red blouse against a mottled blue-grey backdrop.",
   width: 1154,
   height: 1600,
 };
 
 export const philipBadikarHilarioPortrait: ContentImage = {
-  src: "/team/philip-badikar-hilario.jpg",
+  src: "/team/philip-badikar-hilario.webp",
   alt: "Studio portrait of Mr. Philip Badikar Hilario, A Level Principal at NAMI College, arms folded in a charcoal suit and black tie against a mottled blue-grey backdrop.",
-  width: 3247,
-  height: 4223,
+  width: 1538,
+  height: 2000,
 };

@@ -21,7 +21,6 @@ export {
   Mail01Icon as MailIcon,
   Menu01Icon as MenuIcon,
   Mortarboard01Icon as MortarboardIcon,
-  NewTwitterIcon as TwitterIcon,
   PlusSignIcon as PlusIcon,
   QuoteUpIcon as QuoteIcon,
   Tick02Icon as CheckIcon,

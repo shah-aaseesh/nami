@@ -21,7 +21,7 @@ export type SchoolHeroCopy = {
 };
 
 const principalPortrait: ContentImage = {
-  src: "/team/anisha-panday-joshi.jpg",
+  src: "/team/anisha-panday-joshi.webp",
   alt: "Studio portrait of Ms. Anisha Panday Joshi, Principal of NAMI International School, hands clasped in an olive and red patterned sari over a red blouse against a mottled blue-grey backdrop.",
   width: 1154,
   height: 1600,

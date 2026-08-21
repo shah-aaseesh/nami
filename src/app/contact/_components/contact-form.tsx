@@ -3,20 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Route } from "next";
 import Link from "next/link";
-import type { FocusEvent, FormEvent, ReactNode } from "react";
-import { useId, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import type { FocusEvent, FormEvent } from "react";
+import { useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
 import { buttonVariants } from "@/components/ui/button";
+import { SelectField, TextareaField, TextField } from "@/components/ui/form";
 import { Icon } from "@/components/ui/icon";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { H5, P } from "@/components/ui/typography";
 import { ArrowUpRightIcon } from "@/lib/icons";
 import { type ContactFormData, contactSchema } from "@/lib/schema";
@@ -27,10 +19,6 @@ const FIELDS = ["name", "email", "phone", "topic", "message"] as const;
 
 type FieldName = (typeof FIELDS)[number];
 type FormControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-
-const controlStyles = "font-body text-base text-ink placeholder:text-ink-muted";
-const labelStyles = "block font-body text-sm font-medium text-ink";
-const errorStyles = "mt-2 font-body text-sm text-accent";
 
 function isFormControl(node: unknown): node is FormControl {
   return (
@@ -67,34 +55,6 @@ function draftHref(email: string, values: ContactFormData): string {
   return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function Field({
-  children,
-  className,
-  error,
-  htmlFor,
-  label,
-}: {
-  children: ReactNode;
-  className?: string;
-  error: string | undefined;
-  htmlFor: string;
-  label: string;
-}) {
-  return (
-    <div className={className}>
-      <label className={labelStyles} htmlFor={htmlFor}>
-        {label}
-      </label>
-      <div className="mt-2">{children}</div>
-      {error === undefined ? null : (
-        <p className={errorStyles} id={`${htmlFor}-error`}>
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
-
 export function ContactForm({
   email,
   topics,
@@ -102,33 +62,25 @@ export function ContactForm({
   email: string;
   topics: readonly string[];
 }) {
-  const uid = useId();
   const [attempted, setAttempted] = useState(false);
   const [draft, setDraft] = useState<string | null>(null);
   const copy = contactCopy.form;
-  const {
-    control,
-    register,
-    trigger,
-    getValues,
-    getFieldState,
-    formState: { errors },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-    mode: "onTouched",
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      topic: "",
-      message: "",
-    },
-  });
-
-  const fieldId = (name: FieldName) => `${uid}-${name}`;
-  const errorOf = (name: FieldName) => errors[name]?.message;
-  const describedBy = (name: FieldName) =>
-    errorOf(name) === undefined ? undefined : `${fieldId(name)}-error`;
+  const topicOptions = useMemo(
+    () => topics.map((topic) => ({ value: topic, label: topic })),
+    [topics],
+  );
+  const { control, trigger, getValues, getFieldState } =
+    useForm<ContactFormData>({
+      resolver: zodResolver(contactSchema),
+      mode: "onTouched",
+      defaultValues: {
+        name: "",
+        email: "",
+        phone: "",
+        topic: "",
+        message: "",
+      },
+    });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -189,108 +141,56 @@ export function ContactForm({
         onBlur={handleBlur}
         onSubmit={handleSubmit}
       >
-        <Field
-          error={errorOf("name")}
-          htmlFor={fieldId("name")}
+        <TextField
+          autoComplete="name"
+          className="font-body text-base text-ink placeholder:text-ink-muted"
+          control={control}
           label={copy.labels.name}
-        >
-          <Input
-            aria-describedby={describedBy("name")}
-            aria-invalid={errors.name !== undefined}
-            autoComplete="name"
-            className={controlStyles}
-            id={fieldId("name")}
-            required
-            type="text"
-            {...register("name")}
-          />
-        </Field>
+          name="name"
+          required
+          type="text"
+        />
 
-        <Field
-          error={errorOf("email")}
-          htmlFor={fieldId("email")}
+        <TextField
+          autoComplete="email"
+          className="font-body text-base text-ink placeholder:text-ink-muted"
+          control={control}
           label={copy.labels.email}
-        >
-          <Input
-            aria-describedby={describedBy("email")}
-            aria-invalid={errors.email !== undefined}
-            autoComplete="email"
-            className={controlStyles}
-            id={fieldId("email")}
-            required
-            type="email"
-            {...register("email")}
-          />
-        </Field>
+          name="email"
+          required
+          type="email"
+        />
 
-        <Field
-          error={errorOf("phone")}
-          htmlFor={fieldId("phone")}
+        <TextField
+          autoComplete="tel"
+          className="font-body text-base text-ink placeholder:text-ink-muted"
+          control={control}
           label={copy.labels.phone}
-        >
-          <Input
-            aria-describedby={describedBy("phone")}
-            aria-invalid={errors.phone !== undefined}
-            autoComplete="tel"
-            className={controlStyles}
-            id={fieldId("phone")}
-            type="tel"
-            {...register("phone")}
-          />
-        </Field>
+          name="phone"
+          type="tel"
+        />
 
-        <Field
-          error={errorOf("topic")}
-          htmlFor={fieldId("topic")}
+        <SelectField
+          className="font-body text-base text-ink"
+          control={control}
           label={copy.labels.topic}
-        >
-          <Controller
-            control={control}
-            name="topic"
-            render={({ field }) => (
-              <Select
-                name="topic"
-                required
-                value={field.value}
-                onValueChange={field.onChange}
-              >
-                <SelectTrigger
-                  id={fieldId("topic")}
-                  aria-describedby={describedBy("topic")}
-                  aria-invalid={errors.topic !== undefined}
-                  className={controlStyles}
-                >
-                  <SelectValue placeholder={copy.topicPlaceholder} />
-                </SelectTrigger>
-                <SelectContent>
-                  {topics.map((topic) => (
-                    <SelectItem key={topic} value={topic}>
-                      {topic}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-          />
-        </Field>
+          name="topic"
+          options={topicOptions}
+          placeholder={copy.topicPlaceholder}
+          required
+        />
 
-        <Field
-          className="sm:col-span-2"
-          error={errorOf("message")}
-          htmlFor={fieldId("message")}
-          label={copy.labels.message}
-        >
-          <Textarea
-            aria-describedby={describedBy("message")}
-            aria-invalid={errors.message !== undefined}
-            className={cn(controlStyles, "resize-y")}
-            id={fieldId("message")}
+        <div className="sm:col-span-2">
+          <TextareaField
+            className="font-body text-base text-ink resize-y placeholder:text-ink-muted"
+            control={control}
+            label={copy.labels.message}
             maxLength={2000}
+            name="message"
             required
             rows={6}
-            {...register("message")}
           />
-        </Field>
+        </div>
 
         <div className="flex flex-col items-start gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
           <button

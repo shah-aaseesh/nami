@@ -18,7 +18,8 @@ export type PlaceholderRecord = {
 const MARKER_PATTERNS: readonly RegExp[] = [
   /placeholder/i,
   /\.example(?=$|[/:?#])/,
-  /XX/,
+  // Three or more, so a masked number stays caught while real copy ("XXL") does not.
+  /X{3,}/,
 ];
 
 const records = new Map<string, PlaceholderRecord>();

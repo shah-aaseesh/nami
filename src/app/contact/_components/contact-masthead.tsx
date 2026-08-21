@@ -12,7 +12,6 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TikTokIcon,
-  TwitterIcon,
   YouTubeIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -23,7 +22,6 @@ const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
   instagram: InstagramIcon,
   linkedin: LinkedInIcon,
   tiktok: TikTokIcon,
-  twitter: TwitterIcon,
   youtube: YouTubeIcon,
 };
 

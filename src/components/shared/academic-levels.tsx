@@ -1,125 +1,133 @@
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Parallax } from "@/components/motion/parallax";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H3, P } from "@/components/ui/typography";
-import type { AcademicLevel, NamedEntity } from "@/lib/content";
-import { content, paragraphsOf } from "@/lib/content";
+import { Eyebrow, H5, P } from "@/components/ui/typography";
+import type {
+  AcademicLevel,
+  ContentImage,
+  NamedEntity,
+  VocationalApproval,
+} from "@/lib/content";
+import { content, slug } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
 
-const MEDIA_SIZES = "(min-width: 1024px) 40vw, 100vw";
+const MEDIA_SIZES = "(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 100vw";
 
-function InstitutionEntry({
-  campus,
+function InstitutionCard({
   entity,
-  index,
   level,
 }: {
-  readonly campus: string | null;
   readonly entity: NamedEntity;
-  readonly index: number;
   readonly level: AcademicLevel;
 }) {
-  const flipped = index % 2 === 1;
-  const lead = paragraphsOf(level.summary)[0] ?? null;
   const established =
     entity.establishedYear === null ? null : `Est. ${entity.establishedYear}`;
 
   return (
     <li
-      className="group relative grid gap-y-8 border-t border-border pt-8 lg:grid-cols-12 lg:gap-x-8 lg:pt-10"
+      className="group relative flex flex-col overflow-hidden rounded-media border border-ink/15 bg-surface-raised"
       data-reveal-item=""
     >
-      <div
-        className={cn(
-          "lg:col-span-6 lg:row-start-1",
-          flipped ? "lg:col-start-7" : "lg:col-start-1",
-        )}
-      >
-        <div className="flex items-center justify-between gap-5">
-          <span className="font-body text-xs tracking-widest text-accent tabular-nums">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <span className="flex items-center gap-4">
-            {established === null ? null : (
-              <span className="font-body text-xs tracking-widest text-ink-muted uppercase">
-                {established}
-              </span>
-            )}
-            <Icon
-              className="shrink-0 text-accent transition-transform duration-500 ease-out group-hover:translate-x-1"
-              icon={ArrowRightIcon}
-            />
-          </span>
-        </div>
+      {level.image === null ? null : (
+        <figure className="shrink-0 overflow-hidden">
+          <Image
+            alt={level.image.alt}
+            className="aspect-4/3 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            height={level.image.height}
+            sizes={MEDIA_SIZES}
+            src={level.image.src}
+            width={level.image.width}
+          />
+        </figure>
+      )}
 
-        <H3 className="mt-8">
+      <div className="flex flex-1 flex-col p-6 lg:p-7">
+        <H5 as="h3">
           <Link
             className="transition-colors after:absolute after:inset-0 group-hover:text-accent"
             href={`/institutions/${level.slug}` as Route}
           >
             {entity.name}
           </Link>
-        </H3>
+        </H5>
 
-        <p className="mt-4 font-body text-sm text-ink-muted">{level.stage}</p>
+        <p className="mt-3 mb-6 font-body text-sm text-ink-muted">
+          {level.stage}
+        </p>
 
-        {lead === null ? null : <P className="mt-6 max-w-md">{lead}</P>}
-
-        {campus === null ? null : (
-          <p
-            className={cn(
-              "font-body text-sm text-ink-muted",
-              lead === null ? "mt-6" : "mt-4",
-            )}
-          >
-            {campus}
-          </p>
-        )}
-      </div>
-
-      {level.image === null ? null : (
-        <Parallax
-          className={cn(
-            "lg:col-span-5 lg:row-start-1",
-            flipped ? "lg:col-start-1" : "lg:col-start-8",
+        <div className="mt-auto flex items-center gap-4 border-t border-ink/15 pt-5">
+          {established === null ? null : (
+            <Eyebrow as="span" className="text-ink-muted">
+              {established}
+            </Eyebrow>
           )}
-          speed={flipped ? 0.94 : 1.06}
-        >
-          <figure className="overflow-hidden rounded-xl">
-            <Image
-              alt={level.image.alt}
-              className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              height={level.image.height}
-              sizes={MEDIA_SIZES}
-              src={level.image.src}
-              width={level.image.width}
-            />
-          </figure>
-        </Parallax>
+          <Icon
+            className="ml-auto shrink-0 text-accent transition-transform duration-500 ease-out group-hover:translate-x-1"
+            icon={ArrowRightIcon}
+          />
+        </div>
+      </div>
+    </li>
+  );
+}
+
+function VocationalCard({
+  approval,
+  image,
+}: {
+  readonly approval: VocationalApproval;
+  readonly image: ContentImage | null;
+}) {
+  return (
+    <li
+      className="relative flex flex-col overflow-hidden rounded-media border border-ink/15 bg-surface-raised"
+      data-reveal-item=""
+    >
+      {image === null ? null : (
+        <figure className="shrink-0 overflow-hidden">
+          <Image
+            alt={image.alt}
+            className="aspect-4/3 w-full object-cover"
+            height={image.height}
+            sizes={MEDIA_SIZES}
+            src={image.src}
+            width={image.width}
+          />
+        </figure>
       )}
+
+      <div className="flex flex-1 flex-col p-6 lg:p-7">
+        <H5 as="h3" className="text-lg">
+          {approval.council}
+        </H5>
+        <p className="mt-3 font-body text-sm text-ink-muted">
+          {approval.scope}
+        </p>
+
+        <div className="mt-2 flex items-center border-t border-ink/15 pt-5">
+          <Eyebrow as="span" className="text-ink-muted">
+            {`Est. ${approval.approvedYear}`}
+          </Eyebrow>
+        </div>
+      </div>
     </li>
   );
 }
 
 export async function AcademicLevels() {
-  const [copy, levels, institution] = await Promise.all([
+  const [copy, levels, institution, vocational] = await Promise.all([
     content.getHomeCopy(),
     content.getAcademicLevels(),
     content.getInstitution(),
+    content.getVocationalApproval(),
   ]);
 
   const section = copy.sections.levels;
-  const campuses = new Map(
-    institution.campuses.map((campus) => [
-      campus.slug,
-      `${campus.locality}, ${campus.city}`,
-    ]),
-  );
+  const bachelorsImage =
+    levels.find((level) => level.slug === slug("bachelors"))?.image ?? null;
 
   return (
     <section className="field-brand gutter-x section-y" id="institutions">
@@ -153,18 +161,17 @@ export async function AcademicLevels() {
             <P className="mt-16 max-w-md">{section.emptyState}</P>
           )
         ) : (
-          <Reveal className="mt-16 lg:mt-24" stagger={0.12}>
-            <ol className="flex flex-col gap-y-16 lg:gap-y-28">
-              {levels.map((level, index) => (
-                <InstitutionEntry
-                  campus={campuses.get(level.campusSlug) ?? null}
+          <Reveal className="mt-16 lg:mt-20" stagger={0.12}>
+            <ul className="grid gap-6 sm:grid-cols-2 lg:gap-8 xl:grid-cols-4">
+              {levels.map((level) => (
+                <InstitutionCard
                   entity={institution.entities[level.entity]}
-                  index={index}
                   key={level.id}
                   level={level}
                 />
               ))}
-            </ol>
+              <VocationalCard approval={vocational} image={bachelorsImage} />
+            </ul>
           </Reveal>
         )}
       </div>

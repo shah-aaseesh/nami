@@ -1,6 +1,13 @@
-import { Marquee } from "@/components/motion/marquee";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselControls,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import type { SectionCopy, Testimonial } from "@/lib/content";
 import { content } from "@/lib/content";
@@ -48,23 +55,28 @@ export async function Testimonials({
         ) : (
           <Reveal className="mt-12 lg:mt-16" y={32}>
             {single === undefined ? (
-              <Marquee
-                className="bleed-x"
-                copies={3}
-                label={section.eyebrow ?? section.heading}
-                speed={40}
-                velocity={false}
+              <Carousel
+                aria-label={section.eyebrow ?? section.heading}
+                aria-roledescription="carousel"
+                className="flex flex-col gap-8"
+                opts={{ align: "start", slidesToScroll: "auto" }}
               >
-                <div className="flex gap-4 pe-4 lg:gap-6 lg:pe-6">
+                <CarouselContent className="-ms-4 lg:-ms-6">
                   {testimonials.map((testimonial) => (
-                    <TestimonialCard
-                      className="w-72 sm:w-80 lg:w-96"
+                    <CarouselItem
+                      className="ps-4 md:basis-1/2 lg:basis-1/3 lg:ps-6"
                       key={testimonial.id}
-                      testimonial={testimonial}
-                    />
+                    >
+                      <TestimonialCard testimonial={testimonial} />
+                    </CarouselItem>
                   ))}
-                </div>
-              </Marquee>
+                </CarouselContent>
+
+                <CarouselControls className="justify-end">
+                  <CarouselPrevious aria-label="Previous testimonials" />
+                  <CarouselNext aria-label="Next testimonials" />
+                </CarouselControls>
+              </Carousel>
             ) : (
               <TestimonialCard className="lg:w-7/12" testimonial={single} />
             )}

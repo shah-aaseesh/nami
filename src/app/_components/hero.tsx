@@ -3,6 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
 import { buttonVariants } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselControls,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
 import type { ContentLink, NamedEntity, SocialProfile } from "@/lib/content";
@@ -14,9 +22,9 @@ import { HeroHeadline } from "./hero-headline";
 
 const BADGE_RADIUS = 66;
 const BADGE_ARC = `M 80,80 m 0,-${BADGE_RADIUS} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,${BADGE_RADIUS * 2} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,-${BADGE_RADIUS * 2}`;
-const MARK_SRC = "/logo.png";
-const MARK_WIDTH = 176;
-const MARK_HEIGHT = 132;
+const MARK_SRC = "/logo/nami-color.svg";
+const MARK_WIDTH = 200;
+const MARK_HEIGHT = 200;
 
 function leadClause(sentence: string): string {
   const splitAt = sentence.indexOf(", ");
@@ -44,24 +52,6 @@ function HeroCta({
       {link.label}
       {variant === "link" ? <Icon icon={ArrowUpRightIcon} /> : null}
     </Link>
-  );
-}
-
-function HeroRail({ lines }: { lines: readonly string[] }) {
-  return (
-    <div className="absolute inset-y-0 left-0 hidden w-6 flex-col items-center justify-start pb-6 pt-2 lg:flex">
-      <div className="flex flex-col items-center gap-6">
-        <span className="h-16 w-px bg-border" />
-        {lines.map((line) => (
-          <p
-            className="rotate-180 font-body text-xs tracking-widest text-ink-muted uppercase [writing-mode:vertical-rl]"
-            key={line}
-          >
-            {line}
-          </p>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -117,7 +107,7 @@ function HeroBadge({
             alt=""
             className="h-12 w-auto"
             height={MARK_HEIGHT}
-            sizes="96px"
+            sizes="48px"
             src={MARK_SRC}
             width={MARK_WIDTH}
           />
@@ -145,13 +135,11 @@ export async function Hero() {
     splitAt === -1 ? hero.headline : hero.headline.slice(0, splitAt + 1);
   const tail = splitAt === -1 ? null : hero.headline.slice(splitAt + 2);
 
-  const railLines = institution.campuses.map((campus) => campus.locality);
+  const heroSlides = hero.images;
 
   return (
     <section className="relative isolate gutter-x section-y-hero" id="hero">
-      <div className="relative mx-auto max-w-page lg:ps-14">
-        {railLines.length === 0 ? null : <HeroRail lines={railLines} />}
-
+      <div className="relative mx-auto max-w-page">
         <div className="flex items-center gap-4">
           <Icon className="size-6 text-accent" icon={MortarboardIcon} />
           <Eyebrow>{hero.eyebrow}</Eyebrow>
@@ -180,20 +168,42 @@ export async function Hero() {
             </div>
           </HeroBadgePin>
 
-          {hero.image === null ? null : (
+          {heroSlides.length === 0 ? null : (
             <figure className="mt-6 lg:col-span-10 lg:col-start-3 lg:mt-0">
-              <div className="relative aspect-video overflow-hidden rounded-xl lg:aspect-[2/1]">
-                <Parallax className="absolute inset-0" speed={0.94}>
-                  <Image
-                    alt={hero.image.alt}
-                    className="scale-110 object-cover"
-                    fill
-                    preload
-                    sizes="(min-width: 1024px) 75vw, 92vw"
-                    src={hero.image.src}
-                  />
-                </Parallax>
-              </div>
+              <Carousel
+                aria-label={hero.eyebrow}
+                aria-roledescription="carousel"
+                className="flex flex-col gap-6"
+                opts={{ align: "start", duration: 18 }}
+              >
+                <CarouselContent
+                  className="h-full"
+                  viewportClassName="aspect-video rounded-xl lg:aspect-[2/1]"
+                >
+                  {heroSlides.map((slide, position) => (
+                    <CarouselItem
+                      className="relative overflow-hidden"
+                      key={slide.src}
+                    >
+                      <Parallax className="absolute inset-0" speed={0.94}>
+                        <Image
+                          alt={slide.alt}
+                          className="scale-110 object-cover"
+                          fill
+                          preload={position === 0}
+                          sizes="(min-width: 1024px) 74vw, 92vw"
+                          src={slide.src}
+                        />
+                      </Parallax>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+
+                <CarouselControls className="justify-end">
+                  <CarouselPrevious aria-label="Previous image" />
+                  <CarouselNext aria-label="Next image" />
+                </CarouselControls>
+              </Carousel>
             </figure>
           )}
         </div>

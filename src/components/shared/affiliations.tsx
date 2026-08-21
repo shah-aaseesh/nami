@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Marquee } from "@/components/motion/marquee";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
@@ -33,53 +34,42 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
   );
 }
 
-function AffiliationStation({ item }: { item: Affiliation }) {
+function logoSrcOf(logo: Affiliation["logo"]): string | null {
+  if (logo === null) return null;
+  return typeof logo === "string" ? logo : logo.src;
+}
+
+function AffiliationMark({ item }: { item: Affiliation }) {
+  const logo = logoSrcOf(item.logo);
+
+  if (logo === null) {
+    return (
+      <p className="flex h-20 w-40 shrink-0 items-center justify-center text-center font-display text-base text-ink lg:h-24 lg:w-48">
+        {item.body}
+      </p>
+    );
+  }
+
   return (
-    <li
-      className="group relative border-t border-border-strong pt-6 flex flex-col h-full transition-transform duration-500 ease-out hover:-translate-y-2"
-      data-reveal-item=""
-    >
-      <span
-        aria-hidden="true"
-        className="absolute -top-px left-0 h-0.5 w-12 bg-accent transition-all duration-500 ease-out group-hover:w-full"
+    <div className="relative h-20 w-40 shrink-0 lg:h-24 lg:w-48">
+      <Image
+        alt={item.body}
+        className="object-contain"
+        fill
+        sizes="192px"
+        src={logo}
       />
+    </div>
+  );
+}
 
-      {item.logo && (
-        <div className="relative h-16 w-full max-w-[160px] mb-6">
-          <Image
-            src={typeof item.logo === "string" ? item.logo : item.logo.src}
-            alt={item.body}
-            fill
-            sizes="160px"
-            className="object-contain object-left"
-          />
-        </div>
-      )}
-
-      <div className="flex flex-col flex-1">
-        <Eyebrow
-          as="span"
-          className="block text-ink-muted uppercase tracking-widest text-xs"
-        >
-          Since
-        </Eyebrow>
-        <p className="mt-1.5 font-display text-4xl text-accent">
-          {item.sinceYear}
-        </p>
-        <h3 className="mt-4 font-display text-2xl font-medium text-ink">
-          {item.body}
-        </h3>
-        <p className="mt-2 text-sm text-ink-muted leading-relaxed">
-          {item.scope}
-        </p>
-
-        {item.note && (
-          <p className="mt-auto pt-4 text-xs font-medium text-ink-muted opacity-80">
-            {item.note}
-          </p>
-        )}
-      </div>
-    </li>
+function AffiliationRow({ items }: { items: readonly Affiliation[] }) {
+  return (
+    <div className="flex items-center gap-10 pe-10 lg:gap-14 lg:pe-14">
+      {items.map((item) => (
+        <AffiliationMark item={item} key={item.id} />
+      ))}
+    </div>
   );
 }
 
@@ -97,12 +87,14 @@ export async function Affiliations({ section }: { section: SectionCopy }) {
             <P className="mt-12 lg:w-5/12">{section.emptyState}</P>
           )
         ) : (
-          <Reveal className="mt-8 lg:mt-10" stagger={0.08}>
-            <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-              {timeline.map((item) => (
-                <AffiliationStation item={item} key={item.id} />
-              ))}
-            </ul>
+          <Reveal className="mt-10 lg:mt-14" y={32}>
+            <Marquee
+              copies={3}
+              label={section.eyebrow ?? section.heading}
+              speed={45}
+            >
+              <AffiliationRow items={timeline} />
+            </Marquee>
           </Reveal>
         )}
       </div>

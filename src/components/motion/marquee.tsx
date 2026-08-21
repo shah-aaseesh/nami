@@ -37,7 +37,9 @@ export function Marquee({
       if (!el) return;
 
       const base = reverse ? -1 : 1;
-      const duration = el.scrollWidth / copies / speed;
+      let measuredWidth = el.scrollWidth / copies;
+      const duration = measuredWidth / speed;
+
       const loop = gsap.to(el, {
         xPercent: -100 / copies,
         duration,
@@ -50,7 +52,34 @@ export function Marquee({
       loop.totalTime(duration * 1000);
       loop.timeScale(base);
 
-      if (!velocity) return;
+      // BUG-023: late-settling content (lazy images) bakes a wrong duration
+      // in at mount; re-measure and retime, holding progress steady so it doesn't jump.
+      let resizeTimeout: number | undefined;
+      const retime = () => {
+        const nextWidth = el.scrollWidth / copies;
+        if (Math.abs(nextWidth - measuredWidth) < 1) return;
+
+        const progress = loop.progress();
+        const nextDuration = nextWidth / speed;
+
+        loop.duration(nextDuration);
+        loop.totalTime(nextDuration * 1000 + progress * nextDuration);
+
+        measuredWidth = nextWidth;
+      };
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(retime, 120);
+      });
+      resizeObserver.observe(el);
+
+      if (!velocity) {
+        return () => {
+          window.clearTimeout(resizeTimeout);
+          resizeObserver.disconnect();
+        };
+      }
 
       const observer = Observer.create({
         type: "wheel,touch,scroll",
@@ -74,7 +103,11 @@ export function Marquee({
         onStopDelay: 0.2,
       });
 
-      return () => observer.kill();
+      return () => {
+        window.clearTimeout(resizeTimeout);
+        resizeObserver.disconnect();
+        observer.kill();
+      };
     },
     { scope: root },
   );

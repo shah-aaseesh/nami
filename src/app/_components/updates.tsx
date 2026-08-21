@@ -1,20 +1,21 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
-import type { ContentLink, IsoDate, Update } from "@/lib/content";
-import { content, isPlaceholder } from "@/lib/content";
+import type { ContentImage, ContentLink, IsoDate, Update } from "@/lib/content";
+import { content } from "@/lib/content";
 import {
   ArrowRightIcon,
   ArrowUpRightIcon,
   CalendarIcon,
   LocationIcon,
 } from "@/lib/icons";
+import { institutionLabel } from "@/lib/institution-filter";
 import { cn } from "@/lib/utils";
+import { UpdatesCarousel } from "./updates-carousel";
 
 const HOME_TEASER_COUNT = 3;
 
@@ -87,6 +88,19 @@ function UpdateRow({ item, ordinal }: { item: Update; ordinal: number }) {
             : "sm:border-border sm:group-hover:border-white",
         )}
       >
+        {item.institution === null ? null : (
+          <Eyebrow
+            className={cn(
+              "mb-2 transition-colors duration-300",
+              alternate
+                ? "text-accent-ink"
+                : "text-ink-muted group-hover:text-accent-ink",
+            )}
+          >
+            {institutionLabel[item.institution]}
+          </Eyebrow>
+        )}
+
         <H5
           as="h3"
           className={cn(
@@ -133,14 +147,18 @@ export async function Updates() {
   ]);
 
   const updates = allUpdates
-    .filter((item) => !isPlaceholder(item.title))
+    .filter((item) => item.kind === "news")
     .slice(0, HOME_TEASER_COUNT);
 
   const section = copy.sections.updates;
-  const featureImage =
-    updates.find((item) => item.image !== null)?.image ?? null;
-  const listColumns =
-    featureImage === null ? "lg:col-span-12" : "lg:col-span-7";
+  const slides = updates
+    .map((item) => item.image)
+    .filter((image): image is ContentImage => image !== null)
+    .filter(
+      (image, index, all) =>
+        all.findIndex((other) => other.src === image.src) === index,
+    );
+  const listColumns = slides.length === 0 ? "lg:col-span-12" : "lg:col-span-7";
 
   return (
     <section className="gutter-x section-y" id="updates">
@@ -196,16 +214,11 @@ export async function Updates() {
                 ))}
               </ul>
 
-              {featureImage === null ? null : (
+              {slides.length === 0 ? null : (
                 <div className="lg:col-span-5" data-reveal-item="">
-                  <Image
-                    alt={featureImage.alt}
-                    className="h-auto w-full object-cover lg:h-full"
-                    height={featureImage.height}
-                    loading="lazy"
-                    sizes="(min-width: 1024px) 42vw, 100vw"
-                    src={featureImage.src}
-                    width={featureImage.width}
+                  <UpdatesCarousel
+                    className="aspect-4/3 w-full lg:aspect-auto lg:h-full"
+                    images={slides}
                   />
                 </div>
               )}

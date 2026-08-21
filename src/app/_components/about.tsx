@@ -47,7 +47,7 @@ export async function About({
 
             <Reveal className="mt-8">
               <Link
-                className={buttonVariants({ variant: "quiet" })}
+                className={buttonVariants({ variant: "default" })}
                 href={"/about" as Route}
               >
                 Read the full story

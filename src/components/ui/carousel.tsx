@@ -12,6 +12,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 export type CarouselApi = UseEmblaCarouselType[1];
@@ -28,6 +31,10 @@ type CarouselProps = {
 type CarouselContextProps = {
   readonly carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   readonly api: CarouselApi;
+  readonly canScrollNext: boolean;
+  readonly canScrollPrev: boolean;
+  readonly scrollNext: () => void;
+  readonly scrollPrev: () => void;
   readonly scrollTo: (index: number) => void;
   readonly selectedIndex: number;
   readonly scrollSnaps: readonly number[];
@@ -54,11 +61,15 @@ export function Carousel({
   const [carouselRef, api] = useEmblaCarousel({ ...opts, axis: "x" }, plugins);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
   const onSelect = useCallback((emblaApi: CarouselApi) => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
     setScrollSnaps(emblaApi.scrollSnapList());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
   }, []);
 
   const scrollTo = useCallback(
@@ -67,6 +78,14 @@ export function Carousel({
     },
     [api],
   );
+
+  const scrollPrev = useCallback(() => {
+    api?.scrollPrev();
+  }, [api]);
+
+  const scrollNext = useCallback(() => {
+    api?.scrollNext();
+  }, [api]);
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "ArrowLeft") {
@@ -96,7 +115,17 @@ export function Carousel({
 
   return (
     <CarouselContext.Provider
-      value={{ api, carouselRef, scrollSnaps, scrollTo, selectedIndex }}
+      value={{
+        api,
+        canScrollNext,
+        canScrollPrev,
+        carouselRef,
+        scrollNext,
+        scrollPrev,
+        scrollSnaps,
+        scrollTo,
+        selectedIndex,
+      }}
     >
       <div
         className={cn("relative", className)}
@@ -141,16 +170,83 @@ export function CarouselItem({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
+export function CarouselControls({
+  className,
+  ...props
+}: ComponentProps<"div">) {
+  const { scrollSnaps } = useCarousel();
+
+  if (scrollSnaps.length < 2) return null;
+
+  return (
+    <div
+      className={cn("flex items-center gap-2", className)}
+      data-slot="carousel-controls"
+      {...props}
+    />
+  );
+}
+
+export function CarouselPrevious({
+  className,
+  size = "icon",
+  variant = "outline",
+  ...props
+}: ComponentProps<typeof Button>) {
+  const { canScrollPrev, scrollPrev } = useCarousel();
+
+  return (
+    <Button
+      aria-label="Previous slide"
+      className={cn("rounded-full", className)}
+      data-slot="carousel-previous"
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      size={size}
+      type="button"
+      variant={variant}
+      {...props}
+    >
+      <Icon icon={ArrowLeftIcon} />
+    </Button>
+  );
+}
+
+export function CarouselNext({
+  className,
+  size = "icon",
+  variant = "outline",
+  ...props
+}: ComponentProps<typeof Button>) {
+  const { canScrollNext, scrollNext } = useCarousel();
+
+  return (
+    <Button
+      aria-label="Next slide"
+      className={cn("rounded-full", className)}
+      data-slot="carousel-next"
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      size={size}
+      type="button"
+      variant={variant}
+      {...props}
+    >
+      <Icon icon={ArrowRightIcon} />
+    </Button>
+  );
+}
+
 export function CarouselDots({
   activeDotClassName,
   className,
   dotClassName,
-  getDotLabel,
+  dotLabel,
   ...props
 }: ComponentProps<"div"> & {
   readonly activeDotClassName?: string;
   readonly dotClassName?: string;
-  readonly getDotLabel?: (index: number) => string;
+  readonly dotLabel?: string;
 }) {
   const { scrollSnaps, scrollTo, selectedIndex } = useCarousel();
 
@@ -168,7 +264,7 @@ export function CarouselDots({
         return (
           <button
             aria-current={active}
-            aria-label={getDotLabel?.(index) ?? `Go to slide ${index + 1}`}
+            aria-label={`${dotLabel ?? "Go to slide"} ${index + 1} of ${scrollSnaps.length}`}
             className="inline-flex h-6 items-center px-0.5"
             key={snap}
             onClick={() => scrollTo(index)}

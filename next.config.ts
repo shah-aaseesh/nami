@@ -34,6 +34,10 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   typedRoutes: true,
   poweredByHeader: false,
+  images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

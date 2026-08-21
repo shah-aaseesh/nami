@@ -16,7 +16,7 @@ export const siteConfig = {
   description:
     "NAMI, Kathmandu, est. 2012 — NAMI International School (10+2 NEB), NAMI College (Cambridge A-Level) and Naaya Aayam Multi-Disciplinary Institute (degrees).",
   locale: "en_US",
-  themeColor: "#bc2125",
+  themeColor: "#bd1b21",
 } as const;
 
 type SitemapEntry = MetadataRoute.Sitemap[number];

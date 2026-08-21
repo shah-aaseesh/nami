@@ -16,13 +16,18 @@ export const UPDATE_KIND_PARAM = "kind";
 
 export const UPDATE_CATEGORY_PARAM = "category";
 
-export const DEFAULT_UPDATE_KIND: UpdateKindFilter = "notice";
+export const DEFAULT_UPDATE_KIND: UpdateKindFilter = "news";
 
 export const ALL_YEARS: YearFilter = "all";
 
 export const ALL_CATEGORIES: UpdateCategoryFilter = "all";
 
-export const UPDATE_KINDS: readonly UpdateKind[] = ["notice", "event", "news"];
+export const UPDATE_KINDS: readonly UpdateKind[] = [
+  "news",
+  "notice",
+  "event",
+  "press-release",
+];
 
 export const UPDATE_CATEGORIES: readonly UpdateCategory[] =
   PROVISIONAL_UPDATE_CATEGORIES;

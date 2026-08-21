@@ -27,10 +27,6 @@ const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
   youtube: YouTubeIcon,
 };
 
-const channelHeading =
-  "font-body text-xs font-medium tracking-widest text-ink-muted uppercase";
-const channelLink = cn(buttonVariants({ size: "md", variant: "link" }));
-
 export async function ContactMasthead() {
   const institution = await content.getInstitution();
   const { contact } = institution;
@@ -63,10 +59,12 @@ export async function ContactMasthead() {
         <div className="mt-14 grid gap-y-10 border-t pt-10 sm:grid-cols-2 sm:gap-x-10 lg:mt-20 lg:grid-cols-12">
           {email === null ? null : (
             <div className="lg:col-span-5">
-              <h2 className={channelHeading}>{copy.emailLabel}</h2>
+              <Eyebrow as="h2" className="text-ink-muted">
+                {copy.emailLabel}
+              </Eyebrow>
               <Link
                 className={cn(
-                  channelLink,
+                  buttonVariants({ size: "md", variant: "link" }),
                   "mt-4 max-w-full text-lg sm:text-xl",
                 )}
                 href={`mailto:${email}` as Route}
@@ -78,12 +76,17 @@ export async function ContactMasthead() {
 
           {phones.length === 0 ? null : (
             <div className="lg:col-span-3 lg:col-start-6">
-              <h2 className={channelHeading}>{copy.phoneLabel}</h2>
+              <Eyebrow as="h2" className="text-ink-muted">
+                {copy.phoneLabel}
+              </Eyebrow>
               <ul className="mt-4 flex flex-col items-start gap-y-1">
                 {phones.map((phone) => (
                   <li key={phone}>
                     <Link
-                      className={cn(channelLink, "text-xl")}
+                      className={cn(
+                        buttonVariants({ size: "md", variant: "link" }),
+                        "text-xl",
+                      )}
                       href={`tel:${phone.replace(/\s+/g, "")}` as Route}
                     >
                       {phone}
@@ -96,13 +99,15 @@ export async function ContactMasthead() {
 
           {socials.length === 0 ? null : (
             <div className="lg:col-span-3 lg:col-start-10">
-              <h2 className={channelHeading}>{copy.socialLabel}</h2>
+              <Eyebrow as="h2" className="text-ink-muted">
+                {copy.socialLabel}
+              </Eyebrow>
               <ul className="mt-4 flex flex-wrap items-center gap-3">
                 {socials.map((profile) => (
                   <li key={profile.href}>
                     <Link
                       className={cn(
-                        buttonVariants({ size: "icon", variant: "quiet" }),
+                        buttonVariants({ size: "icon", variant: "default" }),
                         "rounded-full",
                       )}
                       href={profile.href as Route}

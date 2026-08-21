@@ -10,12 +10,14 @@ export const updateKindLabel: Record<UpdateKind, string> = {
   notice: "Notice",
   event: "Event",
   news: "News",
+  "press-release": "Press release",
 };
 
 const updateKindPlural: Record<UpdateKind, string> = {
   notice: "Notices",
   event: "Events",
   news: "News",
+  "press-release": "Press releases",
 };
 
 export const updateCategoryLabel: Record<UpdateCategory, string> = {

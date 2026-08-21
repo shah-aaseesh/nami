@@ -71,7 +71,7 @@ export const H6 = createText(
 export const Eyebrow = createText(
   "p",
   "eyebrow",
-  "font-body text-xs font-medium tracking-widest text-accent uppercase",
+  "font-body text-sm font-medium tracking-widest text-accent uppercase",
 );
 
 export const Standfirst = createText(

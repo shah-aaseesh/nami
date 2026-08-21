@@ -88,9 +88,9 @@ export function UpdateCard({
               : updateKindLabel[item.kind]}
           </Eyebrow>
           {item.institution === null ? null : (
-            <span className="font-body text-xs tracking-widest text-ink-muted uppercase">
+            <Eyebrow as="span" className="text-ink-muted">
               {institutionLabel[item.institution]}
-            </span>
+            </Eyebrow>
           )}
         </p>
 

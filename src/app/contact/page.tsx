@@ -15,8 +15,8 @@ export default function ContactPage() {
   return (
     <>
       <ContactMasthead />
-      <CampusLocations />
       <ContactFormSection />
+      <CampusLocations />
     </>
   );
 }

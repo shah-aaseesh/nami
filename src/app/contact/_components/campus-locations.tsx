@@ -37,9 +37,7 @@ function CampusEntry({ campus, index }: { campus: Campus; index: number }) {
 
         {campus.hosts.length === 0 ? null : (
           <div className="mt-8">
-            <p className="font-body text-xs font-medium tracking-widest text-ink-muted uppercase">
-              {copy.hostsLabel}
-            </p>
+            <Eyebrow className="text-ink-muted">{copy.hostsLabel}</Eyebrow>
             <ul className="mt-3 flex flex-col gap-y-2 font-body text-base text-ink">
               {campus.hosts.map((host) => (
                 <li className="border-t pt-2" key={host}>

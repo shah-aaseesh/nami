@@ -30,9 +30,9 @@ export const aboutCopy: AboutCopy = {
       emptyState: null,
     },
     creed: {
-      navLabel: "Mission & vision",
-      eyebrow: "What the institution is for",
-      heading: "What the institution is for.",
+      navLabel: "Motto, mission & vision",
+      eyebrow: "Motto, mission & vision",
+      heading: "What NAMI stands for.",
       standfirst: null,
       cta: null,
       emptyState: null,
@@ -66,7 +66,7 @@ export const aboutCopy: AboutCopy = {
     testimonials: {
       navLabel: "Alumni",
       eyebrow: "Alumni",
-      heading: "Where NAMIANS end up.",
+      heading: "Where our graduates are now.",
       standfirst: null,
       cta: null,
       emptyState:

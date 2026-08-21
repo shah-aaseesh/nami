@@ -21,6 +21,13 @@ export const scienceLaboratory: ContentImage = {
   height: 853,
 };
 
+export const scienceLaboratoryTwo: ContentImage = {
+  src: "/nami/campus-science-lab-2.jpg",
+  alt: "A NAMI practical laboratory, blue-topped stools ranked along a long bench of sinks and glassware with microscopes set out on the counter opposite.",
+  width: 1280,
+  height: 853,
+};
+
 export const studentsOnCampus: ContentImage = {
   src: "/nami/campus-welcome.jpg",
   alt: "A large group of NAMI students standing together on the paved walkway outside a campus building.",

@@ -34,9 +34,9 @@ const campusInfirmary: ContentImage = {
   height: 400,
 };
 
-const campusBloodDonation: ContentImage = {
-  src: "/nami/campus-blood-donation.jpg",
-  alt: "NAMI A-Level students at the Christmas blood donation drive, donors seated beside the donation tables on campus.",
+const campusChristmasTree: ContentImage = {
+  src: "/nami/campus-christmas-tree.jpg",
+  alt: "NAMI students decorating a tall outdoor Christmas tree with balloons and ornaments in the courtyard outside the Academic Block, one student on a ladder reaching into the upper branches.",
   width: 1064,
   height: 709,
 };
@@ -280,11 +280,11 @@ export const gallery: readonly GalleryItem[] = [
     date: null,
   },
   {
-    ...entryOf("christmas-blood-donation-drive"),
+    ...entryOf("christmas-tree-decorating"),
     category: "events",
     institution: "college",
-    title: "Christmas Blood Donation Drive",
-    image: campusBloodDonation,
+    title: "Christmas Tree Decorating",
+    image: campusChristmasTree,
     date: isoDate("2023-12-22"),
   },
   {

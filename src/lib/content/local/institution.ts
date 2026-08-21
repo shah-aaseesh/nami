@@ -3,10 +3,14 @@ import { richText } from "../rich-text";
 import { schoolGrades } from "../school-grades";
 import type { InstitutionProfile } from "../types";
 import {
+  collegeContactEmail,
+  collegeContactPhone,
   gokarneshworMapUrl,
   gokarneshworStreetAddress,
   newBaneshworMapUrl,
   newBaneshworStreetAddress,
+  schoolContactEmail,
+  schoolContactPhone,
   whatsappContactLink,
 } from "./placeholders";
 
@@ -25,12 +29,12 @@ export const institution: InstitutionProfile = {
       establishedYear: 2013,
     },
     school: {
-      // The brand book gives the school no founding year — 2019 and 2024 are
-      // affiliation dates and belong to `affiliations`, not to this field.
+      // 2019: decided 2026-08-20 — the year NEB-affiliated +2 began. The
+      // primary division's 2024 opening is a separate affiliation date.
       role: "school",
       name: "NAMI International School",
       shortName: "NAMI International School",
-      establishedYear: null,
+      establishedYear: 2019,
     },
   },
   motto: "Transform yourself, to lead the world",
@@ -137,12 +141,6 @@ export const institution: InstitutionProfile = {
         destination: "external",
       },
       {
-        platform: "twitter",
-        label: "Twitter",
-        href: "https://twitter.com/NamiCollege",
-        destination: "external",
-      },
-      {
         platform: "youtube",
         label: "YouTube",
         href: "https://www.youtube.com/user/naminepal",
@@ -155,5 +153,10 @@ export const institution: InstitutionProfile = {
         destination: "external",
       },
     ],
+    byEntity: {
+      institute: { phone: "+977 1 4917444", email: "info@nami.edu.np" },
+      college: { phone: collegeContactPhone, email: collegeContactEmail },
+      school: { phone: schoolContactPhone, email: schoolContactEmail },
+    },
   },
 };

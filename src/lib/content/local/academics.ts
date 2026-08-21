@@ -1,9 +1,10 @@
 import { entryOf, slug } from "../identifiers";
 import { richText } from "../rich-text";
 import { schoolGrades } from "../school-grades";
-import type { AcademicLevel, Programme } from "../types";
+import type { AcademicLevel, Programme, VocationalApproval } from "../types";
 import { AWARDING_BODIES } from "./awarding-bodies";
 import { readingRoom, schoolTransport, studentsOnCampus } from "./images";
+import { ctevtEstablishedYear } from "./placeholders";
 
 export const academicLevels: readonly AcademicLevel[] = [
   {
@@ -161,3 +162,10 @@ export const programmes: readonly Programme[] = [
     startingFrom: null,
   },
 ];
+
+export const vocationalApproval: VocationalApproval = {
+  council: "Council for Technical Education and Vocational Training ( CTEVT )",
+  scope: "Short-term vocational training programmes approved for NAMI",
+  approvedYear: ctevtEstablishedYear.year,
+  approvedYearNote: ctevtEstablishedYear.caution,
+};

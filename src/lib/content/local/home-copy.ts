@@ -1,5 +1,11 @@
 import type { HomeCopy } from "../types";
-import { mustangTrip } from "./images";
+import {
+  bachelorOrientation,
+  climatePanel,
+  convocationCeremony,
+  mustangTrip,
+  scienceLaboratoryTwo,
+} from "./images";
 
 export const homeCopy: HomeCopy = {
   hero: {
@@ -17,7 +23,13 @@ export const homeCopy: HomeCopy = {
       href: "/about",
       destination: "internal",
     },
-    image: mustangTrip,
+    images: [
+      mustangTrip,
+      scienceLaboratoryTwo,
+      climatePanel,
+      convocationCeremony,
+      bachelorOrientation,
+    ],
   },
   sections: {
     about: {
@@ -30,10 +42,10 @@ export const homeCopy: HomeCopy = {
     },
     levels: {
       navLabel: "Institutions",
-      eyebrow: "Three institutions",
-      heading: "Three institutions, one pathway.",
+      eyebrow: "Institutions and training",
+      heading: "Under one name, separately accredited.",
       standfirst:
-        "Grade 1 to a Master's degree, under one name. Each institution stands on its own accreditation — and leads into the next.",
+        "Grade 1 to a Master's degree, and short-term vocational training alongside them. Each stands on its own accreditation.",
       cta: null,
       emptyState: null,
     },
@@ -76,14 +88,15 @@ export const homeCopy: HomeCopy = {
       navLabel: "NAMI in numbers",
       eyebrow: "The record",
       heading: "The institution, in numbers.",
-      standfirst: null,
+      standfirst:
+        "Teaching across the school, the college and the institute — measured in the people it has taught.",
       cta: null,
       emptyState: null,
     },
     testimonials: {
       navLabel: "Alumni",
       eyebrow: "Alumni",
-      heading: "Where NAMIANS end up.",
+      heading: "Where our graduates are now.",
       standfirst: null,
       cta: null,
       emptyState:

@@ -41,12 +41,18 @@ export type SocialProfile = ContentLink & {
   readonly platform: SocialPlatform;
 };
 
+export type EntityContactChannel = {
+  readonly phone: string;
+  readonly email: string;
+};
+
 export type ContactChannel = {
   readonly phones: readonly string[];
   readonly email: string | null;
   readonly websites: readonly ContentLink[];
   readonly socialProfiles: readonly SocialProfile[];
   readonly whatsapp: ContentLink | null;
+  readonly byEntity: Readonly<Record<EntityRole, EntityContactChannel>>;
 };
 
 export type EntityRole = "institute" | "college" | "school";
@@ -101,6 +107,18 @@ export type Programme = ContentEntry & {
   readonly startingFrom: string | null;
 };
 
+export type VocationalCourse = {
+  readonly title: string;
+  readonly hours: number;
+};
+
+export type VocationalApproval = {
+  readonly council: string;
+  readonly scope: string;
+  readonly approvedYear: number;
+  readonly approvedYearNote: string | null;
+};
+
 export type Affiliation = ContentEntry & {
   readonly body: string;
   readonly scope: string;
@@ -129,7 +147,7 @@ export type CampusLifePillar = ContentEntry & {
   readonly image: ContentImage | null;
 };
 
-export type UpdateKind = "notice" | "event" | "news";
+export type UpdateKind = "notice" | "event" | "news" | "press-release";
 
 export const PROVISIONAL_UPDATE_CATEGORIES = [
   "admissions",
@@ -198,7 +216,7 @@ export type HeroCopy = {
   readonly standfirst: string;
   readonly primaryCta: ContentLink;
   readonly secondaryCta: ContentLink;
-  readonly image: ContentImage | null;
+  readonly images: readonly ContentImage[];
 };
 
 export type HomeCopy = {

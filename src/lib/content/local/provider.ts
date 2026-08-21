@@ -1,6 +1,6 @@
 import type { ContentProvider } from "../provider";
 import { aboutCopy } from "./about-copy";
-import { academicLevels, programmes } from "./academics";
+import { academicLevels, programmes, vocationalApproval } from "./academics";
 import { admissionCalls } from "./admissions";
 import { affiliations } from "./affiliations";
 import { campusLife } from "./campus-life";
@@ -19,6 +19,7 @@ export const localContentProvider: ContentProvider = {
   getStats: () => Promise.resolve(stats),
   getAcademicLevels: () => Promise.resolve(academicLevels),
   getProgrammes: () => Promise.resolve(programmes),
+  getVocationalApproval: () => Promise.resolve(vocationalApproval),
   getAffiliations: () => Promise.resolve(affiliations),
   getPartners: () => Promise.resolve(partners),
   getCampusLife: () => Promise.resolve(campusLife),

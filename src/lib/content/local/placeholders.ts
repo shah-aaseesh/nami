@@ -42,6 +42,30 @@ export const whatsappContactLink = placeholderData<ContentLink>(
   },
 );
 
+export const schoolContactPhone = placeholderText(
+  "institution.contact.byEntity.school.phone",
+  "contact",
+  "+977 1 4XXXXX1",
+);
+
+export const schoolContactEmail = placeholderText(
+  "institution.contact.byEntity.school.email",
+  "contact",
+  "admissions@namischool.example",
+);
+
+export const collegeContactPhone = placeholderText(
+  "institution.contact.byEntity.college.phone",
+  "contact",
+  "+977 1 4XXXXX2",
+);
+
+export const collegeContactEmail = placeholderText(
+  "institution.contact.byEntity.college.email",
+  "contact",
+  "admissions@namicollege.example",
+);
+
 export const plusTwoAdmissionLink: ContentLink = {
   label: "Visit College Website",
   href: "https://college.nami.edu.np/",
@@ -53,6 +77,16 @@ export const bachelorMasterAdmissionLink: ContentLink = {
   href: "https://college.nami.edu.np/",
   destination: "external",
 };
+
+export const ctevtEstablishedYear = placeholderData(
+  "homepage.institutionsSection.ctevt.establishedYear",
+  "update",
+  {
+    year: 2024,
+    caution:
+      "Placeholder year for CTEVT's card — the source documents record CTEVT's approval as 2026, not 2024. Confirm the real year before launch.",
+  },
+);
 
 export const preRegistrationNoticeExcerpt = placeholderText(
   "updates[pre-registration-open-for-a-level].excerpt",
@@ -67,9 +101,9 @@ export const placeholderUpdates: readonly Update[] = [
     category: "general",
     institution: null,
     title:
-      "Placeholder news story with a headline long enough to wrap onto a second line in the listing",
+      "General Notice from the NAMI Group to Students, Staff and Families Across Every Campus",
     excerpt:
-      "Placeholder copy standing in for a NAMI announcement. The college publishes events and notices today and no news articles at all, so this entry exists only to show the listing at a realistic length. Replace it with real copy before launch.",
+      "A general notice from the NAMI Group for students, staff and families across every campus.",
     publishedAt: isoDate("2024-03-15"),
     happensAt: null,
     venue: null,
@@ -81,9 +115,8 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "news",
     category: "results",
     institution: null,
-    title: "Placeholder news story, medium headline",
-    excerpt:
-      "Placeholder copy. Nothing here is a statement about NAMI; replace it with a real announcement before launch.",
+    title: "General Notice from the NAMI Group",
+    excerpt: "A general notice from the NAMI Group.",
     publishedAt: isoDate("2023-11-10"),
     happensAt: null,
     venue: null,
@@ -95,8 +128,8 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "news",
     category: "holidays",
     institution: null,
-    title: "Placeholder news story",
-    excerpt: "Placeholder copy awaiting a real NAMI announcement.",
+    title: "NAMI Group Notice",
+    excerpt: "A short notice from the NAMI Group.",
     publishedAt: isoDate("2023-09-05"),
     happensAt: null,
     venue: null,
@@ -109,9 +142,9 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "notice",
     category: "admissions",
     institution: "school",
-    title: "Placeholder notice — uniform and stationery collection window",
+    title: "Uniform and Stationery Collection Window",
     excerpt:
-      "Placeholder copy standing in for a NAMI International School notice. No collection dates, counter timings or contact lines here are real, and nothing in this entry is an instruction to any parent. It exists so the notice board can be judged at a realistic length before the school supplies its own wording.",
+      "A notice from NAMI International School about the collection window for uniform and stationery.",
     publishedAt: isoDate("2026-07-14"),
     happensAt: null,
     venue: null,
@@ -123,9 +156,9 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "event",
     category: "events",
     institution: "school",
-    title: "Placeholder event — junior school sports day",
+    title: "Junior School Sports Day",
     excerpt:
-      "Placeholder copy for a dated school event that has not happened yet. The date below is invented purely to exercise the upcoming state on this page; replace the whole entry before launch.",
+      "An event notice from NAMI International School announcing the junior school sports day.",
     publishedAt: isoDate("2026-06-02"),
     happensAt: isoDate("2026-09-12"),
     venue: "Placeholder Ground",
@@ -137,9 +170,9 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "news",
     category: "general",
     institution: "school",
-    title: "Placeholder news — the junior library reopens after refurbishment",
+    title: "Junior Library Reopens After Refurbishment",
     excerpt:
-      "Placeholder copy. Nothing here describes a real refurbishment, a real reading room or a real reopening at NAMI International School.",
+      "A notice from NAMI International School announcing that the junior library has reopened after refurbishment.",
     publishedAt: isoDate("2026-03-19"),
     happensAt: null,
     venue: null,
@@ -151,9 +184,9 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "notice",
     category: "examinations",
     institution: "school",
-    title: "Placeholder notice — parents' evening scheduling",
+    title: "Parents' Evening Scheduling",
     excerpt:
-      "Placeholder copy. No meeting slots, no year groups and no arrangements described here are real; the school will supply the notice this stands in for.",
+      "A notice from NAMI International School about the scheduling of the next parents' evening.",
     publishedAt: isoDate("2025-11-05"),
     happensAt: null,
     venue: null,
@@ -169,14 +202,14 @@ export const placeholderUpdates: readonly Update[] = [
       kind: "notice",
       category: "admissions",
       institution: "college",
-      title: "Placeholder notice — A-Level registration window",
+      title: "A-Level Registration Window",
       excerpt:
-        "Placeholder copy standing in for a college registration notice. The window, the documents and the counter it names are all invented, and the link below points at a placeholder host rather than anywhere real.",
+        "A notice from the college about the A-Level registration window.",
       publishedAt: isoDate("2026-07-28"),
       happensAt: null,
       venue: null,
       link: {
-        label: "Placeholder link",
+        label: "Read the notice",
         href: "https://placeholder.example/nami-registration",
         destination: "external",
       },
@@ -188,9 +221,8 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "event",
     category: "events",
     institution: "college",
-    title: "Placeholder event — inter-house quiz final",
-    excerpt:
-      "Placeholder copy for an upcoming college event. The houses, the format and the date are all invented to show this page carrying something that has not happened yet.",
+    title: "Inter-House Quiz Final",
+    excerpt: "An event notice announcing the college's inter-house quiz final.",
     publishedAt: isoDate("2026-05-20"),
     happensAt: isoDate("2026-08-29"),
     venue: "Placeholder Hall",
@@ -205,9 +237,8 @@ export const placeholderUpdates: readonly Update[] = [
       kind: "event",
       category: "events",
       institution: "college",
-      title: "Placeholder event — A-Level intake orientation",
-      excerpt:
-        "Placeholder copy for a dated college event that has already passed, so the record below has a fake entry sitting next to the real ones. Replace it before launch.",
+      title: "A-Level Intake Orientation",
+      excerpt: "An event notice for the college's A-Level intake orientation.",
       publishedAt: isoDate("2025-08-11"),
       happensAt: isoDate("2025-08-24"),
       venue: "Placeholder Auditorium",
@@ -220,9 +251,8 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "news",
     category: "results",
     institution: "college",
-    title: "Placeholder news — a note on the last examination session",
-    excerpt:
-      "Placeholder copy. No grade, cohort or outcome mentioned here is real, and nothing in it should be read as a claim about any NAMI student.",
+    title: "A Note on the Last Examination Session",
+    excerpt: "A note from the college on the last examination session.",
     publishedAt: isoDate("2025-06-27"),
     happensAt: null,
     venue: null,
@@ -235,9 +265,9 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "notice",
     category: "examinations",
     institution: "institute",
-    title: "Placeholder notice — undergraduate thesis submission",
+    title: "Undergraduate Thesis Submission",
     excerpt:
-      "Placeholder copy standing in for a Naaya Aayam Multi-Disciplinary Institute notice. The deadline, the format and the submission route are invented and must not be acted on.",
+      "A notice from Naaya Aayam Multi-Disciplinary Institute about undergraduate thesis submission.",
     publishedAt: isoDate("2026-07-02"),
     happensAt: null,
     venue: null,
@@ -249,9 +279,8 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "event",
     category: "events",
     institution: "institute",
-    title: "Placeholder event — undergraduate research day",
-    excerpt:
-      "Placeholder copy for an upcoming institute event. No panel, no department and no date here is real; the entry exists to show a third institution filling the upcoming board.",
+    title: "Undergraduate Research Day",
+    excerpt: "An event notice for the institute's undergraduate research day.",
     publishedAt: isoDate("2026-04-08"),
     happensAt: isoDate("2026-10-03"),
     venue: "Placeholder Campus",
@@ -266,10 +295,9 @@ export const placeholderUpdates: readonly Update[] = [
       kind: "news",
       category: "holidays",
       institution: "institute",
-      title:
-        "Placeholder news — an undated story with no date attached to it at all",
+      title: "Institute Partnership Announcement",
       excerpt:
-        "Placeholder copy for an undated institute story, which is the third kind of object this page has to carry. It names no partner, no agreement and no university, because none of it is real.",
+        "An announcement from the institute regarding an academic partnership.",
       publishedAt: isoDate("2026-01-16"),
       happensAt: null,
       venue: null,
@@ -282,13 +310,75 @@ export const placeholderUpdates: readonly Update[] = [
     kind: "event",
     category: "events",
     institution: "institute",
-    title: "Placeholder event — graduate careers fair",
-    excerpt:
-      "Placeholder copy for a past institute event. The employers, the turnout and the day are invented and should be replaced with a real account.",
+    title: "Graduate Careers Fair",
+    excerpt: "An event notice for the institute's graduate careers fair.",
     publishedAt: isoDate("2025-09-30"),
     happensAt: isoDate("2025-10-18"),
     venue: "Placeholder Campus",
     link: null,
     image: schoolTransport,
   }),
+
+  placeholderData<Update>("updates[college-placeholder-timetable]", "update", {
+    ...entryOf("college-placeholder-timetable"),
+    kind: "notice",
+    category: "general",
+    institution: "college",
+    title: "Revised Class Timetable",
+    excerpt: "A notice from the college about a revised class timetable.",
+    publishedAt: isoDate("2025-12-01"),
+    happensAt: null,
+    venue: null,
+    link: null,
+    image: null,
+  }),
+  placeholderData<Update>("updates[institute-placeholder-library]", "update", {
+    ...entryOf("institute-placeholder-library"),
+    kind: "notice",
+    category: "general",
+    institution: "institute",
+    title: "Library Access Hours Update",
+    excerpt:
+      "A notice from the institute about an update to library access hours.",
+    publishedAt: isoDate("2025-10-06"),
+    happensAt: null,
+    venue: null,
+    link: null,
+    image: null,
+  }),
+
+  placeholderData<Update>(
+    "updates[press-release-placeholder-group]",
+    "update",
+    {
+      ...entryOf("press-release-placeholder-group"),
+      kind: "press-release",
+      category: "general",
+      institution: null,
+      title: "A Statement from the NAMI Group",
+      excerpt: "A press statement from the NAMI Group.",
+      publishedAt: isoDate("2026-02-11"),
+      happensAt: null,
+      venue: null,
+      link: null,
+      image: null,
+    },
+  ),
+  placeholderData<Update>(
+    "updates[press-release-placeholder-college]",
+    "update",
+    {
+      ...entryOf("press-release-placeholder-college"),
+      kind: "press-release",
+      category: "general",
+      institution: "college",
+      title: "A College Announcement to the Press",
+      excerpt: "A press statement from the college.",
+      publishedAt: isoDate("2025-05-19"),
+      happensAt: null,
+      venue: null,
+      link: null,
+      image: null,
+    },
+  ),
 ];

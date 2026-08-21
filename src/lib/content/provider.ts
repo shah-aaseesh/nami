@@ -13,6 +13,7 @@ import type {
   Stat,
   Testimonial,
   Update,
+  VocationalApproval,
 } from "./types";
 
 export class ContentSourceUnavailableError extends Error {
@@ -31,6 +32,7 @@ export type ContentProvider = {
   getStats(): Promise<readonly Stat[]>;
   getAcademicLevels(): Promise<readonly AcademicLevel[]>;
   getProgrammes(): Promise<readonly Programme[]>;
+  getVocationalApproval(): Promise<VocationalApproval>;
   getAffiliations(): Promise<readonly Affiliation[]>;
   getPartners(): Promise<readonly Partner[]>;
   getCampusLife(): Promise<readonly CampusLifePillar[]>;

@@ -28,6 +28,7 @@ const graph = {
   stats: await content.getStats(),
   academicLevels: await content.getAcademicLevels(),
   programmes: await content.getProgrammes(),
+  vocationalApproval: await content.getVocationalApproval(),
   affiliations: await content.getAffiliations(),
   partners: await content.getPartners(),
   campusLife: await content.getCampusLife(),

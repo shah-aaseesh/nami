@@ -19,12 +19,12 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
   {
     label: "Institutions",
     href: "/institutions/college",
-    descriptor: "Three institutions, one academic pathway.",
+    descriptor: "Explore our institutions, each separately accredited.",
     children: [
       { label: "NAMI International School", href: "/institutions/school" },
-      { label: "NAMI College", href: "/institutions/college" },
+      { label: "NAMI A-Levels", href: "/institutions/college" },
       {
-        label: "Multi-Disciplinary Institute",
+        label: "Naaya Aayam Multi-Disciplinary Institute",
         href: "/institutions/bachelors",
       },
     ],

@@ -103,7 +103,7 @@ function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
 
       <div
         ref={dropdown}
-        className="absolute top-full left-0 pt-4 w-48 invisible"
+        className="absolute top-full left-0 pt-4 w-max max-w-xs invisible"
       >
         <div className="bg-surface shadow-lg rounded-md p-1.5 flex flex-col gap-1">
           {item.children?.map((child) => (
@@ -217,11 +217,11 @@ export function SiteHeaderShell({
         <div
           className={cn(
             "mx-auto flex max-w-page items-center justify-between gap-6 transition-[height] duration-300",
-            scrolled ? "h-16" : "h-20 lg:h-24",
+            scrolled ? "h-16" : "h-20 lg:h-20",
           )}
         >
           <Link href="/" className="flex items-center h-full shrink-0">
-            <SiteHeaderWordmark name={siteName} />
+            <SiteHeaderWordmark name={siteName} scrolled={scrolled} />
           </Link>
 
           <nav
@@ -252,7 +252,7 @@ export function SiteHeaderShell({
                 render={
                   <Button
                     size="icon"
-                    variant="quiet"
+                    variant="default"
                     className="border border-border-strong rounded-md flex items-center justify-center"
                     aria-label="Menu"
                   >

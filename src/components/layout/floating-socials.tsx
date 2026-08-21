@@ -7,7 +7,6 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TikTokIcon,
-  TwitterIcon,
   WhatsAppIcon,
   YouTubeIcon,
 } from "@/lib/icons";
@@ -25,12 +24,6 @@ const FLOATING_SOCIAL_LINKS = [
     label: "Instagram",
     href: "https://www.instagram.com/namicollege/",
     icon: InstagramIcon,
-  },
-  {
-    platform: "twitter",
-    label: "X (Twitter)",
-    href: "https://twitter.com/NamiCollege",
-    icon: TwitterIcon,
   },
   {
     platform: "linkedin",

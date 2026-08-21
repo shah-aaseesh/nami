@@ -12,13 +12,18 @@ import {
 } from "@/components/ui/accordion";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import type { SocialPlatform, SocialProfile } from "@/lib/content";
 import { gsap, useGSAP } from "@/lib/gsap";
 import {
   FacebookIcon,
+  type IconSvgElement,
   InstagramIcon,
+  LinkedInIcon,
   LocationIcon,
   MailIcon,
+  TikTokIcon,
   TwitterIcon,
+  YouTubeIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { SiteHeaderWordmark } from "./site-header-wordmark";
@@ -30,11 +35,21 @@ export type SiteMetaLink = {
   readonly external: boolean;
 };
 
+const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+  linkedin: LinkedInIcon,
+  tiktok: TikTokIcon,
+  twitter: TwitterIcon,
+  youtube: YouTubeIcon,
+};
+
 export type SiteNavPanelProps = {
   labelId: string;
   items: readonly SiteNavItem[];
   places: readonly string[];
   links: readonly SiteMetaLink[];
+  socialProfiles?: readonly SocialProfile[];
   siteName: string;
   onNavigate: () => void;
 };
@@ -44,6 +59,7 @@ export function SiteNavPanel({
   labelId,
   places,
   links,
+  socialProfiles = [],
   siteName,
   onNavigate,
 }: SiteNavPanelProps) {
@@ -66,7 +82,7 @@ export function SiteNavPanel({
   );
 
   return (
-    <div ref={container} className="mt-8 flex h-full w-full flex-col">
+    <div ref={container} className="flex h-full w-full flex-col">
       {/* Mobile Navigation */}
       <nav aria-labelledby={labelId} className="flex flex-col gap-1 lg:hidden">
         <Accordion className="border-none w-full">
@@ -198,31 +214,36 @@ export function SiteNavPanel({
         </div>
 
         {/* Social Links */}
-        <div className="flex flex-col gap-5 w-full mt-8 pb-8">
-          <span className="text-xs font-bold text-ink uppercase tracking-widest text-left">
-            Follow Us
-          </span>
-          <div className="flex items-center gap-6">
-            <Link
-              href={"#" as Route}
-              className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors hover:bg-accent hover:text-white"
-            >
-              <Icon icon={FacebookIcon} className="size-5" />
-            </Link>
-            <Link
-              href={"#" as Route}
-              className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors hover:bg-accent hover:text-white"
-            >
-              <Icon icon={TwitterIcon} className="size-5" />
-            </Link>
-            <Link
-              href={"#" as Route}
-              className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors hover:bg-accent hover:text-white"
-            >
-              <Icon icon={InstagramIcon} className="size-5" />
-            </Link>
+        {socialProfiles.length === 0 ? null : (
+          <div className="flex flex-col gap-5 w-full mt-8 pb-8">
+            <span className="text-xs font-bold text-ink uppercase tracking-widest text-left">
+              Follow Us
+            </span>
+            <div className="flex items-center gap-6">
+              {socialProfiles.map((profile) => (
+                <Link
+                  key={profile.href}
+                  aria-label={profile.label}
+                  href={profile.href as Route}
+                  rel={
+                    profile.destination === "external"
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  target={
+                    profile.destination === "external" ? "_blank" : undefined
+                  }
+                  className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors hover:bg-accent hover:text-white"
+                >
+                  <Icon
+                    icon={SOCIAL_GLYPHS[profile.platform]}
+                    className="size-5"
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

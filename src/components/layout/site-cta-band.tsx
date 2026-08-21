@@ -20,12 +20,12 @@ export function SiteCtaBand({ email, heading, standfirst }: SiteCtaBandProps) {
     <section aria-labelledby={HEADING_ID} className="relative gutter-x">
       <div
         aria-hidden="true"
-        className="field-ink absolute inset-x-0 top-1/2 bottom-0"
+        className="field-brand absolute inset-x-0 top-1/2 bottom-0"
       />
 
       <Reveal className="relative mx-auto max-w-page">
-        <div className="field-brand flex flex-col items-start justify-between gap-y-8 rounded-xl px-8 py-12 sm:px-12 lg:min-h-50 lg:flex-row lg:items-center lg:gap-x-16 lg:px-20 lg:py-0">
-          <div className="max-w-md">
+        <div className="field-ink flex flex-col items-start justify-between gap-y-8 rounded-xl px-8 py-12 sm:px-12 lg:min-h-50 lg:flex-row lg:items-center lg:gap-x-16 lg:px-20 lg:py-0">
+          <div className="max-w-xl">
             <H3 as="h2" id={HEADING_ID}>
               {heading}
             </H3>
@@ -33,7 +33,10 @@ export function SiteCtaBand({ email, heading, standfirst }: SiteCtaBandProps) {
           </div>
 
           <Link
-            className={cn(buttonVariants({ size: "lg" }), "max-w-full")}
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "max-w-full bg-primary-700 text-primary-100 hover:bg-primary-800",
+            )}
             href={`mailto:${email}` as Route}
           >
             <span className="truncate">{email}</span>

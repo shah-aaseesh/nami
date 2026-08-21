@@ -1,92 +1,81 @@
 import type { Route } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
-import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { H6, P } from "@/components/ui/typography";
-import type { Campus, ContentLink } from "@/lib/content";
-import { content, isPlaceholder } from "@/lib/content";
-import { ArrowUpRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { Eyebrow, P } from "@/components/ui/typography";
+import type { EntityRole, SocialPlatform } from "@/lib/content";
+import { content, isPlaceholder, paragraphsOf } from "@/lib/content";
+import type { IconSvgElement } from "@/lib/icons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  TikTokIcon,
+  TwitterIcon,
+  YouTubeIcon,
+} from "@/lib/icons";
+import { INSTITUTION_ROLES } from "@/lib/institution-filter";
 import { SiteCtaBand } from "./site-cta-band";
-import { SiteFooterWordmark } from "./site-footer-wordmark";
 import { SITE_FOOTER_NAV_ITEMS } from "./site-nav-sections";
 
-const metaLink = cn(buttonVariants({ size: "sm", variant: "link" }));
-const detailLink = cn(buttonVariants({ size: "md", variant: "link" }));
-const columnHeading =
-  "font-body text-xl font-medium text-ink underline decoration-1 underline-offset-8";
-const quietLink =
-  "font-body text-base text-ink-muted transition-colors hover:text-accent";
+const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+  linkedin: LinkedInIcon,
+  tiktok: TikTokIcon,
+  twitter: TwitterIcon,
+  youtube: YouTubeIcon,
+};
 
-function WebsiteLink({ link }: { link: ContentLink }) {
-  if (link.destination === "legacy") {
-    return (
-      <span className="font-body text-base text-ink-muted">{link.label}</span>
-    );
-  }
+const ENTITY_HREFS: Record<EntityRole, Route> = {
+  school: "/institutions/school",
+  college: "/institutions/college",
+  institute: "/institutions/bachelors",
+};
 
-  const isExternal = link.destination === "external";
-
-  return (
-    <Link
-      className={detailLink}
-      href={link.href as Route}
-      rel={isExternal ? "noopener noreferrer" : undefined}
-      target={isExternal ? "_blank" : undefined}
-    >
-      {link.label}
-      {isExternal ? <Icon icon={ArrowUpRightIcon} /> : null}
-    </Link>
-  );
+function stated(value: string | null | undefined): string | null {
+  return value === undefined || value === null || isPlaceholder(value)
+    ? null
+    : value;
 }
 
-function ContactValue({ href, value }: { href: string; value: string }) {
-  if (isPlaceholder(value)) {
-    return <span className="font-body text-base text-ink-muted">{value}</span>;
-  }
+type FooterContactProps = {
+  name: string;
+  href: Route;
+  phone: string | null;
+  email: string | null;
+};
 
+function FooterContact({ email, href, name, phone }: FooterContactProps) {
   return (
-    <Link className={detailLink} href={href as Route}>
-      {value}
-    </Link>
-  );
-}
+    <li className="border-l border-border-strong/70 pl-4">
+      <Link
+        className="font-body text-base font-medium text-pretty underline-offset-4 transition-colors hover:text-accent hover:underline"
+        href={href}
+      >
+        {name}
+      </Link>
 
-function CampusEntry({ campus }: { campus: Campus }) {
-  const street =
-    campus.streetAddress !== null && !isPlaceholder(campus.streetAddress)
-      ? campus.streetAddress
-      : null;
-  const mapUrl =
-    campus.mapUrl !== null && !isPlaceholder(campus.mapUrl)
-      ? campus.mapUrl
-      : null;
-
-  return (
-    <li>
-      <H6 as="h4">{campus.locality}</H6>
-      <ul className="mt-4 flex flex-col gap-y-1 font-body text-sm text-ink-muted">
-        {campus.hosts.map((host) => (
-          <li key={host}>{host}</li>
-        ))}
-      </ul>
-      {street === null ? null : (
-        <p className="mt-4 font-body text-sm text-ink-muted">
-          {mapUrl === null ? (
-            street
-          ) : (
+      {phone === null && email === null ? null : (
+        <div className="mt-1 font-body text-sm">
+          {phone === null ? null : (
             <Link
-              className={metaLink}
-              href={mapUrl as Route}
-              rel="noopener noreferrer"
-              target="_blank"
+              className="block transition-colors hover:text-accent"
+              href={`tel:${phone.replace(/[^+\d]/g, "")}` as Route}
             >
-              {street}
-              <Icon icon={ArrowUpRightIcon} />
+              {phone}
             </Link>
           )}
-        </p>
+          {email === null ? null : (
+            <Link
+              className="block break-words transition-colors hover:text-accent"
+              href={`mailto:${email}` as Route}
+            >
+              {email}
+            </Link>
+          )}
+        </div>
       )}
     </li>
   );
@@ -94,56 +83,73 @@ function CampusEntry({ campus }: { campus: Campus }) {
 
 export async function SiteFooter() {
   const institution = await content.getInstitution();
-  const { campuses, contact, entities } = institution;
+  const { campuses, contact, entities, overview } = institution;
   const group = entities.institute;
-  const lineage = `Three institutions under the ${group.shortName} name — ${entities.school.name}, ${entities.college.name} and ${group.name}.`;
 
-  const navItems = SITE_FOOTER_NAV_ITEMS;
-  const cities = [...new Set(campuses.map((campus) => campus.city))].join(", ");
-
-  const email =
-    contact.email !== null && !isPlaceholder(contact.email)
-      ? contact.email
-      : null;
-
-  const hasContact =
-    contact.phones.length > 0 ||
-    contact.email !== null ||
-    contact.websites.length > 0;
+  const summary = stated(paragraphsOf(overview)[0]);
+  const groupEmail = stated(contact.email);
 
   return (
-    <footer>
-      {email === null ? null : (
+    <>
+      {groupEmail === null ? null : (
         <SiteCtaBand
-          email={email}
-          heading={`Write to ${group.shortName}.`}
-          standfirst={cities === "" ? group.name : `${group.name} · ${cities}`}
+          email={groupEmail}
+          heading="Subscribe to our Newsletter"
+          standfirst={group.name}
         />
       )}
 
-      <div className="field-ink overflow-hidden gutter-x">
-        <div className="mx-auto max-w-page">
+      <footer className="field-brand">
+        <div className="gutter-x section-y">
           <Reveal
-            className="grid gap-y-14 py-16 md:grid-cols-2 md:gap-x-8 xl:grid-cols-12 xl:py-25"
-            stagger={0.08}
+            className="mx-auto grid max-w-page gap-y-10 md:grid-cols-12 md:gap-x-8 lg:gap-x-10"
+            stagger={0.06}
+            y={16}
           >
-            <div className="xl:col-span-4" data-reveal-item="">
-              <SiteFooterWordmark name={group.name} />
-              <P className="mt-8 max-w-xs">{lineage}</P>
+            <div className="md:col-span-12 lg:col-span-6">
+              <Link className="inline-block" href="/">
+                <Image
+                  alt={group.shortName}
+                  className="h-16 w-auto md:h-20"
+                  height={1000}
+                  sizes="(min-width: 768px) 80px, 64px"
+                  src="/logo/nami-white.svg"
+                  width={1000}
+                />
+              </Link>
+
+              {summary === null ? null : (
+                <P className="mt-5 max-w-xl text-sm">{summary}</P>
+              )}
+
+              <ul className="mt-6 grid gap-y-3">
+                {campuses.map((campus) => {
+                  const street = stated(campus.streetAddress);
+                  return (
+                    <li key={campus.id}>
+                      <p className="font-body text-base font-medium">
+                        {campus.locality}, {campus.city}
+                      </p>
+                      {street === null ? null : (
+                        <p className="font-body text-sm text-pretty text-ink-muted">
+                          {street}
+                        </p>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
 
-            <nav
-              aria-labelledby="site-footer-explore"
-              className="xl:col-span-2"
-              data-reveal-item=""
-            >
-              <h3 className={columnHeading} id="site-footer-explore">
-                Explore
-              </h3>
-              <ul className="mt-8 flex flex-col gap-y-2.5">
-                {navItems.map((item) => (
+            <nav aria-label="Footer" className="md:col-span-5 lg:col-span-3">
+              <Eyebrow as="h2">Quick Links</Eyebrow>
+              <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
+                {SITE_FOOTER_NAV_ITEMS.map((item) => (
                   <li key={item.href}>
-                    <Link className={quietLink} href={item.href as Route}>
+                    <Link
+                      className="inline-block py-1 font-body text-base whitespace-nowrap underline-offset-4 transition-colors hover:text-accent hover:underline"
+                      href={item.href as Route}
+                    >
                       {item.label}
                     </Link>
                   </li>
@@ -151,53 +157,59 @@ export async function SiteFooter() {
               </ul>
             </nav>
 
-            {hasContact ? (
-              <div className="xl:col-span-2" data-reveal-item="">
-                <h3 className={columnHeading}>Contact</h3>
-                <ul className="mt-8 flex flex-col items-start gap-y-2.5">
-                  {contact.phones.map((phone) => (
-                    <li key={phone}>
-                      <ContactValue
-                        href={`tel:${phone.replace(/[^+\d]/g, "")}`}
-                        value={phone}
-                      />
-                    </li>
-                  ))}
-                  {contact.email === null ? null : (
-                    <li>
-                      <ContactValue
-                        href={`mailto:${contact.email}`}
-                        value={contact.email}
-                      />
-                    </li>
-                  )}
-                  {contact.websites.map((site) => (
-                    <li key={site.href}>
-                      <WebsiteLink link={site} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-
-            {campuses.length === 0 ? null : (
-              <div className="xl:col-span-4" data-reveal-item="">
-                <h3 className={columnHeading}>Campuses</h3>
-                <ul className="mt-8 grid gap-y-6 xl:grid-cols-2 xl:gap-x-8">
-                  {campuses.map((campus) => (
-                    <CampusEntry campus={campus} key={campus.id} />
-                  ))}
-                </ul>
-              </div>
-            )}
+            <div className="md:col-span-7 lg:col-span-3">
+              <Eyebrow as="h2">Contact</Eyebrow>
+              <ul className="mt-4 grid gap-y-5">
+                {INSTITUTION_ROLES.map((role) => (
+                  <FooterContact
+                    email={stated(contact.byEntity[role].email)}
+                    href={ENTITY_HREFS[role]}
+                    key={role}
+                    name={entities[role].name}
+                    phone={stated(contact.byEntity[role].phone)}
+                  />
+                ))}
+              </ul>
+            </div>
           </Reveal>
+        </div>
 
-          <div className="flex flex-col gap-y-2 border-t py-4 font-body text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
-            <p>© {group.name}</p>
-            <p>{institution.motto}</p>
+        <div className="field-ink gutter-x section-y-compact">
+          <div className="mx-auto flex max-w-page flex-col gap-y-4 md:flex-row md:items-center md:justify-between">
+            <p className="font-body text-sm text-ink-muted">
+              © {group.name}
+              {group.establishedYear === null
+                ? null
+                : ` · Established ${group.establishedYear}`}
+            </p>
+
+            <ul className="flex flex-wrap items-center gap-2">
+              {contact.socialProfiles.map((profile) => (
+                <li key={profile.href}>
+                  <Link
+                    aria-label={profile.label}
+                    className="flex size-9 items-center justify-center rounded-full border border-border-strong/50 transition-colors hover:border-primary-700 hover:bg-primary-700 hover:text-primary-100"
+                    href={profile.href as Route}
+                    rel={
+                      profile.destination === "external"
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    target={
+                      profile.destination === "external" ? "_blank" : undefined
+                    }
+                  >
+                    <Icon
+                      className="size-4"
+                      icon={SOCIAL_GLYPHS[profile.platform]}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }

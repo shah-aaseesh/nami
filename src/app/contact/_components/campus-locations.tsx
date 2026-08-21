@@ -81,7 +81,7 @@ export async function CampusLocations() {
   if (institution.campuses.length === 0) return null;
 
   return (
-    <section className="field-ink gutter-x section-y" id="campuses">
+    <section className="gutter-x section-y" id="campuses">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-5">

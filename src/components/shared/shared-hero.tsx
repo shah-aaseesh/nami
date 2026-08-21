@@ -31,10 +31,6 @@ export function SharedHero({
   primaryCta,
   secondaryCta,
 }: SharedHeroProps) {
-  const displayHeading = heading ?? entity.name;
-  const [lead = displayHeading, ...tail] = displayHeading.split(" ");
-  const rest = tail.join(" ");
-
   const externalPrimary = primaryCta.destination === "external";
   const externalSecondary = secondaryCta?.destination === "external";
 
@@ -66,14 +62,11 @@ export function SharedHero({
             <div className="flex w-full flex-col items-start gap-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
               <Display
                 className={cn(
-                  "min-w-0 animate-hero-fade text-5xl text-white [animation-delay:100ms] sm:text-6xl lg:text-7xl",
+                  "min-w-0 animate-hero-fade text-balance text-5xl text-white [animation-delay:100ms] sm:text-6xl lg:text-7xl",
                   headingClassName,
                 )}
               >
-                <span className="block">{lead}</span>
-                {rest === "" ? null : (
-                  <span className="block text-primary-200">{rest}</span>
-                )}
+                {heading ?? entity.name}
               </Display>
             </div>
 

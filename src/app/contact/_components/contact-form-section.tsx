@@ -21,7 +21,7 @@ export async function ContactFormSection() {
   ];
 
   return (
-    <section className="gutter-x section-y" id="enquiry">
+    <section className="field-ink gutter-x section-y" id="enquiry">
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <div className="lg:col-span-4">
           <Eyebrow>{copy.eyebrow}</Eyebrow>

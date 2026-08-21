@@ -205,7 +205,7 @@ export function CarouselControls({
 export function CarouselPrevious({
   className,
   size = "icon",
-  variant = "outline",
+  variant = "default",
   ...props
 }: ComponentProps<typeof Button>) {
   const { canScrollPrev, scrollPrev } = useCarousel();
@@ -230,7 +230,7 @@ export function CarouselPrevious({
 export function CarouselNext({
   className,
   size = "icon",
-  variant = "outline",
+  variant = "default",
   ...props
 }: ComponentProps<typeof Button>) {
   const { canScrollNext, scrollNext } = useCarousel();

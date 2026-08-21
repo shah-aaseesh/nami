@@ -90,7 +90,7 @@ const STEP_FIELDS: Record<StepKey, readonly FieldPath<AdmissionsFormData>[]> = {
   ],
   history: ["qualifications", "pendingQualifications"],
   employment: ["employment"],
-  additional: ["howDidYouHear", "criminalRecord", "signature", "signatureDate"],
+  additional: ["howDidYouHear", "signature", "signatureDate"],
 };
 
 function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
@@ -132,7 +132,7 @@ function QualificationRow({
         type="button"
         onClick={onRemove}
         aria-label={`Remove qualification ${index + 1}`}
-        className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
+        className="absolute top-4 right-4 text-ink-muted hover:text-accent transition-colors"
       >
         <Icon icon={TrashIcon} className="size-4" />
       </button>
@@ -182,7 +182,7 @@ function EmploymentRow({
           type="button"
           onClick={onRemove}
           aria-label={`Remove employment entry ${index + 1}`}
-          className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
+          className="absolute top-4 right-4 text-ink-muted hover:text-accent transition-colors"
         >
           <Icon icon={TrashIcon} className="size-4" />
         </button>
@@ -232,7 +232,6 @@ export function MultiStepForm() {
       defaultValues: {
         program: "",
         proposedCourse: "",
-        title: "",
         surname: "",
         firstName: "",
         dob: null,
@@ -266,7 +265,6 @@ export function MultiStepForm() {
         ],
         personalStatement: "",
         howDidYouHear: [],
-        criminalRecord: null,
         signature: "",
         signatureDate: null,
       },
@@ -490,25 +488,29 @@ export function MultiStepForm() {
                 Father's Details
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <TextField control={control} name="fatherName" label="Name" />
+                <TextField
+                  control={control}
+                  name="fatherName"
+                  label="Father's Name"
+                />
                 <TextField
                   control={control}
                   name="fatherContact"
-                  label="Contact Number"
+                  label="Father's Contact Number"
                   type="tel"
                   inputMode="tel"
                 />
                 <TextField
                   control={control}
                   name="fatherEmail"
-                  label="Email"
+                  label="Father's Email"
                   type="email"
                   inputMode="email"
                 />
                 <TextField
                   control={control}
                   name="fatherJob"
-                  label="Job Designation"
+                  label="Father's Job Designation"
                 />
               </div>
             </div>
@@ -518,25 +520,29 @@ export function MultiStepForm() {
                 Mother's Details
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <TextField control={control} name="motherName" label="Name" />
+                <TextField
+                  control={control}
+                  name="motherName"
+                  label="Mother's Name"
+                />
                 <TextField
                   control={control}
                   name="motherContact"
-                  label="Contact Number"
+                  label="Mother's Contact Number"
                   type="tel"
                   inputMode="tel"
                 />
                 <TextField
                   control={control}
                   name="motherEmail"
-                  label="Email"
+                  label="Mother's Email"
                   type="email"
                   inputMode="email"
                 />
                 <TextField
                   control={control}
                   name="motherJob"
-                  label="Job Designation"
+                  label="Mother's Job Designation"
                 />
               </div>
             </div>
@@ -668,15 +674,6 @@ export function MultiStepForm() {
                 />
               </div>
 
-              <div className="pt-6">
-                <FileField
-                  control={control}
-                  name="criminalRecord"
-                  label="Criminal Convictions"
-                  description="Please upload your Police Record Certification if applicable. Files stay on this device. They are not sent anywhere and are not included in the PDF you download."
-                />
-              </div>
-
               <div className="space-y-4 pt-8 border-t border-border/50">
                 <H3 className="text-lg font-display text-ink">Declaration</H3>
                 <P className="text-sm text-ink-muted">
@@ -797,7 +794,7 @@ export function MultiStepForm() {
             {activeStep?.key === "additional" && (
               <P className="text-xs text-ink-muted">
                 Your PDF is created on this device. Nothing you have entered
-                leaves your browser, and the files you uploaded are not included
+                leaves your browser, and the file you uploaded is not included
                 in it.
               </P>
             )}

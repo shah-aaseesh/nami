@@ -56,7 +56,7 @@ const schoolMinifootballGoal: ContentImage = {
 };
 
 const schoolNationalDressDay: ContentImage = {
-  src: "/nami/school/nami-school-air-conditioned-classroom.jpg",
+  src: "/nami/school/nami-school-national-dress-day.jpg",
   alt: "Nine NAMI International School pupils in Nepali national dress standing in namaste on a foam-mat classroom floor, notice boards and a wall clock behind them.",
   width: 1000,
   height: 750,

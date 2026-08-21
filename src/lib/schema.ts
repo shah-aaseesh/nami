@@ -111,7 +111,6 @@ export const admissionsSchema = z
     proposedCourse: requiredText(
       "Tell us which course or subject you want to study",
     ),
-    title: z.string().trim(),
     surname: requiredText("Enter your surname"),
     firstName: requiredText("Enter your first name"),
     dob: requiredPastDate(
@@ -145,7 +144,6 @@ export const admissionsSchema = z
     employment: z.array(employmentSchema),
     personalStatement: z.string().trim(),
     howDidYouHear: z.array(z.string()),
-    criminalRecord: z.instanceof(File).nullable(),
     signature: z.string().trim(),
     signatureDate: optionalPastDate(
       "That date could not be read — pick it from the calendar",

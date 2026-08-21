@@ -246,12 +246,6 @@ const day: SchoolDayCopy = {
     {
       title: "Air-conditioned classrooms",
       body: "Learning spaces are air-conditioned so they stay comfortable through the year.",
-      photo: {
-        src: "/nami/school/nami-school-air-conditioned-classroom.jpg",
-        alt: "Nine primary pupils in Nepali national dress standing with hands folded in namaste on the foam-mat floor of their classroom, alphabet charts and display boards on the walls behind them.",
-        width: 1000,
-        height: 750,
-      },
     },
     {
       title: "Transport",

@@ -96,9 +96,9 @@ export function CourseMasthead({
         >
           {facts.map((fact) => (
             <div key={fact.label}>
-              <dt className="font-body text-xs font-medium tracking-widest text-ink-muted uppercase">
+              <Eyebrow as="dt" className="text-ink-muted">
                 {fact.label}
-              </dt>
+              </Eyebrow>
               <dd className="mt-4 font-display text-2xl font-normal text-balance text-ink">
                 {fact.value}
               </dd>

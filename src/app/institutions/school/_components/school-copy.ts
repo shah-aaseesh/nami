@@ -19,7 +19,6 @@ export type SchoolHeroCopy = {
   readonly logo: ContentImage;
   readonly slides: readonly SharedHeroSlide[];
   readonly admissionCta: ContentLink;
-  readonly website: ContentLink;
 };
 
 const principalPortrait: ContentImage = {
@@ -35,42 +34,37 @@ const heroSlides: readonly SharedHeroSlide[] = [
     alt: "Pupils in red uniforms seated around a hilltop school ground in Sindhupalchowk, facing stacks of red relief bags laid out on benches at a NAMI service camp.",
     width: 1190,
     height: 793,
-    caption: "Service camp, Sindhupalchowk",
   },
   {
     src: "/nami/campus-science-lab.jpg",
     alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
     width: 1280,
     height: 853,
-    caption: "The chemistry laboratory",
   },
   {
     src: "/nami/campus-library.jpg",
     alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
     width: 1280,
     height: 853,
-    caption: "The reading hall",
   },
   {
     src: "/nami/campus-basketball-award.jpg",
     alt: "Prize-giving for the NAMI SEE 3x3 Basketball Tournament on the college auditorium stage, both teams wearing medals and holding certificates behind the winners' trophy and the tournament cheques.",
     width: 1500,
     height: 1000,
-    caption: "SEE 3x3 basketball prize-giving",
   },
   {
     src: "/nami/campus-auditorium.jpg",
     alt: "Students and staff seated on sofas and stacking chairs in the NAMI auditorium, maroon acoustic panelling on the wall behind them.",
     width: 999,
     height: 666,
-    caption: "The school auditorium",
   },
 ];
 
 const masthead: SchoolHeroCopy = {
   eyebrow: "Gokarneshwor-7, Kathmandu",
-  tagline: `From ${schoolGrades.labelPlural} to +2 in Science and Management — one campus, taught under the Government of Nepal's National Curriculum and the National Examination Board.`,
-  heroLabel: "NAMI International School campus",
+  tagline: `From ${schoolGrades.labelPlural} to +2 in Science and Management.`,
+  heroLabel: "NAMI International School",
   logo: {
     src: "/universities/nami-school.png",
     alt: "NAMI International School logo",
@@ -83,17 +77,12 @@ const masthead: SchoolHeroCopy = {
     href: "#admission",
     destination: "internal",
   },
-  website: {
-    label: "Visit the school website",
-    href: "https://school.nami.edu.np",
-    destination: "external",
-  },
 };
 
 const bands: SchoolBandsCopy = {
   eyebrow: "Academics",
   heading: "A primary division and a +2, under one roof.",
-  standfirst: `The primary division teaches ${schoolGrades.labelPlural} within the framework of the Government of Nepal's National Curriculum. The +2 runs at Grades 11 and 12, in Science and Management, under the National Examination Board.`,
+  standfirst: `The primary division teaches ${schoolGrades.labelPlural}. The +2 runs at Grades 11 and 12, in Science and Management.`,
   primary: {
     label: schoolGrades.labelPlural,
     affiliationSlug: "neb-school",
@@ -179,7 +168,7 @@ const day: SchoolDayCopy = {
   heading: "Care is the first thing a child is taught here.",
   standfirst:
     "The school sets out to be a place where every child feels seen, heard and supported — and the campus is built around that rather than around the timetable.",
-  campusLabel: "What the campus holds",
+  campusLabel: "What the school holds",
   campus: [
     {
       title: "Three meals a day",
@@ -426,8 +415,6 @@ export const schoolCopy = {
   principal: {
     slug: "leader-anisha-joshi",
     eyebrow: "From the Principal",
-    heading:
-      "We embrace each child as an individual, with unique talent and potential.",
     portrait: principalPortrait,
     message: richText(
       "My personal and professional commitment at NAMI International School is to guide the growth of students and ensure a nurturing environment for all.",

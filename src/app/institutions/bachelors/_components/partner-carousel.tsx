@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { CSSProperties, RefObject } from "react";
 import { useEffect, useRef, useState } from "react";
+import { Eyebrow } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import { gsap, Observer, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
@@ -71,9 +72,7 @@ function PartnerPlate({ partner }: { readonly partner: CareerPartner }) {
         />
       )}
 
-      <p className="font-body text-xs font-medium tracking-widest text-accent uppercase">
-        {partner.tag}
-      </p>
+      <Eyebrow>{partner.tag}</Eyebrow>
     </div>
   );
 }

@@ -26,9 +26,9 @@ function CourseCard({
           <Eyebrow as="span">{course.qualification}</Eyebrow>
 
           {course.startingFrom === null ? null : (
-            <span className="font-body text-xs font-medium tracking-widest text-ink-muted uppercase">
+            <Eyebrow as="span" className="text-ink-muted">
               {`${copy.startingLabel} ${course.startingFrom}`}
-            </span>
+            </Eyebrow>
           )}
         </div>
 

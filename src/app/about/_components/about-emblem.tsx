@@ -5,6 +5,7 @@ import { Tilt } from "@/components/motion/tilt";
 import { FivePetals, type Petal } from "@/components/shared/five-petals";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
+import { AboutValuesDisclosure } from "./about-values-disclosure";
 
 export function AboutEmblem({
   emblemStory,
@@ -75,7 +76,9 @@ export function AboutEmblem({
 
         {petals.length > 0 ? (
           <div className="mt-10 lg:mt-12">
-            <FivePetals petals={petals} />
+            <AboutValuesDisclosure>
+              <FivePetals petals={petals} />
+            </AboutValuesDisclosure>
           </div>
         ) : null}
       </div>

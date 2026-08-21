@@ -6,7 +6,6 @@ import { Eyebrow, P } from "@/components/ui/typography";
 import type { ContentImage, RichText } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content";
 import { ImageIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
 import { PrincipalPortraitPin } from "./principal-portrait-pin";
 
 export type PrincipalMessagePerson = {
@@ -17,8 +16,7 @@ export type PrincipalMessagePerson = {
 
 export type PrincipalMessageProps = {
   readonly eyebrow: string;
-  readonly heading: string;
-  readonly headingClassName?: string;
+  readonly heading?: string;
   readonly id?: string;
   readonly message: RichText;
   readonly person: PrincipalMessagePerson;
@@ -58,7 +56,6 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
 export function PrincipalMessage({
   eyebrow,
   heading,
-  headingClassName,
   id,
   message,
   person,
@@ -72,15 +69,14 @@ export function PrincipalMessage({
           <Reveal className="flex flex-col gap-5 lg:col-span-7 lg:row-start-1">
             <Eyebrow>{eyebrow}</Eyebrow>
 
-            <SplitText
-              as="h2"
-              className={cn(
-                "max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl",
-                headingClassName,
-              )}
-            >
-              {heading}
-            </SplitText>
+            {heading === undefined ? null : (
+              <SplitText
+                as="h2"
+                className="max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl"
+              >
+                {heading}
+              </SplitText>
+            )}
 
             <span className="block h-1 w-16 rounded-full bg-accent" />
           </Reveal>

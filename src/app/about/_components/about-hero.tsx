@@ -31,7 +31,7 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
             <div className="mt-8 lg:mt-10">
               <Link
                 className={cn(
-                  buttonVariants({ variant: "quiet" }),
+                  buttonVariants({ variant: "default" }),
                   "group gap-2 rounded-full px-5 w-full sm:w-auto inline-flex justify-between sm:justify-start",
                 )}
                 href={"/faculty"}

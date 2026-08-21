@@ -10,6 +10,8 @@ import { CollegeCambridge } from "./_components/college-cambridge";
 import { collegeCopy } from "./_components/college-copy";
 import { CollegeEntry } from "./_components/college-entry";
 import { CollegeMastheadFacts } from "./_components/college-masthead-facts";
+import { CollegeMilestones } from "./_components/college-milestones";
+import { collegeMilestonesCopy } from "./_components/college-milestones-copy";
 import { CollegeSubjects } from "./_components/college-subjects";
 
 export const metadata: Metadata = createMetadata({
@@ -60,8 +62,6 @@ export default async function CollegePage() {
       {principal === null ? null : (
         <PrincipalMessage
           eyebrow={collegeCopy.principal.eyebrow}
-          heading={collegeCopy.principal.heading}
-          headingClassName="!text-3xl sm:!text-4xl whitespace-pre-line"
           id="principal"
           message={collegeCopy.principal.message}
           person={{
@@ -73,6 +73,7 @@ export default async function CollegePage() {
       )}
 
       <CollegeCambridge copy={collegeCopy.cambridge} />
+      <CollegeMilestones copy={collegeMilestonesCopy} />
       <CollegeSubjects copy={collegeCopy.subjects} />
 
       <SharedCampusGallery

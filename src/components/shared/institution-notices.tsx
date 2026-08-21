@@ -6,7 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
 import type { EntityRole, IsoDate } from "@/lib/content";
-import { content, isPlaceholder } from "@/lib/content";
+import { content } from "@/lib/content";
 import { ArrowRightIcon, LocationIcon } from "@/lib/icons";
 import { INSTITUTION_PARAM } from "@/lib/institution-filter";
 import { cn } from "@/lib/utils";
@@ -45,10 +45,7 @@ export async function InstitutionNotices({
 
   const notices = updates
     .filter(
-      (item) =>
-        item.kind === "notice" &&
-        item.institution === institution &&
-        !isPlaceholder(item.title),
+      (item) => item.kind === "notice" && item.institution === institution,
     )
     .slice(0, NOTICE_COUNT);
 
@@ -106,12 +103,13 @@ export async function InstitutionNotices({
                   data-reveal-item=""
                   key={item.id}
                 >
-                  <time
-                    className="font-body text-xs font-medium tracking-widest text-accent uppercase sm:pt-1"
+                  <Eyebrow
+                    as="time"
+                    className="sm:pt-1"
                     dateTime={item.publishedAt}
                   >
                     {formatDate(item.publishedAt)}
-                  </time>
+                  </Eyebrow>
 
                   <div>
                     <h3 className="font-display text-2xl font-normal text-balance text-ink">

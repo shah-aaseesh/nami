@@ -59,9 +59,9 @@ function GroupSubjects({
           >
             {subject.name}
             {subject.compulsory ? (
-              <span className="ml-2 align-middle font-body text-xs font-medium tracking-widest text-accent uppercase">
+              <Eyebrow as="span" className="ml-2 align-middle">
                 {copy.compulsoryLabel}
-              </span>
+              </Eyebrow>
             ) : null}
           </li>
         ))}

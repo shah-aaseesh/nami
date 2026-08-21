@@ -49,9 +49,7 @@ export function HeroSlider({
         ))}
       </CarouselContent>
 
-      <CarouselDots
-        getDotLabel={(index) => `Show image ${index + 1} of ${slides.length}`}
-      />
+      <CarouselDots dotLabel="Show image" />
     </Carousel>
   );
 }

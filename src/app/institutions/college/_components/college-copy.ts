@@ -221,8 +221,6 @@ export const collegeCopy = {
   principal: {
     slug: "leader-phillip-hilario",
     eyebrow: "From the Principal",
-    heading:
-      "At NAMI College, we are not only\neducating minds, we are cultivating a\ncommunity of thinkers and scholars.",
     portrait: principalPortrait,
     message: richText(
       "Dear Parents and well-wishers,",

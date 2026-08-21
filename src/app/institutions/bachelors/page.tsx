@@ -69,7 +69,6 @@ export default async function BachelorsPage() {
       {academicHead === null ? null : (
         <PrincipalMessage
           eyebrow={bachelorsCopy.academicHead.eyebrow}
-          heading={bachelorsCopy.academicHead.heading}
           id="academic-head"
           message={bachelorsCopy.academicHead.message}
           person={{

@@ -17,9 +17,7 @@ function LeaderGroup({
 
   return (
     <div>
-      <p className="mb-8 font-body text-xs font-medium tracking-widest text-accent uppercase">
-        {label}
-      </p>
+      <Eyebrow className="mb-8">{label}</Eyebrow>
       <Reveal className={columns} stagger={0.1}>
         {leaders.map((leader) => (
           <RevealItem className="border-t border-border pt-5" key={leader.id}>

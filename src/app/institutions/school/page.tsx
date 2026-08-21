@@ -37,13 +37,11 @@ export default async function SchoolPage() {
         logo={schoolCopy.masthead.logo}
         standfirst={schoolCopy.masthead.tagline}
         primaryCta={schoolCopy.masthead.admissionCta}
-        secondaryCta={schoolCopy.masthead.website}
       />
 
       {principal === null ? null : (
         <PrincipalMessage
           eyebrow={schoolCopy.principal.eyebrow}
-          heading={schoolCopy.principal.heading}
           id="principal"
           message={schoolCopy.principal.message}
           person={{
@@ -54,10 +52,10 @@ export default async function SchoolPage() {
         />
       )}
 
-      <SchoolAdmission copy={schoolCopy.admission} id="admission" />
       <SchoolBands copy={schoolCopy.bands} id="academics" />
+      <SchoolAdmission copy={schoolCopy.admission} id="admission" />
 
-      <SchoolDay copy={schoolCopy.day} id="campus" />
+      <SchoolDay copy={schoolCopy.day} id="day" />
 
       <Testimonials
         id="parents"

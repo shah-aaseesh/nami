@@ -141,10 +141,10 @@ const masthead: BachelorsMastheadCopy = {
   heroLabel: "NAMI campus at New Baneshwor",
   slides: heroSlides,
   logo: {
-    src: "/logo.png",
+    src: "/logo/nami-color.svg",
     alt: "NAMI logo",
-    width: 250,
-    height: 96,
+    width: 200,
+    height: 200,
   },
   motto: "Transform yourself, to lead the world",
   heading: "NAAYA AAYAM MULTI-DISCIPLINARY INSTITUTE",
@@ -161,7 +161,7 @@ const awarding: BachelorsAwardingCopy = {
   eyebrow: "Awarding universities",
   heading: "The universities awarding the degrees taught on this campus.",
   standfirst:
-    "Since 2012, every degree taught at New Baneshwor has been awarded by the University of Northampton. From 2026, Kathmandu University joins it with the BSc in Environmental Studies, and the University of Hertfordshire with the BSc (Hons) in Data Science.",
+    "Taught here, awarded elsewhere — the university behind each degree sits below.",
   sinceLabel: "Since",
   offerNote:
     "All decisions regarding an offer letter for a University of Northampton programme are made by the University of Northampton, UK.",
@@ -193,7 +193,7 @@ const programmes: BachelorsProgrammesCopy = {
   eyebrow: "Academics",
   heading: "Every degree taught here, and who awards it.",
   standfirst:
-    "Every degree running on this campus today is awarded by the University of Northampton, UK. Environmental Studies is awarded by Kathmandu University and begins in August 2026; Data Science is awarded by the University of Hertfordshire and begins in September 2026.",
+    "Every degree here, paired with the university that awards it, below.",
   awardedLabel: "Awarded by",
   startingLabel: "Begins",
   pendingLabel: "Programme detail",
@@ -1151,7 +1151,6 @@ export const bachelorsCopy = {
   academicHead: {
     slug: "leader-nischal-khadka",
     eyebrow: "From the Academic Head",
-    heading: "A welcome to the Undergraduate and Graduate programmes at NAMI.",
     portrait: academicHeadPortrait,
     message: richText(
       "I extend a warm welcome to the Undergraduate and Graduate Program at NAMI, in partnership with the University of Northampton (UON), United Kingdom.",

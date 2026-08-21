@@ -45,6 +45,31 @@ export const siteRoutes: readonly SiteRoute[] = [
     changeFrequency: "monthly",
     priority: 0.9,
   },
+  {
+    path: "/institutions/bachelors/computer-science",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/bachelors/environmental-science",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/bachelors/environmental-studies",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/bachelors/business-administration",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/bachelors/msc-computing",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
   { path: "/admissions", changeFrequency: "weekly", priority: 0.9 },
   { path: "/faculty", changeFrequency: "monthly", priority: 0.7 },
   { path: "/student-life", changeFrequency: "monthly", priority: 0.7 },

@@ -16,16 +16,15 @@ export type SchoolHeroCopy = {
   readonly eyebrow: string;
   readonly tagline: string;
   readonly heroLabel: string;
-  readonly logo: ContentImage;
   readonly slides: readonly SharedHeroSlide[];
   readonly admissionCta: ContentLink;
 };
 
 const principalPortrait: ContentImage = {
-  src: "/nami/school-principal.jpg",
-  alt: "Ms. Anisha Panday Joshi, Principal of NAMI International School, smiling with hands clasped, wearing a deep red long coat over a patterned cream-and-red shawl, cut out on a white background.",
-  width: 378,
-  height: 442,
+  src: "/team/anisha-panday-joshi.jpg",
+  alt: "Studio portrait of Ms. Anisha Panday Joshi, Principal of NAMI International School, hands clasped in an olive and red patterned sari over a red blouse against a mottled blue-grey backdrop.",
+  width: 1154,
+  height: 1600,
 };
 
 const heroSlides: readonly SharedHeroSlide[] = [
@@ -65,16 +64,10 @@ const masthead: SchoolHeroCopy = {
   eyebrow: "Gokarneshwor-7, Kathmandu",
   tagline: `From ${schoolGrades.labelPlural} to +2 in Science and Management.`,
   heroLabel: "NAMI International School",
-  logo: {
-    src: "/universities/nami-school.png",
-    alt: "NAMI International School logo",
-    width: 250,
-    height: 96,
-  },
   slides: heroSlides,
   admissionCta: {
     label: "Apply for admission",
-    href: "#admission",
+    href: "/admissions",
     destination: "internal",
   },
 };
@@ -384,6 +377,15 @@ const admission: SchoolAdmissionCopy = {
       body: "Parents or guardians attend an Open House to receive the Parent's and Student's Handbook, the curriculum details and the other essential documents.",
     },
   ],
+  callHeading: "Ready to enrol?",
+  callBody:
+    "The admissions team will guide you through every step. Call the school, or start the enquiry online and they will come back to you.",
+  cta: {
+    label: "Start an admission",
+    href: "/admissions",
+    destination: "internal",
+  },
+  phoneLabel: "Call the school",
 };
 
 const gallery: InstitutionGalleryCopy = {

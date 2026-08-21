@@ -145,18 +145,7 @@
 @theme {
   --gutter-x: clamp(1.25rem, 0.4643rem + 3.9286vw, 4rem);
 
-  /* School hero — hero-progress must match AUTOPLAY_MS in school-hero-slider.tsx */
-  --animate-hero-progress: hero-progress 6.5s linear forwards;
   --animate-hero-fade: hero-fade 0.7s ease-out both;
-
-  @keyframes hero-progress {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
 
   @keyframes hero-fade {
     from {

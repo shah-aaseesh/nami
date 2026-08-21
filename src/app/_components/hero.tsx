@@ -173,8 +173,9 @@ export async function Hero() {
               <Carousel
                 aria-label={hero.eyebrow}
                 aria-roledescription="carousel"
+                autoplay
                 className="flex flex-col gap-6"
-                opts={{ align: "start", duration: 18 }}
+                opts={{ align: "start", duration: 18, loop: true }}
               >
                 <CarouselContent
                   className="h-full"

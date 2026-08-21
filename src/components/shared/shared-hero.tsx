@@ -1,10 +1,9 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Display } from "@/components/ui/typography";
-import type { ContentImage, ContentLink, NamedEntity } from "@/lib/content";
+import type { ContentLink, NamedEntity } from "@/lib/content";
 import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { type SharedHeroSlide, SharedHeroSlider } from "./shared-hero-slider";
@@ -15,7 +14,6 @@ export type SharedHeroProps = {
   readonly entity: NamedEntity;
   readonly heroLabel: string;
   readonly slides: readonly SharedHeroSlide[];
-  readonly logo?: ContentImage;
   readonly heading?: string;
   readonly headingClassName?: string;
   readonly standfirst: string;
@@ -27,7 +25,6 @@ export function SharedHero({
   entity,
   heroLabel,
   slides,
-  logo,
   heading,
   headingClassName,
   standfirst,
@@ -48,7 +45,7 @@ export function SharedHero({
     >
       <div className="mx-auto max-w-page">
         <SharedHeroSlider
-          className="flex flex-col rounded-3xl bg-neutral-950 p-5 sm:rounded-4xl sm:p-8 lg:px-10 xl:aspect-21/9"
+          className="flex flex-col justify-center rounded-3xl bg-neutral-950 p-5 sm:rounded-4xl sm:p-8 lg:px-10 xl:aspect-21/9"
           label={heroLabel}
           slides={slides}
         >
@@ -78,20 +75,6 @@ export function SharedHero({
                   <span className="block text-primary-200">{rest}</span>
                 )}
               </Display>
-
-              {logo ? (
-                <span className="inline-flex shrink-0 animate-hero-fade items-center self-end rounded-2xl bg-white px-6 py-3 shadow-lg shadow-neutral-950/20 sm:self-auto">
-                  <Image
-                    alt=""
-                    className="h-7 w-auto sm:h-8"
-                    height={logo.height}
-                    sizes="84px"
-                    src={logo.src}
-                    width={logo.width}
-                  />
-                  <span className="sr-only">{entity.name}</span>
-                </span>
-              ) : null}
             </div>
 
             <p className="max-w-xl animate-hero-fade font-body text-base text-pretty text-white/80 [animation-delay:200ms] sm:text-lg">

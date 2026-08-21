@@ -45,12 +45,6 @@ export default async function CollegePage() {
         heading={collegeCopy.masthead.heading}
         standfirst={collegeCopy.masthead.standfirst}
         primaryCta={collegeCopy.masthead.cta}
-        logo={{
-          src: "/universities/nami-college.png",
-          alt: "NAMI College",
-          width: 250,
-          height: 96,
-        }}
       />
 
       <CollegeMastheadFacts

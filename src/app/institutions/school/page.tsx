@@ -27,6 +27,7 @@ export default async function SchoolPage() {
     leadership.academics.find(
       (item) => item.slug === schoolCopy.principal.slug,
     ) ?? null;
+  const phone = institution.contact.phones[0] ?? null;
 
   return (
     <>
@@ -34,7 +35,6 @@ export default async function SchoolPage() {
         entity={institution.entities.school}
         heroLabel={schoolCopy.masthead.heroLabel}
         slides={schoolCopy.masthead.slides}
-        logo={schoolCopy.masthead.logo}
         standfirst={schoolCopy.masthead.tagline}
         primaryCta={schoolCopy.masthead.admissionCta}
       />
@@ -53,7 +53,7 @@ export default async function SchoolPage() {
       )}
 
       <SchoolBands copy={schoolCopy.bands} id="academics" />
-      <SchoolAdmission copy={schoolCopy.admission} id="admission" />
+      <SchoolAdmission copy={schoolCopy.admission} phone={phone} />
 
       <SchoolDay copy={schoolCopy.day} id="day" />
 

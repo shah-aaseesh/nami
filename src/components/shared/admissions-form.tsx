@@ -73,6 +73,13 @@ function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
   return steps;
 }
 
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 function emptyEmployment() {
   return {
     id: crypto.randomUUID(),
@@ -109,25 +116,38 @@ function QualificationRow({
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
         <div className="flex flex-col gap-2">
-          <Label>Place of Study</Label>
-          <Input {...register(`qualifications.${index}.place`)} />
+          <Label htmlFor={`qualifications-${index}-place`}>
+            Place of Study
+          </Label>
+          <Input
+            id={`qualifications-${index}-place`}
+            {...register(`qualifications.${index}.place`)}
+          />
         </div>
         <div className="flex flex-col gap-2">
-          <Label>Dates Attended</Label>
+          <Label htmlFor={`qualifications-${index}-dates`}>
+            Dates Attended
+          </Label>
           <Input
+            id={`qualifications-${index}-dates`}
             placeholder="e.g. 2018 - 2022"
             {...register(`qualifications.${index}.dates`)}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label>Awards / Grades</Label>
+          <Label htmlFor={`qualifications-${index}-awards`}>
+            Awards / Grades
+          </Label>
           <Input
+            id={`qualifications-${index}-awards`}
             placeholder="e.g. GPA 3.8 / A+"
             {...register(`qualifications.${index}.awards`)}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label>Date Obtained</Label>
+          <Label id={`qualifications-${index}-date-obtained-label`}>
+            Date Obtained
+          </Label>
           <Controller
             control={control}
             name={`qualifications.${index}.dateObtained`}
@@ -137,6 +157,7 @@ function QualificationRow({
                   render={
                     <Button
                       type="button"
+                      aria-labelledby={`qualifications-${index}-date-obtained-label`}
                       className={cn(
                         "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
                         !field.value && "text-ink-muted",
@@ -193,23 +214,37 @@ function EmploymentRow({
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
         <div className="flex flex-col gap-2">
-          <Label>Employer Name & Address</Label>
-          <Input {...register(`employment.${index}.employer`)} />
+          <Label htmlFor={`employment-${index}-employer`}>
+            Employer Name & Address
+          </Label>
+          <Input
+            id={`employment-${index}-employer`}
+            {...register(`employment.${index}.employer`)}
+          />
         </div>
         <div className="flex flex-col gap-2">
-          <Label>Dates (From - To)</Label>
+          <Label htmlFor={`employment-${index}-dates`}>Dates (From - To)</Label>
           <Input
+            id={`employment-${index}-dates`}
             placeholder="e.g. Jan 2021 - Present"
             {...register(`employment.${index}.dates`)}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label>Position Held</Label>
-          <Input {...register(`employment.${index}.position`)} />
+          <Label htmlFor={`employment-${index}-position`}>Position Held</Label>
+          <Input
+            id={`employment-${index}-position`}
+            {...register(`employment.${index}.position`)}
+          />
         </div>
         <div className="flex flex-col gap-2 md:col-span-2">
-          <Label>Brief Description of Duties</Label>
-          <Textarea {...register(`employment.${index}.duties`)} />
+          <Label htmlFor={`employment-${index}-duties`}>
+            Brief Description of Duties
+          </Label>
+          <Textarea
+            id={`employment-${index}-duties`}
+            {...register(`employment.${index}.duties`)}
+          />
         </div>
       </div>
     </div>
@@ -364,7 +399,7 @@ export function MultiStepForm() {
             </H3>
             <div className="space-y-4">
               <div className="flex flex-col gap-2">
-                <Label>Program</Label>
+                <Label id="program-label">Program</Label>
                 <Controller
                   control={control}
                   name="program"
@@ -375,7 +410,10 @@ export function MultiStepForm() {
                       }
                       value={field.value}
                     >
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger
+                        className="w-full"
+                        aria-labelledby="program-label"
+                      >
                         <SelectValue placeholder="Select a program" />
                       </SelectTrigger>
                       <SelectContent>
@@ -390,8 +428,9 @@ export function MultiStepForm() {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <Label>Proposed Course/s</Label>
+                <Label htmlFor="proposedCourse">Proposed Course/s</Label>
                 <Input
+                  id="proposedCourse"
                   placeholder="e.g. Science, Management, BSc Computing..."
                   {...register("proposedCourse")}
                 />
@@ -407,15 +446,15 @@ export function MultiStepForm() {
             </H3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <Label>First Name</Label>
-                <Input {...register("firstName")} />
+                <Label htmlFor="firstName">First Name</Label>
+                <Input id="firstName" {...register("firstName")} />
               </div>
               <div className="flex flex-col gap-2">
-                <Label>Surname</Label>
-                <Input {...register("surname")} />
+                <Label htmlFor="surname">Surname</Label>
+                <Input id="surname" {...register("surname")} />
               </div>
               <div className="flex flex-col gap-2">
-                <Label>Date of Birth</Label>
+                <Label id="dob-label">Date of Birth</Label>
                 <Controller
                   control={control}
                   name="dob"
@@ -425,6 +464,7 @@ export function MultiStepForm() {
                         render={
                           <Button
                             type="button"
+                            aria-labelledby="dob-label"
                             className={cn(
                               "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
                               !field.value && "text-ink-muted",
@@ -458,24 +498,25 @@ export function MultiStepForm() {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <Label>Nationality</Label>
-                <Input {...register("nationality")} />
+                <Label htmlFor="nationality">Nationality</Label>
+                <Input id="nationality" {...register("nationality")} />
               </div>
               <div className="flex flex-col gap-2">
-                <Label>Telephone Number</Label>
-                <Input type="tel" {...register("telephone")} />
+                <Label htmlFor="telephone">Telephone Number</Label>
+                <Input id="telephone" type="tel" {...register("telephone")} />
               </div>
               <div className="flex flex-col gap-2">
-                <Label>Email Address</Label>
-                <Input type="email" {...register("email")} />
+                <Label htmlFor="email">Email Address</Label>
+                <Input id="email" type="email" {...register("email")} />
               </div>
               <div className="flex flex-col gap-2 md:col-span-2">
-                <Label>Photo Upload</Label>
+                <Label htmlFor="photo">Photo Upload</Label>
                 <P className="text-xs text-ink-muted">
                   Files stay on this device. They are not sent anywhere and are
                   not included in the PDF you download.
                 </P>
                 <Input
+                  id="photo"
                   type="file"
                   accept="image/*"
                   onChange={(e) =>
@@ -521,20 +562,28 @@ export function MultiStepForm() {
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <Label>Name</Label>
-                  <Input {...register("fatherName")} />
+                  <Label htmlFor="fatherName">Name</Label>
+                  <Input id="fatherName" {...register("fatherName")} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Contact Number</Label>
-                  <Input type="tel" {...register("fatherContact")} />
+                  <Label htmlFor="fatherContact">Contact Number</Label>
+                  <Input
+                    id="fatherContact"
+                    type="tel"
+                    {...register("fatherContact")}
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Email</Label>
-                  <Input type="email" {...register("fatherEmail")} />
+                  <Label htmlFor="fatherEmail">Email</Label>
+                  <Input
+                    id="fatherEmail"
+                    type="email"
+                    {...register("fatherEmail")}
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Job Designation</Label>
-                  <Input {...register("fatherJob")} />
+                  <Label htmlFor="fatherJob">Job Designation</Label>
+                  <Input id="fatherJob" {...register("fatherJob")} />
                 </div>
               </div>
             </div>
@@ -545,20 +594,28 @@ export function MultiStepForm() {
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <Label>Name</Label>
-                  <Input {...register("motherName")} />
+                  <Label htmlFor="motherName">Name</Label>
+                  <Input id="motherName" {...register("motherName")} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Contact Number</Label>
-                  <Input type="tel" {...register("motherContact")} />
+                  <Label htmlFor="motherContact">Contact Number</Label>
+                  <Input
+                    id="motherContact"
+                    type="tel"
+                    {...register("motherContact")}
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Email</Label>
-                  <Input type="email" {...register("motherEmail")} />
+                  <Label htmlFor="motherEmail">Email</Label>
+                  <Input
+                    id="motherEmail"
+                    type="email"
+                    {...register("motherEmail")}
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Job Designation</Label>
-                  <Input {...register("motherJob")} />
+                  <Label htmlFor="motherJob">Job Designation</Label>
+                  <Input id="motherJob" {...register("motherJob")} />
                 </div>
               </div>
             </div>
@@ -569,12 +626,18 @@ export function MultiStepForm() {
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <Label>Secondary Contact Number</Label>
-                  <Input type="tel" {...register("secondaryContact")} />
+                  <Label htmlFor="secondaryContact">
+                    Secondary Contact Number
+                  </Label>
+                  <Input
+                    id="secondaryContact"
+                    type="tel"
+                    {...register("secondaryContact")}
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Relationship to Student</Label>
-                  <Input {...register("relationship")} />
+                  <Label htmlFor="relationship">Relationship to Student</Label>
+                  <Input id="relationship" {...register("relationship")} />
                 </div>
               </div>
             </div>
@@ -616,8 +679,11 @@ export function MultiStepForm() {
                   Qualifications Pending
                 </H3>
                 <div className="flex flex-col gap-2">
-                  <Label>Are you currently awaiting any results?</Label>
+                  <Label htmlFor="pendingQualifications">
+                    Are you currently awaiting any results?
+                  </Label>
                   <Textarea
+                    id="pendingQualifications"
                     placeholder="Please list any exams taken for which results are pending..."
                     className="min-h-[100px]"
                     {...register("pendingQualifications")}
@@ -666,18 +732,21 @@ export function MultiStepForm() {
 
             <div className="space-y-4">
               <div className="flex flex-col gap-2">
-                <Label>Personal Statement</Label>
+                <Label htmlFor="personalStatement">Personal Statement</Label>
                 <P className="text-xs text-ink-muted">
                   Please provide a brief statement supporting your application.
                 </P>
                 <Textarea
+                  id="personalStatement"
                   className="min-h-[120px]"
                   {...register("personalStatement")}
                 />
               </div>
 
-              <div className="flex flex-col gap-3 pt-6">
-                <Label>How did you hear of NAMI?</Label>
+              <fieldset className="flex flex-col gap-3 pt-6">
+                <legend className="text-sm font-medium leading-none text-ink">
+                  How did you hear of NAMI?
+                </legend>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {[
                     "Social Media",
@@ -686,44 +755,48 @@ export function MultiStepForm() {
                     "Advertisement",
                     "Website",
                     "Other",
-                  ].map((option) => (
-                    <div key={option} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={`hear-${option}`}
-                        checked={howDidYouHear.includes(option)}
-                        onCheckedChange={(checked) => {
-                          if (checked) {
-                            setValue("howDidYouHear", [
-                              ...howDidYouHear,
-                              option,
-                            ]);
-                          } else {
-                            setValue(
-                              "howDidYouHear",
-                              howDidYouHear.filter((o) => o !== option),
-                            );
-                          }
-                        }}
-                      />
-                      <Label
-                        htmlFor={`hear-${option}`}
-                        className="font-normal cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {option}
-                      </Label>
-                    </div>
-                  ))}
+                  ].map((option) => {
+                    const optionId = `hear-${slugify(option)}`;
+                    return (
+                      <div key={option} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={optionId}
+                          checked={howDidYouHear.includes(option)}
+                          onCheckedChange={(checked) => {
+                            if (checked) {
+                              setValue("howDidYouHear", [
+                                ...howDidYouHear,
+                                option,
+                              ]);
+                            } else {
+                              setValue(
+                                "howDidYouHear",
+                                howDidYouHear.filter((o) => o !== option),
+                              );
+                            }
+                          }}
+                        />
+                        <Label
+                          htmlFor={optionId}
+                          className="font-normal cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {option}
+                        </Label>
+                      </div>
+                    );
+                  })}
                 </div>
-              </div>
+              </fieldset>
 
               <div className="flex flex-col gap-2 pt-6">
-                <Label>Criminal Convictions</Label>
+                <Label htmlFor="criminalRecord">Criminal Convictions</Label>
                 <P className="text-xs text-ink-muted">
                   Please upload your Police Record Certification if applicable.
                   Files stay on this device. They are not sent anywhere and are
                   not included in the PDF you download.
                 </P>
                 <Input
+                  id="criminalRecord"
                   type="file"
                   onChange={(e) =>
                     setValue("criminalRecord", e.target.files?.[0] || null)
@@ -740,11 +813,13 @@ export function MultiStepForm() {
                 </P>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                   <div className="flex flex-col gap-2">
-                    <Label>Student Signature (Type Name)</Label>
-                    <Input {...register("signature")} />
+                    <Label htmlFor="signature">
+                      Student Signature (Type Name)
+                    </Label>
+                    <Input id="signature" {...register("signature")} />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Label>Date</Label>
+                    <Label id="signatureDate-label">Date</Label>
                     <Controller
                       control={control}
                       name="signatureDate"
@@ -754,6 +829,7 @@ export function MultiStepForm() {
                             render={
                               <Button
                                 type="button"
+                                aria-labelledby="signatureDate-label"
                                 className={cn(
                                   "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
                                   !field.value && "text-ink-muted",
@@ -902,24 +978,16 @@ export function MultiStepForm() {
                   Next Step <Icon icon={ArrowRightIcon} className="size-4" />
                 </Button>
               ) : (
-                <div className="flex flex-wrap items-center gap-3">
-                  <Button
-                    type="button"
-                    variant="default"
-                    onClick={downloadPdf}
-                    disabled={isPreparingPdf}
-                    className="gap-2 px-6 h-12 border border-border"
-                  >
-                    {isPreparingPdf ? "Preparing PDF" : "Download PDF"}
-                    <Icon icon={DownloadIcon} className="size-4" />
-                  </Button>
-                  <Button
-                    type="button"
-                    className="gap-2 px-6 h-12 bg-accent hover:bg-accent/90 text-white"
-                  >
-                    Submit Inquiry <Icon icon={CheckIcon} className="size-4" />
-                  </Button>
-                </div>
+                <Button
+                  type="button"
+                  variant="default"
+                  onClick={downloadPdf}
+                  disabled={isPreparingPdf}
+                  className="gap-2 px-6 h-12 border border-border"
+                >
+                  {isPreparingPdf ? "Preparing PDF" : "Download PDF"}
+                  <Icon icon={DownloadIcon} className="size-4" />
+                </Button>
               )}
             </div>
           </div>

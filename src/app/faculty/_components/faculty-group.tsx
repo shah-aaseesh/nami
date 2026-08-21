@@ -5,9 +5,11 @@ import { cn } from "@/lib/utils";
 import { FacultyGroupTrack } from "./faculty-group-track";
 
 export function FacultyGroup({
+  isFirstGroup = false,
   leaders,
   title,
 }: {
+  readonly isFirstGroup?: boolean;
   readonly leaders: readonly Leader[];
   readonly title: string;
 }) {
@@ -22,7 +24,7 @@ export function FacultyGroup({
     </H2>
   );
 
-  const cards = leaders.map((leader) => (
+  const cards = leaders.map((leader, index) => (
     <div
       className={cn(
         "group flex flex-col snap-center shrink-0 w-[75vw] max-w-[260px] sm:w-[40vw] sm:max-w-[280px]",
@@ -34,12 +36,14 @@ export function FacultyGroup({
       )}
       key={leader.id}
     >
-      <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-neutral-100 border border-border/40">
+      <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-neutral-100 border border-border/40">
         {leader.portrait ? (
           <Image
             alt={leader.portrait.alt}
-            className="absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            fetchPriority={isFirstGroup && index === 0 ? "high" : "auto"}
             fill
+            loading={isFirstGroup && index === 0 ? "eager" : "lazy"}
             sizes="(max-width: 640px) 260px, (max-width: 1024px) 280px, 25vw"
             src={leader.portrait.src}
           />

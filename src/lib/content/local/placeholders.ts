@@ -1,6 +1,6 @@
 import { entryOf, isoDate } from "../identifiers";
 import { placeholderData, placeholderText } from "../placeholder-registry";
-import type { ContentLink, Update } from "../types";
+import type { Award, ContentLink, Update } from "../types";
 import {
   readingHall,
   readingRoom,
@@ -77,16 +77,6 @@ export const bachelorMasterAdmissionLink: ContentLink = {
   href: "https://college.nami.edu.np/",
   destination: "external",
 };
-
-export const ctevtEstablishedYear = placeholderData(
-  "homepage.institutionsSection.ctevt.establishedYear",
-  "update",
-  {
-    year: 2024,
-    caution:
-      "Placeholder year for CTEVT's card — the source documents record CTEVT's approval as 2026, not 2024. Confirm the real year before launch.",
-  },
-);
 
 export const preRegistrationNoticeExcerpt = placeholderText(
   "updates[pre-registration-open-for-a-level].excerpt",
@@ -379,6 +369,57 @@ export const placeholderUpdates: readonly Update[] = [
       venue: null,
       link: null,
       image: null,
+    },
+  ),
+];
+
+export const placeholderAwards: readonly Award[] = [
+  placeholderData<Award>(
+    "aboutCopy.awards[award-placeholder-teaching]",
+    "update",
+    {
+      ...entryOf("award-placeholder-teaching"),
+      title: "Excellence in Teaching and Learning",
+      awardingBody: "National education awards panel",
+      year: 2024,
+      citation:
+        "Placeholder award. NAMI's real awards list is still owed from the client, and every entry in this section must be replaced before launch.",
+    },
+  ),
+  placeholderData<Award>(
+    "aboutCopy.awards[award-placeholder-emerging]",
+    "update",
+    {
+      ...entryOf("award-placeholder-emerging"),
+      title: "Best Emerging Institution",
+      awardingBody: "Regional schools association",
+      year: 2022,
+      citation:
+        "Placeholder award, standing in until the client supplies NAMI's real recognition record.",
+    },
+  ),
+  placeholderData<Award>(
+    "aboutCopy.awards[award-placeholder-students]",
+    "update",
+    {
+      ...entryOf("award-placeholder-students"),
+      title: "Outstanding Student Achievement",
+      awardingBody: "Inter-college academic council",
+      year: 2020,
+      citation:
+        "Placeholder award. The citation that belongs here is owed from the client and has not been supplied.",
+    },
+  ),
+  placeholderData<Award>(
+    "aboutCopy.awards[award-placeholder-sustainability]",
+    "update",
+    {
+      ...entryOf("award-placeholder-sustainability"),
+      title: "Campus Sustainability Commendation",
+      awardingBody: "City sustainability forum",
+      year: 2018,
+      citation:
+        "Placeholder award, seeded so this section can be reviewed. NAMI's real awards are still owed from the client.",
     },
   ),
 ];

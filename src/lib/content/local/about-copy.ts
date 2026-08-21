@@ -1,5 +1,6 @@
 import type { AboutCopy } from "../types";
 import { auditoriumGathering, readingHall, studentsOnCampus } from "./images";
+import { placeholderAwards } from "./placeholders";
 
 export const aboutCopy: AboutCopy = {
   metaTitle: "About NAMI",
@@ -12,6 +13,7 @@ export const aboutCopy: AboutCopy = {
   overviewImage: studentsOnCampus,
   statsImage: readingHall,
   creedImage: auditoriumGathering,
+  awards: placeholderAwards,
   sections: {
     chronology: {
       navLabel: "About NAMI",
@@ -45,21 +47,22 @@ export const aboutCopy: AboutCopy = {
       cta: null,
       emptyState: null,
     },
+    awards: {
+      navLabel: "Awards",
+      eyebrow: "Awards & honours",
+      heading: "What NAMI has been awarded.",
+      standfirst:
+        "Distinctions the institution and its students have carried home, and the bodies that conferred them.",
+      cta: null,
+      emptyState:
+        "NAMI is compiling its awards record — this space is reserved for it.",
+    },
     stats: {
       navLabel: "NAMI in numbers",
       eyebrow: "The record",
       heading: "The institution, in numbers.",
       standfirst:
         "A decade of teaching across four academic levels, measured in the people it has graduated.",
-      cta: null,
-      emptyState: null,
-    },
-    leadership: {
-      navLabel: "Leadership",
-      eyebrow: "The people behind NAMI",
-      heading: "The people behind NAMI.",
-      standfirst:
-        "A board, a management team and academic heads who keep the institution accountable to its motto.",
       cta: null,
       emptyState: null,
     },

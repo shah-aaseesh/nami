@@ -51,10 +51,13 @@ function postalAddress(campus: Campus): JsonLdNode {
   };
 }
 
-function credentialNode(affiliation: Affiliation): JsonLdNode {
+function credentialNode(affiliation: Affiliation): JsonLdNode | null {
+  const name = publishable(affiliation.scope);
+  if (name === undefined) return null;
+
   return {
     "@type": "EducationalOccupationalCredential",
-    name: publishable(affiliation.scope),
+    name,
     recognizedBy: {
       "@type": "Organization",
       name: publishable(affiliation.body),
@@ -73,6 +76,10 @@ function organizationNode(
     )
     .map((site) => site.href);
 
+  const credentials = affiliations
+    .map(credentialNode)
+    .filter((node) => node !== null);
+
   const url = absoluteUrl("/");
   const { college, institute, school } = profile.entities;
 
@@ -90,7 +97,7 @@ function organizationNode(
       .map(publishable)
       .find((phone) => phone !== undefined),
     email: publishable(profile.contact.email),
-    hasCredential: affiliations.map(credentialNode),
+    hasCredential: credentials.length > 0 ? credentials : undefined,
     sameAs: sameAs.length > 0 ? sameAs : undefined,
   };
 }

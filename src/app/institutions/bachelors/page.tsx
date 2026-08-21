@@ -55,7 +55,6 @@ export default async function BachelorsPage() {
         headingClassName="!text-3xl sm:!text-4xl lg:!text-[4rem]"
         standfirst={bachelorsCopy.masthead.standfirst}
         primaryCta={bachelorsCopy.masthead.cta}
-        logo={bachelorsCopy.masthead.logo}
       />
       <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
 

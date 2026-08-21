@@ -116,17 +116,23 @@ export type VocationalApproval = {
   readonly council: string;
   readonly scope: string;
   readonly approvedYear: number;
-  readonly approvedYearNote: string | null;
 };
 
 export type Affiliation = ContentEntry & {
   readonly body: string;
-  readonly scope: string;
+  readonly scope: string | null;
   readonly sinceYear: number;
   readonly levelSlug: Slug;
   readonly campusSlug: Slug;
   readonly note: string | null;
   readonly logo: string | ContentImage | null;
+};
+
+export type Award = ContentEntry & {
+  readonly title: string;
+  readonly awardingBody: string;
+  readonly year: number;
+  readonly citation: string | null;
 };
 
 export type PartnerKind = "industry" | "technology" | "ecosystem";
@@ -245,8 +251,8 @@ export type AboutSectionId =
   | "emblem"
   | "creed"
   | "recognition"
+  | "awards"
   | "stats"
-  | "leadership"
   | "testimonials";
 
 export type AboutCopy = {
@@ -258,6 +264,7 @@ export type AboutCopy = {
   readonly overviewImage: ContentImage | null;
   readonly statsImage: ContentImage | null;
   readonly creedImage: ContentImage | null;
+  readonly awards: readonly Award[];
   readonly sections: Readonly<Record<AboutSectionId, SectionCopy>>;
 };
 

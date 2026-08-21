@@ -14,6 +14,7 @@ import {
 } from "react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import { useCarouselAutoplay } from "@/hooks/motion/use-carousel-autoplay";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +24,7 @@ type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
 
 type CarouselProps = {
+  readonly autoplay?: boolean;
   readonly opts?: CarouselOptions;
   readonly plugins?: CarouselPlugin;
   readonly setApi?: (api: CarouselApi) => void;
@@ -51,6 +53,7 @@ function useCarousel() {
 }
 
 export function Carousel({
+  autoplay = false,
   children,
   className,
   opts,
@@ -86,6 +89,12 @@ export function Carousel({
   const scrollNext = useCallback(() => {
     api?.scrollNext();
   }, [api]);
+
+  const { pause, resume } = useCarouselAutoplay({
+    api,
+    enabled: autoplay && scrollSnaps.length > 1,
+    selectedIndex,
+  });
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "ArrowLeft") {
@@ -127,11 +136,17 @@ export function Carousel({
         selectedIndex,
       }}
     >
+      {/* biome-ignore lint/a11y/useSemanticElements: the ARIA carousel pattern pairs role="region" with aria-roledescription="carousel"; there is no semantic HTML equivalent. */}
       <div
+        {...props}
         className={cn("relative", className)}
         data-slot="carousel"
+        onBlurCapture={autoplay ? resume : undefined}
+        onFocusCapture={autoplay ? pause : undefined}
         onKeyDownCapture={onKeyDown}
-        {...props}
+        onPointerEnter={autoplay ? pause : undefined}
+        onPointerLeave={autoplay ? resume : undefined}
+        role="region"
       >
         {children}
       </div>

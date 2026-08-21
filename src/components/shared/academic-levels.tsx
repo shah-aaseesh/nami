@@ -109,7 +109,7 @@ function VocationalCard({
 
         <div className="mt-2 flex items-center border-t border-ink/15 pt-5">
           <Eyebrow as="span" className="text-ink-muted">
-            {`Est. ${approval.approvedYear}`}
+            {`Approved ${approval.approvedYear}`}
           </Eyebrow>
         </div>
       </div>

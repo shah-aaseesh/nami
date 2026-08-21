@@ -4,7 +4,6 @@ import { schoolGrades } from "../school-grades";
 import type { AcademicLevel, Programme, VocationalApproval } from "../types";
 import { AWARDING_BODIES } from "./awarding-bodies";
 import { readingRoom, schoolTransport, studentsOnCampus } from "./images";
-import { ctevtEstablishedYear } from "./placeholders";
 
 export const academicLevels: readonly AcademicLevel[] = [
   {
@@ -126,15 +125,6 @@ export const programmes: readonly Programme[] = [
     startingFrom: "August 2026",
   },
   {
-    ...entryOf("bsc-data-science"),
-    title: "Data Science",
-    shortTitle: "Data Science",
-    qualification: "BSc (Hons)",
-    awardingBody: AWARDING_BODIES.hertfordshire,
-    levelSlug: slug("bachelors"),
-    startingFrom: "September 2026",
-  },
-  {
     ...entryOf("a-level-programme"),
     title: "Science and non-science subject combinations",
     shortTitle: "Science & Non-Science",
@@ -166,6 +156,5 @@ export const programmes: readonly Programme[] = [
 export const vocationalApproval: VocationalApproval = {
   council: "Council for Technical Education and Vocational Training ( CTEVT )",
   scope: "Short-term vocational training programmes approved for NAMI",
-  approvedYear: ctevtEstablishedYear.year,
-  approvedYearNote: ctevtEstablishedYear.caution,
+  approvedYear: 2026,
 };

@@ -19,10 +19,10 @@ export type CollegeMastheadCopy = {
 };
 
 const principalPortrait: ContentImage = {
-  src: "/nami/principal-philip-badikar-hilario.jpg",
-  alt: "Philip Badikar Hilario, A Level Principal at NAMI College, standing in a checked jacket and holding a folder.",
-  width: 233,
-  height: 430,
+  src: "/team/philip-badikar-hilario.jpg",
+  alt: "Studio portrait of Mr. Philip Badikar Hilario, A Level Principal at NAMI College, arms folded in a charcoal suit and black tie against a mottled blue-grey backdrop.",
+  width: 3247,
+  height: 4223,
 };
 
 const heroSlides: readonly ContentImage[] = [
@@ -219,7 +219,7 @@ export const collegeCopy = {
   levelSlug: "college",
   masthead,
   principal: {
-    slug: "leader-phillip-hilario",
+    slug: "leader-philip-hilario",
     eyebrow: "From the Principal",
     portrait: principalPortrait,
     message: richText(

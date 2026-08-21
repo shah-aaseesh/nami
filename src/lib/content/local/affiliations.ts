@@ -57,11 +57,11 @@ export const affiliations: readonly Affiliation[] = [
   {
     ...entryOf("hertfordshire"),
     body: AWARDING_BODIES.hertfordshire,
-    scope: "Upcoming undergraduate and postgraduate programmes",
+    scope: null,
     sinceYear: 2026,
     levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
-    note: "Programmes commencing in 2026",
+    note: null,
     logo: "/universities/hertfordshire.png",
   },
 ];

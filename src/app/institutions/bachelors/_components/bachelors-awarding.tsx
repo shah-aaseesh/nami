@@ -62,9 +62,11 @@ function AwardingBodyCard({
         {item.body}
       </h3>
 
-      <p className="mt-3 font-body text-sm text-pretty text-neutral-700">
-        {item.scope}
-      </p>
+      {item.scope === null ? null : (
+        <p className="mt-3 font-body text-sm text-pretty text-neutral-700">
+          {item.scope}
+        </p>
+      )}
 
       {item.note === null ? null : (
         <Eyebrow className="mt-auto pt-4 text-primary-700">{item.note}</Eyebrow>

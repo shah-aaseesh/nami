@@ -8,10 +8,10 @@ export const principalEyebrow = "From the Principal";
 export const principalHeading = "A message from our School Principal.";
 
 export const principalPortrait: ContentImage = {
-  src: "/nami/school-principal.jpg",
-  alt: "Ms. Anisha Panday Joshi, Principal of NAMI International School, smiling with hands clasped, wearing a deep red long coat over a patterned cream-and-red shawl, cut out on a white background.",
-  width: 378,
-  height: 442,
+  src: "/team/anisha-panday-joshi.jpg",
+  alt: "Studio portrait of Ms. Anisha Panday Joshi, Principal of NAMI International School, hands clasped in an olive and red patterned sari over a red blouse against a mottled blue-grey backdrop.",
+  width: 1154,
+  height: 1600,
 };
 
 export const principalExcerpt: RichText = richText(

@@ -3,12 +3,11 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { useCarouselAutoplay } from "@/hooks/motion/use-carousel-autoplay";
 import type { ContentImage } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export type SharedHeroSlide = ContentImage;
-
-const AUTOPLAY_MS = 4000;
 
 export function SharedHeroSlider({
   children,
@@ -23,7 +22,6 @@ export function SharedHeroSlider({
 }) {
   const [emblaRef, api] = useEmblaCarousel({ duration: 30, loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   const hasMany = slides.length > 1;
 
@@ -39,19 +37,13 @@ export function SharedHeroSlider({
     };
   }, [api]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: selectedIndex is an intentional re-key — every slide change (arrows, dots, swipe) must restart the autoplay countdown.
-  useEffect(() => {
-    if (!api || !hasMany || isPaused) return;
-    const id = window.setInterval(() => {
-      if (!document.hidden) api.scrollNext();
-    }, AUTOPLAY_MS);
-    return () => window.clearInterval(id);
-  }, [api, hasMany, isPaused, selectedIndex]);
+  const { pause, resume } = useCarouselAutoplay({
+    api,
+    enabled: hasMany,
+    selectedIndex,
+  });
 
   const scrollTo = useCallback((index: number) => api?.scrollTo(index), [api]);
-
-  const pause = useCallback(() => setIsPaused(true), []);
-  const resume = useCallback(() => setIsPaused(false), []);
 
   return (
     // biome-ignore lint/a11y/useSemanticElements: the ARIA carousel pattern pairs role="region" with aria-roledescription="carousel"; there is no semantic HTML equivalent.

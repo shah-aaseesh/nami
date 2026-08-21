@@ -1,5 +1,18 @@
 import { entryOf } from "../identifiers";
 import type { Leader, LeadershipProfile } from "../types";
+import {
+  anishaPandayJoshiPortrait,
+  nischalKhadkaPortrait,
+  philipBadikarHilarioPortrait,
+  pranilPandeyPortrait,
+  rameshPrasadTiwariPortrait,
+  rameshwarThapaPortrait,
+  robinRanaPortrait,
+  samjhanaPhuyalPortrait,
+  soniJoshiPortrait,
+  sureshRajGhimirePortrait,
+  yogRajKandelSharmaPortrait,
+} from "./images";
 
 const board: readonly Leader[] = [
   {
@@ -9,7 +22,7 @@ const board: readonly Leader[] = [
     group: "board",
     brief:
       "Founder Chairman of Annapurna Ventures, a multi-sector platform of 30+ ventures across Nepal's economy. A first-generation entrepreneur and strategic investor with two decades of aviation leadership, he is Nepal's first MI-17 Commander for commercial operations and chairs Simrik Air and Annapurna Media Network.",
-    portrait: null,
+    portrait: rameshwarThapaPortrait,
   },
   {
     ...entryOf("leader-suresh-ghimire"),
@@ -18,7 +31,7 @@ const board: readonly Leader[] = [
     group: "board",
     brief:
       "Engineering management professional with an MSc from Brunel University, UK, and two decades across manufacturing, international trading and consultancy. As Director at NAMI, he blends technical knowledge with managerial expertise.",
-    portrait: null,
+    portrait: sureshRajGhimirePortrait,
   },
   {
     ...entryOf("leader-soni-joshi"),
@@ -27,7 +40,7 @@ const board: readonly Leader[] = [
     group: "board",
     brief:
       "Development practitioner, educator and gender-rights advocate. Her work spans social development and education, with international service through UN Women's organizations and Zonta International.",
-    portrait: null,
+    portrait: soniJoshiPortrait,
   },
   {
     ...entryOf("leader-yog-raj-kandel"),
@@ -36,7 +49,7 @@ const board: readonly Leader[] = [
     group: "board",
     brief:
       "Leadership experience across aviation management, corporate governance and community development. Holds an MBA Executive from Purbanchal University and an FAA Aircraft Dispatcher qualification.",
-    portrait: null,
+    portrait: yogRajKandelSharmaPortrait,
   },
   {
     ...entryOf("leader-robin-rana"),
@@ -45,7 +58,7 @@ const board: readonly Leader[] = [
     group: "board",
     brief:
       "Business leader and strategic advisor with three decades across banking, aviation, telecommunications, energy and environmental sustainability. Director of Himalayan Carbon and Hansa International.",
-    portrait: null,
+    portrait: robinRanaPortrait,
   },
   {
     ...entryOf("leader-samjhana-phuyal"),
@@ -54,7 +67,7 @@ const board: readonly Leader[] = [
     group: "board",
     brief:
       "Human-rights advocate, legal professional and social-development leader with nearly two decades in gender equality and women's rights. Holds a Master's degree in Anthropology and contributes to community-empower initiatives.",
-    portrait: null,
+    portrait: samjhanaPhuyalPortrait,
   },
   {
     ...entryOf("leader-ramesh-tiwari"),
@@ -63,7 +76,7 @@ const board: readonly Leader[] = [
     group: "board",
     brief:
       "Entrepreneur, educationist and governance professional. Board Director of Stoxkarts Securities and Kantipur Campus, and Founder Member of Kantipur Academy, contributing to institutional development and stakeholder engagement.",
-    portrait: null,
+    portrait: rameshPrasadTiwariPortrait,
   },
 ];
 
@@ -75,7 +88,7 @@ const management: readonly Leader[] = [
     group: "management",
     brief:
       "Chief Executive Officer of NAMI, leading the institution's day-to-day operations and strategic delivery across its schools and college.",
-    portrait: null,
+    portrait: pranilPandeyPortrait,
   },
 ];
 
@@ -87,7 +100,7 @@ const academics: readonly Leader[] = [
     group: "academics",
     brief:
       "Academic Head at NAMI and the NILE (Northampton Integrated Learning Environment) Champion. His career grew from lecturer to Module and Programme Leader to Academic Head; he also practises as a full-stack developer and IT consultant in .NET Core, Angular and microservices.",
-    portrait: null,
+    portrait: nischalKhadkaPortrait,
   },
   {
     ...entryOf("leader-anisha-joshi"),
@@ -96,16 +109,16 @@ const academics: readonly Leader[] = [
     group: "academics",
     brief:
       "Principal of NAMI International School with 15+ years in education leadership. Holds a Master's in Education (NOCM, UK) and an MBA in Marketing from Kathmandu University; a student-centred leader in curriculum, teacher operations and student wellbeing.",
-    portrait: null,
+    portrait: anishaPandayJoshiPortrait,
   },
   {
-    ...entryOf("leader-phillip-hilario"),
-    name: "Mr. Phillip Badikar Hilario",
+    ...entryOf("leader-philip-hilario"),
+    name: "Mr. Philip Badikar Hilario",
     title: "A Level Principal, NAMI College",
     group: "academics",
     brief:
       "A Level Principal at NAMI College with 21+ years in business and accounting education. Leads academic coordination, curriculum implementation and student development toward a culture of academic excellence.",
-    portrait: null,
+    portrait: philipBadikarHilarioPortrait,
   },
 ];
 

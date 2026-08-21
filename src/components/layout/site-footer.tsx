@@ -110,7 +110,7 @@ export async function SiteFooter() {
               <Link className="inline-block" href="/">
                 <Image
                   alt={group.shortName}
-                  className="h-16 w-auto md:h-20"
+                  className="h-20 w-auto md:h-28"
                   height={1000}
                   sizes="(min-width: 768px) 80px, 64px"
                   src="/logo/nami-white.svg"
@@ -119,7 +119,7 @@ export async function SiteFooter() {
               </Link>
 
               {summary === null ? null : (
-                <P className="mt-5 max-w-xl text-sm">{summary}</P>
+                <P className="max-w-xl text-sm">{summary}</P>
               )}
 
               <ul className="mt-6 grid gap-y-3">

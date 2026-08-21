@@ -1,36 +1,26 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   type Control,
-  Controller,
-  type UseFormRegister,
+  type FieldPath,
   useFieldArray,
   useForm,
   useWatch,
 } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
+import {
+  CheckboxField,
+  CheckboxGroupField,
+  DateField,
+  FileField,
+  SelectField,
+  TextareaField,
+  TextField,
+} from "@/components/ui/form";
 import { Icon } from "@/components/ui/icon";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { H2, H3, P } from "@/components/ui/typography";
 import {
   findInquiryCourse,
@@ -39,7 +29,6 @@ import {
 } from "@/lib/content/institutions";
 import {
   ArrowRightIcon,
-  CalendarIcon,
   CheckIcon,
   DownloadIcon,
   PlusIcon,
@@ -48,15 +37,60 @@ import {
 import { type AdmissionsFormData, admissionsSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
+type StepKey =
+  | "course"
+  | "student"
+  | "parents"
+  | "history"
+  | "employment"
+  | "additional";
+
 type Step = {
-  readonly key:
-    | "course"
-    | "student"
-    | "parents"
-    | "history"
-    | "employment"
-    | "additional";
+  readonly key: StepKey;
   readonly label: string;
+};
+
+const PROGRAM_OPTIONS = INQUIRY_COURSES.map((course) => ({
+  value: course.id,
+  label: course.label,
+}));
+
+const HEAR_OPTIONS = [
+  "Social Media",
+  "Friends / Family",
+  "School / College",
+  "Advertisement",
+  "Website",
+  "Other",
+] as const;
+
+const STEP_FIELDS: Record<StepKey, readonly FieldPath<AdmissionsFormData>[]> = {
+  course: ["program", "proposedCourse"],
+  student: [
+    "firstName",
+    "surname",
+    "dob",
+    "nationality",
+    "telephone",
+    "email",
+    "photo",
+    "specialNeeds",
+  ],
+  parents: [
+    "fatherName",
+    "fatherContact",
+    "fatherEmail",
+    "fatherJob",
+    "motherName",
+    "motherContact",
+    "motherEmail",
+    "motherJob",
+    "secondaryContact",
+    "relationship",
+  ],
+  history: ["qualifications", "pendingQualifications"],
+  employment: ["employment"],
+  additional: ["howDidYouHear", "criminalRecord", "signature", "signatureDate"],
 };
 
 function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
@@ -73,13 +107,6 @@ function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
   return steps;
 }
 
-function slugify(value: string): string {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
 function emptyEmployment() {
   return {
     id: crypto.randomUUID(),
@@ -92,111 +119,58 @@ function emptyEmployment() {
 
 function QualificationRow({
   control,
-  register,
   index,
-  showRemove,
   onRemove,
 }: {
   control: Control<AdmissionsFormData>;
-  register: UseFormRegister<AdmissionsFormData>;
   index: number;
-  showRemove: boolean;
   onRemove: () => void;
 }) {
   return (
     <div className="p-5 rounded-xl border border-border bg-surface-muted/50 relative">
-      {showRemove && (
-        <button
-          type="button"
-          onClick={onRemove}
-          className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
-        >
-          <Icon icon={TrashIcon} className="size-4" />
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label={`Remove qualification ${index + 1}`}
+        className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
+      >
+        <Icon icon={TrashIcon} className="size-4" />
+      </button>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-        <div className="flex flex-col gap-2">
-          <Label htmlFor={`qualifications-${index}-place`}>
-            Place of Study
-          </Label>
-          <Input
-            id={`qualifications-${index}-place`}
-            {...register(`qualifications.${index}.place`)}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor={`qualifications-${index}-dates`}>
-            Dates Attended
-          </Label>
-          <Input
-            id={`qualifications-${index}-dates`}
-            placeholder="e.g. 2018 - 2022"
-            {...register(`qualifications.${index}.dates`)}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor={`qualifications-${index}-awards`}>
-            Awards / Grades
-          </Label>
-          <Input
-            id={`qualifications-${index}-awards`}
-            placeholder="e.g. GPA 3.8 / A+"
-            {...register(`qualifications.${index}.awards`)}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label id={`qualifications-${index}-date-obtained-label`}>
-            Date Obtained
-          </Label>
-          <Controller
-            control={control}
-            name={`qualifications.${index}.dateObtained`}
-            render={({ field }) => (
-              <Popover>
-                <PopoverTrigger
-                  render={
-                    <Button
-                      type="button"
-                      aria-labelledby={`qualifications-${index}-date-obtained-label`}
-                      className={cn(
-                        "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
-                        !field.value && "text-ink-muted",
-                      )}
-                    >
-                      <Icon icon={CalendarIcon} className="mr-2 h-4 w-4" />
-                      {field.value ? (
-                        format(new Date(field.value), "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                    </Button>
-                  }
-                />
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value ? new Date(field.value) : undefined}
-                    onSelect={(date) =>
-                      field.onChange(date ? date.toISOString() : null)
-                    }
-                  />
-                </PopoverContent>
-              </Popover>
-            )}
-          />
-        </div>
+        <TextField
+          control={control}
+          name={`qualifications.${index}.place`}
+          label="Place of Study"
+        />
+        <TextField
+          control={control}
+          name={`qualifications.${index}.dates`}
+          label="Dates Attended"
+          placeholder="e.g. 2018 - 2022"
+        />
+        <TextField
+          control={control}
+          name={`qualifications.${index}.awards`}
+          label="Awards / Grades"
+          placeholder="e.g. GPA 3.8 / A+"
+        />
+        <DateField
+          control={control}
+          name={`qualifications.${index}.dateObtained`}
+          label="Date Obtained"
+        />
       </div>
     </div>
   );
 }
 
 function EmploymentRow({
-  register,
+  control,
   index,
   showRemove,
   onRemove,
 }: {
-  register: UseFormRegister<AdmissionsFormData>;
+  control: Control<AdmissionsFormData>;
   index: number;
   showRemove: boolean;
   onRemove: () => void;
@@ -207,43 +181,34 @@ function EmploymentRow({
         <button
           type="button"
           onClick={onRemove}
+          aria-label={`Remove employment entry ${index + 1}`}
           className="absolute top-4 right-4 text-ink-muted hover:text-red-500 transition-colors"
         >
           <Icon icon={TrashIcon} className="size-4" />
         </button>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-        <div className="flex flex-col gap-2">
-          <Label htmlFor={`employment-${index}-employer`}>
-            Employer Name & Address
-          </Label>
-          <Input
-            id={`employment-${index}-employer`}
-            {...register(`employment.${index}.employer`)}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor={`employment-${index}-dates`}>Dates (From - To)</Label>
-          <Input
-            id={`employment-${index}-dates`}
-            placeholder="e.g. Jan 2021 - Present"
-            {...register(`employment.${index}.dates`)}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor={`employment-${index}-position`}>Position Held</Label>
-          <Input
-            id={`employment-${index}-position`}
-            {...register(`employment.${index}.position`)}
-          />
-        </div>
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <Label htmlFor={`employment-${index}-duties`}>
-            Brief Description of Duties
-          </Label>
-          <Textarea
-            id={`employment-${index}-duties`}
-            {...register(`employment.${index}.duties`)}
+        <TextField
+          control={control}
+          name={`employment.${index}.employer`}
+          label="Employer Name & Address"
+        />
+        <TextField
+          control={control}
+          name={`employment.${index}.dates`}
+          label="Dates (From - To)"
+          placeholder="e.g. Jan 2021 - Present"
+        />
+        <TextField
+          control={control}
+          name={`employment.${index}.position`}
+          label="Position Held"
+        />
+        <div className="md:col-span-2">
+          <TextareaField
+            control={control}
+            name={`employment.${index}.duties`}
+            label="Brief Description of Duties"
           />
         </div>
       </div>
@@ -258,9 +223,12 @@ export function MultiStepForm() {
   const formRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { control, register, setValue, getValues } =
+  const [focusStepKey, setFocusStepKey] = useState<StepKey | null>(null);
+
+  const { control, setValue, getValues, trigger, getFieldState, formState } =
     useForm<AdmissionsFormData>({
       resolver: zodResolver(admissionsSchema),
+      mode: "onTouched",
       defaultValues: {
         program: "",
         proposedCourse: "",
@@ -323,12 +291,23 @@ export function MultiStepForm() {
     name: "employment",
   });
 
-  const howDidYouHear = useWatch({ control, name: "howDidYouHear" }) ?? [];
   const selectedProgram = useWatch({ control, name: "program" }) ?? "";
   const course = findInquiryCourse(selectedProgram);
   const steps = stepsForCourse(course);
   const stepIndex = Math.min(currentStep, steps.length - 1);
   const activeStep = steps[stepIndex];
+  const activeStepKey = activeStep?.key;
+
+  const stepHasError = (key: StepKey) =>
+    STEP_FIELDS[key].some(
+      (name) => getFieldState(name, formState).error !== undefined,
+    );
+
+  useEffect(() => {
+    if (focusStepKey === null || activeStepKey !== focusStepKey) return;
+    setFocusStepKey(null);
+    void trigger(STEP_FIELDS[focusStepKey], { shouldFocus: true });
+  }, [focusStepKey, activeStepKey, trigger]);
 
   const addQualification = () => {
     appendQualification({
@@ -344,31 +323,10 @@ export function MultiStepForm() {
     appendEmployment(emptyEmployment());
   };
 
-  const selectCourse = (
-    value: string | null,
-    commit: (value: string) => void,
-  ) => {
-    commit(value ?? "");
+  const selectCourse = (value: string) => {
     const next = value ? findInquiryCourse(value) : undefined;
     if (!next?.asksPendingQualifications) setValue("pendingQualifications", "");
     if (!next?.asksEmploymentHistory) replaceEmployment([emptyEmployment()]);
-  };
-
-  const downloadPdf = async () => {
-    setPdfError(null);
-    setIsPreparingPdf(true);
-    try {
-      const { downloadInquiryPdf } = await import("@/lib/inquiry-pdf");
-      await downloadInquiryPdf(getValues());
-    } catch (error) {
-      setPdfError(
-        error instanceof Error
-          ? error.message
-          : "The PDF could not be created. Please try again.",
-      );
-    } finally {
-      setIsPreparingPdf(false);
-    }
   };
 
   const goToStep = (step: number) => {
@@ -389,6 +347,51 @@ export function MultiStepForm() {
     });
   };
 
+  const goToNextStep = async () => {
+    if (!activeStep) return;
+    const passed = await trigger(STEP_FIELDS[activeStep.key], {
+      shouldFocus: true,
+    });
+    if (!passed) return;
+    goToStep(stepIndex + 1);
+  };
+
+  const downloadPdf = async () => {
+    setPdfError(null);
+
+    const passed = await trigger(undefined, { shouldFocus: true });
+    if (!passed) {
+      const firstBrokenStep = steps.findIndex((step) =>
+        STEP_FIELDS[step.key].some(
+          (name) => getFieldState(name).error !== undefined,
+        ),
+      );
+      setPdfError(
+        "Some answers still need attention. Check the highlighted steps, then download again.",
+      );
+      const target = steps[firstBrokenStep];
+      if (target && firstBrokenStep !== stepIndex) {
+        setFocusStepKey(target.key);
+        goToStep(firstBrokenStep);
+      }
+      return;
+    }
+
+    setIsPreparingPdf(true);
+    try {
+      const { downloadInquiryPdf } = await import("@/lib/inquiry-pdf");
+      await downloadInquiryPdf(admissionsSchema.parse(getValues()));
+    } catch (error) {
+      setPdfError(
+        error instanceof Error
+          ? error.message
+          : "The PDF could not be created. Please try again.",
+      );
+    } finally {
+      setIsPreparingPdf(false);
+    }
+  };
+
   const renderStepContent = () => {
     switch (activeStep?.key) {
       case "course":
@@ -398,43 +401,20 @@ export function MultiStepForm() {
               Course Details
             </H3>
             <div className="space-y-4">
-              <div className="flex flex-col gap-2">
-                <Label id="program-label">Program</Label>
-                <Controller
-                  control={control}
-                  name="program"
-                  render={({ field }) => (
-                    <Select
-                      onValueChange={(value) =>
-                        selectCourse(value, field.onChange)
-                      }
-                      value={field.value}
-                    >
-                      <SelectTrigger
-                        className="w-full"
-                        aria-labelledby="program-label"
-                      >
-                        <SelectValue placeholder="Select a program" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {INQUIRY_COURSES.map((option) => (
-                          <SelectItem key={option.id} value={option.id}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="proposedCourse">Proposed Course/s</Label>
-                <Input
-                  id="proposedCourse"
-                  placeholder="e.g. Science, Management, BSc Computing..."
-                  {...register("proposedCourse")}
-                />
-              </div>
+              <SelectField
+                control={control}
+                name="program"
+                label="Program"
+                options={PROGRAM_OPTIONS}
+                placeholder="Select a program"
+                onValueChange={selectCourse}
+              />
+              <TextField
+                control={control}
+                name="proposedCourse"
+                label="Proposed Course/s"
+                placeholder="e.g. Science, Management, BSc Computing..."
+              />
             </div>
           </div>
         );
@@ -445,107 +425,56 @@ export function MultiStepForm() {
               Student Details
             </H3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input id="firstName" {...register("firstName")} />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="surname">Surname</Label>
-                <Input id="surname" {...register("surname")} />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label id="dob-label">Date of Birth</Label>
-                <Controller
+              <TextField
+                control={control}
+                name="firstName"
+                label="First Name"
+                autoComplete="given-name"
+              />
+              <TextField
+                control={control}
+                name="surname"
+                label="Surname"
+                autoComplete="family-name"
+              />
+              <DateField control={control} name="dob" label="Date of Birth" />
+              <TextField
+                control={control}
+                name="nationality"
+                label="Nationality"
+                autoComplete="country-name"
+              />
+              <TextField
+                control={control}
+                name="telephone"
+                label="Telephone Number"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+              />
+              <TextField
+                control={control}
+                name="email"
+                label="Email Address"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+              />
+              <div className="md:col-span-2">
+                <FileField
                   control={control}
-                  name="dob"
-                  render={({ field }) => (
-                    <Popover>
-                      <PopoverTrigger
-                        render={
-                          <Button
-                            type="button"
-                            aria-labelledby="dob-label"
-                            className={cn(
-                              "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
-                              !field.value && "text-ink-muted",
-                            )}
-                          >
-                            <Icon
-                              icon={CalendarIcon}
-                              className="mr-2 h-4 w-4"
-                            />
-                            {field.value ? (
-                              format(new Date(field.value), "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                          </Button>
-                        }
-                      />
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={
-                            field.value ? new Date(field.value) : undefined
-                          }
-                          onSelect={(date) =>
-                            field.onChange(date ? date.toISOString() : null)
-                          }
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  )}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="nationality">Nationality</Label>
-                <Input id="nationality" {...register("nationality")} />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="telephone">Telephone Number</Label>
-                <Input id="telephone" type="tel" {...register("telephone")} />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" {...register("email")} />
-              </div>
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <Label htmlFor="photo">Photo Upload</Label>
-                <P className="text-xs text-ink-muted">
-                  Files stay on this device. They are not sent anywhere and are
-                  not included in the PDF you download.
-                </P>
-                <Input
-                  id="photo"
-                  type="file"
+                  name="photo"
+                  label="Photo Upload"
                   accept="image/*"
-                  onChange={(e) =>
-                    setValue("photo", e.target.files?.[0] || null)
-                  }
+                  description="Files stay on this device. They are not sent anywhere and are not included in the PDF you download."
                 />
               </div>
-              <div className="flex items-start space-x-3 md:col-span-2 mt-2">
-                <Controller
-                  control={control}
-                  name="specialNeeds"
-                  render={({ field }) => (
-                    <Checkbox
-                      id="specialNeeds"
-                      checked={field.value}
-                      onCheckedChange={(checked) =>
-                        field.onChange(checked === true)
-                      }
-                    />
-                  )}
-                />
-                <Label
-                  htmlFor="specialNeeds"
-                  className="leading-snug cursor-pointer font-normal"
-                >
-                  Do you have any special needs or medical conditions we should
-                  be aware of?
-                </Label>
-              </div>
+              <CheckboxField
+                control={control}
+                name="specialNeeds"
+                label="Do you have any special needs or medical conditions we should be aware of?"
+                className="md:col-span-2 mt-2"
+              />
             </div>
           </div>
         );
@@ -561,30 +490,26 @@ export function MultiStepForm() {
                 Father's Details
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="fatherName">Name</Label>
-                  <Input id="fatherName" {...register("fatherName")} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="fatherContact">Contact Number</Label>
-                  <Input
-                    id="fatherContact"
-                    type="tel"
-                    {...register("fatherContact")}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="fatherEmail">Email</Label>
-                  <Input
-                    id="fatherEmail"
-                    type="email"
-                    {...register("fatherEmail")}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="fatherJob">Job Designation</Label>
-                  <Input id="fatherJob" {...register("fatherJob")} />
-                </div>
+                <TextField control={control} name="fatherName" label="Name" />
+                <TextField
+                  control={control}
+                  name="fatherContact"
+                  label="Contact Number"
+                  type="tel"
+                  inputMode="tel"
+                />
+                <TextField
+                  control={control}
+                  name="fatherEmail"
+                  label="Email"
+                  type="email"
+                  inputMode="email"
+                />
+                <TextField
+                  control={control}
+                  name="fatherJob"
+                  label="Job Designation"
+                />
               </div>
             </div>
 
@@ -593,30 +518,26 @@ export function MultiStepForm() {
                 Mother's Details
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="motherName">Name</Label>
-                  <Input id="motherName" {...register("motherName")} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="motherContact">Contact Number</Label>
-                  <Input
-                    id="motherContact"
-                    type="tel"
-                    {...register("motherContact")}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="motherEmail">Email</Label>
-                  <Input
-                    id="motherEmail"
-                    type="email"
-                    {...register("motherEmail")}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="motherJob">Job Designation</Label>
-                  <Input id="motherJob" {...register("motherJob")} />
-                </div>
+                <TextField control={control} name="motherName" label="Name" />
+                <TextField
+                  control={control}
+                  name="motherContact"
+                  label="Contact Number"
+                  type="tel"
+                  inputMode="tel"
+                />
+                <TextField
+                  control={control}
+                  name="motherEmail"
+                  label="Email"
+                  type="email"
+                  inputMode="email"
+                />
+                <TextField
+                  control={control}
+                  name="motherJob"
+                  label="Job Designation"
+                />
               </div>
             </div>
 
@@ -625,20 +546,18 @@ export function MultiStepForm() {
                 Emergency / Secondary Contact
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="secondaryContact">
-                    Secondary Contact Number
-                  </Label>
-                  <Input
-                    id="secondaryContact"
-                    type="tel"
-                    {...register("secondaryContact")}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="relationship">Relationship to Student</Label>
-                  <Input id="relationship" {...register("relationship")} />
-                </div>
+                <TextField
+                  control={control}
+                  name="secondaryContact"
+                  label="Secondary Contact Number"
+                  type="tel"
+                  inputMode="tel"
+                />
+                <TextField
+                  control={control}
+                  name="relationship"
+                  label="Relationship to Student"
+                />
               </div>
             </div>
           </div>
@@ -661,16 +580,21 @@ export function MultiStepForm() {
             </div>
 
             <div className="space-y-6">
-              {qualificationFields.map((field, index) => (
-                <QualificationRow
-                  key={field.id}
-                  control={control}
-                  register={register}
-                  index={index}
-                  showRemove={qualificationFields.length > 1}
-                  onRemove={() => removeQualification(index)}
-                />
-              ))}
+              {qualificationFields.length === 0 ? (
+                <P className="text-sm text-ink-muted">
+                  No entries added. If you have not studied anywhere before,
+                  leave this empty and continue.
+                </P>
+              ) : (
+                qualificationFields.map((field, index) => (
+                  <QualificationRow
+                    key={field.id}
+                    control={control}
+                    index={index}
+                    onRemove={() => removeQualification(index)}
+                  />
+                ))
+              )}
             </div>
 
             {(!course || course.asksPendingQualifications) && (
@@ -678,17 +602,13 @@ export function MultiStepForm() {
                 <H3 className="text-lg font-display text-ink">
                   Qualifications Pending
                 </H3>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="pendingQualifications">
-                    Are you currently awaiting any results?
-                  </Label>
-                  <Textarea
-                    id="pendingQualifications"
-                    placeholder="Please list any exams taken for which results are pending..."
-                    className="min-h-[100px]"
-                    {...register("pendingQualifications")}
-                  />
-                </div>
+                <TextareaField
+                  control={control}
+                  name="pendingQualifications"
+                  label="Are you currently awaiting any results?"
+                  placeholder="Please list any exams taken for which results are pending..."
+                  className="min-h-[100px]"
+                />
               </div>
             )}
           </div>
@@ -714,7 +634,7 @@ export function MultiStepForm() {
               {employmentFields.map((field, index) => (
                 <EmploymentRow
                   key={field.id}
-                  register={register}
+                  control={control}
                   index={index}
                   showRemove={employmentFields.length > 1}
                   onRemove={() => removeEmployment(index)}
@@ -731,76 +651,29 @@ export function MultiStepForm() {
             </H3>
 
             <div className="space-y-4">
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="personalStatement">Personal Statement</Label>
-                <P className="text-xs text-ink-muted">
-                  Please provide a brief statement supporting your application.
-                </P>
-                <Textarea
-                  id="personalStatement"
-                  className="min-h-[120px]"
-                  {...register("personalStatement")}
+              <TextareaField
+                control={control}
+                name="personalStatement"
+                label="Personal Statement"
+                description="Please provide a brief statement supporting your application."
+                className="min-h-[120px]"
+              />
+
+              <div className="pt-6">
+                <CheckboxGroupField
+                  control={control}
+                  name="howDidYouHear"
+                  legend="How did you hear of NAMI?"
+                  options={HEAR_OPTIONS}
                 />
               </div>
 
-              <fieldset className="flex flex-col gap-3 pt-6">
-                <legend className="text-sm font-medium leading-none text-ink">
-                  How did you hear of NAMI?
-                </legend>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {[
-                    "Social Media",
-                    "Friends / Family",
-                    "School / College",
-                    "Advertisement",
-                    "Website",
-                    "Other",
-                  ].map((option) => {
-                    const optionId = `hear-${slugify(option)}`;
-                    return (
-                      <div key={option} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={optionId}
-                          checked={howDidYouHear.includes(option)}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setValue("howDidYouHear", [
-                                ...howDidYouHear,
-                                option,
-                              ]);
-                            } else {
-                              setValue(
-                                "howDidYouHear",
-                                howDidYouHear.filter((o) => o !== option),
-                              );
-                            }
-                          }}
-                        />
-                        <Label
-                          htmlFor={optionId}
-                          className="font-normal cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          {option}
-                        </Label>
-                      </div>
-                    );
-                  })}
-                </div>
-              </fieldset>
-
-              <div className="flex flex-col gap-2 pt-6">
-                <Label htmlFor="criminalRecord">Criminal Convictions</Label>
-                <P className="text-xs text-ink-muted">
-                  Please upload your Police Record Certification if applicable.
-                  Files stay on this device. They are not sent anywhere and are
-                  not included in the PDF you download.
-                </P>
-                <Input
-                  id="criminalRecord"
-                  type="file"
-                  onChange={(e) =>
-                    setValue("criminalRecord", e.target.files?.[0] || null)
-                  }
+              <div className="pt-6">
+                <FileField
+                  control={control}
+                  name="criminalRecord"
+                  label="Criminal Convictions"
+                  description="Please upload your Police Record Certification if applicable. Files stay on this device. They are not sent anywhere and are not included in the PDF you download."
                 />
               </div>
 
@@ -812,56 +685,17 @@ export function MultiStepForm() {
                   knowledge.
                 </P>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                  <div className="flex flex-col gap-2">
-                    <Label htmlFor="signature">
-                      Student Signature (Type Name)
-                    </Label>
-                    <Input id="signature" {...register("signature")} />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Label id="signatureDate-label">Date</Label>
-                    <Controller
-                      control={control}
-                      name="signatureDate"
-                      render={({ field }) => (
-                        <Popover>
-                          <PopoverTrigger
-                            render={
-                              <Button
-                                type="button"
-                                aria-labelledby="signatureDate-label"
-                                className={cn(
-                                  "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none",
-                                  !field.value && "text-ink-muted",
-                                )}
-                              >
-                                <Icon
-                                  icon={CalendarIcon}
-                                  className="mr-2 h-4 w-4"
-                                />
-                                {field.value ? (
-                                  format(new Date(field.value), "PPP")
-                                ) : (
-                                  <span>Pick a date</span>
-                                )}
-                              </Button>
-                            }
-                          />
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={
-                                field.value ? new Date(field.value) : undefined
-                              }
-                              onSelect={(date) =>
-                                field.onChange(date ? date.toISOString() : null)
-                              }
-                            />
-                          </PopoverContent>
-                        </Popover>
-                      )}
-                    />
-                  </div>
+                  <TextField
+                    control={control}
+                    name="signature"
+                    label="Student Signature (Type Name)"
+                    autoComplete="name"
+                  />
+                  <DateField
+                    control={control}
+                    name="signatureDate"
+                    label="Date"
+                  />
                 </div>
               </div>
             </div>
@@ -883,6 +717,8 @@ export function MultiStepForm() {
             {steps.map((step, index) => {
               const isActive = index === stepIndex;
               const isPast = index < stepIndex;
+              const hasError = stepHasError(step.key);
+              const canJump = isPast || hasError;
 
               return (
                 <li
@@ -900,18 +736,22 @@ export function MultiStepForm() {
 
                   <button
                     type="button"
-                    onClick={() => isPast && goToStep(index)}
-                    disabled={!isPast && !isActive}
+                    onClick={() => canJump && goToStep(index)}
+                    disabled={!canJump && !isActive}
                     className={cn(
                       "flex items-center justify-center size-7 rounded-full text-xs font-semibold shrink-0 transition-all duration-300 outline-none",
-                      isActive
-                        ? "bg-accent text-white ring-4 ring-accent/20 scale-110"
-                        : isPast
-                          ? "bg-accent text-white cursor-pointer hover:scale-110"
-                          : "bg-surface text-ink-muted border border-border",
+                      isActive && "ring-4 ring-accent/20 scale-110",
+                      canJump && "cursor-pointer",
+                      hasError
+                        ? "bg-surface text-accent border-2 border-accent"
+                        : isActive
+                          ? "bg-accent text-white"
+                          : isPast
+                            ? "bg-accent text-white hover:scale-110"
+                            : "bg-surface text-ink-muted border border-border",
                     )}
                   >
-                    {isPast ? (
+                    {isPast && !hasError ? (
                       <Icon icon={CheckIcon} className="size-3" />
                     ) : (
                       index + 1
@@ -919,18 +759,24 @@ export function MultiStepForm() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => isPast && goToStep(index)}
-                    disabled={!isPast && !isActive}
+                    onClick={() => canJump && goToStep(index)}
+                    disabled={!canJump && !isActive}
                     className={cn(
                       "text-sm font-medium text-left transition-colors duration-300 outline-none",
-                      isActive
-                        ? "text-ink"
-                        : isPast
-                          ? "text-ink cursor-pointer group-hover:text-accent"
-                          : "text-ink-muted",
+                      canJump && "cursor-pointer",
+                      hasError
+                        ? "text-accent"
+                        : isActive
+                          ? "text-ink"
+                          : isPast
+                            ? "text-ink group-hover:text-accent"
+                            : "text-ink-muted",
                     )}
                   >
                     {step.label}
+                    {hasError && (
+                      <span className="sr-only"> — needs attention</span>
+                    )}
                   </button>
                 </li>
               );
@@ -938,7 +784,11 @@ export function MultiStepForm() {
           </ul>
         </div>
 
-        <div className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-between">
+        <form
+          noValidate
+          onSubmit={(event) => event.preventDefault()}
+          className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-between"
+        >
           <div ref={formRef} className="flex-1">
             {renderStepContent()}
           </div>
@@ -972,7 +822,7 @@ export function MultiStepForm() {
               {stepIndex < steps.length - 1 ? (
                 <Button
                   type="button"
-                  onClick={() => goToStep(stepIndex + 1)}
+                  onClick={goToNextStep}
                   className="gap-2 px-6 h-12"
                 >
                   Next Step <Icon icon={ArrowRightIcon} className="size-4" />
@@ -991,7 +841,7 @@ export function MultiStepForm() {
               )}
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

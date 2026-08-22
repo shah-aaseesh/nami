@@ -1,6 +1,10 @@
 import { entryOf, isoDate } from "../identifiers";
-import { placeholderData, placeholderText } from "../placeholder-registry";
-import type { Award, ContentLink, Update } from "../types";
+import {
+  placeholderData,
+  placeholderImage,
+  placeholderText,
+} from "../placeholder-registry";
+import type { Award, ContentImage, ContentLink, Update } from "../types";
 import {
   readingHall,
   readingRoom,
@@ -82,6 +86,16 @@ export const preRegistrationNoticeExcerpt = placeholderText(
   "updates[pre-registration-open-for-a-level].excerpt",
   "update",
   "Placeholder summary. NAMI's own notice carries this headline and no body text, so there is nothing yet to quote here.",
+);
+
+export const partnerLogoStandIn: ContentImage = placeholderImage(
+  "partners[*].logo",
+  {
+    src: "/logo/nami-color.svg",
+    alt: "Placeholder partner logo. NAMI’s own mark stands in on every partner tile until the client supplies the partners’ artwork.",
+    width: 1000,
+    height: 1000,
+  },
 );
 
 export const placeholderUpdates: readonly Update[] = [

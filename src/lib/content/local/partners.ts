@@ -1,5 +1,6 @@
 import { entryOf } from "../identifiers";
 import type { Partner } from "../types";
+import { partnerLogoStandIn } from "./placeholders";
 
 const industryPartnerNames: readonly [string, string][] = [
   ["sanima-bank", "Sanima Bank"],
@@ -18,9 +19,6 @@ const industryPartnerNames: readonly [string, string][] = [
   ["bajra-technologies", "Bajra Technologies"],
   ["clock-business-technology", "Clock Business Technology"],
   ["buddha-tech", "Buddha Tech Pvt. Ltd."],
-  ["palm-mind-technology", "Palm Mind Technology"],
-  ["samsara", "Samsara Pvt. Ltd."],
-  ["nic-asia-capital", "NIC Asia Capital Limited"],
 ];
 
 export const partners: readonly Partner[] = [
@@ -31,7 +29,7 @@ export const partners: readonly Partner[] = [
     blurb:
       "As an AWS Academy College, NAMI teaches the Amazon Web Services cloud computing curriculum and prepares students for globally recognised certifications.",
     href: null,
-    logo: null,
+    logo: partnerLogoStandIn,
   },
   {
     ...entryOf("startup-discovery-asia"),
@@ -40,7 +38,7 @@ export const partners: readonly Partner[] = [
     blurb:
       "South Asian startup ecosystem enabler, partner behind the Naaya Aayam Avinaya Prerana Kendra incubation centre.",
     href: null,
-    logo: null,
+    logo: partnerLogoStandIn,
   },
   ...industryPartnerNames.map<Partner>(([partnerSlug, name]) => ({
     ...entryOf(partnerSlug),
@@ -48,6 +46,6 @@ export const partners: readonly Partner[] = [
     kind: "industry",
     blurb: null,
     href: null,
-    logo: null,
+    logo: partnerLogoStandIn,
   })),
 ];

@@ -51,6 +51,12 @@ function optionalPhone(message: string) {
     .refine((value) => value === "" || isPhone(value), { error: message });
 }
 
+function requiredPhone(missing: string, invalid: string) {
+  return optionalPhone(invalid).refine((value) => value !== "", {
+    error: missing,
+  });
+}
+
 function optionalPastDate(unreadable: string, future: string) {
   return z
     .string()
@@ -108,9 +114,7 @@ export type Employment = z.infer<typeof employmentSchema>;
 export const admissionsSchema = z
   .object({
     program: requiredText("Choose the programme you are applying for"),
-    proposedCourse: requiredText(
-      "Tell us which course or subject you want to study",
-    ),
+    proposedCourse: z.string().trim(),
     surname: requiredText("Enter your surname"),
     firstName: requiredText("Enter your first name"),
     dob: requiredPastDate(
@@ -192,7 +196,10 @@ export const contactSchema = z.object({
     .string({ error: "Please enter your email address" })
     .min(1, "Please enter your email address")
     .pipe(z.email({ error: "Please enter a valid email address" })),
-  phone: z.string(),
+  phone: requiredPhone(
+    "Please enter your phone number",
+    "Please enter a valid phone number",
+  ),
   topic: z
     .string({ error: "Please choose a subject" })
     .min(1, "Please choose a subject"),

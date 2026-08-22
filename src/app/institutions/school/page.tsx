@@ -5,6 +5,8 @@ import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
+import { institutionPath } from "@/lib/content/institutions";
+import { schoolPrincipal } from "@/lib/content/school-principal";
 import { createMetadata } from "@/lib/seo";
 import { SchoolAdmission } from "./_components/school-admission";
 import { SchoolBands } from "./_components/school-bands";
@@ -12,7 +14,7 @@ import { dummyParentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
 
 export const metadata: Metadata = createMetadata({
-  path: "/institutions/school",
+  path: institutionPath("school"),
   title: schoolCopy.meta.title,
   description: schoolCopy.meta.description,
 });
@@ -24,10 +26,8 @@ export default async function SchoolPage() {
   ]);
 
   const principal =
-    leadership.academics.find(
-      (item) => item.slug === schoolCopy.principal.slug,
-    ) ?? null;
-  const phone = institution.contact.phones[0] ?? null;
+    leadership.academics.find((item) => item.slug === schoolPrincipal.slug) ??
+    null;
 
   return (
     <>
@@ -41,19 +41,19 @@ export default async function SchoolPage() {
 
       {principal === null ? null : (
         <PrincipalMessage
-          eyebrow={schoolCopy.principal.eyebrow}
+          eyebrow={schoolPrincipal.eyebrow}
           id="principal"
-          message={schoolCopy.principal.message}
+          message={schoolPrincipal.message}
           person={{
             name: principal.name,
-            portrait: schoolCopy.principal.portrait,
+            portrait: principal.portrait,
             title: principal.title,
           }}
         />
       )}
 
+      <SchoolAdmission copy={schoolCopy.admission} />
       <SchoolBands copy={schoolCopy.bands} id="academics" />
-      <SchoolAdmission copy={schoolCopy.admission} phone={phone} />
 
       <SchoolDay copy={schoolCopy.day} id="day" />
 

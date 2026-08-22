@@ -157,7 +157,7 @@ export function SiteNavPanel({
               href={"/admissions" as Route}
               onClick={onNavigate}
               className={cn(
-                buttonVariants(),
+                buttonVariants({ size: "lg" }),
                 "w-full bg-accent hover:bg-accent/90 text-white border-none shadow-md",
               )}
             >

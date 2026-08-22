@@ -124,7 +124,7 @@ export function ContactForm({
           <P className="mt-2">{copy.draftBody(email)}</P>
           <Link
             className={cn(
-              buttonVariants({ size: "md", variant: "link" }),
+              buttonVariants({ size: "md", variant: "outline" }),
               "mt-4",
             )}
             href={draft as Route}
@@ -167,6 +167,7 @@ export function ContactForm({
           control={control}
           label={copy.labels.phone}
           name="phone"
+          required
           type="tel"
         />
 
@@ -203,7 +204,7 @@ export function ContactForm({
           <p className="font-body text-sm text-ink-muted">
             {copy.directPrompt}{" "}
             <Link
-              className={cn(buttonVariants({ size: "sm", variant: "link" }))}
+              className="text-accent underline underline-offset-4 transition-colors hover:text-ink"
               href={`mailto:${email}` as Route}
             >
               {email}

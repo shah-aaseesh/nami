@@ -1,3 +1,5 @@
+import { institutionPath } from "@/lib/content/institutions";
+
 export type SiteNavItem = {
   readonly label: string;
   readonly href: string;
@@ -18,14 +20,14 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
   },
   {
     label: "Institutions",
-    href: "/institutions/college",
+    href: institutionPath("college"),
     descriptor: "Explore our institutions, each separately accredited.",
     children: [
-      { label: "NAMI International School", href: "/institutions/school" },
-      { label: "NAMI A-Levels", href: "/institutions/college" },
+      { label: "NAMI International School", href: institutionPath("school") },
+      { label: "NAMI A-Levels", href: institutionPath("college") },
       {
         label: "Naaya Aayam Multi-Disciplinary Institute",
-        href: "/institutions/bachelors",
+        href: institutionPath("bachelors"),
       },
     ],
   },
@@ -33,11 +35,6 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     label: "Admissions",
     href: "/admissions",
     descriptor: "Join our diverse community.",
-  },
-  {
-    label: "Student Life",
-    href: "/student-life",
-    descriptor: "Experience vibrant campus life.",
   },
   {
     label: "Gallery",
@@ -50,7 +47,7 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
 export const SITE_FOOTER_NAV_ITEMS: SiteNavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Institutions", href: "/institutions/college" },
+  { label: "Institutions", href: institutionPath("college") },
   { label: "Admissions", href: "/admissions" },
   { label: "Student Life", href: "/student-life" },
   { label: "Gallery", href: "/gallery" },

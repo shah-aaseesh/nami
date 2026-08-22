@@ -6,10 +6,8 @@ import { buttonVariants } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
-  CarouselControls,
+  CarouselDots,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
@@ -36,7 +34,7 @@ function HeroCta({
   variant,
 }: {
   link: ContentLink;
-  variant: "default" | "link";
+  variant: "default" | "outline";
 }) {
   if (link.destination === "legacy") return null;
 
@@ -50,7 +48,7 @@ function HeroCta({
       target={isExternal ? "_blank" : undefined}
     >
       {link.label}
-      {variant === "link" ? <Icon icon={ArrowUpRightIcon} /> : null}
+      {variant === "outline" ? <Icon icon={ArrowUpRightIcon} /> : null}
     </Link>
   );
 }
@@ -150,9 +148,9 @@ export async function Hero() {
 
           <div className="mt-12 flex flex-col items-start gap-8 lg:col-span-4 lg:col-start-9 lg:mt-0">
             <Standfirst>{hero.standfirst}</Standfirst>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="flex flex-wrap items-center gap-4">
               <HeroCta link={hero.primaryCta} variant="default" />
-              <HeroCta link={hero.secondaryCta} variant="link" />
+              <HeroCta link={hero.secondaryCta} variant="outline" />
             </div>
           </div>
         </div>
@@ -174,12 +172,13 @@ export async function Hero() {
                 aria-label={hero.eyebrow}
                 aria-roledescription="carousel"
                 autoplay
+                autoplayIntervalMs={3000}
                 className="flex flex-col gap-6"
-                opts={{ align: "start", duration: 18, loop: true }}
+                opts={{ align: "start", duration: 20, loop: true }}
               >
                 <CarouselContent
                   className="h-full"
-                  viewportClassName="aspect-video rounded-xl lg:aspect-[2/1]"
+                  viewportClassName="aspect-video rounded-xl lg:aspect-[5/2]"
                 >
                   {heroSlides.map((slide, position) => (
                     <CarouselItem
@@ -200,10 +199,7 @@ export async function Hero() {
                   ))}
                 </CarouselContent>
 
-                <CarouselControls className="justify-end">
-                  <CarouselPrevious aria-label="Previous image" />
-                  <CarouselNext aria-label="Next image" />
-                </CarouselControls>
+                <CarouselDots className="justify-end" dotLabel="Go to image" />
               </Carousel>
             </figure>
           )}

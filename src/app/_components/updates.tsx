@@ -43,7 +43,10 @@ function UpdateCta({
 
   return (
     <Link
-      className={cn(buttonVariants({ size: "md", variant: "link" }), className)}
+      className={cn(
+        buttonVariants({ size: "md", variant: "outline" }),
+        className,
+      )}
       href={link.href as Route}
       rel={isExternal ? "noopener noreferrer" : undefined}
       target={isExternal ? "_blank" : undefined}

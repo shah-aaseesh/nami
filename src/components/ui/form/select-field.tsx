@@ -52,7 +52,7 @@ export function SelectField<T extends FieldValues>({
       name={name}
       render={({ field, ids, invalid }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel required={required}>{label}</FormLabel>
           {description ? (
             <FormDescription>{description}</FormDescription>
           ) : null}
@@ -71,6 +71,7 @@ export function SelectField<T extends FieldValues>({
             <SelectTrigger
               id={ids.control}
               aria-labelledby={`${ids.label} ${ids.control}`}
+              aria-required={required}
               aria-invalid={invalid}
               aria-describedby={describedBy(ids, {
                 description: Boolean(description),

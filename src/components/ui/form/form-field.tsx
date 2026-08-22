@@ -115,12 +115,30 @@ export function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+export function RequiredMarker() {
+  return (
+    <>
+      <span aria-hidden="true" className="ml-0.5 text-accent">
+        *
+      </span>
+      <span className="sr-only"> (required)</span>
+    </>
+  );
+}
+
 export function FormLabel({
   className,
+  children,
+  required,
   ...props
-}: React.ComponentProps<typeof Label>) {
+}: React.ComponentProps<typeof Label> & { required?: boolean }) {
   const { ids } = useFormFieldState();
-  return <Label className={className} {...props} id={ids.label} />;
+  return (
+    <Label className={className} {...props} id={ids.label}>
+      {children}
+      {required ? <RequiredMarker /> : null}
+    </Label>
+  );
 }
 
 export function FormDescription({

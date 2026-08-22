@@ -78,7 +78,7 @@ export function AdmissionsClient() {
           <div className="hidden lg:block lg:col-span-6 relative">
             <div
               ref={leftColRef}
-              className="relative h-[calc(100vh-16rem)] w-full rounded-2xl overflow-hidden bg-surface-muted shadow-sm"
+              className="relative h-[calc(100vh-16rem)] w-full rounded-2xl overflow-hidden bg-muted shadow-sm"
             >
               {PROGRAMS.map((prog, i) => (
                 <div
@@ -129,7 +129,7 @@ export function AdmissionsClient() {
                   {prog.description}
                 </P>
 
-                <div className="bg-surface-muted/50 rounded-xl p-6 mb-8 border border-border/50">
+                <div className="bg-muted/50 rounded-xl p-6 mb-8 border border-border/50">
                   <h3 className="font-semibold text-ink mb-4 tracking-wide text-sm uppercase">
                     Key Requirements
                   </h3>
@@ -151,6 +151,7 @@ export function AdmissionsClient() {
                 <Link
                   href={prog.href}
                   className={buttonVariants({
+                    size: "lg",
                     variant: "default",
                     className: "w-full sm:w-auto self-start",
                   })}

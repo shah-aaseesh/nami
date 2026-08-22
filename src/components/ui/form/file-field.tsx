@@ -20,6 +20,7 @@ type OwnProps<T extends FieldValues> = {
   name: FieldPath<T>;
   label: string;
   description?: string;
+  required?: boolean;
 };
 
 export type FileFieldProps<T extends FieldValues> = OwnProps<T> &
@@ -40,6 +41,7 @@ export function FileField<T extends FieldValues>({
   name,
   label,
   description,
+  required,
   className,
   ...inputProps
 }: FileFieldProps<T>) {
@@ -49,7 +51,9 @@ export function FileField<T extends FieldValues>({
       name={name}
       render={({ field, ids, invalid }) => (
         <FormItem>
-          <FormLabel htmlFor={ids.control}>{label}</FormLabel>
+          <FormLabel htmlFor={ids.control} required={required}>
+            {label}
+          </FormLabel>
           {description ? (
             <FormDescription>{description}</FormDescription>
           ) : null}
@@ -65,6 +69,7 @@ export function FileField<T extends FieldValues>({
               field.onBlur();
             }}
             id={ids.control}
+            required={required}
             aria-invalid={invalid}
             aria-describedby={describedBy(ids, {
               description: Boolean(description),

@@ -1,11 +1,4 @@
-import type { Route } from "next";
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H3, H6, P, Standfirst } from "@/components/ui/typography";
-import type { ContentLink } from "@/lib/content";
-import { ArrowUpRightIcon, PhoneIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { Eyebrow, H6, P, Standfirst } from "@/components/ui/typography";
 import { SchoolAdmissionTrack } from "./school-admission-track";
 
 export type SchoolAdmissionStep = {
@@ -19,10 +12,6 @@ export type SchoolAdmissionCopy = {
   readonly standfirst: string;
   readonly stepLabel: string;
   readonly steps: readonly SchoolAdmissionStep[];
-  readonly callHeading: string;
-  readonly callBody: string;
-  readonly cta: ContentLink;
-  readonly phoneLabel: string;
 };
 
 const RING_RADIUS = 23;
@@ -75,14 +64,11 @@ function StepRing({
 export function SchoolAdmission({
   copy,
   id,
-  phone,
 }: {
   readonly copy: SchoolAdmissionCopy;
   readonly id?: string;
-  readonly phone?: string | null;
 }) {
   const total = copy.steps.length;
-  const external = copy.cta.destination === "external";
 
   if (total === 0) return null;
 
@@ -130,44 +116,6 @@ export function SchoolAdmission({
           </li>
         ))}
       </SchoolAdmissionTrack>
-
-      <div className="mx-auto max-w-page">
-        <div className="mt-14 flex flex-col gap-8 border-t border-border-strong pt-10 lg:mt-20 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-          <div className="lg:max-w-xl">
-            <H3 className="text-ink">{copy.callHeading}</H3>
-            <P className="mt-4">{copy.callBody}</P>
-          </div>
-
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center lg:shrink-0">
-            <Link
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "w-full justify-center gap-2 rounded-full px-6 sm:w-auto",
-              )}
-              href={copy.cta.href as Route}
-              rel={external ? "noopener noreferrer" : undefined}
-              target={external ? "_blank" : undefined}
-            >
-              <span>{copy.cta.label}</span>
-              <Icon className="size-4" icon={ArrowUpRightIcon} />
-            </Link>
-
-            {phone ? (
-              <Link
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "outline" }),
-                  "w-full justify-center gap-2 rounded-full px-6 sm:w-auto",
-                )}
-                href={`tel:${phone.replace(/[^+\d]/g, "")}` as Route}
-              >
-                <Icon className="size-4" icon={PhoneIcon} />
-                <span className="sr-only">{copy.phoneLabel}</span>
-                <span>{phone}</span>
-              </Link>
-            ) : null}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

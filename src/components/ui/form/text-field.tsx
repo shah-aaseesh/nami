@@ -20,6 +20,7 @@ type OwnProps<T extends FieldValues> = {
   name: FieldPath<T>;
   label: string;
   description?: string;
+  required?: boolean;
 };
 
 export type TextFieldProps<T extends FieldValues> = OwnProps<T> &
@@ -34,6 +35,7 @@ export function TextField<T extends FieldValues>({
   name,
   label,
   description,
+  required,
   className,
   ...inputProps
 }: TextFieldProps<T>) {
@@ -43,7 +45,9 @@ export function TextField<T extends FieldValues>({
       name={name}
       render={({ field, ids, invalid }) => (
         <FormItem>
-          <FormLabel htmlFor={ids.control}>{label}</FormLabel>
+          <FormLabel htmlFor={ids.control} required={required}>
+            {label}
+          </FormLabel>
           {description ? (
             <FormDescription>{description}</FormDescription>
           ) : null}
@@ -53,6 +57,7 @@ export function TextField<T extends FieldValues>({
             {...field}
             value={typeof field.value === "string" ? field.value : ""}
             id={ids.control}
+            required={required}
             aria-invalid={invalid}
             aria-describedby={describedBy(ids, {
               description: Boolean(description),

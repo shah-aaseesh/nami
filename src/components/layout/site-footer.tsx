@@ -4,8 +4,9 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, P } from "@/components/ui/typography";
-import type { EntityRole, SocialPlatform } from "@/lib/content";
+import type { SocialPlatform } from "@/lib/content";
 import { content, isPlaceholder, paragraphsOf } from "@/lib/content";
+import { institutionPathForRole } from "@/lib/content/institutions";
 import type { IconSvgElement } from "@/lib/icons";
 import {
   FacebookIcon,
@@ -24,12 +25,6 @@ const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
   linkedin: LinkedInIcon,
   tiktok: TikTokIcon,
   youtube: YouTubeIcon,
-};
-
-const ENTITY_HREFS: Record<EntityRole, Route> = {
-  school: "/institutions/school",
-  college: "/institutions/college",
-  institute: "/institutions/bachelors",
 };
 
 function stated(value: string | null | undefined): string | null {
@@ -85,17 +80,13 @@ export async function SiteFooter() {
   const group = entities.institute;
 
   const summary = stated(paragraphsOf(overview)[0]);
-  const groupEmail = stated(contact.email);
 
   return (
     <>
-      {groupEmail === null ? null : (
-        <SiteCtaBand
-          email={groupEmail}
-          heading="Subscribe to our Newsletter"
-          standfirst={group.name}
-        />
-      )}
+      <SiteCtaBand
+        heading="Subscribe to our Newsletter"
+        standfirst={group.name}
+      />
 
       <footer className="field-brand">
         <div className="gutter-x section-y">
@@ -161,7 +152,7 @@ export async function SiteFooter() {
                 {INSTITUTION_ROLES.map((role) => (
                   <FooterContact
                     email={stated(contact.byEntity[role].email)}
-                    href={ENTITY_HREFS[role]}
+                    href={institutionPathForRole(role)}
                     key={role}
                     name={entities[role].name}
                     phone={stated(contact.byEntity[role].phone)}

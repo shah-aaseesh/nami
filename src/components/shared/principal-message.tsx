@@ -38,7 +38,7 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
             className="aspect-4/5 w-full object-cover"
             height={portrait.height}
             loading="lazy"
-            sizes="(max-width: 1023px) 320px, 32vw"
+            sizes="(max-width: 1023px) 320px, 23vw"
             src={portrait.src}
             width={portrait.width}
           />
@@ -65,8 +65,8 @@ export function PrincipalMessage({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:gap-x-10">
-          <Reveal className="flex flex-col gap-5 lg:col-span-7 lg:row-start-1">
+        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-10">
+          <Reveal className="flex flex-col gap-5 lg:col-span-9 lg:row-start-1">
             <Eyebrow>{eyebrow}</Eyebrow>
 
             {heading === undefined ? null : (
@@ -81,23 +81,27 @@ export function PrincipalMessage({
             <span className="block h-1 w-16 rounded-full bg-accent" />
           </Reveal>
 
-          <PrincipalPortraitPin className="mx-auto max-w-xs lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:row-span-2 lg:mx-0 lg:max-w-none">
+          <PrincipalPortraitPin className="mx-auto max-w-xs lg:col-span-3 lg:col-start-10 lg:row-start-1 lg:row-span-2 lg:mx-0 lg:max-w-none">
             <Reveal>
               <PortraitCard person={person} />
             </Reveal>
           </PrincipalPortraitPin>
 
-          <Reveal className="lg:col-span-7 lg:row-start-2" stagger={0.1}>
-            <RevealItem className="max-w-prose space-y-5">
-              {letter.map((paragraph, index) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
-                <P key={index}>{paragraph}</P>
-              ))}
-              <RevealItem>
-                <p className="font-display text-3xl text-ink italic lg:text-4xl">
-                  {person.name}
-                </p>
+          <Reveal
+            className="space-y-5 lg:col-span-9 lg:row-start-2"
+            stagger={0.1}
+          >
+            {letter.map((paragraph, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
+              <RevealItem key={index}>
+                <P className="lg:text-justify">{paragraph}</P>
               </RevealItem>
+            ))}
+
+            <RevealItem>
+              <p className="font-display text-3xl text-ink italic lg:text-4xl">
+                {person.name}
+              </p>
             </RevealItem>
           </Reveal>
         </div>

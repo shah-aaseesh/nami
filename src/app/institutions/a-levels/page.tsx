@@ -5,6 +5,7 @@ import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
+import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
 import { CollegeCambridge } from "./_components/college-cambridge";
 import { collegeCopy } from "./_components/college-copy";
@@ -15,7 +16,7 @@ import { collegeMilestonesCopy } from "./_components/college-milestones-copy";
 import { CollegeSubjects } from "./_components/college-subjects";
 
 export const metadata: Metadata = createMetadata({
-  path: "/institutions/college",
+  path: institutionPath("college"),
   title: collegeCopy.meta.title,
   description: collegeCopy.meta.description,
 });
@@ -47,12 +48,6 @@ export default async function CollegePage() {
         primaryCta={collegeCopy.masthead.cta}
       />
 
-      <CollegeMastheadFacts
-        campus={campus}
-        copy={collegeCopy.masthead}
-        entity={institution.entities.college}
-      />
-
       {principal === null ? null : (
         <PrincipalMessage
           eyebrow={collegeCopy.principal.eyebrow}
@@ -66,9 +61,15 @@ export default async function CollegePage() {
         />
       )}
 
+      <CollegeMastheadFacts
+        campus={campus}
+        copy={collegeCopy.masthead}
+        entity={institution.entities.college}
+      />
+
       <CollegeCambridge copy={collegeCopy.cambridge} />
-      <CollegeMilestones copy={collegeMilestonesCopy} />
       <CollegeSubjects copy={collegeCopy.subjects} />
+      <CollegeMilestones copy={collegeMilestonesCopy} />
 
       <SharedCampusGallery
         institution={institution.entities.college.role}

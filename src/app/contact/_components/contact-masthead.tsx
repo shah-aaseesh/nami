@@ -61,13 +61,10 @@ export async function ContactMasthead() {
                 {copy.emailLabel}
               </Eyebrow>
               <Link
-                className={cn(
-                  buttonVariants({ size: "md", variant: "link" }),
-                  "mt-4 max-w-full text-lg sm:text-xl",
-                )}
+                className="mt-4 inline-block max-w-full truncate font-body text-lg text-accent underline underline-offset-4 transition-colors hover:text-ink sm:text-xl"
                 href={`mailto:${email}` as Route}
               >
-                <span className="truncate">{email}</span>
+                {email}
               </Link>
             </div>
           )}
@@ -81,10 +78,7 @@ export async function ContactMasthead() {
                 {phones.map((phone) => (
                   <li key={phone}>
                     <Link
-                      className={cn(
-                        buttonVariants({ size: "md", variant: "link" }),
-                        "text-xl",
-                      )}
+                      className="font-body text-xl text-accent underline underline-offset-4 transition-colors hover:text-ink"
                       href={`tel:${phone.replace(/\s+/g, "")}` as Route}
                     >
                       {phone}

@@ -17,6 +17,7 @@ export type CheckboxFieldProps<T extends FieldValues> = {
   name: FieldPath<T>;
   label: string;
   description?: string;
+  required?: boolean;
   className?: string;
 };
 
@@ -25,6 +26,7 @@ export function CheckboxField<T extends FieldValues>({
   name,
   label,
   description,
+  required,
   className,
 }: CheckboxFieldProps<T>) {
   return (
@@ -35,6 +37,7 @@ export function CheckboxField<T extends FieldValues>({
         <FormItem className={cn("flex-row items-start gap-3", className)}>
           <Checkbox
             id={ids.control}
+            required={required}
             className="aria-invalid:border-accent"
             checked={field.value === true}
             onCheckedChange={(checked) => {
@@ -50,6 +53,7 @@ export function CheckboxField<T extends FieldValues>({
           <div className="flex flex-col gap-1">
             <FormLabel
               htmlFor={ids.control}
+              required={required}
               className="leading-snug cursor-pointer font-normal"
             >
               {label}

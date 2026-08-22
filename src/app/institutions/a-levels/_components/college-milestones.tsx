@@ -23,13 +23,14 @@ export function CollegeMilestones({
   if (copy.milestones.length === 0) return null;
 
   return (
-    <section className="field-teal gutter-x section-y" id="milestones">
+    <section className="gutter-x section-y" id="milestones">
       <div className="mx-auto max-w-page">
         <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
-          <div className="lg:col-span-6">
+          <div className="max-w-2xl lg:col-span-12">
             <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
             </RevealItem>
+
             <SplitText
               as="h2"
               className="mt-4 font-display text-5xl font-normal text-balance text-ink"
@@ -38,29 +39,29 @@ export function CollegeMilestones({
             </SplitText>
           </div>
 
-          <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
+          <RevealItem className="mt-8 max-w-xl lg:col-span-8 lg:col-start-5">
             <Standfirst>{copy.standfirst}</Standfirst>
           </RevealItem>
         </Reveal>
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
-          <ol className="border-t border-border">
+          <ol className="flex flex-col gap-16 border-t border-border pt-10 lg:gap-24 lg:pt-14">
             {copy.milestones.map((milestone) => (
               <li
-                className="border-b border-border py-8 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:py-12"
+                className="lg:grid lg:grid-cols-12 lg:items-baseline lg:gap-x-10"
                 data-reveal-item=""
                 key={milestone.year}
               >
                 <time
-                  className="block font-display text-6xl text-accent lg:col-span-3"
+                  className="block font-display text-8xl text-accent tabular-nums lg:col-span-4"
                   dateTime={String(milestone.year)}
                 >
                   {milestone.year}
                 </time>
 
-                <div className="mt-5 lg:col-span-7 lg:col-start-5 lg:mt-0">
-                  <H4>{milestone.title}</H4>
-                  <P className="mt-3">{milestone.body}</P>
+                <div className="mt-4 lg:col-span-8 lg:mt-0">
+                  <H4 as="h3">{milestone.title}</H4>
+                  <P className="mt-4 max-w-xl">{milestone.body}</P>
                 </div>
               </li>
             ))}

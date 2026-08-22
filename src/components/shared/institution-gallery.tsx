@@ -109,8 +109,7 @@ export async function InstitutionGallery({
             <RevealItem className="sm:shrink-0">
               <Link
                 className={cn(
-                  buttonVariants({ size: "md", variant: "link" }),
-                  "min-h-11 inline-flex items-center",
+                  buttonVariants({ size: "lg", variant: "default" }),
                 )}
                 href={href}
               >

@@ -1,23 +1,23 @@
-import type { Route } from "next";
-import Link from "next/link";
+import { useId } from "react";
 import { Reveal } from "@/components/motion/reveal";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { H3, P } from "@/components/ui/typography";
 import { ArrowUpRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-
-const HEADING_ID = "site-cta-band-heading";
 
 export type SiteCtaBandProps = {
   heading: string;
   standfirst: string;
-  email: string;
 };
 
-export function SiteCtaBand({ email, heading, standfirst }: SiteCtaBandProps) {
+export function SiteCtaBand({ heading, standfirst }: SiteCtaBandProps) {
+  const headingId = useId();
+  const emailId = useId();
+
   return (
-    <section aria-labelledby={HEADING_ID} className="relative gutter-x">
+    <section aria-labelledby={headingId} className="relative gutter-x">
       <div
         aria-hidden="true"
         className="field-brand absolute inset-x-0 top-1/2 bottom-0"
@@ -26,22 +26,33 @@ export function SiteCtaBand({ email, heading, standfirst }: SiteCtaBandProps) {
       <Reveal className="relative mx-auto max-w-page">
         <div className="field-ink flex flex-col items-start justify-between gap-y-8 rounded-xl px-8 py-12 sm:px-12 lg:min-h-50 lg:flex-row lg:items-center lg:gap-x-16 lg:px-20 lg:py-0">
           <div className="max-w-xl">
-            <H3 as="h2" id={HEADING_ID}>
+            <H3 as="h2" id={headingId}>
               {heading}
             </H3>
             <P className="mt-3">{standfirst}</P>
           </div>
 
-          <Link
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "max-w-full bg-primary-700 text-primary-100 hover:bg-primary-800",
-            )}
-            href={`mailto:${email}` as Route}
-          >
-            <span className="truncate">{email}</span>
-            <Icon icon={ArrowUpRightIcon} />
-          </Link>
+          <div className="w-full max-w-md lg:min-w-xs">
+            <Label className="sr-only" htmlFor={emailId}>
+              Email address
+            </Label>
+
+            <div className="flex flex-col gap-3 md:flex-row md:items-center">
+              <Input
+                autoComplete="email"
+                className="min-w-0 border-input bg-transparent md:flex-1"
+                id={emailId}
+                name="email"
+                placeholder="you@example.com"
+                type="email"
+              />
+
+              <Button size="lg">
+                Subscribe
+                <Icon icon={ArrowUpRightIcon} />
+              </Button>
+            </div>
+          </div>
         </div>
       </Reveal>
     </section>

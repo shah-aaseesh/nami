@@ -25,7 +25,7 @@ function UpdateCta({ link }: { readonly link: ContentLink }) {
 
   return (
     <Link
-      className={cn(buttonVariants({ size: "md", variant: "link" }), "mt-5")}
+      className={cn(buttonVariants({ size: "md", variant: "outline" }), "mt-5")}
       href={link.href as Route}
       rel={isExternal ? "noopener noreferrer" : undefined}
       target={isExternal ? "_blank" : undefined}

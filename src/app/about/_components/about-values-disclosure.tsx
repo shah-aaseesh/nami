@@ -46,7 +46,7 @@ export function AboutValuesDisclosure({ children }: { children: ReactNode }) {
       value={value}
     >
       <AccordionItem className="border-b-0" value={PANEL_VALUE}>
-        <AccordionTrigger>
+        <AccordionTrigger className="justify-end gap-2">
           <span>
             {isOpen ? "Show less" : "Read more"}
             <span className="sr-only">

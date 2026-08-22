@@ -58,9 +58,6 @@ export function AboutMascot({
                 {image === null ? (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
                     <Icon className="size-8 text-ink-muted" icon={ImageIcon} />
-                    <P className="text-sm">
-                      The mascot artwork is not published yet.
-                    </P>
                   </div>
                 ) : (
                   <Image

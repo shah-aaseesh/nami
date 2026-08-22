@@ -5,6 +5,7 @@ import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Eyebrow, P } from "@/components/ui/typography";
 import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 export async function About({
   section,
@@ -47,7 +48,9 @@ export async function About({
 
             <Reveal className="mt-8">
               <Link
-                className={buttonVariants({ variant: "default" })}
+                className={cn(
+                  buttonVariants({ size: "lg", variant: "default" }),
+                )}
                 href={"/about" as Route}
               >
                 Read the full story

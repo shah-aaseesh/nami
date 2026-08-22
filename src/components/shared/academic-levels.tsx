@@ -1,4 +1,3 @@
-import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
@@ -12,6 +11,7 @@ import type {
   VocationalApproval,
 } from "@/lib/content";
 import { content, slug } from "@/lib/content";
+import { institutionPathOfSlug } from "@/lib/content/institutions";
 import { ArrowRightIcon } from "@/lib/icons";
 
 const MEDIA_SIZES = "(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 100vw";
@@ -25,10 +25,11 @@ function InstitutionCard({
 }) {
   const established =
     entity.establishedYear === null ? null : `Est. ${entity.establishedYear}`;
+  const href = institutionPathOfSlug(level.slug);
 
   return (
     <li
-      className="group relative flex flex-col overflow-hidden rounded-media border border-ink/15 bg-surface-raised"
+      className="group relative flex flex-col overflow-hidden rounded-media border border-border bg-surface-raised"
       data-reveal-item=""
     >
       {level.image === null ? null : (
@@ -46,19 +47,23 @@ function InstitutionCard({
 
       <div className="flex flex-1 flex-col p-6 lg:p-7">
         <H5 as="h3">
-          <Link
-            className="transition-colors after:absolute after:inset-0 group-hover:text-accent"
-            href={`/institutions/${level.slug}` as Route}
-          >
-            {entity.name}
-          </Link>
+          {href === null ? (
+            entity.name
+          ) : (
+            <Link
+              className="transition-colors after:absolute after:inset-0 group-hover:text-accent"
+              href={href}
+            >
+              {entity.name}
+            </Link>
+          )}
         </H5>
 
         <p className="mt-3 mb-6 font-body text-sm text-ink-muted">
           {level.stage}
         </p>
 
-        <div className="mt-auto flex items-center gap-4 border-t border-ink/15 pt-5">
+        <div className="mt-auto flex items-center gap-4 border-t border-border pt-5">
           {established === null ? null : (
             <Eyebrow as="span" className="text-ink-muted">
               {established}
@@ -83,7 +88,7 @@ function VocationalCard({
 }) {
   return (
     <li
-      className="relative flex flex-col overflow-hidden rounded-media border border-ink/15 bg-surface-raised"
+      className="relative flex flex-col overflow-hidden rounded-media border border-border bg-surface-raised"
       data-reveal-item=""
     >
       {image === null ? null : (
@@ -107,7 +112,7 @@ function VocationalCard({
           {approval.scope}
         </p>
 
-        <div className="mt-2 flex items-center border-t border-ink/15 pt-5">
+        <div className="mt-2 flex items-center border-t border-border pt-5">
           <Eyebrow as="span" className="text-ink-muted">
             {`Approved ${approval.approvedYear}`}
           </Eyebrow>
@@ -130,7 +135,7 @@ export async function AcademicLevels() {
     levels.find((level) => level.slug === slug("bachelors"))?.image ?? null;
 
   return (
-    <section className="field-brand gutter-x section-y" id="institutions">
+    <section className="gutter-x section-y" id="institutions">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
           <Reveal className="lg:col-span-4 lg:row-start-1" stagger={0.08}>

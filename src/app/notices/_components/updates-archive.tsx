@@ -224,10 +224,7 @@ export function UpdatesArchive({
                 <H2 className="mt-4">{noticesCopy.empty.heading}</H2>
                 <P className="mt-6">{noticesCopy.empty.body}</P>
                 <button
-                  className={cn(
-                    buttonVariants({ size: "md" }),
-                    "mt-10 min-h-11 px-6",
-                  )}
+                  className={cn(buttonVariants({ size: "lg" }), "mt-10")}
                   onClick={resetFilters}
                   type="button"
                 >

@@ -39,7 +39,7 @@ export const contactCopy = {
     labels: {
       name: "Full name",
       email: "Email address",
-      phone: "Phone number (optional)",
+      phone: "Phone number",
       topic: "What is this about?",
       message: "Your message",
     },

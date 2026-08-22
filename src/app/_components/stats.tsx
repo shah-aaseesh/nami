@@ -16,7 +16,7 @@ export function Stats({
   if (rows.length === 0) return null;
 
   return (
-    <section className="gutter-x section-y" id="numbers">
+    <section className="field-brand gutter-x section-y" id="numbers">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-5 lg:col-start-1 lg:row-start-1">

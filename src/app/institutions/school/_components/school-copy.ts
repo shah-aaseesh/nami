@@ -1,13 +1,8 @@
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
 import type { SharedHeroSlide } from "@/components/shared/shared-hero";
-import type {
-  ContentImage,
-  ContentLink,
-  SectionCopy,
-  Testimonial,
-} from "@/lib/content";
-import { entryOf, richText, schoolGrades } from "@/lib/content";
+import type { ContentLink, SectionCopy, Testimonial } from "@/lib/content";
+import { entryOf, schoolGrades } from "@/lib/content";
 import type { SchoolAdmissionCopy } from "./school-admission";
 import type { SchoolBandsCopy } from "./school-bands";
 import type { SchoolDayCopy } from "./school-day";
@@ -18,13 +13,6 @@ export type SchoolHeroCopy = {
   readonly heroLabel: string;
   readonly slides: readonly SharedHeroSlide[];
   readonly admissionCta: ContentLink;
-};
-
-const principalPortrait: ContentImage = {
-  src: "/team/anisha-panday-joshi.webp",
-  alt: "Studio portrait of Ms. Anisha Panday Joshi, Principal of NAMI International School, hands clasped in an olive and red patterned sari over a red blouse against a mottled blue-grey backdrop.",
-  width: 1154,
-  height: 1600,
 };
 
 const heroSlides: readonly SharedHeroSlide[] = [
@@ -371,15 +359,6 @@ const admission: SchoolAdmissionCopy = {
       body: "Parents or guardians attend an Open House to receive the Parent's and Student's Handbook, the curriculum details and the other essential documents.",
     },
   ],
-  callHeading: "Ready to enrol?",
-  callBody:
-    "The admissions team will guide you through every step. Call the school, or start the enquiry online and they will come back to you.",
-  cta: {
-    label: "Start an admission",
-    href: "/admissions",
-    destination: "internal",
-  },
-  phoneLabel: "Call the school",
 };
 
 const gallery: InstitutionGalleryCopy = {
@@ -408,19 +387,6 @@ export const schoolCopy = {
   levelSlug: "school",
   masthead,
   bands,
-  principal: {
-    slug: "leader-anisha-joshi",
-    eyebrow: "From the Principal",
-    portrait: principalPortrait,
-    message: richText(
-      "My personal and professional commitment at NAMI International School is to guide the growth of students and ensure a nurturing environment for all.",
-      "At NAMI International School, we hold a deep conviction that education should be a catalyst for bringing out the best in every child. We work towards enhancing knowledge, skill, ability and the overall potential of individuals to become successful and ready for a world that never ceases to change.",
-      "As my understanding of the world deepens, so does my conviction that we need to raise a generation of empathetic and compassionate individuals. It is therefore crucial to instil a culture of care from an early age, both within the household and the school environment. This entails acknowledging parents as essential partners in moulding the educational path of the child.",
-      "Keeping the above in mind, our school curriculum is crafted through extensive research and is designed to address various facets of development — cognitive, social-emotional, physical and creative. We aim to instil a genuine love for learning in our students, and therefore embrace each child as an individual with unique talent and potential.",
-      "Academics at NAMI International School are not just about grades. Our focus is on creating an inclusive and caring community where every child feels seen, heard and supported in all manner of ways.",
-      "Together with my team, we are dedicated to creating a centre of excellence in education, empowering students to become resilient lifelong learners and positive agents of change.",
-    ),
-  },
   day,
   parents,
   admission,

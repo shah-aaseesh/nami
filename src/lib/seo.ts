@@ -1,4 +1,5 @@
 import type { Metadata, MetadataRoute } from "next";
+import { institutionPath } from "@/lib/content/institutions";
 
 const FALLBACK_SITE_ORIGIN = "https://nami.edu.np";
 
@@ -31,17 +32,17 @@ export const siteRoutes: readonly SiteRoute[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
   {
-    path: "/institutions/school",
+    path: institutionPath("school"),
     changeFrequency: "monthly",
     priority: 0.9,
   },
   {
-    path: "/institutions/college",
+    path: institutionPath("college"),
     changeFrequency: "monthly",
     priority: 0.9,
   },
   {
-    path: "/institutions/bachelors",
+    path: institutionPath("bachelors"),
     changeFrequency: "monthly",
     priority: 0.9,
   },

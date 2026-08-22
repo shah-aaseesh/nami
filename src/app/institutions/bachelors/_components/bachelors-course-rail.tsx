@@ -5,10 +5,9 @@ import type {
   BachelorsProgramme,
   BachelorsProgrammesCopy,
 } from "./bachelors-copy";
-import { BachelorsCourseTrack } from "./bachelors-course-track";
 
 const CARD_SIZES =
-  "(min-width: 1568px) 480px, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 78vw";
+  "(min-width: 1568px) 480px, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 90vw";
 
 function CourseCard({
   copy,
@@ -20,7 +19,7 @@ function CourseCard({
   const lead = course.summary[0] ?? null;
 
   return (
-    <li className="group relative flex w-4/5 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong sm:w-1/2 lg:w-1/3">
+    <li className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong">
       <div className="flex flex-1 flex-col gap-4 p-6 lg:p-8">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
           <Eyebrow as="span">{course.qualification}</Eyebrow>
@@ -93,12 +92,15 @@ export function BachelorsCourseRail({
         </div>
       </div>
 
-      <div className="mt-14 lg:mt-20">
-        <BachelorsCourseTrack label={copy.eyebrow} total={total}>
+      <div className="mx-auto mt-14 max-w-page lg:mt-20">
+        <ul
+          aria-label={copy.eyebrow}
+          className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3"
+        >
           {copy.items.map((course) => (
             <CourseCard copy={copy} course={course} key={course.key} />
           ))}
-        </BachelorsCourseTrack>
+        </ul>
       </div>
     </section>
   );

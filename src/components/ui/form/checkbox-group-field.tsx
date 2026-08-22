@@ -9,6 +9,7 @@ import {
   FormDescription,
   FormField,
   FormMessage,
+  RequiredMarker,
 } from "./form-field";
 
 function slugify(value: string): string {
@@ -24,6 +25,7 @@ export type CheckboxGroupFieldProps<T extends FieldValues> = {
   legend: string;
   options: readonly string[];
   description?: string;
+  required?: boolean;
   className?: string;
 };
 
@@ -33,6 +35,7 @@ export function CheckboxGroupField<T extends FieldValues>({
   legend,
   options,
   description,
+  required,
   className,
 }: CheckboxGroupFieldProps<T>) {
   return (
@@ -45,7 +48,7 @@ export function CheckboxGroupField<T extends FieldValues>({
           : [];
         return (
           <fieldset
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-3 pt-4"
             aria-describedby={describedBy(ids, {
               description: Boolean(description),
               invalid,
@@ -56,6 +59,7 @@ export function CheckboxGroupField<T extends FieldValues>({
               className="text-sm font-medium leading-none text-ink"
             >
               {legend}
+              {required ? <RequiredMarker /> : null}
             </legend>
             {description ? (
               <FormDescription>{description}</FormDescription>

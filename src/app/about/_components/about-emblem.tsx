@@ -75,7 +75,7 @@ export function AboutEmblem({
         </div>
 
         {petals.length > 0 ? (
-          <div className="mt-10 lg:mt-12">
+          <div className="mt-6 lg:mt-8">
             <AboutValuesDisclosure>
               <FivePetals petals={petals} />
             </AboutValuesDisclosure>

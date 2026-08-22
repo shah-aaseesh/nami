@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Eyebrow, P } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
 
 export default function ErrorPage({
   error,
@@ -40,10 +41,12 @@ export default function ErrorPage({
           </P>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button onClick={() => reset()}>Try Again</Button>
-            <Button render={<Link href="/" />} nativeButton={false}>
-              Return to Homepage
+            <Button size="lg" onClick={() => reset()}>
+              Try Again
             </Button>
+            <Link className={cn(buttonVariants({ size: "lg" }))} href="/">
+              Return to Homepage
+            </Link>
           </div>
         </Reveal>
       </div>

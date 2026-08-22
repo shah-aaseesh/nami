@@ -1,11 +1,6 @@
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
-import type {
-  ContentImage,
-  ContentLink,
-  PartnerKind,
-  SectionCopy,
-} from "@/lib/content";
+import type { ContentImage, ContentLink, SectionCopy } from "@/lib/content";
 import { richText } from "@/lib/content";
 import type { BachelorsAwardingCopy } from "./bachelors-awarding";
 import type { BachelorsPartnersCopy } from "./bachelors-partners";
@@ -840,10 +835,18 @@ const programmes: BachelorsProgrammesCopy = {
   ],
 };
 
+const placementPanel: ContentImage = {
+  src: "/nami/event-climate-panel.jpg",
+  alt: "A panel discussion in a wood-panelled conference room, a speaker addressing a seated audience with a microphone while the other panellists listen from the front row.",
+  width: 800,
+  height: 533,
+};
+
 const partners: BachelorsPartnersCopy = {
-  eyebrow: "Industry network",
+  eyebrow: "Career Placement",
   heading: "The organisations our students meet before they graduate.",
-  label: "NAMI industry and technology partners",
+  image: placementPanel,
+  label: "NAMI industry and technology partner logos",
 };
 
 const alumni: SectionCopy = {
@@ -874,31 +877,6 @@ const notices: InstitutionNoticesCopy = {
     "There is no institute notice standing right now. Everything the institute has published stays on the notice board.",
 };
 
-const partnerTags: Readonly<Record<string, string>> = {
-  "aws-academy": "Cloud computing",
-  "startup-discovery-asia": "Startup ecosystem",
-  "sanima-bank": "Banking",
-  "sunrise-bank": "Banking",
-  "nic-asia-capital": "Capital markets",
-  "cloud-factory": "Cloud and technology",
-  "bajra-technologies": "Technology",
-  "buddha-tech": "Technology",
-  "palm-mind-technology": "Technology",
-  "clock-business-technology": "Business technology",
-  "ap1-television": "Media",
-  "annapurna-media-network": "Media",
-  "machan-country-villa": "Hospitality",
-  "nyef-lalitpur": "Entrepreneurship",
-  "intern-nepal-recruit-nepal": "Recruitment",
-  sabco: "Business services",
-};
-
-const partnerKindTags: Readonly<Record<PartnerKind, string>> = {
-  industry: "Industry partner",
-  technology: "Technology partner",
-  ecosystem: "Ecosystem partner",
-};
-
 export const bachelorsCopy = {
   meta: {
     title: "Naaya Aayam Multi-Disciplinary Institute",
@@ -924,6 +902,4 @@ export const bachelorsCopy = {
   alumni,
   gallery,
   notices,
-  partnerTags,
-  partnerKindTags,
 } as const;

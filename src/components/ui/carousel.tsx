@@ -25,6 +25,7 @@ type CarouselPlugin = UseCarouselParameters[1];
 
 type CarouselProps = {
   readonly autoplay?: boolean;
+  readonly autoplayIntervalMs?: number;
   readonly opts?: CarouselOptions;
   readonly plugins?: CarouselPlugin;
   readonly setApi?: (api: CarouselApi) => void;
@@ -54,6 +55,7 @@ function useCarousel() {
 
 export function Carousel({
   autoplay = false,
+  autoplayIntervalMs,
   children,
   className,
   opts,
@@ -93,6 +95,7 @@ export function Carousel({
   const { pause, resume } = useCarouselAutoplay({
     api,
     enabled: autoplay && scrollSnaps.length > 1,
+    intervalMs: autoplayIntervalMs,
     selectedIndex,
   });
 

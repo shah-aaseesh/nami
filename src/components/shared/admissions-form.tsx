@@ -28,13 +28,18 @@ import {
   type InquiryCourse,
 } from "@/lib/content/institutions";
 import {
+  ArrowLeftIcon,
   ArrowRightIcon,
   CheckIcon,
   DownloadIcon,
   PlusIcon,
   TrashIcon,
 } from "@/lib/icons";
-import { type AdmissionsFormData, admissionsSchema } from "@/lib/schema";
+import {
+  type AdmissionsFormData,
+  admissionsSchema,
+  isGuardianLedProgram,
+} from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
 type StepKey =
@@ -90,7 +95,12 @@ const STEP_FIELDS: Record<StepKey, readonly FieldPath<AdmissionsFormData>[]> = {
   ],
   history: ["qualifications", "pendingQualifications"],
   employment: ["employment"],
-  additional: ["howDidYouHear", "signature", "signatureDate"],
+  additional: [
+    "personalStatement",
+    "howDidYouHear",
+    "signature",
+    "signatureDate",
+  ],
 };
 
 function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
@@ -127,7 +137,7 @@ function QualificationRow({
   onRemove: () => void;
 }) {
   return (
-    <div className="p-5 rounded-xl border border-border bg-surface-muted/50 relative">
+    <div className="p-5 rounded-xl border border-border bg-muted/50 relative">
       <button
         type="button"
         onClick={onRemove}
@@ -141,6 +151,7 @@ function QualificationRow({
           control={control}
           name={`qualifications.${index}.place`}
           label="Place of Study"
+          required
         />
         <TextField
           control={control}
@@ -176,7 +187,7 @@ function EmploymentRow({
   onRemove: () => void;
 }) {
   return (
-    <div className="p-5 rounded-xl border border-border bg-surface-muted/50 relative">
+    <div className="p-5 rounded-xl border border-border bg-muted/50 relative">
       {showRemove && (
         <button
           type="button"
@@ -218,10 +229,13 @@ function EmploymentRow({
 
 export function MultiStepForm() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isPreparingPdf, setIsPreparingPdf] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [pdfError, setPdfError] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const confirmationRef = useRef<HTMLHeadingElement>(null);
 
   const [focusStepKey, setFocusStepKey] = useState<StepKey | null>(null);
 
@@ -290,6 +304,7 @@ export function MultiStepForm() {
   });
 
   const selectedProgram = useWatch({ control, name: "program" }) ?? "";
+  const guardianLed = isGuardianLedProgram(selectedProgram);
   const course = findInquiryCourse(selectedProgram);
   const steps = stepsForCourse(course);
   const stepIndex = Math.min(currentStep, steps.length - 1);
@@ -300,6 +315,11 @@ export function MultiStepForm() {
     STEP_FIELDS[key].some(
       (name) => getFieldState(name, formState).error !== undefined,
     );
+
+  useEffect(() => {
+    if (!isSubmitted) return;
+    confirmationRef.current?.focus();
+  }, [isSubmitted]);
 
   useEffect(() => {
     if (focusStepKey === null || activeStepKey !== focusStepKey) return;
@@ -354,8 +374,8 @@ export function MultiStepForm() {
     goToStep(stepIndex + 1);
   };
 
-  const downloadPdf = async () => {
-    setPdfError(null);
+  const submitForm = async () => {
+    setSubmitError(null);
 
     const passed = await trigger(undefined, { shouldFocus: true });
     if (!passed) {
@@ -364,8 +384,8 @@ export function MultiStepForm() {
           (name) => getFieldState(name).error !== undefined,
         ),
       );
-      setPdfError(
-        "Some answers still need attention. Check the highlighted steps, then download again.",
+      setSubmitError(
+        "Some answers still need attention. Check the highlighted steps, then submit again.",
       );
       const target = steps[firstBrokenStep];
       if (target && firstBrokenStep !== stepIndex) {
@@ -375,6 +395,17 @@ export function MultiStepForm() {
       return;
     }
 
+    setPdfError(null);
+    setIsSubmitted(true);
+  };
+
+  const resumeEditing = () => {
+    setPdfError(null);
+    setIsSubmitted(false);
+  };
+
+  const downloadPdf = async () => {
+    setPdfError(null);
     setIsPreparingPdf(true);
     try {
       const { downloadInquiryPdf } = await import("@/lib/inquiry-pdf");
@@ -405,6 +436,7 @@ export function MultiStepForm() {
                 label="Program"
                 options={PROGRAM_OPTIONS}
                 placeholder="Select a program"
+                required
                 onValueChange={selectCourse}
               />
               <TextField
@@ -428,19 +460,27 @@ export function MultiStepForm() {
                 name="firstName"
                 label="First Name"
                 autoComplete="given-name"
+                required
               />
               <TextField
                 control={control}
                 name="surname"
                 label="Surname"
                 autoComplete="family-name"
+                required
               />
-              <DateField control={control} name="dob" label="Date of Birth" />
+              <DateField
+                control={control}
+                name="dob"
+                label="Date of Birth"
+                required
+              />
               <TextField
                 control={control}
                 name="nationality"
                 label="Nationality"
                 autoComplete="country-name"
+                required
               />
               <TextField
                 control={control}
@@ -449,6 +489,7 @@ export function MultiStepForm() {
                 type="tel"
                 inputMode="tel"
                 autoComplete="tel"
+                required={!guardianLed}
               />
               <TextField
                 control={control}
@@ -457,6 +498,7 @@ export function MultiStepForm() {
                 type="email"
                 inputMode="email"
                 autoComplete="email"
+                required={!guardianLed}
               />
               <div className="md:col-span-2">
                 <FileField
@@ -579,7 +621,7 @@ export function MultiStepForm() {
                 type="button"
                 size="sm"
                 onClick={addQualification}
-                className="gap-2 shrink-0 bg-transparent border border-border text-ink hover:bg-surface-muted shadow-none"
+                className="gap-2 shrink-0 bg-transparent border border-border text-ink hover:bg-muted shadow-none"
               >
                 <Icon icon={PlusIcon} className="size-4" /> Add
               </Button>
@@ -630,7 +672,7 @@ export function MultiStepForm() {
                 type="button"
                 size="sm"
                 onClick={addEmployment}
-                className="gap-2 shrink-0 bg-transparent border border-border text-ink hover:bg-surface-muted shadow-none"
+                className="gap-2 shrink-0 bg-transparent border border-border text-ink hover:bg-muted shadow-none"
               >
                 <Icon icon={PlusIcon} className="size-4" /> Add
               </Button>
@@ -687,11 +729,13 @@ export function MultiStepForm() {
                     name="signature"
                     label="Student Signature (Type Name)"
                     autoComplete="name"
+                    required={!guardianLed}
                   />
                   <DateField
                     control={control}
                     name="signatureDate"
                     label="Date"
+                    required={!guardianLed}
                   />
                 </div>
               </div>
@@ -706,16 +750,16 @@ export function MultiStepForm() {
   return (
     <div className="mx-auto w-full max-w-5xl" ref={containerRef}>
       <div className="bg-surface border border-border rounded-2xl shadow-sm flex flex-col md:flex-row min-h-[600px]">
-        <div className="bg-surface-muted w-full md:w-64 lg:w-80 p-6 md:p-8 shrink-0 border-b md:border-b-0 md:border-r border-border rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
+        <div className="bg-muted w-full md:w-64 lg:w-80 p-6 md:p-8 shrink-0 border-b md:border-b-0 md:border-r border-border rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
           <H2 className="font-display text-xl font-semibold text-ink mb-8">
             Inquiry Form
           </H2>
           <ul className="space-y-6">
             {steps.map((step, index) => {
-              const isActive = index === stepIndex;
-              const isPast = index < stepIndex;
+              const isActive = !isSubmitted && index === stepIndex;
+              const isPast = isSubmitted || index < stepIndex;
               const hasError = stepHasError(step.key);
-              const canJump = isPast || hasError;
+              const canJump = !isSubmitted && (isPast || hasError);
 
               return (
                 <li
@@ -736,7 +780,7 @@ export function MultiStepForm() {
                     onClick={() => canJump && goToStep(index)}
                     disabled={!canJump && !isActive}
                     className={cn(
-                      "flex items-center justify-center size-7 rounded-full text-xs font-semibold shrink-0 transition-all duration-300 outline-none",
+                      "flex items-center justify-center size-7 rounded-full text-xs font-semibold shrink-0 transition-all duration-300",
                       isActive && "ring-4 ring-accent/20 scale-110",
                       canJump && "cursor-pointer",
                       hasError
@@ -759,7 +803,7 @@ export function MultiStepForm() {
                     onClick={() => canJump && goToStep(index)}
                     disabled={!canJump && !isActive}
                     className={cn(
-                      "text-sm font-medium text-left transition-colors duration-300 outline-none",
+                      "text-sm font-medium text-left rounded-sm transition-colors duration-300",
                       canJump && "cursor-pointer",
                       hasError
                         ? "text-accent"
@@ -786,58 +830,103 @@ export function MultiStepForm() {
           onSubmit={(event) => event.preventDefault()}
           className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-between"
         >
-          <div ref={formRef} className="flex-1">
-            {renderStepContent()}
-          </div>
+          {isSubmitted ? (
+            <div className="flex-1 flex flex-col items-center justify-center text-center gap-6 py-12">
+              <span className="flex items-center justify-center size-16 rounded-full bg-accent text-accent-ink">
+                <Icon icon={CheckIcon} className="size-7" />
+              </span>
 
-          <div className="mt-12 pt-6 border-t border-border flex flex-col gap-4">
-            {activeStep?.key === "additional" && (
-              <P className="text-xs text-ink-muted">
-                Your PDF is created on this device. Nothing you have entered
-                leaves your browser, and the file you uploaded is not included
-                in it.
-              </P>
-            )}
-
-            {pdfError && (
-              <P role="alert" className="text-xs text-accent">
-                {pdfError}
-              </P>
-            )}
-
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <Button
-                type="button"
-                variant="default"
-                onClick={() => goToStep(stepIndex - 1)}
-                disabled={stepIndex === 0}
-                className="px-6 h-12 border border-border"
-              >
-                Previous
-              </Button>
-
-              {stepIndex < steps.length - 1 ? (
-                <Button
-                  type="button"
-                  onClick={goToNextStep}
-                  className="gap-2 px-6 h-12"
+              <div className="max-w-md space-y-3">
+                <H3
+                  ref={confirmationRef}
+                  tabIndex={-1}
+                  className="text-2xl font-display text-ink"
                 >
-                  Next Step <Icon icon={ArrowRightIcon} className="size-4" />
-                </Button>
-              ) : (
+                  Your inquiry form is complete
+                </H3>
+                <P className="text-ink-muted">
+                  Every answer has been checked. Download your summary as a PDF
+                  and bring it with you, or go back if you want to change
+                  something.
+                </P>
+              </div>
+
+              {pdfError && (
+                <P role="alert" className="text-xs text-accent">
+                  {pdfError}
+                </P>
+              )}
+
+              <div className="flex flex-col md:flex-row items-center gap-3">
                 <Button
                   type="button"
-                  variant="default"
+                  size="lg"
                   onClick={downloadPdf}
                   disabled={isPreparingPdf}
-                  className="gap-2 px-6 h-12 border border-border"
+                  className="gap-2 px-6"
                 >
                   {isPreparingPdf ? "Preparing PDF" : "Download PDF"}
                   <Icon icon={DownloadIcon} className="size-4" />
                 </Button>
-              )}
+                <Button
+                  type="button"
+                  size="lg"
+                  onClick={resumeEditing}
+                  className="gap-2 px-6 bg-transparent border border-border text-ink hover:bg-muted shadow-none"
+                >
+                  <Icon icon={ArrowLeftIcon} className="size-4" /> Edit answers
+                </Button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <>
+              <div ref={formRef} className="flex-1">
+                {renderStepContent()}
+              </div>
+
+              <div className="mt-12 pt-6 border-t border-border flex flex-col gap-4">
+                {submitError && (
+                  <P role="alert" className="text-xs text-accent">
+                    {submitError}
+                  </P>
+                )}
+
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <Button
+                    type="button"
+                    size="lg"
+                    variant="default"
+                    onClick={() => goToStep(stepIndex - 1)}
+                    disabled={stepIndex === 0}
+                    className="px-6 border border-border"
+                  >
+                    Previous
+                  </Button>
+
+                  {stepIndex < steps.length - 1 ? (
+                    <Button
+                      type="button"
+                      size="lg"
+                      onClick={goToNextStep}
+                      className="gap-2 px-6"
+                    >
+                      Next Step{" "}
+                      <Icon icon={ArrowRightIcon} className="size-4" />
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      size="lg"
+                      onClick={submitForm}
+                      className="gap-2 px-6"
+                    >
+                      Submit form <Icon icon={CheckIcon} className="size-4" />
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
         </form>
       </div>
     </div>
@@ -846,7 +935,7 @@ export function MultiStepForm() {
 
 export function AdmissionsFormSection() {
   return (
-    <section className="bg-surface-muted section-y gutter-x" id="apply">
+    <section className="bg-muted section-y gutter-x" id="apply">
       <div className="text-center mb-12 max-w-3xl mx-auto">
         <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
           Start Your Application

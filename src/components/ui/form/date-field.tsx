@@ -35,6 +35,7 @@ export type DateFieldProps<T extends FieldValues> = {
   label: string;
   placeholder?: string;
   description?: string;
+  required?: boolean;
   className?: string;
   captionLayout?: React.ComponentProps<typeof Calendar>["captionLayout"];
   startMonth?: Date;
@@ -47,6 +48,7 @@ export function DateField<T extends FieldValues>({
   label,
   placeholder = "Pick a date",
   description,
+  required,
   className,
   captionLayout = "dropdown",
   startMonth = new Date(new Date().getFullYear() - 100, 0, 1),
@@ -61,7 +63,7 @@ export function DateField<T extends FieldValues>({
         const selected = toDate(field.value);
         return (
           <FormItem>
-            <FormLabel>{label}</FormLabel>
+            <FormLabel required={required}>{label}</FormLabel>
             {description ? (
               <FormDescription>{description}</FormDescription>
             ) : null}
@@ -78,7 +80,7 @@ export function DateField<T extends FieldValues>({
                       invalid,
                     })}
                     className={cn(
-                      "w-full h-12 bg-transparent border border-border hover:bg-surface-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none aria-invalid:border-accent",
+                      "w-full h-12 bg-transparent border border-border hover:bg-muted justify-start text-left font-normal text-base text-ink px-4 py-2 shadow-none aria-invalid:border-accent",
                       !selected && "text-ink-muted",
                       className,
                     )}

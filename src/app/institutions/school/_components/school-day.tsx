@@ -29,7 +29,7 @@ export function SchoolDay({
   readonly id?: string;
 }) {
   return (
-    <section className="field-ink gutter-x section-y" id={id}>
+    <section className="field-brand gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-6">

@@ -41,6 +41,15 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  async redirects() {
+    return [
+      {
+        source: "/institutions/college",
+        destination: "/institutions/a-levels",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

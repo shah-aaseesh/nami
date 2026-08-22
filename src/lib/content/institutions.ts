@@ -1,7 +1,38 @@
 import type { Route } from "next";
 import { schoolGrades } from "@/lib/content/school-grades";
+import type { EntityRole } from "./types";
 
 export type InstitutionId = "school" | "college" | "bachelors";
+
+// The one id -> public path map. The id is domain identity and never tracks the
+// URL: "college" is served at /institutions/a-levels.
+const INSTITUTION_PATHS = {
+  school: "/institutions/school",
+  college: "/institutions/a-levels",
+  bachelors: "/institutions/bachelors",
+} as const satisfies Record<InstitutionId, Route>;
+
+const INSTITUTION_ID_BY_ENTITY_ROLE = {
+  school: "school",
+  college: "college",
+  institute: "bachelors",
+} as const satisfies Record<EntityRole, InstitutionId>;
+
+function isInstitutionId(value: string): value is InstitutionId {
+  return value in INSTITUTION_PATHS;
+}
+
+export function institutionPath(id: InstitutionId): Route {
+  return INSTITUTION_PATHS[id];
+}
+
+export function institutionPathForRole(role: EntityRole): Route {
+  return INSTITUTION_PATHS[INSTITUTION_ID_BY_ENTITY_ROLE[role]];
+}
+
+export function institutionPathOfSlug(value: string): Route | null {
+  return isInstitutionId(value) ? INSTITUTION_PATHS[value] : null;
+}
 
 export type Institution = {
   readonly id: InstitutionId;
@@ -14,19 +45,19 @@ export const INSTITUTIONS: readonly Institution[] = [
   {
     id: "school",
     title: "NAMI International School",
-    href: "/institutions/school",
+    href: institutionPath("school"),
     applyLabel: `NAMI International School (${schoolGrades.label} & NEB +2)`,
   },
   {
     id: "college",
     title: "NAMI College",
-    href: "/institutions/college",
+    href: institutionPath("college"),
     applyLabel: "NAMI College",
   },
   {
     id: "bachelors",
     title: "Naaya Aayam Multi-Disciplinary Institute",
-    href: "/institutions/bachelors",
+    href: institutionPath("bachelors"),
     applyLabel: "Naaya Aayam Multi-Disciplinary Institute",
   },
 ];

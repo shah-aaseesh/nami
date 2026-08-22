@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Eyebrow, P } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Page Not Found",
@@ -32,9 +33,9 @@ export default function NotFound() {
           </P>
 
           <div className="mt-10">
-            <Button render={<Link href="/" />} nativeButton={false}>
+            <Link className={cn(buttonVariants({ size: "lg" }))} href="/">
               Return to Homepage
-            </Button>
+            </Link>
           </div>
         </Reveal>
       </div>

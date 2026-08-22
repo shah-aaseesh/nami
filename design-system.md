@@ -12,18 +12,17 @@ Anything not listed here is not a decision — it is drift.
 
 ## 0. The rules that break a build
 
-Eight things. Each one is cheap to follow and expensive to discover later.
+Seven things. Each one is cheap to follow and expensive to discover later.
 
 | # | Rule | What goes wrong if you don't |
 |:--|:--|:--|
 | 1 | **`<main>` is full-bleed. Every SECTION owns `gutter-x` + an inner `mx-auto max-w-page`.** | Section widths drift page to page, and the full-bleed colour fields stop reaching the viewport edge. |
 | 2 | **Use semantic tokens (`bg-surface`, `text-ink`), never raw ramp steps (`bg-neutral-50`).** | Your component stops inverting inside a dark colour field. It will look correct in isolation and broken in place. |
-| 3 | **Nothing at the fold may end up parked invisible.** Use `atFold` on the reveal primitives. | LCP / CLS defect. A hero waiting on a scroll trigger that already fired never appears. |
-| 4 | **Every motion has a reduced-motion path** — and "no animation" only counts if the element ends up **visible and correctly positioned**. | Reduced-motion users get a blank or displaced section. |
-| 5 | **`position: fixed` and `position: sticky` do not work inside the smooth-scrolled content.** Fixed chrome goes in `SmoothScrollProvider`'s **`chrome` slot** (§9.6), never in `children`. | Your sticky header scrolls away, or jitters, and nothing in the console explains it — and only on desktop. |
-| 6 | **No dark mode.** Light-only. No `dark:` variants, no `prefers-color-scheme`. "Dark" is a design device — the colour fields — not a user theme. | A `dark:` class is dead code that no gate catches. |
-| 7 | **Near-zero comments in code.** Reasoning goes here, not in the source. | The QA gate rejects the file. |
-| 8 | **Never pair a NAME with a YEAR across two entities.** `institution.entities.college` is 2013; `institution.entities.institute` is 2012. Read `name` and `establishedYear` from **one** `NamedEntity`. | A false founding claim about a real institution. This is a HIGH invariant, not a copy nit — and it already reached the tree once. |
+| 3 | **Every motion has a reduced-motion path** — and "no animation" only counts if the element ends up **visible and correctly positioned**. | Reduced-motion users get a blank or displaced section. |
+| 4 | **`position: fixed` and `position: sticky` do not work inside the smooth-scrolled content.** Fixed chrome goes in `SmoothScrollProvider`'s **`chrome` slot** (§9.6), never in `children`. | Your sticky header scrolls away, or jitters, and nothing in the console explains it — and only on desktop. |
+| 5 | **No dark mode.** Light-only. No `dark:` variants, no `prefers-color-scheme`. "Dark" is a design device — the colour fields — not a user theme. | A `dark:` class is dead code that no gate catches. |
+| 6 | **Near-zero comments in code.** Reasoning goes here, not in the source. | The QA gate rejects the file. |
+| 7 | **Never pair a NAME with a YEAR across two entities.** `institution.entities.college` is 2013; `institution.entities.institute` is 2012. Read `name` and `establishedYear` from **one** `NamedEntity`. | A false founding claim about a real institution. This is a HIGH invariant, not a copy nit — and it already reached the tree once. |
 
 ---
 
@@ -49,7 +48,7 @@ All colour lives in `src/app/globals.css`. Three ramps → nine semantic tokens 
 
 | Ramp | Steps | Anchor |
 |:--|:--|:--|
-| `primary-*` | 100 → 900 | **`primary-700 = #BC2125`** — the brand red, sampled from the official logo |
+| `primary-*` | 100 → 900 | **`primary-700 = #BD1B21`** — the brand red, sampled from the official logo |
 | `secondary-*` | 100 → 900 | **`secondary-700 = #0E5C54`** — deep teal |
 | `neutral-*` | 50 → 950 | teal-tinted greys — **these deliberately override Tailwind's stock `neutral`** |
 
@@ -93,7 +92,9 @@ It exists so a primitive pulled in from shadcn compiles against our palette with
 
 **Porting a shadcn component: `bg-secondary` → `bg-surface-raised`, `text-secondary-foreground` → `text-ink`.** Those two classes now compile to *nothing at all*, so the mistake surfaces as an unstyled element rather than a silently wrong colour — but no gate reports it (§13, dead-class failure).
 
-`--color-muted` is `color-mix(in srgb, var(--color-border) 35%, var(--color-surface))` — a 35% wash of the field's **own border colour** over its surface. It washes toward the border, not toward the ink, because ink-toward is only the right direction in a light field: on `field-brand` an ink wash lightened the mid-tone red *toward* `--color-muted-foreground`, putting `text-muted-foreground` on `bg-muted` at **4.29:1**, under AA. The mix weight cannot rescue that in either direction — even 0% caps the pairing at 4.66 and pure white reaches only 5.71. Washing toward the border makes the muted block recede in every field (brand `#ac171d`, 5.45:1) and leaves the light theme unchanged to the eye (`#ecefee` → `#ebf0ee`).
+`--color-muted` is `color-mix(in srgb, var(--color-border) 35%, var(--color-surface))` — a 35% wash of the field's **own border colour** over its surface. It washes toward the border, not toward the ink, because ink-toward is only the right direction in a light field: on `field-brand` an ink wash lightens the mid-tone red *toward* `--color-muted-foreground` and puts `text-muted-foreground` on `bg-muted` under AA, and the mix weight cannot rescue that in either direction — even 0%, which is the bare surface, reaches only **4.73:1**. Washing toward the border makes the muted block recede in every field and leaves the light theme unchanged to the eye (`#ecefee` → `#ebf0ee`).
+
+**In `field-brand` that wash resolves to `#ad1219`, and carries `text-muted-foreground` at 5.49:1.** Both figures are derived, not sampled: inside that field `--color-border` is `primary-800` (`#90000b`) and `--color-surface` is `primary-700` (`#bd1b21`), so the 35% mix is `0.35×144 + 0.65×189 = 173`, `0.35×0 + 0.65×27 = 18`, `0.35×11 + 0.65×33 = 25`; `--color-muted-foreground` resolves to `primary-200` (`#fdd7cf`) there. **Both are functions of the brand ramp — re-derive them whenever a step moves.** The pair printed here before it (`#ac171d`, 5.45:1) was computed against the superseded `#BC2125`.
 
 `--color-input` is `var(--color-border-strong)`, **not** `var(--color-border)`. It is the visual boundary of a form control, so WCAG 1.4.11 asks 3:1 against the surface; the decorative hairline gives 1.39:1 in the light theme and **1.00:1** inside `field-brand` on a card — a mathematically invisible border. Consequence: an input border is `neutral-900` in the light theme, the same weight as body text rather than a soft grey. `--color-border` itself is unchanged and stays decorative.
 
@@ -125,7 +126,7 @@ That is why `globals.css` contains a `@layer base` block that **re-declares the 
 
 **Consequence: adding *or removing* an alias means editing BOTH places. `pnpm run aliases` enforces it.** The gate compiles this file with Tailwind's own compiler, derives which `@theme` keys resolve — directly or transitively — against a field-scoped token, and fails if that set does not exactly match the keys re-declared on `.field-ink, .field-brand, .field-teal`. It names the missing keys and which block they belong in, and fails in both directions. It also checks the three `@utility field-*` rules re-point an identical token set. The nine core tokens never had the inversion problem — they are re-declared by the `@utility field-*` rules themselves — but the gate checks those for drift too.
 
-The font block uses `@theme inline` for the opposite reason: `--font-body` points at `--font-inter-tight`, which `next/font` defines on `<html>`. Inlining makes `font-sans` emit the `var()` chain directly so it resolves against the element's own scope.
+The font block uses `@theme inline` for the opposite reason: `--font-body` points at `--font-inter`, which `next/font` defines on `<html>`. Inlining makes `font-sans` emit the `var()` chain directly so it resolves against the element's own scope.
 
 ---
 
@@ -176,8 +177,8 @@ Never a fixed-px font size. Never `text-[13px]`. If a step is missing, the scale
 | `H4` | `h4` | `text-3xl` | 30px | display / normal | `text-balance` |
 | `H5` | `h5` | `text-2xl` | 24px | display / normal | `text-balance` |
 | `H6` | `h6` | `text-xl` | 20px | display / normal | `text-balance` |
-| `Eyebrow` | `p` | `text-xs` | 13px | body / medium | `uppercase tracking-widest text-accent` |
-| `Standfirst` | `p` | `text-xl` | 20px | body / normal | `text-pretty text-ink-muted` |
+| `Eyebrow` | `p` | `text-sm` | 15px | body / medium | `uppercase tracking-widest text-accent` |
+| `Standfirst` | `p` | `text-lg` → `xl:text-xl` | 18 → 20px | body / normal | `text-pretty text-ink-muted` |
 | `P` | `p` | `text-base` | 16px | body / normal | `text-pretty text-ink-muted` |
 
 **Every heading role is weight 400, not semibold.** The display face ships one weight (§7), the reference sets every heading at 400, and a bolder heading is not expressible — `font-semibold` on the display face is a no-op, not a heavier heading (§7.1).
@@ -186,7 +187,7 @@ Never a fixed-px font size. Never `text-[13px]`. If a step is missing, the scale
 
 `text-8xl`, `text-9xl`, `text-10xl` and `text-11xl` are **deliberately unclaimed**. They are the editorial register — constraint 2's "type is the layout" — applied to a specific element in a specific section, not routed through a role. Use them consciously; do not invent a `Display2`.
 
-**`Display`, `H1` and `H2` currently have zero call sites** — sections write the raw step (`font-display text-5xl`) instead. That is why the roles are not the whole story and a change to the *scale* is what actually moves the rendered page. Prefer the role; the raw-step sections are a known divergence, not a licence.
+**`Display`, `H1` and `H2` are in use, but usually with the step overridden at the call site** — `<Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">` on the mastheads, `<H2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl">` in the contact sections. A role whose scale is replaced on every use is a `data-slot` and a face, not a type contract, and a change to the *scale* will not move those sections. Prefer the bare role; a per-breakpoint override on a role is a known divergence — it also fights the clamps of §3.1 — not a licence.
 
 ### 3.3 The `as` prop, and why every role restates its face
 
@@ -207,7 +208,7 @@ Each role also emits a `data-slot` (`display`, `h1`, … `eyebrow`, `standfirst`
 
 ## 4. Space and layout
 
-### 4.1 Four utilities
+### 4.1 The layout utilities
 
 | Utility | Value | Means |
 |:--|:--|:--|
@@ -219,11 +220,13 @@ Each role also emits a `data-slot` (`display`, `h1`, … `eyebrow`, `standfirst`
 | `section-y-masthead` | `padding-top: var(--spacing-section-pt-masthead); padding-bottom: var(--spacing-section-py-hero)` | 64px → 108px top, 24px → 44px bottom. Asymmetrical padding used on **ALL subpage heroes** to clear the 80px-96px fixed site header! |
 | `max-w-page` | `--container-page: 90rem` | 1440px, the content column |
 
+`globals.css` defines two further `@utility` rules that are not layout and have no row here: `scrollbar-hide` and `text-outline`.
+
 `gutter-x` and `section-y` are operator-tuned. Do not restate them as `px-*` / `py-*`, and do not "correct" them toward a measurement from a reference site. `cn()` knows they conflict with `p-*`/`px-*`/`py-*` (§8), so a later `px-8` genuinely replaces the gutter rather than fighting it — which is also why writing both is always a mistake.
 
 ### 4.2 The section contract — the inverted shell
 
-`src/app/layout.tsx` renders `<main id="main" className="flex-1">` with **no width constraint and no padding**. That is deliberate and it inverts the usual "shell owns the width" convention.
+`src/app/layout.tsx` renders `<main id="main" className="flex-1 pt-20">` with **no width constraint and no horizontal padding**. That is deliberate and it inverts the usual "shell owns the width" convention. The `pt-20` clears the fixed header, which takes no layout space of its own (§9.6); it is the shell paying that offset once, not width a section may lean on.
 
 **Why:** the colour fields have to paint edge to edge. A `max-w-page` on `<main>` makes a full-bleed `field-brand` section structurally impossible. So the shell stays unconstrained and **every section applies the gutter and the max-width itself**.
 
@@ -295,15 +298,14 @@ So:
 
 ```tsx
 <section className="gutter-x section-y" id="programmes">
-  <div className="mx-auto max-w-page">…eyebrow + heading…</div>
-  <Reveal className="bleed-x mt-16 lg:mt-24">   {/* direct child of <section> */}
-    <RevealItem className="field-ink py-6 lg:py-10">…</RevealItem>
-    <RevealItem className="field-brand py-6 lg:py-10">…</RevealItem>
+  <Reveal className="bleed-x" stagger={0.12}>   {/* direct child of <section> */}
+    <RevealItem className="field-ink py-4">…</RevealItem>
+    <RevealItem className="field-brand py-5">…</RevealItem>
   </Reveal>
 </section>
 ```
 
-The heading keeps the content column; the bands escape it. **The `Reveal` is what carries `bleed-x`, because `Reveal` renders a plain `div` and that div is the section's direct child** — wrapping the bands in one more div "for tidiness" would put `bleed-x` a level too deep and silently reintroduce the 176px-short defect above 1568px.
+The bands escape the content column entirely; a section that also carries a heading keeps that heading in its own `mx-auto max-w-page` div beside them. **The `Reveal` is what carries `bleed-x`, because `Reveal` renders a plain `div` and that div is the section's direct child** — wrapping the bands in one more div "for tidiness" would put `bleed-x` a level too deep and silently reintroduce the 176px-short defect above 1568px.
 
 Measured on this build: bands span `0 → 1425` at a 1440 viewport and `0 → 1905` at 1920, in both cases exactly `documentElement.clientWidth`, with `scrollWidth - clientWidth === 0`. The content column in the same section measures `64 → 1361` and `232 → 1672` respectively — so that one measurement distinguishes a real bleed from a column-relative overhang, and is the check to run when a band "looks" full width.
 
@@ -352,7 +354,7 @@ It is now declared in `@theme inline` as `--radius-media: var(--radius-xl)`, so 
 
 ## 6. Primitives — `src/components/ui/`
 
-Four primitives ship in Phase 0: `Button`, `Icon`, `Accordion`, `Tabs`. All are built on **Base UI** (`@base-ui/react`), not Radix, and every element carries a `data-slot`.
+`src/components/ui/` holds `Button`, `Icon`, `Accordion`, `Tabs`, `Avatar`, `Calendar`, `Carousel`, `Checkbox`, `Input`, `Label`, `Pagination`, `Popover`, `Select`, `Sheet`, `Textarea`, the typography roles (§3.2) and the `form/` field kit. **The four with a contract written below — `Button`, `Icon`, `Accordion`, `Tabs` — are the only ones this document covers; a primitive with no section here is undocumented, not sanctioned**, and landing one means landing its section in the same change (§14). Most are built on **Base UI** (`@base-ui/react`), not Radix — the exceptions are `Carousel` (Embla) and `Calendar` (react-day-picker) — and every element carries a `data-slot`.
 
 Base UI note: `data-*` state attributes are **presence-only** (`data-disabled=""`). A `[data-disabled="true"]` selector matches nothing — use the `data-disabled:` / `data-active:` / `data-panel-open:` variants as the existing components do.
 
@@ -362,24 +364,34 @@ Base UI note: `data-*` state attributes are **presence-only** (`data-disabled=""
 
 | `variant` | Look |
 |:--|:--|
-| `solid` *(default)* | `bg-accent text-accent-ink`, opacity shift on hover/active |
-| `quiet` | `border-border-strong` outline, transparent; inverts to `bg-ink text-surface` on hover |
-| `link` | `text-accent` underline, `decoration-1` → `decoration-2` on hover |
+| `default` *(default)* | `bg-primary text-primary-foreground`, `hover:bg-primary/80` — the brand red fill, reached through the shadcn alias layer (§2.3) rather than `bg-accent` |
+| `outline` | `border-border` hairline on `bg-transparent` with `shadow-xs`; `hover:bg-muted hover:text-foreground`, and the same pair again on `aria-expanded` |
+| `ghost` | no border, no fill; `hover:bg-muted hover:text-foreground`, same on `aria-expanded` |
 
 **Sizes**
 
+Ten rungs — five with a label, five icon-only. Anything the rung does not state comes from the `cva` base string, which is where `text-sm`, `rounded-md` and `[&_svg]:size-4` are declared once for all ten.
+
 | `size` | Height | Padding | Label | Glyph |
 |:--|--:|:--|:--|:--|
-| `sm` | `h-9` (36px) | `px-4` | `text-xs` | `size-4` (16px) |
-| `md` *(default)* | `h-11` (44px) | `px-6` | `text-sm` | `size-5` (20px) |
-| `lg` | `h-13` (52px) | `px-8` | `text-base` | `size-6` (24px) |
-| `icon` | `size-11` (44px) | — | — | `size-5` (20px) |
+| `default` *(default)* | `h-10` (40px) | `px-3` → `md:px-4` | `text-sm` | `size-4` (16px) |
+| `xs` | `h-7` (28px) | `px-2` | `text-xs` | `size-3` (12px) |
+| `sm` | `h-9` (36px) | `px-2.5` | `text-sm` | `size-4` (16px) |
+| `md` | `h-9` (36px) | `px-4 py-2` | `text-sm` | `size-4` (16px) |
+| `lg` | `h-11` (44px) | `px-4` → `md:px-6` | `text-sm` | `size-4` (16px) |
+| `icon` | `size-9` (36px) | — | — | `size-4` (16px) |
+| `icon-xs` | `size-6` (24px) | — | — | `size-3` (12px) |
+| `icon-sm` | `size-8` (32px) | — | — | `size-4` (16px) |
+| `icon-lg` | `size-10` (40px) | — | — | `size-4` (16px) |
+| `icon-xl` | `size-12` (48px) | — | — | `size-6` (24px) |
 
-`md` at 44px is the default because it is the comfortable touch target and this is a marketing site whose conversions are phone taps. A compound variant strips height and horizontal padding from `link` (`h-auto px-0`) so an inline link sits on the text baseline rather than in a 44px box.
+**`lg` (44px) is the rung to reach for on anything a phone taps** — it is the only labelled rung at the comfortable touch target, on a marketing site whose conversions are phone taps, and it is what nearly every call site already passes. `default` (40px) is what you get by writing nothing.
 
-**Every rung declares its own glyph size via `[&_svg]:size-*`, and that is not redundancy.** The selector is `[&_svg]`, not `[&_[data-slot=icon]]` — it matches *any* descendant `svg`, so a rung that declares nothing sizes a bare inline `<svg>` at whatever that SVG's intrinsic size is. Relying on `Icon`'s own `size-5` default (§6.2) only works for glyphs that happen to come through `Icon`, and silently couples every button's glyph to an unrelated file. Declaring on all four rungs makes the button own its glyph regardless of what is inside it. The progression holds the glyph at a constant ~0.45 of the button height (16/36, 20/44, 24/52), so the glyph scales with the label rather than the 52px `lg` and the 36px `sm` carrying the same mark.
+**The glyph size lives in the base class, not on the rungs — so it does not scale with the button.** `[&_svg]:size-4` is declared once in the base string and only three rungs move it: `xs` and `icon-xs` down to `size-3`, `icon-xl` up to `size-6`. A 16px glyph therefore sits inside seven of the ten rungs, a 32px `icon-sm` and a 44px `lg` carrying the same mark. The selector is `[&_svg]`, not `[&_[data-slot=icon]]`, so it matches *any* descendant `svg` and the button owns its glyph whether or not it came through `Icon` (§6.2) — which is what stops a bare inline `<svg>` rendering at its intrinsic size.
 
-Radius is `rounded-sm` (2px) on every button — nearly square, per §5.
+**Radius is `rounded-md` (6px), also from the base class.** `xs`/`sm` and `icon-xs`/`icon-sm` restate it as `rounded-[min(var(--radius-md),8px)]` and `rounded-[min(var(--radius-md),10px)]`, which resolve to the same 6px against the ramp in §5; the `min()` only starts to bite if `--radius-md` is ever raised past 8px.
+
+**There is no `link` variant and no compound variant.** An inline text link is not a button rung here.
 
 **Rendering a link with button styling — use `buttonVariants`, never a nested `<Button asChild>` or a `<Link>` inside a `<Button>`:**
 
@@ -390,7 +402,7 @@ import { cn } from "@/lib/utils";
 
 <Link
   href="/admissions"
-  className={cn(buttonVariants({ variant: "quiet", size: "lg" }))}
+  className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
 >
   Apply now
 </Link>
@@ -400,11 +412,11 @@ import { cn } from "@/lib/utils";
 
 ### 6.2 `Icon`
 
-Wraps `HugeiconsIcon`. Defaults: `size-5`, `strokeWidth={1.5}`, `aria-hidden`, `focusable="false"`.
+Wraps `HugeiconsIcon`. Defaults: `size-5 shrink-0`, `strokeWidth={1.5}`, `aria-hidden`, `focusable="false"`.
 
 Icons are decorative by default — the wrapper hides them from the accessibility tree. **An icon carrying meaning on its own needs a visible or `sr-only` text label next to it**, not an `aria-label` on the icon.
 
-Every glyph comes through **the one barrel, `@/lib/icons`**, which re-exports Hugeicons under house names (`ChevronDownIcon`, `ArrowRightIcon`, `ArrowUpRightIcon`, `AsteriskIcon`, `CalendarIcon`, `PhoneIcon`, `CloseIcon`, `GlobeIcon`, `LocationIcon`, `MailIcon`, `MenuIcon`, `MortarboardIcon`, `PlayIcon`, `QuoteIcon`, `CheckIcon`, and the five social marks `FacebookIcon`, `InstagramIcon`, `LinkedInIcon`, `TikTokIcon`, `YouTubeIcon`). Need a new glyph → add it to the barrel with a house name; do not import from `@hugeicons/core-free-icons` in a component.
+Every glyph comes through **the one barrel, `@/lib/icons`**, which re-exports Hugeicons under house names (`ArrowLeftIcon`, `ArrowRightIcon`, `ArrowUpRightIcon`, `AsteriskIcon`, `CalendarIcon`, `CheckIcon`, `ChevronDownIcon`, `ChevronLeftIcon`, `ChevronRightIcon`, `ChevronUpIcon`, `CloseIcon`, `DownloadIcon`, `GlobeIcon`, `ImageIcon`, `LocationIcon`, `MailIcon`, `MenuIcon`, `MortarboardIcon`, `PhoneIcon`, `PlusIcon`, `QuoteIcon`, `TrashIcon`, `WhatsAppIcon`, and the five social marks `FacebookIcon`, `InstagramIcon`, `LinkedInIcon`, `TikTokIcon`, `YouTubeIcon`). Need a new glyph → add it to the barrel with a house name; do not import from `@hugeicons/core-free-icons` in a component.
 
 The social marks are keyed to content, not chosen per call site: `SocialPlatform` (`facebook` | `instagram` | `linkedin` | `tiktok` | `youtube`) indexes a `Record<SocialPlatform, IconSvgElement>` map, so adding a platform to the content layer fails `tsc` until its glyph exists. Do not reach for a social glyph with a conditional.
 
@@ -414,13 +426,13 @@ The social marks are keyed to content, not chosen per call site: `SocialPlatform
 
 `Accordion` / `AccordionItem` / `AccordionTrigger` / `AccordionPanel`. Hairline separation only — a top border on the root and a bottom border per item, no card, no radius (constraint 1).
 
-The trigger is `text-xl`, hovers to `text-accent`, and rotates its chevron via `group-data-panel-open:rotate-180`. The panel animates `height` off Base UI's `--accordion-panel-height` with `data-starting-style` / `data-ending-style`, and carries `motion-reduce:transition-none`.
+The trigger is `text-xl`, hovers to `text-accent`, and rotates its chevron via `group-data-panel-open:rotate-180`. The panel animates `height` off Base UI's `--accordion-panel-height` with `data-starting-style` / `data-ending-style`. **It carries no `motion-reduce:` guard** — §9.2.
 
 `AccordionPanel`'s `className` lands on the **inner content div**, not the animating panel. That is intentional — the panel's `overflow-hidden` and height transition must not be overridable from a call site.
 
 ### 6.4 `Tabs`
 
-`Tabs` / `TabsList` / `TabsTab` / `TabsPanel`. A bottom hairline with a 2px accent indicator that slides via Base UI's `--active-tab-width` / `--active-tab-left`, with `motion-reduce:transition-none`. The list scrolls horizontally on narrow viewports (`overflow-x-auto`, `gap-6 sm:gap-10`) rather than wrapping.
+`Tabs` / `TabsList` / `TabsTab` / `TabsPanel`. A bottom hairline with a 2px accent indicator that slides via Base UI's `--active-tab-width` / `--active-tab-left`. **Like the accordion panel it carries no `motion-reduce:` guard** — §9.2. The list scrolls horizontally on narrow viewports (`overflow-x-auto`, `gap-6 sm:gap-10`) rather than wrapping.
 
 ---
 
@@ -430,35 +442,34 @@ The trigger is `text-xl`, hovers to `text-accent`, and rotates its chevron via `
 
 | Token | Face | Used by |
 |:--|:--|:--|
-| `--font-display` | **Instrument Serif**, weight 400 only | `h1`–`h6` (base rule), every `font-display` role, the hero headline, the marquee bands |
-| `--font-body` | **Inter** | everything else; `--font-sans` aliases to it |
-| `--font-editorial` | *alias of `--font-display`* | kept only so existing `font-editorial` call sites keep compiling |
+| `--font-display` | **Spectral**, weights 400 / 500 / 600 / 700 | `h1`–`h6` (base rule), every `font-display` role, the hero headline, the marquee bands |
+| `--font-body` | **Inter**, weights 400 / 500 / 600 / 700 | everything else; `--font-sans` resolves to the same stack |
 
 **`--font-display` is the single swap point.** The face is named in exactly two places — this token, and the `next/font` call in `layout.tsx` that defines the variable it reads. **No component names a font.** If the Canela licence is ever bought (§7.2), it drops in by changing those two lines and nothing else.
 
-**`--font-editorial` is now an alias, not a third face.** It was not deleted, because `font-editorial` appears at live call sites and a removed theme key makes the class compile to *nothing* — the silent dead-class failure of §13, which no gate catches. New code writes `font-display`.
+**`--font-editorial` was retired with the swap** (`fa9422e`, 2026-08-06). It had been an alias of `--font-display`, kept alive only while `font-editorial` call sites still existed; there are now zero, so the key went with them. Deleting a theme key makes its class compile to *nothing* — the silent dead-class failure of §13 — so grep for call sites before removing another one. New code writes `font-display`.
 
-**Bricolage Grotesque was retired.** It was the display face until the reference's own two-face structure was measured; keeping it loaded for zero call sites is a font download nobody reads.
+**Bricolage Grotesque and Instrument Serif were both retired.** Bricolage was the display face until the reference's own two-face structure was measured. Instrument Serif replaced it and held the role for one week, until `fa9422e` swapped in Spectral; the section below is what changed with it.
 
-### 7.1 The display face is a 400-only serif — three consequences
+### 7.1 The display face is a four-weight text serif — three consequences
 
-Instrument Serif ships **one weight, 400**, and is now the face behind every heading. That single fact drives everything below.
+Spectral ships a full weight range and the build loads **400 / 500 / 600 / 700** — the same four as Inter. It is a *text* serif (designed by Production Type for reading on screen), not a high-contrast display serif, and that pair of facts drives everything below.
 
-**1 — `font-semibold` on a heading does nothing, and must not be relied on.** There is no bold to reach. Browsers would normally *synthesize* one by smearing the strokes, which on a high-contrast serif looks like a rendering fault. So `globals.css` sets `font-synthesis-weight: none` on `html`, and a stray `font-semibold` degrades to the correct 400 rather than to a smear. Do not write it; if you find it, delete it rather than "fixing" the weight.
+**1 — weight on a heading is real, and it is still not the default.** `font-medium` and `font-semibold` on a `font-display` element reach an actual loaded weight rather than a synthesized smear, so they are usable. But `globals.css` keeps `font-synthesis-weight: none` on `html`, which means anything *outside* 400–700 (a stray `font-black`) snaps to the nearest loaded weight instead of being faked. Every typography role in §3.2 still sets `font-normal`: 400 is the house display weight, and a heavier heading is a deliberate call-site choice, not something to sprinkle.
 
-**2 — the scale carries no `letter-spacing`, and `tracking-normal` is now a no-op.** The old scale ran negative tracking down to `-0.045em`, tuned for a wide grotesque. On a narrow high-contrast serif that collides the thin strokes, which is why every `font-editorial` call site used to have to write `tracking-normal` by hand. With the serif as *the* display face, the negative tracking has no remaining consumer, so the `--text-*--letter-spacing` keys were removed outright — the fix belongs in the scale, not in a ritual repeated at every call site. The reference sets `letter-spacing: normal` everywhere too. Existing `tracking-normal` classes are harmless; new code omits them.
+**2 — the scale carries no `letter-spacing`, and `tracking-normal` is a no-op.** The old scale ran negative tracking down to `-0.045em`, tuned for a wide grotesque. Neither serif that followed it wanted that, so the `--text-*--letter-spacing` keys were removed outright — the fix belongs in the scale, not in a ritual repeated at every call site. The reference sets `letter-spacing: normal` everywhere too. Existing `tracking-normal` classes are harmless; new code omits them.
 
-**3 — the legibility floor moved, deliberately.** The old rule was "serif at `text-5xl` and above" — correct when it was an accent face on two elements. It is now the face of `H6` (20px) through `Display` (96px), which was checked on the rendered page before being written down. **Below `text-xl` (20px), use the body face** — that is where the stroke contrast closes up. The reference draws the same line: its `h6` at 20px is Inter, not Canela.
+**3 — the legibility floor is open, and that is the one thing this swap left unresolved.** Under Instrument Serif the rule was "below `text-xl` (20px), use the body face", because that is where a high-contrast serif's thin strokes close up. Spectral is built for small sizes and does not carry that constraint, so the floor no longer follows from the face. The code has already moved: `font-display` appears at `text-lg` and `text-base` at a handful of call sites, while the typography roles below `H6` (`Standfirst`, `P`, `Eyebrow`) all stay `font-body`. **Nobody has ruled on where the line now sits** — treat the roles as the contract and raise a small-size `font-display` as a question rather than copying it.
 
-Line-heights above `text-6xl` were loosened for the same reason (§3.1): the old sub-1 leadings assumed a grotesque's short descenders, and this serif's collide.
+Line-heights above `text-6xl` were loosened when the grotesque left (§3.1): the old sub-1 leadings assumed its short descenders, and a serif's collide.
 
 ### 7.2 The hero and the marquee follow the unipix reference; the rest of the page does not
 
 `DEC-005` holds that the reference supplies the section spine only. **Asmit narrowed it for these two sections only** (2026-08-06) — the hero and the programme marquee follow the reference's *composition*. Everything else on the page keeps the house language.
 
-What that buys, and its boundary: the reference's headline face is **Canela, a commercial trial licence the template is using unlicensed**. It is not shippable and was not copied. Instrument Serif is a free stand-in of the same register, chosen for the same 400-weight display usage. **Composition came from the reference; the colour tokens, spacing utilities and primitives stayed the house's.**
+What that buys, and its boundary: the reference's headline face is **Canela, a commercial trial licence the template is using unlicensed**. It is not shippable and was not copied. Spectral is the free stand-in carrying that role. **Composition came from the reference; the colour tokens, spacing utilities and primitives stayed the house's.**
 
-**The type scale itself is now measured from the reference (§3.1), and so are the faces (§7).** Asmit's directive (2026-08-06) was *"use same font as used in reference website... typography also stays same"*, after *"everything feels too big"*. Every size, line-height and weight that is ours to control was matched at 1440. **One thing was not: Canela.** The template runs it on a **trial** licence — i.e. in violation — and shipping it on a real college's production domain would put an unlicensed commercial face on a client's live site. Instrument Serif carries the substitution, isolated behind `--font-display` so licensing Canela later is a two-line change touching no component (§7).
+**The type scale itself is now measured from the reference (§3.1), and so are the faces (§7).** Asmit's directive (2026-08-06) was *"use same font as used in reference website... typography also stays same"*, after *"everything feels too big"*. Every size, line-height and weight that is ours to control was matched at 1440. **One thing was not: Canela.** The template runs it on a **trial** licence — i.e. in violation — and shipping it on a real college's production domain would put an unlicensed commercial face on a client's live site. Spectral carries the substitution, isolated behind `--font-display` so licensing Canela later is a two-line change touching no component (§7). The substitute itself was re-picked once inside that isolation — Instrument Serif first, then Spectral on the same day the type scale was retuned (`fa9422e`) — which is the swap point doing its job: two lines, no component touched.
 
 **`Standfirst` keeps the body face, and the reference is genuinely ambiguous here.** Its two lead paragraphs disagree: `.about p` is Canela 20/30, `.banner p` (the hero) is Inter 16/26 — one role, two treatments. `Standfirst` matches the *size* (20 / 30 / 400) and stays on the body face, because it is the lead-copy role and a serif lead is a display choice a section can opt into with `<Standfirst className="font-display">`. Picking one silently would have made the hero's lead a serif on the strength of a spec that does not say so.
 
@@ -468,16 +479,16 @@ The hero maps every reference element onto real content — there is no invented
 |:--|:--|
 | eyebrow (icon + brand-colour line) | `MortarboardIcon` + `homeCopy.hero.eyebrow` |
 | serif headline | `homeCopy.hero.headline` (the motto), split at the comma into two lines |
-| right column body + CTA | `hero.standfirst`, `hero.primaryCta` (solid) + `hero.secondaryCta` (link, ↗) |
-| circular badge text | `institution.entities.college` — `name` **and** `establishedYear` off the **same** entity (§0.8) |
-| badge play button | `contact.socialProfiles` → `platform: "youtube"`, the real channel |
-| social stack | `contact.socialProfiles`, glyphs via `SOCIAL_GLYPHS` off the `@/lib/icons` barrel |
-| far-left vertical rail | `institution.campuses` — the reference's opening hours do not exist for NAMI and were **not** invented |
-| landscape image | `hero.image` |
+| right column body + CTA | `hero.standfirst`, `hero.primaryCta` (`variant="default"`) + `hero.secondaryCta` (`variant="outline"`, ↗) |
+| circular badge text | `institution.entities.institute` — `shortName` **and** `establishedYear` off the **same** entity (§0.7), plus the lead clause of `institution.motto`; the `aria-label` uses the full `name` |
+| badge centre | the NAMI mark (`/logo/nami-color.svg`) linking to `contact.socialProfiles` → `platform: "youtube"`, the real channel |
+| landscape image | `hero.images` — a `Carousel` of slides, each inside a `Parallax` layer |
 
-**The badge does not rotate, and that is a decision.** A rotating ring is a `gsap.to()` loop, which §9.2 makes a mandatory `reduced` branch — for an element whose correct reduced state is simply "not rotating", i.e. its natural one. Building it static satisfies the reduced-motion contract by construction and removes an at-fold animation from the LCP section entirely. The ring is `role="img"` + `aria-label` with the plain string, so the `*` separators are never announced (§9.7's reasoning, applied to `<textPath>`).
+The reference's social stack and its far-left vertical rail are **not** built. The rail would have been `institution.campuses`; the reference's opening hours do not exist for NAMI and were never invented.
 
-**The play button links to the real YouTube channel.** There is no NAMI video asset. A play affordance that opens the actual channel is honest; a dead player is not.
+**The badge ring rotates, on a bare CSS `animate-[spin_20s_linear_infinite]`** — no GSAP, and no reduced-motion path of any kind. It is an at-fold loop in the LCP section that keeps turning for a user who asked for less, which makes it the most visible instance of the gap in §9.2. The ring itself is `role="img"` + `aria-label` carrying the plain string, so the `*` separators are never announced (§9.7's reasoning, applied to `<textPath>`).
+
+**The badge centre is the NAMI mark, and it links to the real YouTube channel.** There is no NAMI video asset and no play glyph in the barrel (§6.2); the image is `alt=""` and an `sr-only` string carries the destination. An affordance that opens the actual channel is honest; a dead player is not.
 
 ---
 
@@ -487,7 +498,7 @@ The hero maps every reference element onto real content — there is no invented
 
 1. **`max-w-page`** — `container: ["page"]` registers our custom container key, so `max-w-page` participates in the `max-w-*` merge group instead of surviving alongside a conflicting width.
 2. **`rounded-media`** — `theme.radius` is **extended** with `["media"]`. Stock `tailwind-merge` matches the radius group with a t-shirt-size test, so every step in §5 is already handled; `media` is a custom key it has never heard of, and without registering it `cn("rounded-media", "rounded-none")` would leave **both** alive and let stylesheet order decide. This is `extend`, not `override`: the group used to be overridden with an explicit list that *dropped* `3xl`/`4xl` while those were dead classes, and reviving them (§5) made that list wrong — `cn("rounded-xl", "rounded-3xl")` returned **both**. Extending inherits the stock test, so a future step cannot fall out of the group again.
-3. **The custom utilities** — `gutter-x`, `section-y`, `bleed-x` and the `field-*` group are registered, and `gutter-x` is declared to conflict with `p`/`px` (both directions), `section-y` with `p`/`py`, `bleed-x` with `m`/`mx`. So `cn("gutter-x", "px-8")` resolves to `px-8` and `cn("px-8", "gutter-x")` resolves to `gutter-x`, instead of both surviving and the winner being decided by Tailwind's emission order.
+3. **The custom utilities** — `gutter-x`, `bleed-x`, `text-outline` and the `field-*` group each get a class group, and one `section-y` group holds all four rungs (`section-y`, `section-y-hero`, `section-y-masthead`, `section-y-compact`) so they replace one another rather than stacking. `gutter-x` is declared to conflict with `p`/`px` (both directions), `section-y` with `p`/`py`, `bleed-x` with `m`/`mx`. So `cn("gutter-x", "px-8")` resolves to `px-8` and `cn("px-8", "gutter-x")` resolves to `gutter-x`, instead of both surviving and the winner being decided by Tailwind's emission order.
 
 The `field-*` classes form their own merge group, so passing `field-teal` over a `field-ink` base replaces it rather than stacking two colour fields on one element.
 
@@ -495,7 +506,7 @@ The `field-*` classes form their own merge group, so passing `field-teal` over a
 
 **Consequence: add a custom `@utility` to `globals.css` → register it in `cn()` too.** An unregistered utility is invisible to the merger, and conflicts against it are resolved by stylesheet order, which is not something you control from a call site.
 
-**And declare its group id as a type parameter, not only in the config object.** `extendTailwindMerge<"color-field" | "gutter-x" | "section-y" | "bleed-x">` is what makes those ids assignable inside `classGroups` / `conflictingClassGroups`. Adding a utility to the config and forgetting the union runs perfectly at runtime and fails `tsc` — this house has shipped that exact runtime-green / `tsc`-red shape before.
+**And declare its group id as a type parameter, not only in the config object.** `extendTailwindMerge<"color-field" | "gutter-x" | "section-y" | "bleed-x" | "text-outline">` is what makes those ids assignable inside `classGroups` / `conflictingClassGroups`. Adding a utility to the config and forgetting the union runs perfectly at runtime and fails `tsc` — this house has shipped that exact runtime-green / `tsc`-red shape before.
 
 Two more merge facts that bite and are invisible to `tsc` and lint:
 
@@ -506,62 +517,77 @@ Two more merge facts that bite and are invisible to `tsc` and lint:
 
 ## 9. Motion — `src/components/motion/` + `src/lib/gsap.ts`
 
-**GSAP is the only animation library.** No `motion`, no `lenis`, no CSS keyframe libraries. Since GSAP 3.13 the former Club plugins ship free, so ScrollTrigger, SplitText, ScrollSmoother and Observer cover everything in one dependency.
+**GSAP is the only animation library.** No `motion`, no `lenis`, no CSS keyframe libraries. Since GSAP 3.13 the former Club plugins ship free, so ScrollTrigger, SplitText, ScrollSmoother, Observer and Flip cover everything in one dependency.
 
 ### 9.1 The single registration site
 
-`src/lib/gsap.ts` is the **only** module that may import a GSAP plugin. It registers `useGSAP`, `ScrollTrigger`, `SplitText`, `ScrollSmoother` and `Observer`, then re-exports them.
+`src/lib/gsap.ts` is the **only** module that may import a GSAP plugin. It registers `useGSAP`, `ScrollTrigger`, `SplitText`, `ScrollSmoother`, `Observer` and `Flip`, then re-exports them alongside `gsap` itself and the `FULL_MOTION_QUERY` constant (§9.2). `Flip` has one consumer, the gallery archive's filter transition.
 
 This is enforced by a `biome` `noRestrictedImports` rule banning `gsap/*` and `gsap/**` everywhere else — including `gsap/all` and `gsap/dist/*`, so the one site cannot be reached around. A bare `import { gsap } from "gsap"` is still allowed. A plugin registered from two sites is a plugin **unregistered on some route**, and that failure is silent.
 
 Import everything from `@/lib/gsap`.
 
-### 9.2 The reduced-motion contract
+### 9.2 The reduced-motion contract — stated, not yet implemented
 
-`lib/gsap.ts` exports `matchMotion(branches, scope)`, a thin wrapper over `gsap.matchMedia()`:
+**Read this section before you trust rule §0.3 to be enforced by anything. It is not.**
+
+`lib/gsap.ts` exports one motion constant, and it is not a media query:
 
 ```ts
-matchMotion({ motion: () => { … }, reduced: () => { … } }, root)
+export const FULL_MOTION_QUERY = "all";
 ```
 
-`motion` registers under `(prefers-reduced-motion: no-preference)`. `reduced` is **optional** — and knowing when it is optional is the whole rule:
+Eleven expressions across ten modules compose it into a `gsap.matchMedia()` key — `` `${FULL_MOTION_QUERY} and (pointer: fine)` `` in `Tilt` and `SmoothScrollProvider`, `` `${FULL_MOTION_QUERY} and (min-width: 1024px)` `` in the pin components, bare in the gallery and notices archives. **`all` matches unconditionally**, so every one of those keys reduces to its pointer or width half and nothing more. The name says full-motion; the value gates nothing.
 
-> **`reduced` may be omitted only when the animation is a `gsap.from()`.**
-> A `from()` tween's *natural* DOM state is already the final state, so registering nothing under reduced motion leaves the element visible and correctly positioned — which is what rule §0.4 actually requires.
-> **The moment an animation is a `gsap.to()`, a `set()`, a loop, or duplicates DOM, a `reduced` branch is mandatory** — otherwise the reduced-motion user gets the *initial* state permanently.
+**So there is no reduced-motion gate anywhere in the motion layer.** There is no `matchMotion` helper — the branch-pair wrapper this section used to describe was never built. No component in `src/components/motion/` reads `prefers-reduced-motion`. `Reveal` (a `fromTo`), `SplitText`, `Counter`, `Marquee` and every pinned track run their full animation for a user who has asked for less; `Marquee` is a `gsap.to({ repeat: -1 })` over duplicated copies with no branch at all, and the hero badge spins on a bare CSS `animate-[spin_20s_linear_infinite]` (§7.2). Two motion hooks (`use-admissions-parallax`, `use-pinned-cards`) gate on width alone and do not touch the constant.
 
-`Marquee` is the worked example: it is a `gsap.to()` loop over duplicated copies, so it ships a `reduced` branch that switches the track to native horizontal scroll and hides the duplicate copies. `Reveal`, `SplitText`, `Parallax` and `Tilt` are all `from()`-shaped or pointer-driven, so they correctly register nothing.
+Two places genuinely check the query, and both are recent: `updates-carousel.tsx` and `hooks/motion/use-carousel-autoplay.ts`, each declaring its own `REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)"` against `window.matchMedia`. Seven call sites carry `motion-reduce:transition-none` on a CSS transition — none of them a `ui/` primitive; the `Accordion` panel and the `Tabs` indicator both animate unguarded (§6.3, §6.4).
 
-Components that use CSS transitions instead (`Accordion`, `Tabs`) carry `motion-reduce:transition-none`.
+**Rule §0.3 and constraint 5 still stand; the mechanism to satisfy them is missing. Closing that is CARD-402.** Until it lands, an animation you add today has no reduced path unless you write one by hand, and no gate in §13 will tell you it is absent. The shape the rule wants, and what the helper has to make cheap, is unchanged:
+
+> **A `reduced` branch may be omitted only when the animation is a `gsap.from()`/`fromTo()` whose from-state is applied client-side.**
+> Its *natural* DOM state is already the final state, so registering nothing under reduced motion leaves the element visible and correctly positioned — which is what rule §0.3 actually requires.
+> **The moment an animation is a `gsap.to()`, a `set()`, a loop, or duplicates DOM, a `reduced` branch is mandatory** — otherwise the reduced-motion user gets the *initial* state permanently, or the loop for ever.
 
 ### 9.3 The vocabulary
 
 | Primitive | Shape | Notes |
 |:--|:--|:--|
-| `Reveal` / `RevealItem` | enter on scroll: `y` (40) / `x` offset + optional fade | `stagger > 0` animates `[data-reveal-item]` children, falling back to direct children |
+| `Reveal` / `RevealItem` | enter on scroll: `gsap.fromTo` on `y` (40) and opacity | props are `y` and `stagger` only — there is no `x` and no fade switch; `stagger > 0` animates `[data-reveal-item]` children, falling back to direct children |
 | `SplitText` | masked line / word / char entrance on a single string | accessible name is GSAP's (`aria: "auto"`); the a11y attributes exist only while the split does — §9.7 |
-| `Marquee` | infinite horizontal loop, scroll-velocity linked via `Observer` | `copies` (2), `speed` (80), `reverse`, `velocity`, `maxBoost` |
+| `Marquee` | infinite horizontal loop, scroll-velocity linked via `Observer` | `label` is **required** (it names the `role="group"` region); `copies` (2), `speed` (80), `reverse`, `velocity` (true), `maxBoost` (3), `trackClassName` |
 | `Parallax` | depth layer | **markup only** — see below |
-| `Tilt` | 3D pointer tilt, `max` 8° | `(pointer: fine)` + full-motion only; no-ops on touch |
-| `SmoothScrollProvider` | wraps the app in ScrollSmoother, `smooth: 1.8` | `(pointer: fine)` + full-motion only; required `chrome` slot renders outside the smoothed content (§9.6); re-scans parallax effects on route change (§9.5) |
+| `Counter` | count-up on scroll: `value` + optional `suffix` | a `gsap.to()` on a plain object writing `textContent`; skips entirely when the element already sits within the first 90% of the viewport at mount, so the server-rendered final number stands |
+| `Tilt` | 3D pointer tilt, `max` 8° | `(pointer: fine)` only — `FULL_MOTION_QUERY` is `"all"` (§9.2); no-ops on touch |
+| `SmoothScrollProvider` | wraps the app in ScrollSmoother, `smooth: 1.8` | `(pointer: fine)` only (§9.2); required `chrome` slot renders outside the smoothed content (§9.6); re-scans parallax effects on route change (§9.5) |
 
 **`smooth: 1.8` is seconds-to-catch-up, so bigger is slower.** It reads like a speed and is the opposite: it is how long the content takes to settle onto the real scroll position. It was raised from `1.2` on Asmit's *"slow down lenis, it is too fast"* (there is no Lenis — DEC-001 replaced it with ScrollSmoother; he was describing this value). Above roughly `2` the page starts to feel detached from the wheel rather than weighted, which is why this stopped at 1.8.
 
 **It is also the parallax dial.** The `data-speed` layers (§9.5) ride this same smoother, so raising it deepens their separation as a side effect. Retune it and the depth of every parallax layer on the site changes with it — check a parallax section, not just a plain one.
 
-### 9.4 The at-fold rule
+### 9.4 At-fold content needs no special prop — and there is no prop to reach for
 
-`Reveal` and `SplitText` both take **`atFold`**. It drops the ScrollTrigger so the animation plays immediately on mount, and on `Reveal` it also flips `fade` off by default (`fade = !atFold`).
+`Reveal` and `SplitText` are safe above the fold as they stand. **There is no `atFold` prop, and there should not be one.** This section exists because the shape of the hazard is real in other stacks, and an engineer who has met it there will come looking for the escape hatch.
 
-**Anything in the first viewport uses `atFold`.** A scroll-triggered reveal on at-fold content is a reveal whose trigger point is already behind the scroll position — it can leave the hero parked at its from-state, and it is a Core Web Vitals defect regardless.
+The hazard: an entrance animation whose start state is hidden, wrapped around content that is already on screen at scroll 0, and whose trigger can therefore never fire. The hero paints from-state and stays there. Nothing catches it — `tsc`, `biome` and `next build` are all green on content that renders and stays invisible.
 
-Note that `fade` is a *default*, not a lock: `<Reveal atFold fade>` is expressible and re-introduces an opacity ramp at the fold. Don't.
+**It does not happen here, for two independent reasons.**
+
+**1 — a ScrollTrigger start that is already behind the scroll position fires on creation.** It is a scroll *position*, not an IntersectionObserver threshold. Both primitives use `start: "top 85%"`; for anything in the first viewport that resolves to a negative scroll offset, so the trigger is already past its start the moment it is built. `ScrollTrigger.refresh()` calls `self.update()` on its first pass (`ScrollTrigger.js:1606`), progress computes greater than zero, `toggleState` is `0` (enter), and the default `toggleActions: "play"` (`:300`) runs `animation.play()` (`:1690`–`:1760`). **The entrance plays on mount** — exactly the behaviour an `atFold` prop would have had to add by hand.
+
+This is where the instinct comes from and why it does not transfer: Motion's `whileInView` with a numeric `amount` *is* an IntersectionObserver threshold, and an element already fully visible at scroll 0 never crosses it, so it stays hidden until the user scrolls. That library is not in this build (§9), and GSAP does not share the bug.
+
+**2 — the from-state is never in the server HTML.** Both primitives apply it client-side inside `useGSAP`. The server sends live text at full opacity, so the LCP element paints before hydration, the no-JS case reads correctly, and there is no opacity gate on first paint to be a Core Web Vitals defect in the first place. §9.7 relies on the same property for `SplitText`'s accessible name.
+
+**What still applies at the fold** is rule §0.3 and §9.2: an animation whose natural DOM state is *not* the final state — a `to()`, a `set()`, a loop — must ship a `reduced` branch, at the fold or anywhere else. The hero badge is the worked example (§7.2), and right now it is the counter-example: an at-fold CSS spin loop with no reduced path at all.
+
+*(Historical note: this section previously mandated an `atFold` prop on both primitives. The prop was never built. The rule it sat under was removed from §0 with it.)*
 
 ### 9.5 `Parallax` is markup, not motion
 
 `Parallax` renders a plain `div` with `data-speed` and `data-lag`. It contains no GSAP at all. Those attributes are read by **ScrollSmoother's `effects: true`**, which only runs when `SmoothScrollProvider` is active.
 
-**So parallax silently does nothing on touch devices, on coarse pointers, and under reduced motion.** That is the correct behaviour — but it means a section whose *meaning* depends on parallax (overlapping layers that only separate when they move) is broken for a large share of visitors. Design the static composition first; parallax is the enhancement.
+**So parallax silently does nothing on touch devices or on coarse pointers.** It *does* still run under reduced motion, because the smoother is gated on `(pointer: fine)` alone (§9.2). That is the correct behaviour for the pointer half — but it means a section whose *meaning* depends on parallax (overlapping layers that only separate when they move) is broken for a large share of visitors. Design the static composition first; parallax is the enhancement.
 
 **The effect list is built by DOM query, not by React.** `ScrollSmoother.create({ effects: true })` resolves `[data-speed], [data-lag]` **once, at create time**. The smoother is created on mount and outlives every client-side navigation — so a `<Parallax>` on a soft-navigated route would get no effect at all, silently, on desktop only.
 
@@ -571,14 +597,15 @@ The scan runs once per route commit. **A `[data-speed]` element that appears aft
 
 ### 9.6 Fixed and sticky do not work inside the smooth content — the `chrome` slot
 
-`SmoothScrollProvider` wraps everything in `#smooth-wrapper` > `#smooth-content`. ScrollSmoother sets the wrapper to `position: fixed; overflow: hidden; height: 100%` and **transforms** the content element. **A `fixed` or `sticky` descendant is positioned against a transformed ancestor, so it scrolls with the content.** Nothing warns you; it simply behaves as `absolute`. The failure is **desktop-only** — the smoother is gated on `(pointer: fine)` + full motion — so it does not reproduce on the phone you test on.
+`SmoothScrollProvider` wraps everything in `#smooth-wrapper` > `#smooth-content`. ScrollSmoother sets the wrapper to `position: fixed; overflow: hidden; height: 100%` and **transforms** the content element. **A `fixed` or `sticky` descendant is positioned against a transformed ancestor, so it scrolls with the content.** Nothing warns you; it simply behaves as `absolute`. The failure is **desktop-only** — the smoother is gated on `(pointer: fine)` (§9.2) — so it does not reproduce on the phone you test on.
 
 The provider therefore has two slots, and `chrome` is a **required** prop:
 
 ```tsx
-<SmoothScrollProvider chrome={<SiteHeader />}>
+<SmoothScrollProvider chrome={<><SiteHeader /><FloatingSocials /></>}>
   <div className="flex min-h-svh flex-col">
-    <main id="main" className="flex-1">{children}</main>
+    <main id="main" className="flex-1 pt-20">{children}</main>
+    <SiteFooter />
   </div>
 </SmoothScrollProvider>
 ```
@@ -626,7 +653,7 @@ const [copy, levels] = await Promise.all([
 ]);
 ```
 
-- `content` is a `ContentProvider` — eleven async getters (`getInstitution`, `getStats`, `getAcademicLevels`, `getProgrammes`, `getAffiliations`, `getPartners`, `getCampusLife`, `getAdmissionCalls`, `getUpdates`, `getTestimonials`, `getHomeCopy`). Every one returns a Promise, so the WP swap changes no call site.
+- `content` is a `ContentProvider` — fifteen async getters (`getInstitution`, `getStats`, `getAcademicLevels`, `getProgrammes`, `getVocationalApproval`, `getAffiliations`, `getPartners`, `getCampusLife`, `getAdmissionCalls`, `getUpdates`, `getTestimonials`, `getLeadership`, `getGallery`, `getHomeCopy`, `getAboutCopy`) plus a `source` string. Every getter returns a Promise, so the WP swap changes no call site.
 - Types live in `content/types.ts`. Ids, slugs and dates are **branded** (`ContentId`, `Slug`, `IsoDate`) and validated at construction — a malformed slug or a 31 February throws at module load, not in production.
 - **`InstitutionProfile` carries no bare name and no bare year.** Both live only inside `entities: Record<EntityRole, NamedEntity>` — `institute` (Naaya Aayam Multi-Disciplinary Institute, 2012), `college` (NAMI College, 2013), `school` (NAMI International School, no founding year in the brand book — its 2019 and 2024 dates are *affiliations* and live on `affiliations.sinceYear`). Read `name` and `establishedYear` from the **same** entity object. There is no `displayName`, `legalName`, `shortName` or `establishedYear` on the profile, and that is the point: they existed only so a template literal could pair the College's name with the Institute's year.
 - **`ContentLink.destination` is `"internal" | "external" | "legacy"` — there is no `external` boolean.** `internal` renders a plain `<Link href>`; `external` adds `target="_blank" rel="noopener noreferrer"`; **`legacy` points at `college.nami.edu.np`, the site this build replaces — render the surrounding content with the CTA suppressed, never as a link.** On launch that host is us: a new tab to ourselves, at a route that will not exist. The URL is real and sourced, so it is not a registry placeholder — it is a migration TODO the type carries until someone re-points it.
@@ -663,10 +690,8 @@ A reader who does not know something was a decision will assume it was an oversi
 | **`letter-spacing` on any type step** | Removed with the display-face change (§7.1). The negative tracking existed to serve a wide grotesque that is no longer in the build; the reference sets `normal` throughout. Do not reintroduce a `--text-*--letter-spacing` key to "tighten" a heading — if a heading looks loose, the line-height or the step is wrong. `tracking-widest` on `Eyebrow` is a per-role choice for uppercase micro-copy and is not part of the scale. |
 | **A `text-*` step between 48px and 76px** | The `text-5xl` → `text-6xl` gap is the reference's own `h2`/`h1` structure (§3.1), not an omission. |
 | **A bold display weight** | The display face has one weight (§7.1). `font-semibold` on a heading is a no-op, not a defect to fix by loading a second weight. |
-| **A viewport-edge bleed from *inside* the content column** (`margin-inline: calc(50% - 50vw)`) | The one case `bleed-x` does not cover (§4.3): an element that must stay a child of the content column — a grid cell keeping its place in the editorial grid — and still paint to the viewport edge above 1568px. The formula is correct and needs no coupling to `gutter-x` at all, but it costs three things `bleed-x` does not. **`50vw` includes the classic scrollbar**, so it overflows ~7–8px each side and raises a horizontal scrollbar everywhere ScrollSmoother is not already clipping — and the smoother is off on touch, on coarse pointers, and under reduced motion (§9.5). That makes an `overflow-x: clip` on the shell a *prerequisite*, not a tidy-up, and putting overflow on `html`/`body` is exactly what GSAP's own guidance warns against next to ScrollTrigger. It also silently requires a **horizontally centred** containing block, and the moment it is used in an asymmetric flex or grid cell it fails by *mispositioning* rather than by not working — the failure shape nothing in this stack catches. No section has asked for it; three asked for `bleed-x`. Add it **with** the section that needs it and **with** its clipping ancestor, verified together — not before. |
-| **A default OG image** | `createMetadata` accepts an `image` and falls back to `twitter: { card: "summary" }` without one. The brand asset (and the vector logo) have not been supplied. |
-| **`components/layout/`** | Header and footer are blocked on the vector logo. |
-| **`components/shared/`** | Extraction happens **last**, on the merged tree, once a second route actually needs a section. Extracting before a real second consumer exists is the over-abstraction smell. |
+| **A viewport-edge bleed from *inside* the content column** (`margin-inline: calc(50% - 50vw)`) | The one case `bleed-x` does not cover (§4.3): an element that must stay a child of the content column — a grid cell keeping its place in the editorial grid — and still paint to the viewport edge above 1568px. The formula is correct and needs no coupling to `gutter-x` at all, but it costs three things `bleed-x` does not. **`50vw` includes the classic scrollbar**, so it overflows ~7–8px each side and raises a horizontal scrollbar everywhere ScrollSmoother is not already clipping — and the smoother is off on touch and on coarse pointers (§9.5). That makes an `overflow-x: clip` on the shell a *prerequisite*, not a tidy-up, and putting overflow on `html`/`body` is exactly what GSAP's own guidance warns against next to ScrollTrigger. It also silently requires a **horizontally centred** containing block, and the moment it is used in an asymmetric flex or grid cell it fails by *mispositioning* rather than by not working — the failure shape nothing in this stack catches. No section has asked for it; three asked for `bleed-x`. Add it **with** the section that needs it and **with** its clipping ancestor, verified together — not before. |
+| **A default OG image** | `createMetadata` accepts an `image` and falls back to `twitter: { card: "summary" }` without one, and no route passes it. The vector logo has since landed (`public/logo/nami-{black,color,white}.svg`); a composed social card has not. |
 | **A `Link`-flavoured `Button`** | `buttonVariants` (§6.1) is the bridge. A second component would duplicate the matrix. |
 | **`prefers-color-scheme` block** | Removed from the scaffold rather than extended. |
 | **Per-component focus rings** | The global `:focus-visible` outline (§2.2) already inverts per colour field. |

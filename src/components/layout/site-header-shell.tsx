@@ -95,7 +95,7 @@ function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
     >
       <Link
         href={item.href as Route}
-        className="flex items-center gap-1 font-body text-xs xl:text-sm font-medium text-ink uppercase transition-colors hover:text-accent outline-none cursor-pointer whitespace-nowrap"
+        className="flex items-center gap-1 font-body text-xs xl:text-sm font-medium text-ink uppercase transition-colors hover:text-accent cursor-pointer whitespace-nowrap"
       >
         {item.label}{" "}
         <Icon ref={icon} icon={ChevronDownIcon} className="size-4 shrink-0" />
@@ -261,7 +261,7 @@ export function SiteHeaderShell({
                 }
               />
               <SheetContent
-                className="w-full sm:max-w-md lg:max-w-sm flex flex-col outline-none overflow-y-auto p-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                className="w-full sm:max-w-md lg:max-w-sm flex flex-col overflow-y-auto p-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                 side="right"
                 hideClose
               >

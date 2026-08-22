@@ -6,11 +6,11 @@ import {
   Carousel,
   type CarouselApi,
   CarouselContent,
-  CarouselDots,
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useCarouselAutoplay } from "@/hooks/motion/use-carousel-autoplay";
 import type { ContentImage } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 export type CareerPartner = {
   readonly id: string;
@@ -93,18 +93,22 @@ export function PartnerCarousel({
             >
               <ul className="grid grid-cols-3 gap-3 md:gap-4">
                 {page.logos.map((partner) => (
-                  <li className="aspect-square" key={partner.id}>
+                  <li
+                    className={cn(
+                      "flex aspect-2/1 items-center justify-center overflow-hidden rounded-xl border bg-surface-raised lg:aspect-3/1",
+                      partner.logo === null && "border-dashed",
+                    )}
+                    key={partner.id}
+                  >
                     {partner.logo === null ? (
-                      <span className="block size-full rounded-xl border border-dashed">
-                        <span className="sr-only">{partner.name}</span>
-                      </span>
+                      <span className="sr-only">{partner.name}</span>
                     ) : (
                       <Image
                         alt={partner.name}
-                        className="size-full object-contain p-3 md:p-4"
+                        className="h-2/5 w-1/2 object-contain"
                         height={partner.logo.height}
                         loading="lazy"
-                        sizes="(min-width: 1024px) 18vw, 31vw"
+                        sizes="(min-width: 1440px) 136px, (min-width: 1024px) 9vw, 15vw"
                         src={partner.logo.src}
                         width={partner.logo.width}
                       />
@@ -115,8 +119,6 @@ export function PartnerCarousel({
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        <CarouselDots className="mt-8" dotLabel="Go to logo page" />
       </Carousel>
     </div>
   );

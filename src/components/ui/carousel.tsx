@@ -15,7 +15,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { useCarouselAutoplay } from "@/hooks/motion/use-carousel-autoplay";
-import { ArrowLeftIcon, ArrowRightIcon } from "@/lib/icons";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 export type CarouselApi = UseEmblaCarouselType[1];
@@ -31,11 +36,14 @@ type CarouselProps = {
   readonly setApi?: (api: CarouselApi) => void;
 };
 
+type CarouselOrientation = "horizontal" | "vertical";
+
 type CarouselContextProps = {
   readonly carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   readonly api: CarouselApi;
   readonly canScrollNext: boolean;
   readonly canScrollPrev: boolean;
+  readonly orientation: CarouselOrientation;
   readonly scrollNext: () => void;
   readonly scrollPrev: () => void;
   readonly scrollTo: (index: number) => void;
@@ -63,7 +71,10 @@ export function Carousel({
   setApi,
   ...props
 }: ComponentProps<"div"> & CarouselProps) {
-  const [carouselRef, api] = useEmblaCarousel({ ...opts, axis: "x" }, plugins);
+  const axis = opts?.axis ?? "x";
+  const orientation: CarouselOrientation =
+    axis === "y" ? "vertical" : "horizontal";
+  const [carouselRef, api] = useEmblaCarousel({ ...opts, axis }, plugins);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -99,11 +110,14 @@ export function Carousel({
     selectedIndex,
   });
 
+  const prevKey = orientation === "vertical" ? "ArrowUp" : "ArrowLeft";
+  const nextKey = orientation === "vertical" ? "ArrowDown" : "ArrowRight";
+
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "ArrowLeft") {
+    if (event.key === prevKey) {
       event.preventDefault();
       api?.scrollPrev();
-    } else if (event.key === "ArrowRight") {
+    } else if (event.key === nextKey) {
       event.preventDefault();
       api?.scrollNext();
     }
@@ -132,6 +146,7 @@ export function Carousel({
         canScrollNext,
         canScrollPrev,
         carouselRef,
+        orientation,
         scrollNext,
         scrollPrev,
         scrollSnaps,
@@ -162,7 +177,7 @@ export function CarouselContent({
   viewportClassName,
   ...props
 }: ComponentProps<"div"> & { readonly viewportClassName?: string }) {
-  const { carouselRef } = useCarousel();
+  const { carouselRef, orientation } = useCarousel();
 
   return (
     <div
@@ -170,17 +185,30 @@ export function CarouselContent({
       data-slot="carousel-content"
       ref={carouselRef}
     >
-      <div className={cn("flex", className)} {...props} />
+      <div
+        className={cn(
+          "flex",
+          orientation === "vertical" ? "flex-col" : "flex-row",
+          className,
+        )}
+        {...props}
+      />
     </div>
   );
 }
 
 export function CarouselItem({ className, ...props }: ComponentProps<"div">) {
+  const { orientation } = useCarousel();
+
   return (
     // biome-ignore lint/a11y/useSemanticElements: the ARIA carousel pattern pairs role="group" with aria-roledescription="slide"; the suggested <fieldset> is for grouping form controls and would be wrong here.
     <div
       aria-roledescription="slide"
-      className={cn("min-w-0 shrink-0 grow-0 basis-full", className)}
+      className={cn(
+        "shrink-0 grow-0 basis-full",
+        orientation === "vertical" ? "min-h-0" : "min-w-0",
+        className,
+      )}
       data-slot="carousel-item"
       role="group"
       {...props}
@@ -211,7 +239,7 @@ export function CarouselPrevious({
   variant = "default",
   ...props
 }: ComponentProps<typeof Button>) {
-  const { canScrollPrev, scrollPrev } = useCarousel();
+  const { canScrollPrev, orientation, scrollPrev } = useCarousel();
 
   return (
     <Button
@@ -225,7 +253,7 @@ export function CarouselPrevious({
       variant={variant}
       {...props}
     >
-      <Icon icon={ArrowLeftIcon} />
+      <Icon icon={orientation === "vertical" ? ChevronUpIcon : ArrowLeftIcon} />
     </Button>
   );
 }
@@ -236,7 +264,7 @@ export function CarouselNext({
   variant = "default",
   ...props
 }: ComponentProps<typeof Button>) {
-  const { canScrollNext, scrollNext } = useCarousel();
+  const { canScrollNext, orientation, scrollNext } = useCarousel();
 
   return (
     <Button
@@ -250,7 +278,9 @@ export function CarouselNext({
       variant={variant}
       {...props}
     >
-      <Icon icon={ArrowRightIcon} />
+      <Icon
+        icon={orientation === "vertical" ? ChevronDownIcon : ArrowRightIcon}
+      />
     </Button>
   );
 }

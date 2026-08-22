@@ -35,7 +35,7 @@ export function BachelorsPartners({
         </h2>
 
         <div className="mt-14 grid gap-8 lg:mt-20 lg:grid-cols-5 lg:gap-12">
-          <div className="relative aspect-video overflow-hidden rounded-xl lg:col-span-2 lg:aspect-auto lg:h-full">
+          <div className="relative aspect-video overflow-hidden rounded-xl lg:col-span-2 lg:aspect-4/3 lg:self-start">
             <Image
               alt={copy.image.alt}
               className="object-cover"

@@ -70,17 +70,16 @@ export function SchoolAdmissionTrack({
     <div className="mx-auto max-w-page overflow-hidden" ref={railRef}>
       {heading}
 
-      <div className="mt-14 lg:mt-20">
-        <ol
-          aria-label={label}
-          className="scrollbar-hide flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 sm:gap-8 lg:overflow-x-visible lg:pb-0"
-          ref={trackRef}
-          // biome-ignore lint/a11y/noNoninteractiveTabindex: horizontal scroll region whose cards hold no focusable child, so WCAG 2.1.1 (axe scrollable-region-focusable) requires it be reachable by keyboard.
-          tabIndex={0}
-        >
+      <section
+        aria-label={label}
+        className="scrollbar-hide mt-14 snap-x snap-mandatory overflow-x-auto pb-2 lg:mt-20 lg:overflow-x-visible lg:pb-0"
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: below lg this is the horizontal scroll region and its cards hold no focusable child, so WCAG 2.1.1 (axe scrollable-region-focusable) requires it be keyboard-reachable. It must stay off the <ol>, which GSAP translates off-screen at lg+, taking the focus ring with it.
+        tabIndex={0}
+      >
+        <ol className="flex gap-6 sm:gap-8" ref={trackRef}>
           {children}
         </ol>
-      </div>
+      </section>
     </div>
   );
 }

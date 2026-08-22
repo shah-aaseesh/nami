@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/motion/reveal";
 import { Eyebrow, H2, Standfirst } from "@/components/ui/typography";
-import { content, isPlaceholder } from "@/lib/content";
+import { content } from "@/lib/content";
 import { contactCopy } from "./contact-copy";
 import { ContactForm } from "./contact-form";
 
@@ -12,7 +12,7 @@ export async function ContactFormSection() {
   const copy = contactCopy.form;
 
   const email = institution.contact.email;
-  if (email === null || isPlaceholder(email)) return null;
+  if (email === null) return null;
 
   const topics = [
     copy.topicGeneral,

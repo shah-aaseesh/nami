@@ -4,7 +4,7 @@ import type {
   InstitutionProfile,
   NamedEntity,
 } from "@/lib/content";
-import { content, isPlaceholder } from "@/lib/content";
+import { content } from "@/lib/content";
 import { absoluteUrl, siteUrl } from "@/lib/seo";
 import { JsonLd, type JsonLdNode } from "./json-ld";
 
@@ -21,7 +21,7 @@ function isPlainText(value: string): boolean {
 
 function publishable(value: string | null | undefined): string | undefined {
   const text = value?.trim();
-  if (!text || isPlaceholder(value) || !isPlainText(text)) {
+  if (!text || !isPlainText(text)) {
     return undefined;
   }
   return text;

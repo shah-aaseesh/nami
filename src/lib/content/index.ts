@@ -12,14 +12,6 @@ export {
   slug,
 } from "./identifiers";
 export {
-  isPlaceholder,
-  isPlaceholderShaped,
-  type PlaceholderKind,
-  type PlaceholderRecord,
-  placeholderRecords,
-  placeholderValues,
-} from "./placeholder-registry";
-export {
   type ContentProvider,
   ContentSourceUnavailableError,
 } from "./provider";

@@ -10,7 +10,7 @@ import { schoolPrincipal } from "@/lib/content/school-principal";
 import { createMetadata } from "@/lib/seo";
 import { SchoolAdmission } from "./_components/school-admission";
 import { SchoolBands } from "./_components/school-bands";
-import { dummyParentTestimonials, schoolCopy } from "./_components/school-copy";
+import { parentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
 
 export const metadata: Metadata = createMetadata({
@@ -59,7 +59,7 @@ export default async function SchoolPage() {
 
       <Testimonials
         id="parents"
-        items={dummyParentTestimonials}
+        items={parentTestimonials}
         section={schoolCopy.parents}
       />
       <SharedCampusGallery

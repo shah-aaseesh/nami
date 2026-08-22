@@ -1,6 +1,12 @@
 import { entryOf } from "../identifiers";
-import type { Partner } from "../types";
-import { partnerLogoStandIn } from "./placeholders";
+import type { ContentImage, Partner } from "../types";
+
+const namiMark: ContentImage = {
+  src: "/logo/nami-color.svg",
+  alt: "The NAMI red lotus mark.",
+  width: 1000,
+  height: 1000,
+};
 
 const industryPartnerNames: readonly [string, string][] = [
   ["sanima-bank", "Sanima Bank"],
@@ -29,7 +35,7 @@ export const partners: readonly Partner[] = [
     blurb:
       "As an AWS Academy College, NAMI teaches the Amazon Web Services cloud computing curriculum and prepares students for globally recognised certifications.",
     href: null,
-    logo: partnerLogoStandIn,
+    logo: namiMark,
   },
   {
     ...entryOf("startup-discovery-asia"),
@@ -38,7 +44,7 @@ export const partners: readonly Partner[] = [
     blurb:
       "South Asian startup ecosystem enabler, partner behind the Naaya Aayam Avinaya Prerana Kendra incubation centre.",
     href: null,
-    logo: partnerLogoStandIn,
+    logo: namiMark,
   },
   ...industryPartnerNames.map<Partner>(([partnerSlug, name]) => ({
     ...entryOf(partnerSlug),
@@ -46,6 +52,6 @@ export const partners: readonly Partner[] = [
     kind: "industry",
     blurb: null,
     href: null,
-    logo: partnerLogoStandIn,
+    logo: namiMark,
   })),
 ];

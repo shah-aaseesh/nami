@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "placeholders": "node scripts/check-placeholders.mjs",
     "aliases": "node scripts/check-color-aliases.mjs",
     "format": "biome format --write"
   },

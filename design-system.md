@@ -488,7 +488,7 @@ The hero maps every reference element onto real content — there is no invented
 
 The reference's social stack and its far-left vertical rail are **not** built. The rail would have been `institution.campuses`; the reference's opening hours do not exist for NAMI and were never invented.
 
-**The badge ring rotates, on a bare CSS `animate-[spin_20s_linear_infinite]`, and the rotation is sanctioned** — operator decision, 2026-08-22. No GSAP: a 20s linear loop on a single transform needs no timeline, and keeping it in CSS keeps it out of the motion layer's teardown path. What it still owes is a reduced-motion branch — it is an at-fold loop in the LCP section that keeps turning for a user who asked for less, which makes it the first thing §9.2's gap has to answer for rather than a defect in the badge itself. The ring itself is `role="img"` + `aria-label` carrying the plain string, so the `*` separators are never announced (§9.7's reasoning, applied to `<textPath>`).
+**The badge ring rotates, on a bare CSS `animate-[spin_20s_linear_infinite]`, and the rotation is sanctioned** — operator decision, 2026-08-22. No GSAP: a 20s linear loop on a single transform needs no timeline, and keeping it in CSS keeps it out of the motion layer's teardown path. It carries no reduced-motion branch and is not going to: the project ships no `prefers-reduced-motion` gate at all, by ratified decision, and that is settled rather than outstanding. The ring itself is `role="img"` + `aria-label` carrying the plain string, so the `*` separators are never announced (§9.7's reasoning, applied to `<textPath>`).
 
 **The badge centre is the NAMI mark, and it links to the real YouTube channel.** There is no NAMI video asset and no play glyph in the barrel (§6.2); the image is `alt=""` and an `sr-only` string carries the destination. An affordance that opens the actual channel is honest; a dead player is not.
 
@@ -581,7 +581,7 @@ This is where the instinct comes from and why it does not transfer: Motion's `wh
 
 **2 — the from-state is never in the server HTML.** Both primitives apply it client-side inside `useGSAP`. The server sends live text at full opacity, so the LCP element paints before hydration, the no-JS case reads correctly, and there is no opacity gate on first paint to be a Core Web Vitals defect in the first place. §9.7 relies on the same property for `SplitText`'s accessible name.
 
-**What still applies at the fold** is rule §0.3 and §9.2: an animation whose natural DOM state is *not* the final state — a `to()`, a `set()`, a loop — must ship a `reduced` branch, at the fold or anywhere else. The hero badge is the worked example (§7.2): the spin itself is ratified and stays, so what is missing is only its reduced branch — an at-fold CSS spin loop with no reduced path at all, and the first case the gate has to handle when it is built.
+**What still applies at the fold** is that an animation whose natural DOM state is *not* the final state — a `to()`, a `set()`, a loop — must leave its element visible and correctly positioned if the tween never runs. That is a robustness requirement about the DOM's resting state, and it holds whether or not any motion preference is consulted. It is **not** a reduced-motion contract: this project ships no `prefers-reduced-motion` gate anywhere, by ratified decision, so there is no `reduced` branch for anything to be the first case of. The hero badge's spin is sanctioned and gateless (§7.2).
 
 *(Historical note: this section previously mandated an `atFold` prop on both primitives. The prop was never built. The rule it sat under was removed from §0 with it.)*
 
@@ -658,22 +658,14 @@ const [copy, levels] = await Promise.all([
 - `content` is a `ContentProvider` — fifteen async getters (`getInstitution`, `getStats`, `getAcademicLevels`, `getProgrammes`, `getVocationalApproval`, `getAffiliations`, `getPartners`, `getCampusLife`, `getAdmissionCalls`, `getUpdates`, `getTestimonials`, `getLeadership`, `getGallery`, `getHomeCopy`, `getAboutCopy`) plus a `source` string. Every getter returns a Promise, so the WP swap changes no call site.
 - Types live in `content/types.ts`. Ids, slugs and dates are **branded** (`ContentId`, `Slug`, `IsoDate`) and validated at construction — a malformed slug or a 31 February throws at module load, not in production.
 - **`InstitutionProfile` carries no bare name and no bare year.** Both live only inside `entities: Record<EntityRole, NamedEntity>` — `institute` (Naaya Aayam Multi-Disciplinary Institute, 2012), `college` (NAMI College, 2013), `school` (NAMI International School, no founding year in the brand book — its 2019 and 2024 dates are *affiliations* and live on `affiliations.sinceYear`). Read `name` and `establishedYear` from the **same** entity object. There is no `displayName`, `legalName`, `shortName` or `establishedYear` on the profile, and that is the point: they existed only so a template literal could pair the College's name with the Institute's year.
-- **`ContentLink.destination` is `"internal" | "external" | "legacy"` — there is no `external` boolean.** `internal` renders a plain `<Link href>`; `external` adds `target="_blank" rel="noopener noreferrer"`; **`legacy` points at `college.nami.edu.np`, the site this build replaces — render the surrounding content with the CTA suppressed, never as a link.** On launch that host is us: a new tab to ourselves, at a route that will not exist. The URL is real and sourced, so it is not a registry placeholder — it is a migration TODO the type carries until someone re-points it.
+- **`ContentLink.destination` is `"internal" | "external" | "legacy"` — there is no `external` boolean.** `internal` renders a plain `<Link href>`; `external` adds `target="_blank" rel="noopener noreferrer"`; **`legacy` points at `college.nami.edu.np`, the site this build replaces — render the surrounding content with the CTA suppressed, never as a link.** On launch that host is us: a new tab to ourselves, at a route that will not exist. The URL is real and sourced — it is a migration TODO the type carries until someone re-points it.
 - Body copy is `RichText`, a discriminated union of `{ kind: "blocks", paragraphs }` and `{ kind: "html", html }`. The `html` arm is the WP path and **will need sanitizing when it goes live**; nothing renders it yet.
 - Section headings, eyebrows, standfirsts and CTAs live in `HomeCopy.sections[<id>]` as `SectionCopy` — including `emptyState`. Read them; do not type a heading into JSX.
 - `ContentSourceUnavailableError` exists for the remote provider. The local provider cannot throw it.
 
-### Placeholder content is registered, not improvised
+### Content length is a layout test — do not "tidy" it
 
-NAMI has not supplied alumni testimonials, campus photography, or the real contact details. Those values are **registered** through `content/placeholder-registry.ts` (`placeholderText`, `placeholderData`, `placeholderImage`), which:
-
-- rejects a value that does not *read* as a placeholder (must match `/placeholder/i`, `.example`, or `XX`)
-- rejects a duplicate registration path
-- makes `isPlaceholder(value)` answerable at runtime, so a section can style or suppress fake content
-
-**`pnpm run placeholders`** compiles the content layer and prints every registered placeholder grouped by kind, plus the values that are **real and must be left alone**. It **fails** if a registered value has vanished from the content graph, or if a placeholder-shaped value appears in the content without being registered. Run it before shipping anything that touches content.
-
-The placeholder testimonials are deliberately short / medium / very long, and the updates deliberately mix a dated event, an undated notice and a long news item — so a layout is judged against its worst case before real copy arrives. Do not "tidy" them to equal lengths.
+The testimonials are deliberately short / medium / very long, and the updates deliberately mix a dated event, an undated notice and a long news item — so a layout is judged against its worst case. Do not level them to equal lengths.
 
 ---
 
@@ -686,6 +678,7 @@ A reader who does not know something was a decision will assume it was an oversi
 | **Dark mode** | Light-only, by decision. `viewport.colorScheme` is `"light"`. "Dark" is a *design device* — the three colour fields — not a user theme. Never write a `dark:` variant. |
 | **`Card` primitive** | Constraint 1. A `Card` component is how the rounded-card grid gets back in. Separate with whitespace, a hairline, or a colour-field change. **Sanctioned rounding (§5) does not license this** — the constraint was always about *boxing every item uniformly*, and a `Card` primitive is what makes that the path of least resistance. A rounded panel built for one section is a section, not a primitive. |
 | **Shadow tokens** | Constraint 4 — depth comes from motion and overlap, not shadows on boxes. |
+| **A placeholder registry, and `pnpm placeholders`** | Retired by operator decision, 2026-08-22 — the module, the checker and the npm script are all deleted, and nothing replaces them. **The consequence is the reason this row exists: a set of published values are invented and are now indistinguishable in the source from the verified ones.** Both campus street addresses, both admissions emails, the school and college phone extensions, the WhatsApp link, both `mapUrl`s, four award records and the six parent testimonials on `/institutions/school` were authored here, not supplied by the client. The addresses ship inside `PostalAddress` in the JSON-LD and the phones and emails are live `tel:`/`mailto:` links in the footer — both were previously suppressed by the retired registry, and publishing them was a deliberate, separately-confirmed call rather than a side effect. Do not add markers back, and do not "correct" any of these to look provisional. Replace them only with material the client actually supplies. |
 | **`--destructive` / `--warning` / `--success` aliases** | No prop without a consumer. This is a marketing site with no destructive actions and no form validation yet. Add them **with** the feature that needs them. |
 | **`--color-secondary` / `--color-secondary-foreground` aliases** | Same reasoning as `--destructive`, one step further: where shadcn's meaning **collides** with our brand meaning, our brand meaning wins and the alias goes. The alias bought one thing — a pasted shadcn component compiling unmodified — and the CLI is banned here, so components are hand-adapted anyway. It cost a permanent trap (`bg-secondary` white vs `bg-secondary-700` teal) in the namespace a section builder reaches for most. Port to `bg-surface-raised` / `text-ink` (§2.3). |
 | **A radius cap** | **There is no longer one.** `rounded-xl` (12px) is the site default and the ramp runs to 32px, `3xl`/`4xl` included (§5). This row exists so nobody reinstates the old 8px cap from memory: it was retired by operator directive, not by oversight. |
@@ -727,7 +720,6 @@ Corollary: **you cannot verify a class compiles by writing it in a `.md` file.**
 |:--|:--|
 | `pnpm exec tsc --noEmit` | types |
 | `pnpm run lint` | `biome check` — lint + format + import order. Does **not** cover markdown. |
-| `pnpm run placeholders` | content/placeholder-registry consistency (§10) |
 | `pnpm run aliases` | shadcn alias parity between `:root` and the colour fields, plus field-token drift (§2.4) |
 | `pnpm run format` | `biome format --write` |
 

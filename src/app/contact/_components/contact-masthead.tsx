@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Display, Eyebrow, Standfirst } from "@/components/ui/typography";
 import type { SocialPlatform } from "@/lib/content";
-import { content, isPlaceholder } from "@/lib/content";
+import { content } from "@/lib/content";
 import type { IconSvgElement } from "@/lib/icons";
 import {
   FacebookIcon,
@@ -30,11 +30,8 @@ export async function ContactMasthead() {
   const { contact } = institution;
   const copy = contactCopy.masthead;
 
-  const email =
-    contact.email !== null && !isPlaceholder(contact.email)
-      ? contact.email
-      : null;
-  const phones = contact.phones.filter((phone) => !isPlaceholder(phone));
+  const email = contact.email;
+  const phones = contact.phones;
   const socials = contact.socialProfiles.filter(
     (profile) => profile.destination === "external",
   );

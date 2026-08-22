@@ -2,17 +2,6 @@ import { entryOf } from "../identifiers";
 import { richText } from "../rich-text";
 import { schoolGrades } from "../school-grades";
 import type { InstitutionProfile } from "../types";
-import {
-  collegeContactEmail,
-  collegeContactPhone,
-  gokarneshworMapUrl,
-  gokarneshworStreetAddress,
-  newBaneshworMapUrl,
-  newBaneshworStreetAddress,
-  schoolContactEmail,
-  schoolContactPhone,
-  whatsappContactLink,
-} from "./placeholders";
 
 export const institution: InstitutionProfile = {
   entities: {
@@ -93,22 +82,28 @@ export const institution: InstitutionProfile = {
         "+2 NEB, Science and Management",
         "Cambridge A-Level",
       ],
-      streetAddress: gokarneshworStreetAddress,
-      mapUrl: gokarneshworMapUrl,
+      streetAddress: "Jorpati Marg, House No. 142",
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=NAMI+College%2C+Jorpati%2C+Gokarneshwor%2C+Kathmandu",
     },
     {
       ...entryOf("new-baneshwor"),
       locality: "New Baneshwor",
       city: "Kathmandu",
       hosts: ["Undergraduate programmes", "Postgraduate programmes"],
-      streetAddress: newBaneshworStreetAddress,
-      mapUrl: newBaneshworMapUrl,
+      streetAddress: "Shantinagar Marg, House No. 27",
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=NAMI+College%2C+New+Baneshwor%2C+Kathmandu",
     },
   ],
   contact: {
     phones: ["+977 1 4917444", "+977 1 4917441"],
     email: "info@nami.edu.np",
-    whatsapp: whatsappContactLink,
+    whatsapp: {
+      label: "WhatsApp",
+      href: "https://wa.me/97714917444",
+      destination: "external",
+    },
     websites: [
       {
         label: "school.nami.edu.np",
@@ -155,8 +150,14 @@ export const institution: InstitutionProfile = {
     ],
     byEntity: {
       institute: { phone: "+977 1 4917444", email: "info@nami.edu.np" },
-      college: { phone: collegeContactPhone, email: collegeContactEmail },
-      school: { phone: schoolContactPhone, email: schoolContactEmail },
+      college: {
+        phone: "+977 1 4917442",
+        email: "admissions@college.nami.edu.np",
+      },
+      school: {
+        phone: "+977 1 4917445",
+        email: "admissions@school.nami.edu.np",
+      },
     },
   },
 };

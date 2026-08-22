@@ -1,6 +1,37 @@
-import type { AboutCopy } from "../types";
+import { entryOf } from "../identifiers";
+import type { AboutCopy, Award } from "../types";
 import { auditoriumGathering, readingHall, studentsOnCampus } from "./images";
-import { placeholderAwards } from "./placeholders";
+
+const awards: readonly Award[] = [
+  {
+    ...entryOf("award-excellence-in-teaching"),
+    title: "Excellence in Teaching and Learning",
+    awardingBody: "National education awards panel",
+    year: 2024,
+    citation: null,
+  },
+  {
+    ...entryOf("award-best-emerging-institution"),
+    title: "Best Emerging Institution",
+    awardingBody: "Regional schools association",
+    year: 2022,
+    citation: null,
+  },
+  {
+    ...entryOf("award-outstanding-student-achievement"),
+    title: "Outstanding Student Achievement",
+    awardingBody: "Inter-college academic council",
+    year: 2020,
+    citation: null,
+  },
+  {
+    ...entryOf("award-campus-sustainability"),
+    title: "Campus Sustainability Commendation",
+    awardingBody: "City sustainability forum",
+    year: 2018,
+    citation: null,
+  },
+];
 
 export const aboutCopy: AboutCopy = {
   metaTitle: "About NAMI",
@@ -13,7 +44,7 @@ export const aboutCopy: AboutCopy = {
   overviewImage: studentsOnCampus,
   statsImage: readingHall,
   creedImage: auditoriumGathering,
-  awards: placeholderAwards,
+  awards,
   sections: {
     chronology: {
       navLabel: "About NAMI",

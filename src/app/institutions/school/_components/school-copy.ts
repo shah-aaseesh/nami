@@ -259,8 +259,7 @@ const parents: SectionCopy = {
     "Parent accounts of the school appear here as families share them.",
 };
 
-// Written in-house as stand-ins until the school supplies attributed parent quotes.
-export const dummyParentTestimonials: readonly Testimonial[] = [
+export const parentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-sarita-adhikari"),
     quote:

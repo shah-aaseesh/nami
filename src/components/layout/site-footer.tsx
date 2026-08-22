@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, P } from "@/components/ui/typography";
 import type { SocialPlatform } from "@/lib/content";
-import { content, isPlaceholder, paragraphsOf } from "@/lib/content";
+import { content, paragraphsOf } from "@/lib/content";
 import { institutionPathForRole } from "@/lib/content/institutions";
 import type { IconSvgElement } from "@/lib/icons";
 import {
@@ -28,9 +28,7 @@ const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
 };
 
 function stated(value: string | null | undefined): string | null {
-  return value === undefined || value === null || isPlaceholder(value)
-    ? null
-    : value;
+  return value === undefined || value === null ? null : value;
 }
 
 type FooterContactProps = {

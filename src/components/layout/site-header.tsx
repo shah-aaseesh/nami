@@ -1,4 +1,4 @@
-import { content, isPlaceholder } from "@/lib/content";
+import { content } from "@/lib/content";
 import { SiteHeaderShell } from "./site-header-shell";
 import type { SiteMetaLink } from "./site-nav-panel";
 import { SITE_NAV_ITEMS } from "./site-nav-sections";
@@ -7,7 +7,7 @@ function channel(value: string | null, scheme: "mailto:"): SiteMetaLink | null {
   if (value === null) return null;
   return {
     label: value,
-    href: isPlaceholder(value) ? null : `${scheme}${value.replace(/\s+/g, "")}`,
+    href: `${scheme}${value.replace(/\s+/g, "")}`,
     external: false,
   };
 }

@@ -20,7 +20,7 @@ Seven things. Each one is cheap to follow and expensive to discover later.
 | 2 | **Use semantic tokens (`bg-surface`, `text-ink`), never raw ramp steps (`bg-neutral-50`).** | Your component stops inverting inside a dark colour field. It will look correct in isolation and broken in place. |
 | 3 | **Every motion has a reduced-motion path** — and "no animation" only counts if the element ends up **visible and correctly positioned**. | Reduced-motion users get a blank or displaced section. |
 | 4 | **`position: fixed` and `position: sticky` do not work inside the smooth-scrolled content.** Fixed chrome goes in `SmoothScrollProvider`'s **`chrome` slot** (§9.6), never in `children`. | Your sticky header scrolls away, or jitters, and nothing in the console explains it — and only on desktop. |
-| 5 | **No dark mode.** Light-only. No `dark:` variants, no `prefers-color-scheme`. "Dark" is a design device — the colour fields — not a user theme. | A `dark:` class is dead code that no gate catches. |
+| 5 | **No dark mode.** Light-only. No `dark:` variants, no `prefers-color-scheme`. "Dark" is a design device — the colour fields — not a user theme. | A `dark:` class is not dead code — Tailwind v4 defaults the variant to `prefers-color-scheme`, so it ships live behaviour to any visitor whose OS is in dark mode, and no gate catches it. Of the four that reached this tree, two shipped real defects — one washed the form checkboxes near-black, one flipped selected calendar days to near-black on the red fill — one was a milder live override, and only the fourth was the harmless duplicate all four looked like. |
 | 6 | **Near-zero comments in code.** Reasoning goes here, not in the source. | The QA gate rejects the file. |
 | 7 | **Never pair a NAME with a YEAR across two entities.** `institution.entities.college` is 2013; `institution.entities.institute` is 2012. Read `name` and `establishedYear` from **one** `NamedEntity`. | A false founding claim about a real institution. This is a HIGH invariant, not a copy nit — and it already reached the tree once. |
 
@@ -311,7 +311,9 @@ Measured on this build: bands span `0 → 1425` at a 1440 viewport and `0 → 19
 
 ### 4.4 Responsive
 
-Mobile-first. Base classes are the small screen; step up with `sm:` / `md:` / `lg:` / `xl:`.
+Mobile-first. Base classes are the small screen, and you step up from there.
+
+**There is no prescribed breakpoint vocabulary, and this section deliberately does not name one.** Which prefixes a section needs depends on what that section's layout actually does — a two-column split and a horizontally scrolling rail do not break at the same widths, and a rule that forces them to produces a worse layout in service of a tidier class string. Choose the steps the section needs and no more. Operator directive, 2026-08-22: *"it depends on section, we cant fix it."*
 
 Type and section rhythm **do not need breakpoints** — the `clamp()`s already cover 320 → 1440 (§3.1). Breakpoints are for **layout**: grid template changes, column reordering, what collapses into a drawer. If you find yourself writing `md:text-3xl`, the scale step is wrong, not the breakpoint.
 
@@ -486,7 +488,7 @@ The hero maps every reference element onto real content — there is no invented
 
 The reference's social stack and its far-left vertical rail are **not** built. The rail would have been `institution.campuses`; the reference's opening hours do not exist for NAMI and were never invented.
 
-**The badge ring rotates, on a bare CSS `animate-[spin_20s_linear_infinite]`** — no GSAP, and no reduced-motion path of any kind. It is an at-fold loop in the LCP section that keeps turning for a user who asked for less, which makes it the most visible instance of the gap in §9.2. The ring itself is `role="img"` + `aria-label` carrying the plain string, so the `*` separators are never announced (§9.7's reasoning, applied to `<textPath>`).
+**The badge ring rotates, on a bare CSS `animate-[spin_20s_linear_infinite]`, and the rotation is sanctioned** — operator decision, 2026-08-22. No GSAP: a 20s linear loop on a single transform needs no timeline, and keeping it in CSS keeps it out of the motion layer's teardown path. What it still owes is a reduced-motion branch — it is an at-fold loop in the LCP section that keeps turning for a user who asked for less, which makes it the first thing §9.2's gap has to answer for rather than a defect in the badge itself. The ring itself is `role="img"` + `aria-label` carrying the plain string, so the `*` separators are never announced (§9.7's reasoning, applied to `<textPath>`).
 
 **The badge centre is the NAMI mark, and it links to the real YouTube channel.** There is no NAMI video asset and no play glyph in the barrel (§6.2); the image is `alt=""` and an `sr-only` string carries the destination. An affordance that opens the actual channel is honest; a dead player is not.
 
@@ -579,7 +581,7 @@ This is where the instinct comes from and why it does not transfer: Motion's `wh
 
 **2 — the from-state is never in the server HTML.** Both primitives apply it client-side inside `useGSAP`. The server sends live text at full opacity, so the LCP element paints before hydration, the no-JS case reads correctly, and there is no opacity gate on first paint to be a Core Web Vitals defect in the first place. §9.7 relies on the same property for `SplitText`'s accessible name.
 
-**What still applies at the fold** is rule §0.3 and §9.2: an animation whose natural DOM state is *not* the final state — a `to()`, a `set()`, a loop — must ship a `reduced` branch, at the fold or anywhere else. The hero badge is the worked example (§7.2), and right now it is the counter-example: an at-fold CSS spin loop with no reduced path at all.
+**What still applies at the fold** is rule §0.3 and §9.2: an animation whose natural DOM state is *not* the final state — a `to()`, a `set()`, a loop — must ship a `reduced` branch, at the fold or anywhere else. The hero badge is the worked example (§7.2): the spin itself is ratified and stays, so what is missing is only its reduced branch — an at-fold CSS spin loop with no reduced path at all, and the first case the gate has to handle when it is built.
 
 *(Historical note: this section previously mandated an `atFold` prop on both primitives. The prop was never built. The rule it sat under was removed from §0 with it.)*
 

@@ -37,13 +37,17 @@ function TestimonialsHeader({
           </SplitText>
         </div>
 
-        {children}
+        {section.standfirst === null ? children : null}
       </div>
 
       {section.standfirst === null ? null : (
-        <RevealItem className="mt-8 lg:w-7/12">
-          <Standfirst>{section.standfirst}</Standfirst>
-        </RevealItem>
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <RevealItem className="w-full lg:w-7/12">
+            <Standfirst>{section.standfirst}</Standfirst>
+          </RevealItem>
+
+          {children}
+        </div>
       )}
     </Reveal>
   );

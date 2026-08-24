@@ -1,53 +1,37 @@
-import type { ReactNode } from "react";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H2, P, Standfirst } from "@/components/ui/typography";
+import { Icon } from "@/components/ui/icon";
+import { Display, Eyebrow, P } from "@/components/ui/typography";
 import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
-
-function CreedStatement({
-  children,
-  label,
-}: {
-  children: ReactNode;
-  label: string;
-}) {
-  return (
-    <RevealItem className="border-t border-border-strong pt-8 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:pt-12">
-      <Eyebrow as="h3" className="lg:col-span-3 lg:col-start-1">
-        {label}
-      </Eyebrow>
-      <div className="mt-5 flex flex-col gap-5 lg:col-span-8 lg:col-start-5 lg:mt-0">
-        {children}
-      </div>
-    </RevealItem>
-  );
-}
+import { QuoteIcon } from "@/lib/icons";
 
 export function AboutCreed({
-  mission,
   motto,
-  section,
+  mission,
   vision,
+  section,
 }: {
-  mission: RichText;
   motto: string;
-  section: SectionCopy;
+  mission: RichText;
   vision: RichText;
+  section: SectionCopy;
 }) {
-  const missionBody = paragraphsOf(mission);
-  const visionBody = paragraphsOf(vision);
-  const mottoLine = motto.trim();
+  const missionParagraphs = paragraphsOf(mission);
+  const visionParagraphs = paragraphsOf(vision);
 
   if (
-    missionBody.length === 0 &&
-    visionBody.length === 0 &&
-    mottoLine.length === 0
+    motto === "" &&
+    missionParagraphs.length === 0 &&
+    visionParagraphs.length === 0
   ) {
     return null;
   }
 
   return (
-    <section className="field-brand gutter-x section-y" id="creed">
+    <section
+      className="gutter-x pb-10 pt-[var(--spacing-section-py)] lg:pb-16"
+      id="creed"
+    >
       <div className="mx-auto max-w-page">
         {section.eyebrow === null ? null : (
           <Reveal>
@@ -60,40 +44,53 @@ export function AboutCreed({
         >
           {section.heading}
         </SplitText>
-        {section.standfirst === null ? null : (
-          <Reveal className="mt-5">
-            <Standfirst className="max-w-2xl text-ink">
-              {section.standfirst}
-            </Standfirst>
+
+        {motto === "" ? null : (
+          <Reveal className="mt-10 lg:mt-14" y={32}>
+            <div className="field-brand relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16">
+              <Icon
+                className="size-9 text-accent lg:size-11"
+                icon={QuoteIcon}
+              />
+              <Display as="p" className="mt-6 max-w-4xl">
+                {motto}
+              </Display>
+            </div>
           </Reveal>
         )}
 
-        <Reveal
-          className="mt-12 flex flex-col gap-8 lg:mt-16 lg:gap-12"
-          stagger={0.12}
-        >
-          {mottoLine.length === 0 ? null : (
-            <CreedStatement label="Motto">
-              <H2 as="p" className="text-ink">
-                {mottoLine}
-              </H2>
-            </CreedStatement>
-          )}
-          {visionBody.length === 0 ? null : (
-            <CreedStatement label="Vision">
-              {visionBody.map((paragraph) => (
-                <P key={paragraph}>{paragraph}</P>
-              ))}
-            </CreedStatement>
-          )}
-          {missionBody.length === 0 ? null : (
-            <CreedStatement label="Mission">
-              {missionBody.map((paragraph) => (
-                <P key={paragraph}>{paragraph}</P>
-              ))}
-            </CreedStatement>
-          )}
-        </Reveal>
+        {missionParagraphs.length === 0 &&
+        visionParagraphs.length === 0 ? null : (
+          <Reveal
+            className="mt-10 grid gap-6 lg:mt-14 lg:grid-cols-2 lg:gap-8"
+            stagger={0.12}
+          >
+            {missionParagraphs.length === 0 ? null : (
+              <RevealItem>
+                <article className="flex h-full flex-col gap-4 rounded-3xl border border-border p-8 sm:p-10">
+                  <Eyebrow as="h3">Mission</Eyebrow>
+                  <div className="flex flex-col gap-4">
+                    {missionParagraphs.map((paragraph) => (
+                      <P key={paragraph}>{paragraph}</P>
+                    ))}
+                  </div>
+                </article>
+              </RevealItem>
+            )}
+            {visionParagraphs.length === 0 ? null : (
+              <RevealItem>
+                <article className="flex h-full flex-col gap-4 rounded-3xl border border-border p-8 sm:p-10">
+                  <Eyebrow as="h3">Vision</Eyebrow>
+                  <div className="flex flex-col gap-4">
+                    {visionParagraphs.map((paragraph) => (
+                      <P key={paragraph}>{paragraph}</P>
+                    ))}
+                  </div>
+                </article>
+              </RevealItem>
+            )}
+          </Reveal>
+        )}
       </div>
     </section>
   );

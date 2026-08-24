@@ -1,9 +1,9 @@
+import type { CareerPlacementCopy } from "@/components/shared/career-placement";
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
 import type { ContentImage, ContentLink, SectionCopy } from "@/lib/content";
 import { richText } from "@/lib/content";
 import type { BachelorsAwardingCopy } from "./bachelors-awarding";
-import type { BachelorsPartnersCopy } from "./bachelors-partners";
 
 export type CourseKey =
   | "computer-science"
@@ -842,7 +842,7 @@ const placementPanel: ContentImage = {
   height: 533,
 };
 
-const partners: BachelorsPartnersCopy = {
+const partners: CareerPlacementCopy = {
   eyebrow: "Career Placement",
   heading: "The organisations our students meet before they graduate.",
   image: placementPanel,

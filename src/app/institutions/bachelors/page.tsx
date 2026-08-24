@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { CareerPlacement } from "@/components/shared/career-placement";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
+import type { CareerPartner } from "@/components/shared/partner-carousel";
 import { PrincipalMessage } from "@/components/shared/principal-message";
 import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
@@ -10,8 +12,6 @@ import { createMetadata } from "@/lib/seo";
 import { BachelorsAwarding } from "./_components/bachelors-awarding";
 import { bachelorsCopy } from "./_components/bachelors-copy";
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
-import { BachelorsPartners } from "./_components/bachelors-partners";
-import type { CareerPartner } from "./_components/partner-carousel";
 
 export const metadata: Metadata = createMetadata({
   path: institutionPath("bachelors"),
@@ -76,7 +76,7 @@ export default async function BachelorsPage() {
         levelSlug={bachelorsCopy.levelSlug}
       />
 
-      <BachelorsPartners
+      <CareerPlacement
         copy={bachelorsCopy.partners}
         id="partners"
         partners={networkPartners}

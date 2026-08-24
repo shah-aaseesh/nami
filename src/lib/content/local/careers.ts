@@ -1,11 +1,8 @@
 import { entryOf, isoDate } from "../identifiers";
 import type { Vacancy } from "../types";
 
-export const vacancies: readonly Vacancy[] = [];
-
-// Design fixture, never shipped: the provider returns `vacancies` (empty) and no
-// shipped path may import this — these postings are invented, not real openings.
-export const designOnlyVacancies: readonly Vacancy[] = [
+// Invented postings, not real openings.
+export const vacancies: readonly Vacancy[] = [
   {
     ...entryOf("lecturer-computer-science"),
     title: "Lecturer, Computer Science",

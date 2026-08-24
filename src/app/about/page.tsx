@@ -34,17 +34,16 @@ export default async function AboutPage() {
         overview={institution.overview}
         section={copy.sections.chronology}
       />
-
+      <AboutEmblem
+        emblemStory={institution.emblemStory}
+        petals={institution.values}
+        section={copy.sections.emblem}
+      />
       <AboutCreed
         mission={institution.mission}
         motto={institution.motto}
         section={copy.sections.creed}
         vision={institution.vision}
-      />
-      <AboutEmblem
-        emblemStory={institution.emblemStory}
-        petals={institution.values}
-        section={copy.sections.emblem}
       />
       <AboutMascot section={mascotSection} story={mascotStory} />
       <AboutAwards awards={copy.awards} section={copy.sections.awards} />

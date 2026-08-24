@@ -26,7 +26,7 @@ export default async function FacultyPage() {
           title="Board of Directors"
         />
 
-        <FacultyGroup leaders={leadership.management} title="Management Team" />
+        <FacultyGroup leaders={leadership.management} title="CEO" />
 
         <FacultyGroup leaders={leadership.academics} title="Academic Heads" />
       </div>

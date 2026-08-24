@@ -4,19 +4,19 @@ import type { ContentImage } from "@/lib/content";
 import type { CareerPartner } from "./partner-carousel";
 import { PartnerCarousel } from "./partner-carousel";
 
-export type BachelorsPartnersCopy = {
+export type CareerPlacementCopy = {
   readonly eyebrow: string;
   readonly heading: string;
   readonly image: ContentImage;
   readonly label: string;
 };
 
-export function BachelorsPartners({
+export function CareerPlacement({
   copy,
   id,
   partners,
 }: {
-  readonly copy: BachelorsPartnersCopy;
+  readonly copy: CareerPlacementCopy;
   readonly id?: string;
   readonly partners: readonly CareerPartner[];
 }) {

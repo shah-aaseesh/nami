@@ -3,6 +3,7 @@ import type { InstitutionNoticesCopy } from "@/components/shared/institution-not
 import type { SharedHeroSlide } from "@/components/shared/shared-hero";
 import type { ContentLink, SectionCopy, Testimonial } from "@/lib/content";
 import { entryOf, schoolGrades } from "@/lib/content";
+import { pragatiRaiPortrait } from "@/lib/content/local/images";
 import type { SchoolAdmissionCopy } from "./school-admission";
 import type { SchoolBandsCopy } from "./school-bands";
 import type { SchoolDayCopy } from "./school-day";
@@ -259,6 +260,7 @@ const parents: SectionCopy = {
     "Parent accounts of the school appear here as families share them.",
 };
 
+// PLACEHOLDER, not final: every portrait below reuses the same stock content-layer image.
 export const parentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-sarita-adhikari"),
@@ -268,7 +270,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     programme: "Parent, Grade 11 Science",
     institution: "school",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("parent-prakash-maharjan"),
@@ -278,7 +280,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     programme: "Parent of a Grade 1 student",
     institution: "school",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("parent-bikash-shrestha"),
@@ -288,7 +290,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     programme: "Parent of a Grade 6 student",
     institution: "school",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("parent-rekha-tamang"),
@@ -298,7 +300,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     programme: "Parent of a Grade 2 student",
     institution: "school",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("parent-sunita-karki"),
@@ -308,7 +310,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     programme: "Parent of a Grade 4 student",
     institution: "school",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("parent-deepak-bhattarai"),
@@ -318,7 +320,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     programme: "Parent, Grades 11 and 12",
     institution: "school",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
 ];
 

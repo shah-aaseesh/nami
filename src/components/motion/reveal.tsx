@@ -6,6 +6,19 @@ import { gsap, useGSAP } from "@/lib/gsap";
 
 const REVEAL_Y = 40;
 const REVEAL_DURATION = 0.9;
+const REVEAL_START_PERCENT = 85;
+
+export const REVEAL_START = `top ${REVEAL_START_PERCENT}%`;
+
+// Between REVEAL_START and the trigger's default end ("bottom top") the server
+// has already painted this element, so an entrance from-state would hide it.
+export function isInsideRevealWindow(el: Element) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.bottom > 0 &&
+    rect.top <= window.innerHeight * (REVEAL_START_PERCENT / 100)
+  );
+}
 
 export type RevealProps = {
   children: ReactNode;
@@ -26,6 +39,7 @@ export function Reveal({
     () => {
       const el = root.current;
       if (!el) return;
+      if (isInsideRevealWindow(el)) return;
 
       const marked = el.querySelectorAll("[data-reveal-item]");
       const targets =
@@ -43,7 +57,7 @@ export function Reveal({
           duration: REVEAL_DURATION,
           ease: "power3.out",
           stagger,
-          scrollTrigger: { trigger: el, start: "top 85%", once: true },
+          scrollTrigger: { trigger: el, start: REVEAL_START, once: true },
         },
       );
     },

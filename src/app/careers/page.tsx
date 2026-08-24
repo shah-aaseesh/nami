@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { CareerPlacement } from "@/components/shared/career-placement";
+import type { CareerPartner } from "@/components/shared/partner-carousel";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { careersCopy } from "./_components/careers-copy";
@@ -13,12 +15,26 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function CareersPage() {
-  const vacancies = await content.getVacancies();
+  const [vacancies, partners] = await Promise.all([
+    content.getVacancies(),
+    content.getPartners(),
+  ]);
+
+  const networkPartners: readonly CareerPartner[] = partners.map((partner) => ({
+    id: partner.id,
+    name: partner.name,
+    logo: partner.logo,
+  }));
 
   return (
     <>
       <CareersMasthead copy={careersCopy.masthead} />
       <CareersVacancies section={careersCopy.vacancies} vacancies={vacancies} />
+      <CareerPlacement
+        copy={careersCopy.placement}
+        id="career-placement"
+        partners={networkPartners}
+      />
     </>
   );
 }

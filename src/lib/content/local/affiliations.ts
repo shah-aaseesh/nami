@@ -28,7 +28,7 @@ export const affiliations: readonly Affiliation[] = [
     ...entryOf("cambridge"),
     body: AWARDING_BODIES.cambridge,
     scope: "A-Level programme, science and non-science",
-    sinceYear: 2013,
+    sinceYear: 2014,
     levelSlug: slug("college"),
     campusSlug: slug("gokarneshwor"),
     note: "Independent CAIE examination centre since 2024",

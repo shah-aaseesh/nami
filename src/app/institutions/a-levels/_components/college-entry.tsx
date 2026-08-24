@@ -42,7 +42,7 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
               <Link
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "w-full justify-center gap-2 rounded-full px-6 sm:w-auto",
+                  "w-full justify-center gap-2 px-6 sm:w-auto",
                 )}
                 href={copy.cta.href as Route}
                 rel={external ? "noopener noreferrer" : undefined}

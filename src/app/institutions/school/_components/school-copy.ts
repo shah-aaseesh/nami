@@ -235,6 +235,12 @@ const day: SchoolDayCopy = {
     {
       title: "Air-conditioned classrooms",
       body: "Learning spaces are air-conditioned so they stay comfortable through the year.",
+      photo: {
+        src: "/nami/school/nami-school-cafeteria.jpg",
+        alt: "Ceiling-mounted air-conditioning units running the length of a NAMI dining hall, above wooden tables and chairs ranked across the polished floor.",
+        width: 1000,
+        height: 1333,
+      },
     },
     {
       title: "Transport",

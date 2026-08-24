@@ -32,7 +32,7 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
               <Link
                 className={cn(
                   buttonVariants({ size: "lg", variant: "default" }),
-                  "group gap-2 rounded-full px-5 w-full sm:w-auto inline-flex justify-between sm:justify-start",
+                  "group gap-2 px-5 w-full sm:w-auto inline-flex justify-between sm:justify-start",
                 )}
                 href={"/faculty"}
               >

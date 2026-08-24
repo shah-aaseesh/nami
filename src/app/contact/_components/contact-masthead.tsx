@@ -97,7 +97,6 @@ export async function ContactMasthead() {
                     <Link
                       className={cn(
                         buttonVariants({ size: "icon", variant: "default" }),
-                        "rounded-full",
                       )}
                       href={profile.href as Route}
                       rel="noopener noreferrer"

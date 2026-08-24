@@ -44,7 +44,6 @@ function entityNode(entity: NamedEntity): JsonLdNode {
 function postalAddress(campus: Campus): JsonLdNode {
   return {
     "@type": "PostalAddress",
-    streetAddress: publishable(campus.streetAddress),
     addressLocality: publishable(campus.locality),
     addressRegion: publishable(campus.city),
     addressCountry: ADDRESS_COUNTRY,

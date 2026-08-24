@@ -56,7 +56,7 @@ function FooterContact({ email, href, name, phone }: FooterContactProps) {
 
 export async function SiteFooter() {
   const institution = await content.getInstitution();
-  const { campuses, contact, entities, overview } = institution;
+  const { contact, entities, overview } = institution;
   const group = entities.institute;
 
   const summary = stated(paragraphsOf(overview)[0]);
@@ -71,48 +71,30 @@ export async function SiteFooter() {
       <footer className="field-brand">
         <div className="gutter-x section-y-compact">
           <Reveal
-            className="mx-auto grid max-w-page gap-y-6 md:grid-cols-12 md:gap-x-8 lg:gap-x-10"
+            className="mx-auto grid max-w-page gap-y-10 md:grid-cols-12 md:gap-x-8 md:gap-y-12 lg:gap-x-10"
             stagger={0.06}
             y={16}
           >
-            <div className="md:col-span-12 lg:col-span-6">
+            <div className="md:col-span-12 lg:col-span-4">
               <Link className="inline-block" href="/">
                 <Image
                   alt={group.shortName}
                   className="h-20 w-auto md:h-28"
                   height={1000}
-                  sizes="(min-width: 768px) 80px, 64px"
+                  sizes="(min-width: 768px) 112px, 80px"
                   src="/logo/nami-white.svg"
                   width={1000}
                 />
               </Link>
 
               {summary === null ? null : (
-                <P className="max-w-xl text-sm">{summary}</P>
+                <P className="mt-5 max-w-xl text-sm">{summary}</P>
               )}
-
-              <ul className="mt-4 grid gap-y-3">
-                {campuses.map((campus) => {
-                  const street = stated(campus.streetAddress);
-                  return (
-                    <li key={campus.id}>
-                      <p className="font-body text-base font-medium">
-                        {campus.locality}, {campus.city}
-                      </p>
-                      {street === null ? null : (
-                        <p className="font-body text-sm text-pretty text-ink-muted">
-                          {street}
-                        </p>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
             </div>
 
-            <nav aria-label="Footer" className="md:col-span-5 lg:col-span-3">
+            <nav aria-label="Footer" className="md:col-span-6 lg:col-span-4">
               <Eyebrow as="h2">Quick Links</Eyebrow>
-              <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
+              <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2">
                 {SITE_FOOTER_NAV_ITEMS.map((item) => (
                   <li key={item.href}>
                     <Link
@@ -126,9 +108,9 @@ export async function SiteFooter() {
               </ul>
             </nav>
 
-            <div className="md:col-span-7 lg:col-span-3">
+            <div className="md:col-span-6 lg:col-span-4">
               <Eyebrow as="h2">Contact</Eyebrow>
-              <ul className="mt-4 grid gap-y-4">
+              <ul className="mt-5 grid gap-y-5">
                 {INSTITUTION_ROLES.map((role) => (
                   <FooterContact
                     email={stated(contact.byEntity[role].email)}

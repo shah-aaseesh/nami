@@ -51,6 +51,12 @@ export default async function CollegePage() {
         primaryCta={collegeCopy.masthead.cta}
       />
 
+      <CollegeMastheadFacts
+        campus={campus}
+        copy={collegeCopy.masthead}
+        entity={institution.entities.college}
+      />
+
       {principal === null ? null : (
         <PrincipalMessage
           eyebrow={collegeCopy.principal.eyebrow}
@@ -63,12 +69,6 @@ export default async function CollegePage() {
           }}
         />
       )}
-
-      <CollegeMastheadFacts
-        campus={campus}
-        copy={collegeCopy.masthead}
-        entity={institution.entities.college}
-      />
 
       <CollegeCambridge copy={collegeCopy.cambridge} />
       <CollegeSubjects copy={collegeCopy.subjects} />

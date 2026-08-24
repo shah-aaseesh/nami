@@ -567,6 +567,37 @@ const published: readonly Update[] = [
     link: null,
     image: null,
   },
+  // PLACEHOLDER, not final: the two entries below (school-placeholder-notice,
+  // institute-placeholder-notice) are invented filler added only so School and
+  // Bachelors reach three notices. Replace with client-supplied notices before launch.
+  {
+    ...entryOf("school-placeholder-notice"),
+    kind: "notice",
+    category: "general",
+    institution: "school",
+    title: "Placeholder School Notice",
+    excerpt:
+      "Placeholder text standing in for a school notice. Nothing here is a real announcement.",
+    publishedAt: isoDate("2026-08-01"),
+    happensAt: null,
+    venue: null,
+    link: null,
+    image: null,
+  },
+  {
+    ...entryOf("institute-placeholder-notice"),
+    kind: "notice",
+    category: "general",
+    institution: "institute",
+    title: "Placeholder Institute Notice",
+    excerpt:
+      "Placeholder text standing in for an institute notice. Nothing here is a real announcement.",
+    publishedAt: isoDate("2026-08-01"),
+    happensAt: null,
+    venue: null,
+    link: null,
+    image: null,
+  },
 ];
 
 export const updates: readonly Update[] = [...published].sort((a, b) =>

@@ -2,12 +2,13 @@ import type { Route } from "next";
 import Link from "next/link";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
+import { UpdateBoard } from "@/components/shared/update-board";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
-import type { EntityRole, IsoDate } from "@/lib/content";
+import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import type { EntityRole } from "@/lib/content";
 import { content } from "@/lib/content";
-import { ArrowRightIcon, LocationIcon } from "@/lib/icons";
+import { ArrowRightIcon } from "@/lib/icons";
 import { INSTITUTION_PARAM } from "@/lib/institution-filter";
 import { cn } from "@/lib/utils";
 
@@ -19,18 +20,7 @@ export type InstitutionNoticesCopy = {
   readonly emptyState: string;
 };
 
-const NOTICE_COUNT = 4;
-
-const dateFormat = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "long",
-  timeZone: "UTC",
-  year: "numeric",
-});
-
-function formatDate(value: IsoDate) {
-  return dateFormat.format(new Date(value));
-}
+const NOTICE_COUNT = 3;
 
 export async function InstitutionNotices({
   copy,
@@ -49,8 +39,7 @@ export async function InstitutionNotices({
     )
     .slice(0, NOTICE_COUNT);
 
-  const href =
-    `/notices?${INSTITUTION_PARAM}=${institution}` as Route<`/notices?${string}`>;
+  const href = `/notices?${INSTITUTION_PARAM}=${institution}` as Route;
 
   return (
     <section className="gutter-x section-y" id={id}>
@@ -95,52 +84,11 @@ export async function InstitutionNotices({
           </Reveal>
         ) : (
           <Reveal className="mt-10 lg:mt-14" stagger={0.08} y={28}>
-            <ul className="border-t border-border">
-              {notices.map((item) => {
-                const notice =
-                  item.link !== null && item.link.destination !== "legacy"
-                    ? item.link
-                    : null;
-                const isExternal = notice?.destination === "external";
-
-                return (
-                  <li
-                    className="group relative grid gap-x-8 gap-y-2 border-b border-border py-5 sm:grid-cols-[auto_minmax(0,1fr)] lg:py-7"
-                    data-reveal-item=""
-                    key={item.id}
-                  >
-                    <Eyebrow
-                      as="time"
-                      className="sm:pt-1"
-                      dateTime={item.publishedAt}
-                    >
-                      {formatDate(item.publishedAt)}
-                    </Eyebrow>
-
-                    <div>
-                      <H5 as="h3" className="text-ink">
-                        <Link
-                          className="transition-colors after:absolute after:inset-0 group-hover:text-accent"
-                          href={(notice?.href ?? href) as Route}
-                          rel={isExternal ? "noopener noreferrer" : undefined}
-                          target={isExternal ? "_blank" : undefined}
-                        >
-                          {item.title}
-                        </Link>
-                      </H5>
-
-                      {item.venue === null ? null : (
-                        <p className="mt-2 inline-flex items-center gap-2 font-body text-sm text-ink-muted">
-                          <Icon className="size-4" icon={LocationIcon} />
-                          <span className="sr-only">Venue </span>
-                          {item.venue}
-                        </p>
-                      )}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+            <UpdateBoard
+              indexHref={href}
+              items={notices}
+              showInstitution={false}
+            />
           </Reveal>
         )}
       </div>

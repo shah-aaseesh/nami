@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H6, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 export type SchoolCampusEntry = {
   readonly title: string;
@@ -19,7 +20,7 @@ export type SchoolDayCopy = {
 };
 
 const CAMPUS_PHOTO_SIZES =
-  "(min-width: 1024px) 160px, (min-width: 640px) 144px, 112px";
+  "(min-width: 1568px) 460px, (min-width: 1024px) 29vw, (min-width: 640px) 45vw, 90vw";
 
 export function SchoolDay({
   copy,
@@ -49,22 +50,18 @@ export function SchoolDay({
           </RevealItem>
         </Reveal>
 
-        <Reveal className="mt-14 lg:mt-20" stagger={0.06} y={24}>
+        <Reveal className="mt-14 lg:mt-20" stagger={0.05} y={24}>
           <RevealItem>
             <Eyebrow>{copy.campusLabel}</Eyebrow>
           </RevealItem>
 
-          <ul className="mt-8 grid border-t border-border lg:grid-cols-2 lg:gap-x-16">
+          <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-14">
             {copy.campus.map((entry) => (
-              <li
-                className="flex items-start gap-5 border-b border-border py-6"
-                data-reveal-item=""
-                key={entry.title}
-              >
+              <li data-reveal-item="" key={entry.title}>
                 {entry.photo ? (
                   <Image
                     alt={entry.photo.alt}
-                    className="aspect-[4/3] h-auto w-28 shrink-0 rounded-media object-cover sm:w-36 lg:w-40"
+                    className="aspect-square w-full rounded-media object-cover"
                     height={entry.photo.height}
                     sizes={CAMPUS_PHOTO_SIZES}
                     src={entry.photo.src}
@@ -72,14 +69,13 @@ export function SchoolDay({
                   />
                 ) : null}
 
-                <div className="min-w-0">
-                  <H6 as="h3" className="text-ink">
-                    {entry.title}
-                  </H6>
-                  <p className="mt-2 font-body text-sm text-ink-muted">
-                    {entry.body}
-                  </p>
-                </div>
+                <H5
+                  as="h3"
+                  className={cn("text-ink", entry.photo ? "mt-5" : null)}
+                >
+                  {entry.title}
+                </H5>
+                <P className="mt-2">{entry.body}</P>
               </li>
             ))}
           </ul>

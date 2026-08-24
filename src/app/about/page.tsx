@@ -41,7 +41,6 @@ export default async function AboutPage() {
       />
       <AboutCreed
         mission={institution.mission}
-        motto={institution.motto}
         section={copy.sections.creed}
         vision={institution.vision}
       />

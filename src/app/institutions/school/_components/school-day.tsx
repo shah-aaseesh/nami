@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H6, Standfirst } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 
 export type SchoolCampusEntry = {
@@ -73,9 +73,9 @@ export function SchoolDay({
                 ) : null}
 
                 <div className="min-w-0">
-                  <h3 className="font-display text-xl font-normal text-ink">
+                  <H6 as="h3" className="text-ink">
                     {entry.title}
-                  </h3>
+                  </H6>
                   <p className="mt-2 font-body text-sm text-ink-muted">
                     {entry.body}
                   </p>

@@ -4,7 +4,7 @@ import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
 import type { EntityRole, IsoDate } from "@/lib/content";
 import { content } from "@/lib/content";
 import { ArrowRightIcon, LocationIcon } from "@/lib/icons";
@@ -111,9 +111,9 @@ export async function InstitutionNotices({
                   </Eyebrow>
 
                   <div>
-                    <h3 className="font-display text-2xl font-normal text-balance text-ink">
+                    <H5 as="h3" className="text-ink">
                       {item.title}
-                    </h3>
+                    </H5>
 
                     {item.venue === null ? null : (
                       <p className="mt-2 inline-flex items-center gap-2 font-body text-sm text-ink-muted">

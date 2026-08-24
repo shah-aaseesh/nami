@@ -4,7 +4,7 @@ import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, P } from "@/components/ui/typography";
+import { Eyebrow, H5, P } from "@/components/ui/typography";
 import type { ContentLink } from "@/lib/content";
 import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -63,9 +63,9 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
                 className="border-t border-border pt-6"
                 key={block.title}
               >
-                <h3 className="font-display text-2xl font-normal text-ink">
+                <H5 as="h3" className="text-ink">
                   {block.title}
-                </h3>
+                </H5>
                 <P className="mt-3">{block.body}</P>
               </RevealItem>
             ))}

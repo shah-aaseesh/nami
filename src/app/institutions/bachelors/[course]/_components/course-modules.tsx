@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Standfirst } from "@/components/ui/typography";
+import { H5, Standfirst } from "@/components/ui/typography";
 import type {
   BachelorsProgramme,
   ProgrammeStage,
@@ -26,9 +26,9 @@ function StageTable({
 
   return (
     <div>
-      <h3 className="font-display text-2xl font-normal text-ink">
+      <H5 as="h3" className="text-ink">
         {stage.label}
-      </h3>
+      </H5>
 
       <section
         aria-label={`${stage.label} modules`}

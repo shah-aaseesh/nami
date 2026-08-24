@@ -54,7 +54,7 @@ export function SidebarTabs<T extends string>({
               aria-controls={controls}
               aria-pressed={active}
               className={cn(
-                "flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left font-body text-sm transition-colors duration-200 motion-reduce:transition-none",
+                "flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left font-body text-sm transition-colors duration-200",
                 active
                   ? "border-accent text-ink"
                   : "border-border text-ink-muted hover:border-border-strong hover:text-ink",
@@ -67,7 +67,7 @@ export function SidebarTabs<T extends string>({
               <span
                 aria-hidden="true"
                 className={cn(
-                  "size-1.5 shrink-0 rounded-full border transition-colors duration-200 motion-reduce:transition-none",
+                  "size-1.5 shrink-0 rounded-full border transition-colors duration-200",
                   active
                     ? "border-accent bg-accent"
                     : "border-border-strong bg-transparent",

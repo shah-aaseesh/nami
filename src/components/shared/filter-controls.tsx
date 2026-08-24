@@ -55,7 +55,7 @@ export function SegmentedFilter<T extends string>({
               aria-label={option.accessibleLabel}
               aria-pressed={active}
               className={cn(
-                "flex min-h-11 cursor-pointer items-baseline gap-2 border-b-2 pb-1 transition-colors duration-200 motion-reduce:transition-none",
+                "flex min-h-11 cursor-pointer items-baseline gap-2 border-b-2 pb-1 transition-colors duration-200",
                 active
                   ? "border-accent text-ink"
                   : "border-transparent text-ink-muted hover:border-border-strong hover:text-ink",
@@ -92,7 +92,7 @@ export function PillFilter<T extends string>({
               aria-label={option.accessibleLabel}
               aria-pressed={active}
               className={cn(
-                "flex min-h-11 cursor-pointer items-center gap-2 transition-colors duration-200 motion-reduce:transition-none",
+                "flex min-h-11 cursor-pointer items-center gap-2 transition-colors duration-200",
                 active ? "text-ink" : "text-ink-muted hover:text-ink",
               )}
               key={option.id}
@@ -102,7 +102,7 @@ export function PillFilter<T extends string>({
               <span
                 aria-hidden="true"
                 className={cn(
-                  "size-1.5 rounded-full border transition-colors duration-200 motion-reduce:transition-none",
+                  "size-1.5 rounded-full border transition-colors duration-200",
                   active
                     ? "border-accent bg-accent"
                     : "border-border-strong bg-transparent",

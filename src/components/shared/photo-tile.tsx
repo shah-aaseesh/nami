@@ -20,7 +20,7 @@ export function PhotoTile({
     >
       <Image
         alt={item.image.alt}
-        className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
         fill
         sizes={sizes}
         src={item.image.src}

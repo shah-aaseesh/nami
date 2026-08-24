@@ -44,12 +44,11 @@ function InstitutionCard({
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/10" />
 
-          {/* Floating Badges */}
           <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
             {established === null ? (
               <span />
             ) : (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/70 px-3 py-1 font-body text-[11px] font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/70 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
                 <span className="size-1.5 rounded-full bg-primary-400" />
                 <span>{established}</span>
               </span>
@@ -116,9 +115,8 @@ function VocationalCard({
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/10" />
 
-          {/* Floating Badges */}
           <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-neutral-950/70 px-3 py-1 font-body text-[11px] font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-neutral-950/70 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
               <span className="size-1.5 rounded-full bg-primary-400" />
               <span>{`Approved ${approval.approvedYear}`}</span>
             </span>

@@ -39,7 +39,6 @@ export async function SiteFooter() {
             stagger={0.06}
             y={16}
           >
-            {/* Column 1: Brand & Institution Overview */}
             <div className="flex flex-col lg:col-span-4">
               <div>
                 <Link
@@ -59,7 +58,6 @@ export async function SiteFooter() {
               </div>
             </div>
 
-            {/* Column 2: Quick Links */}
             <div className="lg:col-span-2">
               <Eyebrow
                 as="h2"
@@ -81,7 +79,6 @@ export async function SiteFooter() {
               </ul>
             </div>
 
-            {/* Column 3: Institutional Direct Enquiries (2 in top row, 1 full-width below) */}
             <div className="lg:col-span-6">
               <Eyebrow
                 as="h2"
@@ -91,7 +88,6 @@ export async function SiteFooter() {
               </Eyebrow>
 
               <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {/* Row 1, Col 1: School */}
                 <div className="border-t border-white/15 pt-4">
                   <Link
                     href={institutionPath("school")}
@@ -131,7 +127,6 @@ export async function SiteFooter() {
                   </div>
                 </div>
 
-                {/* Row 1, Col 2: College (A-Levels) */}
                 <div className="border-t border-white/15 pt-4">
                   <Link
                     href={institutionPath("college")}
@@ -171,7 +166,6 @@ export async function SiteFooter() {
                   </div>
                 </div>
 
-                {/* Row 2: Institute (Higher Ed) - Full Width */}
                 <div className="border-t border-white/15 pt-4 sm:col-span-2">
                   <Link
                     href={institutionPath("bachelors")}
@@ -217,7 +211,6 @@ export async function SiteFooter() {
           </Reveal>
         </div>
 
-        {/* Dark Sub-footer Strip (field-ink) */}
         <div className="field-ink gutter-x py-4 sm:py-5 border-t border-neutral-800">
           <div className="mx-auto max-w-page text-center">
             <p className="font-body text-xs text-neutral-300">

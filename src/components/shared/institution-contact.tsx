@@ -77,10 +77,8 @@ export async function InstitutionContact({
           stagger={0.1}
           y={20}
         >
-          {/* Left Column: Contact Details & Social Media */}
           <div className="flex flex-col justify-between space-y-8 lg:col-span-5">
             <div className="space-y-6">
-              {/* Campus Location */}
               <div className="rounded-2xl border border-neutral-800 bg-neutral-900/80 p-6 backdrop-blur-xs">
                 <div className="flex items-start gap-4">
                   <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary-950/80 text-primary-400 border border-primary-800/50">
@@ -108,7 +106,6 @@ export async function InstitutionContact({
                 </div>
               </div>
 
-              {/* Direct Inquiries */}
               <div className="rounded-2xl border border-neutral-800 bg-neutral-900/80 p-6 backdrop-blur-xs">
                 <Eyebrow className="text-neutral-400">Direct Inquiries</Eyebrow>
                 <div className="mt-4 space-y-3 font-body text-sm">
@@ -137,7 +134,6 @@ export async function InstitutionContact({
               </div>
             </div>
 
-            {/* Social Media Channels */}
             {profile.contact.socialProfiles &&
             profile.contact.socialProfiles.length > 0 ? (
               <div className="rounded-2xl border border-neutral-800 bg-neutral-900/80 p-6 backdrop-blur-xs">
@@ -167,7 +163,6 @@ export async function InstitutionContact({
             ) : null}
           </div>
 
-          {/* Right Column: Google Maps Embed */}
           <div className="lg:col-span-7">
             <div className="h-full overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 shadow-xl">
               <iframe

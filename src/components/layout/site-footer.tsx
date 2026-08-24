@@ -16,6 +16,7 @@ const FOOTER_NAV_LINKS = [
   { label: "Faculty & Leadership", href: "/faculty" },
   { label: "Student Life", href: "/student-life" },
   { label: "Photo Gallery", href: "/gallery" },
+  { label: "Alumni", href: "/alumni" },
   { label: "Careers", href: "/careers" },
   { label: "Notices & Events", href: "/notices" },
 ] as const;

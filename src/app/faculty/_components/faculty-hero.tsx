@@ -1,4 +1,4 @@
-import { Eyebrow, Standfirst } from "@/components/ui/typography";
+import { Display, Eyebrow, Standfirst } from "@/components/ui/typography";
 
 export function FacultyHero() {
   return (
@@ -7,9 +7,9 @@ export function FacultyHero() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>Our People</Eyebrow>
-            <h1 className="mt-5 font-display text-4xl font-normal leading-[1.1] text-balance text-ink sm:text-6xl lg:text-7xl">
+            <Display className="mt-5 text-4xl leading-[1.1] text-ink sm:text-6xl lg:text-7xl">
               Faculty & Leadership
-            </h1>
+            </Display>
           </div>
           <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:flex lg:flex-col lg:justify-between lg:self-end">
             <Standfirst className="text-ink-muted">

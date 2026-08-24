@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H5, Standfirst } from "@/components/ui/typography";
 import type { Affiliation } from "@/lib/content";
 
 export type BachelorsAwardingCopy = {
@@ -58,9 +58,9 @@ function AwardingBodyCard({
         </div>
       )}
 
-      <h3 className="mt-6 font-display text-2xl font-normal text-balance text-primary-800">
+      <H5 as="h3" className="mt-6 text-primary-800">
         {item.body}
-      </h3>
+      </H5>
 
       {item.scope === null ? null : (
         <p className="mt-3 font-body text-sm text-pretty text-neutral-700">

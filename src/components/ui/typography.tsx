@@ -85,3 +85,9 @@ export const P = createText(
   "p",
   "font-body text-base font-normal text-pretty text-ink-muted",
 );
+
+export const Small = createText(
+  "p",
+  "small",
+  "font-body text-sm font-normal text-pretty text-ink-muted",
+);

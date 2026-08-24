@@ -1,6 +1,6 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
 export type CollegeProposition = {
@@ -56,9 +56,9 @@ export function CollegeCambridge({
               <p className="font-display text-3xl text-accent">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-5 font-display text-2xl font-normal text-ink">
+              <H5 as="h3" className="mt-5 text-ink">
                 {proposition.title}
-              </h3>
+              </H5>
               <P className="mt-3">{proposition.body}</P>
             </RevealItem>
           ))}

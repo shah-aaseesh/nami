@@ -21,7 +21,7 @@ import {
   TextField,
 } from "@/components/ui/form";
 import { Icon } from "@/components/ui/icon";
-import { H2, H3, P } from "@/components/ui/typography";
+import { H2, H3, H5, H6, P } from "@/components/ui/typography";
 import {
   findInquiryCourse,
   INQUIRY_COURSES,
@@ -426,9 +426,9 @@ export function MultiStepForm() {
       case "course":
         return (
           <div className="space-y-6">
-            <H3 className="text-xl font-display text-ink mb-6">
+            <H6 as="h3" className="text-ink mb-6">
               Course Details
-            </H3>
+            </H6>
             <div className="space-y-4">
               <SelectField
                 control={control}
@@ -451,9 +451,9 @@ export function MultiStepForm() {
       case "student":
         return (
           <div className="space-y-6">
-            <H3 className="text-xl font-display text-ink mb-6">
+            <H6 as="h3" className="text-ink mb-6">
               Student Details
-            </H3>
+            </H6>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <TextField
                 control={control}
@@ -521,9 +521,9 @@ export function MultiStepForm() {
       case "parents":
         return (
           <div className="space-y-8">
-            <H3 className="text-xl font-display text-ink mb-6">
+            <H6 as="h3" className="text-ink mb-6">
               Parent / Guardian Details
-            </H3>
+            </H6>
 
             <div className="space-y-4">
               <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
@@ -614,9 +614,9 @@ export function MultiStepForm() {
         return (
           <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <H3 className="text-xl font-display text-ink">
+              <H6 as="h3" className="text-ink">
                 {course?.historyHeading ?? "Qualifications Achieved"}
-              </H3>
+              </H6>
               <Button
                 type="button"
                 size="sm"
@@ -665,9 +665,9 @@ export function MultiStepForm() {
         return (
           <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <H3 className="text-xl font-display text-ink">
+              <H6 as="h3" className="text-ink">
                 Employment History
-              </H3>
+              </H6>
               <Button
                 type="button"
                 size="sm"
@@ -694,9 +694,9 @@ export function MultiStepForm() {
       case "additional":
         return (
           <div className="space-y-8">
-            <H3 className="text-xl font-display text-ink mb-6">
+            <H6 as="h3" className="text-ink mb-6">
               Additional Info & Signatures
-            </H3>
+            </H6>
 
             <div className="space-y-4">
               <TextareaField
@@ -751,9 +751,9 @@ export function MultiStepForm() {
     <div className="mx-auto w-full max-w-5xl" ref={containerRef}>
       <div className="bg-surface border border-border rounded-2xl shadow-sm flex flex-col md:flex-row min-h-[600px]">
         <div className="bg-muted w-full md:w-64 lg:w-80 p-6 md:p-8 shrink-0 border-b md:border-b-0 md:border-r border-border rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
-          <H2 className="font-display text-xl font-semibold text-ink mb-8">
+          <H6 as="h2" className="font-semibold text-ink mb-8">
             Inquiry Form
-          </H2>
+          </H6>
           <ul className="space-y-6">
             {steps.map((step, index) => {
               const isActive = !isSubmitted && index === stepIndex;
@@ -837,13 +837,14 @@ export function MultiStepForm() {
               </span>
 
               <div className="max-w-md space-y-3">
-                <H3
+                <H5
+                  as="h3"
                   ref={confirmationRef}
                   tabIndex={-1}
-                  className="text-2xl font-display text-ink"
+                  className="text-ink"
                 >
                   Your inquiry form is complete
-                </H3>
+                </H5>
                 <P className="text-ink-muted">
                   Every answer has been checked. Download your summary as a PDF
                   and bring it with you, or go back if you want to change

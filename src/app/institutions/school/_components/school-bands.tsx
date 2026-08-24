@@ -3,7 +3,7 @@ import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H6, P, Standfirst } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 
 import { CheckIcon } from "@/lib/icons";
@@ -73,9 +73,9 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                   />
                 </div>
               )}
-              <h4 className="font-display text-xl font-normal text-ink">
+              <H6 as="h4" className="text-ink">
                 {stream.name}
-              </h4>
+              </H6>
               <p className="mt-2 font-body text-sm text-ink-muted">
                 {stream.note}
               </p>

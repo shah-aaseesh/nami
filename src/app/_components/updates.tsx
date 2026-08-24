@@ -173,7 +173,7 @@ export async function Updates() {
           <div className="lg:max-w-2xl">
             {section.eyebrow === null ? null : (
               <RevealItem className="flex items-center gap-5">
-                <Eyebrow>{section.eyebrow}</Eyebrow>
+                <Eyebrow className="text-base">{section.eyebrow}</Eyebrow>
                 <span className="h-px flex-1 bg-border" />
               </RevealItem>
             )}

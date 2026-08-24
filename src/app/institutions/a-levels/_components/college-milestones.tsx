@@ -26,7 +26,7 @@ export function CollegeMilestones({
     <section className="gutter-x section-y" id="milestones">
       <div className="mx-auto max-w-page">
         <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
-          <div className="max-w-2xl lg:col-span-12">
+          <div className="lg:col-span-5">
             <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
             </RevealItem>
@@ -39,30 +39,30 @@ export function CollegeMilestones({
             </SplitText>
           </div>
 
-          <RevealItem className="mt-8 max-w-xl lg:col-span-8 lg:col-start-5">
+          <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
           </RevealItem>
         </Reveal>
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
-          <ol className="flex flex-col gap-16 border-t border-border pt-10 lg:gap-24 lg:pt-14">
+          <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {copy.milestones.map((milestone) => (
               <li
-                className="lg:grid lg:grid-cols-12 lg:items-baseline lg:gap-x-10"
+                className="border-t border-border pt-6"
                 data-reveal-item=""
                 key={milestone.year}
               >
                 <time
-                  className="block font-display text-8xl text-accent tabular-nums lg:col-span-4"
+                  className="block font-display text-4xl text-accent tabular-nums"
                   dateTime={String(milestone.year)}
                 >
                   {milestone.year}
                 </time>
 
-                <div className="mt-4 lg:col-span-8 lg:mt-0">
-                  <H4 as="h3">{milestone.title}</H4>
-                  <P className="mt-4 max-w-xl">{milestone.body}</P>
-                </div>
+                <H4 as="h3" className="mt-4 text-ink">
+                  {milestone.title}
+                </H4>
+                <P className="mt-3">{milestone.body}</P>
               </li>
             ))}
           </ol>

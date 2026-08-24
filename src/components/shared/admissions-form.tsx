@@ -936,7 +936,7 @@ export function MultiStepForm() {
 
 export function AdmissionsFormSection() {
   return (
-    <section className="bg-muted section-y gutter-x" id="apply">
+    <section className="section-y gutter-x" id="apply">
       <div className="text-center mb-12 max-w-3xl mx-auto">
         <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
           Start Your Application

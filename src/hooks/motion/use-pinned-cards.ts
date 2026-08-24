@@ -1,57 +1,63 @@
 "use client";
 
 import type { RefObject } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { FULL_MOTION_QUERY, gsap, useGSAP } from "@/lib/gsap";
 
-export function usePinnedCards(
-  containerRef: RefObject<HTMLElement | null>,
-  cardsWrapperRef: RefObject<HTMLElement | null>,
-) {
+const STACK_QUERY = `${FULL_MOTION_QUERY} and (min-width: 1024px)`;
+const STACK_TOP = 128;
+const STACK_OFFSET = 20;
+
+export function usePinnedCards(cardsWrapperRef: RefObject<HTMLElement | null>) {
   useGSAP(
     () => {
-      const container = containerRef.current;
-      const cardsWrapper = cardsWrapperRef.current;
-      if (!container || !cardsWrapper) return;
-
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 768px)", () => {
+      mm.add(STACK_QUERY, () => {
+        const cardsWrapper = cardsWrapperRef.current;
+        if (!cardsWrapper) return;
+
         const panels = gsap.utils.toArray<HTMLElement>(
           "[data-pinned-panel]",
           cardsWrapper,
         );
-        if (panels.length <= 1) return;
+        const lastPanel = panels.at(-1);
+        if (lastPanel === undefined || panels.length < 2) return;
 
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: cardsWrapper,
-            start: "top 15%",
-            end: () => `+=${panels.length * 90}%`,
-            pin: true,
-            scrub: 0.8,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
+        panels.forEach((panel, index) => {
+          gsap.set(panel, { zIndex: index + 1 });
         });
 
-        panels.forEach((panel, i) => {
-          if (i === 0) return;
-          timeline.fromTo(
-            panel,
-            { yPercent: 100, opacity: 0.9 },
-            { yPercent: 0, opacity: 1, ease: "none" },
-          );
-          const prevPanel = panels[i - 1];
-          if (prevPanel) {
-            timeline.to(
-              prevPanel,
-              { scale: 0.94, opacity: 0.25, ease: "none" },
-              "<",
+        // A transform holds each card on its slot instead of ScrollTrigger's
+        // pin, which would snap the stack back to flow the moment it completes.
+        panels.slice(0, -1).forEach((panel, index) => {
+          const travel = () =>
+            Math.max(
+              1,
+              lastPanel.offsetTop -
+                panel.offsetTop -
+                (panels.length - 1 - index) * STACK_OFFSET,
             );
-          }
+
+          gsap.fromTo(
+            panel,
+            { y: 0 },
+            {
+              ease: "none",
+              scrollTrigger: {
+                end: () => `+=${travel()}`,
+                invalidateOnRefresh: true,
+                scrub: true,
+                start: `top ${STACK_TOP + index * STACK_OFFSET}px`,
+                trigger: panel,
+              },
+              y: travel,
+            },
+          );
         });
       });
+
+      return () => mm.revert();
     },
-    { scope: containerRef },
+    { scope: cardsWrapperRef },
   );
 }

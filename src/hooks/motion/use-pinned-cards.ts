@@ -1,11 +1,19 @@
 "use client";
 
 import type { RefObject } from "react";
+import { isInsideRevealWindow, REVEAL_START } from "@/components/motion/reveal";
 import { FULL_MOTION_QUERY, gsap, useGSAP } from "@/lib/gsap";
 
-const STACK_QUERY = `${FULL_MOTION_QUERY} and (min-width: 1024px)`;
+const STACK_MIN_WIDTH = 1024;
+const STACK_QUERY = `${FULL_MOTION_QUERY} and (min-width: ${STACK_MIN_WIDTH}px)`;
+// The stack pin owns `y` from STACK_MIN_WIDTH up; below it nothing drives `y`.
+// ENTRANCE_QUERY is `not` STACK_QUERY, so exactly one of the two ever matches.
+const ENTRANCE_QUERY = `not ${STACK_QUERY}`;
 const STACK_TOP = 128;
 const STACK_OFFSET = 20;
+const ENTRANCE_Y = 40;
+const ENTRANCE_DURATION = 0.9;
+const ENTRANCE_STAGGER = 0.08;
 
 export function usePinnedCards(cardsWrapperRef: RefObject<HTMLElement | null>) {
   useGSAP(
@@ -54,6 +62,35 @@ export function usePinnedCards(cardsWrapperRef: RefObject<HTMLElement | null>) {
             },
           );
         });
+      });
+
+      mm.add(ENTRANCE_QUERY, () => {
+        const cardsWrapper = cardsWrapperRef.current;
+        if (!cardsWrapper) return;
+        if (isInsideRevealWindow(cardsWrapper)) return;
+
+        const panels = gsap.utils.toArray<HTMLElement>(
+          "[data-pinned-panel]",
+          cardsWrapper,
+        );
+        if (panels.length === 0) return;
+
+        gsap.fromTo(
+          panels,
+          { y: ENTRANCE_Y, opacity: 0 },
+          {
+            duration: ENTRANCE_DURATION,
+            ease: "power3.out",
+            opacity: 1,
+            scrollTrigger: {
+              once: true,
+              start: REVEAL_START,
+              trigger: cardsWrapper,
+            },
+            stagger: ENTRANCE_STAGGER,
+            y: 0,
+          },
+        );
       });
 
       return () => mm.revert();

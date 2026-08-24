@@ -99,12 +99,12 @@ export const aboutCopy: AboutCopy = {
     },
     testimonials: {
       navLabel: "Testimonials",
-      eyebrow: "Testimonials",
-      heading: "Where our graduates are now.",
+      eyebrow: "Student voices",
+      heading: "What our students say.",
       standfirst: null,
       cta: null,
       emptyState:
-        "NAMI is collecting alumni stories — this space is reserved for them.",
+        "Student stories are being collected — this space is reserved for them.",
     },
   },
 };

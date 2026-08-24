@@ -94,13 +94,13 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     testimonials: {
-      navLabel: "Alumni",
-      eyebrow: "Alumni",
-      heading: "Where our graduates are now.",
+      navLabel: "Testimonials",
+      eyebrow: "Student voices",
+      heading: "What our students say.",
       standfirst: null,
       cta: null,
       emptyState:
-        "NAMI is collecting alumni stories — this space is reserved for them.",
+        "Student stories are being collected — this space is reserved for them.",
     },
     updates: {
       navLabel: "Notices",

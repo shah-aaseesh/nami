@@ -849,12 +849,12 @@ const partners: CareerPlacementCopy = {
 
 const alumni: SectionCopy = {
   navLabel: "Voices",
-  eyebrow: "Students and alumni",
+  eyebrow: "Student voices",
   heading: "Six voices, on what the degree is actually worth.",
   standfirst:
     "In their own words — on the British system of learning, the workload, and where the degree has carried them.",
   cta: null,
-  emptyState: "Student and alumni stories will appear here as they are shared.",
+  emptyState: "Student stories will appear here as they are shared.",
 };
 
 const gallery: InstitutionGalleryCopy = {

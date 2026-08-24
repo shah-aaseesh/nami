@@ -30,10 +30,7 @@ export function AboutOverview({
                 <Eyebrow>{section.eyebrow}</Eyebrow>
               </Reveal>
             )}
-            <SplitText
-              as="h2"
-              className="mt-4 font-display text-5xl font-normal tracking-tight text-ink text-balance"
-            >
+            <SplitText as="h2" className="mt-4">
               {section.heading}
             </SplitText>
           </div>

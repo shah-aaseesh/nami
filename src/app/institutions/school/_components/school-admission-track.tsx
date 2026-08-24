@@ -6,9 +6,9 @@ import { FULL_MOTION_QUERY, gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 const LAPTOP_QUERY = `${FULL_MOTION_QUERY} and (min-width: 1024px) and (max-width: 1279px)`;
 const DESKTOP_QUERY = `${FULL_MOTION_QUERY} and (min-width: 1280px)`;
-const LAPTOP_VISIBLE_CARDS = 2;
-const DESKTOP_VISIBLE_CARDS = 3;
-const PIN_TOP = 96;
+const LAPTOP_VISIBLE_CARDS = 3;
+const DESKTOP_VISIBLE_CARDS = 4;
+const PIN_TOP = 24;
 
 export function SchoolAdmissionTrack({
   children,
@@ -72,9 +72,7 @@ export function SchoolAdmissionTrack({
 
       <section
         aria-label={label}
-        className="scrollbar-hide mt-14 snap-x snap-mandatory overflow-x-auto pb-2 lg:mt-20 lg:overflow-x-visible lg:pb-0"
-        // biome-ignore lint/a11y/noNoninteractiveTabindex: below lg this is the horizontal scroll region and its cards hold no focusable child, so WCAG 2.1.1 (axe scrollable-region-focusable) requires it be keyboard-reachable. It must stay off the <ol>, which GSAP translates off-screen at lg+, taking the focus ring with it.
-        tabIndex={0}
+        className="scrollbar-hide mt-14 snap-x snap-mandatory overflow-x-auto pb-2 lg:mt-16 lg:overflow-x-visible lg:pb-0"
       >
         <ol className="flex gap-6 sm:gap-8" ref={trackRef}>
           {children}

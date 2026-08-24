@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H5, P } from "@/components/ui/typography";
+import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
 import type {
   AcademicLevel,
   ContentImage,
@@ -24,34 +24,50 @@ function InstitutionCard({
   readonly level: AcademicLevel;
 }) {
   const established =
-    entity.establishedYear === null ? null : `Est. ${entity.establishedYear}`;
+    entity.establishedYear === null ? null : `Estd. ${entity.establishedYear}`;
   const href = institutionPathOfSlug(level.slug);
 
   return (
     <li
-      className="group relative flex flex-col overflow-hidden rounded-media border border-border bg-surface-raised"
+      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border border-primary-900/10"
       data-reveal-item=""
     >
       {level.image === null ? null : (
-        <figure className="shrink-0 overflow-hidden">
+        <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
           <Image
             alt={level.image.alt}
-            className="aspect-4/3 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             height={level.image.height}
             sizes={MEDIA_SIZES}
             src={level.image.src}
             width={level.image.width}
           />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/10" />
+
+          {/* Floating Badges */}
+          <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
+            {established === null ? (
+              <span />
+            ) : (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/70 px-3 py-1 font-body text-[11px] font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
+                <span className="size-1.5 rounded-full bg-primary-400" />
+                <span>{established}</span>
+              </span>
+            )}
+          </div>
         </figure>
       )}
 
-      <div className="flex flex-1 flex-col p-6 lg:p-7">
-        <H5 as="h3">
+      <div className="flex flex-1 flex-col p-5">
+        <H5
+          as="h3"
+          className="font-display text-lg font-normal leading-snug text-neutral-900"
+        >
           {href === null ? (
             entity.name
           ) : (
             <Link
-              className="transition-colors after:absolute after:inset-0 group-hover:text-accent"
+              className="transition-colors after:absolute after:inset-0 group-hover:text-primary-700"
               href={href}
             >
               {entity.name}
@@ -59,20 +75,17 @@ function InstitutionCard({
           )}
         </H5>
 
-        <p className="mt-3 mb-6 font-body text-sm text-ink-muted">
+        <p className="mt-2 mb-5 font-body text-xs font-normal leading-relaxed text-neutral-600">
           {level.stage}
         </p>
 
-        <div className="mt-auto flex items-center gap-4 border-t border-border pt-5">
-          {established === null ? null : (
-            <Eyebrow as="span" className="text-ink-muted">
-              {established}
-            </Eyebrow>
-          )}
-          <Icon
-            className="ml-auto shrink-0 text-accent transition-transform duration-500 ease-out group-hover:translate-x-1"
-            icon={ArrowRightIcon}
-          />
+        <div className="mt-auto flex items-center justify-between border-t border-neutral-100 pt-3.5">
+          <span className="font-body text-xs font-semibold text-primary-800 transition-colors group-hover:text-primary-950">
+            Explore Details
+          </span>
+          <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-300 group-hover:bg-primary-700 group-hover:text-white group-hover:translate-x-0.5">
+            <Icon className="size-3.5" icon={ArrowRightIcon} />
+          </span>
         </div>
       </div>
     </li>
@@ -88,34 +101,50 @@ function VocationalCard({
 }) {
   return (
     <li
-      className="relative flex flex-col overflow-hidden rounded-media border border-border bg-surface-raised"
+      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border border-primary-900/10"
       data-reveal-item=""
     >
       {image === null ? null : (
-        <figure className="shrink-0 overflow-hidden">
+        <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
           <Image
             alt={image.alt}
-            className="aspect-4/3 w-full object-cover"
+            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             height={image.height}
             sizes={MEDIA_SIZES}
             src={image.src}
             width={image.width}
           />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/10" />
+
+          {/* Floating Badges */}
+          <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-neutral-950/70 px-3 py-1 font-body text-[11px] font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
+              <span className="size-1.5 rounded-full bg-primary-400" />
+              <span>{`Approved ${approval.approvedYear}`}</span>
+            </span>
+          </div>
         </figure>
       )}
 
-      <div className="flex flex-1 flex-col p-6 lg:p-7">
-        <H5 as="h3" className="text-lg">
+      <div className="flex flex-1 flex-col p-5">
+        <H5
+          as="h3"
+          className="font-display text-lg font-normal leading-snug text-neutral-900"
+        >
           {approval.council}
         </H5>
-        <p className="mt-3 font-body text-sm text-ink-muted">
+
+        <p className="mt-2 mb-5 font-body text-xs font-normal leading-relaxed text-neutral-600">
           {approval.scope}
         </p>
 
-        <div className="mt-2 flex items-center border-t border-border pt-5">
-          <Eyebrow as="span" className="text-ink-muted">
-            {`Approved ${approval.approvedYear}`}
-          </Eyebrow>
+        <div className="mt-auto flex items-center justify-between border-t border-neutral-100 pt-3.5">
+          <span className="font-body text-xs font-semibold text-primary-800">
+            Vocational & Technical
+          </span>
+          <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-300 group-hover:bg-primary-700 group-hover:text-white group-hover:translate-x-0.5">
+            <Icon className="size-3.5" icon={ArrowRightIcon} />
+          </span>
         </div>
       </div>
     </li>
@@ -135,39 +164,38 @@ export async function AcademicLevels() {
     levels.find((level) => level.slug === slug("bachelors"))?.image ?? null;
 
   return (
-    <section className="gutter-x section-y" id="institutions">
+    <section className="field-brand gutter-x section-y" id="institutions">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
-          <Reveal className="lg:col-span-4 lg:row-start-1" stagger={0.08}>
-            {section.eyebrow === null ? null : (
-              <RevealItem className="flex items-center gap-5">
-                <Eyebrow>{section.eyebrow}</Eyebrow>
-                <span className="h-px flex-1 bg-border" />
-              </RevealItem>
-            )}
+        <Reveal stagger={0.08}>
+          {section.eyebrow === null ? null : (
+            <RevealItem className="flex items-center gap-5">
+              <Eyebrow>{section.eyebrow}</Eyebrow>
+              <span className="h-px flex-1 bg-border" />
+            </RevealItem>
+          )}
+
+          <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
+            <SplitText as="h2" className="lg:max-w-2xl">
+              {section.heading}
+            </SplitText>
 
             {section.standfirst === null ? null : (
-              <RevealItem className="mt-6">
-                <P>{section.standfirst}</P>
+              <RevealItem className="lg:max-w-md">
+                <Standfirst>{section.standfirst}</Standfirst>
               </RevealItem>
             )}
-          </Reveal>
-
-          <SplitText
-            as="h2"
-            className="mt-10 font-display text-6xl font-normal lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:mt-0"
-          >
-            {section.heading}
-          </SplitText>
-        </div>
+          </div>
+        </Reveal>
 
         {levels.length === 0 ? (
           section.emptyState === null ? null : (
-            <P className="mt-16 max-w-md">{section.emptyState}</P>
+            <P className="mt-16 max-w-md text-primary-200">
+              {section.emptyState}
+            </P>
           )
         ) : (
-          <Reveal className="mt-16 lg:mt-20" stagger={0.12}>
-            <ul className="grid gap-6 sm:grid-cols-2 lg:gap-8 xl:grid-cols-4">
+          <Reveal className="mt-10 lg:mt-14" stagger={0.1} y={20}>
+            <ul className="grid gap-5 sm:grid-cols-2 lg:gap-6 xl:grid-cols-4">
               {levels.map((level) => (
                 <InstitutionCard
                   entity={institution.entities[level.entity]}

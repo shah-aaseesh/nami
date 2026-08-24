@@ -32,7 +32,7 @@ function TestimonialsHeader({
             </RevealItem>
           )}
 
-          <SplitText as="h2" className="mt-6 font-display text-5xl lg:mt-8">
+          <SplitText as="h2" className="mt-6 lg:mt-8">
             {section.heading}
           </SplitText>
         </div>

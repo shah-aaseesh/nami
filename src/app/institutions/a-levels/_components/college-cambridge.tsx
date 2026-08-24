@@ -31,10 +31,7 @@ export function CollegeCambridge({
             <RevealItem>
               <Eyebrow>{copy.eyebrow}</Eyebrow>
             </RevealItem>
-            <SplitText
-              as="h2"
-              className="mt-4 font-display text-5xl font-normal text-balance text-ink"
-            >
+            <SplitText as="h2" className="mt-4">
               {copy.heading}
             </SplitText>
             <RevealItem className="mt-8 max-w-xl">

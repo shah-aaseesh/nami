@@ -20,7 +20,7 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
           </RevealItem>
         )}
 
-        <SplitText as="h2" className="mt-4 font-display text-5xl lg:mt-6">
+        <SplitText as="h2" className="mt-4 lg:mt-6">
           {copy.heading}
         </SplitText>
       </div>

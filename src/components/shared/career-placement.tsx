@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Eyebrow } from "@/components/ui/typography";
+import { Eyebrow, H2 } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import type { CareerPartner } from "./partner-carousel";
 import { PartnerCarousel } from "./partner-carousel";
@@ -30,9 +30,7 @@ export function CareerPlacement({
           <span className="h-px flex-1 bg-border" />
         </div>
 
-        <h2 className="mt-6 max-w-3xl font-display text-4xl font-normal text-balance text-ink lg:mt-8 lg:text-5xl">
-          {copy.heading}
-        </h2>
+        <H2 className="mt-6 max-w-3xl lg:mt-8">{copy.heading}</H2>
 
         <div className="mt-14 grid gap-8 lg:mt-20 lg:grid-cols-5 lg:gap-12">
           <div className="relative aspect-video overflow-hidden rounded-xl lg:col-span-2 lg:aspect-4/3 lg:self-start">

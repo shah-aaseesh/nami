@@ -7,7 +7,7 @@ import { schoolPrincipal } from "@/lib/content/school-principal";
 import { About } from "./_components/about";
 import { CampusLife } from "./_components/campus-life";
 import { Hero } from "./_components/hero";
-import { principalHeading } from "./_components/principal-copy";
+import { ceoHeading } from "./_components/principal-copy";
 import { ProgrammeMarquee } from "./_components/programme-marquee";
 import { Stats } from "./_components/stats";
 import { Updates } from "./_components/updates";
@@ -20,8 +20,11 @@ export default async function Home() {
     content.getStats(),
   ]);
 
-  const principal =
-    leadership.academics.find((item) => item.slug === schoolPrincipal.slug) ??
+  const ceo =
+    leadership.management.find(
+      (item) => item.slug === "leader-pranil-pandey",
+    ) ??
+    leadership.management[0] ??
     null;
 
   return (
@@ -31,16 +34,16 @@ export default async function Home() {
       <About overview={institution.overview} section={copy.sections.about} />
       <AcademicLevels />
       <Affiliations section={copy.sections.affiliations} />
-      {principal === null ? null : (
+      {ceo === null ? null : (
         <PrincipalMessage
-          eyebrow={schoolPrincipal.eyebrow}
-          heading={principalHeading}
-          id="principal"
+          eyebrow="From the CEO"
+          heading={ceoHeading}
+          id="ceo-message"
           message={schoolPrincipal.message}
           person={{
-            name: principal.name,
-            portrait: principal.portrait,
-            title: principal.title,
+            name: ceo.name,
+            portrait: ceo.portrait,
+            title: ceo.title,
           }}
         />
       )}

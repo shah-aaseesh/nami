@@ -26,10 +26,7 @@ export function Stats({
               </Reveal>
             )}
 
-            <SplitText
-              as="h2"
-              className="mt-4 font-display text-3xl font-normal tracking-tight text-balance text-ink sm:text-4xl lg:text-5xl"
-            >
+            <SplitText as="h2" className="mt-4">
               {section.heading}
             </SplitText>
 

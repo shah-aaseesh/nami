@@ -70,10 +70,7 @@ export function PrincipalMessage({
             <Eyebrow>{eyebrow}</Eyebrow>
 
             {heading === undefined ? null : (
-              <SplitText
-                as="h2"
-                className="max-w-4xl font-display text-4xl font-normal text-balance text-ink lg:text-5xl"
-              >
+              <SplitText as="h2" className="max-w-4xl">
                 {heading}
               </SplitText>
             )}

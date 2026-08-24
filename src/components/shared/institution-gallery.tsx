@@ -100,10 +100,7 @@ export async function InstitutionGallery({
           </RevealItem>
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-8 lg:mt-8">
-            <SplitText
-              as="h2"
-              className="font-display text-5xl font-normal text-balance text-ink sm:max-w-2xl"
-            >
+            <SplitText as="h2" className="sm:max-w-2xl">
               {copy.heading}
             </SplitText>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { InstitutionAwarding } from "@/components/shared/institution-awarding";
+import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
 import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
@@ -96,6 +97,8 @@ export default async function CollegePage() {
         id="notices"
         institution="college"
       />
+
+      <InstitutionContact id="contact" institution="college" />
     </>
   );
 }

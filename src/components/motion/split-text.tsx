@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { isInsideRevealWindow, REVEAL_START } from "@/components/motion/reveal";
 import { SplitText as GsapSplitText, gsap, useGSAP } from "@/lib/gsap";
+import { cn } from "@/lib/utils";
 
 type SplitTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 
@@ -12,6 +13,18 @@ const SPLIT_TYPE: Record<SplitUnit, string> = {
   lines: "lines",
   words: "words,lines",
   chars: "chars,words,lines",
+};
+
+const SPLIT_TAG_STYLES: Record<SplitTag, string> = {
+  h1: "font-display text-5xl lg:text-6xl font-normal text-balance text-ink",
+  h2: "font-display text-4xl lg:text-5xl font-normal text-balance text-ink",
+  h3: "font-display text-3xl lg:text-4xl font-normal text-balance text-ink",
+  h4: "font-display text-2xl lg:text-3xl font-normal text-balance text-ink",
+  h5: "font-display text-xl lg:text-2xl font-normal text-balance text-ink",
+  h6: "font-display text-lg lg:text-xl font-normal text-balance text-ink",
+  p: "font-body text-base font-normal text-pretty text-ink-muted",
+  span: "",
+  div: "",
 };
 
 const SPLIT_Y_PERCENT = 110;
@@ -80,7 +93,7 @@ export function SplitText({
 
   return (
     <Tag
-      className={className}
+      className={cn(SPLIT_TAG_STYLES[as], className)}
       ref={(node: HTMLElement | null) => {
         root.current = node;
       }}

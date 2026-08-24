@@ -115,10 +115,7 @@ export function SchoolBands({
                 <span className="h-px flex-1 bg-border" />
               </RevealItem>
 
-              <SplitText
-                as="h2"
-                className="mt-6 font-display text-4xl font-normal text-balance text-ink lg:mt-8 lg:text-5xl"
-              >
+              <SplitText as="h2" className="mt-6 lg:mt-8">
                 {copy.heading}
               </SplitText>
 

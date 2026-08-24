@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Eyebrow, H4, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H2, H4, P, Standfirst } from "@/components/ui/typography";
 import type {
   BachelorsProgramme,
   BachelorsProgrammesCopy,
@@ -82,9 +82,7 @@ export function BachelorsCourseRail({
         </div>
 
         <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-          <h2 className="font-display text-4xl font-normal text-balance text-ink lg:max-w-2xl lg:text-5xl">
-            {copy.heading}
-          </h2>
+          <H2 className="lg:max-w-2xl">{copy.heading}</H2>
 
           <div className="lg:max-w-md">
             <Standfirst>{copy.standfirst}</Standfirst>

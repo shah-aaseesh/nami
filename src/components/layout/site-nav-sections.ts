@@ -46,7 +46,6 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     href: "/careers",
     descriptor: "See what the group is recruiting for.",
   },
-  { label: "Contact", href: "/contact", descriptor: "Get in touch with us." },
 ];
 
 export const SITE_FOOTER_NAV_ITEMS: SiteNavItem[] = [
@@ -57,5 +56,4 @@ export const SITE_FOOTER_NAV_ITEMS: SiteNavItem[] = [
   { label: "Student Life", href: "/student-life" },
   { label: "Gallery", href: "/gallery" },
   { label: "Notices", href: "/notices" },
-  { label: "Contact", href: "/contact" },
 ];

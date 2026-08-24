@@ -72,10 +72,7 @@ export async function Updates() {
               </RevealItem>
             )}
 
-            <SplitText
-              as="h2"
-              className="mt-6 font-display text-5xl font-normal tracking-normal lg:mt-8"
-            >
+            <SplitText as="h2" className="mt-6 lg:mt-8">
               {section.heading}
             </SplitText>
 

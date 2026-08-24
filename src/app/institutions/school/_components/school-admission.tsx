@@ -1,4 +1,4 @@
-import { Eyebrow, H6, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H2, H6, P, Standfirst } from "@/components/ui/typography";
 import { SchoolAdmissionTrack } from "./school-admission-track";
 
 export type SchoolAdmissionStep = {
@@ -83,9 +83,7 @@ export function SchoolAdmission({
             </div>
 
             <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-              <h2 className="font-display text-4xl font-normal text-balance text-ink lg:max-w-2xl lg:text-5xl">
-                {copy.heading}
-              </h2>
+              <H2 className="lg:max-w-2xl">{copy.heading}</H2>
 
               <div className="lg:max-w-md">
                 <Standfirst>{copy.standfirst}</Standfirst>
@@ -98,7 +96,7 @@ export function SchoolAdmission({
       >
         {copy.steps.map((step, index) => (
           <li
-            className="flex w-4/5 shrink-0 snap-start flex-col gap-5 rounded-2xl bg-primary-100 p-6 sm:w-1/2 lg:p-8 xl:w-1/3"
+            className="flex w-4/5 shrink-0 snap-start flex-col gap-5 rounded-2xl bg-primary-100 p-6 sm:w-1/2 lg:w-1/3 lg:p-8 xl:w-1/4"
             key={step.title}
           >
             <StepRing

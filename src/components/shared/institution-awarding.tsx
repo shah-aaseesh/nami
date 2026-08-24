@@ -100,10 +100,7 @@ export function InstitutionAwarding({
           </RevealItem>
 
           <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-            <SplitText
-              as="h2"
-              className="font-display text-4xl font-normal text-balance text-ink lg:max-w-2xl lg:text-5xl"
-            >
+            <SplitText as="h2" className="lg:max-w-2xl">
               {copy.heading}
             </SplitText>
 

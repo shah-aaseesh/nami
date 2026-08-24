@@ -73,9 +73,23 @@ function AffiliationRow({ items }: { items: readonly Affiliation[] }) {
   );
 }
 
+function deduplicateAffiliations(
+  items: readonly Affiliation[],
+): readonly Affiliation[] {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const key = `${item.body}::${logoSrcOf(item.logo)}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export async function Affiliations({ section }: { section: SectionCopy }) {
   const affiliations = await content.getAffiliations();
-  const timeline = [...affiliations].sort((a, b) => a.sinceYear - b.sinceYear);
+  const timeline = deduplicateAffiliations(
+    [...affiliations].sort((a, b) => a.sinceYear - b.sinceYear),
+  );
 
   return (
     <section className="gutter-x section-y" id="affiliations">

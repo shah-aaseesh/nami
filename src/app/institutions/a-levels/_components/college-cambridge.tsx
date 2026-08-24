@@ -28,8 +28,9 @@ export function CollegeCambridge({
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <CollegeCambridgeHold className="lg:col-span-5">
           <Reveal stagger={0.08}>
-            <RevealItem>
+            <RevealItem className="flex items-center gap-5">
               <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <span className="h-px flex-1 bg-border" />
             </RevealItem>
             <SplitText as="h2" className="mt-4">
               {copy.heading}

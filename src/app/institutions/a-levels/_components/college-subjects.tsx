@@ -31,7 +31,6 @@ export type CollegeSubjectsCopy = {
   readonly eyebrow: string;
   readonly heading: string;
   readonly standfirst: string;
-  readonly compulsoryNote: string;
   readonly compulsoryLabel: string;
   readonly streams: readonly CollegeSubjectStream[];
   readonly offeredLabel: (group: string) => string;
@@ -116,8 +115,9 @@ export function CollegeSubjects({
       <div className="mx-auto max-w-page">
         <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-6">
-            <RevealItem>
+            <RevealItem className="flex items-center gap-5">
               <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <span className="h-px flex-1 bg-border" />
             </RevealItem>
 
             <SplitText as="h2" className="mt-4">
@@ -127,9 +127,6 @@ export function CollegeSubjects({
 
           <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
             <Standfirst>{copy.standfirst}</Standfirst>
-            <P className="mt-6 border-t border-border pt-5 text-sm">
-              {copy.compulsoryNote}
-            </P>
           </RevealItem>
         </Reveal>
 

@@ -93,9 +93,7 @@ const subjects: CollegeSubjectsCopy = {
   eyebrow: "Subjects",
   heading: "Two streams, and the subjects in each.",
   standfirst:
-    "The college offers a wide range of subjects and subject combinations, preparing students for university study in science, medicine, engineering, business and the liberal arts.",
-  compulsoryNote:
-    "English General Paper is compulsory in every group. Students choose one stream, then take their remaining subjects from a single group within it.",
+    "A wide range of subject combinations preparing students for university study in science, medicine, engineering, and business.",
   compulsoryLabel: "Compulsory",
   streams: [
     {

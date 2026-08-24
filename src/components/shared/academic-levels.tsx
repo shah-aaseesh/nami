@@ -29,14 +29,14 @@ function InstitutionCard({
 
   return (
     <li
-      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border border-primary-900/10"
+      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-primary-900/10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
       data-reveal-item=""
     >
       {level.image === null ? null : (
         <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
           <Image
             alt={level.image.alt}
-            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-103"
             height={level.image.height}
             sizes={MEDIA_SIZES}
             src={level.image.src}
@@ -82,7 +82,7 @@ function InstitutionCard({
           <span className="font-body text-xs font-semibold text-primary-800 transition-colors group-hover:text-primary-950">
             Explore Details
           </span>
-          <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-300 group-hover:bg-primary-700 group-hover:text-white group-hover:translate-x-0.5">
+          <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-200 group-hover:bg-primary-700 group-hover:text-white">
             <Icon className="size-3.5" icon={ArrowRightIcon} />
           </span>
         </div>
@@ -100,14 +100,14 @@ function VocationalCard({
 }) {
   return (
     <li
-      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border border-primary-900/10"
+      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-primary-900/10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
       data-reveal-item=""
     >
       {image === null ? null : (
         <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
           <Image
             alt={image.alt}
-            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-103"
             height={image.height}
             sizes={MEDIA_SIZES}
             src={image.src}
@@ -140,7 +140,7 @@ function VocationalCard({
           <span className="font-body text-xs font-semibold text-primary-800">
             Vocational & Technical
           </span>
-          <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-300 group-hover:bg-primary-700 group-hover:text-white group-hover:translate-x-0.5">
+          <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-200 group-hover:bg-primary-700 group-hover:text-white">
             <Icon className="size-3.5" icon={ArrowRightIcon} />
           </span>
         </div>
@@ -192,7 +192,7 @@ export async function AcademicLevels() {
             </P>
           )
         ) : (
-          <Reveal className="mt-10 lg:mt-14" stagger={0.1} y={20}>
+          <Reveal className="mt-10 lg:mt-14" stagger={0.06} y={12}>
             <ul className="grid gap-5 sm:grid-cols-2 lg:gap-6 xl:grid-cols-4">
               {levels.map((level) => (
                 <InstitutionCard

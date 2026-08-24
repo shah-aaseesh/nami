@@ -23,7 +23,10 @@ export function AboutAwards({
           <div className="lg:col-span-6">
             {section.eyebrow === null ? null : (
               <Reveal>
-                <Eyebrow>{section.eyebrow}</Eyebrow>
+                <div className="flex items-center gap-5">
+                  <Eyebrow>{section.eyebrow}</Eyebrow>
+                  <span className="h-px flex-1 bg-border" />
+                </div>
               </Reveal>
             )}
             <SplitText as="h2" className="mt-4">

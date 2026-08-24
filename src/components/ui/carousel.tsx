@@ -306,29 +306,33 @@ export function CarouselDots({
       data-slot="carousel-dots"
       {...props}
     >
-      {scrollSnaps.map((snap, index) => {
-        const active = selectedIndex === index;
+      <div className="field-brand flex items-center gap-2 rounded-full px-4 py-2">
+        {scrollSnaps.map((snap, index) => {
+          const active = selectedIndex === index;
 
-        return (
-          <button
-            aria-current={active}
-            aria-label={`${dotLabel ?? "Go to slide"} ${index + 1} of ${scrollSnaps.length}`}
-            className="inline-flex h-6 items-center px-0.5"
-            key={snap}
-            onClick={() => scrollTo(index)}
-            type="button"
-          >
-            <span
-              className={cn(
-                "block h-1 rounded-full transition-all duration-300",
-                active ? "w-10 bg-accent" : "w-4 bg-border-strong",
-                dotClassName,
-                active ? activeDotClassName : null,
-              )}
-            />
-          </button>
-        );
-      })}
+          return (
+            <button
+              aria-current={active}
+              aria-label={`${dotLabel ?? "Go to slide"} ${index + 1} of ${scrollSnaps.length}`}
+              className="group p-1.5"
+              key={snap}
+              onClick={() => scrollTo(index)}
+              type="button"
+            >
+              <span
+                className={cn(
+                  "block size-2 rounded-full transition-colors",
+                  active
+                    ? "bg-ink"
+                    : "bg-ink-muted/60 group-hover:bg-ink-muted",
+                  dotClassName,
+                  active ? activeDotClassName : null,
+                )}
+              />
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

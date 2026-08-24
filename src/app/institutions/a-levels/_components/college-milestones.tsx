@@ -31,14 +31,15 @@ export function CollegeMilestones({
   return (
     <section className="gutter-x section-y" id="milestones">
       <div className="mx-auto max-w-page">
-        <Reveal className="lg:max-w-2xl" stagger={0.08}>
-          <RevealItem>
+        <Reveal stagger={0.08}>
+          <RevealItem className="flex items-center gap-5">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
           </RevealItem>
 
-          <SplitText as="h2" className="mt-4">
-            {copy.heading}
-          </SplitText>
+          <div className="mt-6 sm:max-w-2xl lg:mt-8">
+            <SplitText as="h2">{copy.heading}</SplitText>
+          </div>
         </Reveal>
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>

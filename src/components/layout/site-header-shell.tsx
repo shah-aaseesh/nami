@@ -250,12 +250,7 @@ export function SiteHeaderShell({
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
                 render={
-                  <Button
-                    size="icon"
-                    variant="default"
-                    className="border border-border-strong rounded-md flex items-center justify-center"
-                    aria-label="Menu"
-                  >
+                  <Button size="icon" variant="default" aria-label="Menu">
                     <Icon icon={MenuIcon} className="size-5" />
                   </Button>
                 }

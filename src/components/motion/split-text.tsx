@@ -53,36 +53,56 @@ export function SplitText({
       const el = root.current;
       if (!el) return;
 
-      const split = GsapSplitText.create(el, {
-        type: SPLIT_TYPE[type],
-        mask: type,
-        aria: "auto",
-        autoSplit: true,
-        onSplit: (self) => {
-          if (isInsideRevealWindow(el)) return;
+      let disposed = false;
+      let split: ReturnType<typeof GsapSplitText.create> | null = null;
+      let tween: gsap.core.Tween | null = null;
 
-          return gsap.fromTo(
-            self[type],
-            {
-              yPercent: SPLIT_Y_PERCENT,
-            },
-            {
-              yPercent: 0,
-              duration: SPLIT_DURATION,
-              ease: "power4.out",
-              stagger,
-              scrollTrigger: { trigger: el, start: REVEAL_START, once: true },
-            },
-          );
-        },
-      });
+      const splitText = () => {
+        if (disposed) return;
 
-      if (!isHeading) {
-        el.setAttribute("role", "img");
+        split = GsapSplitText.create(el, {
+          type: SPLIT_TYPE[type],
+          mask: type,
+          aria: "auto",
+          autoSplit: true,
+          onSplit: (self) => {
+            if (isInsideRevealWindow(el)) return;
+
+            tween = gsap.fromTo(
+              self[type],
+              {
+                yPercent: SPLIT_Y_PERCENT,
+              },
+              {
+                yPercent: 0,
+                duration: SPLIT_DURATION,
+                ease: "power4.out",
+                stagger,
+                scrollTrigger: { trigger: el, start: REVEAL_START, once: true },
+              },
+            );
+            return tween;
+          },
+        });
+
+        if (!isHeading) {
+          el.setAttribute("role", "img");
+        }
+      };
+
+      // Splitting against the fallback font's metrics yields line breaks that
+      // no longer match once next/font swaps the webfont in (FOUT). Wait for the
+      // document's fonts to settle so the masked lines align with the real glyphs.
+      if (document.fonts?.ready !== undefined) {
+        void document.fonts.ready.then(splitText);
+      } else {
+        splitText();
       }
 
       return () => {
-        split.revert();
+        disposed = true;
+        tween?.kill();
+        split?.revert();
         el.removeAttribute("role");
       };
     },

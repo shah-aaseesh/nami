@@ -6,7 +6,6 @@ import { useCallback, useEffect, useState } from "react";
 type EmblaApi = UseEmblaCarouselType[1];
 
 const AUTOPLAY_MS = 4000;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 export function useCarouselAutoplay({
   api,

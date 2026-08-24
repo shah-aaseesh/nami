@@ -1,25 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CareersMastheadCopy } from "@/app/careers/_components/careers-masthead";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
-import type { ContentImage } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-
-export type AlumniMastheadCopy = {
-  readonly eyebrow: string;
-  readonly heading: string;
-  readonly standfirst: string;
-  readonly cta: string;
-  readonly secondaryCta: string;
-  readonly image: ContentImage;
-};
 
 export function AlumniMasthead({
   copy,
 }: {
-  readonly copy: AlumniMastheadCopy;
+  readonly copy: CareersMastheadCopy;
 }) {
   return (
     <section className="gutter-x section-y-masthead" id="alumni-hero">
@@ -38,12 +29,12 @@ export function AlumniMasthead({
               </Standfirst>
             )}
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center lg:mt-10">
+            <div className="mt-8 lg:mt-10">
               <Link
-                href="#stories"
+                href="#testimonials"
                 className={cn(
                   buttonVariants({ size: "lg", variant: "default" }),
-                  "group gap-2 px-6 w-full sm:w-auto inline-flex items-center justify-between sm:justify-start",
+                  "group gap-2 px-5 w-full sm:w-auto inline-flex items-center justify-between sm:justify-start",
                 )}
               >
                 <span>{copy.cta}</span>
@@ -52,21 +43,11 @@ export function AlumniMasthead({
                   icon={ArrowRightIcon}
                 />
               </Link>
-
-              <Link
-                href="#connect"
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "outline" }),
-                  "w-full sm:w-auto inline-flex items-center justify-center px-6",
-                )}
-              >
-                <span>{copy.secondaryCta}</span>
-              </Link>
             </div>
           </div>
 
           <div className="lg:col-span-5">
-            <div className="relative aspect-4/3 sm:aspect-16/10 lg:aspect-4/3 overflow-hidden rounded-3xl border border-border/60 shadow-xs">
+            <div className="relative aspect-4/3 sm:aspect-16/10 lg:aspect-4/3 overflow-hidden rounded-3xl">
               <Image
                 src={copy.image.src}
                 alt={copy.image.alt}

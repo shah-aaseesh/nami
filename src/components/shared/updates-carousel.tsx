@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 const HOLD_SECONDS = 3.2;
 const SLIDE_SECONDS = 0.9;
 const AUTOPLAY_MS = (HOLD_SECONDS + SLIDE_SECONDS) * 1000;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 export function UpdatesCarousel({
   className,
@@ -26,19 +25,9 @@ export function UpdatesCarousel({
   const [index, setIndex] = useState(0);
   const [hovering, setHovering] = useState(false);
   const [focusWithin, setFocusWithin] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   const count = images.length;
   const canSlide = count > 1;
-
-  useEffect(() => {
-    const query = window.matchMedia(REDUCED_MOTION_QUERY);
-    setPrefersReducedMotion(query.matches);
-    const onChange = (event: MediaQueryListEvent) =>
-      setPrefersReducedMotion(event.matches);
-    query.addEventListener("change", onChange);
-    return () => query.removeEventListener("change", onChange);
-  }, []);
 
   useEffect(() => {
     const el = track.current;
@@ -64,7 +53,7 @@ export function UpdatesCarousel({
       setIndex(next);
 
       gsap.to(el, {
-        duration: prefersReducedMotion ? 0 : SLIDE_SECONDS,
+        duration: SLIDE_SECONDS,
         ease: "power2.inOut",
         onComplete: () => {
           gsap.set(el, { yPercent: -100 * next });
@@ -72,17 +61,17 @@ export function UpdatesCarousel({
         yPercent: -100 * (wrapsForward ? count : next),
       });
     },
-    [count, prefersReducedMotion],
+    [count],
   );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: index is an intentional re-key — every advance, by arrow or by autoplay, restarts the hold countdown.
   useEffect(() => {
-    if (!canSlide || hovering || focusWithin || prefersReducedMotion) return;
+    if (!canSlide || hovering || focusWithin) return;
     const id = window.setInterval(() => {
       if (!document.hidden) navigate(1);
     }, AUTOPLAY_MS);
     return () => window.clearInterval(id);
-  }, [canSlide, focusWithin, hovering, index, navigate, prefersReducedMotion]);
+  }, [canSlide, focusWithin, hovering, index, navigate]);
 
   const [first] = images;
   const loopSlide =

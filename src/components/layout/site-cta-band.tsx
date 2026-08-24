@@ -68,7 +68,11 @@ export function SiteCtaBand({ heading, standfirst }: SiteCtaBandProps) {
                 />
               </div>
 
-              <Button size="lg" type="submit" className="shrink-0">
+              <Button
+                size="lg"
+                type="submit"
+                className="shrink-0 bg-white text-primary-700 hover:bg-white/90"
+              >
                 <span>Subscribe</span>
                 <Icon icon={ArrowUpRightIcon} />
               </Button>

@@ -1,8 +1,8 @@
 "use client";
 
-import type { ContentImage } from "@/lib/content";
 import Image from "next/image";
 import { useRef } from "react";
+import type { ContentImage } from "@/lib/content";
 
 const BAND_VIDEO_SRC = "/nami-video.mp4";
 

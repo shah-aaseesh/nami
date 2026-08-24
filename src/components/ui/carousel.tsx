@@ -32,6 +32,7 @@ type CarouselProps = {
   readonly autoplay?: boolean;
   readonly autoplayIntervalMs?: number;
   readonly opts?: CarouselOptions;
+  readonly pauseOnHover?: boolean;
   readonly plugins?: CarouselPlugin;
   readonly setApi?: (api: CarouselApi) => void;
 };
@@ -67,6 +68,7 @@ export function Carousel({
   children,
   className,
   opts,
+  pauseOnHover = true,
   plugins,
   setApi,
   ...props
@@ -162,8 +164,8 @@ export function Carousel({
         onBlurCapture={autoplay ? resume : undefined}
         onFocusCapture={autoplay ? pause : undefined}
         onKeyDownCapture={onKeyDown}
-        onPointerEnter={autoplay ? pause : undefined}
-        onPointerLeave={autoplay ? resume : undefined}
+        onPointerEnter={autoplay && pauseOnHover ? pause : undefined}
+        onPointerLeave={autoplay && pauseOnHover ? resume : undefined}
         role="region"
       >
         {children}

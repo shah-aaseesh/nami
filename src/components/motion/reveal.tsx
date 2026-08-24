@@ -25,6 +25,7 @@ export type RevealProps = {
   className?: string;
   y?: number;
   stagger?: number;
+  duration?: number;
 };
 
 export function Reveal({
@@ -32,6 +33,7 @@ export function Reveal({
   className,
   y = REVEAL_Y,
   stagger = 0,
+  duration = REVEAL_DURATION,
 }: RevealProps) {
   const root = useRef<HTMLDivElement>(null);
 
@@ -54,7 +56,7 @@ export function Reveal({
         {
           y: 0,
           opacity: 1,
-          duration: REVEAL_DURATION,
+          duration,
           ease: "power3.out",
           stagger,
           scrollTrigger: { trigger: el, start: REVEAL_START, once: true },

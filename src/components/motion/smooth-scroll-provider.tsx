@@ -35,7 +35,7 @@ function MountSmootherBeforeSiblings() {
       const smoother = ScrollSmoother.create({
         content: `#${CONTENT_ID}`,
         effects: true,
-        smooth: 1.8,
+        smooth: 1.2,
         wrapper: `#${WRAPPER_ID}`,
       });
       return () => smoother.kill();

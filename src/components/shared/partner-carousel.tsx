@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Marquee } from "@/components/motion/marquee";
 import type { ContentImage } from "@/lib/content";
 import { gsap } from "@/lib/gsap";
@@ -22,7 +22,6 @@ type LogoRow = {
 
 const FORWARD_SPEED = 45;
 const REVERSE_SPEED = 35;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 function splitRows(items: readonly CareerPartner[]): readonly LogoRow[] {
   const half = Math.ceil(items.length / 2);
@@ -92,16 +91,6 @@ export function PartnerCarousel({
   readonly label: string;
 }) {
   const rows = useRef<HTMLDivElement>(null);
-  const [motionAllowed, setMotionAllowed] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia(REDUCED_MOTION_QUERY);
-    setMotionAllowed(!query.matches);
-    const onChange = (event: MediaQueryListEvent) =>
-      setMotionAllowed(!event.matches);
-    query.addEventListener("change", onChange);
-    return () => query.removeEventListener("change", onChange);
-  }, []);
 
   // Marquee exposes no pause handle, so reach the loop through the tween that
   // targets its track — the only child of the labelled group it renders.
@@ -124,23 +113,6 @@ export function PartnerCarousel({
     logoRows.length === 1
       ? label
       : `${label} (${position + 1} of ${logoRows.length})`;
-
-  if (!motionAllowed) {
-    return (
-      <div className="flex flex-col gap-3 md:gap-4">
-        {logoRows.map((row, position) => (
-          // Tailwind emits the reduced-motion block ahead of the breakpoint ones,
-          // so every breakpoint needs its own override to release the clip height.
-          <PartnerRow
-            className="h-24 flex-wrap content-start justify-center overflow-hidden md:h-28 lg:h-32 motion-reduce:h-auto md:motion-reduce:h-auto lg:motion-reduce:h-auto"
-            key={row.key}
-            label={rowLabel(position)}
-            logos={row.logos}
-          />
-        ))}
-      </div>
-    );
-  }
 
   return (
     <div

@@ -192,7 +192,12 @@ export async function AcademicLevels() {
             </P>
           )
         ) : (
-          <Reveal className="mt-10 lg:mt-14" stagger={0.06} y={12}>
+          <Reveal
+            className="mt-10 lg:mt-14"
+            duration={0.55}
+            stagger={0.05}
+            y={10}
+          >
             <ul className="grid gap-5 sm:grid-cols-2 lg:gap-6 xl:grid-cols-4">
               {levels.map((level) => (
                 <InstitutionCard

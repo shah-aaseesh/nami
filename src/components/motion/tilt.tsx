@@ -42,18 +42,24 @@ export function Tilt({
 
         const rotateX = gsap.quickTo(el, "rotationX", { duration, ease });
         const rotateY = gsap.quickTo(el, "rotationY", { duration, ease });
-        const scaleTo = gsap.quickTo(el, "scale", { duration, ease });
+        // scale is a transform shorthand quickTo's resetTo can't target; drive the axes individually.
+        const scaleXTo = gsap.quickTo(el, "scaleX", { duration, ease });
+        const scaleYTo = gsap.quickTo(el, "scaleY", { duration, ease });
 
         const onMove = (event: PointerEvent) => {
           const rect = el.getBoundingClientRect();
           rotateY(((event.clientX - rect.left) / rect.width - 0.5) * max * 2);
           rotateX(-((event.clientY - rect.top) / rect.height - 0.5) * max * 2);
         };
-        const onEnter = () => scaleTo(scale);
+        const onEnter = () => {
+          scaleXTo(scale);
+          scaleYTo(scale);
+        };
         const onLeave = () => {
           rotateX(0);
           rotateY(0);
-          scaleTo(1);
+          scaleXTo(1);
+          scaleYTo(1);
         };
 
         el.addEventListener("pointermove", onMove);

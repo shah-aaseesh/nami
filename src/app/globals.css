@@ -121,7 +121,8 @@
 @layer base {
   .field-ink,
   .field-brand,
-  .field-teal {
+  .field-teal,
+  .field-blush {
     --color-background: var(--color-surface);
     --color-foreground: var(--color-ink);
     --color-card: var(--color-surface-raised);
@@ -226,6 +227,20 @@
   --color-accent: var(--color-primary-100);
   --color-accent-ink: var(--color-primary-800);
   --color-focus: var(--color-primary-100);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+@utility field-blush {
+  --color-surface: var(--color-primary-100);
+  --color-surface-raised: var(--color-neutral-50);
+  --color-ink: var(--color-primary-800);
+  --color-ink-muted: var(--color-neutral-700);
+  --color-border: var(--color-primary-200);
+  --color-border-strong: var(--color-primary-300);
+  --color-accent: var(--color-primary-700);
+  --color-accent-ink: #ffffff;
+  --color-focus: var(--color-primary-700);
   background-color: var(--color-surface);
   color: var(--color-ink);
 }

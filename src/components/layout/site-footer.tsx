@@ -2,30 +2,12 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
-import { Icon } from "@/components/ui/icon";
 import { Eyebrow, P } from "@/components/ui/typography";
-import type { SocialPlatform } from "@/lib/content";
 import { content, paragraphsOf } from "@/lib/content";
 import { institutionPathForRole } from "@/lib/content/institutions";
-import type { IconSvgElement } from "@/lib/icons";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  TikTokIcon,
-  YouTubeIcon,
-} from "@/lib/icons";
 import { INSTITUTION_ROLES } from "@/lib/institution-filter";
 import { SiteCtaBand } from "./site-cta-band";
 import { SITE_FOOTER_NAV_ITEMS } from "./site-nav-sections";
-
-const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
-  facebook: FacebookIcon,
-  instagram: InstagramIcon,
-  linkedin: LinkedInIcon,
-  tiktok: TikTokIcon,
-  youtube: YouTubeIcon,
-};
 
 function stated(value: string | null | undefined): string | null {
   return value === undefined || value === null ? null : value;
@@ -87,9 +69,9 @@ export async function SiteFooter() {
       />
 
       <footer className="field-brand">
-        <div className="gutter-x section-y">
+        <div className="gutter-x section-y-compact">
           <Reveal
-            className="mx-auto grid max-w-page gap-y-10 md:grid-cols-12 md:gap-x-8 lg:gap-x-10"
+            className="mx-auto grid max-w-page gap-y-6 md:grid-cols-12 md:gap-x-8 lg:gap-x-10"
             stagger={0.06}
             y={16}
           >
@@ -109,7 +91,7 @@ export async function SiteFooter() {
                 <P className="max-w-xl text-sm">{summary}</P>
               )}
 
-              <ul className="mt-6 grid gap-y-3">
+              <ul className="mt-4 grid gap-y-3">
                 {campuses.map((campus) => {
                   const street = stated(campus.streetAddress);
                   return (
@@ -146,7 +128,7 @@ export async function SiteFooter() {
 
             <div className="md:col-span-7 lg:col-span-3">
               <Eyebrow as="h2">Contact</Eyebrow>
-              <ul className="mt-4 grid gap-y-5">
+              <ul className="mt-4 grid gap-y-4">
                 {INSTITUTION_ROLES.map((role) => (
                   <FooterContact
                     email={stated(contact.byEntity[role].email)}
@@ -162,39 +144,12 @@ export async function SiteFooter() {
         </div>
 
         <div className="field-ink gutter-x section-y-compact">
-          <div className="mx-auto flex max-w-page flex-col gap-y-4 md:flex-row md:items-center md:justify-between">
-            <p className="font-body text-sm text-ink-muted">
-              © {group.name}
-              {group.establishedYear === null
-                ? null
-                : ` · Established ${group.establishedYear}`}
-            </p>
-
-            <ul className="flex flex-wrap items-center gap-2">
-              {contact.socialProfiles.map((profile) => (
-                <li key={profile.href}>
-                  <Link
-                    aria-label={profile.label}
-                    className="flex size-9 items-center justify-center rounded-full border border-border-strong/50 transition-colors hover:border-primary-700 hover:bg-primary-700 hover:text-primary-100"
-                    href={profile.href as Route}
-                    rel={
-                      profile.destination === "external"
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    target={
-                      profile.destination === "external" ? "_blank" : undefined
-                    }
-                  >
-                    <Icon
-                      className="size-4"
-                      icon={SOCIAL_GLYPHS[profile.platform]}
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="mx-auto max-w-page text-center font-body text-sm text-ink-muted">
+            © {group.name}
+            {group.establishedYear === null
+              ? null
+              : ` · Established ${group.establishedYear}`}
+          </p>
         </div>
       </footer>
     </>

@@ -96,35 +96,50 @@ export async function InstitutionNotices({
         ) : (
           <Reveal className="mt-10 lg:mt-14" stagger={0.08} y={28}>
             <ul className="border-t border-border">
-              {notices.map((item) => (
-                <li
-                  className="grid gap-x-8 gap-y-2 border-b border-border py-5 sm:grid-cols-[auto_minmax(0,1fr)] lg:py-7"
-                  data-reveal-item=""
-                  key={item.id}
-                >
-                  <Eyebrow
-                    as="time"
-                    className="sm:pt-1"
-                    dateTime={item.publishedAt}
+              {notices.map((item) => {
+                const notice =
+                  item.link !== null && item.link.destination !== "legacy"
+                    ? item.link
+                    : null;
+                const isExternal = notice?.destination === "external";
+
+                return (
+                  <li
+                    className="group relative grid gap-x-8 gap-y-2 border-b border-border py-5 sm:grid-cols-[auto_minmax(0,1fr)] lg:py-7"
+                    data-reveal-item=""
+                    key={item.id}
                   >
-                    {formatDate(item.publishedAt)}
-                  </Eyebrow>
+                    <Eyebrow
+                      as="time"
+                      className="sm:pt-1"
+                      dateTime={item.publishedAt}
+                    >
+                      {formatDate(item.publishedAt)}
+                    </Eyebrow>
 
-                  <div>
-                    <H5 as="h3" className="text-ink">
-                      {item.title}
-                    </H5>
+                    <div>
+                      <H5 as="h3" className="text-ink">
+                        <Link
+                          className="transition-colors after:absolute after:inset-0 group-hover:text-accent"
+                          href={(notice?.href ?? href) as Route}
+                          rel={isExternal ? "noopener noreferrer" : undefined}
+                          target={isExternal ? "_blank" : undefined}
+                        >
+                          {item.title}
+                        </Link>
+                      </H5>
 
-                    {item.venue === null ? null : (
-                      <p className="mt-2 inline-flex items-center gap-2 font-body text-sm text-ink-muted">
-                        <Icon className="size-4" icon={LocationIcon} />
-                        <span className="sr-only">Venue </span>
-                        {item.venue}
-                      </p>
-                    )}
-                  </div>
-                </li>
-              ))}
+                      {item.venue === null ? null : (
+                        <p className="mt-2 inline-flex items-center gap-2 font-body text-sm text-ink-muted">
+                          <Icon className="size-4" icon={LocationIcon} />
+                          <span className="sr-only">Venue </span>
+                          {item.venue}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </Reveal>
         )}

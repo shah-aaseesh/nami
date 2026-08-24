@@ -3,13 +3,13 @@ import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, H5, Standfirst } from "@/components/ui/typography";
 import type { Affiliation } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
-export type BachelorsAwardingCopy = {
+export type InstitutionAwardingCopy = {
   readonly eyebrow: string;
   readonly heading: string;
   readonly standfirst: string;
   readonly sinceLabel: string;
-  readonly offerNote: string;
 };
 
 function logoSrcOf(logo: Affiliation["logo"]): string | null {
@@ -75,14 +75,14 @@ function AwardingBodyCard({
   );
 }
 
-export function BachelorsAwarding({
+export function InstitutionAwarding({
   affiliations,
   copy,
   id,
   levelSlug,
 }: {
   readonly affiliations: readonly Affiliation[];
-  readonly copy: BachelorsAwardingCopy;
+  readonly copy: InstitutionAwardingCopy;
   readonly id?: string;
   readonly levelSlug: string;
 }) {
@@ -114,7 +114,14 @@ export function BachelorsAwarding({
         </Reveal>
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <ul
+            className={cn(
+              "grid gap-4 lg:gap-6",
+              awardingBodies.length === 1
+                ? "mx-auto w-full max-w-md"
+                : "sm:grid-cols-2 lg:grid-cols-3",
+            )}
+          >
             {awardingBodies.map((item) => (
               <AwardingBodyCard
                 item={item}

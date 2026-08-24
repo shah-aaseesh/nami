@@ -1,6 +1,6 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H4, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H4, P } from "@/components/ui/typography";
 
 export type CollegeMilestone = {
   readonly year: number;
@@ -11,7 +11,6 @@ export type CollegeMilestone = {
 export type CollegeMilestonesCopy = {
   readonly eyebrow: string;
   readonly heading: string;
-  readonly standfirst: string;
   readonly milestones: readonly CollegeMilestone[];
 };
 
@@ -25,23 +24,17 @@ export function CollegeMilestones({
   return (
     <section className="gutter-x section-y" id="milestones">
       <div className="mx-auto max-w-page">
-        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
-          <div className="lg:col-span-5">
-            <RevealItem>
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
-            </RevealItem>
-
-            <SplitText
-              as="h2"
-              className="mt-4 font-display text-5xl font-normal text-balance text-ink"
-            >
-              {copy.heading}
-            </SplitText>
-          </div>
-
-          <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
-            <Standfirst>{copy.standfirst}</Standfirst>
+        <Reveal className="lg:max-w-lg" stagger={0.08}>
+          <RevealItem>
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
           </RevealItem>
+
+          <SplitText
+            as="h2"
+            className="mt-4 font-display text-5xl font-normal text-balance text-ink"
+          >
+            {copy.heading}
+          </SplitText>
         </Reveal>
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>

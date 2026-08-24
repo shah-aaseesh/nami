@@ -17,6 +17,7 @@ export type InstitutionGalleryCopy = {
   readonly heading: string;
   readonly standfirst: string;
   readonly ctaLabel: string;
+  readonly ctaAccessibleLabel?: string;
 };
 
 export type InstitutionGalleryTone = "surface" | "ink";
@@ -108,6 +109,7 @@ export async function InstitutionGallery({
 
             <RevealItem className="sm:shrink-0">
               <Link
+                aria-label={copy.ctaAccessibleLabel}
                 className={cn(
                   buttonVariants({ size: "lg", variant: "default" }),
                 )}

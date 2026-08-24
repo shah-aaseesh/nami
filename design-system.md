@@ -98,15 +98,16 @@ It exists so a primitive pulled in from shadcn compiles against our palette with
 
 `--color-input` is `var(--color-border-strong)`, **not** `var(--color-border)`. It is the visual boundary of a form control, so WCAG 1.4.11 asks 3:1 against the surface; the decorative hairline gives 1.39:1 in the light theme and **1.00:1** inside `field-brand` on a card — a mathematically invisible border. Consequence: an input border is `neutral-900` in the light theme, the same weight as body text rather than a soft grey. `--color-border` itself is unchanged and stays decorative.
 
-### 2.4 Colour fields — `field-ink`, `field-brand`, `field-teal`
+### 2.4 Colour fields — `field-ink`, `field-brand`, `field-teal`, `field-blush`
 
-Three utilities. Each one **re-points all nine tokens** and sets its own `background-color` / `color`, so the entire subtree inverts.
+Four utilities. Each one **re-points all nine tokens** and sets its own `background-color` / `color`, so the entire subtree inverts.
 
 | Utility | Surface | Ink | Accent | Use |
 |:--|:--|:--|:--|:--|
 | `field-ink` | `neutral-950` | `neutral-50` | `primary-400` | near-black editorial break |
 | `field-brand` | `primary-700` | `#ffffff` | `primary-100` | the brand red block |
 | `field-teal` | `secondary-900` | `#ffffff` | `primary-400` | programme / campus-life / sustainability lane |
+| `field-blush` | `primary-100` | `primary-800` | `primary-700` | light card sitting inside a `field-brand` section |
 
 Apply to the **section element itself**, which is full-bleed, so the colour paints edge to edge:
 
@@ -116,15 +117,21 @@ Apply to the **section element itself**, which is full-bleed, so the colour pain
 </section>
 ```
 
-Note that in a field the accent flips to a **light** value — `primary-400` on ink/teal, `primary-100` on brand. The brand red is not legible on itself or on near-black at text sizes, so `text-accent` means "the accent for this surface", not "red".
+Note that in the three dark fields the accent flips to a **light** value — `primary-400` on ink/teal, `primary-100` on brand. The brand red is not legible on itself or on near-black at text sizes, so `text-accent` means "the accent for this surface", not "red". `field-blush` is the light case, so its accent stays the dark `primary-700`.
+
+A field nested inside another field is supported and is what `field-blush` is for — it re-points all nine tokens again, so the inner subtree resolves against the inner field, not the enclosing one.
 
 #### How the inversion actually works (read this before editing globals.css)
 
 CSS substitutes a `var()` inside a custom property **at the point the property is declared**, not where it is used. So `--color-primary: var(--color-accent)` declared on `:root` is frozen to the *root's* accent — re-pointing `--color-accent` on a descendant would not move it.
 
-That is why `globals.css` contains a `@layer base` block that **re-declares the entire shadcn alias set on `.field-ink, .field-brand, .field-teal`**. It looks like a copy-paste duplicate of the alias block. It is load-bearing: without it, `bg-primary` inside a dark section would still emit the light-mode red.
+That is why `globals.css` contains a `@layer base` block that **re-declares the entire shadcn alias set on every colour field**. It looks like a copy-paste duplicate of the alias block. It is load-bearing: without it, `bg-primary` inside a dark section would still emit the light-mode red.
 
-**Consequence: adding *or removing* an alias means editing BOTH places. `pnpm run aliases` enforces it.** The gate compiles this file with Tailwind's own compiler, derives which `@theme` keys resolve — directly or transitively — against a field-scoped token, and fails if that set does not exactly match the keys re-declared on `.field-ink, .field-brand, .field-teal`. It names the missing keys and which block they belong in, and fails in both directions. It also checks the three `@utility field-*` rules re-point an identical token set. The nine core tokens never had the inversion problem — they are re-declared by the `@utility field-*` rules themselves — but the gate checks those for drift too.
+**So every colour field is declared TWICE in `globals.css` — once as `@utility field-…` for the nine tokens, once in that `@layer base` block for the aliases — and a fourth registration lives in `cn()` (§8). Adding a field, or adding *or removing* an alias, means editing all of them. `pnpm run aliases` enforces the `globals.css` half.**
+
+The gate compiles this file with Tailwind's own compiler and works per field, from the compiled output rather than from a selector string, so it neither knows nor cares how Tailwind groups the rules it emits. For each field it collects every custom property that lands on that class from *any* rule, and fails if the fields do not all declare an identical set — that is what catches a field added as a `@utility` but missed in the `@layer base` block. It then derives which `@theme` keys resolve, directly or transitively, against a field-scoped token, and fails if that set does not exactly match the aliases the fields re-declare. It names the missing keys and which block they belong in, and fails in both directions. The nine core tokens never had the inversion problem — they are re-declared by the `@utility field-*` rules themselves — but the gate checks those for drift too, and it prints the field, token and alias counts it compared so an empty comparison cannot read as a pass.
+
+Registering a fifth field is a one-line addition in each of the four places; nothing in the gate enumerates field names beyond its own list.
 
 The font block uses `@theme inline` for the opposite reason: `--font-body` points at `--font-inter`, which `next/font` defines on `<html>`. Inlining makes `font-sans` emit the `var()` chain directly so it resolves against the element's own scope.
 

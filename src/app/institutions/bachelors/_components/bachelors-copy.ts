@@ -1,9 +1,9 @@
 import type { CareerPlacementCopy } from "@/components/shared/career-placement";
+import type { InstitutionAwardingCopy } from "@/components/shared/institution-awarding";
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
 import type { ContentImage, ContentLink, SectionCopy } from "@/lib/content";
 import { richText } from "@/lib/content";
-import type { BachelorsAwardingCopy } from "./bachelors-awarding";
 
 export type CourseKey =
   | "computer-science"
@@ -137,14 +137,12 @@ const masthead: BachelorsMastheadCopy = {
   },
 };
 
-const awarding: BachelorsAwardingCopy = {
+const awarding: InstitutionAwardingCopy = {
   eyebrow: "Awarding universities",
   heading: "The universities awarding the degrees taught on this campus.",
   standfirst:
     "Taught here, awarded elsewhere — the university behind each degree sits below.",
   sinceLabel: "Since",
-  offerNote:
-    "All decisions regarding an offer letter for a University of Northampton programme are made by the University of Northampton, UK.",
 };
 
 const undergraduateEntry: readonly ProgrammeRequirement[] = [

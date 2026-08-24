@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CareerPlacement } from "@/components/shared/career-placement";
+import { InstitutionAwarding } from "@/components/shared/institution-awarding";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import type { CareerPartner } from "@/components/shared/partner-carousel";
 import { PrincipalMessage } from "@/components/shared/principal-message";
@@ -9,7 +10,6 @@ import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
-import { BachelorsAwarding } from "./_components/bachelors-awarding";
 import { bachelorsCopy } from "./_components/bachelors-copy";
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
 
@@ -50,7 +50,6 @@ export default async function BachelorsPage() {
         heroLabel={bachelorsCopy.masthead.heroLabel}
         slides={bachelorsCopy.masthead.slides}
         heading={bachelorsCopy.masthead.heading}
-        headingClassName="!text-3xl sm:!text-4xl lg:!text-[4rem]"
         standfirst={bachelorsCopy.masthead.standfirst}
         primaryCta={bachelorsCopy.masthead.cta}
       />
@@ -69,7 +68,7 @@ export default async function BachelorsPage() {
 
       <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
 
-      <BachelorsAwarding
+      <InstitutionAwarding
         affiliations={affiliations}
         copy={bachelorsCopy.awarding}
         id="awarding"

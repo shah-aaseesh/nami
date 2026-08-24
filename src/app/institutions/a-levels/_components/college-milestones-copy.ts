@@ -3,8 +3,6 @@ import type { CollegeMilestonesCopy } from "./college-milestones";
 export const collegeMilestonesCopy: CollegeMilestonesCopy = {
   eyebrow: "Milestones",
   heading: "The Cambridge programme, year by year.",
-  standfirst:
-    "Each date below marks a step the A Level programme at NAMI College has taken.",
   milestones: [
     {
       year: 2013,

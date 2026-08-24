@@ -1,3 +1,4 @@
+import type { InstitutionAwardingCopy } from "@/components/shared/institution-awarding";
 import type { InstitutionGalleryCopy } from "@/components/shared/institution-gallery";
 import type { InstitutionNoticesCopy } from "@/components/shared/institution-notices";
 import type { ContentImage, ContentLink, SectionCopy } from "@/lib/content";
@@ -160,6 +161,14 @@ const subjects: CollegeSubjectsCopy = {
   notOfferedLabel: (group) => `Not offered in ${group}`,
 };
 
+const awarding: InstitutionAwardingCopy = {
+  eyebrow: "Awarding body",
+  heading: "The examination board behind the certificate.",
+  standfirst:
+    "A Level certificates are issued by Cambridge, not by NAMI. What the college holds is the affiliation to teach the programme and the accreditation to examine it on campus.",
+  sinceLabel: "Affiliated since",
+};
+
 const gallery: InstitutionGalleryCopy = {
   eyebrow: "The campus",
   heading: "Two years, photographed.",
@@ -232,6 +241,7 @@ export const collegeCopy = {
   },
   cambridge,
   subjects,
+  awarding,
   gallery,
   alumni,
   entry,

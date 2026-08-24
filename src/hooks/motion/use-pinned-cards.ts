@@ -5,7 +5,7 @@ import { isInsideRevealWindow, REVEAL_START } from "@/components/motion/reveal";
 import { FULL_MOTION_QUERY, gsap, useGSAP } from "@/lib/gsap";
 
 const STACK_MIN_WIDTH = 1024;
-const STACK_QUERY = `${FULL_MOTION_QUERY} and (min-width: ${STACK_MIN_WIDTH}px)`;
+export const STACK_QUERY = `${FULL_MOTION_QUERY} and (min-width: ${STACK_MIN_WIDTH}px)`;
 // The stack pin owns `y` from STACK_MIN_WIDTH up; below it nothing drives `y`.
 // ENTRANCE_QUERY is `not` STACK_QUERY, so exactly one of the two ever matches.
 const ENTRANCE_QUERY = `not ${STACK_QUERY}`;

@@ -7,7 +7,7 @@ const twMerge = extendTailwindMerge<
   extend: {
     theme: { container: ["page"], radius: ["media"] },
     classGroups: {
-      "color-field": [{ field: ["ink", "brand", "teal"] }],
+      "color-field": [{ field: ["ink", "brand", "teal", "blush"] }],
       "gutter-x": ["gutter-x"],
       "section-y": [
         "section-y",

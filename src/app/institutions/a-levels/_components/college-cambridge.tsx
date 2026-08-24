@@ -1,7 +1,10 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, H4, H5, P, Standfirst } from "@/components/ui/typography";
-import { CollegeCambridgeStack } from "./college-cambridge-stack";
+import {
+  CollegeCambridgeHold,
+  CollegeCambridgeStack,
+} from "./college-cambridge-stack";
 
 export type CollegeProposition = {
   readonly title: string;
@@ -23,25 +26,27 @@ export function CollegeCambridge({
   return (
     <section className="field-brand gutter-x section-y" id="cambridge">
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
-        <Reveal className="lg:col-span-5" stagger={0.08}>
-          <RevealItem>
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
-          </RevealItem>
-          <SplitText
-            as="h2"
-            className="mt-4 font-display text-5xl font-normal text-balance text-ink"
-          >
-            {copy.heading}
-          </SplitText>
-          <RevealItem className="mt-8 max-w-xl">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </RevealItem>
-        </Reveal>
+        <CollegeCambridgeHold className="lg:col-span-5">
+          <Reveal stagger={0.08}>
+            <RevealItem>
+              <Eyebrow>{copy.eyebrow}</Eyebrow>
+            </RevealItem>
+            <SplitText
+              as="h2"
+              className="mt-4 font-display text-5xl font-normal text-balance text-ink"
+            >
+              {copy.heading}
+            </SplitText>
+            <RevealItem className="mt-8 max-w-xl">
+              <Standfirst>{copy.standfirst}</Standfirst>
+            </RevealItem>
+          </Reveal>
+        </CollegeCambridgeHold>
 
         <CollegeCambridgeStack className="mt-12 flex flex-col gap-6 lg:col-span-6 lg:col-start-7 lg:mt-0">
           {copy.propositions.map((proposition, index) => (
             <li
-              className="relative rounded-3xl border border-border-strong/50 bg-surface-raised p-6 sm:p-8 lg:p-10"
+              className="field-blush relative rounded-3xl border border-border-strong p-6 sm:p-8 lg:p-10"
               data-pinned-panel=""
               key={proposition.title}
             >

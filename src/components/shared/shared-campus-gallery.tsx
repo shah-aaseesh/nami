@@ -7,7 +7,8 @@ const sharedGalleryCopy = {
   heading: "Campus life, photographed.",
   standfirst:
     "Convocations, panels, field days, sports, classrooms and the ordinary weeks between them — our own record of what a day here looks like.",
-  ctaLabel: "All campus photographs",
+  ctaLabel: "See more",
+  ctaAccessibleLabel: "See more campus photographs",
 };
 
 export function SharedCampusGallery({

@@ -52,6 +52,11 @@ export async function Updates() {
 
   const section = copy.sections.updates;
 
+  const indexHref =
+    section.cta === null || section.cta.destination === "legacy"
+      ? null
+      : (section.cta.href as Route);
+
   return (
     <section className="gutter-x section-y" id="updates">
       <div className="mx-auto max-w-page">
@@ -94,7 +99,7 @@ export async function Updates() {
 
         {updates.length === 0 ? null : (
           <Reveal className="mt-10 lg:mt-14" stagger={0.08}>
-            <UpdateBoard items={updates} />
+            <UpdateBoard indexHref={indexHref} items={updates} />
           </Reveal>
         )}
       </div>

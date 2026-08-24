@@ -42,7 +42,7 @@ export function TestimonialCard({
         <Avatar size="md">
           {portrait === null ? null : (
             <AvatarImage
-              alt={portrait.alt}
+              alt=""
               height={portrait.height}
               src={portrait.src}
               width={portrait.width}

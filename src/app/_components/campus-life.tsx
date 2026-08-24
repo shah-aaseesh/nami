@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Parallax } from "@/components/motion/parallax";
 import { Reveal } from "@/components/motion/reveal";
 import { content } from "@/lib/content";
+import { CampusLifeBand } from "./campus-life-band";
 
 export async function CampusLife() {
   const pillars = await content.getCampusLife();
@@ -17,15 +17,7 @@ export async function CampusLife() {
             className="absolute inset-x-0 -inset-y-24 lg:-inset-y-48"
             speed={0.9}
           >
-            <Image
-              alt={band.alt}
-              className="h-full w-full object-cover"
-              height={band.height}
-              loading="lazy"
-              sizes="100vw"
-              src={band.src}
-              width={band.width}
-            />
+            <CampusLifeBand poster={band} />
           </Parallax>
         </figure>
       </Reveal>

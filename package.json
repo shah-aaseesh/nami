@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "biome check",
     "aliases": "node scripts/check-color-aliases.mjs",
+    "portraits": "node scripts/check-portrait-placeholders.mjs",
     "format": "biome format --write"
   },
   "dependencies": {

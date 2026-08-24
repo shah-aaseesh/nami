@@ -1,15 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import {
-  Carousel,
-  type CarouselApi,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import { useCarouselAutoplay } from "@/hooks/motion/use-carousel-autoplay";
+import { useEffect, useRef, useState } from "react";
+import { Marquee } from "@/components/motion/marquee";
 import type { ContentImage } from "@/lib/content";
+import { gsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 export type CareerPartner = {
@@ -18,23 +13,75 @@ export type CareerPartner = {
   readonly logo: ContentImage | null;
 };
 
-type LogoPage = {
+type LogoRow = {
   readonly key: string;
   readonly logos: readonly CareerPartner[];
+  readonly reverse: boolean;
+  readonly speed: number;
 };
 
-const LOGOS_PER_PAGE = 9;
-const PAGE_INTERVAL_MS = 5000;
+const FORWARD_SPEED = 45;
+const REVERSE_SPEED = 35;
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
-function paginate(items: readonly CareerPartner[]): readonly LogoPage[] {
-  const pages: LogoPage[] = [];
+function splitRows(items: readonly CareerPartner[]): readonly LogoRow[] {
+  const half = Math.ceil(items.length / 2);
 
-  for (let start = 0; start < items.length; start += LOGOS_PER_PAGE) {
-    const logos = items.slice(start, start + LOGOS_PER_PAGE);
-    pages.push({ key: logos.map((logo) => logo.id).join("|"), logos });
-  }
+  return [
+    { logos: items.slice(0, half), reverse: false, speed: FORWARD_SPEED },
+    { logos: items.slice(half), reverse: true, speed: REVERSE_SPEED },
+  ]
+    .filter((row) => row.logos.length > 0)
+    .map((row) => ({
+      ...row,
+      key: row.logos.map((logo) => logo.id).join("|"),
+    }));
+}
 
-  return pages;
+function PartnerTile({ partner }: { readonly partner: CareerPartner }) {
+  // Partners share one placeholder mark, so the name is text and the image is decorative.
+  return (
+    <li
+      className={cn(
+        "flex h-24 w-52 shrink-0 items-center justify-center overflow-hidden rounded-xl border bg-surface-raised md:h-28 md:w-64 lg:h-32 lg:w-80",
+        partner.logo === null && "border-dashed",
+      )}
+    >
+      <span className="sr-only">{partner.name}</span>
+      {partner.logo !== null && (
+        <Image
+          alt=""
+          className="h-3/5 w-3/4 object-contain"
+          height={partner.logo.height}
+          loading="lazy"
+          sizes="(min-width: 1024px) 240px, (min-width: 768px) 192px, 156px"
+          src={partner.logo.src}
+          width={partner.logo.width}
+        />
+      )}
+    </li>
+  );
+}
+
+function PartnerRow({
+  className,
+  label,
+  logos,
+}: {
+  readonly className?: string;
+  readonly label?: string;
+  readonly logos: readonly CareerPartner[];
+}) {
+  return (
+    <ul
+      aria-label={label}
+      className={cn("flex items-center gap-3 md:gap-4", className)}
+    >
+      {logos.map((partner) => (
+        <PartnerTile key={partner.id} partner={partner} />
+      ))}
+    </ul>
+  );
 }
 
 export function PartnerCarousel({
@@ -44,82 +91,76 @@ export function PartnerCarousel({
   readonly items: readonly CareerPartner[];
   readonly label: string;
 }) {
-  const [api, setApi] = useState<CarouselApi>();
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [hovering, setHovering] = useState(false);
-  const [focusWithin, setFocusWithin] = useState(false);
-
-  const pages = paginate(items);
+  const rows = useRef<HTMLDivElement>(null);
+  const [motionAllowed, setMotionAllowed] = useState(false);
 
   useEffect(() => {
-    if (!api) return;
+    const query = window.matchMedia(REDUCED_MOTION_QUERY);
+    setMotionAllowed(!query.matches);
+    const onChange = (event: MediaQueryListEvent) =>
+      setMotionAllowed(!event.matches);
+    query.addEventListener("change", onChange);
+    return () => query.removeEventListener("change", onChange);
+  }, []);
 
-    const onSelect = () => setSelectedIndex(api.selectedScrollSnap());
-    onSelect();
-    api.on("select", onSelect);
-    api.on("reInit", onSelect);
+  // Marquee exposes no pause handle, so reach the loop through the tween that
+  // targets its track — the only child of the labelled group it renders.
+  const setPaused = (paused: boolean) => {
+    const root = rows.current;
+    if (root === null) return;
 
-    return () => {
-      api.off("select", onSelect);
-      api.off("reInit", onSelect);
-    };
-  }, [api]);
+    for (const track of root.querySelectorAll<HTMLElement>(
+      '[role="group"] > div',
+    )) {
+      for (const tween of gsap.getTweensOf(track)) {
+        if (paused) tween.pause();
+        else tween.resume();
+      }
+    }
+  };
 
-  useCarouselAutoplay({
-    api,
-    enabled: pages.length > 1 && !hovering && !focusWithin,
-    intervalMs: PAGE_INTERVAL_MS,
-    selectedIndex,
-  });
+  const logoRows = splitRows(items);
+  const rowLabel = (position: number) =>
+    logoRows.length === 1
+      ? label
+      : `${label} (${position + 1} of ${logoRows.length})`;
+
+  if (!motionAllowed) {
+    return (
+      <div className="flex flex-col gap-3 md:gap-4">
+        {logoRows.map((row, position) => (
+          // Tailwind emits the reduced-motion block ahead of the breakpoint ones,
+          // so every breakpoint needs its own override to release the clip height.
+          <PartnerRow
+            className="h-24 flex-wrap content-start justify-center overflow-hidden md:h-28 lg:h-32 motion-reduce:h-auto md:motion-reduce:h-auto lg:motion-reduce:h-auto"
+            key={row.key}
+            label={rowLabel(position)}
+            logos={row.logos}
+          />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div
-      onBlurCapture={() => setFocusWithin(false)}
-      onFocusCapture={() => setFocusWithin(true)}
-      onPointerEnter={() => setHovering(true)}
-      onPointerLeave={() => setHovering(false)}
+      className="flex flex-col gap-3 md:gap-4"
+      onBlurCapture={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onPointerEnter={() => setPaused(true)}
+      onPointerLeave={() => setPaused(false)}
+      ref={rows}
     >
-      <Carousel
-        aria-label={label}
-        aria-roledescription="carousel"
-        opts={{ duration: 24, loop: true }}
-        setApi={setApi}
-      >
-        <CarouselContent>
-          {pages.map((page, position) => (
-            <CarouselItem
-              aria-label={`${position + 1} of ${pages.length}`}
-              key={page.key}
-            >
-              <ul className="grid grid-cols-3 gap-3 md:gap-4">
-                {page.logos.map((partner) => (
-                  <li
-                    className={cn(
-                      "flex aspect-2/1 items-center justify-center overflow-hidden rounded-xl border bg-surface-raised lg:aspect-3/1",
-                      partner.logo === null && "border-dashed",
-                    )}
-                    key={partner.id}
-                  >
-                    {partner.logo === null ? (
-                      <span className="sr-only">{partner.name}</span>
-                    ) : (
-                      <Image
-                        alt={partner.name}
-                        className="h-2/5 w-1/2 object-contain"
-                        height={partner.logo.height}
-                        loading="lazy"
-                        sizes="(min-width: 1440px) 136px, (min-width: 1024px) 9vw, 15vw"
-                        src={partner.logo.src}
-                        width={partner.logo.width}
-                      />
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      {logoRows.map((row, position) => (
+        <Marquee
+          key={row.key}
+          label={rowLabel(position)}
+          reverse={row.reverse}
+          speed={row.speed}
+        >
+          <PartnerRow className="pe-3 md:pe-4" logos={row.logos} />
+        </Marquee>
+      ))}
     </div>
   );
 }

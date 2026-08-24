@@ -13,6 +13,7 @@ import type {
   Stat,
   Testimonial,
   Update,
+  Vacancy,
   VocationalApproval,
 } from "./types";
 
@@ -41,6 +42,7 @@ export type ContentProvider = {
   getTestimonials(): Promise<readonly Testimonial[]>;
   getLeadership(): Promise<LeadershipProfile>;
   getGallery(): Promise<readonly GalleryItem[]>;
+  getVacancies(): Promise<readonly Vacancy[]>;
   getHomeCopy(): Promise<HomeCopy>;
   getAboutCopy(): Promise<AboutCopy>;
 };

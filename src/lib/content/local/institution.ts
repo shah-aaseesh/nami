@@ -99,11 +99,6 @@ export const institution: InstitutionProfile = {
   contact: {
     phones: ["+977 1 4917444", "+977 1 4917441"],
     email: "info@nami.edu.np",
-    whatsapp: {
-      label: "WhatsApp",
-      href: "https://wa.me/97714917444",
-      destination: "external",
-    },
     websites: [
       {
         label: "school.nami.edu.np",

@@ -41,6 +41,11 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     href: "/gallery",
     descriptor: "View our photo gallery.",
   },
+  {
+    label: "Careers",
+    href: "/careers",
+    descriptor: "See what the group is recruiting for.",
+  },
   { label: "Contact", href: "/contact", descriptor: "Get in touch with us." },
 ];
 

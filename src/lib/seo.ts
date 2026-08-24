@@ -77,6 +77,7 @@ export const siteRoutes: readonly SiteRoute[] = [
   { path: "/notices", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/gallery", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/careers", changeFrequency: "monthly", priority: 0.6 },
 ];
 
 export type SocialImage = {

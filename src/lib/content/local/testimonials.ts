@@ -3,6 +3,8 @@ import type { Testimonial } from "../types";
 import { pragatiRaiPortrait } from "./images";
 
 // TEMP: every quote below is written copy, not an attributed account — replace with client-verified NAMI stories before launch.
+// PLACEHOLDER (DEC-068), not final: every portrait deliberately reuses ONE real
+// person's photo (Pragati Rai). Must not ship — retire per-entry, or portrait: null.
 export const testimonials: readonly Testimonial[] = [
   {
     ...entryOf("pragati-rai"),
@@ -22,7 +24,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "Cambridge A-Level (Science)",
     institution: "college",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("anisha-gurung"),
@@ -32,7 +34,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "Cambridge A-Level (Science)",
     institution: "college",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("nirdishta-amatya"),
@@ -42,7 +44,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BSc (Hons) Environmental Science",
     institution: "institute",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("ronak-bastola"),
@@ -52,7 +54,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BSc (Hons) Computing (Software Engineering)",
     institution: "institute",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("ananda-roy"),
@@ -62,7 +64,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "Bachelor of Business Administration (BBA)",
     institution: "institute",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("devashree-niroula"),
@@ -72,7 +74,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: null,
     institution: "institute",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("yamato-sherpa"),
@@ -82,7 +84,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BBA (Hons)",
     institution: "institute",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
   {
     ...entryOf("pankaj-badu"),
@@ -92,6 +94,6 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BSc (Hons) Computing",
     institution: "institute",
     graduatedYear: null,
-    portrait: null,
+    portrait: pragatiRaiPortrait,
   },
 ];

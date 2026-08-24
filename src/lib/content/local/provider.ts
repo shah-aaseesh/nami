@@ -4,6 +4,7 @@ import { academicLevels, programmes, vocationalApproval } from "./academics";
 import { admissionCalls } from "./admissions";
 import { affiliations } from "./affiliations";
 import { campusLife } from "./campus-life";
+import { vacancies } from "./careers";
 import { gallery } from "./gallery";
 import { homeCopy } from "./home-copy";
 import { institution } from "./institution";
@@ -29,6 +30,7 @@ export const localContentProvider: ContentProvider = {
   getTestimonials: () => Promise.resolve(testimonials),
   getLeadership: () => Promise.resolve(leadership),
   getGallery: () => Promise.resolve(gallery),
+  getVacancies: () => Promise.resolve(vacancies),
   getHomeCopy: () => Promise.resolve(homeCopy),
   getAboutCopy: () => Promise.resolve(aboutCopy),
 };

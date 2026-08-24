@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Spectral } from "next/font/google";
-import { FloatingSocials } from "@/components/layout/floating-socials";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
@@ -35,14 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body>
         <StructuredData />
-        <SmoothScrollProvider
-          chrome={
-            <>
-              <SiteHeader />
-              <FloatingSocials />
-            </>
-          }
-        >
+        <SmoothScrollProvider chrome={<SiteHeader />}>
           <div className="flex min-h-svh flex-col">
             <main id="main" className="flex-1 pt-20">
               {children}

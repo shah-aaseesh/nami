@@ -50,7 +50,6 @@ export type ContactChannel = {
   readonly email: string | null;
   readonly websites: readonly ContentLink[];
   readonly socialProfiles: readonly SocialProfile[];
-  readonly whatsapp: ContentLink | null;
   readonly byEntity: Readonly<Record<EntityRole, EntityContactChannel>>;
 };
 
@@ -192,6 +191,22 @@ export type AdmissionCall = ContentEntry & {
   readonly title: string;
   readonly note: string | null;
   readonly link: ContentLink | null;
+};
+
+export type EmploymentType =
+  | "full-time"
+  | "part-time"
+  | "contract"
+  | "internship";
+
+export type Vacancy = ContentEntry & {
+  readonly title: string;
+  readonly department: string;
+  readonly employmentType: EmploymentType;
+  readonly location: string;
+  readonly summary: string;
+  readonly postedAt: IsoDate;
+  readonly closesAt: IsoDate | null;
 };
 
 export type HomeSectionId =

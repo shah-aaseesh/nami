@@ -46,15 +46,19 @@ export function AboutValuesDisclosure({ children }: { children: ReactNode }) {
       value={value}
     >
       <AccordionItem className="border-b-0" value={PANEL_VALUE}>
-        <AccordionTrigger className="w-fit gap-2">
-          <span>
-            {isOpen ? "Show less" : "Read more"}
-            <span className="sr-only">
-              {" "}
-              about the five petals and the values they carry
-            </span>
-          </span>
-        </AccordionTrigger>
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+          <div className="lg:col-span-6 lg:col-start-7 lg:flex lg:justify-end">
+            <AccordionTrigger className="w-fit gap-2">
+              <span>
+                {isOpen ? "Show less" : "Read more"}
+                <span className="sr-only">
+                  {" "}
+                  about the five petals and the values they carry
+                </span>
+              </span>
+            </AccordionTrigger>
+          </div>
+        </div>
         <AccordionPanel className="pt-8 pb-0 pe-0 text-ink" hiddenUntilFound>
           {children}
         </AccordionPanel>

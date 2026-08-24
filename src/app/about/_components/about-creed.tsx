@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H1, H5, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, H2, P, Standfirst } from "@/components/ui/typography";
 import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
 
 function CreedStatement({
@@ -56,7 +56,7 @@ export function AboutCreed({
         )}
         <SplitText
           as="h2"
-          className="mt-4 font-display text-3xl sm:text-4xl font-normal tracking-tight text-ink text-balance lg:text-5xl"
+          className="mt-4 font-display text-5xl font-normal tracking-tight text-ink text-balance"
         >
           {section.heading}
         </SplitText>
@@ -74,24 +74,22 @@ export function AboutCreed({
         >
           {mottoLine.length === 0 ? null : (
             <CreedStatement label="Motto">
-              <H1 as="p">{mottoLine}</H1>
+              <H2 as="p" className="text-ink">
+                {mottoLine}
+              </H2>
             </CreedStatement>
           )}
           {visionBody.length === 0 ? null : (
             <CreedStatement label="Vision">
               {visionBody.map((paragraph) => (
-                <H5 as="p" className="text-pretty" key={paragraph}>
-                  {paragraph}
-                </H5>
+                <P key={paragraph}>{paragraph}</P>
               ))}
             </CreedStatement>
           )}
           {missionBody.length === 0 ? null : (
             <CreedStatement label="Mission">
               {missionBody.map((paragraph) => (
-                <H5 as="p" className="text-pretty" key={paragraph}>
-                  {paragraph}
-                </H5>
+                <P key={paragraph}>{paragraph}</P>
               ))}
             </CreedStatement>
           )}

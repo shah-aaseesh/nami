@@ -47,11 +47,11 @@ export function SchoolDay({
           <ul className="grid border-t border-primary-800/80 lg:grid-cols-2 lg:gap-x-14 xl:gap-x-16">
             {copy.campus.map((entry) => (
               <li
-                className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 border-b border-primary-800/80 py-6"
+                className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 border-b border-primary-800/80 py-4 sm:py-6"
                 key={entry.title}
               >
                 {entry.photo && (
-                  <div className="relative aspect-[4/3] w-full sm:w-40 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-primary-800/30">
+                  <div className="relative aspect-[4/3] hidden sm:block sm:w-40 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-primary-800/30">
                     <Image
                       alt={entry.photo.alt}
                       className="h-full w-full object-cover"
@@ -71,6 +71,17 @@ export function SchoolDay({
                         </h3>
                       </AccordionTrigger>
                       <AccordionPanel className="p-0 pt-3 pe-0">
+                        {entry.photo && (
+                          <div className="relative mb-3 aspect-[16/10] w-full overflow-hidden rounded-xl shadow-md bg-primary-800/30 sm:hidden">
+                            <Image
+                              alt={entry.photo.alt}
+                              className="h-full w-full object-cover"
+                              fill
+                              sizes="(max-width: 640px) 100vw, 300px"
+                              src={entry.photo.src}
+                            />
+                          </div>
+                        )}
                         <p className="font-body text-sm sm:text-base leading-relaxed text-primary-200">
                           {entry.body}
                         </p>

@@ -116,7 +116,7 @@ export function SharedHero({
               {heading ?? entity.name}
             </H3>
 
-            <p className="max-w-xl animate-hero-fade font-body text-lg text-pretty text-white/80 [animation-delay:200ms]">
+            <p className="max-w-xl animate-hero-fade font-body text-sm sm:text-base lg:text-lg text-pretty text-white/80 [animation-delay:200ms]">
               {standfirst}
             </p>
 

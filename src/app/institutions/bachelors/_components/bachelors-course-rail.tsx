@@ -20,7 +20,7 @@ function CourseCard({
   const lead = course.summary[0] ?? null;
 
   return (
-    <li className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong">
+    <li className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong w-[85vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink">
       <div className="flex flex-1 flex-col gap-4 p-6 lg:p-8">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
           <Eyebrow as="span">{course.qualification}</Eyebrow>
@@ -84,10 +84,10 @@ export function BachelorsCourseRail({
         />
       </div>
 
-      <div className="mx-auto mt-14 max-w-page lg:mt-20">
+      <div className="mx-auto mt-8 sm:mt-12 lg:mt-16 max-w-page">
         <ul
           aria-label={copy.eyebrow}
-          className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3"
+          className="flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-[var(--gutter-x)] px-[var(--gutter-x)] sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible lg:grid-cols-3"
         >
           {copy.items.map((course) => (
             <CourseCard copy={copy} course={course} key={course.key} />

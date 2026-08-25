@@ -113,9 +113,9 @@ export function SchoolBands({
           title={copy.eyebrow ?? "Academic Bands"}
         />
 
-        <RevealItem className="mt-14 lg:mt-20">
+        <RevealItem className="mt-6 sm:mt-8 lg:mt-14">
           <Tabs defaultValue="primary" className="w-full">
-            <TabsList className="mb-10">
+            <TabsList className="mb-4 sm:mb-6 lg:mb-8">
               <TabsTab value="primary" className="text-base sm:text-lg">
                 {copy.primary.label}
               </TabsTab>

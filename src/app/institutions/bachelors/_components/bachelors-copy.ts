@@ -129,7 +129,7 @@ const masthead: BachelorsMastheadCopy = {
   motto: "Transform yourself, to lead the world",
   heading: "NAAYA AAYAM MULTI-DISCIPLINARY INSTITUTE",
   standfirst:
-    "Nepal’s premium educational institution in partnership with the University of Northampton, UK and Kathmandu University.",
+    "British & KU degree programmes in Kathmandu, partnered with the University of Northampton (UK).",
   cta: {
     label: "Start an application",
     href: "/admissions",

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useRef } from "react";
-import { gsap, Observer, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 export type MarqueeProps = {
@@ -13,8 +13,6 @@ export type MarqueeProps = {
   speed?: number;
   reverse?: boolean;
   copies?: number;
-  velocity?: boolean;
-  maxBoost?: number;
 };
 
 export function Marquee({
@@ -25,8 +23,6 @@ export function Marquee({
   speed = 80,
   reverse = false,
   copies = 2,
-  velocity = true,
-  maxBoost = 3,
 }: MarqueeProps) {
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
@@ -74,39 +70,9 @@ export function Marquee({
       });
       resizeObserver.observe(el);
 
-      if (!velocity) {
-        return () => {
-          window.clearTimeout(resizeTimeout);
-          resizeObserver.disconnect();
-        };
-      }
-
-      const observer = Observer.create({
-        type: "wheel,touch,scroll",
-        onChangeY: (self) => {
-          const boost =
-            1 + gsap.utils.clamp(0, maxBoost, Math.abs(self.velocityY) / 600);
-          const heading = self.deltaY > 0 ? 1 : -1;
-          gsap.to(loop, {
-            timeScale: base * heading * boost,
-            duration: 0.35,
-            overwrite: true,
-          });
-        },
-        onStop: () => {
-          gsap.to(loop, {
-            timeScale: base,
-            duration: 0.9,
-            overwrite: true,
-          });
-        },
-        onStopDelay: 0.2,
-      });
-
       return () => {
         window.clearTimeout(resizeTimeout);
         resizeObserver.disconnect();
-        observer.kill();
       };
     },
     { scope: root },

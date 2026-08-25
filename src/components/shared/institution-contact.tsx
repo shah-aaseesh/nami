@@ -136,6 +136,7 @@ export async function InstitutionContact({
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={mapSrc(campus)}
+                title={`${entity.name} location map`}
                 width={500}
               />
             </div>

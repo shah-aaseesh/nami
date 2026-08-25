@@ -34,47 +34,37 @@ function SinglePartnerCard({
   const logo = logoSrcOf(item.logo);
 
   return (
-    <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-surface-raised p-6 shadow-xs sm:p-8">
-      <div className="grid grid-cols-1 items-center gap-6 sm:grid-cols-12 sm:gap-8">
-        {/* Left: Logo & Status */}
-        <div className="flex flex-col items-center sm:col-span-4 sm:items-start">
-          {logo === null ? null : (
-            <div className="relative h-20 w-44 rounded-xl border border-border/60 bg-white p-3 shadow-2xs">
-              <Image
-                alt={item.body}
-                className="object-contain"
-                fill
-                sizes="176px"
-                src={logo}
-              />
-            </div>
-          )}
-          <span className="mt-3.5 inline-flex items-center rounded-full bg-accent/10 px-3 py-1 font-body text-xs font-medium text-accent">
-            {`${sinceLabel} ${item.sinceYear}`}
-          </span>
-        </div>
+    <div className="mx-auto max-w-md rounded-3xl bg-white p-6 sm:p-8 text-center shadow-xl">
+      <div className="flex flex-col items-center">
+        {/* 1. Since <year> */}
+        <span className="rounded-full border border-primary-100 bg-primary-50 px-3.5 py-1 font-body text-xs font-semibold text-primary-800">
+          {`${sinceLabel} ${item.sinceYear}`}
+        </span>
 
-        {/* Right: Partner Details */}
-        <div className="space-y-2.5 text-center sm:col-span-8 sm:text-left">
-          <h3 className="font-display text-xl font-medium text-ink sm:text-2xl">
-            {item.body}
-          </h3>
+        {/* 2. Logo */}
+        {logo === null ? null : (
+          <div className="relative mt-5 h-20 w-44">
+            <Image
+              alt={item.body}
+              className="object-contain"
+              fill
+              sizes="176px"
+              src={logo}
+            />
+          </div>
+        )}
 
-          {item.scope === null ? null : (
-            <p className="font-body text-sm text-ink-muted leading-relaxed sm:text-base">
-              {item.scope}
-            </p>
-          )}
+        {/* 3. Name */}
+        <h3 className="mt-5 font-display text-xl sm:text-2xl font-medium text-neutral-950">
+          {item.body}
+        </h3>
 
-          {item.note === null ? null : (
-            <div className="pt-1">
-              <span className="inline-flex items-center gap-2 font-body text-xs font-medium text-accent">
-                <span className="size-1.5 rounded-full bg-accent" />
-                <span>{item.note}</span>
-              </span>
-            </div>
-          )}
-        </div>
+        {/* 4. Additional detail if present */}
+        {item.note === null ? null : (
+          <p className="mt-3 font-body text-xs sm:text-sm font-medium text-primary-700">
+            {item.note}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -90,35 +80,33 @@ function MultiPartnerCard({
   const logo = logoSrcOf(item.logo);
 
   return (
-    <li className="flex flex-col items-center rounded-2xl border border-border bg-surface-raised p-6 text-center shadow-xs">
-      <span className="rounded-full bg-accent/10 px-3 py-1 font-body text-xs font-medium text-accent">
+    <li className="flex flex-col items-center rounded-3xl bg-white p-6 sm:p-8 text-center shadow-xl">
+      {/* 1. Since <year> */}
+      <span className="rounded-full border border-primary-100 bg-primary-50 px-3.5 py-1 font-body text-xs font-semibold text-primary-800">
         {`${sinceLabel} ${item.sinceYear}`}
       </span>
 
+      {/* 2. Logo */}
       {logo === null ? null : (
-        <div className="relative mt-4 h-16 w-36 rounded-xl border border-border/60 bg-white p-2.5 shadow-2xs">
+        <div className="relative mt-5 h-20 w-44">
           <Image
             alt={item.body}
             className="object-contain"
             fill
-            sizes="144px"
+            sizes="176px"
             src={logo}
           />
         </div>
       )}
 
-      <h3 className="mt-5 font-display text-lg font-medium text-ink">
+      {/* 3. Name */}
+      <h3 className="mt-5 font-display text-xl sm:text-2xl font-medium text-neutral-950">
         {item.body}
       </h3>
 
-      {item.scope === null ? null : (
-        <p className="mt-2 font-body text-sm text-ink-muted leading-relaxed">
-          {item.scope}
-        </p>
-      )}
-
+      {/* 4. Additional detail if present */}
       {item.note === null ? null : (
-        <span className="mt-auto pt-4 font-body text-xs font-medium text-accent">
+        <span className="mt-auto pt-4 font-body text-xs sm:text-sm font-medium text-primary-700">
           {item.note}
         </span>
       )}
@@ -143,7 +131,7 @@ export function InstitutionAwarding({
   if (!firstBody) return null;
 
   return (
-    <section className="gutter-x section-y border-t border-border/40" id={id}>
+    <section className="field-brand gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <SectionHeader
           description={copy.standfirst}
@@ -151,7 +139,7 @@ export function InstitutionAwarding({
           title={copy.eyebrow ?? "Awarding Body"}
         />
 
-        <Reveal className="mt-8 sm:mt-10 lg:mt-12" y={16}>
+        <Reveal className="mt-10 sm:mt-12 lg:mt-14" y={16}>
           {awardingBodies.length === 1 ? (
             <SinglePartnerCard item={firstBody} sinceLabel={copy.sinceLabel} />
           ) : (

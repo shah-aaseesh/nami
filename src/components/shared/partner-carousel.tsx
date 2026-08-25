@@ -38,26 +38,28 @@ function splitRows(items: readonly CareerPartner[]): readonly LogoRow[] {
 }
 
 function PartnerTile({ partner }: { readonly partner: CareerPartner }) {
-  // Partners share one placeholder mark, so the name is text and the image is decorative.
+  if (partner.logo === null) {
+    return (
+      <li className="flex shrink-0 items-center justify-center px-2">
+        <span className="font-display text-sm sm:text-base font-medium text-ink-muted">
+          {partner.name}
+        </span>
+      </li>
+    );
+  }
+
   return (
-    <li
-      className={cn(
-        "flex h-24 w-52 shrink-0 items-center justify-center overflow-hidden rounded-xl border bg-surface-raised md:h-28 md:w-64 lg:h-32 lg:w-80",
-        partner.logo === null && "border-dashed",
-      )}
-    >
+    <li className="flex shrink-0 items-center justify-center px-1 sm:px-1.5">
       <span className="sr-only">{partner.name}</span>
-      {partner.logo !== null && (
-        <Image
-          alt=""
-          className="h-3/5 w-3/4 object-contain"
-          height={partner.logo.height}
-          loading="lazy"
-          sizes="(min-width: 1024px) 240px, (min-width: 768px) 192px, 156px"
-          src={partner.logo.src}
-          width={partner.logo.width}
-        />
-      )}
+      <Image
+        alt={partner.name}
+        className="h-auto max-h-16 sm:max-h-18 lg:max-h-20 w-32 sm:w-36 lg:w-40 xl:w-44 object-contain transition-transform duration-300 hover:scale-105"
+        height={partner.logo.height}
+        loading="lazy"
+        sizes="(min-width: 1280px) 176px, (min-width: 1024px) 160px, (min-width: 640px) 144px, 128px"
+        src={partner.logo.src}
+        width={partner.logo.width}
+      />
     </li>
   );
 }
@@ -74,7 +76,7 @@ function PartnerRow({
   return (
     <ul
       aria-label={label}
-      className={cn("flex items-center gap-3 md:gap-4", className)}
+      className={cn("flex items-center gap-1.5 sm:gap-2 lg:gap-2.5", className)}
     >
       {logos.map((partner) => (
         <PartnerTile key={partner.id} partner={partner} />
@@ -116,7 +118,7 @@ export function PartnerCarousel({
 
   return (
     <div
-      className="flex flex-col gap-3 md:gap-4"
+      className="flex flex-col gap-2 sm:gap-3"
       onBlurCapture={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onPointerEnter={() => setPaused(true)}
@@ -130,7 +132,7 @@ export function PartnerCarousel({
           reverse={row.reverse}
           speed={row.speed}
         >
-          <PartnerRow className="pe-3 md:pe-4" logos={row.logos} />
+          <PartnerRow className="pe-1.5 sm:pe-2 lg:pe-2.5" logos={row.logos} />
         </Marquee>
       ))}
     </div>

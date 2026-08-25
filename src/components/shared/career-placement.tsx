@@ -31,19 +31,19 @@ export function CareerPlacement({
           title={copy.eyebrow ?? "Placement & Internship"}
         />
 
-        <div className="mt-14 grid gap-8 lg:mt-20 lg:grid-cols-5 lg:gap-12">
-          <div className="relative aspect-video overflow-hidden rounded-xl lg:col-span-2 lg:aspect-4/3 lg:self-start">
+        <div className="mt-6 sm:mt-8 lg:mt-10 grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-14">
+          <div className="relative aspect-video lg:aspect-[16/10] overflow-hidden rounded-2xl lg:col-span-4 shadow-md w-full max-w-md lg:max-w-none mx-auto lg:mx-0">
             <Image
               alt={copy.image.alt}
               className="object-cover"
               fill
               loading="lazy"
-              sizes="(min-width: 1024px) 36vw, 92vw"
+              sizes="(min-width: 1024px) 28vw, 92vw"
               src={copy.image.src}
             />
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="flex flex-col justify-center lg:col-span-8 min-w-0">
             <PartnerCarousel items={partners} label={copy.label} />
           </div>
         </div>

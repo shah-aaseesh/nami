@@ -7,6 +7,7 @@ export {
   ArrowUp01Icon as ChevronUpIcon,
   ArrowUpRight01Icon as ArrowUpRightIcon,
   Asterisk02Icon as AsteriskIcon,
+  Book01Icon as BookIcon,
   Calendar03Icon as CalendarIcon,
   CallIcon as PhoneIcon,
   Cancel01Icon as CloseIcon,
@@ -14,6 +15,7 @@ export {
   Download01Icon as DownloadIcon,
   Facebook01Icon as FacebookIcon,
   GlobalIcon as GlobeIcon,
+  GraduationScrollIcon as DiplomaIcon,
   Image01Icon as ImageIcon,
   InstagramIcon,
   Linkedin01Icon as LinkedInIcon,
@@ -25,6 +27,7 @@ export {
   QuoteUpIcon as QuoteIcon,
   Tick02Icon as CheckIcon,
   TiktokIcon as TikTokIcon,
+  WhatsappIcon,
   YoutubeIcon as YouTubeIcon,
 } from "@hugeicons/core-free-icons";
 export type { IconSvgElement } from "@hugeicons/react";

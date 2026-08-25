@@ -78,7 +78,7 @@ export function HeroBadge({
           </textPath>
         </text>
       </svg>
-      <div className="absolute inset-0 m-auto flex size-16 items-center justify-center rounded-full">
+      <div className="absolute inset-0 m-auto flex size-20 lg:size-24 items-center justify-center rounded-full">
         {watch ? (
           <Link
             className="flex size-full items-center justify-center rounded-full transition-transform hover:scale-105"
@@ -88,9 +88,9 @@ export function HeroBadge({
           >
             <Image
               alt=""
-              className="h-12 w-auto object-contain"
+              className="h-16 lg:h-18 w-auto object-contain"
               height={MARK_HEIGHT}
-              sizes="48px"
+              sizes="(min-width: 1024px) 72px, 64px"
               src={logoSrc}
               width={MARK_WIDTH}
             />
@@ -99,9 +99,9 @@ export function HeroBadge({
         ) : (
           <Image
             alt=""
-            className="h-12 w-auto object-contain"
+            className="h-16 lg:h-18 w-auto object-contain"
             height={MARK_HEIGHT}
-            sizes="48px"
+            sizes="(min-width: 1024px) 72px, 64px"
             src={logoSrc}
             width={MARK_WIDTH}
           />

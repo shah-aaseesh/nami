@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Eyebrow, H2, H4, P, Standfirst } from "@/components/ui/typography";
+import { SectionHeader } from "@/components/shared/section-header";
+import { Eyebrow, H4, P } from "@/components/ui/typography";
 import type {
   BachelorsProgramme,
   BachelorsProgrammesCopy,
@@ -76,18 +77,11 @@ export function BachelorsCourseRail({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="flex items-center gap-5">
-          <Eyebrow>{copy.heading}</Eyebrow>
-          <span className="h-px flex-1 bg-border" />
-        </div>
-
-        <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-          <H2 className="lg:max-w-2xl">{copy.eyebrow ?? "Programmes"}</H2>
-
-          <div className="lg:max-w-md">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </div>
-        </div>
+        <SectionHeader
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Programmes"}
+          description={copy.standfirst}
+        />
       </div>
 
       <div className="mx-auto mt-14 max-w-page lg:mt-20">

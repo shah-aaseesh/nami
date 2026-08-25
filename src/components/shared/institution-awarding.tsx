@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H5, Standfirst } from "@/components/ui/typography";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
+import { Eyebrow, H5 } from "@/components/ui/typography";
 import type { Affiliation } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -93,22 +93,11 @@ export function InstitutionAwarding({
   return (
     <section className="field-brand gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-            <SplitText as="h2" className="lg:max-w-2xl">
-              {copy.eyebrow ?? "Awarding Bodies"}
-            </SplitText>
-
-            <RevealItem className="lg:max-w-md">
-              <Standfirst>{copy.standfirst}</Standfirst>
-            </RevealItem>
-          </div>
-        </Reveal>
+        <SectionHeader
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Awarding Bodies"}
+          description={copy.standfirst}
+        />
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
           <ul

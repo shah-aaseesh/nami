@@ -7,8 +7,9 @@ import {
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H2, H5, P, Standfirst } from "@/components/ui/typography";
+import { H5, P } from "@/components/ui/typography";
 import type { BenefitItem } from "./careers-copy";
 
 const benefitIcons = [
@@ -36,20 +37,11 @@ export function CareersBenefits({
       id="benefits"
     >
       <div className="mx-auto max-w-page">
-        <Reveal className="max-w-3xl">
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <RevealItem className="mt-4">
-            <H2>{copy.eyebrow ?? "Why Work With Us"}</H2>
-          </RevealItem>
-
-          <RevealItem className="mt-4">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </RevealItem>
-        </Reveal>
+        <SectionHeader
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Why Work With Us"}
+          description={copy.standfirst}
+        />
 
         <Reveal className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10 sm:mt-16">
           {copy.items.map((item, idx) => {

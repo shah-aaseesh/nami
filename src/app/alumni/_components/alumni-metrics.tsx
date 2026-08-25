@@ -5,8 +5,9 @@ import {
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H2, H3, H5, P, Standfirst } from "@/components/ui/typography";
+import { H3, H5, P } from "@/components/ui/typography";
 import type { AlumniMetric } from "./alumni-copy";
 
 const statIcons = [GlobalIcon, Mortarboard01Icon, Award01Icon, SparklesIcon];
@@ -27,20 +28,11 @@ export function AlumniMetrics({
       id="impact"
     >
       <div className="mx-auto max-w-page">
-        <Reveal className="max-w-3xl">
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <RevealItem className="mt-4">
-            <H2>{copy.eyebrow ?? "Impact & Scale"}</H2>
-          </RevealItem>
-
-          <RevealItem className="mt-4">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </RevealItem>
-        </Reveal>
+        <SectionHeader
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Impact & Scale"}
+          description={copy.standfirst}
+        />
 
         <Reveal className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 sm:mt-16">
           {copy.items.map((item, idx) => {

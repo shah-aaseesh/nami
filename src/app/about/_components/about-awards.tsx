@@ -1,6 +1,6 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H4, H6, P, Standfirst } from "@/components/ui/typography";
+import { SectionHeader } from "@/components/shared/section-header";
+import { Eyebrow, H4, H6, P } from "@/components/ui/typography";
 import type { Award, SectionCopy } from "@/lib/content";
 
 export function AboutAwards({
@@ -19,25 +19,11 @@ export function AboutAwards({
       id="awards"
     >
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-10">
-          <div className="lg:col-span-6">
-            <Reveal>
-              <div className="flex items-center gap-5">
-                <Eyebrow>{section.heading}</Eyebrow>
-                <span className="h-px flex-1 bg-border" />
-              </div>
-            </Reveal>
-            <SplitText as="h2" className="mt-4">
-              {section.eyebrow ?? "Awards & Recognition"}
-            </SplitText>
-          </div>
-
-          {section.standfirst === null ? null : (
-            <Reveal className="mt-6 lg:col-span-5 lg:col-start-8 lg:mt-0">
-              <Standfirst>{section.standfirst}</Standfirst>
-            </Reveal>
-          )}
-        </div>
+        <SectionHeader
+          eyebrow={section.heading}
+          title={section.eyebrow ?? "Awards & Recognition"}
+          description={section.standfirst}
+        />
 
         {latest === undefined ? (
           section.emptyState === null ? null : (

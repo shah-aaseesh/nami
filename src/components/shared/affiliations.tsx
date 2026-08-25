@@ -1,31 +1,18 @@
 import Image from "next/image";
 import { Marquee } from "@/components/motion/marquee";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
+import { P } from "@/components/ui/typography";
 import type { Affiliation, SectionCopy } from "@/lib/content";
 import { content } from "@/lib/content";
 
 function SectionHead({ copy }: { copy: SectionCopy }) {
   return (
-    <Reveal stagger={0.08}>
-      <RevealItem className="flex items-center gap-5">
-        <Eyebrow>{copy.heading}</Eyebrow>
-        <span className="h-px flex-1 bg-border" />
-      </RevealItem>
-
-      <div className="mt-4 lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
-        <div className="lg:col-span-7">
-          <SplitText as="h2">{copy.eyebrow ?? "Accreditation"}</SplitText>
-        </div>
-
-        {copy.standfirst === null ? null : (
-          <RevealItem className="mt-6 lg:col-span-4 lg:col-start-9 lg:mt-0">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </RevealItem>
-        )}
-      </div>
-    </Reveal>
+    <SectionHeader
+      eyebrow={copy.heading}
+      title={copy.eyebrow ?? "Accreditation"}
+      description={copy.standfirst}
+    />
   );
 }
 

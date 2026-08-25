@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H4, P } from "@/components/ui/typography";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
+import { H4, P } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -31,16 +31,10 @@ export function CollegeMilestones({
   return (
     <section className="gutter-x section-y" id="milestones">
       <div className="mx-auto max-w-page">
-        <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <div className="mt-4 sm:max-w-2xl">
-            <SplitText as="h2">{copy.eyebrow ?? "Milestones"}</SplitText>
-          </div>
-        </Reveal>
+        <SectionHeader
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Milestones"}
+        />
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
           <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2">

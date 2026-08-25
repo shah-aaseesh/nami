@@ -1,7 +1,7 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { Eyebrow, P } from "@/components/ui/typography";
 
 export type SubjectGroupKey = "s1" | "s2" | "ns1" | "ns2";
 
@@ -113,22 +113,11 @@ export function CollegeSubjects({
   return (
     <section className="gutter-x section-y" id="subjects">
       <div className="mx-auto max-w-page">
-        <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
-          <div className="lg:col-span-6">
-            <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.heading}</Eyebrow>
-              <span className="h-px flex-1 bg-border" />
-            </RevealItem>
-
-            <SplitText as="h2" className="mt-4">
-              {copy.eyebrow ?? "Subjects"}
-            </SplitText>
-          </div>
-
-          <RevealItem className="mt-8 max-w-xl lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </RevealItem>
-        </Reveal>
+        <SectionHeader
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Subjects"}
+          description={copy.standfirst}
+        />
 
         <Reveal
           className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-2 lg:gap-8"

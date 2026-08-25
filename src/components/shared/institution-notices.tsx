@@ -1,11 +1,11 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { UpdateBoard } from "@/components/shared/update-board";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { P } from "@/components/ui/typography";
 import type { EntityRole } from "@/lib/content";
 import { content } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
@@ -44,34 +44,21 @@ export async function InstitutionNotices({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-8">
-            <SplitText as="h2" className="sm:max-w-2xl">
-              {copy.eyebrow}
-            </SplitText>
-
-            <RevealItem className="sm:shrink-0">
-              <Link
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "default" }),
-                )}
-                href={href}
-              >
-                {copy.ctaLabel}
-                <Icon icon={ArrowRightIcon} />
-              </Link>
-            </RevealItem>
-          </div>
-
-          <RevealItem className="mt-6 max-w-2xl">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </RevealItem>
-        </Reveal>
+        <SectionHeader
+          action={
+            <Link
+              className={cn(buttonVariants({ size: "lg", variant: "default" }))}
+              href={href}
+            >
+              {copy.ctaLabel}
+              <Icon icon={ArrowRightIcon} />
+            </Link>
+          }
+          description={copy.standfirst}
+          eyebrow={copy.heading}
+          layout="action"
+          title={copy.eyebrow}
+        />
 
         {notices.length === 0 ? (
           <Reveal className="mt-10 lg:mt-14">

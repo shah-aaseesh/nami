@@ -11,7 +11,7 @@ import {
   Mortarboard01Icon,
 } from "@hugeicons/core-free-icons";
 import { useMemo, useState } from "react";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import {
@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Eyebrow, H2, H4, H5, P, Standfirst } from "@/components/ui/typography";
+import { H4, H5, P } from "@/components/ui/typography";
 import type { SectionCopy, Vacancy } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { employmentTypeLabel } from "./careers-copy";
@@ -49,36 +49,24 @@ function VacanciesHeader({
   readonly totalCount: number;
 }) {
   return (
-    <Reveal stagger={0.08}>
-      <RevealItem className="flex items-center gap-5">
-        <Eyebrow>{copy.heading}</Eyebrow>
-        <span className="h-px flex-1 bg-border" />
-      </RevealItem>
-
-      <div className="mt-4 lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
-        <div className="lg:col-span-7">
-          <RevealItem>
-            <H2>{copy.eyebrow ?? "Current Openings"}</H2>
-          </RevealItem>
-        </div>
-
-        <div className="mt-6 flex flex-col lg:col-span-5 lg:mt-0 lg:items-end">
-          {copy.standfirst === null ? null : (
-            <RevealItem>
-              <Standfirst className="lg:text-right">
-                {copy.standfirst}
-              </Standfirst>
-            </RevealItem>
-          )}
-          <RevealItem className="mt-4">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-semibold text-accent">
-              <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-              {totalCount} Active {totalCount === 1 ? "Opening" : "Openings"}
+    <SectionHeader
+      action={
+        <div className="flex flex-col items-start lg:items-end gap-2">
+          {copy.standfirst && (
+            <span className="text-xs sm:text-sm text-ink-muted leading-relaxed lg:text-right">
+              {copy.standfirst}
             </span>
-          </RevealItem>
+          )}
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-semibold text-accent">
+            <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+            {totalCount} Active {totalCount === 1 ? "Opening" : "Openings"}
+          </span>
         </div>
-      </div>
-    </Reveal>
+      }
+      eyebrow={copy.heading}
+      layout="action"
+      title={copy.eyebrow ?? "Current Openings"}
+    />
   );
 }
 

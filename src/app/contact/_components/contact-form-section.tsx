@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/motion/reveal";
-import { Eyebrow, H2, Standfirst } from "@/components/ui/typography";
+import { SectionHeader } from "@/components/shared/section-header";
 import { content } from "@/lib/content";
 import { contactCopy } from "./contact-copy";
 import { ContactForm } from "./contact-form";
@@ -23,19 +23,15 @@ export async function ContactFormSection() {
 
   return (
     <section className="gutter-x section-y" id="enquiry">
-      <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
-        <div className="lg:col-span-4">
-          <div className="flex items-center gap-5">
-            <Eyebrow>{copy.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </div>
-          <H2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl">
-            {copy.eyebrow ?? "Enquiry"}
-          </H2>
-          <Standfirst className="mt-6">{copy.standfirst(email)}</Standfirst>
-        </div>
+      <div className="mx-auto max-w-page">
+        <SectionHeader
+          description={copy.standfirst(email)}
+          eyebrow={copy.heading}
+          layout="split"
+          title={copy.eyebrow ?? "Enquiry"}
+        />
 
-        <Reveal className="mt-10 lg:col-span-7 lg:col-start-6 lg:mt-0">
+        <Reveal className="mt-12 lg:mt-16 max-w-3xl">
           <ContactForm email={email} topics={topics} />
         </Reveal>
       </div>

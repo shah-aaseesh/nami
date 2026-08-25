@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/motion/reveal";
-import { Eyebrow, H2, H3, P, Standfirst } from "@/components/ui/typography";
+import { SectionHeader } from "@/components/shared/section-header";
+import { Eyebrow, H3, P } from "@/components/ui/typography";
 import type { Campus } from "@/lib/content";
 import { content } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -83,20 +84,11 @@ export async function CampusLocations() {
   return (
     <section className="gutter-x section-y" id="campuses">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
-          <div className="lg:col-span-5">
-            <div className="flex items-center gap-5">
-              <Eyebrow>{copy.heading}</Eyebrow>
-              <span className="h-px flex-1 bg-border" />
-            </div>
-            <H2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl">
-              {copy.eyebrow ?? "Campuses"}
-            </H2>
-          </div>
-          <Standfirst className="mt-6 lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">
-            {copy.standfirst}
-          </Standfirst>
-        </div>
+        <SectionHeader
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Campuses"}
+          description={copy.standfirst}
+        />
 
         <Reveal className="mt-14 lg:mt-24" stagger={0.12}>
           <ul className="flex flex-col gap-y-12 sm:gap-y-16 lg:gap-y-28">

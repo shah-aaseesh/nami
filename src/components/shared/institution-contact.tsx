@@ -1,7 +1,7 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, H3, P } from "@/components/ui/typography";
 import type { Campus, EntityRole } from "@/lib/content";
@@ -64,16 +64,7 @@ export async function InstitutionContact({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{sectionHeading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <div className="mt-4 sm:max-w-2xl">
-            <SplitText as="h2">Contact & Location</SplitText>
-          </div>
-        </Reveal>
+        <SectionHeader eyebrow={sectionHeading} title="Contact & Location" />
 
         <Reveal
           className="mt-10 grid grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-14 items-stretch"

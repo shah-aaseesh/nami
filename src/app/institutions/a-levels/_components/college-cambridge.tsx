@@ -1,6 +1,5 @@
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H4, H5, P, Standfirst } from "@/components/ui/typography";
+import { SectionHeader } from "@/components/shared/section-header";
+import { H4, H5, P } from "@/components/ui/typography";
 import {
   CollegeCambridgeHold,
   CollegeCambridgeStack,
@@ -27,18 +26,12 @@ export function CollegeCambridge({
     <section className="field-brand gutter-x section-y" id="cambridge">
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <CollegeCambridgeHold className="lg:col-span-5">
-          <Reveal stagger={0.08}>
-            <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.heading}</Eyebrow>
-              <span className="h-px flex-1 bg-border" />
-            </RevealItem>
-            <SplitText as="h2" className="mt-4">
-              {copy.eyebrow ?? "Why Cambridge"}
-            </SplitText>
-            <RevealItem className="mt-6 max-w-xl">
-              <Standfirst>{copy.standfirst}</Standfirst>
-            </RevealItem>
-          </Reveal>
+          <SectionHeader
+            description={copy.standfirst}
+            eyebrow={copy.heading}
+            layout="stacked"
+            title={copy.eyebrow ?? "Why Cambridge"}
+          />
         </CollegeCambridgeHold>
 
         <CollegeCambridgeStack className="mt-12 flex flex-col gap-6 lg:col-span-6 lg:col-start-7 lg:mt-0">

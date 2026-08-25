@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { RevealItem } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
-import { Eyebrow, H6, P, Standfirst } from "@/components/ui/typography";
+import { H6, P } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import { CheckIcon } from "@/lib/icons";
 
@@ -106,36 +106,12 @@ export function SchoolBands({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <div className="mt-4 grid lg:grid-cols-12 lg:gap-16 items-start">
-            <div className="lg:col-span-7">
-              <SplitText as="h2">{copy.eyebrow ?? "Academic Bands"}</SplitText>
-
-              <RevealItem className="mt-6 max-w-2xl">
-                <Standfirst>{copy.standfirst}</Standfirst>
-              </RevealItem>
-            </div>
-
-            <div className="hidden lg:col-span-5 lg:block">
-              <RevealItem>
-                <div className="relative aspect-video w-full overflow-hidden rounded-3xl">
-                  <Image
-                    alt={copy.photo.alt}
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 1024px) 0vw, 40vw"
-                    src={copy.photo.src}
-                  />
-                </div>
-              </RevealItem>
-            </div>
-          </div>
-        </Reveal>
+        <SectionHeader
+          description={copy.standfirst}
+          eyebrow={copy.heading}
+          layout="split"
+          title={copy.eyebrow ?? "Academic Bands"}
+        />
 
         <RevealItem className="mt-14 lg:mt-20">
           <Tabs defaultValue="primary" className="w-full">

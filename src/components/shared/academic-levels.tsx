@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
+import { H5, P } from "@/components/ui/typography";
 import type {
   AcademicLevel,
   ContentImage,
@@ -164,24 +164,11 @@ export async function AcademicLevels() {
   return (
     <section className="field-brand gutter-x section-y" id="institutions">
       <div className="mx-auto max-w-page">
-        <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{section.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-            <SplitText as="h2" className="lg:max-w-2xl">
-              {section.eyebrow ?? "Institutions"}
-            </SplitText>
-
-            {section.standfirst === null ? null : (
-              <RevealItem className="lg:max-w-md">
-                <Standfirst>{section.standfirst}</Standfirst>
-              </RevealItem>
-            )}
-          </div>
-        </Reveal>
+        <SectionHeader
+          eyebrow={section.heading}
+          title={section.eyebrow ?? "Institutions"}
+          description={section.standfirst}
+        />
 
         {levels.length === 0 ? (
           section.emptyState === null ? null : (

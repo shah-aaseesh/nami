@@ -1,11 +1,11 @@
 import type { Route } from "next";
 import Link from "next/link";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import { UpdateBoard } from "@/components/shared/update-board";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { P } from "@/components/ui/typography";
 import type { ContentLink } from "@/lib/content";
 import { content } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
@@ -54,30 +54,15 @@ export async function Updates() {
   return (
     <section className="gutter-x section-y" id="updates">
       <div className="mx-auto max-w-page">
-        <Reveal stagger={0.08}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{section.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-
-          <div className="mt-4 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-x-12">
-            <div className="max-w-2xl">
-              <SplitText as="h2">{section.eyebrow ?? "Notices"}</SplitText>
-
-              {section.standfirst === null ? null : (
-                <RevealItem className="mt-4">
-                  <Standfirst>{section.standfirst}</Standfirst>
-                </RevealItem>
-              )}
-            </div>
-
-            {section.cta === null ? null : (
-              <RevealItem className="shrink-0">
-                <UpdateCta link={section.cta} />
-              </RevealItem>
-            )}
-          </div>
-        </Reveal>
+        <SectionHeader
+          action={
+            section.cta === null ? null : <UpdateCta link={section.cta} />
+          }
+          description={section.standfirst}
+          eyebrow={section.heading}
+          layout="action"
+          title={section.eyebrow ?? "Notices"}
+        />
 
         {updates.length === 0 && section.emptyState !== null ? (
           <P className="mt-12 max-w-xl">{section.emptyState}</P>

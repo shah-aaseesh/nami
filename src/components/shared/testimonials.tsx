@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeader } from "@/components/shared/section-header";
 import {
   Carousel,
   CarouselContent,
@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Eyebrow, P, Standfirst } from "@/components/ui/typography";
+import { P } from "@/components/ui/typography";
 import type { SectionCopy, Testimonial } from "@/lib/content";
 import { content } from "@/lib/content";
 import { TestimonialCard } from "./testimonials-card";
@@ -22,26 +22,13 @@ function TestimonialsHeader({
   section: SectionCopy;
 }) {
   return (
-    <Reveal stagger={0.08}>
-      <RevealItem className="flex items-center gap-5">
-        <Eyebrow>{section.heading}</Eyebrow>
-        <span className="h-px flex-1 bg-border" />
-      </RevealItem>
-
-      <div className="mt-4 flex flex-wrap items-end gap-6">
-        <div className="w-full lg:w-7/12">
-          <SplitText as="h2">{section.eyebrow ?? "Student voices"}</SplitText>
-        </div>
-
-        {children}
-      </div>
-
-      {section.standfirst === null ? null : (
-        <RevealItem className="mt-6 w-full lg:w-7/12">
-          <Standfirst>{section.standfirst}</Standfirst>
-        </RevealItem>
-      )}
-    </Reveal>
+    <SectionHeader
+      action={children}
+      description={section.standfirst}
+      eyebrow={section.heading}
+      layout="action"
+      title={section.eyebrow ?? "Student voices"}
+    />
   );
 }
 
@@ -65,7 +52,14 @@ export async function Testimonials({
           <Carousel
             aria-label={section.eyebrow ?? section.heading}
             aria-roledescription="carousel"
-            opts={{ align: "start", slidesToScroll: "auto" }}
+            autoplay={true}
+            autoplayIntervalMs={2500}
+            opts={{
+              align: "start",
+              duration: 25,
+              loop: true,
+              slidesToScroll: "auto",
+            }}
           >
             <TestimonialsHeader section={section}>
               <CarouselControls className="ms-auto">

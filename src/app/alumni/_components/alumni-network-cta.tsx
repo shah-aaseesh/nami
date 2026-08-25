@@ -1,7 +1,7 @@
 import { Mail01Icon } from "@hugeicons/core-free-icons";
+import { SectionHeader } from "@/components/shared/section-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H2, Standfirst } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
 export function AlumniNetworkCta({
@@ -20,35 +20,27 @@ export function AlumniNetworkCta({
     <section className="gutter-x section-y" id="connect">
       <div className="mx-auto max-w-page">
         <div className="field-brand rounded-3xl p-8 sm:p-12 lg:p-16">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <div className="flex items-center gap-5">
-                <Eyebrow>{copy.heading}</Eyebrow>
-                <span className="h-px flex-1 bg-border" />
+          <SectionHeader
+            action={
+              <div className="flex flex-col items-start gap-4 lg:items-end">
+                <a
+                  className={cn(
+                    buttonVariants({ size: "lg", variant: "default" }),
+                    "inline-flex items-center justify-center gap-2 px-6",
+                  )}
+                  href={mailtoHref}
+                >
+                  <Icon className="size-4" icon={Mail01Icon} />
+                  <span>Email Us</span>
+                </a>
+                <span className="text-sm text-ink-muted">{copy.email}</span>
               </div>
-
-              <H2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-normal">
-                {copy.eyebrow ?? "Stay Connected"}
-              </H2>
-
-              <Standfirst className="mt-4">{copy.standfirst}</Standfirst>
-            </div>
-
-            <div className="flex flex-col items-start gap-4 lg:items-end lg:shrink-0">
-              <a
-                href={mailtoHref}
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "default" }),
-                  "inline-flex items-center justify-center gap-2 px-6",
-                )}
-              >
-                <Icon icon={Mail01Icon} className="size-4" />
-                <span>Register with Alumni Office</span>
-              </a>
-
-              <span className="text-sm text-ink-muted">{copy.email}</span>
-            </div>
-          </div>
+            }
+            description={copy.standfirst}
+            eyebrow={copy.heading}
+            layout="action"
+            title={copy.eyebrow ?? "Stay Connected"}
+          />
         </div>
       </div>
     </section>

@@ -77,7 +77,7 @@ export const Eyebrow = createText(
 export const Standfirst = createText(
   "p",
   "standfirst",
-  "font-body text-lg xl:text-xl font-normal text-pretty text-ink-muted",
+  "font-body text-sm sm:text-base font-normal text-pretty text-ink-muted leading-relaxed",
 );
 
 export const P = createText(

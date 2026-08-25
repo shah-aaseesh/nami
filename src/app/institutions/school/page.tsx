@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { InstitutionContact } from "@/components/shared/institution-contact";
+import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
 import { SharedCollegeGallery } from "@/components/shared/shared-college-gallery";
@@ -80,6 +81,8 @@ export default async function SchoolPage() {
         id="notices"
         institution="school"
       />
+
+      <InstitutionEnrollCta institution="school" />
 
       <InstitutionContact id="contact" institution="school" />
     </>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CareerPlacement } from "@/components/shared/career-placement";
 import { InstitutionAwarding } from "@/components/shared/institution-awarding";
 import { InstitutionContact } from "@/components/shared/institution-contact";
+import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import type { CareerPartner } from "@/components/shared/partner-carousel";
 import { PrincipalMessage } from "@/components/shared/principal-message";
@@ -101,6 +102,8 @@ export default async function BachelorsPage() {
         id="notices"
         institution="institute"
       />
+
+      <InstitutionEnrollCta institution="institute" />
 
       <InstitutionContact id="contact" institution="institute" />
     </>

@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { P } from "@/components/ui/typography";
 import { content } from "@/lib/content";
-import {
-  INSTITUTION_PARAM,
-  parseInstitutionFilter,
-} from "@/lib/institution-filter";
 import { createMetadata } from "@/lib/seo";
 import { GalleryArchive } from "./_components/gallery-archive";
 import { galleryCopy } from "./_components/gallery-copy";
 import { GalleryMasthead } from "./_components/gallery-masthead";
-
-type PageProps = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-};
 
 export const metadata: Metadata = createMetadata({
   path: "/gallery",
@@ -21,14 +14,11 @@ export const metadata: Metadata = createMetadata({
   description: galleryCopy.meta.description,
 });
 
-export default async function GalleryPage({ searchParams }: PageProps) {
-  const [items, institution, query] = await Promise.all([
+export default async function GalleryPage() {
+  const [items, institution] = await Promise.all([
     content.getGallery(),
     content.getInstitution(),
-    searchParams,
   ]);
-
-  const initialFilter = parseInstitutionFilter(query[INSTITUTION_PARAM]);
 
   return (
     <>
@@ -40,11 +30,9 @@ export default async function GalleryPage({ searchParams }: PageProps) {
           </div>
         </section>
       ) : (
-        <GalleryArchive
-          entities={institution.entities}
-          initialFilter={initialFilter}
-          items={items}
-        />
+        <Suspense fallback={null}>
+          <GalleryArchive entities={institution.entities} items={items} />
+        </Suspense>
       )}
     </>
   );

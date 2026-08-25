@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import {
@@ -16,10 +17,12 @@ import type {
 import { Flip, FULL_MOTION_QUERY, gsap, useGSAP } from "@/lib/gsap";
 import {
   countUnattributed,
+  INSTITUTION_PARAM,
   INSTITUTION_ROLES,
   type InstitutionFilter,
   institutionLabel,
   matchesInstitution,
+  parseInstitutionFilter,
 } from "@/lib/institution-filter";
 import { galleryCopy } from "./gallery-copy";
 import { GalleryTile } from "./gallery-tile";
@@ -47,13 +50,15 @@ function tileRowSpan({ height, width }: ContentImage) {
 
 export function GalleryArchive({
   entities,
-  initialFilter,
   items,
 }: {
   readonly entities: Readonly<Record<EntityRole, NamedEntity>>;
-  readonly initialFilter: InstitutionFilter;
   readonly items: readonly GalleryItem[];
 }) {
+  const searchParams = useSearchParams();
+  const initialFilter = parseInstitutionFilter(
+    searchParams.get(INSTITUTION_PARAM) ?? undefined,
+  );
   const stageRef = useRef<HTMLDivElement>(null);
   const snapshotRef = useRef<Snapshot | null>(null);
   const [filter, setFilter] = useState<InstitutionFilter>(initialFilter);

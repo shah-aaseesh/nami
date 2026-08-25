@@ -23,6 +23,8 @@ export {
   Mail01Icon as MailIcon,
   Menu01Icon as MenuIcon,
   Mortarboard01Icon as MortarboardIcon,
+  PauseIcon,
+  PlayIcon,
   PlusSignIcon as PlusIcon,
   QuoteUpIcon as QuoteIcon,
   Tick02Icon as CheckIcon,

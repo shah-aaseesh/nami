@@ -33,7 +33,7 @@ export function AboutEmblem({
                 <div className="absolute -inset-10 -z-10 rounded-full bg-accent/5 blur-3xl transition-opacity duration-700 group-hover:bg-accent/10" />
                 <Image
                   alt="NAMI Emblem - Red Lotus"
-                  className="h-auto w-full max-w-sm object-contain mix-blend-multiply drop-shadow-2xl transition-transform duration-700 group-hover:scale-105 lg:max-w-md"
+                  className="h-auto w-full max-w-sm object-contain mix-blend-multiply drop-shadow-2xl lg:max-w-md"
                   height={408}
                   loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 450px"

@@ -20,6 +20,7 @@ gsap.registerPlugin(
   Flip,
 );
 
+// Unconditional motion query: animations must run across all devices (DEC-077, Asmit directive 2026-08-26).
 export const FULL_MOTION_QUERY = "all";
 export {
   Flip,

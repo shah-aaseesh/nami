@@ -72,7 +72,7 @@ export default async function CollegePage() {
 
       <SharedCollegeGallery
         institution={institution.entities.college.role}
-        tone="ink"
+        tone="brand"
       />
 
       <Testimonials id="alumni" items={alumni} section={collegeCopy.alumni} />

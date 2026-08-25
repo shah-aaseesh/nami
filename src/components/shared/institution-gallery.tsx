@@ -19,7 +19,7 @@ export type InstitutionGalleryCopy = {
   readonly ctaAccessibleLabel?: string;
 };
 
-export type InstitutionGalleryTone = "surface" | "ink";
+export type InstitutionGalleryTone = "surface" | "ink" | "brand";
 
 const BENTO_TILE_COUNT = 5;
 
@@ -63,7 +63,7 @@ export async function InstitutionGallery({
   copy,
   id,
   institution,
-  tone = "surface",
+  tone = "brand",
 }: {
   readonly copy: InstitutionGalleryCopy;
   readonly id?: string;
@@ -88,7 +88,11 @@ export async function InstitutionGallery({
 
   return (
     <section
-      className={cn("gutter-x section-y", tone === "ink" && "field-ink")}
+      className={cn(
+        "gutter-x section-y",
+        tone === "brand" && "field-brand",
+        tone === "ink" && "field-ink",
+      )}
       id={id}
     >
       <div className="mx-auto max-w-page">

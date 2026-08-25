@@ -25,18 +25,20 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
   const external = copy.cta.destination === "external";
 
   return (
-    <section className="field-ink gutter-x section-y" id="entry">
+    <section className="field-brand gutter-x section-y" id="entry">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        {/* Full-width Eyebrow Bar */}
+        <Reveal className="flex items-center gap-5" stagger={0.08}>
+          <Eyebrow>{copy.heading}</Eyebrow>
+          <span className="h-px flex-1 bg-border" />
+        </Reveal>
+
+        <div className="mt-6 sm:mt-8 lg:mt-10 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <Reveal className="lg:col-span-5" stagger={0.08}>
-            <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.heading}</Eyebrow>
-              <span className="h-px flex-1 bg-border" />
-            </RevealItem>
-            <SplitText as="h2" className="mt-4">
+            <SplitText as="h2" className="mt-0 text-ink">
               {copy.eyebrow ?? "Admissions & Entry"}
             </SplitText>
-            <RevealItem className="mt-10">
+            <RevealItem className="mt-8 lg:mt-10">
               <Link
                 className={cn(
                   buttonVariants({ size: "lg" }),

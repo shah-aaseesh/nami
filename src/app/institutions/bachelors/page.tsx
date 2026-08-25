@@ -93,7 +93,7 @@ export default async function BachelorsPage() {
 
       <SharedCollegeGallery
         institution={institution.entities.institute.role}
-        tone="ink"
+        tone="brand"
       />
 
       <InstitutionNotices

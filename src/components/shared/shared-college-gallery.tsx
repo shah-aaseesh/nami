@@ -20,7 +20,7 @@ function getGalleryCopy(institution: EntityRole) {
 
 export function SharedCollegeGallery({
   institution,
-  tone,
+  tone = "brand",
 }: {
   readonly institution: EntityRole;
   readonly tone?: InstitutionGalleryTone;

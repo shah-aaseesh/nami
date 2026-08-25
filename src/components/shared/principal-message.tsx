@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, P } from "@/components/ui/typography";
+import { H6, P } from "@/components/ui/typography";
 import type { ContentImage, RichText } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content";
 import { ImageIcon } from "@/lib/icons";
@@ -55,7 +54,6 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
 
 export function PrincipalMessage({
   eyebrow,
-  heading,
   id,
   message,
   person,
@@ -66,14 +64,13 @@ export function PrincipalMessage({
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-10">
-          <Reveal className="flex flex-col gap-5 lg:col-span-9 lg:row-start-1">
-            <Eyebrow className="text-base">{eyebrow}</Eyebrow>
-
-            {heading === undefined ? null : (
-              <SplitText as="h2" className="max-w-4xl">
-                {heading}
-              </SplitText>
-            )}
+          <Reveal className="flex flex-col gap-4 lg:col-span-9 lg:row-start-1">
+            <H6
+              as="p"
+              className="text-accent tracking-widest uppercase font-body"
+            >
+              {eyebrow}
+            </H6>
 
             <span className="block h-1 w-16 rounded-full bg-accent" />
           </Reveal>

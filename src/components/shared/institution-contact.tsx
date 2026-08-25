@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H3, P } from "@/components/ui/typography";
 import type { Campus, EntityRole } from "@/lib/content";
 import { content } from "@/lib/content";
 import {
@@ -11,8 +10,6 @@ import {
   GlobeIcon,
   InstagramIcon,
   LinkedInIcon,
-  MailIcon,
-  PhoneIcon,
   TikTokIcon,
   YouTubeIcon,
 } from "@/lib/icons";
@@ -38,11 +35,9 @@ const SOCIAL_ICONS = {
 } as const;
 
 export async function InstitutionContact({
-  heading,
   id = "contact",
   institution: role,
 }: {
-  readonly heading?: string;
   readonly id?: string;
   readonly institution: EntityRole;
 }) {
@@ -59,113 +54,94 @@ export async function InstitutionContact({
 
   if (!campus) return null;
 
-  const sectionHeading = heading ?? "Get in Touch with NAMI";
+  const socials = (profile.contact.socialProfiles ?? []).slice(0, 4);
 
   return (
-    <section className="gutter-x section-y" id={id}>
+    <section className="gutter-x section-y border-t border-border/40" id={id}>
       <div className="mx-auto max-w-page">
-        <SectionHeader eyebrow={sectionHeading} title="Contact & Location" />
+        <SectionHeader
+          eyebrow="Get in Touch with NAMI"
+          title="Contact & Location"
+        />
 
-        <Reveal
-          className="mt-10 grid grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-14 items-stretch"
-          stagger={0.1}
-          y={20}
-        >
-          {/* Left: Map */}
-          <div className="lg:col-span-7">
-            <div className="h-full min-h-[380px] overflow-hidden rounded-2xl bg-neutral-100 lg:min-h-[440px]">
+        <div className="mx-auto max-w-6xl">
+          <Reveal
+            className="mt-10 grid grid-cols-1 gap-8 sm:mt-12 md:grid-cols-2 md:gap-12 lg:gap-16 items-center"
+            y={16}
+          >
+            {/* Left: Contact Details (vertically centered, text-left) */}
+            <div className="flex flex-col justify-center text-left space-y-4 sm:space-y-5">
+              <p className="font-body text-base sm:text-lg text-ink leading-relaxed">
+                <span className="font-medium text-ink">Address: </span>
+                <span className="text-ink-muted">
+                  {campus.streetAddress}, {campus.locality}, {campus.city}
+                </span>
+              </p>
+
+              <p className="font-body text-base sm:text-lg text-ink">
+                <span className="font-medium text-ink">Phone: </span>
+                <Link
+                  className="text-ink-muted transition-colors hover:text-accent"
+                  href={
+                    `tel:${entityContact.phone.replace(/[^+\d]/g, "")}` as Route
+                  }
+                >
+                  {entityContact.phone}
+                </Link>
+              </p>
+
+              <p className="font-body text-base sm:text-lg text-ink">
+                <span className="font-medium text-ink">Email: </span>
+                <Link
+                  className="text-ink-muted transition-colors hover:text-accent"
+                  href={`mailto:${entityContact.email}` as Route}
+                >
+                  {entityContact.email}
+                </Link>
+              </p>
+
+              {socials.length > 0 ? (
+                <div className="pt-2 sm:pt-3">
+                  <ul className="flex items-center gap-3">
+                    {socials.map((social) => {
+                      const IconComponent =
+                        SOCIAL_ICONS[
+                          social.platform as keyof typeof SOCIAL_ICONS
+                        ] ?? GlobeIcon;
+
+                      return (
+                        <li key={social.platform}>
+                          <Link
+                            aria-label={`${entity.name} on ${social.label}`}
+                            className="flex size-10 sm:size-11 items-center justify-center rounded-full border border-border/70 text-ink-muted transition-colors hover:border-ink hover:bg-ink hover:text-white"
+                            href={social.href as Route}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            <Icon className="size-5" icon={IconComponent} />
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+
+            {/* Right: Map */}
+            <div className="overflow-hidden rounded-xl border border-border/70 bg-neutral-100 shadow-sm">
               <iframe
-                className="block h-full min-h-[380px] w-full lg:min-h-[440px]"
-                height={600}
+                className="block aspect-4/3 w-full h-[260px] sm:h-[300px] lg:h-[320px]"
+                height={320}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={mapSrc(campus)}
                 title={`Map location of ${entity.name} in ${campus.locality}`}
-                width={800}
+                width={500}
               />
             </div>
-          </div>
-
-          {/* Right: Contact details */}
-          <div className="flex flex-col justify-between gap-y-8 lg:col-span-5 lg:py-2">
-            <div className="space-y-8">
-              {/* Location */}
-              <div>
-                <Eyebrow className="text-ink-muted">
-                  {role === "school" ? "School Location" : "College Location"}
-                </Eyebrow>
-                <H3 className="mt-1.5 text-lg sm:text-xl font-medium text-ink">
-                  {campus.locality}, {campus.city}
-                </H3>
-                <P className="mt-1 text-sm text-ink-muted">
-                  {campus.streetAddress}
-                </P>
-              </div>
-
-              {/* Direct Inquiries */}
-              <div>
-                <Eyebrow className="text-ink-muted">Direct Inquiries</Eyebrow>
-                <ul className="mt-4 space-y-3 font-body text-base">
-                  <li>
-                    <Link
-                      className="group flex items-center gap-3 text-ink transition-colors hover:text-accent"
-                      href={
-                        `tel:${entityContact.phone.replace(/[^+\d]/g, "")}` as Route
-                      }
-                    >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors group-hover:bg-accent group-hover:text-white">
-                        <Icon className="size-4" icon={PhoneIcon} />
-                      </div>
-                      <span className="font-medium">{entityContact.phone}</span>
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      className="group flex items-center gap-3 text-ink transition-colors hover:text-accent"
-                      href={`mailto:${entityContact.email}` as Route}
-                    >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-ink transition-colors group-hover:bg-accent group-hover:text-white">
-                        <Icon className="size-4" icon={MailIcon} />
-                      </div>
-                      <span className="font-medium">{entityContact.email}</span>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Social Profiles */}
-            {profile.contact.socialProfiles &&
-            profile.contact.socialProfiles.length > 0 ? (
-              <div>
-                <Eyebrow className="text-ink-muted">Connect Online</Eyebrow>
-                <ul className="mt-3 flex flex-wrap items-center gap-2.5">
-                  {profile.contact.socialProfiles.map((social) => {
-                    const IconComponent =
-                      SOCIAL_ICONS[
-                        social.platform as keyof typeof SOCIAL_ICONS
-                      ] ?? GlobeIcon;
-
-                    return (
-                      <li key={social.platform}>
-                        <Link
-                          aria-label={`${entity.name} on ${social.label}`}
-                          className="flex size-10 items-center justify-center rounded-full bg-neutral-100 text-ink transition-all duration-200 hover:scale-105 hover:bg-accent hover:text-white"
-                          href={social.href as Route}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          <Icon className="size-4.5" icon={IconComponent} />
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ) : null}
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

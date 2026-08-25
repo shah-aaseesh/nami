@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { INQUIRY_COURSES } from "@/lib/content/institutions";
+import {
+  INQUIRY_COURSES,
+  isProposedCourseRequired,
+} from "@/lib/content/institutions";
 
 const PHONE_SHAPE = /^[\d\s+().-]{7,20}$/;
 const PHONE_EXTENSION = /\s*(?:extension|extn|ext|x)\.?\s*\d{1,6}$/i;
@@ -84,6 +87,7 @@ function requiredPastDate(missing: string, unreadable: string, future: string) {
 }
 
 type ConditionalField =
+  | "proposedCourse"
   | "fatherName"
   | "fatherContact"
   | "telephone"
@@ -158,6 +162,10 @@ export const admissionsSchema = z
     const missing = (path: ConditionalField, message: string) => {
       ctx.addIssue({ code: "custom", path: [path], message });
     };
+
+    if (isProposedCourseRequired(data.program) && data.proposedCourse === "") {
+      missing("proposedCourse", "Select your proposed course");
+    }
 
     if (isGuardianLedProgram(data.program)) {
       if (data.fatherName === "" && data.motherName === "") {

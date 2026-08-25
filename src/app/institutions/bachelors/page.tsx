@@ -102,11 +102,7 @@ export default async function BachelorsPage() {
         institution="institute"
       />
 
-      <InstitutionContact
-        heading={bachelorsCopy.contact.heading}
-        id="contact"
-        institution="institute"
-      />
+      <InstitutionContact id="contact" institution="institute" />
     </>
   );
 }

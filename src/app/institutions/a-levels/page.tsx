@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { InstitutionAwarding } from "@/components/shared/institution-awarding";
 import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
@@ -23,13 +22,11 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function CollegePage() {
-  const [institution, leadership, affiliations, testimonials] =
-    await Promise.all([
-      content.getInstitution(),
-      content.getLeadership(),
-      content.getAffiliations(),
-      content.getTestimonials(),
-    ]);
+  const [institution, leadership, testimonials] = await Promise.all([
+    content.getInstitution(),
+    content.getLeadership(),
+    content.getTestimonials(),
+  ]);
 
   const principal =
     leadership.academics.find(
@@ -70,13 +67,6 @@ export default async function CollegePage() {
 
       <CollegeCambridge copy={collegeCopy.cambridge} />
       <CollegeSubjects copy={collegeCopy.subjects} />
-
-      <InstitutionAwarding
-        affiliations={affiliations}
-        copy={collegeCopy.awarding}
-        id="awarding"
-        levelSlug={collegeCopy.levelSlug}
-      />
 
       <CollegeMilestones copy={collegeMilestonesCopy} />
 

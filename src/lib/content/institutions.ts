@@ -68,6 +68,11 @@ export type InquiryCourseId =
   | "a-level"
   | "degree";
 
+export type ProposedCourseOption = {
+  readonly value: string;
+  readonly label: string;
+};
+
 export type InquiryCourse = {
   readonly id: InquiryCourseId;
   readonly label: string;
@@ -76,6 +81,7 @@ export type InquiryCourse = {
   readonly historyHeading: string;
   readonly asksPendingQualifications: boolean;
   readonly asksEmploymentHistory: boolean;
+  readonly proposedCourses?: readonly ProposedCourseOption[];
 };
 
 // Diverges from INSTITUTIONS on purpose (decided 2026-08-20): the inquiry select splits the
@@ -98,6 +104,10 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     historyHeading: "Education History",
     asksPendingQualifications: true,
     asksEmploymentHistory: false,
+    proposedCourses: [
+      { value: "+2 Science", label: "+2 Science" },
+      { value: "+2 Management", label: "+2 Management" },
+    ],
   },
   {
     id: "a-level",
@@ -107,6 +117,10 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     historyHeading: "Education History",
     asksPendingQualifications: true,
     asksEmploymentHistory: false,
+    proposedCourses: [
+      { value: "Science Stream", label: "Science Stream" },
+      { value: "Non-Science Stream", label: "Non-Science Stream" },
+    ],
   },
   {
     id: "degree",
@@ -116,11 +130,43 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     historyHeading: "Qualifications Achieved",
     asksPendingQualifications: true,
     asksEmploymentHistory: true,
+    proposedCourses: [
+      {
+        value: "BSc (Hons) Computer Science",
+        label: "BSc (Hons) Computer Science",
+      },
+      {
+        value: "BSc (Hons) Software Engineering",
+        label: "BSc (Hons) Software Engineering",
+      },
+      {
+        value: "BSc (Hons) Networking Engineering",
+        label: "BSc (Hons) Networking Engineering",
+      },
+      {
+        value: "BSc (Hons) Environmental Science",
+        label: "BSc (Hons) Environmental Science",
+      },
+      {
+        value: "BSc (Hons) Business Administration",
+        label: "BSc (Hons) Business Administration",
+      },
+      { value: "MSc Computer Science", label: "MSc Computer Science" },
+      {
+        value: "BSc Environmental Studies (KU)",
+        label: "BSc Environmental Studies (KU)",
+      },
+    ],
   },
 ];
 
 export function findInquiryCourse(id: string): InquiryCourse | undefined {
   return INQUIRY_COURSES.find((course) => course.id === id);
+}
+
+export function isProposedCourseRequired(programId: string): boolean {
+  const course = findInquiryCourse(programId);
+  return Boolean(course?.proposedCourses && course.proposedCourses.length > 0);
 }
 
 export function findInstitution(id: InstitutionId): Institution | undefined {

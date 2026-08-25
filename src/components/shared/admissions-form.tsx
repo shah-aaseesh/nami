@@ -342,6 +342,7 @@ export function MultiStepForm() {
   };
 
   const selectCourse = (value: string) => {
+    setValue("proposedCourse", "");
     const next = value ? findInquiryCourse(value) : undefined;
     if (!next?.asksPendingQualifications) setValue("pendingQualifications", "");
     if (!next?.asksEmploymentHistory) replaceEmployment([emptyEmployment()]);
@@ -423,7 +424,12 @@ export function MultiStepForm() {
 
   const renderStepContent = () => {
     switch (activeStep?.key) {
-      case "course":
+      case "course": {
+        const proposedCourseOptions = course?.proposedCourses ?? [];
+        const showProposedCourse = Boolean(
+          selectedProgram && proposedCourseOptions.length > 0,
+        );
+
         return (
           <div className="space-y-6">
             <H6 as="h3" className="text-ink mb-6">
@@ -439,15 +445,20 @@ export function MultiStepForm() {
                 required
                 onValueChange={selectCourse}
               />
-              <TextField
-                control={control}
-                name="proposedCourse"
-                label="Proposed Course/s"
-                placeholder="e.g. Science, Management, BSc Computing..."
-              />
+              {showProposedCourse && (
+                <SelectField
+                  control={control}
+                  name="proposedCourse"
+                  label="Proposed Course"
+                  options={proposedCourseOptions}
+                  placeholder="Select a course"
+                  required
+                />
+              )}
             </div>
           </div>
         );
+      }
       case "student":
         return (
           <div className="space-y-6">

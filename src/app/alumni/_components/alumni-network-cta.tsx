@@ -1,4 +1,6 @@
 import { Mail01Icon } from "@hugeicons/core-free-icons";
+import type { Route } from "next";
+import Link from "next/link";
 import { SectionHeader } from "@/components/shared/section-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -22,19 +24,16 @@ export function AlumniNetworkCta({
         <div className="field-brand rounded-3xl p-8 sm:p-12 lg:p-16">
           <SectionHeader
             action={
-              <div className="flex flex-col items-start gap-4 lg:items-end">
-                <a
-                  className={cn(
-                    buttonVariants({ size: "lg", variant: "default" }),
-                    "inline-flex items-center justify-center gap-2 px-6",
-                  )}
-                  href={mailtoHref}
-                >
-                  <Icon className="size-4" icon={Mail01Icon} />
-                  <span>Email Us</span>
-                </a>
-                <span className="text-sm text-ink-muted">{copy.email}</span>
-              </div>
+              <Link
+                className={cn(
+                  buttonVariants({ size: "lg", variant: "default" }),
+                  "inline-flex items-center justify-center gap-2 px-6",
+                )}
+                href={mailtoHref as Route}
+              >
+                <Icon className="size-4" icon={Mail01Icon} />
+                <span>Email Us</span>
+              </Link>
             }
             description={copy.standfirst}
             eyebrow={copy.heading}

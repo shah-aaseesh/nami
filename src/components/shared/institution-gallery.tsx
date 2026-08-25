@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 export type InstitutionGalleryCopy = {
   readonly eyebrow: string;
   readonly heading: string;
-  readonly standfirst: string;
+  readonly standfirst?: string;
   readonly ctaLabel: string;
   readonly ctaAccessibleLabel?: string;
 };
@@ -103,7 +103,6 @@ export async function InstitutionGallery({
               <Icon icon={ArrowRightIcon} />
             </Link>
           }
-          description={copy.standfirst}
           eyebrow={copy.heading}
           layout="action"
           title={copy.eyebrow}

@@ -214,14 +214,21 @@ function buildBlocks(
   data: AdmissionsFormData,
   course: InquiryCourse,
 ): readonly Block[] {
+  const courseRows: Row[] = [
+    { label: "Course applied for", value: sanitize(course.label) },
+  ];
+  if (data.proposedCourse.trim()) {
+    courseRows.push({
+      label: "Proposed course",
+      value: text(data.proposedCourse),
+    });
+  }
+
   const blocks: Block[] = [
     {
       kind: "fields",
       heading: "Course Details",
-      rows: [
-        { label: "Course applied for", value: sanitize(course.label) },
-        { label: "Proposed course/s", value: text(data.proposedCourse) },
-      ],
+      rows: courseRows,
     },
     {
       kind: "fields",

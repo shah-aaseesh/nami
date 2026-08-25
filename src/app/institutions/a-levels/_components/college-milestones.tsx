@@ -2,14 +2,12 @@ import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { H4, P } from "@/components/ui/typography";
-import type { ContentImage } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 export type CollegeMilestone = {
   readonly year: number;
   readonly title: string;
   readonly body: string;
-  readonly photo?: ContentImage;
+  readonly logo?: string;
 };
 
 export type CollegeMilestonesCopy = {
@@ -17,9 +15,6 @@ export type CollegeMilestonesCopy = {
   readonly heading: string;
   readonly milestones: readonly CollegeMilestone[];
 };
-
-const MILESTONE_PHOTO_SIZES =
-  "(min-width: 1568px) 700px, (min-width: 640px) 45vw, 90vw";
 
 export function CollegeMilestones({
   copy,
@@ -29,49 +24,62 @@ export function CollegeMilestones({
   if (copy.milestones.length === 0) return null;
 
   return (
-    <section className="gutter-x section-y" id="milestones">
+    <section
+      className="gutter-x section-y border-t border-border/40"
+      id="milestones"
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}
           title={copy.eyebrow ?? "Milestones"}
         />
 
-        <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
-          <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
-            {copy.milestones.map((milestone) => (
-              <li
-                className="flex flex-col border-t border-border pt-6"
-                data-reveal-item=""
-                key={milestone.year}
-              >
-                <time
-                  className="block font-display text-4xl text-accent tabular-nums"
-                  dateTime={String(milestone.year)}
+        <div className="mx-auto max-w-6xl">
+          <Reveal className="mt-8 sm:mt-10 lg:mt-12" stagger={0.1} y={16}>
+            <ol className="grid gap-6 sm:grid-cols-2 lg:gap-8">
+              {copy.milestones.map((milestone) => (
+                <li
+                  className="flex h-full flex-col rounded-2xl border border-border bg-surface-raised p-6 shadow-xs sm:p-8"
+                  data-reveal-item=""
+                  key={milestone.year}
                 >
-                  {milestone.year}
-                </time>
+                  {/* Logo at top */}
+                  {milestone.logo ? (
+                    <div className="relative mb-6 h-12 w-36 shrink-0 sm:h-14 sm:w-44">
+                      <Image
+                        alt="Cambridge Assessment International Education"
+                        className="object-contain object-left"
+                        fill
+                        sizes="176px"
+                        src={milestone.logo}
+                      />
+                    </div>
+                  ) : null}
 
-                <H4 as="h3" className="mt-4 text-ink">
-                  {milestone.title}
-                </H4>
-                <P className={cn("mt-3", milestone.photo ? "mb-8" : null)}>
-                  {milestone.body}
-                </P>
+                  {/* Year */}
+                  <time
+                    className="block font-display text-3xl sm:text-4xl font-normal text-accent tabular-nums"
+                    dateTime={String(milestone.year)}
+                  >
+                    {milestone.year}
+                  </time>
 
-                {milestone.photo ? (
-                  <Image
-                    alt={milestone.photo.alt}
-                    className="mt-auto aspect-video w-full rounded-media object-cover"
-                    height={milestone.photo.height}
-                    sizes={MILESTONE_PHOTO_SIZES}
-                    src={milestone.photo.src}
-                    width={milestone.photo.width}
-                  />
-                ) : null}
-              </li>
-            ))}
-          </ol>
-        </Reveal>
+                  {/* Title & Body */}
+                  <H4
+                    as="h3"
+                    className="mt-3 text-ink text-xl sm:text-2xl font-normal"
+                  >
+                    {milestone.title}
+                  </H4>
+
+                  <P className="mt-2.5 font-body text-sm sm:text-base text-ink-muted leading-relaxed">
+                    {milestone.body}
+                  </P>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

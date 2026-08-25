@@ -48,12 +48,12 @@ function GroupSubjects({
 }) {
   return (
     // biome-ignore lint/a11y/noRedundantRoles: Tailwind preflight's list-style:none drops the implicit list role in Safari
-    <ul className="flex flex-col gap-4" role="list">
+    <ul className="flex flex-col gap-2 sm:gap-2.5" role="list">
       {stream.subjects
         .filter((subject) => subject.groups.includes(group.key))
         .map((subject) => (
           <li
-            className="font-display text-xl font-normal text-ink"
+            className="font-display text-base sm:text-lg font-normal text-ink"
             key={subject.name}
           >
             {subject.name}
@@ -76,30 +76,38 @@ function StreamCard({
   readonly stream: CollegeSubjectStream;
 }) {
   return (
-    <div className="flex h-full flex-col rounded-3xl border border-border bg-surface-raised p-6 sm:p-8 lg:p-10">
-      <h3 className="font-display text-3xl font-normal text-ink lg:text-4xl">
+    <div className="flex h-full flex-col rounded-2xl border border-border bg-surface-raised p-5 sm:p-6 lg:p-7">
+      <h3 className="font-display text-2xl font-normal text-ink sm:text-3xl">
         {stream.label}
       </h3>
 
-      <Tabs className="mt-6 flex-1" defaultValue={stream.groups[0]?.key}>
+      <Tabs className="mt-4 flex-1" defaultValue={stream.groups[0]?.key}>
         <TabsList aria-label={stream.label}>
           {stream.groups.map((group) => (
-            <TabsTab className="text-base" key={group.key} value={group.key}>
+            <TabsTab
+              className="py-2.5 text-sm sm:text-base"
+              key={group.key}
+              value={group.key}
+            >
               {group.label}
             </TabsTab>
           ))}
         </TabsList>
 
         {stream.groups.map((group) => (
-          <TabsPanel key={group.key} value={group.key}>
+          <TabsPanel className="pt-4 sm:pt-5" key={group.key} value={group.key}>
             <GroupSubjects copy={copy} group={group} stream={stream} />
           </TabsPanel>
         ))}
       </Tabs>
 
-      <div className="mt-10 border-t border-border pt-6">
-        <P className="text-sm">{stream.minimumNote}</P>
-        <P className="mt-3 text-sm">{stream.overlapNote}</P>
+      <div className="mt-6 border-t border-border/60 pt-4">
+        <P className="text-xs sm:text-sm text-ink-muted">
+          {stream.minimumNote}
+        </P>
+        <P className="mt-1.5 text-xs sm:text-sm text-ink-muted">
+          {stream.overlapNote}
+        </P>
       </div>
     </div>
   );
@@ -120,9 +128,9 @@ export function CollegeSubjects({
         />
 
         <Reveal
-          className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-2 lg:gap-8"
-          stagger={0.12}
-          y={24}
+          className="mt-8 grid gap-6 sm:mt-10 lg:mt-12 lg:grid-cols-2 lg:gap-8"
+          stagger={0.08}
+          y={16}
         >
           {copy.streams.map((stream) => (
             <RevealItem key={stream.key}>

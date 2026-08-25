@@ -1,9 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
-import { Eyebrow, H5 } from "@/components/ui/typography";
 import type { Affiliation } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 export type InstitutionAwardingCopy = {
   readonly eyebrow: string;
@@ -26,7 +24,7 @@ function selectAwardingBodies(
     .sort((first, second) => first.sinceYear - second.sinceYear);
 }
 
-function AwardingBodyCard({
+function SinglePartnerCard({
   item,
   sinceLabel,
 }: {
@@ -36,40 +34,93 @@ function AwardingBodyCard({
   const logo = logoSrcOf(item.logo);
 
   return (
-    <li className="flex flex-col items-center rounded-3xl bg-primary-100 p-6 text-center xl:p-8">
-      <Eyebrow
-        as="span"
-        className="rounded-full bg-primary-200 px-3 py-1 text-primary-800"
-      >
+    <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-surface-raised p-6 shadow-xs sm:p-8">
+      <div className="grid grid-cols-1 items-center gap-6 sm:grid-cols-12 sm:gap-8">
+        {/* Left: Logo & Status */}
+        <div className="flex flex-col items-center sm:col-span-4 sm:items-start">
+          {logo === null ? null : (
+            <div className="relative h-20 w-44 rounded-xl border border-border/60 bg-white p-3 shadow-2xs">
+              <Image
+                alt={item.body}
+                className="object-contain"
+                fill
+                sizes="176px"
+                src={logo}
+              />
+            </div>
+          )}
+          <span className="mt-3.5 inline-flex items-center rounded-full bg-accent/10 px-3 py-1 font-body text-xs font-medium text-accent">
+            {`${sinceLabel} ${item.sinceYear}`}
+          </span>
+        </div>
+
+        {/* Right: Partner Details */}
+        <div className="space-y-2.5 text-center sm:col-span-8 sm:text-left">
+          <h3 className="font-display text-xl font-medium text-ink sm:text-2xl">
+            {item.body}
+          </h3>
+
+          {item.scope === null ? null : (
+            <p className="font-body text-sm text-ink-muted leading-relaxed sm:text-base">
+              {item.scope}
+            </p>
+          )}
+
+          {item.note === null ? null : (
+            <div className="pt-1">
+              <span className="inline-flex items-center gap-2 font-body text-xs font-medium text-accent">
+                <span className="size-1.5 rounded-full bg-accent" />
+                <span>{item.note}</span>
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MultiPartnerCard({
+  item,
+  sinceLabel,
+}: {
+  readonly item: Affiliation;
+  readonly sinceLabel: string;
+}) {
+  const logo = logoSrcOf(item.logo);
+
+  return (
+    <li className="flex flex-col items-center rounded-2xl border border-border bg-surface-raised p-6 text-center shadow-xs">
+      <span className="rounded-full bg-accent/10 px-3 py-1 font-body text-xs font-medium text-accent">
         {`${sinceLabel} ${item.sinceYear}`}
-      </Eyebrow>
+      </span>
 
       {logo === null ? null : (
-        <div className="mt-4 flex w-full items-center justify-center rounded-2xl bg-neutral-50 p-4">
-          <div className="relative h-16 w-32 md:h-20 md:w-40">
-            <Image
-              alt={item.body}
-              className="object-contain"
-              fill
-              sizes="(max-width: 767px) 128px, 160px"
-              src={logo}
-            />
-          </div>
+        <div className="relative mt-4 h-16 w-36 rounded-xl border border-border/60 bg-white p-2.5 shadow-2xs">
+          <Image
+            alt={item.body}
+            className="object-contain"
+            fill
+            sizes="144px"
+            src={logo}
+          />
         </div>
       )}
 
-      <H5 as="h3" className="mt-6 text-primary-800">
+      <h3 className="mt-5 font-display text-lg font-medium text-ink">
         {item.body}
-      </H5>
+      </h3>
 
       {item.scope === null ? null : (
-        <p className="mt-3 font-body text-sm text-pretty text-neutral-700">
+        <p className="mt-2 font-body text-sm text-ink-muted leading-relaxed">
           {item.scope}
         </p>
       )}
 
       {item.note === null ? null : (
-        <Eyebrow className="mt-auto pt-4 text-primary-700">{item.note}</Eyebrow>
+        <span className="mt-auto pt-4 font-body text-xs font-medium text-accent">
+          {item.note}
+        </span>
       )}
     </li>
   );
@@ -87,35 +138,33 @@ export function InstitutionAwarding({
   readonly levelSlug: string;
 }) {
   const awardingBodies = selectAwardingBodies(affiliations, levelSlug);
+  const firstBody = awardingBodies[0];
 
-  if (awardingBodies.length === 0) return null;
+  if (!firstBody) return null;
 
   return (
-    <section className="field-brand gutter-x section-y" id={id}>
+    <section className="gutter-x section-y border-t border-border/40" id={id}>
       <div className="mx-auto max-w-page">
         <SectionHeader
-          eyebrow={copy.heading}
-          title={copy.eyebrow ?? "Awarding Bodies"}
           description={copy.standfirst}
+          eyebrow={copy.heading}
+          title={copy.eyebrow ?? "Awarding Body"}
         />
 
-        <Reveal className="mt-14 lg:mt-20" stagger={0.12} y={24}>
-          <ul
-            className={cn(
-              "grid gap-4 lg:gap-6",
-              awardingBodies.length === 1
-                ? "mx-auto w-full max-w-md"
-                : "sm:grid-cols-2 lg:grid-cols-3",
-            )}
-          >
-            {awardingBodies.map((item) => (
-              <AwardingBodyCard
-                item={item}
-                key={item.id}
-                sinceLabel={copy.sinceLabel}
-              />
-            ))}
-          </ul>
+        <Reveal className="mt-8 sm:mt-10 lg:mt-12" y={16}>
+          {awardingBodies.length === 1 ? (
+            <SinglePartnerCard item={firstBody} sinceLabel={copy.sinceLabel} />
+          ) : (
+            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {awardingBodies.map((item) => (
+                <MultiPartnerCard
+                  item={item}
+                  key={item.id}
+                  sinceLabel={copy.sinceLabel}
+                />
+              ))}
+            </ul>
+          )}
         </Reveal>
       </div>
     </section>

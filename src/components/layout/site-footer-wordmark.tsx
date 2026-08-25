@@ -15,10 +15,13 @@ export function SiteFooterWordmark({
   name,
 }: SiteFooterWordmarkProps) {
   return (
-    <div className={cn("inline-block", className)} data-slot="wordmark">
+    <div
+      className={cn("inline-block max-w-full", className)}
+      data-slot="wordmark"
+    >
       <Image
         alt={name}
-        className="h-20 w-auto md:h-24 lg:h-28 -mt-6"
+        className="h-20 w-auto max-w-full md:h-24 lg:h-28 -mt-6"
         height={MARK_HEIGHT}
         sizes="(min-width: 1024px) 112px, 80px"
         src={MARK_SRC}

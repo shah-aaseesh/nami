@@ -80,7 +80,7 @@ export function FacultyGroup({
         <div className="mx-auto max-w-page overflow-hidden">
           {heading}
 
-          <div className="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:flex-wrap lg:justify-center lg:overflow-visible">
+          <div className="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:justify-center md:overflow-visible">
             {cards}
           </div>
         </div>

@@ -47,7 +47,7 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
     <aside
       aria-label="Floating quick actions"
       className={cn(
-        "fixed right-0 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border-y border-l border-primary-600/30 bg-primary-700 p-1.5 shadow-2xl md:flex",
+        "fixed right-0 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border-y border-l border-primary-600/30 bg-primary-700 p-1.5 shadow-2xl xl:flex",
         className,
       )}
     >

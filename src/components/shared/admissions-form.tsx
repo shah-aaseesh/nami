@@ -146,7 +146,7 @@ function QualificationRow({
       >
         <Icon icon={TrashIcon} className="size-4" />
       </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
         <TextField
           control={control}
           name={`qualifications.${index}.place`}
@@ -198,7 +198,7 @@ function EmploymentRow({
           <Icon icon={TrashIcon} className="size-4" />
         </button>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
         <TextField
           control={control}
           name={`employment.${index}.employer`}
@@ -215,7 +215,7 @@ function EmploymentRow({
           name={`employment.${index}.position`}
           label="Position Held"
         />
-        <div className="md:col-span-2">
+        <div className="lg:col-span-2">
           <TextareaField
             control={control}
             name={`employment.${index}.duties`}
@@ -465,7 +465,7 @@ export function MultiStepForm() {
             <H6 as="h3" className="text-ink mb-6">
               Student Details
             </H6>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <TextField
                 control={control}
                 name="firstName"
@@ -511,7 +511,7 @@ export function MultiStepForm() {
                 autoComplete="email"
                 required={!guardianLed}
               />
-              <div className="md:col-span-2">
+              <div className="lg:col-span-2">
                 <FileField
                   control={control}
                   name="photo"
@@ -524,7 +524,7 @@ export function MultiStepForm() {
                 control={control}
                 name="specialNeeds"
                 label="Do you have any special needs or medical conditions we should be aware of?"
-                className="md:col-span-2 mt-2"
+                className="lg:col-span-2 mt-2"
               />
             </div>
           </div>
@@ -540,7 +540,7 @@ export function MultiStepForm() {
               <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
                 Father's Details
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <TextField
                   control={control}
                   name="fatherName"
@@ -572,7 +572,7 @@ export function MultiStepForm() {
               <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
                 Mother's Details
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <TextField
                   control={control}
                   name="motherName"
@@ -604,7 +604,7 @@ export function MultiStepForm() {
               <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
                 Emergency / Secondary Contact
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <TextField
                   control={control}
                   name="secondaryContact"
@@ -734,7 +734,7 @@ export function MultiStepForm() {
                   this application is accurate and complete to the best of my
                   knowledge.
                 </P>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
                   <TextField
                     control={control}
                     name="signature"
@@ -775,12 +775,12 @@ export function MultiStepForm() {
               return (
                 <li
                   key={step.key}
-                  className="flex items-center gap-4 relative group"
+                  className="flex items-center gap-4 relative group min-h-9"
                 >
                   {index !== steps.length - 1 && (
                     <div
                       className={cn(
-                        "absolute left-[13px] top-8 w-[2px] h-8 -z-10 transition-colors duration-500",
+                        "absolute left-[15px] sm:left-[13px] top-8 w-[2px] h-8 -z-10 transition-colors duration-500",
                         isPast ? "bg-accent" : "bg-border",
                       )}
                     />
@@ -790,8 +790,9 @@ export function MultiStepForm() {
                     type="button"
                     onClick={() => canJump && goToStep(index)}
                     disabled={!canJump && !isActive}
+                    aria-label={`Step ${index + 1}: ${step.label}`}
                     className={cn(
-                      "flex items-center justify-center size-7 rounded-full text-xs font-semibold shrink-0 transition-all duration-300",
+                      "flex items-center justify-center size-8 sm:size-7 rounded-full text-xs font-semibold shrink-0 transition-all duration-300",
                       isActive && "ring-4 ring-accent/20 scale-110",
                       canJump && "cursor-pointer",
                       hasError
@@ -814,7 +815,7 @@ export function MultiStepForm() {
                     onClick={() => canJump && goToStep(index)}
                     disabled={!canJump && !isActive}
                     className={cn(
-                      "text-sm font-medium text-left rounded-sm transition-colors duration-300",
+                      "text-sm font-medium text-left rounded-sm py-1 transition-colors duration-300",
                       canJump && "cursor-pointer",
                       hasError
                         ? "text-accent"

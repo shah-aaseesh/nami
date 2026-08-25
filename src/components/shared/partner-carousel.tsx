@@ -53,10 +53,10 @@ function PartnerTile({ partner }: { readonly partner: CareerPartner }) {
       <span className="sr-only">{partner.name}</span>
       <Image
         alt={partner.name}
-        className="h-auto max-h-16 sm:max-h-18 lg:max-h-20 w-32 sm:w-36 lg:w-40 xl:w-44 object-contain transition-transform duration-300 hover:scale-105"
+        className="h-auto max-h-12 sm:max-h-16 lg:max-h-20 w-24 sm:w-32 lg:w-40 xl:w-44 object-contain transition-transform duration-300 hover:scale-105"
         height={partner.logo.height}
         loading="lazy"
-        sizes="(min-width: 1280px) 176px, (min-width: 1024px) 160px, (min-width: 640px) 144px, 128px"
+        sizes="(min-width: 1280px) 176px, (min-width: 1024px) 160px, (min-width: 640px) 128px, 96px"
         src={partner.logo.src}
         width={partner.logo.width}
       />

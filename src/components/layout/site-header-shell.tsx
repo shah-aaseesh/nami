@@ -246,11 +246,16 @@ export function SiteHeaderShell({
             </ul>
           </nav>
 
-          <div className="flex items-center gap-x-3 xl:gap-x-5 shrink-0">
+          <div className="flex items-center gap-x-3 xl:gap-x-5 shrink-0 lg:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
                 render={
-                  <Button size="icon" variant="default" aria-label="Menu">
+                  <Button
+                    size="icon"
+                    variant="default"
+                    aria-label="Menu"
+                    className="min-h-11 min-w-11"
+                  >
                     <Icon icon={MenuIcon} className="size-5" />
                   </Button>
                 }

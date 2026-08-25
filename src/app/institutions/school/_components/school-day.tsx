@@ -47,11 +47,11 @@ export function SchoolDay({
           <ul className="grid border-t border-primary-800/80 lg:grid-cols-2 lg:gap-x-14 xl:gap-x-16">
             {copy.campus.map((entry) => (
               <li
-                className="flex items-start gap-5 sm:gap-6 border-b border-primary-800/80 py-6"
+                className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 border-b border-primary-800/80 py-6"
                 key={entry.title}
               >
                 {entry.photo && (
-                  <div className="relative aspect-[4/3] w-32 sm:w-40 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-primary-800/30">
+                  <div className="relative aspect-[4/3] w-full sm:w-40 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-primary-800/30">
                     <Image
                       alt={entry.photo.alt}
                       className="h-full w-full object-cover"

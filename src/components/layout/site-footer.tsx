@@ -71,7 +71,7 @@ export async function SiteFooter() {
                   <li key={item.href}>
                     <Link
                       href={item.href as Route}
-                      className="inline-block text-white/85 transition-colors hover:text-white hover:underline underline-offset-4"
+                      className="inline-block py-1 text-white/85 transition-colors hover:text-white hover:underline underline-offset-4"
                     >
                       {item.label}
                     </Link>

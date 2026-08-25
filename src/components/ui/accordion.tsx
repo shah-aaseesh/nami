@@ -47,7 +47,7 @@ export function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group flex w-full cursor-pointer items-center justify-between gap-6 py-6 text-start text-xl text-ink transition-colors duration-200 hover:text-accent",
+          "group flex w-full cursor-pointer items-center justify-between gap-6 py-6 text-start text-xl text-ink transition-colors duration-200 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset",
           className,
         )}
         {...props}

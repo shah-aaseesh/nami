@@ -51,7 +51,12 @@ export function HeroBadge({
   const logoSrc = MARK_SRC[entity.role] ?? "/logo/nami-color.svg";
 
   return (
-    <div className={cn("relative size-32 shrink-0 lg:size-36", className)}>
+    <div
+      className={cn(
+        "relative size-32 shrink-0 lg:size-36 2xl:size-40",
+        className,
+      )}
+    >
       <svg
         aria-label={accessibleLabel}
         className="size-full animate-[spin_20s_linear_infinite]"
@@ -78,7 +83,7 @@ export function HeroBadge({
           </textPath>
         </text>
       </svg>
-      <div className="absolute inset-0 m-auto flex size-20 lg:size-24 items-center justify-center rounded-full">
+      <div className="absolute inset-0 m-auto flex size-20 lg:size-24 2xl:size-28 items-center justify-center rounded-full">
         {watch ? (
           <Link
             className="flex size-full items-center justify-center rounded-full transition-transform hover:scale-105"
@@ -88,9 +93,9 @@ export function HeroBadge({
           >
             <Image
               alt=""
-              className="h-16 lg:h-18 w-auto object-contain"
+              className="h-16 lg:h-18 2xl:h-20 w-auto object-contain"
               height={MARK_HEIGHT}
-              sizes="(min-width: 1024px) 72px, 64px"
+              sizes="(min-width: 1536px) 80px, (min-width: 1024px) 72px, 64px"
               src={logoSrc}
               width={MARK_WIDTH}
             />
@@ -99,9 +104,9 @@ export function HeroBadge({
         ) : (
           <Image
             alt=""
-            className="h-16 lg:h-18 w-auto object-contain"
+            className="h-16 lg:h-18 2xl:h-20 w-auto object-contain"
             height={MARK_HEIGHT}
-            sizes="(min-width: 1024px) 72px, 64px"
+            sizes="(min-width: 1536px) 80px, (min-width: 1024px) 72px, 64px"
             src={logoSrc}
             width={MARK_WIDTH}
           />

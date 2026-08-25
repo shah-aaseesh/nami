@@ -316,7 +316,7 @@ export function CarouselDots({
             <button
               aria-current={active}
               aria-label={`${dotLabel ?? "Go to slide"} ${index + 1} of ${scrollSnaps.length}`}
-              className="group p-1.5"
+              className="group p-2.5 sm:p-2 cursor-pointer flex items-center justify-center"
               key={snap}
               onClick={() => scrollTo(index)}
               type="button"

@@ -149,7 +149,7 @@ const day: SchoolDayCopy = {
   eyebrow: "A day at NAMI",
   heading: "Care is the first thing a child is taught here.",
   standfirst:
-    "A campus built around care, curiosity, and community — where every child feels seen, heard, and supported.",
+    "A school built around care, curiosity, and community — where every child feels seen, heard, and supported.",
   campusLabel: "What the school holds",
   campus: [
     {

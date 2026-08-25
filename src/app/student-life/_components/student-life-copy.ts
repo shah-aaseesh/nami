@@ -6,6 +6,6 @@ export const studentLifeCopy = {
   },
   masthead: {
     title: "Student Life",
-    lead: "Beyond the classroom. A campus that fosters innovation, leadership, and sustainability.",
+    lead: "Beyond the classroom. A college that fosters innovation, leadership, and sustainability.",
   },
 };

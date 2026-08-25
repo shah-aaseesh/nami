@@ -146,7 +146,7 @@ export function SiteNavPanel({
         <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mt-2 shadow-lg">
           <Image
             src="/nami/campus-library.jpg"
-            alt="Campus Library"
+            alt="College Library"
             fill
             sizes="336px"
             className="absolute inset-0 object-cover"

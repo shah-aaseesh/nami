@@ -7,9 +7,9 @@ import { H2, P, Standfirst } from "@/components/ui/typography";
 import type { CampusLifePillar } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content/rich-text";
 
-import { CampusLifePin } from "./campus-life-pin";
+import { CollegeLifePin } from "./college-life-pin";
 
-export function CampusLifeList({
+export function CollegeLifeList({
   pillars,
 }: {
   pillars: readonly CampusLifePillar[];
@@ -29,7 +29,7 @@ export function CampusLifeList({
           >
             <div className="mx-auto max-w-page">
               <Reveal className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-                <CampusLifePin
+                <CollegeLifePin
                   className={`lg:col-span-5 ${
                     isEven ? "lg:col-start-1" : "lg:col-start-8"
                   }`}
@@ -43,7 +43,7 @@ export function CampusLifeList({
                   <RevealItem className="mt-6">
                     <Standfirst>{pillar.lead}</Standfirst>
                   </RevealItem>
-                </CampusLifePin>
+                </CollegeLifePin>
 
                 <div
                   className={`lg:col-span-6 lg:pt-16 ${

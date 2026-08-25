@@ -18,7 +18,7 @@ function mapSrc(campus: Campus): string {
   return `${MAP_ORIGIN}?${params.toString()}`;
 }
 
-function CampusEntry({ campus, index }: { campus: Campus; index: number }) {
+function LocationEntry({ campus, index }: { campus: Campus; index: number }) {
   const copy = contactCopy.campuses;
   const flipped = index % 2 === 1;
 
@@ -75,25 +75,25 @@ function CampusEntry({ campus, index }: { campus: Campus; index: number }) {
   );
 }
 
-export async function CampusLocations() {
+export async function CollegeLocations() {
   const institution = await content.getInstitution();
   const copy = contactCopy.campuses;
 
   if (institution.campuses.length === 0) return null;
 
   return (
-    <section className="gutter-x section-y" id="campuses">
+    <section className="gutter-x section-y" id="locations">
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}
-          title={copy.eyebrow ?? "Campuses"}
+          title={copy.eyebrow ?? "Locations"}
           description={copy.standfirst}
         />
 
         <Reveal className="mt-14 lg:mt-24" stagger={0.12}>
           <ul className="flex flex-col gap-y-12 sm:gap-y-16 lg:gap-y-28">
             {institution.campuses.map((campus, index) => (
-              <CampusEntry campus={campus} index={index} key={campus.id} />
+              <LocationEntry campus={campus} index={index} key={campus.id} />
             ))}
           </ul>
         </Reveal>

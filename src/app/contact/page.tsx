@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/seo";
-import { CampusLocations } from "./_components/campus-locations";
+import { CollegeLocations } from "./_components/college-locations";
 import { contactCopy } from "./_components/contact-copy";
 import { ContactFormSection } from "./_components/contact-form-section";
 import { ContactMasthead } from "./_components/contact-masthead";
@@ -16,7 +16,7 @@ export default function ContactPage() {
     <>
       <ContactMasthead />
       <ContactFormSection />
-      <CampusLocations />
+      <CollegeLocations />
     </>
   );
 }

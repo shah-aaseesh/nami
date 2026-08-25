@@ -6,12 +6,12 @@ import { FULL_MOTION_QUERY, gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 const PIN_QUERY = `${FULL_MOTION_QUERY} and (min-width: 1024px)`;
 const PIN_TOP = 128;
 
-export type CampusLifePinProps = {
+export type CollegeLifePinProps = {
   children: ReactNode;
   className?: string;
 };
 
-export function CampusLifePin({ children, className }: CampusLifePinProps) {
+export function CollegeLifePin({ children, className }: CollegeLifePinProps) {
   const track = useRef<HTMLDivElement>(null);
   const column = useRef<HTMLDivElement>(null);
 

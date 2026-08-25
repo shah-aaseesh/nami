@@ -77,7 +77,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     campusLife: {
-      navLabel: "Campus life",
+      navLabel: "College life",
       eyebrow: "Beyond the timetable",
       heading: "Where ideas get built.",
       standfirst: null,
@@ -88,8 +88,7 @@ export const homeCopy: HomeCopy = {
       navLabel: "NAMI in numbers",
       eyebrow: "The record",
       heading: "The institution, in numbers.",
-      standfirst:
-        "Teaching across the school, the college and the institute — measured in the people it has taught.",
+      standfirst: null,
       cta: null,
       emptyState: null,
     },

@@ -124,7 +124,7 @@ const heroSlides: readonly ContentImage[] = [
 ];
 
 const masthead: BachelorsMastheadCopy = {
-  heroLabel: "NAMI campus at New Baneshwor",
+  heroLabel: "NAMI at New Baneshwor",
   slides: heroSlides,
   motto: "Transform yourself, to lead the world",
   heading: "NAAYA AAYAM MULTI-DISCIPLINARY INSTITUTE",
@@ -139,7 +139,7 @@ const masthead: BachelorsMastheadCopy = {
 
 const awarding: InstitutionAwardingCopy = {
   eyebrow: "Awarding universities",
-  heading: "The universities awarding the degrees taught on this campus.",
+  heading: "The universities awarding the degrees taught at the college.",
   standfirst:
     "Taught here, awarded elsewhere — the university behind each degree sits below.",
   sinceLabel: "Since",
@@ -858,7 +858,7 @@ const alumni: SectionCopy = {
 };
 
 const gallery: InstitutionGalleryCopy = {
-  eyebrow: "The campus",
+  eyebrow: "The college",
   heading: "Degree years, photographed.",
   standfirst:
     "Convocations, panels, field days and the ordinary weeks between them — the institute’s own record of what a degree here looks like.",

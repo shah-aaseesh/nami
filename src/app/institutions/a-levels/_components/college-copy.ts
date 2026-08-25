@@ -41,14 +41,14 @@ const heroSlides: readonly ContentImage[] = [
   },
   {
     src: "/nami/campus-sports.jpg",
-    alt: "Students on the NAMI sports ground during a campus tournament or sports day.",
+    alt: "Students on the NAMI sports ground during a college tournament or sports day.",
     width: 1500,
     height: 1000,
   },
 ];
 
 const masthead: CollegeMastheadCopy = {
-  heroLabel: "NAMI College campus",
+  heroLabel: "NAMI College",
   slides: heroSlides,
   heading: "NAMI College",
   standfirst:
@@ -61,7 +61,7 @@ const masthead: CollegeMastheadCopy = {
   establishedLabel: "Established",
   statusLabel: "Status",
   statusValue: "Independent CAIE examination centre",
-  campusLabel: "Campus",
+  campusLabel: "Location",
 };
 
 const cambridge: CollegeCambridgeCopy = {
@@ -163,12 +163,12 @@ const awarding: InstitutionAwardingCopy = {
   eyebrow: "Awarding body",
   heading: "The examination board behind the certificate.",
   standfirst:
-    "A Level certificates are issued by Cambridge, not by NAMI. What the college holds is the affiliation to teach the programme and the accreditation to examine it on campus.",
+    "A Level certificates are issued by Cambridge, not by NAMI. What the college holds is the affiliation to teach the programme and the accreditation to examine it at the college.",
   sinceLabel: "Affiliated since",
 };
 
 const gallery: InstitutionGalleryCopy = {
-  eyebrow: "The campus",
+  eyebrow: "The college",
   heading: "Two years, photographed.",
   standfirst:
     "Trips, tournaments, service camps and the ordinary weeks between them — the college's own record of what an A Level here looks like.",

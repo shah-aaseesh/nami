@@ -2,7 +2,7 @@ import { Counter } from "@/components/motion/counter";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import type { ContentImage, SectionCopy, Stat } from "@/lib/content";
-import { CampusLifeBand } from "./campus-life-band";
+import { CollegeLifeBand } from "./college-life-band";
 
 export function Stats({
   poster = null,
@@ -34,12 +34,6 @@ export function Stats({
               : "mt-12 grid grid-cols-1 gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-12 lg:items-center"
           }
         >
-          {poster === null ? null : (
-            <div className="lg:col-span-5">
-              <CampusLifeBand poster={poster} />
-            </div>
-          )}
-
           <div className={poster === null ? "" : "lg:col-span-7"}>
             <Reveal
               className={
@@ -61,6 +55,12 @@ export function Stats({
               ))}
             </Reveal>
           </div>
+
+          {poster === null ? null : (
+            <div className="lg:col-span-5">
+              <CollegeLifeBand poster={poster} />
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
-import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
+import { SharedCollegeGallery } from "@/components/shared/shared-college-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
@@ -70,7 +70,7 @@ export default async function SchoolPage() {
         items={parentTestimonials}
         section={schoolCopy.parents}
       />
-      <SharedCampusGallery
+      <SharedCollegeGallery
         institution={institution.entities.school.role}
         tone="ink"
       />

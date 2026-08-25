@@ -69,9 +69,9 @@ export const campusLife: readonly CampusLifePillar[] = [
   {
     ...entryOf("sustainability"),
     title: "Sustainability",
-    lead: "A plastic-free campus aligned with the UN Sustainable Development Goals.",
+    lead: "A plastic-free college aligned with the UN Sustainable Development Goals.",
     body: richText(
-      "Sustainability is a core principle at NAMI, embedded in its operations, academic framework and strategic development: renewable energy, efficient resource management, structured waste segregation and recycling, reduced reliance on paper, sustainable mobility across the campus and a plastic-free zone.",
+      "Sustainability is a core principle at NAMI, embedded in its operations, academic framework and strategic development: renewable energy, efficient resource management, structured waste segregation and recycling, reduced reliance on paper, sustainable mobility across the college and a plastic-free zone.",
       "These initiatives are aligned with the United Nations Sustainable Development Goals, particularly climate action, responsible consumption and production, and quality education, and are carried into teaching through interdisciplinary curricula, applied research and community engagement.",
     ),
     highlights: [

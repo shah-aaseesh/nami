@@ -5,7 +5,7 @@ import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import type { CareerPartner } from "@/components/shared/partner-carousel";
 import { PrincipalMessage } from "@/components/shared/principal-message";
-import { SharedCampusGallery } from "@/components/shared/shared-campus-gallery";
+import { SharedCollegeGallery } from "@/components/shared/shared-college-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
@@ -91,7 +91,7 @@ export default async function BachelorsPage() {
 
       <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
 
-      <SharedCampusGallery
+      <SharedCollegeGallery
         institution={institution.entities.institute.role}
         tone="ink"
       />

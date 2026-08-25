@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
-import { CampusLifeList } from "./_components/campus-life-list";
+import { CollegeLifeList } from "./_components/college-life-list";
 import { studentLifeCopy } from "./_components/student-life-copy";
 import { StudentLifeMasthead } from "./_components/student-life-masthead";
 
@@ -18,7 +18,7 @@ export default async function StudentLifePage() {
   return (
     <>
       <StudentLifeMasthead copy={studentLifeCopy.masthead} />
-      <CampusLifeList pillars={pillars} />
+      <CollegeLifeList pillars={pillars} />
     </>
   );
 }

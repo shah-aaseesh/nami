@@ -19,7 +19,7 @@ export type SchoolDayCopy = {
   readonly campus: readonly SchoolDayMoment[];
 };
 
-const CAMPUS_PHOTO_SIZES =
+const SCHOOL_PHOTO_SIZES =
   "(min-width: 1568px) 460px, (min-width: 1024px) 29vw, (min-width: 640px) 45vw, 90vw";
 
 export function SchoolDay({
@@ -51,7 +51,7 @@ export function SchoolDay({
                     alt={entry.photo.alt}
                     className="aspect-square w-full rounded-media object-cover"
                     height={entry.photo.height}
-                    sizes={CAMPUS_PHOTO_SIZES}
+                    sizes={SCHOOL_PHOTO_SIZES}
                     src={entry.photo.src}
                     width={entry.photo.width}
                   />

@@ -67,7 +67,7 @@ export function PrincipalMessage({
       <div className="mx-auto max-w-page">
         <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-10">
           <Reveal className="flex flex-col gap-5 lg:col-span-9 lg:row-start-1">
-            <Eyebrow>{eyebrow}</Eyebrow>
+            <Eyebrow className="text-base">{eyebrow}</Eyebrow>
 
             {heading === undefined ? null : (
               <SplitText as="h2" className="max-w-4xl">

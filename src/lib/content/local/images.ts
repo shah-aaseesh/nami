@@ -30,7 +30,7 @@ export const scienceLaboratoryTwo: ContentImage = {
 
 export const studentsOnCampus: ContentImage = {
   src: "/nami/campus-welcome.jpg",
-  alt: "A large group of NAMI students standing together on the paved walkway outside a campus building.",
+  alt: "A large group of NAMI students standing together on the paved walkway outside a college building.",
   width: 714,
   height: 476,
 };

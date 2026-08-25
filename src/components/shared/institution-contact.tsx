@@ -89,9 +89,11 @@ export async function InstitutionContact({
           {/* Right: Contact details */}
           <div className="flex flex-col justify-between gap-y-8 lg:col-span-5 lg:py-2">
             <div className="space-y-8">
-              {/* Campus Location */}
+              {/* Location */}
               <div>
-                <Eyebrow className="text-ink-muted">Campus Location</Eyebrow>
+                <Eyebrow className="text-ink-muted">
+                  {role === "school" ? "School Location" : "College Location"}
+                </Eyebrow>
                 <H3 className="mt-1.5 text-lg sm:text-xl font-medium text-ink">
                   {campus.locality}, {campus.city}
                 </H3>

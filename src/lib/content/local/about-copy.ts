@@ -26,7 +26,7 @@ const awards: readonly Award[] = [
   },
   {
     ...entryOf("award-campus-sustainability"),
-    title: "Campus Sustainability Commendation",
+    title: "College Sustainability Commendation",
     awardingBody: "City sustainability forum",
     year: 2018,
     citation: null,

@@ -9,13 +9,13 @@ export const galleryCopy = {
   meta: {
     title: "Gallery",
     description:
-      "The NAMI group's photographic record of the year in Kathmandu — classrooms and campuses, tournaments and service camps, orientations and convocations, filterable by institution.",
+      "The NAMI group's photographic record of the year in Kathmandu — classrooms and college grounds, tournaments and service camps, orientations and convocations, filterable by institution.",
   },
   masthead: {
     eyebrow: "Gallery",
     heading: "A year, in pictures.",
     standfirst:
-      "Classrooms and campuses, tournaments and service camps, orientations and convocations. One archive across the school, the college and the institute.",
+      "Classrooms and college grounds, tournaments and service camps, orientations and convocations. One archive across the school, the college and the institute.",
   },
   allLabel: "All",
   filterGroupLabel: "Filter by institution",

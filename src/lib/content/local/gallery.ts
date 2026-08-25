@@ -22,14 +22,14 @@ import {
 
 const campusSports: ContentImage = {
   src: "/nami/campus-sports.jpg",
-  alt: "Students on the NAMI sports ground during a campus tournament or sports day.",
+  alt: "Students on the NAMI sports ground during a college tournament or sports day.",
   width: 1500,
   height: 1000,
 };
 
 const campusInfirmary: ContentImage = {
   src: "/nami/campus-infirmary.jpg",
-  alt: "The NAMI campus infirmary, a small treatment room kept ready for students.",
+  alt: "The NAMI infirmary, a small treatment room kept ready for students.",
   width: 600,
   height: 400,
 };
@@ -147,7 +147,7 @@ export const gallery: readonly GalleryItem[] = [
     ...entryOf("students-on-campus"),
     category: "student-life",
     institution: "college",
-    title: "Students on Campus",
+    title: "Students at College",
     image: studentsOnCampus,
     date: null,
   },
@@ -195,7 +195,7 @@ export const gallery: readonly GalleryItem[] = [
     ...entryOf("christmas-at-city-campus"),
     category: "events",
     institution: "institute",
-    title: "Christmas at City Campus",
+    title: "Christmas at City College",
     image: christmasHall,
     date: isoDate("2023-12-24"),
   },
@@ -259,7 +259,7 @@ export const gallery: readonly GalleryItem[] = [
     ...entryOf("campus-tournament"),
     category: "sports",
     institution: "college",
-    title: "Campus Tournament",
+    title: "College Tournament",
     image: campusSports,
     date: null,
   },
@@ -275,7 +275,7 @@ export const gallery: readonly GalleryItem[] = [
     ...entryOf("campus-infirmary"),
     category: "campus",
     institution: "school",
-    title: "Campus Infirmary",
+    title: "School Infirmary",
     image: campusInfirmary,
     date: null,
   },

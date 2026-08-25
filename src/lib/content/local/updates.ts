@@ -114,12 +114,12 @@ const published: readonly Update[] = [
     kind: "event",
     category: "events",
     institution: null,
-    title: "Christmas Event, NAMI City Campus",
+    title: "Christmas Event, NAMI City College",
     excerpt:
       "We are delighted to share the tremendous success of the X-Mas Event, a culmination of festive cheer, laughter, and camaraderie, aimed to provide an unforgettable experience for both students and faculty. The venue was transformed into a festive wonderland, adorned with vibrant Christmas decorations, including two beautifully crafted trees made of cardboard boxes and paper.",
     publishedAt: isoDate("2023-12-24"),
     happensAt: null,
-    venue: "City Campus",
+    venue: "City College",
     link: {
       label: "Read the event report",
       href: "https://nami.edu.np/event/209/christmas-event-nami-city-campus",
@@ -229,7 +229,7 @@ const published: readonly Update[] = [
       "Elite 2023, an inter-college business competition was meticulously organized to showcase undergraduates' skills in finance, marketing, and management.",
     publishedAt: isoDate("2023-03-31"),
     happensAt: null,
-    venue: "City Campus",
+    venue: "City College",
     link: {
       label: "Read the event report",
       href: "https://nami.edu.np/event/210/elite-2023",
@@ -248,7 +248,7 @@ const published: readonly Update[] = [
       "We had insightful conversations on the urgent need for action and the collective efforts required to mitigate the devastating effects of climate change.",
     publishedAt: isoDate("2023-03-23"),
     happensAt: null,
-    venue: "City Campus, New Baneshwor",
+    venue: "City College, New Baneshwor",
     link: {
       label: "Read the event report",
       href: "https://nami.edu.np/event/214/panel-discussion-on-climate-change-impacts-and-the-global-response",
@@ -317,9 +317,9 @@ const published: readonly Update[] = [
     category: "general",
     institution: null,
     title:
-      "General Notice from the NAMI Group to Students, Staff and Families Across Every Campus",
+      "General Notice from the NAMI Group to Students, Staff and Families Across the School and College",
     excerpt:
-      "A general notice from the NAMI Group for students, staff and families across every campus.",
+      "A general notice from the NAMI Group for students, staff and families across the school and college.",
     publishedAt: isoDate("2024-03-15"),
     happensAt: null,
     venue: null,
@@ -483,7 +483,7 @@ const published: readonly Update[] = [
     excerpt: "An event notice for the institute's undergraduate research day.",
     publishedAt: isoDate("2026-04-08"),
     happensAt: isoDate("2026-10-03"),
-    venue: "New Baneshwor Campus",
+    venue: "New Baneshwor College",
     link: null,
     image: scienceLaboratory,
   },
@@ -510,7 +510,7 @@ const published: readonly Update[] = [
     excerpt: "An event notice for the institute's graduate careers fair.",
     publishedAt: isoDate("2025-09-30"),
     happensAt: isoDate("2025-10-18"),
-    venue: "New Baneshwor Campus",
+    venue: "New Baneshwor College",
     link: null,
     image: schoolTransport,
   },

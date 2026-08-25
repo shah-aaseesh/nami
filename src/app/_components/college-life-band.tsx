@@ -6,7 +6,7 @@ import type { ContentImage } from "@/lib/content";
 
 const BAND_VIDEO_SRC = "/nami-video.mp4";
 
-export function CampusLifeBand({ poster }: { poster: ContentImage }) {
+export function CollegeLifeBand({ poster }: { poster: ContentImage }) {
   const band = useRef<HTMLDivElement>(null);
 
   return (

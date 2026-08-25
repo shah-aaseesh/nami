@@ -9,22 +9,22 @@ export const contactCopy = {
   meta: {
     title: "Contact",
     description:
-      "Reach NAMI in Kathmandu — email, phone, campus locations at Gokarneshwor-7 and New Baneshwor, and a message form for admissions and general enquiries.",
+      "Reach NAMI in Kathmandu — email, phone, school and college locations at Gokarneshwor-7 and New Baneshwor, and a message form for admissions and general enquiries.",
   },
   masthead: {
     eyebrow: "Contact",
     heading: "Talk to NAMI.",
     standfirst:
-      "Admissions, campus visits, transcripts, or a question about a programme. Reach us directly, or send a message from this page.",
+      "Admissions, college visits, transcripts, or a question about a programme. Reach us directly, or send a message from this page.",
     emailLabel: "Write to us",
     phoneLabel: "Call us",
     socialLabel: "Follow",
   },
   campuses: {
-    eyebrow: "Campuses",
+    eyebrow: "Locations",
     heading: "Where to find us.",
     standfirst:
-      "Each campus carries a different part of the institute. The maps below are centred on the surrounding area rather than a door number.",
+      "Each location carries a different part of the institute. The maps below are centred on the surrounding area rather than a door number.",
     mapNote: (locality: string) => `Map centred on the ${locality} area.`,
     mapTitle: (locality: string, city: string) =>
       `Map of the ${locality} area, ${city}`,

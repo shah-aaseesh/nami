@@ -73,8 +73,8 @@ export const careersCopy = {
         desc: "Generous tuition fee waivers and scholarship support for dependent children attending NAMI International School or College.",
       },
       {
-        title: "Campus Transit & Cafeteria",
-        desc: "Comfortable institutional transport routes covering Kathmandu, Lalitpur, and Bhaktapur, plus hygienic subsidized campus dining.",
+        title: "Transit & Cafeteria",
+        desc: "Comfortable institutional transport routes covering Kathmandu, Lalitpur, and Bhaktapur, plus hygienic subsidized dining.",
       },
       {
         title: "Paid Sabbatical & Leave",

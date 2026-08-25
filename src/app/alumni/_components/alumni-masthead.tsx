@@ -34,7 +34,7 @@ export function AlumniMasthead({
                 href="#testimonials"
                 className={cn(
                   buttonVariants({ size: "lg", variant: "default" }),
-                  "group gap-2 px-5 w-full sm:w-auto inline-flex items-center justify-between sm:justify-start",
+                  "group gap-2 px-5 w-fit inline-flex items-center justify-start",
                 )}
               >
                 <span>{copy.cta}</span>

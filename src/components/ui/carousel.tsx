@@ -308,7 +308,7 @@ export function CarouselDots({
       data-slot="carousel-dots"
       {...props}
     >
-      <div className="field-brand flex items-center gap-2 rounded-full px-4 py-2">
+      <div className="field-brand flex items-center gap-1 sm:gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 shadow-sm">
         {scrollSnaps.map((snap, index) => {
           const active = selectedIndex === index;
 
@@ -316,16 +316,16 @@ export function CarouselDots({
             <button
               aria-current={active}
               aria-label={`${dotLabel ?? "Go to slide"} ${index + 1} of ${scrollSnaps.length}`}
-              className="group p-2.5 sm:p-2 cursor-pointer flex items-center justify-center"
+              className="group p-1 sm:p-1.5 cursor-pointer flex items-center justify-center transition-transform hover:scale-110"
               key={snap}
               onClick={() => scrollTo(index)}
               type="button"
             >
               <span
                 className={cn(
-                  "block size-2 rounded-full transition-colors",
+                  "block size-1.5 sm:size-2 rounded-full transition-all duration-300",
                   active
-                    ? "bg-ink"
+                    ? "bg-ink scale-110"
                     : "bg-ink-muted/60 group-hover:bg-ink-muted",
                   dotClassName,
                   active ? activeDotClassName : null,

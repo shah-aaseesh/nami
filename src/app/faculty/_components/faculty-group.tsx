@@ -31,7 +31,7 @@ export function FacultyGroup({
         isScrollable
           ? "lg:w-[calc((100%-6rem)/4)] lg:max-w-none"
           : isSolo
-            ? "lg:w-full lg:max-w-sm"
+            ? "w-full max-w-[280px] sm:max-w-[320px] lg:max-w-sm"
             : "lg:w-[calc(25%-1.5rem)] lg:max-w-none",
       )}
       key={leader.id}
@@ -80,7 +80,12 @@ export function FacultyGroup({
         <div className="mx-auto max-w-page overflow-hidden">
           {heading}
 
-          <div className="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:justify-center md:overflow-visible">
+          <div
+            className={cn(
+              "flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:overflow-visible",
+              isSolo ? "justify-center overflow-visible" : "md:justify-center",
+            )}
+          >
             {cards}
           </div>
         </div>

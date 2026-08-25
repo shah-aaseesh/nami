@@ -65,9 +65,12 @@ export async function Testimonials({
               <CarouselControls className="ms-auto">
                 <CarouselPrevious
                   aria-label="Previous testimonials"
-                  size="icon-xl"
+                  className="size-9 sm:size-12 [&_svg]:size-4 sm:[&_svg]:size-6"
                 />
-                <CarouselNext aria-label="Next testimonials" size="icon-xl" />
+                <CarouselNext
+                  aria-label="Next testimonials"
+                  className="size-9 sm:size-12 [&_svg]:size-4 sm:[&_svg]:size-6"
+                />
               </CarouselControls>
             </TestimonialsHeader>
 

@@ -80,9 +80,9 @@ export function SharedHeroSlider({
       </div>
 
       {(badge || hasMany) && (
-        <div className="mt-4 flex flex-col items-center justify-between gap-4 sm:mt-6 sm:flex-row sm:items-center">
+        <div className="mt-4 flex items-center justify-between gap-4 sm:mt-6">
           {badge ? (
-            <div className="flex shrink-0 items-center justify-center sm:justify-start">
+            <div className="flex shrink-0 items-center justify-start">
               {badge}
             </div>
           ) : (
@@ -93,7 +93,7 @@ export function SharedHeroSlider({
           )}
 
           {hasMany ? (
-            <div className="mx-auto w-fit sm:mx-0">
+            <div className="w-fit">
               <CarouselDots dotLabel="Show slide" />
             </div>
           ) : (

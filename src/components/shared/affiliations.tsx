@@ -26,19 +26,19 @@ function AffiliationMark({ item }: { item: Affiliation }) {
 
   if (logo === null) {
     return (
-      <p className="flex h-20 w-40 shrink-0 items-center justify-center text-center font-display text-base text-ink lg:h-24 lg:w-48">
+      <p className="flex h-12 w-24 shrink-0 items-center justify-center text-center font-display text-xs text-ink sm:h-18 sm:w-36 sm:text-sm lg:h-24 lg:w-48 lg:text-base">
         {item.body}
       </p>
     );
   }
 
   return (
-    <div className="relative h-20 w-40 shrink-0 lg:h-24 lg:w-48">
+    <div className="relative h-12 w-24 shrink-0 sm:h-18 sm:w-36 lg:h-24 lg:w-48">
       <Image
         alt={item.body}
         className="object-contain"
         fill
-        sizes="192px"
+        sizes="(min-width: 1024px) 192px, (min-width: 640px) 144px, 96px"
         src={logo}
       />
     </div>
@@ -47,7 +47,7 @@ function AffiliationMark({ item }: { item: Affiliation }) {
 
 function AffiliationRow({ items }: { items: readonly Affiliation[] }) {
   return (
-    <div className="flex items-center gap-10 pe-10 lg:gap-14 lg:pe-14">
+    <div className="flex items-center gap-5 pe-5 sm:gap-10 sm:pe-10 lg:gap-14 lg:pe-14">
       {items.map((item) => (
         <AffiliationMark item={item} key={item.id} />
       ))}

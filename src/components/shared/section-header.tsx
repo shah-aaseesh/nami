@@ -123,7 +123,7 @@ export function SectionHeader({
     if (effectiveLayout === "action") {
       return (
         <>
-          <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-x-8">
+          <div className="mt-4 flex items-center justify-between gap-4 sm:items-start sm:gap-x-8">
             <div>{renderTitle()}</div>
             {action && (
               <div className="shrink-0 sm:self-start">

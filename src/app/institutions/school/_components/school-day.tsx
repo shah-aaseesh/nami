@@ -51,7 +51,7 @@ export function SchoolDay({
                 key={entry.title}
               >
                 {entry.photo && (
-                  <div className="relative aspect-[4/3] hidden sm:block sm:w-40 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-primary-800/30">
+                  <div className="relative aspect-[4/3] hidden sm:block sm:h-30 sm:w-40 lg:h-33 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-primary-800/30">
                     <Image
                       alt={entry.photo.alt}
                       className="h-full w-full object-cover"
@@ -72,13 +72,14 @@ export function SchoolDay({
                       </AccordionTrigger>
                       <AccordionPanel className="p-0 pt-3 pe-0">
                         {entry.photo && (
-                          <div className="relative mb-3 aspect-[16/10] w-full overflow-hidden rounded-xl shadow-md bg-primary-800/30 sm:hidden">
+                          <div className="mb-3 w-full overflow-hidden rounded-xl shadow-md bg-primary-800/30 sm:hidden">
                             <Image
                               alt={entry.photo.alt}
-                              className="h-full w-full object-cover"
-                              fill
-                              sizes="(max-width: 640px) 100vw, 300px"
+                              className="aspect-[16/10] w-full rounded-xl object-cover"
+                              height={entry.photo.height}
+                              sizes="(max-width: 640px) 100vw, 400px"
                               src={entry.photo.src}
+                              width={entry.photo.width}
                             />
                           </div>
                         )}

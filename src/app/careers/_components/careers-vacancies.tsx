@@ -43,28 +43,15 @@ const TYPE_OPTIONS = [
 
 function VacanciesHeader({
   copy,
-  totalCount,
 }: {
   readonly copy: SectionCopy;
-  readonly totalCount: number;
+  readonly totalCount?: number;
 }) {
   return (
     <SectionHeader
-      action={
-        <div className="flex flex-col items-start lg:items-end gap-2">
-          {copy.standfirst && (
-            <span className="text-xs sm:text-sm text-ink-muted leading-relaxed lg:text-right">
-              {copy.standfirst}
-            </span>
-          )}
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-semibold text-accent">
-            <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            {totalCount} Active {totalCount === 1 ? "Opening" : "Openings"}
-          </span>
-        </div>
-      }
+      description={copy.standfirst}
       eyebrow={copy.heading}
-      layout="action"
+      layout="split"
       title={copy.eyebrow ?? "Current Openings"}
     />
   );

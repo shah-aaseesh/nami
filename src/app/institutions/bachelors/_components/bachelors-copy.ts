@@ -139,9 +139,9 @@ const masthead: BachelorsMastheadCopy = {
 
 const awarding: InstitutionAwardingCopy = {
   eyebrow: "Awarding universities",
-  heading: "The universities awarding the degrees taught at the college.",
+  heading: "Partner universities awarding our degrees.",
   standfirst:
-    "Taught here, awarded elsewhere — the university behind each degree sits below.",
+    "Taught at NAMI in Kathmandu, awarded by our accredited university partners.",
   sinceLabel: "Since",
 };
 
@@ -842,7 +842,7 @@ const placementPanel: ContentImage = {
 
 const partners: CareerPlacementCopy = {
   eyebrow: "Career Placement",
-  heading: "The organisations our students meet before they graduate.",
+  heading: "Industry partners and career placements.",
   image: placementPanel,
   label: "NAMI industry and technology partner logos",
 };

@@ -10,7 +10,10 @@ export function CampusLifeBand({ poster }: { poster: ContentImage }) {
   const band = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative h-full w-full" ref={band}>
+    <div
+      className="relative aspect-video w-full overflow-hidden rounded-2xl sm:rounded-3xl lg:aspect-auto lg:h-full"
+      ref={band}
+    >
       <Image
         alt=""
         aria-hidden="true"

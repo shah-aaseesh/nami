@@ -23,7 +23,7 @@ const LOGO_MARK_SIZE = 1000;
 const INSTITUTION_LOGO: Readonly<Record<EntityRole, string>> = {
   college: PLACEHOLDER_INSTITUTION_LOGO,
   institute: PLACEHOLDER_INSTITUTION_LOGO,
-  school: PLACEHOLDER_INSTITUTION_LOGO,
+  school: "/logo/nami-school.png",
 };
 
 export type SharedHeroProps = {
@@ -85,15 +85,27 @@ export function SharedHero({
           />
 
           <div className="relative z-20 flex animate-hero-fade justify-end">
-            <Image
-              alt=""
-              className="h-16 w-auto sm:h-24 md:h-28"
-              height={LOGO_MARK_SIZE}
-              loading="eager"
-              sizes="(min-width: 640px) 96px, 64px"
-              src={INSTITUTION_LOGO[entity.role]}
-              width={LOGO_MARK_SIZE}
-            />
+            <div
+              className={
+                entity.role === "school"
+                  ? "inline-flex items-center rounded-2xl bg-white/95 px-4 py-2 shadow-sm backdrop-blur-xs"
+                  : undefined
+              }
+            >
+              <Image
+                alt={`${entity.name} logo`}
+                className={
+                  entity.role === "school"
+                    ? "h-10 w-auto object-contain sm:h-14 md:h-16"
+                    : "h-16 w-auto sm:h-24 md:h-28"
+                }
+                height={LOGO_MARK_SIZE}
+                loading="eager"
+                sizes="(min-width: 640px) 96px, 64px"
+                src={INSTITUTION_LOGO[entity.role]}
+                width={LOGO_MARK_SIZE}
+              />
+            </div>
           </div>
 
           <div className="relative z-20 flex max-w-2xl flex-col items-start gap-4 sm:gap-5">

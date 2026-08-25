@@ -1,9 +1,14 @@
 "use client";
 
-import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import { type ReactNode, useCallback, useEffect, useState } from "react";
-import { useCarouselAutoplay } from "@/hooks/motion/use-carousel-autoplay";
+import { type ReactNode, useState } from "react";
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselDots,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import type { ContentImage } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -22,76 +27,54 @@ export function SharedHeroSlider({
   readonly label: string;
   readonly slides: readonly SharedHeroSlide[];
 }) {
-  const [emblaRef, api] = useEmblaCarousel({ duration: 30, loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
-
   const hasMany = slides.length > 1;
 
-  useEffect(() => {
+  const handleSetApi = (api: CarouselApi) => {
     if (!api) return;
-    const onSelect = () => setSelectedIndex(api.selectedScrollSnap());
-    onSelect();
-    api.on("select", onSelect);
-    api.on("reInit", onSelect);
-    return () => {
-      api.off("select", onSelect);
-      api.off("reInit", onSelect);
-    };
-  }, [api]);
-
-  const { pause, resume } = useCarouselAutoplay({
-    api,
-    enabled: hasMany,
-    selectedIndex,
-  });
-
-  const scrollTo = useCallback((index: number) => api?.scrollTo(index), [api]);
+    setSelectedIndex(api.selectedScrollSnap());
+    api.on("select", () => setSelectedIndex(api.selectedScrollSnap()));
+  };
 
   return (
-    // biome-ignore lint/a11y/useSemanticElements: the ARIA carousel pattern pairs role="region" with aria-roledescription="carousel"; there is no semantic HTML equivalent.
-    <div
+    <Carousel
       aria-label={label}
       aria-roledescription="carousel"
-      onBlurCapture={resume}
-      onFocusCapture={pause}
-      role="region"
+      autoplay={hasMany}
+      autoplayIntervalMs={2500}
+      className="relative w-full"
+      opts={{ duration: 20, loop: true }}
+      setApi={handleSetApi}
     >
       <div className={cn("relative isolate overflow-hidden", className)}>
-        <div
-          className="absolute inset-0 overflow-hidden"
-          onPointerEnter={pause}
-          onPointerLeave={resume}
-          ref={emblaRef}
+        <CarouselContent
+          className="size-full"
+          viewportClassName="absolute inset-0 size-full overflow-hidden"
         >
-          <div className="flex h-full">
-            {slides.map((slide, index) => (
-              // biome-ignore lint/a11y/useSemanticElements: the ARIA carousel pattern pairs role="group" with aria-roledescription="slide"; the suggested <fieldset> is for grouping form controls and would be wrong here.
-              <div
-                aria-label={`${index + 1} of ${slides.length}`}
-                aria-roledescription="slide"
-                className="relative h-full min-w-0 shrink-0 grow-0 basis-full"
-                key={slide.src}
-                role="group"
-              >
-                <Image
-                  alt={slide.alt}
-                  className={cn(
-                    "size-full object-cover transition-transform duration-[8000ms] ease-linear",
-                    index === selectedIndex ? "scale-105" : "scale-100",
-                  )}
-                  draggable={false}
-                  fetchPriority={index === 0 ? "high" : "auto"}
-                  height={slide.height}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  priority={index === 0}
-                  sizes="(max-width: 1440px) 100vw, 1440px"
-                  src={slide.src}
-                  width={slide.width}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+          {slides.map((slide, index) => (
+            <CarouselItem
+              aria-label={`${index + 1} of ${slides.length}`}
+              className="relative size-full basis-full"
+              key={slide.src}
+            >
+              <Image
+                alt={slide.alt}
+                className={cn(
+                  "size-full object-cover transition-transform duration-[3000ms] ease-linear",
+                  index === selectedIndex ? "scale-105" : "scale-100",
+                )}
+                draggable={false}
+                fetchPriority={index === 0 ? "high" : "auto"}
+                height={slide.height}
+                loading={index === 0 ? "eager" : "lazy"}
+                priority={index === 0}
+                sizes="(max-width: 1440px) 100vw, 1440px"
+                src={slide.src}
+                width={slide.width}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
 
         {children}
       </div>
@@ -110,35 +93,8 @@ export function SharedHeroSlider({
           )}
 
           {hasMany ? (
-            <div
-              className="field-brand mx-auto w-fit rounded-full px-4 py-2 sm:mx-0"
-              onPointerEnter={pause}
-              onPointerLeave={resume}
-            >
-              <div className="flex items-center gap-2">
-                {slides.map((slide, index) => {
-                  const active = index === selectedIndex;
-                  return (
-                    <button
-                      aria-current={active}
-                      aria-label={`Show slide ${index + 1} of ${slides.length}`}
-                      className="group p-1.5"
-                      key={slide.src}
-                      onClick={() => scrollTo(index)}
-                      type="button"
-                    >
-                      <span
-                        className={cn(
-                          "block size-2 rounded-full transition-colors",
-                          active
-                            ? "bg-ink"
-                            : "bg-ink-muted/60 group-hover:bg-ink-muted",
-                        )}
-                      />
-                    </button>
-                  );
-                })}
-              </div>
+            <div className="mx-auto w-fit sm:mx-0">
+              <CarouselDots dotLabel="Show slide" />
             </div>
           ) : (
             <div />
@@ -147,6 +103,6 @@ export function SharedHeroSlider({
           <div aria-hidden="true" className="hidden sm:block sm:w-32 lg:w-36" />
         </div>
       )}
-    </div>
+    </Carousel>
   );
 }

@@ -6,7 +6,11 @@ import { cn } from "@/lib/utils";
 
 const BADGE_RADIUS = 66;
 const BADGE_ARC = `M 80,80 m 0,-${BADGE_RADIUS} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,${BADGE_RADIUS * 2} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,-${BADGE_RADIUS * 2}`;
-const MARK_SRC = "/logo/nami-color.svg";
+const MARK_SRC: Readonly<Record<string, string>> = {
+  college: "/logo/nami-color.svg",
+  institute: "/logo/nami-color.svg",
+  school: "/logo/nami-school.png",
+};
 const MARK_WIDTH = 200;
 const MARK_HEIGHT = 200;
 
@@ -44,6 +48,7 @@ export function HeroBadge({
     motto ? leadClause(motto) : null,
   ].filter((part): part is string => part !== null);
   const accessibleLabel = accessibleLabelParts.join(", ");
+  const logoSrc = MARK_SRC[entity.role] ?? "/logo/nami-color.svg";
 
   return (
     <div className={cn("relative size-32 shrink-0 lg:size-36", className)}>
@@ -83,10 +88,10 @@ export function HeroBadge({
           >
             <Image
               alt=""
-              className="h-12 w-auto"
+              className="h-12 w-auto object-contain"
               height={MARK_HEIGHT}
               sizes="48px"
-              src={MARK_SRC}
+              src={logoSrc}
               width={MARK_WIDTH}
             />
             <span className="sr-only">{`Watch ${entity.name} on ${watch.label}`}</span>
@@ -94,10 +99,10 @@ export function HeroBadge({
         ) : (
           <Image
             alt=""
-            className="h-12 w-auto"
+            className="h-12 w-auto object-contain"
             height={MARK_HEIGHT}
             sizes="48px"
-            src={MARK_SRC}
+            src={logoSrc}
             width={MARK_WIDTH}
           />
         )}

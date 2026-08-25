@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 type EmblaApi = UseEmblaCarouselType[1];
 
-const AUTOPLAY_MS = 4000;
+const AUTOPLAY_MS = 2500;
 
 export function useCarouselAutoplay({
   api,

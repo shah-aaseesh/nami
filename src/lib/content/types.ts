@@ -225,7 +225,7 @@ export type SectionCopy = {
   readonly navLabel: string;
   readonly eyebrow: string | null;
   readonly heading: string;
-  readonly standfirst: string | null;
+  readonly standfirst?: string | null;
   readonly cta: ContentLink | null;
   readonly emptyState: string | null;
 };

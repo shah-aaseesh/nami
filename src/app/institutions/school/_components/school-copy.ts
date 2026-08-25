@@ -149,7 +149,7 @@ const day: SchoolDayCopy = {
   eyebrow: "A day at NAMI",
   heading: "Care is the first thing a child is taught here.",
   standfirst:
-    "The school sets out to be a place where every child feels seen, heard and supported — and the campus is built around that rather than around the timetable.",
+    "A campus built around care, curiosity, and community — where every child feels seen, heard, and supported.",
   campusLabel: "What the school holds",
   campus: [
     {
@@ -259,14 +259,11 @@ const parents: SectionCopy = {
   navLabel: "Parents",
   eyebrow: "Parent voices",
   heading: "The school their children come home from.",
-  standfirst:
-    "Parents across the primary division and the +2 years, on the teaching, the pastoral care, and what the first weeks actually felt like.",
   cta: null,
   emptyState:
     "Parent accounts of the school appear here as families share them.",
 };
 
-// PLACEHOLDER, not final: every portrait below reuses the same stock content-layer image.
 export const parentTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("parent-sarita-adhikari"),
@@ -334,7 +331,7 @@ const admission: SchoolAdmissionCopy = {
   eyebrow: "Admission",
   heading: "Seven steps, written for parents and guardians.",
   standfirst:
-    "This is the school's own procedure, in the order it happens. The admissions office guides you through each step, and step six carries a deadline worth noting.",
+    "The step-by-step admissions procedure from registration to final enrolment.",
   stepLabel: "Step",
   steps: [
     {

@@ -12,7 +12,6 @@ import { createMetadata } from "@/lib/seo";
 import { CollegeCambridge } from "./_components/college-cambridge";
 import { collegeCopy } from "./_components/college-copy";
 import { CollegeEntry } from "./_components/college-entry";
-import { CollegeMastheadFacts } from "./_components/college-masthead-facts";
 import { CollegeMilestones } from "./_components/college-milestones";
 import { collegeMilestonesCopy } from "./_components/college-milestones-copy";
 import { CollegeSubjects } from "./_components/college-subjects";
@@ -32,9 +31,6 @@ export default async function CollegePage() {
       content.getTestimonials(),
     ]);
 
-  const campus =
-    institution.campuses.find((item) => item.slug === collegeCopy.campusSlug) ??
-    null;
   const principal =
     leadership.academics.find(
       (item) => item.slug === collegeCopy.principal.slug,
@@ -57,12 +53,6 @@ export default async function CollegePage() {
         slides={collegeCopy.masthead.slides}
         standfirst={collegeCopy.masthead.standfirst}
         watch={watch ?? null}
-      />
-
-      <CollegeMastheadFacts
-        campus={campus}
-        copy={collegeCopy.masthead}
-        entity={institution.entities.college}
       />
 
       {principal === null ? null : (

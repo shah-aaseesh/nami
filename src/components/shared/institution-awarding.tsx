@@ -95,13 +95,13 @@ export function InstitutionAwarding({
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
           <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <Eyebrow>{copy.heading}</Eyebrow>
             <span className="h-px flex-1 bg-border" />
           </RevealItem>
 
-          <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
+          <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
             <SplitText as="h2" className="lg:max-w-2xl">
-              {copy.heading}
+              {copy.eyebrow ?? "Awarding Bodies"}
             </SplitText>
 
             <RevealItem className="lg:max-w-md">

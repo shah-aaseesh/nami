@@ -41,15 +41,22 @@ export default async function CollegePage() {
     ) ?? null;
   const alumni = testimonials.filter((item) => item.institution === "college");
 
+  const socials = institution.contact.socialProfiles.filter(
+    (profile) => profile.destination === "external",
+  );
+  const watch = socials.find((profile) => profile.platform === "youtube");
+
   return (
     <>
       <SharedHero
         entity={institution.entities.college}
-        heroLabel={collegeCopy.masthead.heroLabel}
-        slides={collegeCopy.masthead.slides}
         heading={collegeCopy.masthead.heading}
-        standfirst={collegeCopy.masthead.standfirst}
+        heroLabel={collegeCopy.masthead.heroLabel}
+        motto={institution.motto}
         primaryCta={collegeCopy.masthead.cta}
+        slides={collegeCopy.masthead.slides}
+        standfirst={collegeCopy.masthead.standfirst}
+        watch={watch ?? null}
       />
 
       <CollegeMastheadFacts

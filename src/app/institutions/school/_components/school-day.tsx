@@ -5,7 +5,7 @@ import { Eyebrow, H5, P, Standfirst } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-export type SchoolCampusEntry = {
+export type SchoolDayMoment = {
   readonly title: string;
   readonly body: string;
   readonly photo?: ContentImage;
@@ -16,7 +16,7 @@ export type SchoolDayCopy = {
   readonly heading: string;
   readonly standfirst: string;
   readonly campusLabel: string;
-  readonly campus: readonly SchoolCampusEntry[];
+  readonly campus: readonly SchoolDayMoment[];
 };
 
 const CAMPUS_PHOTO_SIZES =
@@ -35,11 +35,12 @@ export function SchoolDay({
         <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-6">
             <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <Eyebrow>{copy.heading}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
             </RevealItem>
+
             <SplitText as="h2" className="mt-4">
-              {copy.heading}
+              {copy.eyebrow ?? "A Day at School"}
             </SplitText>
           </div>
 
@@ -49,10 +50,9 @@ export function SchoolDay({
         </Reveal>
 
         <Reveal className="mt-14 lg:mt-20" stagger={0.05} y={24}>
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.campusLabel}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
+          <H5 as="h3" className="text-ink">
+            {copy.campusLabel}
+          </H5>
 
           <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-14">
             {copy.campus.map((entry) => (

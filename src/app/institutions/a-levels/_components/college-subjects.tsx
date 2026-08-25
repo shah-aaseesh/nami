@@ -116,12 +116,12 @@ export function CollegeSubjects({
         <Reveal className="lg:grid lg:grid-cols-12 lg:gap-x-10" stagger={0.08}>
           <div className="lg:col-span-6">
             <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <Eyebrow>{copy.heading}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
             </RevealItem>
 
             <SplitText as="h2" className="mt-4">
-              {copy.heading}
+              {copy.eyebrow ?? "Subjects"}
             </SplitText>
           </div>
 

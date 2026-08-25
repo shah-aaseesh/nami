@@ -95,13 +95,13 @@ export async function InstitutionGallery({
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
           <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <Eyebrow>{copy.heading}</Eyebrow>
             <span className="h-px flex-1 bg-border" />
           </RevealItem>
 
-          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-8 lg:mt-8">
+          <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-8">
             <SplitText as="h2" className="sm:max-w-2xl">
-              {copy.heading}
+              {copy.eyebrow}
             </SplitText>
 
             <RevealItem className="sm:shrink-0">

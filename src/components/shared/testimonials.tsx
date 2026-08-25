@@ -23,25 +23,21 @@ function TestimonialsHeader({
 }) {
   return (
     <Reveal stagger={0.08}>
-      <div className="flex flex-wrap items-end gap-6">
-        <div className="w-full lg:w-7/12">
-          {section.eyebrow === null ? null : (
-            <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{section.eyebrow}</Eyebrow>
-              <span className="h-px flex-1 bg-border" />
-            </RevealItem>
-          )}
+      <RevealItem className="flex items-center gap-5">
+        <Eyebrow>{section.heading}</Eyebrow>
+        <span className="h-px flex-1 bg-border" />
+      </RevealItem>
 
-          <SplitText as="h2" className="mt-6 lg:mt-8">
-            {section.heading}
-          </SplitText>
+      <div className="mt-4 flex flex-wrap items-end gap-6">
+        <div className="w-full lg:w-7/12">
+          <SplitText as="h2">{section.eyebrow ?? "Student voices"}</SplitText>
         </div>
 
         {children}
       </div>
 
       {section.standfirst === null ? null : (
-        <RevealItem className="mt-8 w-full lg:w-7/12">
+        <RevealItem className="mt-6 w-full lg:w-7/12">
           <Standfirst>{section.standfirst}</Standfirst>
         </RevealItem>
       )}

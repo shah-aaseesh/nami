@@ -30,11 +30,11 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <Reveal className="lg:col-span-5" stagger={0.08}>
             <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <Eyebrow>{copy.heading}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
             </RevealItem>
             <SplitText as="h2" className="mt-4">
-              {copy.heading}
+              {copy.eyebrow ?? "Admissions & Entry"}
             </SplitText>
             <RevealItem className="mt-10">
               <Link

@@ -165,16 +165,14 @@ export async function AcademicLevels() {
     <section className="field-brand gutter-x section-y" id="institutions">
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
-          {section.eyebrow === null ? null : (
-            <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{section.eyebrow}</Eyebrow>
-              <span className="h-px flex-1 bg-border" />
-            </RevealItem>
-          )}
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{section.heading}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </RevealItem>
 
-          <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
+          <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
             <SplitText as="h2" className="lg:max-w-2xl">
-              {section.heading}
+              {section.eyebrow ?? "Institutions"}
             </SplitText>
 
             {section.standfirst === null ? null : (

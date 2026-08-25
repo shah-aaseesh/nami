@@ -875,6 +875,10 @@ const notices: InstitutionNoticesCopy = {
     "There is no institute notice standing right now. Everything the institute has published stays on the notice board.",
 };
 
+const contact = {
+  heading: "Get in Touch with NAMI",
+} as const;
+
 export const bachelorsCopy = {
   meta: {
     title: "Naaya Aayam Multi-Disciplinary Institute",
@@ -900,4 +904,5 @@ export const bachelorsCopy = {
   alumni,
   gallery,
   notices,
+  contact,
 } as const;

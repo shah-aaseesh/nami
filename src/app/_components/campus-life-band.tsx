@@ -17,7 +17,7 @@ export function CampusLifeBand({ poster }: { poster: ContentImage }) {
         className="h-full w-full object-cover"
         height={poster.height}
         loading="lazy"
-        sizes="100vw"
+        sizes="(max-width: 1023px) 100vw, 45vw"
         src={poster.src}
         width={poster.width}
       />

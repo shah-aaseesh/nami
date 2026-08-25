@@ -28,13 +28,14 @@ export function AboutMascot({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-10">
           <div className="lg:col-span-6 lg:col-start-1 lg:row-start-1">
-            {section.eyebrow === null ? null : (
-              <Reveal>
-                <Eyebrow>{section.eyebrow}</Eyebrow>
-              </Reveal>
-            )}
+            <Reveal>
+              <div className="flex items-center gap-5">
+                <Eyebrow>{section.heading}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+            </Reveal>
             <SplitText as="h2" className="mt-4">
-              {section.heading}
+              {section.eyebrow ?? "The Mascot"}
             </SplitText>
 
             <Reveal className="mt-8 flex flex-col gap-5" stagger={0.1}>

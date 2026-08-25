@@ -38,9 +38,11 @@ const SOCIAL_ICONS = {
 } as const;
 
 export async function InstitutionContact({
+  heading,
   id = "contact",
   institution: role,
 }: {
+  readonly heading?: string;
   readonly id?: string;
   readonly institution: EntityRole;
 }) {
@@ -57,17 +59,19 @@ export async function InstitutionContact({
 
   if (!campus) return null;
 
+  const sectionHeading = heading ?? "Get in Touch with NAMI";
+
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
           <RevealItem className="flex items-center gap-5">
-            <Eyebrow>Contact & Location</Eyebrow>
+            <Eyebrow>{sectionHeading}</Eyebrow>
             <span className="h-px flex-1 bg-border" />
           </RevealItem>
 
-          <div className="mt-6 sm:max-w-2xl lg:mt-8">
-            <SplitText as="h2">{`Get in Touch with ${entity.name}`}</SplitText>
+          <div className="mt-4 sm:max-w-2xl">
+            <SplitText as="h2">Contact & Location</SplitText>
           </div>
         </Reveal>
 

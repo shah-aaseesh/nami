@@ -33,12 +33,12 @@ export function CollegeMilestones({
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
           <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <Eyebrow>{copy.heading}</Eyebrow>
             <span className="h-px flex-1 bg-border" />
           </RevealItem>
 
-          <div className="mt-6 sm:max-w-2xl lg:mt-8">
-            <SplitText as="h2">{copy.heading}</SplitText>
+          <div className="mt-4 sm:max-w-2xl">
+            <SplitText as="h2">{copy.eyebrow ?? "Milestones"}</SplitText>
           </div>
         </Reveal>
 

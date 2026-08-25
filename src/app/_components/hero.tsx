@@ -2,6 +2,7 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
+import { HeroBadge } from "@/components/shared/hero-badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Carousel,
@@ -11,23 +12,12 @@ import {
 } from "@/components/ui/carousel";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
-import type { ContentLink, NamedEntity, SocialProfile } from "@/lib/content";
+import type { ContentLink } from "@/lib/content";
 import { content } from "@/lib/content";
 import { ArrowUpRightIcon, MortarboardIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { HeroBadgePin } from "./hero-badge-pin";
 import { HeroHeadline } from "./hero-headline";
-
-const BADGE_RADIUS = 66;
-const BADGE_ARC = `M 80,80 m 0,-${BADGE_RADIUS} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,${BADGE_RADIUS * 2} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,-${BADGE_RADIUS * 2}`;
-const MARK_SRC = "/logo/nami-color.svg";
-const MARK_WIDTH = 200;
-const MARK_HEIGHT = 200;
-
-function leadClause(sentence: string): string {
-  const splitAt = sentence.indexOf(", ");
-  return splitAt === -1 ? sentence : sentence.slice(0, splitAt);
-}
 
 function HeroCta({
   link,
@@ -50,69 +40,6 @@ function HeroCta({
       {link.label}
       {variant === "outline" ? <Icon icon={ArrowUpRightIcon} /> : null}
     </Link>
-  );
-}
-
-function HeroBadge({
-  entity,
-  motto,
-  watch,
-}: {
-  entity: NamedEntity;
-  motto: string;
-  watch: SocialProfile | null;
-}) {
-  const founded =
-    entity.establishedYear === null ? null : `Estd. ${entity.establishedYear}`;
-  const ringParts = [entity.shortName, founded, leadClause(motto)].filter(
-    (part) => part !== null,
-  );
-  const ring = ringParts.join(" * ");
-  const accessibleLabelParts = [entity.name, founded, leadClause(motto)].filter(
-    (part) => part !== null,
-  );
-  const accessibleLabel = accessibleLabelParts.join(", ");
-
-  return (
-    <div className="relative size-32 shrink-0 lg:size-36">
-      <svg
-        aria-label={accessibleLabel}
-        className="size-full animate-[spin_20s_linear_infinite]"
-        role="img"
-        viewBox="0 0 160 160"
-      >
-        <defs>
-          <path d={BADGE_ARC} fill="none" id="hero-badge-arc" />
-        </defs>
-        <text
-          className="fill-ink-muted font-display font-bold text-sm"
-          fontSize="11"
-          textLength={2 * Math.PI * BADGE_RADIUS}
-        >
-          <textPath href="#hero-badge-arc" lengthAdjust="spacing">
-            {` ${ring} * `}
-          </textPath>
-        </text>
-      </svg>
-      {watch === null ? null : (
-        <Link
-          className="absolute inset-0 m-auto flex size-16 items-center justify-center rounded-full"
-          href={watch.href as Route}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Image
-            alt=""
-            className="h-12 w-auto"
-            height={MARK_HEIGHT}
-            sizes="48px"
-            src={MARK_SRC}
-            width={MARK_WIDTH}
-          />
-          <span className="sr-only">{`Watch ${entity.name} on ${watch.label}`}</span>
-        </Link>
-      )}
-    </div>
   );
 }
 

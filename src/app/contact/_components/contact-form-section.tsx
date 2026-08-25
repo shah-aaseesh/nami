@@ -9,6 +9,7 @@ export async function ContactFormSection() {
     content.getInstitution(),
     content.getAcademicLevels(),
   ]);
+
   const copy = contactCopy.form;
 
   const email = institution.contact.email;
@@ -24,9 +25,12 @@ export async function ContactFormSection() {
     <section className="gutter-x section-y" id="enquiry">
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <div className="lg:col-span-4">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <H2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl">
-            {copy.heading}
+          <div className="flex items-center gap-5">
+            <Eyebrow>{copy.heading}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <H2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl">
+            {copy.eyebrow ?? "Enquiry"}
           </H2>
           <Standfirst className="mt-6">{copy.standfirst(email)}</Standfirst>
         </div>

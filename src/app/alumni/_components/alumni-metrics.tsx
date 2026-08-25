@@ -28,13 +28,13 @@ export function AlumniMetrics({
     >
       <div className="mx-auto max-w-page">
         <Reveal className="max-w-3xl">
-          <RevealItem className="flex items-center gap-4">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{copy.heading}</Eyebrow>
             <span className="h-px flex-1 bg-border" />
           </RevealItem>
 
-          <RevealItem className="mt-5">
-            <H2>{copy.heading}</H2>
+          <RevealItem className="mt-4">
+            <H2>{copy.eyebrow ?? "Impact & Scale"}</H2>
           </RevealItem>
 
           <RevealItem className="mt-4">

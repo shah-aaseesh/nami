@@ -38,6 +38,11 @@ export default async function BachelorsPage() {
     (item) => item.institution === "institute",
   );
 
+  const socials = institution.contact.socialProfiles.filter(
+    (profile) => profile.destination === "external",
+  );
+  const watch = socials.find((profile) => profile.platform === "youtube");
+
   const networkPartners: readonly CareerPartner[] = partners.map((partner) => ({
     id: partner.id,
     name: partner.name,
@@ -48,11 +53,13 @@ export default async function BachelorsPage() {
     <>
       <SharedHero
         entity={institution.entities.institute}
-        heroLabel={bachelorsCopy.masthead.heroLabel}
-        slides={bachelorsCopy.masthead.slides}
         heading={bachelorsCopy.masthead.heading}
-        standfirst={bachelorsCopy.masthead.standfirst}
+        heroLabel={bachelorsCopy.masthead.heroLabel}
+        motto={bachelorsCopy.masthead.motto}
         primaryCta={bachelorsCopy.masthead.cta}
+        slides={bachelorsCopy.masthead.slides}
+        standfirst={bachelorsCopy.masthead.standfirst}
+        watch={watch ?? null}
       />
       {academicHead === null ? null : (
         <PrincipalMessage
@@ -95,7 +102,11 @@ export default async function BachelorsPage() {
         institution="institute"
       />
 
-      <InstitutionContact id="contact" institution="institute" />
+      <InstitutionContact
+        heading={bachelorsCopy.contact.heading}
+        id="contact"
+        institution="institute"
+      />
     </>
   );
 }

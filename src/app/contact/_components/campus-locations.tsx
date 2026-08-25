@@ -85,9 +85,12 @@ export async function CampusLocations() {
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-5">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <H2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl">
-              {copy.heading}
+            <div className="flex items-center gap-5">
+              <Eyebrow>{copy.heading}</Eyebrow>
+              <span className="h-px flex-1 bg-border" />
+            </div>
+            <H2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl">
+              {copy.eyebrow ?? "Campuses"}
             </H2>
           </div>
           <Standfirst className="mt-6 lg:col-span-5 lg:col-start-8 lg:mt-0 lg:self-end">

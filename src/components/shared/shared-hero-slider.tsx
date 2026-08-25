@@ -10,11 +10,13 @@ import { cn } from "@/lib/utils";
 export type SharedHeroSlide = ContentImage;
 
 export function SharedHeroSlider({
+  badge,
   children,
   className,
   label,
   slides,
 }: {
+  readonly badge?: ReactNode;
   readonly children: ReactNode;
   readonly className?: string;
   readonly label: string;
@@ -94,36 +96,55 @@ export function SharedHeroSlider({
         {children}
       </div>
 
-      {hasMany && (
-        <div
-          className="field-brand mx-auto mt-4 w-fit rounded-full px-4 py-2 sm:mt-5"
-          onPointerEnter={pause}
-          onPointerLeave={resume}
-        >
-          <div className="flex items-center gap-2">
-            {slides.map((slide, index) => {
-              const active = index === selectedIndex;
-              return (
-                <button
-                  aria-current={active}
-                  aria-label={`Show slide ${index + 1} of ${slides.length}`}
-                  className="group p-1.5"
-                  key={slide.src}
-                  onClick={() => scrollTo(index)}
-                  type="button"
-                >
-                  <span
-                    className={cn(
-                      "block size-2 rounded-full transition-colors",
-                      active
-                        ? "bg-ink"
-                        : "bg-ink-muted/60 group-hover:bg-ink-muted",
-                    )}
-                  />
-                </button>
-              );
-            })}
-          </div>
+      {(badge || hasMany) && (
+        <div className="mt-4 flex flex-col items-center justify-between gap-4 sm:mt-6 sm:flex-row sm:items-center">
+          {badge ? (
+            <div className="flex shrink-0 items-center justify-center sm:justify-start">
+              {badge}
+            </div>
+          ) : (
+            <div
+              aria-hidden="true"
+              className="hidden sm:block sm:w-32 lg:w-36"
+            />
+          )}
+
+          {hasMany ? (
+            <div
+              className="field-brand mx-auto w-fit rounded-full px-4 py-2 sm:mx-0"
+              onPointerEnter={pause}
+              onPointerLeave={resume}
+            >
+              <div className="flex items-center gap-2">
+                {slides.map((slide, index) => {
+                  const active = index === selectedIndex;
+                  return (
+                    <button
+                      aria-current={active}
+                      aria-label={`Show slide ${index + 1} of ${slides.length}`}
+                      className="group p-1.5"
+                      key={slide.src}
+                      onClick={() => scrollTo(index)}
+                      type="button"
+                    >
+                      <span
+                        className={cn(
+                          "block size-2 rounded-full transition-colors",
+                          active
+                            ? "bg-ink"
+                            : "bg-ink-muted/60 group-hover:bg-ink-muted",
+                        )}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <div />
+          )}
+
+          <div aria-hidden="true" className="hidden sm:block sm:w-32 lg:w-36" />
         </div>
       )}
     </div>

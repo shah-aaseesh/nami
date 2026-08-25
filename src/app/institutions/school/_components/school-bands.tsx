@@ -5,7 +5,6 @@ import { Icon } from "@/components/ui/icon";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { Eyebrow, H6, P, Standfirst } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
-
 import { CheckIcon } from "@/lib/icons";
 
 export type SchoolStream = {
@@ -59,8 +58,8 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {band.streams.map((stream) => (
             <div
+              className="rounded-2xl bg-surface-raised p-6 lg:p-8"
               key={stream.name}
-              className="rounded-2xl bg-surface-raised/40 p-6 transition-colors hover:bg-surface-raised/80"
             >
               {stream.photo && (
                 <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl">
@@ -108,16 +107,14 @@ export function SchoolBands({
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <Reveal stagger={0.08}>
-          <div className="grid lg:grid-cols-12 lg:gap-16 items-start">
-            <div className="lg:col-span-7">
-              <RevealItem className="flex items-center gap-5">
-                <Eyebrow>{copy.eyebrow}</Eyebrow>
-                <span className="h-px flex-1 bg-border" />
-              </RevealItem>
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{copy.heading}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </RevealItem>
 
-              <SplitText as="h2" className="mt-6 lg:mt-8">
-                {copy.heading}
-              </SplitText>
+          <div className="mt-4 grid lg:grid-cols-12 lg:gap-16 items-start">
+            <div className="lg:col-span-7">
+              <SplitText as="h2">{copy.eyebrow ?? "Academic Bands"}</SplitText>
 
               <RevealItem className="mt-6 max-w-2xl">
                 <Standfirst>{copy.standfirst}</Standfirst>

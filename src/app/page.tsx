@@ -5,7 +5,6 @@ import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { schoolPrincipal } from "@/lib/content/school-principal";
 import { About } from "./_components/about";
-import { CampusLife } from "./_components/campus-life";
 import { Hero } from "./_components/hero";
 import { ceoHeading } from "./_components/principal-copy";
 import { ProgrammeMarquee } from "./_components/programme-marquee";
@@ -13,12 +12,15 @@ import { Stats } from "./_components/stats";
 import { Updates } from "./_components/updates";
 
 export default async function Home() {
-  const [copy, institution, leadership, stats] = await Promise.all([
+  const [copy, institution, leadership, stats, pillars] = await Promise.all([
     content.getHomeCopy(),
     content.getInstitution(),
     content.getLeadership(),
     content.getStats(),
+    content.getCampusLife(),
   ]);
+
+  const band = pillars.find((pillar) => pillar.image !== null)?.image ?? null;
 
   const ceo =
     leadership.management.find(
@@ -47,8 +49,7 @@ export default async function Home() {
           }}
         />
       )}
-      <CampusLife />
-      <Stats section={copy.sections.stats} stats={stats} />
+      <Stats poster={band} section={copy.sections.stats} stats={stats} />
       <Testimonials section={copy.sections.testimonials} />
       <Updates />
     </>

@@ -1,6 +1,9 @@
 import { Eyebrow, H2, H6, P, Standfirst } from "@/components/ui/typography";
 import { SchoolAdmissionTrack } from "./school-admission-track";
 
+const RING_RADIUS = 23;
+const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
+
 export type SchoolAdmissionStep = {
   readonly title: string;
   readonly body: string;
@@ -13,9 +16,6 @@ export type SchoolAdmissionCopy = {
   readonly stepLabel: string;
   readonly steps: readonly SchoolAdmissionStep[];
 };
-
-const RING_RADIUS = 23;
-const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
 
 function StepRing({
   label,
@@ -48,15 +48,13 @@ function StepRing({
           r={RING_RADIUS}
           strokeDasharray={RING_LENGTH}
           strokeDashoffset={RING_LENGTH * (1 - position / total)}
-          strokeLinecap="round"
-          strokeWidth="1.5"
+          strokeWidth="2"
         />
       </svg>
-
-      <span className="relative font-display text-lg text-primary-800">
-        <span className="sr-only">{label} </span>
+      <span aria-hidden="true" className="font-display text-sm text-ink">
         {position}
       </span>
+      <span className="sr-only">{label}</span>
     </span>
   );
 }
@@ -76,20 +74,20 @@ export function SchoolAdmission({
     <section className="field-brand gutter-x section-y" id={id}>
       <SchoolAdmissionTrack
         heading={
-          <>
+          <div>
             <div className="flex items-center gap-5">
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <Eyebrow>{copy.heading}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
             </div>
 
-            <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-              <H2 className="lg:max-w-2xl">{copy.heading}</H2>
+            <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
+              <H2 className="lg:max-w-2xl">{copy.eyebrow ?? "Admissions"}</H2>
 
               <div className="lg:max-w-md">
                 <Standfirst>{copy.standfirst}</Standfirst>
               </div>
             </div>
-          </>
+          </div>
         }
         label={copy.eyebrow}
         total={total}

@@ -8,11 +8,11 @@ import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export async function About({
-  section,
   overview,
+  section,
 }: {
-  section: SectionCopy;
   overview: RichText;
+  section: SectionCopy;
 }) {
   const paragraphs = paragraphsOf(overview).slice(0, 2);
 
@@ -21,13 +21,12 @@ export async function About({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-4 lg:col-start-1 lg:row-start-1">
-            {section.eyebrow === null ? null : (
-              <Reveal>
-                <Eyebrow>{section.eyebrow}</Eyebrow>
-              </Reveal>
-            )}
+            <RevealItem className="flex items-center gap-5">
+              <Eyebrow>{section.heading}</Eyebrow>
+              <span className="h-px flex-1 bg-border" />
+            </RevealItem>
             <SplitText as="h2" className="mt-4">
-              {section.heading}
+              {section.eyebrow ?? "About NAMI"}
             </SplitText>
           </div>
 

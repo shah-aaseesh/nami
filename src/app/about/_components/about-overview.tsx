@@ -7,11 +7,11 @@ import type { ContentImage } from "@/lib/content";
 import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
 
 export function AboutOverview({
-  image,
+  image = null,
   overview,
   section,
 }: {
-  image: ContentImage | null;
+  image?: ContentImage | null;
   overview: RichText;
   section: SectionCopy;
 }) {
@@ -25,13 +25,14 @@ export function AboutOverview({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-5 lg:col-start-1 lg:row-start-1">
-            {section.eyebrow === null ? null : (
-              <Reveal>
-                <Eyebrow>{section.eyebrow}</Eyebrow>
-              </Reveal>
-            )}
+            <Reveal>
+              <div className="flex items-center gap-5">
+                <Eyebrow>{section.heading}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+            </Reveal>
             <SplitText as="h2" className="mt-4">
-              {section.heading}
+              {section.eyebrow ?? "Overview"}
             </SplitText>
           </div>
 

@@ -21,16 +21,14 @@ export function AboutAwards({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-10">
           <div className="lg:col-span-6">
-            {section.eyebrow === null ? null : (
-              <Reveal>
-                <div className="flex items-center gap-5">
-                  <Eyebrow>{section.eyebrow}</Eyebrow>
-                  <span className="h-px flex-1 bg-border" />
-                </div>
-              </Reveal>
-            )}
+            <Reveal>
+              <div className="flex items-center gap-5">
+                <Eyebrow>{section.heading}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+            </Reveal>
             <SplitText as="h2" className="mt-4">
-              {section.heading}
+              {section.eyebrow ?? "Awards & Recognition"}
             </SplitText>
           </div>
 

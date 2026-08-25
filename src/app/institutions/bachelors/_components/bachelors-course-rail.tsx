@@ -77,12 +77,12 @@ export function BachelorsCourseRail({
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <div className="flex items-center gap-5">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <Eyebrow>{copy.heading}</Eyebrow>
           <span className="h-px flex-1 bg-border" />
         </div>
 
-        <div className="mt-6 flex flex-col gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
-          <H2 className="lg:max-w-2xl">{copy.heading}</H2>
+        <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16">
+          <H2 className="lg:max-w-2xl">{copy.eyebrow ?? "Programmes"}</H2>
 
           <div className="lg:max-w-md">
             <Standfirst>{copy.standfirst}</Standfirst>

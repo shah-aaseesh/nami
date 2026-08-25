@@ -41,7 +41,7 @@ const TYPE_OPTIONS = [
   { value: "internship", label: "Internship" },
 ] as const;
 
-function SectionHead({
+function VacanciesHeader({
   copy,
   totalCount,
 }: {
@@ -49,32 +49,34 @@ function SectionHead({
   readonly totalCount: number;
 }) {
   return (
-    <Reveal className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
-      <div className="lg:col-span-7">
-        {copy.eyebrow === null ? null : (
-          <RevealItem className="flex items-center gap-4">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </RevealItem>
-        )}
+    <Reveal stagger={0.08}>
+      <RevealItem className="flex items-center gap-5">
+        <Eyebrow>{copy.heading}</Eyebrow>
+        <span className="h-px flex-1 bg-border" />
+      </RevealItem>
 
-        <RevealItem className="mt-5">
-          <H2>{copy.heading}</H2>
-        </RevealItem>
-      </div>
-
-      <div className="mt-6 lg:col-span-5 lg:mt-0 flex flex-col lg:items-end">
-        {copy.standfirst === null ? null : (
+      <div className="mt-4 lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
+        <div className="lg:col-span-7">
           <RevealItem>
-            <Standfirst className="lg:text-right">{copy.standfirst}</Standfirst>
+            <H2>{copy.eyebrow ?? "Current Openings"}</H2>
           </RevealItem>
-        )}
-        <RevealItem className="mt-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-semibold text-accent">
-            <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            {totalCount} Active {totalCount === 1 ? "Opening" : "Openings"}
-          </span>
-        </RevealItem>
+        </div>
+
+        <div className="mt-6 flex flex-col lg:col-span-5 lg:mt-0 lg:items-end">
+          {copy.standfirst === null ? null : (
+            <RevealItem>
+              <Standfirst className="lg:text-right">
+                {copy.standfirst}
+              </Standfirst>
+            </RevealItem>
+          )}
+          <RevealItem className="mt-4">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-semibold text-accent">
+              <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+              {totalCount} Active {totalCount === 1 ? "Opening" : "Openings"}
+            </span>
+          </RevealItem>
+        </div>
       </div>
     </Reveal>
   );
@@ -266,7 +268,7 @@ export function CareersVacancies({
   return (
     <section className="gutter-x section-y" id="vacancies">
       <div className="mx-auto max-w-page">
-        <SectionHead copy={section} totalCount={vacancies.length} />
+        <VacanciesHeader copy={section} totalCount={vacancies.length} />
 
         <div className="mt-10 flex flex-col gap-4 rounded-xl border border-border/80 bg-neutral-100/50 p-4 sm:p-6 lg:mt-14">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

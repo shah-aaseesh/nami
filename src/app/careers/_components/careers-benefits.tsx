@@ -1,10 +1,10 @@
 import {
   Award01Icon,
-  Calendar03Icon,
+  BookOpen01Icon,
+  Briefcase02Icon,
   GlobalIcon,
-  HealthIcon,
-  Mortarboard01Icon,
-  ShieldUserIcon,
+  HeartCheckIcon,
+  SparklesIcon,
 } from "@hugeicons/core-free-icons";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { Icon } from "@/components/ui/icon";
@@ -13,11 +13,11 @@ import type { BenefitItem } from "./careers-copy";
 
 const benefitIcons = [
   Award01Icon,
-  Mortarboard01Icon,
-  HealthIcon,
-  ShieldUserIcon,
+  BookOpen01Icon,
+  Briefcase02Icon,
   GlobalIcon,
-  Calendar03Icon,
+  HeartCheckIcon,
+  SparklesIcon,
 ];
 
 export function CareersBenefits({
@@ -37,13 +37,13 @@ export function CareersBenefits({
     >
       <div className="mx-auto max-w-page">
         <Reveal className="max-w-3xl">
-          <RevealItem className="flex items-center gap-4">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <RevealItem className="flex items-center gap-5">
+            <Eyebrow>{copy.heading}</Eyebrow>
             <span className="h-px flex-1 bg-border" />
           </RevealItem>
 
-          <RevealItem className="mt-5">
-            <H2>{copy.heading}</H2>
+          <RevealItem className="mt-4">
+            <H2>{copy.eyebrow ?? "Why Work With Us"}</H2>
           </RevealItem>
 
           <RevealItem className="mt-4">

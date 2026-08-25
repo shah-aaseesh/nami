@@ -30,14 +30,21 @@ export default async function SchoolPage() {
     leadership.academics.find((item) => item.slug === schoolPrincipal.slug) ??
     null;
 
+  const socials = institution.contact.socialProfiles.filter(
+    (profile) => profile.destination === "external",
+  );
+  const watch = socials.find((profile) => profile.platform === "youtube");
+
   return (
     <>
       <SharedHero
         entity={institution.entities.school}
         heroLabel={schoolCopy.masthead.heroLabel}
+        motto={institution.motto}
+        primaryCta={schoolCopy.masthead.admissionCta}
         slides={schoolCopy.masthead.slides}
         standfirst={schoolCopy.masthead.tagline}
-        primaryCta={schoolCopy.masthead.admissionCta}
+        watch={watch ?? null}
       />
 
       {principal === null ? null : (

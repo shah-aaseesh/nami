@@ -26,11 +26,13 @@ export function CareerPlacement({
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <div className="flex items-center gap-5">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <Eyebrow>{copy.heading}</Eyebrow>
           <span className="h-px flex-1 bg-border" />
         </div>
 
-        <H2 className="mt-6 max-w-3xl lg:mt-8">{copy.heading}</H2>
+        <H2 className="mt-4 max-w-3xl">
+          {copy.eyebrow ?? "Placement & Internship"}
+        </H2>
 
         <div className="mt-14 grid gap-8 lg:mt-20 lg:grid-cols-5 lg:gap-12">
           <div className="relative aspect-video overflow-hidden rounded-xl lg:col-span-2 lg:aspect-4/3 lg:self-start">

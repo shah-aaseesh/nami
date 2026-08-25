@@ -6,7 +6,7 @@ import {
   CollegeCambridgeStack,
 } from "./college-cambridge-stack";
 
-export type CollegeProposition = {
+export type CambridgeProposition = {
   readonly title: string;
   readonly body: string;
 };
@@ -15,7 +15,7 @@ export type CollegeCambridgeCopy = {
   readonly eyebrow: string;
   readonly heading: string;
   readonly standfirst: string;
-  readonly propositions: readonly CollegeProposition[];
+  readonly propositions: readonly CambridgeProposition[];
 };
 
 export function CollegeCambridge({
@@ -29,13 +29,13 @@ export function CollegeCambridge({
         <CollegeCambridgeHold className="lg:col-span-5">
           <Reveal stagger={0.08}>
             <RevealItem className="flex items-center gap-5">
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <Eyebrow>{copy.heading}</Eyebrow>
               <span className="h-px flex-1 bg-border" />
             </RevealItem>
             <SplitText as="h2" className="mt-4">
-              {copy.heading}
+              {copy.eyebrow ?? "Why Cambridge"}
             </SplitText>
-            <RevealItem className="mt-8 max-w-xl">
+            <RevealItem className="mt-6 max-w-xl">
               <Standfirst>{copy.standfirst}</Standfirst>
             </RevealItem>
           </Reveal>

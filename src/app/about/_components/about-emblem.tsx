@@ -45,13 +45,14 @@ export function AboutEmblem({
           </Reveal>
 
           <div className="mt-12 lg:col-span-6 lg:col-start-7 lg:mt-0">
-            {section.eyebrow === null ? null : (
-              <Reveal>
-                <Eyebrow>{section.eyebrow}</Eyebrow>
-              </Reveal>
-            )}
+            <Reveal>
+              <div className="flex items-center gap-5">
+                <Eyebrow>{section.heading}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+            </Reveal>
             <SplitText as="h2" className="mt-4">
-              {section.heading}
+              {section.eyebrow ?? "The Emblem"}
             </SplitText>
 
             <Reveal className="mt-8" stagger={0.12}>

@@ -94,12 +94,6 @@ export function PrincipalMessage({
                 <P className="lg:text-justify">{paragraph}</P>
               </RevealItem>
             ))}
-
-            <RevealItem>
-              <p className="font-display text-3xl text-ink italic lg:text-4xl">
-                {person.name}
-              </p>
-            </RevealItem>
           </Reveal>
         </div>
       </div>

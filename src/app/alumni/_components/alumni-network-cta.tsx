@@ -22,10 +22,13 @@ export function AlumniNetworkCta({
         <div className="field-brand rounded-3xl p-8 sm:p-12 lg:p-16">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <Eyebrow>{copy.eyebrow}</Eyebrow>
+              <div className="flex items-center gap-5">
+                <Eyebrow>{copy.heading}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </div>
 
-              <H2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-display font-normal">
-                {copy.heading}
+              <H2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-normal">
+                {copy.eyebrow ?? "Stay Connected"}
               </H2>
 
               <Standfirst className="mt-4">{copy.standfirst}</Standfirst>

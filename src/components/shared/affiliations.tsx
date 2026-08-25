@@ -8,28 +8,23 @@ import { content } from "@/lib/content";
 
 function SectionHead({ copy }: { copy: SectionCopy }) {
   return (
-    <Reveal
-      className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8"
-      stagger={0.08}
-    >
-      <div className="lg:col-span-7">
-        {copy.eyebrow === null ? null : (
-          <RevealItem className="flex items-center gap-5">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
+    <Reveal stagger={0.08}>
+      <RevealItem className="flex items-center gap-5">
+        <Eyebrow>{copy.heading}</Eyebrow>
+        <span className="h-px flex-1 bg-border" />
+      </RevealItem>
+
+      <div className="mt-4 lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-8">
+        <div className="lg:col-span-7">
+          <SplitText as="h2">{copy.eyebrow ?? "Accreditation"}</SplitText>
+        </div>
+
+        {copy.standfirst === null ? null : (
+          <RevealItem className="mt-6 lg:col-span-4 lg:col-start-9 lg:mt-0">
+            <Standfirst>{copy.standfirst}</Standfirst>
           </RevealItem>
         )}
-
-        <SplitText as="h2" className="mt-4 lg:mt-6">
-          {copy.heading}
-        </SplitText>
       </div>
-
-      {copy.standfirst === null ? null : (
-        <RevealItem className="mt-6 lg:col-span-4 lg:col-start-9 lg:mt-0">
-          <Standfirst>{copy.standfirst}</Standfirst>
-        </RevealItem>
-      )}
     </Reveal>
   );
 }

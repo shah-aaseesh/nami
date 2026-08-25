@@ -51,13 +51,14 @@ export function AboutCreed({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
           <AboutCreedPin className="lg:col-span-4 lg:col-start-1 lg:row-start-1">
-            {section.eyebrow === null ? null : (
-              <Reveal>
-                <Eyebrow>{section.eyebrow}</Eyebrow>
-              </Reveal>
-            )}
+            <Reveal>
+              <div className="flex items-center gap-5">
+                <Eyebrow>{section.heading}</Eyebrow>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+            </Reveal>
             <SplitText as="h2" className="mt-4">
-              {section.heading}
+              {section.eyebrow ?? "Our Creed"}
             </SplitText>
           </AboutCreedPin>
 

@@ -45,6 +45,7 @@ export type BachelorsProgramme = {
   readonly startingFrom: string | null;
   readonly format: string | null;
   readonly summary: readonly string[];
+  readonly shortDescription?: string;
   readonly entryLabel: string;
   readonly entry: readonly ProgrammeRequirement[];
   readonly entryNotes: readonly string[];
@@ -186,6 +187,8 @@ const programmes: BachelorsProgrammesCopy = {
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
+      shortDescription:
+        "Three-year honours degree with majors in Software Engineering, Computing Systems, and Networks.",
       summary: [
         "A three-year degree available in three majors — Computing, Software Engineering and Computer Networks Engineering — giving an insight into the computing industry and the reach computer technology has on the world.",
         "In affiliation with the University of Northampton, the three years build the in-depth knowledge and skills the computing streams require. The course is designed so students can explore different ideas and develop innovative improvements to current problems in the industry.",
@@ -365,6 +368,8 @@ const programmes: BachelorsProgrammesCopy = {
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
+      shortDescription:
+        "Three-year honours degree combining ecology, physical science, and practical field and lab research.",
       summary: [
         "A three-year degree combining ecology and physical science to evaluate environmental issues and propose appropriate solutions, and to recognise their relevance to society at national and global levels.",
         "Students undertake a wide variety of activities and encounter new challenges that support the theoretical learning. Accuracy, critical evaluation, the ability to research solutions and apply them in new ways, and the ability to communicate findings to a variety of audiences are all vital skills for an environmental scientist.",
@@ -541,6 +546,8 @@ const programmes: BachelorsProgrammesCopy = {
       awardingBody: "Kathmandu University",
       startingFrom: "August 2026",
       format: null,
+      shortDescription:
+        "Kathmandu University degree integrating environmental science, sustainability policy, and field practice.",
       summary: [
         "A Bachelor’s programme in Environmental Studies affiliated with Kathmandu University, combining environmental science, sustainability, policy development and practical field-based learning.",
         "It is a separate degree from the BSc (Hons) Environmental Science taught here, and it is awarded by Kathmandu University rather than the University of Northampton.",
@@ -567,6 +574,8 @@ const programmes: BachelorsProgrammesCopy = {
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
+      shortDescription:
+        "Three-year management degree covering marketing, finance, enterprise strategy, and leadership.",
       summary: [
         "A three-year degree for students building a career in the financial sector, the service sector, hospitality, or their own small business — developing interpersonal, team-building, critical-thinking, leadership and entrepreneurial skills alongside the management concepts.",
         "Affiliated with the University of Northampton, the three years build in-depth knowledge across the management streams. Students are trained in project management, entrepreneurial skills, and accounting and finance, and the first year lays a foundation so the final-year dissertation can be written in the area that captivates them.",
@@ -735,6 +744,8 @@ const programmes: BachelorsProgrammesCopy = {
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Postgraduate degree",
+      shortDescription:
+        "Postgraduate programme deepening advanced software engineering, systems architecture, and business leadership.",
       summary: [
         "A postgraduate programme built on current global practice in computing, addressing the demand for exceptional leaders in a digital economy the course puts at a global value of $11.5 trillion.",
         "With the technology and computing industries evolving rapidly, the programme equips participants with the skills to thrive in the field and provides a platform for developing the knowledge and experience that career progression in computing needs.",

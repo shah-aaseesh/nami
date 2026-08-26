@@ -104,7 +104,10 @@ export function SchoolBands({
   readonly id?: string;
 }) {
   return (
-    <section className="gutter-x section-y" id={id}>
+    <section
+      className="gutter-x pt-6 sm:pt-8 lg:pt-12 pb-16 sm:pb-24 lg:pb-32"
+      id={id}
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           description={copy.standfirst}

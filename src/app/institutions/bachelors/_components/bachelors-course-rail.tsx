@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/shared/section-header";
-import { Eyebrow, H4, P } from "@/components/ui/typography";
+import { Eyebrow, H4 } from "@/components/ui/typography";
 import type {
   BachelorsProgramme,
   BachelorsProgrammesCopy,
 } from "./bachelors-copy";
 
 const CARD_SIZES =
-  "(min-width: 1568px) 480px, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 90vw";
+  "(min-width: 1568px) 380px, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw";
 
 function CourseCard({
   copy,
@@ -17,12 +17,13 @@ function CourseCard({
   readonly copy: BachelorsProgrammesCopy;
   readonly course: BachelorsProgramme;
 }) {
-  const lead = course.summary[0] ?? null;
+  const description = course.shortDescription ?? course.summary[0] ?? null;
 
   return (
-    <li className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong w-[85vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink">
-      <div className="flex flex-1 flex-col gap-4 p-6 lg:p-8">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+    <li className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/80 bg-surface-raised transition-all duration-300 hover:border-primary-600 hover:shadow-lg hover:shadow-primary-950/5 w-[85vw] max-w-[320px] shrink-0 snap-center sm:w-[calc(50%-0.75rem)] sm:max-w-none sm:shrink-0 lg:w-[calc((100%-3rem)/3)] lg:max-w-[380px] xl:max-w-[400px]">
+      {/* Compact Top Content */}
+      <div className="flex flex-1 flex-col gap-2.5 p-5 sm:p-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
           <Eyebrow as="span">{course.qualification}</Eyebrow>
 
           {course.startingFrom === null ? null : (
@@ -41,18 +42,24 @@ function CourseCard({
           </Link>
         </H4>
 
-        {lead === null ? null : <P className="line-clamp-3 text-sm">{lead}</P>}
+        {description && (
+          <p className="line-clamp-2 text-xs sm:text-sm text-ink-muted leading-relaxed">
+            {description}
+          </p>
+        )}
 
-        <p className="mt-auto border-t border-border pt-4 font-body text-sm text-ink">
+        {/* Compact Awarding Line */}
+        <p className="mt-auto border-t border-border/70 pt-3 text-xs text-ink">
           <span className="text-ink-muted">{`${copy.awardedLabel} `}</span>
-          {course.awardingBody}
+          <span className="font-medium text-ink">{course.awardingBody}</span>
         </p>
       </div>
 
-      <div className="relative aspect-video w-full overflow-hidden bg-muted">
+      {/* Bottom Media Plate */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
         <Image
           alt={course.image.alt}
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           fill
           loading="lazy"
           sizes={CARD_SIZES}
@@ -84,10 +91,10 @@ export function BachelorsCourseRail({
         />
       </div>
 
-      <div className="mx-auto mt-8 sm:mt-12 lg:mt-16 max-w-page">
+      <div className="mx-auto mt-8 sm:mt-10 lg:mt-12 max-w-page">
         <ul
           aria-label={copy.eyebrow}
-          className="flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-[var(--gutter-x)] px-[var(--gutter-x)] sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible lg:grid-cols-3"
+          className="flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-[var(--gutter-x)] px-[var(--gutter-x)] sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center sm:gap-6 sm:overflow-visible lg:gap-6"
         >
           {copy.items.map((course) => (
             <CourseCard copy={copy} course={course} key={course.key} />

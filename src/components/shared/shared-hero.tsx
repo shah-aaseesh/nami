@@ -12,7 +12,6 @@ import type {
 } from "@/lib/content";
 import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { HeroBadge } from "./hero-badge";
 import { type SharedHeroSlide, SharedHeroSlider } from "./shared-hero-slider";
 
 export type { SharedHeroSlide };
@@ -47,21 +46,9 @@ export function SharedHero({
   standfirst,
   primaryCta,
   secondaryCta,
-  motto,
-  watch = null,
-  customBadgeRing,
 }: SharedHeroProps) {
   const externalPrimary = primaryCta.destination === "external";
   const externalSecondary = secondaryCta?.destination === "external";
-
-  const badgeElement = (
-    <HeroBadge
-      customRing={customBadgeRing}
-      entity={entity}
-      motto={motto}
-      watch={watch}
-    />
-  );
 
   return (
     <section
@@ -70,7 +57,6 @@ export function SharedHero({
     >
       <div className="mx-auto max-w-page">
         <SharedHeroSlider
-          badge={badgeElement}
           className="flex min-h-96 flex-col justify-between gap-6 rounded-3xl bg-neutral-950 p-5 sm:min-h-100 sm:rounded-4xl sm:p-8 lg:px-10 xl:aspect-21/9"
           label={heroLabel}
           slides={slides}

@@ -15,15 +15,7 @@ import type {
   NamedEntity,
 } from "@/lib/content";
 import { Flip, FULL_MOTION_QUERY, gsap, useGSAP } from "@/lib/gsap";
-import {
-  countUnattributed,
-  INSTITUTION_PARAM,
-  INSTITUTION_ROLES,
-  type InstitutionFilter,
-  institutionLabel,
-  matchesInstitution,
-  parseInstitutionFilter,
-} from "@/lib/institution-filter";
+import { INSTITUTION_PARAM } from "@/lib/institution-filter";
 import { galleryCopy } from "./gallery-copy";
 import { GalleryTile } from "./gallery-tile";
 
@@ -48,6 +40,28 @@ function tileRowSpan({ height, width }: ContentImage) {
   return Math.min(Math.max(rows, 24), 108) + GUTTER_ROWS;
 }
 
+export type GalleryFilter =
+  | "all"
+  | "primary"
+  | "higher-secondary"
+  | "college"
+  | "institute";
+
+function parseGalleryFilter(value: string | undefined): GalleryFilter {
+  if (!value) return "all";
+  const candidate = value.trim().toLowerCase();
+  if (
+    candidate === "primary" ||
+    candidate === "higher-secondary" ||
+    candidate === "college" ||
+    candidate === "institute"
+  ) {
+    return candidate;
+  }
+  if (candidate === "school") return "primary";
+  return "all";
+}
+
 export function GalleryArchive({
   entities,
   items,
@@ -56,12 +70,12 @@ export function GalleryArchive({
   readonly items: readonly GalleryItem[];
 }) {
   const searchParams = useSearchParams();
-  const initialFilter = parseInstitutionFilter(
+  const initialFilter = parseGalleryFilter(
     searchParams.get(INSTITUTION_PARAM) ?? undefined,
   );
   const stageRef = useRef<HTMLDivElement>(null);
   const snapshotRef = useRef<Snapshot | null>(null);
-  const [filter, setFilter] = useState<InstitutionFilter>(initialFilter);
+  const [filter, setFilter] = useState<GalleryFilter>(initialFilter);
 
   useGSAP(
     () => {
@@ -127,31 +141,49 @@ export function GalleryArchive({
     };
   };
 
-  const selectFilter = (next: InstitutionFilter) => {
+  const selectFilter = (next: GalleryFilter) => {
     if (next === filter) return;
     takeSnapshot();
     setFilter(next);
   };
 
-  const institutionOptions: readonly FilterOption<InstitutionFilter>[] = [
+  const institutionOptions: readonly FilterOption<GalleryFilter>[] = [
     { id: "all", label: galleryCopy.allLabel },
-    ...INSTITUTION_ROLES.map((role) => ({
-      accessibleLabel: galleryCopy.filterOptionLabel(
-        institutionLabel[role],
-        entities[role].name,
-      ),
-      id: role as InstitutionFilter,
-      label: institutionLabel[role],
-    })),
+    {
+      accessibleLabel: "Primary School",
+      id: "primary",
+      label: "Primary",
+    },
+    {
+      accessibleLabel: "Higher Secondary (+2 NEB)",
+      id: "higher-secondary",
+      label: "Higher Secondary",
+    },
+    {
+      accessibleLabel: galleryCopy.filterOptionLabel("A-Level", entities.college.name),
+      id: "college",
+      label: "A-Level",
+    },
+    {
+      accessibleLabel: galleryCopy.filterOptionLabel("Bachelors/Masters", entities.institute.name),
+      id: "institute",
+      label: "Bachelors/Masters",
+    },
   ];
 
-  const isVisible = (item: GalleryItem) => matchesInstitution(item, filter);
+  const isVisible = (item: GalleryItem) => {
+    if (filter === "all") return true;
+    return item.institution === filter;
+  };
 
   const shown = items.reduce(
     (total, item) => (isVisible(item) ? total + 1 : total),
     0,
   );
-  const unattributed = countUnattributed(items);
+  const unattributed = items.reduce(
+    (total, item) => (item.institution === null ? total + 1 : total),
+    0,
+  );
 
   return (
     <>

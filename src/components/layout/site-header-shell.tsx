@@ -2,6 +2,7 @@
 
 import type { Route } from "next";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 
@@ -31,12 +32,34 @@ export type SiteHeaderShellProps = {
   links: readonly SiteMetaLink[];
 };
 
-function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
+function isItemActive(item: SiteNavItem, pathname: string): boolean {
+  if (item.href === "/") {
+    return pathname === "/";
+  }
+  if (pathname === item.href || pathname.startsWith(`${item.href}/`)) {
+    return true;
+  }
+  if (item.children) {
+    return item.children.some(
+      (child) => child.href === pathname || (child.href !== "/" && pathname.startsWith(`${child.href}/`)),
+    );
+  }
+  return false;
+}
+
+function DesktopNavDropdown({
+  item,
+  pathname,
+}: {
+  item: SiteNavItem;
+  pathname: string;
+}) {
   const container = useRef<HTMLLIElement>(null);
   const dropdown = useRef<HTMLDivElement>(null);
   const icon = useRef<SVGSVGElement>(null);
   const [hovered, setHovered] = useState(false);
   const hoverAnim = useRef<gsap.core.Timeline | null>(null);
+  const active = isItemActive(item, pathname);
 
   useGSAP(
     () => {
@@ -95,26 +118,51 @@ function DesktopNavDropdown({ item }: { item: SiteNavItem }) {
     >
       <Link
         href={item.href as Route}
-        className="flex items-center gap-1 font-body text-xs xl:text-sm font-medium text-ink uppercase transition-colors hover:text-accent cursor-pointer whitespace-nowrap"
+        className={cn(
+          "inline-flex items-center gap-1 font-body text-xs xl:text-sm font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap",
+          active
+            ? "bg-white text-accent font-bold shadow-xs"
+            : hovered
+              ? "text-white bg-white/20 shadow-2xs"
+              : "text-white/90 hover:text-white hover:bg-white/15",
+        )}
       >
-        {item.label}{" "}
-        <Icon ref={icon} icon={ChevronDownIcon} className="size-4 shrink-0" />
+        <span>{item.label}</span>
+        <Icon
+          ref={icon}
+          icon={ChevronDownIcon}
+          className={cn(
+            "size-3.5 shrink-0 transition-colors",
+            active ? "text-accent" : "text-white/80",
+          )}
+        />
       </Link>
 
       <div
         ref={dropdown}
-        className="absolute top-full left-0 pt-4 w-max max-w-xs invisible"
+        className="absolute top-full left-0 pt-2.5 w-max max-w-xs invisible z-50"
       >
-        <div className="bg-surface shadow-lg rounded-md p-1.5 flex flex-col gap-1">
-          {item.children?.map((child) => (
-            <Link
-              key={child.label}
-              href={child.href as Route}
-              className="font-body text-sm text-ink hover:text-accent hover:bg-accent/5 focus:bg-accent/10 focus:text-accent py-2 px-3 rounded-sm transition-colors block"
-            >
-              {child.label}
-            </Link>
-          ))}
+        <div className="bg-surface-raised/95 backdrop-blur-md shadow-2xl rounded-2xl p-1.5 flex flex-col gap-1 border border-border/80 min-w-[210px]">
+          {item.children?.map((child) => {
+            const isChildActive =
+              pathname === child.href ||
+              (child.href !== "/" && pathname.startsWith(`${child.href}/`));
+
+            return (
+              <Link
+                key={child.label}
+                href={child.href as Route}
+                className={cn(
+                  "font-body text-xs xl:text-sm font-medium py-2 px-3.5 rounded-xl transition-colors block",
+                  isChildActive
+                    ? "bg-accent/12 text-accent font-semibold"
+                    : "text-ink/90 hover:text-accent hover:bg-accent/10 focus:bg-accent/10 focus:text-accent",
+                )}
+              >
+                {child.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </li>
@@ -127,6 +175,7 @@ export function SiteHeaderShell({
   links,
   siteName,
 }: SiteHeaderShellProps) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const root = useRef<HTMLElement>(null);
@@ -228,22 +277,39 @@ export function SiteHeaderShell({
             aria-label="Sections"
             className="hidden flex-1 justify-end lg:flex"
           >
-            <ul className="flex items-center gap-x-3 lg:gap-x-4 xl:gap-x-6 2xl:gap-x-8">
-              {items.map((item) =>
-                item.children ? (
-                  <DesktopNavDropdown key={item.label} item={item} />
-                ) : (
-                  <li key={item.label}>
-                    <Link
-                      className="font-body text-xs xl:text-sm font-medium text-ink uppercase transition-colors hover:text-accent whitespace-nowrap"
-                      href={item.href as Route}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ),
-              )}
-            </ul>
+            <div className="flex items-center bg-accent text-white rounded-full px-2 py-1.5 shadow-md border border-accent/20">
+              <ul className="flex items-center gap-0.5 xl:gap-1">
+                {items.map((item) => {
+                  const active = isItemActive(item, pathname);
+
+                  if (item.children) {
+                    return (
+                      <DesktopNavDropdown
+                        key={item.label}
+                        item={item}
+                        pathname={pathname}
+                      />
+                    );
+                  }
+
+                  return (
+                    <li key={item.label}>
+                      <Link
+                        className={cn(
+                          "inline-flex items-center font-body text-xs xl:text-sm font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full transition-all duration-200 whitespace-nowrap",
+                          active
+                            ? "bg-white text-accent font-bold shadow-xs"
+                            : "text-white/90 hover:text-white hover:bg-white/15",
+                        )}
+                        href={item.href as Route}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </nav>
 
           <div className="flex items-center gap-x-3 xl:gap-x-5 shrink-0 lg:hidden">

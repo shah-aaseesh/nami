@@ -130,7 +130,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-transport"),
     category: "campus",
-    institution: "school",
+    institution: "primary",
     title: "School Transport",
     image: schoolTransport,
     date: null,
@@ -138,7 +138,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("chemistry-laboratory"),
     category: "academics",
-    institution: "school",
+    institution: "higher-secondary",
     title: "Chemistry Laboratory",
     image: scienceLaboratory,
     date: null,
@@ -178,7 +178,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("service-camp-sindhupalchowk"),
     category: "student-life",
-    institution: "school",
+    institution: "higher-secondary",
     title: "Service Camp, Sindhupalchowk",
     image: serviceCamp,
     date: isoDate("2024-01-27"),
@@ -274,7 +274,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("campus-infirmary"),
     category: "campus",
-    institution: "school",
+    institution: "primary",
     title: "School Infirmary",
     image: campusInfirmary,
     date: null,
@@ -290,7 +290,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-auditorium-assembly"),
     category: "campus",
-    institution: "school",
+    institution: "higher-secondary",
     title: "School Auditorium Assembly",
     image: schoolAuditoriumAssembly,
     date: null,
@@ -298,7 +298,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-minifootball-goal"),
     category: "campus",
-    institution: "school",
+    institution: "primary",
     title: "Playground Goal Corner",
     image: schoolMinifootballGoal,
     date: null,
@@ -306,7 +306,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-national-dress-day"),
     category: "events",
-    institution: "school",
+    institution: "primary",
     title: "National Dress Day",
     image: schoolNationalDressDay,
     date: null,
@@ -314,7 +314,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-bus-fleet"),
     category: "campus",
-    institution: "school",
+    institution: "higher-secondary",
     title: "School Bus Fleet",
     image: schoolBusFleet,
     date: null,
@@ -322,7 +322,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-cafeteria"),
     category: "campus",
-    institution: "school",
+    institution: "primary",
     title: "School Cafeteria",
     image: schoolCafeteria,
     date: null,
@@ -330,7 +330,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-computer-lab"),
     category: "academics",
-    institution: "school",
+    institution: "higher-secondary",
     title: "Computer Lab",
     image: schoolComputerLab,
     date: null,
@@ -338,7 +338,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-digital-classroom"),
     category: "academics",
-    institution: "school",
+    institution: "higher-secondary",
     title: "Digital Classroom",
     image: schoolDigitalClassroom,
     date: null,
@@ -346,7 +346,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-infirmary-ward"),
     category: "campus",
-    institution: "school",
+    institution: "higher-secondary",
     title: "Infirmary Ward",
     image: schoolInfirmaryWard,
     date: null,
@@ -354,7 +354,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-library-reading-nook"),
     category: "academics",
-    institution: "school",
+    institution: "primary",
     title: "Library Reading Nook",
     image: schoolLibraryReadingNook,
     date: null,
@@ -362,7 +362,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-playground"),
     category: "campus",
-    institution: "school",
+    institution: "primary",
     title: "School Playground",
     image: schoolPlayground,
     date: null,
@@ -370,7 +370,7 @@ export const gallery: readonly GalleryItem[] = [
   {
     ...entryOf("school-science-lab-practical"),
     category: "academics",
-    institution: "school",
+    institution: "higher-secondary",
     title: "Science Lab Practical",
     image: schoolScienceLabPractical,
     date: null,

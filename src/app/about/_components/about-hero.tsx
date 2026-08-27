@@ -12,23 +12,23 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
   const image = copy.openingImage;
 
   return (
-    <section className="gutter-x section-y-masthead" id="about">
+    <section className="gutter-x pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-3 lg:pb-12" id="about">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
           <div className="lg:col-span-7">
             <Eyebrow>About NAMI</Eyebrow>
-            <h1 className="mt-5 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-balance text-ink">
+            <h1 className="mt-2.5 sm:mt-3.5 font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-normal tracking-tight leading-[1.1] text-balance text-ink">
               {copy.title}
             </h1>
           </div>
 
-          <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:flex lg:flex-col lg:justify-between lg:self-end">
+          <div className="mt-5 sm:mt-6 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:flex lg:flex-col lg:justify-between lg:self-end">
             {copy.standfirst === "" ? null : (
-              <Standfirst className="text-ink-muted">
+              <Standfirst className="text-ink-muted text-sm sm:text-base">
                 {copy.standfirst}
               </Standfirst>
             )}
-            <div className="mt-8 lg:mt-10">
+            <div className="mt-4 sm:mt-5 lg:mt-6">
               <Link
                 className={cn(
                   buttonVariants({ size: "lg", variant: "default" }),
@@ -48,12 +48,12 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
 
         {image === null ? null : (
           <Parallax
-            className="mt-14 overflow-hidden rounded-3xl lg:mt-20"
+            className="mt-6 sm:mt-7 lg:mt-8 overflow-hidden rounded-2xl lg:rounded-3xl"
             speed={1.05}
           >
             <Image
               alt={image.alt}
-              className="h-[42vh] w-full object-cover lg:h-[58vh]"
+              className="h-[34vh] sm:h-[38vh] lg:h-[42vh] xl:h-[48vh] max-h-[360px] xl:max-h-[440px] w-full object-cover"
               height={image.height}
               loading="eager"
               sizes="(max-width: 1024px) 100vw, 1200px"

@@ -81,26 +81,21 @@ export function SharedHeroSlider({
 
       {(badge || hasMany) && (
         <div className="mt-4 flex items-center justify-between gap-4 sm:mt-6">
-          {badge ? (
+          {badge && (
             <div className="flex shrink-0 items-center justify-start">
               {badge}
             </div>
-          ) : (
-            <div
-              aria-hidden="true"
-              className="hidden sm:block sm:w-32 lg:w-36"
-            />
           )}
 
-          {hasMany ? (
-            <div className="w-fit">
+          {hasMany && (
+            <div className={cn("w-fit", !badge && "mx-auto")}>
               <CarouselDots dotLabel="Show slide" />
             </div>
-          ) : (
-            <div />
           )}
 
-          <div aria-hidden="true" className="hidden sm:block sm:w-32 lg:w-36" />
+          {badge && (
+            <div aria-hidden="true" className="hidden sm:block sm:w-32 lg:w-36" />
+          )}
         </div>
       )}
     </Carousel>

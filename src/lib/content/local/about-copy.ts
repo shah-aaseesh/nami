@@ -99,12 +99,12 @@ export const aboutCopy: AboutCopy = {
     },
     testimonials: {
       navLabel: "Testimonials",
-      eyebrow: "Student voices",
-      heading: "What our students say.",
+      eyebrow: "Stakeholder Voice",
+      heading: "What our stakeholders say.",
       standfirst: null,
       cta: null,
       emptyState:
-        "Student stories are being collected — this space is reserved for them.",
+        "Stakeholder stories are being collected — this space is reserved for them.",
     },
   },
 };

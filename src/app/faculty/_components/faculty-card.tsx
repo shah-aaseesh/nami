@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -19,12 +20,14 @@ export function FacultyCard({
   isFirstGroup = false,
   isScrollable = false,
   isSolo = false,
+  className,
 }: {
   readonly leader: Leader;
   readonly index: number;
   readonly isFirstGroup?: boolean;
   readonly isScrollable?: boolean;
   readonly isSolo?: boolean;
+  readonly className?: string;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -32,12 +35,17 @@ export function FacultyCard({
     <>
       <div
         className={cn(
-          "group flex flex-col snap-center shrink-0 w-[75vw] max-w-[260px] sm:w-[40vw] sm:max-w-[280px]",
-          isScrollable
-            ? "lg:w-[calc((100%-6rem)/4)] lg:max-w-none"
-            : isSolo
-              ? "w-full max-w-[280px] sm:max-w-[320px] lg:max-w-sm"
-              : "lg:w-[calc(25%-1.5rem)] lg:max-w-none",
+          "group flex flex-col snap-center shrink-0",
+          className
+            ? className
+            : cn(
+                "w-[75vw] max-w-[260px] sm:w-[40vw] sm:max-w-[280px]",
+                isScrollable
+                  ? "lg:w-[calc((100%-6rem)/4)] lg:max-w-none"
+                  : isSolo
+                    ? "w-full max-w-[280px] sm:max-w-[320px] lg:max-w-sm"
+                    : "lg:w-[calc(25%-1.5rem)] lg:max-w-none",
+              ),
         )}
       >
         <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-neutral-100 border border-border/40">
@@ -72,14 +80,18 @@ export function FacultyCard({
           <P className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-3">
             {leader.brief}
           </P>
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="mt-2.5 inline-flex items-center gap-1 self-start font-body text-xs font-semibold text-accent hover:text-accent-hover hover:underline cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
-          >
-            <span>Read full bio</span>
-            <span aria-hidden="true">&rarr;</span>
-          </button>
+          <div className="mt-auto pt-3 flex items-center justify-start">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setOpen(true)}
+              className="self-start gap-1.5 px-3.5 border-accent/40 text-accent hover:bg-accent hover:text-white font-medium transition-colors cursor-pointer text-xs rounded-md shadow-2xs"
+            >
+              <span>Read full bio</span>
+              <span aria-hidden="true">&rarr;</span>
+            </Button>
+          </div>
         </div>
       </div>
 

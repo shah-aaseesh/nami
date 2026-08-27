@@ -30,25 +30,28 @@ export function Stats({
         <div
           className={
             poster === null
-              ? "mt-12 lg:mt-16"
-              : "mt-12 grid grid-cols-1 gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-12 lg:items-center"
+              ? "mt-8 lg:mt-12"
+              : "mt-8 lg:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12 lg:items-stretch"
           }
         >
-          <div className={poster === null ? "" : "lg:col-span-7"}>
+          <div className={poster === null ? "" : "lg:col-span-7 flex flex-col justify-center"}>
             <Reveal
               className={
                 poster === null
-                  ? "grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4"
-                  : "grid grid-cols-2 gap-x-6 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:grid-cols-3"
+                  ? "grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-3 lg:grid-cols-4"
+                  : "grid grid-cols-2 gap-4 sm:gap-5 sm:grid-cols-3"
               }
-              stagger={0.08}
+              stagger={0.06}
             >
               {rows.map((stat) => (
-                <RevealItem key={stat.id}>
-                  <p className="font-display text-3xl font-normal tracking-tight text-ink sm:text-4xl lg:text-5xl">
+                <RevealItem
+                  key={stat.id}
+                  className="flex flex-col justify-between rounded-2xl bg-white/6 p-4 sm:p-5 lg:p-6 border border-white/12 backdrop-blur-xs transition-all hover:bg-white/10 hover:border-white/20 shadow-xs"
+                >
+                  <p className="font-display text-3xl font-normal tracking-tight text-white sm:text-4xl lg:text-5xl">
                     <Counter suffix={stat.suffix ?? ""} value={stat.value} />
                   </p>
-                  <p className="mt-1.5 font-body text-xs sm:text-sm text-ink-muted">
+                  <p className="mt-2.5 font-body text-xs sm:text-sm text-white/85 leading-snug">
                     {stat.label}
                   </p>
                 </RevealItem>
@@ -57,7 +60,7 @@ export function Stats({
           </div>
 
           {poster === null ? null : (
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 flex items-center justify-center">
               <CollegeLifeBand poster={poster} />
             </div>
           )}

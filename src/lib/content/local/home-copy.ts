@@ -88,7 +88,8 @@ export const homeCopy: HomeCopy = {
       navLabel: "NAMI in numbers",
       eyebrow: "The record",
       heading: "The institution, in numbers.",
-      standfirst: null,
+      standfirst:
+        "Over a decade of academic excellence, measured across four learning tiers and the thousands of students who shape our community.",
       cta: null,
       emptyState: null,
     },

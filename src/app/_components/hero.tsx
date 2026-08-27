@@ -63,26 +63,26 @@ export async function Hero() {
   const heroSlides = hero.images;
 
   return (
-    <section className="relative isolate gutter-x section-y-hero" id="hero">
+    <section className="relative isolate gutter-x pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-3 lg:pb-12" id="hero">
       <div className="relative mx-auto max-w-page">
-        <div className="flex items-center gap-4">
-          <Icon className="size-6 text-accent" icon={MortarboardIcon} />
+        <div className="flex items-center gap-3">
+          <Icon className="size-5 sm:size-6 text-accent" icon={MortarboardIcon} />
           <Eyebrow>{hero.eyebrow}</Eyebrow>
         </div>
 
-        <div className="mt-8 lg:mt-12 lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="mt-4 sm:mt-6 lg:mt-7 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
           <HeroHeadline className="lg:col-span-7" lead={lead} tail={tail} />
 
-          <div className="mt-12 flex flex-col items-start gap-8 lg:col-span-4 lg:col-start-9 lg:mt-0">
+          <div className="mt-6 sm:mt-8 flex flex-col items-start gap-4 sm:gap-6 lg:col-span-4 lg:col-start-9 lg:mt-0">
             <Standfirst>{hero.standfirst}</Standfirst>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <HeroCta link={hero.primaryCta} variant="default" />
               <HeroCta link={hero.secondaryCta} variant="outline" />
             </div>
           </div>
         </div>
 
-        <div className="mt-10 lg:mt-14 lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="mt-6 sm:mt-8 lg:mt-8 xl:mt-10 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
           <HeroBadgePin className="lg:col-span-2">
             <div className="relative flex items-start justify-start lg:flex-col lg:items-start lg:justify-start">
               <HeroBadge
@@ -100,13 +100,13 @@ export async function Hero() {
                 aria-roledescription="carousel"
                 autoplay
                 autoplayIntervalMs={5000}
-                className="flex flex-col gap-6"
+                className="flex flex-col gap-4"
                 opts={{ align: "start", duration: 20, loop: true }}
                 pauseOnHover={false}
               >
                 <CarouselContent
                   className="h-full"
-                  viewportClassName="aspect-video rounded-xl lg:aspect-[5/2]"
+                  viewportClassName="aspect-video rounded-xl sm:aspect-[2/1] lg:aspect-[2.4/1] xl:aspect-[5/2] max-h-[360px] xl:max-h-[420px]"
                 >
                   {heroSlides.map((slide, position) => (
                     <CarouselItem

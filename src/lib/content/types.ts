@@ -293,9 +293,14 @@ export const GALLERY_CATEGORIES = [
 
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
+export type GalleryInstitutionRole =
+  | EntityRole
+  | "primary"
+  | "higher-secondary";
+
 export type GalleryItem = ContentEntry & {
   readonly category: GalleryCategory;
-  readonly institution: EntityRole | null;
+  readonly institution: GalleryInstitutionRole | null;
   readonly title: string;
   readonly image: ContentImage;
   readonly date: IsoDate | null;

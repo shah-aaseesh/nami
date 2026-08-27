@@ -12,10 +12,9 @@ export const galleryCopy = {
       "The NAMI group's photographic record of the year in Kathmandu — classrooms and college grounds, tournaments and service camps, orientations and convocations, filterable by institution.",
   },
   masthead: {
-    eyebrow: "Gallery",
-    heading: "A year, in pictures.",
-    standfirst:
-      "Classrooms and college grounds, tournaments and service camps, orientations and convocations. One archive across the school, the college and the institute.",
+    eyebrow: "Visual Archive",
+    heading: "Gallery",
+    standfirst: null,
   },
   allLabel: "All",
   filterGroupLabel: "Filter by institution",

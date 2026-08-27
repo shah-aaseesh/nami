@@ -11,13 +11,13 @@ export function CollegeLifeBand({ poster }: { poster: ContentImage }) {
 
   return (
     <div
-      className="relative aspect-video w-full overflow-hidden rounded-2xl sm:rounded-3xl lg:aspect-auto lg:h-full"
+      className="relative aspect-video sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[260px] w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl border border-white/10"
       ref={band}
     >
       <Image
         alt=""
         aria-hidden="true"
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover scale-110"
         height={poster.height}
         loading="lazy"
         sizes="(max-width: 1023px) 100vw, 45vw"
@@ -28,7 +28,7 @@ export function CollegeLifeBand({ poster }: { poster: ContentImage }) {
       <video
         aria-hidden="true"
         autoPlay
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover scale-[1.18]"
         loop
         muted
         playsInline

@@ -3,7 +3,7 @@ import { Display, Eyebrow, Standfirst } from "@/components/ui/typography";
 export type GalleryMastheadCopy = {
   readonly eyebrow: string;
   readonly heading: string;
-  readonly standfirst: string;
+  readonly standfirst: string | null;
 };
 
 export function GalleryMasthead({
@@ -21,9 +21,11 @@ export function GalleryMasthead({
               {copy.heading}
             </Display>
           </div>
-          <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
-            <Standfirst>{copy.standfirst}</Standfirst>
-          </div>
+          {copy.standfirst ? (
+            <div className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
+              <Standfirst>{copy.standfirst}</Standfirst>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

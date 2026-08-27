@@ -69,11 +69,11 @@ export function FacultyGroupTrack({
   );
 
   return (
-    <div className="mx-auto max-w-page overflow-hidden" ref={rail}>
+    <div className="mx-auto max-w-page overflow-x-clip py-2" ref={rail}>
       {heading}
 
       <div
-        className="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:snap-none lg:overflow-x-visible"
+        className="flex items-start gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:snap-none lg:overflow-x-visible pb-4"
         ref={track}
       >
         {children}

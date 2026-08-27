@@ -40,12 +40,12 @@ export function FacultyGroup({
       {isScrollable ? (
         <FacultyGroupTrack heading={heading}>{cards}</FacultyGroupTrack>
       ) : (
-        <div className="mx-auto max-w-page overflow-hidden">
+        <div className="mx-auto max-w-page overflow-x-clip py-2">
           {heading}
 
           <div
             className={cn(
-              "flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:overflow-visible",
+              "flex items-start gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:overflow-visible pb-4",
               isSolo ? "justify-center overflow-visible" : "md:justify-center",
             )}
           >

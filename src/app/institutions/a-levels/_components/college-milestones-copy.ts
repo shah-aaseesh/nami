@@ -1,7 +1,7 @@
 import type { CollegeMilestonesCopy } from "./college-milestones";
 
 export const collegeMilestonesCopy: CollegeMilestonesCopy = {
-  eyebrow: "Milestones",
+  eyebrow: "Milestones and Accreditations",
   heading: "The Cambridge programme, year by year.",
   milestones: [
     {

@@ -31,7 +31,7 @@ export function CollegeMilestones({
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}
-          title={copy.eyebrow ?? "Milestones"}
+          title={copy.eyebrow ?? "Milestones and Accreditations"}
         />
 
         <div className="mx-auto max-w-6xl">

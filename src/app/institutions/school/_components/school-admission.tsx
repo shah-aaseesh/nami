@@ -38,6 +38,37 @@ const STEP_ICONS = [
 
 const STEP_BADGE_CLASS = "bg-neutral-950 text-white";
 
+const CARD_THEMES = [
+  {
+    bg: "bg-[#BD1B21]",
+    border: "border-[#BD1B21]/40",
+    dashed: "border-[#BD1B21]/50 group-hover:border-[#BD1B21]",
+    shadow: "shadow-primary-950/15 group-hover:shadow-primary-950/25",
+    hoverText: "group-hover:text-primary-100",
+  },
+  {
+    bg: "bg-[#2BBCC6]",
+    border: "border-[#2BBCC6]/40",
+    dashed: "border-[#2BBCC6]/50 group-hover:border-[#2BBCC6]",
+    shadow: "shadow-cyan-950/15 group-hover:shadow-cyan-950/25",
+    hoverText: "group-hover:text-cyan-100",
+  },
+  {
+    bg: "bg-[#143D35]",
+    border: "border-[#143D35]/40",
+    dashed: "border-[#143D35]/50 group-hover:border-[#143D35]",
+    shadow: "shadow-emerald-950/15 group-hover:shadow-emerald-950/25",
+    hoverText: "group-hover:text-emerald-100",
+  },
+  {
+    bg: "bg-[#BF6BA6]",
+    border: "border-[#BF6BA6]/40",
+    dashed: "border-[#BF6BA6]/50 group-hover:border-[#BF6BA6]",
+    shadow: "shadow-purple-950/15 group-hover:shadow-purple-950/25",
+    hoverText: "group-hover:text-purple-100",
+  },
+] as const;
+
 function DiamondStepCard({
   index,
   step,
@@ -47,12 +78,13 @@ function DiamondStepCard({
 }) {
   const isEven = index % 2 === 1; // 0, 2, 4, 6 (top 4) | 1, 3, 5 (bottom 3)
   const IconComponent = STEP_ICONS[index % STEP_ICONS.length] ?? SparklesIcon;
+  const theme = CARD_THEMES[index % CARD_THEMES.length] ?? CARD_THEMES[0];
 
   return (
     <li
       className={cn(
         "group relative flex shrink-0 snap-center flex-col items-center justify-center transition-all duration-300",
-        "w-[175px] h-[175px] sm:w-[185px] sm:h-[185px] md:w-[195px] md:h-[195px] lg:w-[165px] lg:h-[165px] xl:w-[215px] xl:h-[215px] 2xl:w-[205px] 2xl:h-[205px]",
+        "w-[190px] h-[190px] sm:w-[205px] sm:h-[205px] md:w-[215px] md:h-[215px] lg:w-[180px] lg:h-[180px] xl:w-[225px] xl:h-[225px] 2xl:w-[220px] 2xl:h-[220px]",
         // 4 in top (0, 2, 4, 6) and 3 in down (1, 3, 5) with calibrated vertical stagger
         isEven ? "mt-14 sm:mt-16 md:mt-18 xl:mt-22 2xl:mt-24" : "mt-0",
       )}
@@ -61,11 +93,21 @@ function DiamondStepCard({
       {/* Outer Dashed Decorative Border */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-3 sm:inset-3 rotate-45 rounded-2xl sm:rounded-3xl border border-dashed border-primary-300/60 transition-all duration-300 group-hover:border-primary-500 group-hover:scale-102"
+        className={cn(
+          "pointer-events-none absolute inset-3 sm:inset-3 rotate-45 rounded-2xl sm:rounded-3xl border border-dashed transition-all duration-300 group-hover:scale-102",
+          theme.dashed,
+        )}
       />
 
-      {/* Main Diamond Shape — Brand Red Card */}
-      <div className="absolute inset-3.5 sm:inset-4 rotate-45 rounded-2xl sm:rounded-3xl border border-primary-700/30 bg-primary-800 shadow-xl shadow-primary-950/15 transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-primary-950/25 group-hover:scale-105" />
+      {/* Main Diamond Shape — Multi-Color Card */}
+      <div
+        className={cn(
+          "absolute inset-3.5 sm:inset-4 rotate-45 rounded-2xl sm:rounded-3xl border shadow-xl transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105",
+          theme.bg,
+          theme.border,
+          theme.shadow,
+        )}
+      />
 
       {/* Top Apex: Circular Step Number Badge */}
       <div
@@ -86,12 +128,17 @@ function DiamondStepCard({
       </div>
 
       {/* Upright Center Text Content — Generous padding and clear breathing room */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-3.5 sm:px-4 lg:px-3.5 xl:px-4 py-1.5 max-w-[140px] sm:max-w-[150px] md:max-w-[160px] lg:max-w-[140px] xl:max-w-[165px] 2xl:max-w-[175px]">
-        <h4 className="font-display text-[11px] sm:text-xs xl:text-sm font-bold text-white uppercase tracking-wider leading-snug transition-colors group-hover:text-primary-100 line-clamp-2">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-3 sm:px-3.5 lg:px-3 xl:px-4 py-1.5 max-w-[148px] sm:max-w-[160px] md:max-w-[170px] lg:max-w-[148px] xl:max-w-[180px] 2xl:max-w-[185px]">
+        <h4
+          className={cn(
+            "font-display text-xs xl:text-sm font-bold text-white uppercase tracking-wider leading-snug transition-colors line-clamp-2",
+            theme.hoverText,
+          )}
+        >
           {step.title}
         </h4>
 
-        <p className="mt-1 sm:mt-1.5 text-[9.5px] sm:text-[10.5px] xl:text-[11.5px] font-normal leading-relaxed text-primary-100/90 line-clamp-3">
+        <p className="mt-1 text-xs font-normal leading-normal text-white/95">
           {step.body}
         </p>
       </div>
@@ -111,10 +158,7 @@ export function SchoolAdmission({
   if (total === 0) return null;
 
   return (
-    <section
-      className="bg-surface text-ink gutter-x pt-10 sm:pt-12 lg:pt-16 pb-2 sm:pb-4 lg:pb-6"
-      id={id}
-    >
+    <section className="bg-surface text-ink gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}

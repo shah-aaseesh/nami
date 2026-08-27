@@ -14,10 +14,7 @@ export function AboutAwards({
   const [latest, ...rest] = ordered;
 
   return (
-    <section
-      className="gutter-x pb-10 pt-[var(--spacing-section-py)] lg:pb-16"
-      id="awards"
-    >
+    <section className="gutter-x section-y" id="awards">
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={section.heading}

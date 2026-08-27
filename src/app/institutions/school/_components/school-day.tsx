@@ -35,23 +35,27 @@ export function SchoolDay({
   readonly id?: string;
 }) {
   return (
-    <section className="field-brand gutter-x section-y" id={id}>
+    <section className="bg-[#143D35] text-white gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}
+          eyebrowClassName="text-[#FCD700] font-semibold"
           title={copy.eyebrow ?? "A day at NAMI"}
           description={copy.standfirst}
+          descriptionClassName="text-white/80"
+          titleClassName="text-white"
+          className="[&_[data-slot=eyebrow]+span]:bg-white/20"
         />
 
         <div className="mt-12 lg:mt-16">
-          <ul className="grid border-t border-primary-800/80 lg:grid-cols-2 lg:gap-x-14 xl:gap-x-16">
+          <ul className="grid border-t border-white/15 lg:grid-cols-2 lg:gap-x-14 xl:gap-x-16">
             {copy.campus.map((entry) => (
               <li
-                className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 border-b border-primary-800/80 py-4 sm:py-6"
+                className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 border-b border-white/15 py-4 sm:py-6"
                 key={entry.title}
               >
                 {entry.photo && (
-                  <div className="relative aspect-[4/3] hidden sm:block sm:h-30 sm:w-40 lg:h-33 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-primary-800/30">
+                  <div className="relative aspect-[4/3] hidden sm:block sm:h-30 sm:w-40 lg:h-33 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-black/20">
                     <Image
                       alt={entry.photo.alt}
                       className="h-full w-full object-cover"
@@ -66,13 +70,13 @@ export function SchoolDay({
                   <Accordion className="border-none w-full">
                     <AccordionItem value={entry.title} className="border-none">
                       <AccordionTrigger className="p-0 text-start group hover:text-white transition-colors">
-                        <h3 className="font-display text-2xl sm:text-3xl font-normal text-white leading-snug group-hover:text-white">
+                        <h3 className="font-display text-2xl sm:text-3xl font-normal text-white leading-snug group-hover:text-emerald-300">
                           {entry.title}
                         </h3>
                       </AccordionTrigger>
                       <AccordionPanel className="p-0 pt-3 pe-0">
                         {entry.photo && (
-                          <div className="mb-3 w-full overflow-hidden rounded-xl shadow-md bg-primary-800/30 sm:hidden">
+                          <div className="mb-3 w-full overflow-hidden rounded-xl shadow-md bg-black/20 sm:hidden">
                             <Image
                               alt={entry.photo.alt}
                               className="aspect-[16/10] w-full rounded-xl object-cover"
@@ -83,7 +87,7 @@ export function SchoolDay({
                             />
                           </div>
                         )}
-                        <p className="font-body text-sm sm:text-base leading-relaxed text-primary-200">
+                        <p className="font-body text-sm sm:text-base leading-relaxed text-white/80">
                           {entry.body}
                         </p>
                       </AccordionPanel>

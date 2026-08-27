@@ -19,10 +19,7 @@ export function AboutMascot({
   if (paragraphs.length === 0) return null;
 
   return (
-    <section
-      className="gutter-x pb-10 pt-[var(--spacing-section-py)] lg:pb-16"
-      id="mascot"
-    >
+    <section className="gutter-x section-y" id="mascot">
       <div className="mx-auto max-w-page">
         <Reveal>
           <div className="flex items-center gap-5">
@@ -56,7 +53,7 @@ export function AboutMascot({
                 height={image?.height ?? 408}
                 loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 450px"
-                src={image?.src ?? "/lotus.png"}
+                src={image?.src ?? "/swan.png"}
                 width={image?.width ?? 612}
               />
             </div>

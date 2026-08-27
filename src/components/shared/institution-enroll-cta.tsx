@@ -70,17 +70,44 @@ export function InstitutionEnrollCta({
   const effectiveDescription = description ?? roleDefaults.description;
   const effectiveBrochureLabel = brochureLabel ?? roleDefaults.brochureLabel;
 
+  const isSchool = institution === "school";
+  const isCollege = institution === "college";
+  const isCustomDark = isSchool || isCollege;
+
   return (
     <section
-      className={cn("field-brand gutter-x py-10 sm:py-14 lg:py-16", className)}
+      className={cn(
+        isSchool && "bg-[#0e3b47] text-white",
+        isCollege && "bg-[#001b44] text-white",
+        !isCustomDark && "field-brand",
+        "gutter-x py-10 sm:py-14 lg:py-16",
+        className,
+      )}
       id={id}
     >
       <div className="mx-auto max-w-4xl text-center">
         <Reveal stagger={0.08}>
           {eyebrow && (
             <RevealItem>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white backdrop-blur-xs">
-                <span className="size-2 rounded-full bg-white animate-pulse" />
+              <span
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest backdrop-blur-xs",
+                  isSchool &&
+                    "border border-[#2BBCC6]/40 bg-[#2BBCC6]/15 text-[#2BBCC6]",
+                  isCollege &&
+                    "border border-[#88dbdf]/40 bg-[#88dbdf]/15 text-[#88dbdf]",
+                  !isCustomDark &&
+                    "border border-white/20 bg-white/10 text-white",
+                )}
+              >
+                <span
+                  className={cn(
+                    "size-2 rounded-full animate-pulse",
+                    isSchool && "bg-[#2BBCC6]",
+                    isCollege && "bg-[#88dbdf]",
+                    !isCustomDark && "bg-white",
+                  )}
+                />
                 {eyebrow}
               </span>
             </RevealItem>
@@ -94,7 +121,12 @@ export function InstitutionEnrollCta({
           </SplitText>
 
           <RevealItem className="mt-3 sm:mt-4 mx-auto max-w-2xl">
-            <p className="font-body text-sm sm:text-base leading-relaxed text-primary-100/90">
+            <p
+              className={cn(
+                "font-body text-sm sm:text-base leading-relaxed",
+                isCustomDark ? "text-white/85" : "text-primary-100/90",
+              )}
+            >
               {effectiveDescription}
             </p>
           </RevealItem>
@@ -106,11 +138,19 @@ export function InstitutionEnrollCta({
               href={applyHref as Route}
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "bg-white text-primary-800 hover:bg-neutral-100 font-semibold shadow-md",
+                isCustomDark
+                  ? "bg-[#BD1B21] text-white hover:bg-[#a0161b] font-semibold shadow-lg border border-[#BD1B21]/60"
+                  : "bg-white text-primary-800 hover:bg-neutral-100 font-semibold shadow-md",
               )}
             >
               <span>{applyLabel}</span>
-              <Icon icon={ArrowRightIcon} className="size-4 text-primary-800" />
+              <Icon
+                icon={ArrowRightIcon}
+                className={cn(
+                  "size-4",
+                  isCustomDark ? "text-white" : "text-primary-800",
+                )}
+              />
             </Link>
 
             {/* Brochure Action: Download Brochure */}
@@ -121,15 +161,36 @@ export function InstitutionEnrollCta({
                 "border-white/35 bg-white/10 text-white hover:bg-white/20 hover:border-white shadow-sm backdrop-blur-xs",
               )}
             >
-              <Icon icon={DownloadIcon} className="size-4 text-primary-200" />
+              <Icon
+                icon={DownloadIcon}
+                className={cn(
+                  "size-4",
+                  isSchool && "text-[#2BBCC6]",
+                  isCollege && "text-[#88dbdf]",
+                  !isCustomDark && "text-primary-200",
+                )}
+              />
               <span>{effectiveBrochureLabel}</span>
             </Link>
           </RevealItem>
 
           {/* Help Line / Contact Link */}
           {phone && (
-            <RevealItem className="mt-8 flex items-center justify-center gap-2 text-xs sm:text-sm text-primary-200">
-              <Icon icon={PhoneIcon} className="size-3.5 text-primary-300" />
+            <RevealItem
+              className={cn(
+                "mt-8 flex items-center justify-center gap-2 text-xs sm:text-sm",
+                isCustomDark ? "text-white/80" : "text-primary-200",
+              )}
+            >
+              <Icon
+                icon={PhoneIcon}
+                className={cn(
+                  "size-3.5",
+                  isSchool && "text-[#2BBCC6]",
+                  isCollege && "text-[#88dbdf]",
+                  !isCustomDark && "text-primary-300",
+                )}
+              />
               <span>Need help? Call Admissions at</span>
               <Link
                 href={`tel:${phone.replace(/[^+\d]/g, "")}` as Route}

@@ -17,10 +17,7 @@ export function AboutOverview({
   const paragraphs = paragraphsOf(overview);
 
   return (
-    <section
-      className="gutter-x pb-12 pt-[var(--spacing-section-py)] lg:pb-20"
-      id="overview"
-    >
+    <section className="gutter-x section-y" id="overview">
       <div className="mx-auto max-w-page">
         <Reveal>
           <div className="flex items-center gap-5">

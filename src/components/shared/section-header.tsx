@@ -31,6 +31,7 @@ export interface SectionHeaderProps {
   /** Enable entrance animations (default: true) */
   animated?: boolean;
   className?: string;
+  eyebrowClassName?: string;
   titleClassName?: string;
   descriptionClassName?: string;
 }
@@ -51,6 +52,7 @@ export function SectionHeader({
   as = "h2",
   animated = true,
   className,
+  eyebrowClassName,
   titleClassName,
   descriptionClassName,
 }: SectionHeaderProps) {
@@ -101,8 +103,8 @@ export function SectionHeader({
     if (!eyebrow) return null;
     const bar = (
       <div className="flex items-center gap-5">
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <span className="h-px flex-1 bg-border" />
+        <Eyebrow className={eyebrowClassName}>{eyebrow}</Eyebrow>
+        <span className="h-px flex-1 bg-border/40" />
       </div>
     );
     return animated ? <RevealItem>{bar}</RevealItem> : bar;

@@ -59,7 +59,7 @@ export function FacultyGroup({
       </div>
 
       <div className="mt-4">
-        <p className="font-body text-[10px] font-bold uppercase tracking-widest text-accent">
+        <p className="font-body text-xs font-bold uppercase tracking-wider text-accent">
           {leader.title}
         </p>
         <h3 className="mt-1 font-display text-lg font-medium text-ink">

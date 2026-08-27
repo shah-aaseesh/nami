@@ -22,7 +22,7 @@ export function AboutEmblem({
 
   return (
     <section
-      className="field-ink gutter-x overflow-x-clip pb-10 pt-[var(--spacing-section-py)] lg:pb-16"
+      className="field-ink gutter-x overflow-x-clip section-y"
       id="emblem"
     >
       <div className="mx-auto max-w-page">

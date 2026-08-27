@@ -44,10 +44,7 @@ export function AboutCreed({
   }
 
   return (
-    <section
-      className="gutter-x pb-10 pt-[var(--spacing-section-py)] lg:pb-16"
-      id="creed"
-    >
+    <section className="gutter-x section-y" id="creed">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
           <AboutCreedPin className="lg:col-span-4 lg:col-start-1 lg:row-start-1">

@@ -25,7 +25,7 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
   const external = copy.cta.destination === "external";
 
   return (
-    <section className="field-brand gutter-x section-y" id="entry">
+    <section className="bg-surface text-ink gutter-x section-y" id="entry">
       <div className="mx-auto max-w-page">
         {/* Full-width Eyebrow Bar */}
         <Reveal className="flex items-center gap-5" stagger={0.08}>

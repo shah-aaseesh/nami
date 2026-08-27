@@ -11,6 +11,7 @@ import { institutionPath } from "@/lib/content/institutions";
 import { schoolPrincipal } from "@/lib/content/school-principal";
 import { createMetadata } from "@/lib/seo";
 import { SchoolAdmission } from "./_components/school-admission";
+import { SchoolApproachBanner } from "./_components/school-approach-banner";
 import { SchoolBands } from "./_components/school-bands";
 import { parentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
@@ -61,6 +62,8 @@ export default async function SchoolPage() {
         />
       )}
 
+      <SchoolApproachBanner />
+
       <SchoolAdmission copy={schoolCopy.admission} />
       <SchoolBands copy={schoolCopy.bands} id="academics" />
 
@@ -73,7 +76,7 @@ export default async function SchoolPage() {
       />
       <SharedCollegeGallery
         institution={institution.entities.school.role}
-        tone="brand"
+        tone="surface"
       />
 
       <InstitutionNotices

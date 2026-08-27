@@ -336,31 +336,31 @@ const admission: SchoolAdmissionCopy = {
   steps: [
     {
       title: "Registration",
-      body: "Register your child's name in the admissions log at the school reception, or online through the school website or its social media.",
+      body: "Register your child's name at reception or through our online portal.",
     },
     {
       title: "Orientation",
-      body: "The admissions office contacts you for an orientation: a session by the Principal on the academic programme, followed by a tour of the school.",
+      body: "Attend the Principal's academic briefing and a guided school tour.",
     },
     {
       title: "Application",
-      body: "Collect the application form from the admissions office. The form is also available online.",
+      body: "Obtain the official application form from admissions or online.",
     },
     {
-      title: "Application submission",
-      body: "Complete the form and return it to the admissions office or submit it online. The office then schedules a placement assessment and an interview — for your child and for you.",
+      title: "Application Submission",
+      body: "Submit forms to schedule placement assessment and family interview.",
     },
     {
       title: "Notification",
-      body: "You and your child are notified of the acceptance status by telephone or email.",
+      body: "Receive your child's admission decision by phone or email.",
     },
     {
-      title: "Admission confirmation",
-      body: "On acceptance you receive an acceptance letter and a voucher for a deposit covering the applicable fees. That deposit confirms the seat. If it is not paid by the specified date the seat is forfeited and offered to a student on the waiting list.",
+      title: "Admission Confirmation",
+      body: "Confirm your seat upon acceptance letter and deposit submission.",
     },
     {
       title: "Open House",
-      body: "Parents or guardians attend an Open House to receive the Parent's and Student's Handbook, the curriculum details and the other essential documents.",
+      body: "Attend the Open House to receive student handbooks and essentials.",
     },
   ],
 };

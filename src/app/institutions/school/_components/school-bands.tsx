@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { H6, P } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import { CheckIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type SchoolStream = {
   readonly name: string;
@@ -40,13 +41,20 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
 
       {band.notes.length === 0 ? null : (
         <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
-          {band.notes.map((note) => (
+          {band.notes.map((note, idx) => (
             <li
               className="flex items-start gap-3 font-body text-sm text-ink-muted"
               key={note}
             >
-              <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-surface-raised">
-                <Icon className="size-3 text-accent" icon={CheckIcon} />
+              <div
+                className={cn(
+                  "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full shadow-xs",
+                  idx % 2 === 0
+                    ? "bg-[#9CC21A]/20 text-[#143D35]"
+                    : "bg-[#FCD700]/30 text-[#BD1B21]",
+                )}
+              >
+                <Icon className="size-3" icon={CheckIcon} />
               </div>
               <span className="leading-snug">{note}</span>
             </li>
@@ -56,9 +64,9 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
 
       {band.streams.length === 0 ? null : (
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {band.streams.map((stream) => (
+          {band.streams.map((stream, idx) => (
             <div
-              className="rounded-2xl bg-surface-raised p-6 lg:p-8"
+              className="rounded-2xl border border-border/70 bg-surface-raised p-6 lg:p-8 transition-shadow hover:shadow-lg"
               key={stream.name}
             >
               {stream.photo && (
@@ -72,9 +80,21 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                   />
                 </div>
               )}
-              <H6 as="h4" className="text-ink">
-                {stream.name}
-              </H6>
+              <div className="flex items-center gap-3">
+                <H6 as="h4" className="text-ink font-semibold">
+                  {stream.name}
+                </H6>
+                <span
+                  className={cn(
+                    "rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider",
+                    idx === 0
+                      ? "bg-[#BD1B21]/10 text-[#BD1B21] border border-[#BD1B21]/20"
+                      : "bg-[#2BBCC6]/15 text-[#0E5C54] border border-[#2BBCC6]/30",
+                  )}
+                >
+                  Stream
+                </span>
+              </div>
               <p className="mt-2 font-body text-sm text-ink-muted">
                 {stream.note}
               </p>

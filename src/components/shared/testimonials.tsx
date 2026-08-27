@@ -53,7 +53,7 @@ export async function Testimonials({
             aria-label={section.eyebrow ?? section.heading}
             aria-roledescription="carousel"
             autoplay={true}
-            autoplayIntervalMs={2500}
+            autoplayIntervalMs={7000}
             opts={{
               align: "start",
               duration: 25,

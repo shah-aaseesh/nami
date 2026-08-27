@@ -83,7 +83,7 @@ export const Standfirst = createText(
 export const P = createText(
   "p",
   "p",
-  "font-body text-base font-normal text-pretty text-ink-muted",
+  "font-body text-sm sm:text-base font-normal text-pretty text-ink-muted leading-relaxed",
 );
 
 export const Small = createText(

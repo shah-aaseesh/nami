@@ -5,7 +5,15 @@ import { Icon } from "@/components/ui/icon";
 import { Eyebrow } from "@/components/ui/typography";
 import { content } from "@/lib/content";
 import { institutionPath } from "@/lib/content/institutions";
-import { MailIcon, PhoneIcon } from "@/lib/icons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  MailIcon,
+  PhoneIcon,
+  TikTokIcon,
+  YouTubeIcon,
+} from "@/lib/icons";
 import { SiteCtaBand } from "./site-cta-band";
 import { SiteFooterWordmark } from "./site-footer-wordmark";
 
@@ -54,6 +62,32 @@ export async function SiteFooter() {
                   meaningfully to Nepal&apos;s social and economic development
                   through the delivery of high-quality education.
                 </p>
+
+                <div className="mt-5 flex items-center gap-2.5">
+                  {contact.socialProfiles.map((social) => {
+                    const iconMap: Record<string, typeof FacebookIcon> = {
+                      facebook: FacebookIcon,
+                      instagram: InstagramIcon,
+                      linkedin: LinkedInIcon,
+                      youtube: YouTubeIcon,
+                      tiktok: TikTokIcon,
+                    };
+                    const SocialIcon = iconMap[social.platform];
+                    if (!SocialIcon) return null;
+                    return (
+                      <Link
+                        key={social.platform}
+                        href={social.href as Route}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex size-8 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                        aria-label={social.label}
+                      >
+                        <Icon icon={SocialIcon} className="size-4" />
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
@@ -165,10 +199,10 @@ export async function SiteFooter() {
                   </div>
                 </div>
 
-                <div className="border-t border-white/15 pt-4 sm:col-span-2">
+                <div className="border-t border-white/15 pt-4 sm:col-span-2 text-center">
                   <Link
                     href={institutionPath("bachelors")}
-                    className="group block"
+                    className="group inline-block"
                   >
                     <span className="block font-body text-sm font-semibold text-white transition-colors group-hover:text-white group-hover:underline underline-offset-4">
                       {entities.institute.name}
@@ -178,12 +212,12 @@ export async function SiteFooter() {
                     </span>
                   </Link>
 
-                  <div className="mt-3 flex flex-col gap-2 font-body text-xs sm:flex-row sm:items-center sm:gap-6">
+                  <div className="mt-3 flex flex-col items-center justify-center gap-2 font-body text-xs sm:flex-row sm:gap-6">
                     <Link
                       href={
                         `tel:${contact.byEntity.institute.phone.replace(/[^+\d]/g, "")}` as Route
                       }
-                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={PhoneIcon}
@@ -195,7 +229,7 @@ export async function SiteFooter() {
                       href={
                         `mailto:${contact.byEntity.institute.email}` as Route
                       }
-                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={MailIcon}

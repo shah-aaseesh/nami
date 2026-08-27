@@ -81,7 +81,7 @@ export async function SiteFooter() {
             <div className="lg:col-span-6">
               <Eyebrow
                 as="h2"
-                className="text-xs font-semibold uppercase tracking-widest text-white text-center"
+                className="text-xs font-semibold uppercase tracking-widest text-white"
               >
                 Institutions & Contacts
               </Eyebrow>
@@ -165,7 +165,7 @@ export async function SiteFooter() {
                   </div>
                 </div>
 
-                <div className="border-t border-white/15 pt-4 sm:col-span-2 text-center">
+                <div className="border-t border-white/15 pt-4 sm:col-span-2">
                   <Link
                     href={institutionPath("bachelors")}
                     className="group block"
@@ -178,12 +178,12 @@ export async function SiteFooter() {
                     </span>
                   </Link>
 
-                  <div className="mt-3 flex flex-col gap-2 font-body text-xs sm:flex-row sm:items-center sm:justify-center sm:gap-6">
+                  <div className="mt-3 flex flex-col gap-2 font-body text-xs sm:flex-row sm:items-center sm:gap-6">
                     <Link
                       href={
                         `tel:${contact.byEntity.institute.phone.replace(/[^+\d]/g, "")}` as Route
                       }
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={PhoneIcon}
@@ -195,7 +195,7 @@ export async function SiteFooter() {
                       href={
                         `mailto:${contact.byEntity.institute.email}` as Route
                       }
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={MailIcon}

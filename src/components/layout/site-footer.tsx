@@ -115,7 +115,7 @@ export async function SiteFooter() {
             <div className="lg:col-span-6">
               <Eyebrow
                 as="h2"
-                className="text-xs font-semibold uppercase tracking-widest text-white"
+                className="text-xs font-semibold uppercase tracking-widest text-white text-center"
               >
                 Institutions & Contacts
               </Eyebrow>

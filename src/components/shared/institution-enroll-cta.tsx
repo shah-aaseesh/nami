@@ -72,13 +72,14 @@ export function InstitutionEnrollCta({
 
   const isSchool = institution === "school";
   const isCollege = institution === "college";
-  const isCustomDark = isSchool || isCollege;
+  const isInstitute = institution === "institute";
 
   return (
     <section
       className={cn(
         isSchool && "bg-[#284540] text-white",
-        !isSchool && "field-brand",
+        isCollege && "field-brand",
+        isInstitute && "field-ink",
         "gutter-x py-10 sm:py-14 lg:py-16",
         className,
       )}
@@ -95,8 +96,8 @@ export function InstitutionEnrollCta({
                     "border border-[#F7CD00]/40 bg-[#F7CD00]/15 text-[#F7CD00]",
                   isCollege &&
                     "border border-[#FFAD00]/40 bg-white/15 text-[#FFAD00]",
-                  !isCustomDark &&
-                    "border border-white/20 bg-white/10 text-white",
+                  isInstitute &&
+                    "border border-[#BD1B21]/40 bg-[#BD1B21]/15 text-[#BD1B21]",
                 )}
               >
                 <span
@@ -104,7 +105,7 @@ export function InstitutionEnrollCta({
                     "size-2 rounded-full animate-pulse",
                     isSchool && "bg-[#F7CD00]",
                     isCollege && "bg-[#FFAD00]",
-                    !isCustomDark && "bg-white",
+                    isInstitute && "bg-[#BD1B21]",
                   )}
                 />
                 {eyebrow}
@@ -123,7 +124,7 @@ export function InstitutionEnrollCta({
             <p
               className={cn(
                 "font-body text-sm sm:text-base leading-relaxed",
-                isCustomDark ? "text-white/85" : "text-primary-100/90",
+                isCollege ? "text-primary-100/90" : "text-white/85",
               )}
             >
               {effectiveDescription}
@@ -137,9 +138,9 @@ export function InstitutionEnrollCta({
               href={applyHref as Route}
               className={cn(
                 buttonVariants({ size: "lg" }),
-                isCustomDark
-                  ? "bg-[#BD1B21] text-white hover:bg-[#a0161b] font-semibold shadow-lg border border-[#BD1B21]/60"
-                  : "bg-white text-primary-800 hover:bg-neutral-100 font-semibold shadow-md",
+                isCollege
+                  ? "bg-white text-primary-800 hover:bg-neutral-100 font-semibold shadow-md"
+                  : "bg-[#BD1B21] text-white hover:bg-[#9e1419] font-semibold shadow-lg border border-[#BD1B21]/60",
               )}
             >
               <span>{applyLabel}</span>
@@ -147,7 +148,7 @@ export function InstitutionEnrollCta({
                 icon={ArrowRightIcon}
                 className={cn(
                   "size-4",
-                  isCustomDark ? "text-white" : "text-primary-800",
+                  isCollege ? "text-primary-800" : "text-white",
                 )}
               />
             </Link>

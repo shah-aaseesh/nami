@@ -24,14 +24,15 @@ export function CollegeMilestones({
   if (copy.milestones.length === 0) return null;
 
   return (
-    <section className="field-ink gutter-x section-y" id="milestones">
+    <section
+      className="bg-surface text-ink gutter-x section-y border-t border-border/60"
+      id="milestones"
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}
           eyebrowClassName="text-[#FFAD00] font-semibold"
           title={copy.eyebrow ?? "Milestones and Accreditations"}
-          titleClassName="text-white"
-          className="[&_[data-slot=eyebrow]+span]:bg-white/20"
         />
 
         <div className="mx-auto max-w-6xl">
@@ -39,13 +40,13 @@ export function CollegeMilestones({
             <ol className="grid gap-6 sm:grid-cols-2 lg:gap-8">
               {copy.milestones.map((milestone) => (
                 <li
-                  className="flex h-full flex-col rounded-2xl border border-white/15 bg-neutral-900/90 p-6 shadow-xl sm:p-8 hover:border-[#FFAD00]/40 transition-colors"
+                  className="flex h-full flex-col rounded-2xl border border-border bg-surface-raised p-6 shadow-xs sm:p-8 hover:border-[#FFAD00]/50 hover:shadow-md transition-all duration-300"
                   data-reveal-item=""
                   key={milestone.year}
                 >
                   {/* Logo at top */}
                   {milestone.logo ? (
-                    <div className="relative mb-6 h-12 w-36 shrink-0 sm:h-14 sm:w-44 bg-white/90 p-2 rounded-xl">
+                    <div className="relative mb-6 h-12 w-36 shrink-0 sm:h-14 sm:w-44">
                       <Image
                         alt="Cambridge Assessment International Education"
                         className="object-contain object-left"
@@ -67,12 +68,12 @@ export function CollegeMilestones({
                   {/* Title & Body */}
                   <H4
                     as="h3"
-                    className="mt-3 text-white text-xl sm:text-2xl font-semibold"
+                    className="mt-3 text-ink text-xl sm:text-2xl font-semibold"
                   >
                     {milestone.title}
                   </H4>
 
-                  <P className="mt-2.5 font-body text-sm sm:text-base text-neutral-300 leading-relaxed">
+                  <P className="mt-2.5 font-body text-sm sm:text-base text-ink-muted leading-relaxed">
                     {milestone.body}
                   </P>
                 </li>

@@ -63,6 +63,9 @@ export default async function BachelorsPage() {
         standfirst={bachelorsCopy.masthead.standfirst}
         watch={watch ?? null}
       />
+
+      <WhyUndergraduateSection />
+
       {academicHead === null ? null : (
         <PrincipalMessage
           eyebrow={bachelorsCopy.academicHead.eyebrow}
@@ -75,8 +78,6 @@ export default async function BachelorsPage() {
           }}
         />
       )}
-
-      <WhyUndergraduateSection />
 
       <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
 

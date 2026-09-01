@@ -54,6 +54,8 @@ export default async function CollegePage() {
         watch={watch ?? null}
       />
 
+      <WhyALevelsSection />
+
       {principal === null ? null : (
         <PrincipalMessage
           eyebrow={collegeCopy.principal.eyebrow}
@@ -66,8 +68,6 @@ export default async function CollegePage() {
           }}
         />
       )}
-
-      <WhyALevelsSection />
 
       <CollegeCambridge copy={collegeCopy.cambridge} />
       <CollegeSubjects copy={collegeCopy.subjects} />

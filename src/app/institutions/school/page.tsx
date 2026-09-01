@@ -50,6 +50,8 @@ export default async function SchoolPage() {
         watch={watch ?? null}
       />
 
+      <WhySchoolSection />
+
       {principal === null ? null : (
         <PrincipalMessage
           eyebrow={schoolPrincipal.eyebrow}
@@ -62,8 +64,6 @@ export default async function SchoolPage() {
           }}
         />
       )}
-
-      <WhySchoolSection />
 
       <SchoolApproachBanner />
 

@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import { P } from "@/components/ui/typography";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
-import { GalleryArchive } from "./_components/gallery-archive";
 import { galleryCopy } from "./_components/gallery-copy";
 import { GalleryMasthead } from "./_components/gallery-masthead";
+import { GalleryView } from "./_components/gallery-view";
 
 export const metadata: Metadata = createMetadata({
   path: "/gallery",
@@ -31,7 +31,7 @@ export default async function GalleryPage() {
         </section>
       ) : (
         <Suspense fallback={null}>
-          <GalleryArchive entities={institution.entities} items={items} />
+          <GalleryView entities={institution.entities} items={items} />
         </Suspense>
       )}
     </>

@@ -23,6 +23,22 @@
   --color-secondary-800: #0a4641;
   --color-secondary-900: #06322e;
 
+  /* NAMI International School Palette */
+  --color-school-yellow: #f7cd00;
+  --color-school-lime: #9cc21a;
+  --color-school-dark-green: #284540;
+  --color-school-blue: #33b8c7;
+  --color-school-purple: #bf6ba6;
+  --color-school-pink: #e85296;
+
+  /* NAMI College Palette */
+  --color-college-sunflower: #ffad00;
+  --color-college-gold: #e9c355;
+  --color-college-sunset: #ff6720;
+  --color-college-olive: #626951;
+  --color-college-chartreuse: #e9ec6b;
+  --color-college-sky: #88dbdf;
+
   --color-neutral-50: #f9fcfb;
   --color-neutral-100: #f1f6f5;
   --color-neutral-200: #e3eae9;

@@ -35,14 +35,14 @@ export function SchoolDay({
   readonly id?: string;
 }) {
   return (
-    <section className="bg-[#143D35] text-white gutter-x section-y" id={id}>
+    <section className="bg-[#284540] text-white gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}
-          eyebrowClassName="text-[#FCD700] font-semibold"
+          eyebrowClassName="text-[#F7CD00] font-semibold"
           title={copy.eyebrow ?? "A day at NAMI"}
           description={copy.standfirst}
-          descriptionClassName="text-white/80"
+          descriptionClassName="text-white/85"
           titleClassName="text-white"
           className="[&_[data-slot=eyebrow]+span]:bg-white/20"
         />
@@ -55,7 +55,7 @@ export function SchoolDay({
                 key={entry.title}
               >
                 {entry.photo && (
-                  <div className="relative aspect-[4/3] hidden sm:block sm:h-30 sm:w-40 lg:h-33 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-black/20">
+                  <div className="relative aspect-4/3 hidden sm:block sm:h-30 sm:w-40 lg:h-33 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-black/20">
                     <Image
                       alt={entry.photo.alt}
                       className="h-full w-full object-cover"
@@ -70,7 +70,7 @@ export function SchoolDay({
                   <Accordion className="border-none w-full">
                     <AccordionItem value={entry.title} className="border-none">
                       <AccordionTrigger className="p-0 text-start group hover:text-white transition-colors">
-                        <h3 className="font-display text-2xl sm:text-3xl font-normal text-white leading-snug group-hover:text-emerald-300">
+                        <h3 className="font-display text-2xl sm:text-3xl font-normal text-white leading-snug group-hover:text-[#9CC21A]">
                           {entry.title}
                         </h3>
                       </AccordionTrigger>

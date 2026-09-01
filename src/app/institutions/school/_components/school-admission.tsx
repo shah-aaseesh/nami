@@ -47,18 +47,32 @@ const CARD_THEMES = [
     hoverText: "group-hover:text-primary-100",
   },
   {
-    bg: "bg-[#2BBCC6]",
-    border: "border-[#2BBCC6]/40",
-    dashed: "border-[#2BBCC6]/50 group-hover:border-[#2BBCC6]",
-    shadow: "shadow-cyan-950/15 group-hover:shadow-cyan-950/25",
-    hoverText: "group-hover:text-cyan-100",
+    bg: "bg-[#284540]",
+    border: "border-[#284540]/40",
+    dashed: "border-[#284540]/50 group-hover:border-[#284540]",
+    shadow: "shadow-black/15 group-hover:shadow-black/25",
+    hoverText: "group-hover:text-white",
   },
   {
-    bg: "bg-[#143D35]",
-    border: "border-[#143D35]/40",
-    dashed: "border-[#143D35]/50 group-hover:border-[#143D35]",
-    shadow: "shadow-emerald-950/15 group-hover:shadow-emerald-950/25",
-    hoverText: "group-hover:text-emerald-100",
+    bg: "bg-[#F7CD00]",
+    border: "border-[#F7CD00]/40",
+    dashed: "border-[#F7CD00]/50 group-hover:border-[#F7CD00]",
+    shadow: "shadow-amber-950/15 group-hover:shadow-amber-950/25",
+    hoverText: "group-hover:text-neutral-900",
+  },
+  {
+    bg: "bg-[#9CC21A]",
+    border: "border-[#9CC21A]/40",
+    dashed: "border-[#9CC21A]/50 group-hover:border-[#9CC21A]",
+    shadow: "shadow-lime-950/15 group-hover:shadow-lime-950/25",
+    hoverText: "group-hover:text-neutral-950",
+  },
+  {
+    bg: "bg-[#33B8C7]",
+    border: "border-[#33B8C7]/40",
+    dashed: "border-[#33B8C7]/50 group-hover:border-[#33B8C7]",
+    shadow: "shadow-cyan-950/15 group-hover:shadow-cyan-950/25",
+    hoverText: "group-hover:text-cyan-100",
   },
   {
     bg: "bg-[#BF6BA6]",
@@ -85,9 +99,7 @@ function DiamondStepCard({
       className={cn(
         "group relative flex shrink-0 snap-center flex-col items-center justify-center transition-all duration-300",
         "w-[170px] h-[170px] sm:w-[185px] sm:h-[185px] lg:w-[145px] lg:h-[145px] xl:w-[172px] xl:h-[172px] 2xl:w-[190px] 2xl:h-[190px]",
-        isEven
-          ? "mt-10 sm:mt-12 lg:mt-11 xl:mt-14 2xl:mt-16"
-          : "mt-0",
+        isEven ? "mt-10 sm:mt-12 lg:mt-11 xl:mt-14 2xl:mt-16" : "mt-0",
       )}
       data-reveal-item=""
     >

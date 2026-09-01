@@ -50,8 +50,8 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                 className={cn(
                   "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full shadow-xs",
                   idx % 2 === 0
-                    ? "bg-[#9CC21A]/20 text-[#143D35]"
-                    : "bg-[#FCD700]/30 text-[#BD1B21]",
+                    ? "bg-[#9CC21A]/20 text-[#284540]"
+                    : "bg-[#F7CD00]/30 text-[#BD1B21]",
                 )}
               >
                 <Icon className="size-3" icon={CheckIcon} />
@@ -89,7 +89,7 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                     "rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider",
                     idx === 0
                       ? "bg-[#BD1B21]/10 text-[#BD1B21] border border-[#BD1B21]/20"
-                      : "bg-[#2BBCC6]/15 text-[#0E5C54] border border-[#2BBCC6]/30",
+                      : "bg-[#33B8C7]/15 text-[#284540] border border-[#33B8C7]/30",
                   )}
                 >
                   Stream

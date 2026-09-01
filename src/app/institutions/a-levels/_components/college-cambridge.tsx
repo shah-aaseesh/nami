@@ -20,24 +20,24 @@ export type CollegeCambridgeCopy = {
 
 const PROPOSITION_THEMES = [
   {
-    numberColor: "text-[#001b44]",
-    borderColor: "border-[#88dbdf]",
-    badgeBg: "bg-[#88dbdf]/25 text-[#001b44]",
+    numberColor: "text-[#BD1B21]",
+    borderColor: "border-[#BD1B21]/50",
+    badgeBg: "bg-[#BD1B21]/10 text-[#BD1B21]",
   },
   {
-    numberColor: "text-[#ff6720]",
-    borderColor: "border-[#ff6720]/50",
-    badgeBg: "bg-[#ff6720]/15 text-[#ff6720]",
+    numberColor: "text-[#FF6720]",
+    borderColor: "border-[#FF6720]/50",
+    badgeBg: "bg-[#FF6720]/15 text-[#FF6720]",
   },
   {
-    numberColor: "text-[#ffad00]",
-    borderColor: "border-[#ffad00]/60",
-    badgeBg: "bg-[#ffad00]/20 text-[#9b6600]",
+    numberColor: "text-[#FFAD00]",
+    borderColor: "border-[#FFAD00]/60",
+    badgeBg: "bg-[#FFAD00]/20 text-[#8A5A00]",
   },
   {
-    numberColor: "text-[#626951]",
-    borderColor: "border-[#e9ec6b]",
-    badgeBg: "bg-[#e9ec6b]/40 text-[#404535]",
+    numberColor: "text-[#E9C355]",
+    borderColor: "border-[#E9C355]/60",
+    badgeBg: "bg-[#E9C355]/25 text-[#5C4800]",
   },
 ] as const;
 
@@ -47,17 +47,14 @@ export function CollegeCambridge({
   readonly copy: CollegeCambridgeCopy;
 }) {
   return (
-    <section
-      className="bg-[#001b44] text-white gutter-x section-y"
-      id="cambridge"
-    >
+    <section className="field-ink gutter-x section-y" id="cambridge">
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <CollegeCambridgeHold className="lg:col-span-5">
           <SectionHeader
             description={copy.standfirst}
-            descriptionClassName="text-white/80"
+            descriptionClassName="text-ink-muted"
             eyebrow={copy.heading}
-            eyebrowClassName="text-[#ffad00] font-semibold"
+            eyebrowClassName="text-[#FFAD00] font-semibold"
             layout="stacked"
             title={copy.eyebrow ?? "Why Cambridge"}
             titleClassName="text-white"

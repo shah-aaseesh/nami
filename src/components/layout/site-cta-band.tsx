@@ -45,7 +45,9 @@ export function SiteCtaBand({ heading, standfirst }: SiteCtaBandProps) {
               <H3 as="h2" id={headingId}>
                 {heading}
               </H3>
-              <P className="mt-1 text-xs sm:text-sm text-ink-muted">{standfirst}</P>
+              <P className="mt-1 text-xs sm:text-sm text-ink-muted">
+                {standfirst}
+              </P>
             </div>
           </div>
 

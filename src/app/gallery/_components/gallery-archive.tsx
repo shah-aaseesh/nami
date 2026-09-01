@@ -8,7 +8,6 @@ import {
   Image01Icon,
   RefreshIcon,
   Search01Icon,
-  SparklesIcon,
 } from "@hugeicons/core-free-icons";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -29,11 +28,7 @@ import type {
 import { Flip, FULL_MOTION_QUERY, gsap, useGSAP } from "@/lib/gsap";
 import { INSTITUTION_PARAM } from "@/lib/institution-filter";
 import { cn } from "@/lib/utils";
-import {
-  type CuratedAlbum,
-  galleryCategories,
-  galleryCopy,
-} from "./gallery-copy";
+import { galleryCategories, galleryCopy } from "./gallery-copy";
 import { GalleryTile } from "./gallery-tile";
 
 const ROWS_PER_COLUMN = 60;
@@ -85,13 +80,9 @@ function parseGalleryFilter(value: string | undefined): GalleryFilter {
 export function GalleryArchive({
   entities,
   items,
-  selectedAlbum,
-  onResetAlbum,
 }: {
   readonly entities: Readonly<Record<EntityRole, NamedEntity>>;
   readonly items: readonly GalleryItem[];
-  readonly selectedAlbum?: CuratedAlbum | null;
-  readonly onResetAlbum?: () => void;
 }) {
   const searchParams = useSearchParams();
   const initialFilter = parseGalleryFilter(
@@ -249,8 +240,7 @@ export function GalleryArchive({
   const isFiltered =
     wingFilter !== "all" ||
     categoryFilter !== "all" ||
-    searchQuery.trim() !== "" ||
-    !!selectedAlbum;
+    searchQuery.trim() !== "";
 
   return (
     <>
@@ -383,27 +373,6 @@ export function GalleryArchive({
               ) : null}
             </div>
           </div>
-
-          {/* Active Album Badge (if filtered via album) */}
-          {selectedAlbum ? (
-            <div className="flex items-center gap-2 pt-2">
-              <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/25 px-3.5 py-1 text-xs font-semibold text-accent">
-                <Icon className="size-3.5 text-accent" icon={SparklesIcon} />
-                <span>
-                  {galleryCopy.viewingAlbumPrefix}:{" "}
-                  <strong>{selectedAlbum.title}</strong>
-                </span>
-                <button
-                  aria-label="Remove album filter"
-                  className="hover:text-primary-800 ml-1 p-0.5 cursor-pointer"
-                  onClick={resetAllFilters}
-                  type="button"
-                >
-                  <Icon className="size-3.5" icon={Cancel01Icon} />
-                </button>
-              </div>
-            </div>
-          ) : null}
         </div>
       </section>
 

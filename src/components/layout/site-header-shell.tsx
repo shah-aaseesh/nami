@@ -41,7 +41,9 @@ function isItemActive(item: SiteNavItem, pathname: string): boolean {
   }
   if (item.children) {
     return item.children.some(
-      (child) => child.href === pathname || (child.href !== "/" && pathname.startsWith(`${child.href}/`)),
+      (child) =>
+        child.href === pathname ||
+        (child.href !== "/" && pathname.startsWith(`${child.href}/`)),
     );
   }
   return false;

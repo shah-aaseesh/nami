@@ -34,7 +34,13 @@ export function Stats({
               : "mt-8 lg:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12 lg:items-stretch"
           }
         >
-          <div className={poster === null ? "" : "lg:col-span-7 flex flex-col justify-center"}>
+          <div
+            className={
+              poster === null
+                ? ""
+                : "lg:col-span-7 flex flex-col justify-center"
+            }
+          >
             <Reveal
               className={
                 poster === null

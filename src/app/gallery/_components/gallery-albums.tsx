@@ -1,100 +1,96 @@
 "use client";
 
-import {
-  ArrowRight01Icon,
-  Image01Icon,
-  SparklesIcon,
-} from "@hugeicons/core-free-icons";
 import Image from "next/image";
+import { useState } from "react";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { SectionHeader } from "@/components/shared/section-header";
-import { Icon } from "@/components/ui/icon";
-import { H4, P } from "@/components/ui/typography";
-import type { CuratedAlbum } from "./gallery-copy";
+import { cn } from "@/lib/utils";
+import { type EventAlbum, instituteFilters } from "./gallery-copy";
 
 export function GalleryAlbums({
   albums,
-  copy,
   onSelectAlbum,
 }: {
-  readonly albums: readonly CuratedAlbum[];
-  readonly copy: {
-    readonly eyebrow: string;
-    readonly heading: string;
-    readonly standfirst: string;
-  };
-  readonly onSelectAlbum: (album: CuratedAlbum) => void;
+  readonly albums: readonly EventAlbum[];
+  readonly onSelectAlbum: (album: EventAlbum) => void;
 }) {
-  return (
-    <section className="gutter-x pb-12 sm:pb-16" id="gallery-albums">
-      <div className="mx-auto max-w-page">
-        <SectionHeader
-          description={copy.standfirst}
-          eyebrow={copy.heading}
-          layout="split"
-          title={copy.eyebrow}
-        />
+  const [selectedInstitute, setSelectedInstitute] = useState<string>("all");
 
-        <Reveal className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
-          {albums.map((album) => (
-            <RevealItem key={album.id}>
+  const filteredAlbums =
+    selectedInstitute === "all"
+      ? albums
+      : albums.filter((album) => album.institution === selectedInstitute);
+
+  return (
+    <section className="gutter-x pb-16 sm:pb-24" id="gallery-albums">
+      <div className="mx-auto max-w-page">
+        {/* 1. Institute Filter Tabs */}
+        <div className="flex flex-wrap items-center gap-2 border-b border-border pb-6">
+          {instituteFilters.map((filter) => {
+            const isActive = selectedInstitute === filter.id;
+            const count =
+              filter.id === "all"
+                ? albums.length
+                : albums.filter((a) => a.institution === filter.id).length;
+
+            return (
               <button
-                className="group relative flex flex-col h-full w-full text-left rounded-2xl overflow-hidden border border-border/80 bg-surface-raised shadow-2xs transition-all duration-300 hover:border-accent/60 hover:shadow-md cursor-pointer"
+                className={cn(
+                  "group flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-all cursor-pointer",
+                  isActive
+                    ? "bg-[#BD1B21] text-white shadow-md shadow-[#BD1B21]/25"
+                    : "bg-surface-raised border border-border text-ink-muted hover:border-[#BD1B21]/50 hover:text-ink",
+                )}
+                key={filter.id}
+                onClick={() => setSelectedInstitute(filter.id)}
+                type="button"
+              >
+                <span>{filter.label}</span>
+                <span
+                  className={cn(
+                    "rounded-full px-2 py-0.5 text-[11px] font-bold",
+                    isActive
+                      ? "bg-white/20 text-white"
+                      : "bg-muted text-ink-muted group-hover:text-ink",
+                  )}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* 2. Tall / Longer Portrait Event Folders Grid (No Icons) */}
+        <Reveal
+          className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+          stagger={0.05}
+          y={16}
+        >
+          {filteredAlbums.map((album) => (
+            <RevealItem className="h-full" key={album.id}>
+              <button
+                className="group relative aspect-3/4 w-full overflow-hidden rounded-2xl bg-neutral-950 text-left transition-all duration-500 hover:shadow-2xl hover:ring-2 hover:ring-[#BD1B21]/60 cursor-pointer"
                 onClick={() => onSelectAlbum(album)}
                 type="button"
               >
-                {/* Album Cover */}
-                <div className="relative aspect-4/3 w-full overflow-hidden bg-muted">
-                  <Image
-                    alt={album.image.alt}
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    fill
-                    sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                    src={album.image.src}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                {/* 1. Cover Photograph (Longer aspect ratio) */}
+                <Image
+                  alt={album.coverImage.alt}
+                  className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                  height={album.coverImage.height}
+                  sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  src={album.coverImage.src}
+                  width={album.coverImage.width}
+                />
 
-                  {/* Album Tag */}
-                  <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-black/60 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-medium text-white border border-white/15">
-                      <Icon
-                        className="size-3 text-accent"
-                        icon={SparklesIcon}
-                      />
-                      {album.tag}
-                    </span>
-                  </div>
+                {/* 2. Gradient Backdrop for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent opacity-85 transition-opacity duration-300 group-hover:opacity-95" />
 
-                  {/* Count Pill */}
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white/90">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium drop-shadow-sm">
-                      <Icon
-                        className="size-3.5 text-white/80"
-                        icon={Image01Icon}
-                      />
-                      {album.countLabel}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Album Content */}
-                <div className="p-4 sm:p-5 flex flex-col justify-between flex-1">
-                  <div>
-                    <H4 className="text-base font-semibold text-ink group-hover:text-accent transition-colors line-clamp-1">
-                      {album.title}
-                    </H4>
-                    <P className="mt-1.5 text-xs text-ink-muted leading-relaxed line-clamp-2">
-                      {album.description}
-                    </P>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-medium text-accent">
-                    <span>Explore collection</span>
-                    <Icon
-                      className="size-3.5 transition-transform duration-300 group-hover:translate-x-1"
-                      icon={ArrowRight01Icon}
-                    />
-                  </div>
+                {/* 3. Folder Name (Clean & Direct) */}
+                <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-6">
+                  <h3 className="font-display text-lg sm:text-xl font-medium text-white leading-snug line-clamp-2 drop-shadow-sm">
+                    {album.title}
+                  </h3>
                 </div>
               </button>
             </RevealItem>

@@ -1,4 +1,4 @@
-import { H2 } from "@/components/ui/typography";
+import { Eyebrow, H2 } from "@/components/ui/typography";
 import type { Leader } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { FacultyCard } from "./faculty-card";
@@ -19,9 +19,23 @@ export function FacultyGroup({
   if (leaders.length === 0) return null;
 
   const heading = (
-    <H2 className="font-display text-2xl sm:text-3xl font-medium text-ink lg:text-4xl border-b border-border/60 pb-4 mb-8 sm:mb-12">
-      {title}
-    </H2>
+    <div className="border-b border-border/80 pb-4 mb-8 sm:mb-12">
+      {isFirstGroup && (
+        <Eyebrow className="mb-2 text-[#BD1B21] font-semibold tracking-wider">
+          OUR PEOPLE
+        </Eyebrow>
+      )}
+      <H2
+        className={cn(
+          "font-display font-normal text-ink tracking-tight",
+          isFirstGroup
+            ? "text-3xl sm:text-4xl lg:text-5xl"
+            : "text-2xl sm:text-3xl lg:text-4xl",
+        )}
+      >
+        {title}
+      </H2>
+    </div>
   );
 
   // Special 3-row layout for Board of Directors: Row 1 = Chairperson (1), Row 2 = Directors (3), Row 3 = Directors (3)
@@ -32,11 +46,18 @@ export function FacultyGroup({
     const row3 = leaders.slice(4, 7);
 
     return (
-      <section className="gutter-x py-10 lg:py-16">
-        <div className="mx-auto max-w-page py-2">
+      <section
+        className={cn(
+          "gutter-x",
+          isFirstGroup
+            ? "pt-2 sm:pt-4 pb-12 lg:pb-16"
+            : "pt-8 lg:pt-12 pb-12 lg:pb-16",
+        )}
+      >
+        <div className="mx-auto max-w-page">
           {heading}
 
-          <div className="flex flex-col gap-10 sm:gap-12 lg:gap-16">
+          <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
             {/* Row 1: Chairperson */}
             <div className="flex justify-center w-full">
               <FacultyCard
@@ -91,7 +112,14 @@ export function FacultyGroup({
   ));
 
   return (
-    <section className="gutter-x py-10 lg:py-16">
+    <section
+      className={cn(
+        "gutter-x",
+        isFirstGroup
+          ? "pt-2 sm:pt-4 pb-12 lg:pb-16"
+          : "pt-8 lg:pt-12 pb-12 lg:pb-16",
+      )}
+    >
       {isScrollable ? (
         <FacultyGroupTrack heading={heading}>{cards}</FacultyGroupTrack>
       ) : (

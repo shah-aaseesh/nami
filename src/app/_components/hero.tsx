@@ -63,10 +63,16 @@ export async function Hero() {
   const heroSlides = hero.images;
 
   return (
-    <section className="relative isolate gutter-x pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-3 lg:pb-12" id="hero">
+    <section
+      className="relative isolate gutter-x pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-3 lg:pb-12"
+      id="hero"
+    >
       <div className="relative mx-auto max-w-page">
         <div className="flex items-center gap-3">
-          <Icon className="size-5 sm:size-6 text-accent" icon={MortarboardIcon} />
+          <Icon
+            className="size-5 sm:size-6 text-accent"
+            icon={MortarboardIcon}
+          />
           <Eyebrow>{hero.eyebrow}</Eyebrow>
         </div>
 

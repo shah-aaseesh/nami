@@ -1,7 +1,7 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
-import { Eyebrow, P } from "@/components/ui/typography";
+import { P } from "@/components/ui/typography";
 
 export type SubjectGroupKey = "s1" | "s2" | "ns1" | "ns2";
 
@@ -53,14 +53,14 @@ function GroupSubjects({
         .filter((subject) => subject.groups.includes(group.key))
         .map((subject) => (
           <li
-            className="font-display text-base sm:text-lg font-normal text-ink"
+            className="font-display text-base sm:text-lg font-normal text-ink flex items-center justify-between"
             key={subject.name}
           >
-            {subject.name}
+            <span>{subject.name}</span>
             {subject.compulsory ? (
-              <Eyebrow as="span" className="ml-2 align-middle">
+              <span className="rounded-full bg-[#E9EC6B]/30 px-2.5 py-0.5 text-[11px] font-semibold text-[#5A5C00] border border-[#E9EC6B]/60">
                 {copy.compulsoryLabel}
-              </Eyebrow>
+              </span>
             ) : null}
           </li>
         ))}
@@ -77,15 +77,20 @@ function StreamCard({
 }) {
   return (
     <div className="flex h-full flex-col rounded-2xl border border-border bg-surface-raised p-5 sm:p-6 lg:p-7">
-      <h3 className="font-display text-2xl font-normal text-ink sm:text-3xl">
-        {stream.label}
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="font-display text-2xl font-normal text-ink sm:text-3xl">
+          {stream.label}
+        </h3>
+        <span className="rounded-full bg-[#88DBDF]/25 px-2.5 py-0.5 text-[11px] font-semibold text-[#135A5D] border border-[#88DBDF]/40 uppercase tracking-wider">
+          A-Level Stream
+        </span>
+      </div>
 
       <Tabs className="mt-4 flex-1" defaultValue={stream.groups[0]?.key}>
         <TabsList aria-label={stream.label} className="gap-6 sm:gap-8">
           {stream.groups.map((group) => (
             <TabsTab
-              className="py-3 font-display text-lg sm:text-xl lg:text-2xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-accent data-active:font-semibold"
+              className="py-3 font-display text-lg sm:text-xl lg:text-2xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
               key={group.key}
               value={group.key}
             >

@@ -251,6 +251,7 @@ export type Leader = ContentEntry & {
   readonly title: string;
   readonly group: LeaderGroup;
   readonly brief: string;
+  readonly bio?: string;
   readonly portrait: ContentImage | null;
 };
 

@@ -14,6 +14,7 @@ import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
 import { bachelorsCopy } from "./_components/bachelors-copy";
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
+import { PearsonVueBanner } from "./_components/pearson-vue-banner";
 import { WhyUndergraduateSection } from "./_components/why-undergraduate-section";
 
 export const metadata: Metadata = createMetadata({
@@ -87,6 +88,8 @@ export default async function BachelorsPage() {
         id="awarding"
         levelSlug={bachelorsCopy.levelSlug}
       />
+
+      <PearsonVueBanner />
 
       <CareerPlacement
         copy={bachelorsCopy.partners}

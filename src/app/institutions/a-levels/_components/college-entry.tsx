@@ -26,13 +26,13 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
 
   return (
     <section
-      className="bg-[#626951]/[0.08] text-ink gutter-x section-y border-y border-[#626951]/25"
+      className="bg-[#E9EC6B]/[0.06] text-ink gutter-x section-y border-t border-border"
       id="entry"
     >
       <div className="mx-auto max-w-page">
         {/* Full-width Eyebrow Bar */}
         <Reveal className="flex items-center gap-5" stagger={0.08}>
-          <Eyebrow>{copy.heading}</Eyebrow>
+          <Eyebrow className="text-[#BD1B21]">{copy.heading}</Eyebrow>
           <span className="h-px flex-1 bg-border" />
         </Reveal>
 

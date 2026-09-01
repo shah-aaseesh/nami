@@ -1,45 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import type { EntityRole, GalleryItem, NamedEntity } from "@/lib/content";
+import { EventAlbumView } from "./event-album-view";
 import { GalleryAlbums } from "./gallery-albums";
-import { GalleryArchive } from "./gallery-archive";
-import { type CuratedAlbum, curatedAlbums, galleryCopy } from "./gallery-copy";
+import { type EventAlbum, eventAlbums } from "./gallery-copy";
 
-export function GalleryView({
-  entities,
-  items,
-}: {
-  readonly entities: Readonly<Record<EntityRole, NamedEntity>>;
-  readonly items: readonly GalleryItem[];
-}) {
-  const [selectedAlbum, setSelectedAlbum] = useState<CuratedAlbum | null>(null);
+export function GalleryView() {
+  const [selectedAlbum, setSelectedAlbum] = useState<EventAlbum | null>(null);
 
-  const handleSelectAlbum = (album: CuratedAlbum) => {
+  const handleSelectAlbum = (album: EventAlbum) => {
     setSelectedAlbum(album);
-    const archiveEl = document.getElementById("gallery-archive");
-    if (archiveEl) {
-      archiveEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Smooth scroll to top of gallery area
+    const el = document.getElementById("gallery-content");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
-  const handleResetAlbum = () => {
+  const handleBackToFolders = () => {
     setSelectedAlbum(null);
+    const el = document.getElementById("gallery-content");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
-    <>
-      <GalleryAlbums
-        albums={curatedAlbums}
-        copy={galleryCopy.albumsSection}
-        onSelectAlbum={handleSelectAlbum}
-      />
-      <GalleryArchive
-        entities={entities}
-        items={items}
-        onResetAlbum={handleResetAlbum}
-        selectedAlbum={selectedAlbum}
-      />
-    </>
+    <div id="gallery-content">
+      {selectedAlbum ? (
+        <EventAlbumView album={selectedAlbum} onBack={handleBackToFolders} />
+      ) : (
+        <GalleryAlbums albums={eventAlbums} onSelectAlbum={handleSelectAlbum} />
+      )}
+    </div>
   );
 }

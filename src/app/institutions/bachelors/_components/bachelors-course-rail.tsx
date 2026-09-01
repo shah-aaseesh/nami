@@ -85,9 +85,9 @@ export function BachelorsCourseRail({
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <SectionHeader
-          eyebrow={copy.heading}
-          title={copy.eyebrow ?? "Programmes"}
-          description={copy.standfirst}
+          eyebrow={copy.eyebrow}
+          title={copy.heading}
+          description={copy.standfirst ?? undefined}
         />
       </div>
 

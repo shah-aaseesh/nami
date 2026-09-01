@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Briefcase02Icon,
-  CheckmarkCircle02Icon,
-  QuoteUpIcon,
-  SparklesIcon,
-} from "@hugeicons/core-free-icons";
+import { Briefcase02Icon, QuoteUpIcon } from "@hugeicons/core-free-icons";
 import { useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Icon } from "@/components/ui/icon";
@@ -101,18 +96,6 @@ export function CareersFirstJob({
           <Standfirst className="mt-5 text-ink-muted leading-relaxed max-w-md">
             {copy.standfirst}
           </Standfirst>
-
-          {/* Key Placement Metrics */}
-          <div className="mt-8 flex flex-wrap gap-2.5">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-100/90 px-3.5 py-1.5 text-xs font-semibold text-primary-700 ring-1 ring-primary-200">
-              <Icon className="size-4" icon={CheckmarkCircle02Icon} />
-              100% Placement Guidance
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-raised px-3.5 py-1.5 text-xs font-medium text-ink-muted ring-1 ring-border/80">
-              <Icon className="size-3.5 text-accent" icon={SparklesIcon} />
-              Direct Corporate Referrals
-            </span>
-          </div>
         </div>
 
         {/* Vertical Scrolling Story Cards on the Right */}

@@ -20,24 +20,24 @@ export type CollegeCambridgeCopy = {
 
 const PROPOSITION_THEMES = [
   {
-    numberColor: "text-[#BD1B21]",
-    borderColor: "border-[#BD1B21]/50",
-    badgeBg: "bg-[#BD1B21]/10 text-[#BD1B21]",
-  },
-  {
     numberColor: "text-[#FF6720]",
-    borderColor: "border-[#FF6720]/50",
+    borderColor: "border-[#FF6720]/40",
     badgeBg: "bg-[#FF6720]/15 text-[#FF6720]",
   },
   {
     numberColor: "text-[#FFAD00]",
-    borderColor: "border-[#FFAD00]/60",
+    borderColor: "border-[#FFAD00]/50",
     badgeBg: "bg-[#FFAD00]/20 text-[#8A5A00]",
   },
   {
     numberColor: "text-[#E9C355]",
-    borderColor: "border-[#E9C355]/60",
+    borderColor: "border-[#E9C355]/50",
     badgeBg: "bg-[#E9C355]/25 text-[#5C4800]",
+  },
+  {
+    numberColor: "text-[#FF6720]",
+    borderColor: "border-[#FF6720]/40",
+    badgeBg: "bg-[#FF6720]/15 text-[#FF6720]",
   },
 ] as const;
 
@@ -47,12 +47,15 @@ export function CollegeCambridge({
   readonly copy: CollegeCambridgeCopy;
 }) {
   return (
-    <section className="field-ink gutter-x section-y" id="cambridge">
+    <section
+      className="bg-[#626951] text-white gutter-x section-y"
+      id="cambridge"
+    >
       <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
         <CollegeCambridgeHold className="lg:col-span-5">
           <SectionHeader
             description={copy.standfirst}
-            descriptionClassName="text-ink-muted"
+            descriptionClassName="text-white/85"
             eyebrow={copy.heading}
             eyebrowClassName="text-[#FFAD00] font-semibold"
             layout="stacked"

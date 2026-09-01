@@ -13,7 +13,7 @@ export function WhyALevelsSection() {
 
   return (
     <section
-      className="gutter-x section-y border-y border-[#FFAD00]/30 bg-[#FFAD00]/10"
+      className="gutter-x section-y border-t border-border bg-surface"
       id="why-a-levels"
     >
       <div className="mx-auto max-w-page">
@@ -22,10 +22,10 @@ export function WhyALevelsSection() {
           <div className="lg:col-span-5">
             <Reveal>
               <div className="flex items-center gap-5">
-                <Eyebrow>Cambridge A-Levels</Eyebrow>
+                <Eyebrow className="text-[#BD1B21]">Cambridge A-Levels</Eyebrow>
                 <span className="h-px flex-1 bg-border" />
               </div>
-              <SplitText as="h2" className="mt-4">
+              <SplitText as="h2" className="mt-4 text-ink">
                 Why A Levels at NAMI?
               </SplitText>
             </Reveal>

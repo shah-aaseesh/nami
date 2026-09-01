@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 export function ClubJoinCta({ club }: { readonly club: SchoolClub }) {
   return (
-    <section className="gutter-x section-y border-t border-border">
+    <section className="gutter-x section-y border-t border-border" id="join">
       <div className="mx-auto max-w-page">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl bg-[#284540] p-8 sm:p-12 lg:p-16 text-white shadow-xl">

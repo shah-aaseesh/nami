@@ -25,13 +25,13 @@ export function CollegeMilestones({
 
   return (
     <section
-      className="bg-[#E9C355]/10 text-ink gutter-x section-y border-y border-[#E9C355]/30"
+      className="bg-[#E9C355]/[0.06] text-ink gutter-x section-y border-t border-border"
       id="milestones"
     >
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}
-          eyebrowClassName="text-[#FFAD00] font-semibold"
+          eyebrowClassName="text-[#BD1B21] font-semibold"
           title={copy.eyebrow ?? "Milestones and Accreditations"}
         />
 
@@ -40,7 +40,7 @@ export function CollegeMilestones({
             <ol className="grid gap-6 sm:grid-cols-2 lg:gap-8">
               {copy.milestones.map((milestone) => (
                 <li
-                  className="flex h-full flex-col rounded-2xl border border-border bg-surface-raised p-6 shadow-xs sm:p-8 hover:border-[#FFAD00]/50 hover:shadow-md transition-all duration-300"
+                  className="flex h-full flex-col rounded-2xl border border-border bg-white p-6 shadow-xs sm:p-8 hover:border-[#E9C355]/60 hover:shadow-md transition-all duration-300"
                   data-reveal-item=""
                   key={milestone.year}
                 >
@@ -59,7 +59,7 @@ export function CollegeMilestones({
 
                   {/* Year */}
                   <time
-                    className="block font-display text-3xl sm:text-4xl font-bold text-[#FFAD00] tabular-nums"
+                    className="block font-display text-3xl sm:text-4xl font-bold text-[#E9C355] tabular-nums"
                     dateTime={String(milestone.year)}
                   >
                     {milestone.year}

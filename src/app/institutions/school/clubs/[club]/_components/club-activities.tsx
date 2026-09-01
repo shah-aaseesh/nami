@@ -5,11 +5,15 @@ import { H3, P } from "@/components/ui/typography";
 
 export function ClubActivities({ club }: { readonly club: SchoolClub }) {
   return (
-    <section className="gutter-x section-y bg-muted/40 border-t border-border">
+    <section
+      className="gutter-x section-y bg-muted/40 border-t border-border"
+      id="activities"
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           description="A dynamic calendar of recurring clinics, workshops, inter-school championships, and major exhibitions."
           eyebrow="Activities & Flagship Events"
+          eyebrowClassName="text-[#BD1B21] font-semibold"
           layout="stacked"
           title="What Members Experience"
         />

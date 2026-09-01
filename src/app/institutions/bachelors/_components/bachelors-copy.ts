@@ -60,7 +60,7 @@ export type BachelorsProgramme = {
 export type BachelorsProgrammesCopy = {
   readonly eyebrow: string;
   readonly heading: string;
-  readonly standfirst: string;
+  readonly standfirst?: string | null;
   readonly awardedLabel: string;
   readonly startingLabel: string;
   readonly pendingLabel: string;
@@ -169,9 +169,8 @@ const northamptonAward = "The University of Northampton, UK";
 
 const programmes: BachelorsProgrammesCopy = {
   eyebrow: "Academics",
-  heading: "Every degree taught here, and who awards it.",
-  standfirst:
-    "Every degree here, paired with the university that awards it, below.",
+  heading: "Degree Programmes",
+  standfirst: null,
   awardedLabel: "Awarded by",
   startingLabel: "Begins",
   pendingLabel: "Programme detail",

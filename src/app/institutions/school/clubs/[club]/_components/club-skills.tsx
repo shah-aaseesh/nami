@@ -4,10 +4,12 @@ import { Eyebrow, H2, P } from "@/components/ui/typography";
 
 export function ClubSkills({ club }: { readonly club: SchoolClub }) {
   return (
-    <section className="gutter-x section-y border-t border-border">
+    <section className="gutter-x section-y border-t border-border" id="skills">
       <div className="mx-auto max-w-page">
         <div className="max-w-2xl">
-          <Eyebrow>Student Growth & Outcomes</Eyebrow>
+          <Eyebrow className="text-[#BD1B21]">
+            Student Growth & Outcomes
+          </Eyebrow>
           <H2 className="mt-3">Skills that extend beyond the classroom.</H2>
           <P className="mt-4 text-ink-muted">
             Participation in club initiatives instills vital practical,

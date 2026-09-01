@@ -6,14 +6,19 @@ import { CheckIcon, QuoteIcon } from "@/lib/icons";
 
 export function ClubOverview({ club }: { readonly club: ALevelsClub }) {
   return (
-    <section className="gutter-x section-y border-t border-border">
+    <section
+      className="gutter-x section-y border-t border-border"
+      id="overview"
+    >
       <div className="mx-auto max-w-page">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Column: Overview copy & Quote */}
           <div className="lg:col-span-7">
             <Reveal stagger={0.08}>
               <RevealItem>
-                <Eyebrow>Club Philosophy & Purpose</Eyebrow>
+                <Eyebrow className="text-[#BD1B21]">
+                  Club Philosophy & Purpose
+                </Eyebrow>
                 <H2 className="mt-3">
                   Nurturing potential through passion and practice.
                 </H2>

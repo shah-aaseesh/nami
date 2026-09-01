@@ -94,7 +94,10 @@ export function SharedHeroSlider({
           )}
 
           {badge && (
-            <div aria-hidden="true" className="hidden sm:block sm:w-32 lg:w-36" />
+            <div
+              aria-hidden="true"
+              className="hidden sm:block sm:w-32 lg:w-36"
+            />
           )}
         </div>
       )}

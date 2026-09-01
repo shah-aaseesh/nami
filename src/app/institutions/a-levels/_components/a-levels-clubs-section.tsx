@@ -52,6 +52,12 @@ export function ALevelsClubsSection() {
                   {/* Card Content */}
                   <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
                     <div>
+                      <div className="mb-2">
+                        <span className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[10.5px] font-semibold uppercase tracking-wider text-ink-muted border border-border">
+                          {club.category}
+                        </span>
+                      </div>
+
                       <H3
                         as="h3"
                         className="font-display text-lg font-normal text-ink transition-colors group-hover:text-[#BD1B21] sm:text-xl"

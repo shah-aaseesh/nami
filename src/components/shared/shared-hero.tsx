@@ -3,11 +3,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { H3 } from "@/components/ui/typography";
-import type {
-  ContentLink,
-  NamedEntity,
-  SocialProfile,
-} from "@/lib/content";
+import type { ContentLink, NamedEntity, SocialProfile } from "@/lib/content";
 import { ArrowUpRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { type SharedHeroSlide, SharedHeroSlider } from "./shared-hero-slider";

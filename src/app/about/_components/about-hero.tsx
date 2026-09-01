@@ -12,7 +12,10 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
   const image = copy.openingImage;
 
   return (
-    <section className="gutter-x pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-3 lg:pb-12" id="about">
+    <section
+      className="gutter-x pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-3 lg:pb-12"
+      id="about"
+    >
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
           <div className="lg:col-span-7">

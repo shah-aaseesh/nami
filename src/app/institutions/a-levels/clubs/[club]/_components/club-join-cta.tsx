@@ -10,10 +10,10 @@ import { cn } from "@/lib/utils";
 
 export function ClubJoinCta({ club }: { readonly club: ALevelsClub }) {
   return (
-    <section className="gutter-x section-y border-t border-border">
+    <section className="gutter-x section-y border-t border-border" id="join">
       <div className="mx-auto max-w-page">
         <Reveal>
-          <div className="field-ink relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16 shadow-xl">
+          <div className="bg-[#626951] text-white relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16 shadow-xl">
             <div className="relative z-10 max-w-2xl">
               <span className="inline-block rounded-full bg-[#FFAD00]/20 text-[#FFAD00] border border-[#FFAD00]/30 px-3.5 py-1 font-body text-xs font-semibold backdrop-blur-xs">
                 Membership & Participation

@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { content } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { FacultyGroup } from "./_components/faculty-group";
-import { FacultyHero } from "./_components/faculty-hero";
 
 export const metadata: Metadata = createMetadata({
   path: "/faculty",
@@ -16,23 +15,16 @@ export default async function FacultyPage() {
   const leadership = await content.getLeadership();
 
   return (
-    <div className="bg-white">
-      <FacultyHero />
+    <div className="bg-white pt-8 sm:pt-12 pb-16 lg:pb-24">
+      <FacultyGroup
+        isFirstGroup
+        leaders={leadership.board}
+        title="Board of Directors"
+      />
 
-      <div className="pb-12 lg:pb-24">
-        <FacultyGroup
-          isFirstGroup
-          leaders={leadership.board}
-          title="Board of Directors"
-        />
+      <FacultyGroup leaders={leadership.management} title="Management Team" />
 
-        <FacultyGroup
-          leaders={leadership.management}
-          title="Management Team"
-        />
-
-        <FacultyGroup leaders={leadership.academics} title="Academic Heads" />
-      </div>
+      <FacultyGroup leaders={leadership.academics} title="Academic Heads" />
     </div>
   );
 }

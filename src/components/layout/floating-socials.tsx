@@ -37,7 +37,7 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
   const DOWNLOAD_OPTIONS = [
     {
       key: "school",
-      label: "School & +2",
+      label: "School",
       href: "/admissions" as Route,
     },
     {

@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -97,8 +96,8 @@ export function FacultyCard({
 
       {/* Full Bio Modal Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-md sm:max-w-lg">
-          <div className="flex items-start gap-4 sm:gap-5">
+        <DialogContent className="max-w-lg sm:max-w-2xl max-h-[85vh] flex flex-col p-6 sm:p-8">
+          <div className="flex items-start gap-4 sm:gap-5 pb-4 border-b border-border/70">
             {leader.portrait && (
               <div className="relative size-16 sm:size-20 shrink-0 overflow-hidden rounded-2xl border border-border/60 shadow-md">
                 <Image
@@ -110,20 +109,25 @@ export function FacultyCard({
                 />
               </div>
             )}
-            <DialogHeader className="min-w-0 flex-1">
+            <DialogHeader className="min-w-0 flex-1 text-left">
               <p className="font-body text-xs font-bold uppercase tracking-wider text-accent">
                 {leader.title}
               </p>
-              <DialogTitle className="mt-1 text-xl sm:text-2xl">
+              <DialogTitle className="mt-1 text-xl sm:text-2xl font-display font-medium text-ink">
                 {leader.name}
               </DialogTitle>
             </DialogHeader>
           </div>
 
-          <div className="mt-6 border-t border-border/60 pt-4">
-            <DialogDescription className="text-sm sm:text-base leading-relaxed text-ink/90 font-normal">
-              {leader.brief}
-            </DialogDescription>
+          <div className="flex-1 overflow-y-auto pt-4 pr-1 space-y-3.5">
+            {(leader.bio ?? leader.brief).split("\n\n").map((para) => (
+              <p
+                className="text-xs sm:text-sm leading-relaxed text-ink/85 font-body"
+                key={para.slice(0, 30)}
+              >
+                {para}
+              </p>
+            ))}
           </div>
         </DialogContent>
       </Dialog>

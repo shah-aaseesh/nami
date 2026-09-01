@@ -91,12 +91,12 @@ export default async function BachelorsPage() {
         copy={bachelorsCopy.partners}
         id="partners"
         partners={networkPartners}
-        tone="ink"
+        tone="surface"
       />
 
       <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
 
-      <InstitutionClubsSection tone="brand" />
+      <InstitutionClubsSection tone="surface" />
 
       <InstitutionNotices
         copy={bachelorsCopy.notices}

@@ -171,7 +171,10 @@ export function SchoolAdmission({
   if (total === 0) return null;
 
   return (
-    <section className="bg-surface text-ink gutter-x section-y" id={id}>
+    <section
+      className="bg-[#284540]/[0.03] border-y border-[#284540]/10 text-ink gutter-x section-y"
+      id={id}
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow={copy.heading}

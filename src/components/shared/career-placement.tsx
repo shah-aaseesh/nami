@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { SectionHeader } from "@/components/shared/section-header";
 import type { ContentImage } from "@/lib/content";
+import { cn } from "@/lib/utils";
 import type { CareerPartner } from "./partner-carousel";
 import { PartnerCarousel } from "./partner-carousel";
+
+export type CareerPlacementTone = "surface" | "ink" | "brand";
 
 export type CareerPlacementCopy = {
   readonly eyebrow: string;
@@ -15,15 +18,24 @@ export function CareerPlacement({
   copy,
   id,
   partners,
+  tone = "surface",
 }: {
   readonly copy: CareerPlacementCopy;
   readonly id?: string;
   readonly partners: readonly CareerPartner[];
+  readonly tone?: CareerPlacementTone;
 }) {
   if (partners.length === 0) return null;
 
   return (
-    <section className="gutter-x section-y" id={id}>
+    <section
+      className={cn(
+        "gutter-x section-y",
+        tone === "ink" && "field-ink",
+        tone === "brand" && "field-brand",
+      )}
+      id={id}
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           animated={false}

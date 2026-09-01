@@ -25,31 +25,34 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
   const external = copy.cta.destination === "external";
 
   return (
-    <section className="bg-surface text-ink gutter-x section-y" id="entry">
+    <section className="field-brand gutter-x section-y" id="entry">
       <div className="mx-auto max-w-page">
         {/* Full-width Eyebrow Bar */}
         <Reveal className="flex items-center gap-5" stagger={0.08}>
-          <Eyebrow>{copy.heading}</Eyebrow>
-          <span className="h-px flex-1 bg-border" />
+          <Eyebrow className="text-white font-semibold">{copy.heading}</Eyebrow>
+          <span className="h-px flex-1 bg-white/20" />
         </Reveal>
 
         <div className="mt-6 sm:mt-8 lg:mt-10 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <Reveal className="lg:col-span-5" stagger={0.08}>
-            <SplitText as="h2" className="mt-0 text-ink">
+            <SplitText as="h2" className="mt-0 text-white">
               {copy.eyebrow ?? "Admissions & Entry"}
             </SplitText>
             <RevealItem className="mt-8 lg:mt-10">
               <Link
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "w-full justify-center gap-2 px-6 sm:w-auto",
+                  "w-full justify-center gap-2 px-6 sm:w-auto bg-white text-primary-800 hover:bg-neutral-100 font-semibold shadow-md",
                 )}
                 href={copy.cta.href as Route}
                 rel={external ? "noopener noreferrer" : undefined}
                 target={external ? "_blank" : undefined}
               >
                 <span>{copy.cta.label}</span>
-                <Icon className="size-4" icon={ArrowUpRightIcon} />
+                <Icon
+                  className="size-4 text-primary-800"
+                  icon={ArrowUpRightIcon}
+                />
               </Link>
             </RevealItem>
           </Reveal>
@@ -60,13 +63,15 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
           >
             {copy.blocks.map((block) => (
               <RevealItem
-                className="border-t border-border pt-6"
+                className="border-t border-white/20 pt-6"
                 key={block.title}
               >
-                <H5 as="h3" className="text-ink">
+                <H5 as="h3" className="text-white font-semibold">
                   {block.title}
                 </H5>
-                <P className="mt-3">{block.body}</P>
+                <P className="mt-3 text-white/90 leading-relaxed">
+                  {block.body}
+                </P>
               </RevealItem>
             ))}
           </Reveal>

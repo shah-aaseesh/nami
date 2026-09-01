@@ -77,9 +77,8 @@ export function InstitutionEnrollCta({
   return (
     <section
       className={cn(
-        isSchool && "bg-[#0e3b47] text-white",
-        isCollege && "bg-[#001b44] text-white",
-        !isCustomDark && "field-brand",
+        isSchool && "bg-[#284540] text-white",
+        !isSchool && "field-brand",
         "gutter-x py-10 sm:py-14 lg:py-16",
         className,
       )}
@@ -93,9 +92,9 @@ export function InstitutionEnrollCta({
                 className={cn(
                   "inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest backdrop-blur-xs",
                   isSchool &&
-                    "border border-[#2BBCC6]/40 bg-[#2BBCC6]/15 text-[#2BBCC6]",
+                    "border border-[#F7CD00]/40 bg-[#F7CD00]/15 text-[#F7CD00]",
                   isCollege &&
-                    "border border-[#88dbdf]/40 bg-[#88dbdf]/15 text-[#88dbdf]",
+                    "border border-[#FFAD00]/40 bg-white/15 text-[#FFAD00]",
                   !isCustomDark &&
                     "border border-white/20 bg-white/10 text-white",
                 )}
@@ -103,8 +102,8 @@ export function InstitutionEnrollCta({
                 <span
                   className={cn(
                     "size-2 rounded-full animate-pulse",
-                    isSchool && "bg-[#2BBCC6]",
-                    isCollege && "bg-[#88dbdf]",
+                    isSchool && "bg-[#F7CD00]",
+                    isCollege && "bg-[#FFAD00]",
                     !isCustomDark && "bg-white",
                   )}
                 />
@@ -165,9 +164,8 @@ export function InstitutionEnrollCta({
                 icon={DownloadIcon}
                 className={cn(
                   "size-4",
-                  isSchool && "text-[#2BBCC6]",
-                  isCollege && "text-[#88dbdf]",
-                  !isCustomDark && "text-primary-200",
+                  isSchool && "text-[#F7CD00]",
+                  !isSchool && "text-white/80",
                 )}
               />
               <span>{effectiveBrochureLabel}</span>
@@ -179,16 +177,15 @@ export function InstitutionEnrollCta({
             <RevealItem
               className={cn(
                 "mt-8 flex items-center justify-center gap-2 text-xs sm:text-sm",
-                isCustomDark ? "text-white/80" : "text-primary-200",
+                isSchool ? "text-white/85" : "text-primary-100",
               )}
             >
               <Icon
                 icon={PhoneIcon}
                 className={cn(
                   "size-3.5",
-                  isSchool && "text-[#2BBCC6]",
-                  isCollege && "text-[#88dbdf]",
-                  !isCustomDark && "text-primary-300",
+                  isSchool && "text-[#F7CD00]",
+                  !isSchool && "text-primary-200",
                 )}
               />
               <span>Need help? Call Admissions at</span>

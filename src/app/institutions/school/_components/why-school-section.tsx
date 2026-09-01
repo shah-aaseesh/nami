@@ -13,7 +13,7 @@ export function WhySchoolSection() {
 
   return (
     <section
-      className="gutter-x section-y border-t border-border bg-surface"
+      className="gutter-x section-y border-y border-[#F7CD00]/25 bg-[#F7CD00]/[0.04]"
       id="why-school"
     >
       <div className="mx-auto max-w-page">
@@ -40,9 +40,9 @@ export function WhySchoolSection() {
                   environment designed to build strong academic foundations
                   while supporting the overall development of every student.
                   With modern classrooms, well-equipped science laboratories,
-                  ICT facilities, a well-stocked library and experienced faculty,
-                  students receive the resources and guidance needed to develop
-                  academically and personally.
+                  ICT facilities, a well-stocked library and experienced
+                  faculty, students receive the resources and guidance needed to
+                  develop academically and personally.
                 </P>
               </RevealItem>
 

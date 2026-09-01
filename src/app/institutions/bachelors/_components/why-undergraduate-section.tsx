@@ -13,7 +13,7 @@ export function WhyUndergraduateSection() {
 
   return (
     <section
-      className="gutter-x section-y border-t border-border bg-surface"
+      className="gutter-x section-y border-y border-[#BD1B21]/15 bg-[#BD1B21]/[0.04]"
       id="why-undergraduate"
     >
       <div className="mx-auto max-w-page">
@@ -41,8 +41,8 @@ export function WhyUndergraduateSection() {
                   Northampton, UK. Students can pursue British degrees across
                   disciplines including Computer Science, Software Engineering,
                   Networking Engineering, Environmental Science and Business
-                  Administration, gaining an academic foundation designed to meet
-                  the expectations of the global job market.
+                  Administration, gaining an academic foundation designed to
+                  meet the expectations of the global job market.
                 </P>
               </RevealItem>
 

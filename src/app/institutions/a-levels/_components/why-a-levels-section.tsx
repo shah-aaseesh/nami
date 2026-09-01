@@ -13,7 +13,7 @@ export function WhyALevelsSection() {
 
   return (
     <section
-      className="gutter-x section-y border-t border-border bg-surface"
+      className="gutter-x section-y border-y border-[#FFAD00]/30 bg-[#FFAD00]/10"
       id="why-a-levels"
     >
       <div className="mx-auto max-w-page">

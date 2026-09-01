@@ -25,7 +25,7 @@ export function CollegeMilestones({
 
   return (
     <section
-      className="bg-surface text-ink gutter-x section-y border-t border-border/60"
+      className="bg-[#E9C355]/10 text-ink gutter-x section-y border-y border-[#E9C355]/30"
       id="milestones"
     >
       <div className="mx-auto max-w-page">

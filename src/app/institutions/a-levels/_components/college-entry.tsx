@@ -26,7 +26,7 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
 
   return (
     <section
-      className="bg-surface text-ink gutter-x section-y border-t border-border/60"
+      className="bg-[#626951]/[0.08] text-ink gutter-x section-y border-y border-[#626951]/25"
       id="entry"
     >
       <div className="mx-auto max-w-page">

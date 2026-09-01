@@ -13,7 +13,7 @@ export function WhySchoolSection() {
 
   return (
     <section
-      className="gutter-x section-y border-t border-border bg-surface"
+      className="gutter-x section-y border-y border-[#F7CD00]/30 bg-[#F7CD00]/10"
       id="why-school"
     >
       <div className="mx-auto max-w-page">

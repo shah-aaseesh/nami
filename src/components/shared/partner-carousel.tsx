@@ -40,7 +40,7 @@ function splitRows(items: readonly CareerPartner[]): readonly LogoRow[] {
 function PartnerTile({ partner }: { readonly partner: CareerPartner }) {
   if (partner.logo === null) {
     return (
-      <li className="flex shrink-0 items-center justify-center px-2">
+      <li className="flex shrink-0 items-center justify-center px-4">
         <span className="font-display text-sm sm:text-base font-medium text-ink-muted">
           {partner.name}
         </span>
@@ -49,17 +49,18 @@ function PartnerTile({ partner }: { readonly partner: CareerPartner }) {
   }
 
   return (
-    <li className="flex shrink-0 items-center justify-center px-1 sm:px-1.5">
+    <li className="flex shrink-0 items-center justify-center px-3 sm:px-4 lg:px-5">
       <span className="sr-only">{partner.name}</span>
-      <Image
-        alt={partner.name}
-        className="h-auto max-h-12 sm:max-h-16 lg:max-h-20 w-24 sm:w-32 lg:w-40 xl:w-44 object-contain transition-transform duration-300 hover:scale-105"
-        height={partner.logo.height}
-        loading="lazy"
-        sizes="(min-width: 1280px) 176px, (min-width: 1024px) 160px, (min-width: 640px) 128px, 96px"
-        src={partner.logo.src}
-        width={partner.logo.width}
-      />
+      <div className="relative h-10 sm:h-12 lg:h-14 w-28 sm:w-32 lg:w-36 transition-transform duration-300 hover:scale-105">
+        <Image
+          alt={partner.name}
+          className="object-contain"
+          fill
+          loading="lazy"
+          sizes="(min-width: 1280px) 176px, (min-width: 1024px) 160px, (min-width: 640px) 128px, 96px"
+          src={partner.logo.src}
+        />
+      </div>
     </li>
   );
 }

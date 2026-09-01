@@ -89,7 +89,7 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                     "rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider",
                     idx === 0
                       ? "bg-[#BD1B21]/10 text-[#BD1B21] border border-[#BD1B21]/20"
-                      : "bg-[#33B8C7]/15 text-[#284540] border border-[#33B8C7]/30",
+                      : "bg-[#284540]/10 text-[#284540] border border-[#284540]/20",
                   )}
                 >
                   Stream

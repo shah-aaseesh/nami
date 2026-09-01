@@ -13,7 +13,7 @@ export function WhySchoolSection() {
 
   return (
     <section
-      className="gutter-x section-y border-y border-[#F7CD00]/30 bg-[#F7CD00]/10"
+      className="gutter-x section-y border-t border-border bg-surface"
       id="why-school"
     >
       <div className="mx-auto max-w-page">
@@ -22,10 +22,12 @@ export function WhySchoolSection() {
           <div className="lg:col-span-5">
             <Reveal>
               <div className="flex items-center gap-5">
-                <Eyebrow>NAMI International School</Eyebrow>
+                <Eyebrow className="text-[#BD1B21]">
+                  NAMI International School
+                </Eyebrow>
                 <span className="h-px flex-1 bg-border" />
               </div>
-              <SplitText as="h2" className="mt-4">
+              <SplitText as="h2" className="mt-4 text-ink">
                 Why School at NAMI?
               </SplitText>
             </Reveal>

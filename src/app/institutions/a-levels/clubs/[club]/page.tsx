@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { createMetadata } from "@/lib/seo";
 import {
   A_LEVELS_CLUBS,
   type ALevelsClubSlug,
   findALevelsClub,
 } from "@/app/institutions/a-levels/_components/a-levels-clubs-copy";
+import { createMetadata } from "@/lib/seo";
 import { ClubActivities } from "./_components/club-activities";
 import { ClubJoinCta } from "./_components/club-join-cta";
 import { ClubMasthead } from "./_components/club-masthead";

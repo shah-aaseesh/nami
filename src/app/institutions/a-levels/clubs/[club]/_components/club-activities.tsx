@@ -1,11 +1,11 @@
+import type { ALevelsClub } from "@/app/institutions/a-levels/_components/a-levels-clubs-copy";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { H3, P } from "@/components/ui/typography";
-import type { ALevelsClub } from "@/app/institutions/a-levels/_components/a-levels-clubs-copy";
 
 export function ClubActivities({ club }: { readonly club: ALevelsClub }) {
   return (
-    <section className="gutter-x section-y bg-muted/40 border-t border-border">
+    <section className="gutter-x section-y border-t border-border">
       <div className="mx-auto max-w-page">
         <SectionHeader
           description="A dynamic calendar of recurring clinics, workshops, inter-school championships, and major exhibitions."
@@ -24,7 +24,7 @@ export function ClubActivities({ club }: { readonly club: ALevelsClub }) {
               <div className="flex h-full flex-col justify-between rounded-3xl border border-border bg-white p-7 sm:p-8 shadow-xs transition-shadow duration-300 hover:shadow-md">
                 <div>
                   <div className="flex items-center justify-between gap-4">
-                    <span className="rounded-full bg-primary-50 px-3 py-1 font-body text-xs font-semibold text-primary-800">
+                    <span className="rounded-full bg-[#FF6720]/15 text-[#FF6720] border border-[#FF6720]/30 px-3 py-1 font-body text-xs font-semibold">
                       {activity.tag}
                     </span>
                     <span className="font-display text-sm font-bold text-ink-muted">

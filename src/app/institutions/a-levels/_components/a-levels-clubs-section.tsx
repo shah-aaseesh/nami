@@ -10,7 +10,10 @@ import { A_LEVELS_CLUBS } from "./a-levels-clubs-copy";
 
 export function ALevelsClubsSection() {
   return (
-    <section className="gutter-x section-y bg-muted/30" id="eca-clubs">
+    <section
+      className="gutter-x section-y border-t border-border"
+      id="eca-clubs"
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           description="Student-led clubs fostering community engagement, competitive sports, environmental stewardship, and artistic creativity."
@@ -31,7 +34,7 @@ export function ALevelsClubsSection() {
             return (
               <RevealItem className="h-full" key={club.slug}>
                 <Link
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-primary-300 hover:shadow-lg"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-[#BD1B21]/50 hover:shadow-lg"
                   href={clubHref}
                 >
                   {/* Card Cover Image */}
@@ -51,7 +54,7 @@ export function ALevelsClubsSection() {
                     <div>
                       <H3
                         as="h3"
-                        className="font-display text-lg font-normal text-ink transition-colors group-hover:text-primary-700 sm:text-xl"
+                        className="font-display text-lg font-normal text-ink transition-colors group-hover:text-[#BD1B21] sm:text-xl"
                       >
                         {club.title}
                       </H3>
@@ -63,10 +66,10 @@ export function ALevelsClubsSection() {
 
                     {/* Action link */}
                     <div className="mt-5 flex items-center justify-between border-t border-border/60 pt-3">
-                      <span className="font-body text-xs font-semibold text-primary-700 transition-colors group-hover:text-primary-800">
+                      <span className="font-body text-xs font-semibold text-[#BD1B21] transition-colors group-hover:text-[#9e1419]">
                         Explore Club
                       </span>
-                      <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-200 group-hover:bg-primary-700 group-hover:text-white group-hover:translate-x-1">
+                      <span className="flex size-7 items-center justify-center rounded-full bg-[#BD1B21]/10 text-[#BD1B21] transition-all duration-200 group-hover:bg-[#BD1B21] group-hover:text-white group-hover:translate-x-1">
                         <Icon className="size-3.5" icon={ArrowRightIcon} />
                       </span>
                     </div>

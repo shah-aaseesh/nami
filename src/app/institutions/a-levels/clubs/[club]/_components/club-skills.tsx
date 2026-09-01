@@ -1,6 +1,6 @@
+import type { ALevelsClub } from "@/app/institutions/a-levels/_components/a-levels-clubs-copy";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { Eyebrow, H2, P } from "@/components/ui/typography";
-import type { ALevelsClub } from "@/app/institutions/a-levels/_components/a-levels-clubs-copy";
 
 export function ClubSkills({ club }: { readonly club: ALevelsClub }) {
   return (

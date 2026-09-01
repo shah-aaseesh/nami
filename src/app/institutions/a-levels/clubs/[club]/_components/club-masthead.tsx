@@ -1,12 +1,12 @@
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import type { ALevelsClub } from "@/app/institutions/a-levels/_components/a-levels-clubs-copy";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
 import { ArrowLeftIcon } from "@/lib/icons";
-import type { ALevelsClub } from "@/app/institutions/a-levels/_components/a-levels-clubs-copy";
 
 const COVER_SIZES = "(min-width: 1024px) 1200px, 100vw";
 
@@ -34,7 +34,7 @@ export function ClubMasthead({ club }: { readonly club: ALevelsClub }) {
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
           <Reveal className="lg:col-span-7" stagger={0.08}>
             <RevealItem>
-              <span className="inline-block rounded-full bg-primary-50 px-3.5 py-1 font-body text-xs font-semibold text-primary-800">
+              <span className="inline-block rounded-full bg-[#BD1B21]/10 text-[#BD1B21] border border-[#BD1B21]/20 px-3.5 py-1 font-body text-xs font-semibold">
                 {club.category}
               </span>
             </RevealItem>

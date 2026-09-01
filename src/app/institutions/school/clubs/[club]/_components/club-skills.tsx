@@ -1,6 +1,6 @@
+import type { SchoolClub } from "@/app/institutions/school/_components/school-clubs-copy";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { Eyebrow, H2, P } from "@/components/ui/typography";
-import type { SchoolClub } from "@/app/institutions/school/_components/school-clubs-copy";
 
 export function ClubSkills({ club }: { readonly club: SchoolClub }) {
   return (

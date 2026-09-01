@@ -1,16 +1,20 @@
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
-import { Icon } from "@/components/ui/icon";
-import { Eyebrow, H2, P } from "@/components/ui/typography";
-import { ArrowRightIcon } from "@/lib/icons";
 import {
   SCHOOL_CLUBS,
   type SchoolClub,
 } from "@/app/institutions/school/_components/school-clubs-copy";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { Icon } from "@/components/ui/icon";
+import { Eyebrow, H2, P } from "@/components/ui/typography";
+import { ArrowRightIcon } from "@/lib/icons";
 
-export function ClubOtherRail({ currentClub }: { readonly currentClub: SchoolClub }) {
+export function ClubOtherRail({
+  currentClub,
+}: {
+  readonly currentClub: SchoolClub;
+}) {
   const otherClubs = SCHOOL_CLUBS.filter(
     (club) => club.slug !== currentClub.slug,
   );
@@ -73,7 +77,10 @@ export function ClubOtherRail({ currentClub }: { readonly currentClub: SchoolClu
 
                   <div className="mt-4 flex items-center gap-1.5 font-body text-xs font-semibold text-primary-700 group-hover:text-primary-800">
                     <span>View details</span>
-                    <Icon className="size-3 transition-transform group-hover:translate-x-1" icon={ArrowRightIcon} />
+                    <Icon
+                      className="size-3 transition-transform group-hover:translate-x-1"
+                      icon={ArrowRightIcon}
+                    />
                   </div>
                 </div>
               </Link>

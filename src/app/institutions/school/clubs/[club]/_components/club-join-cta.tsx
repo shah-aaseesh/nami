@@ -1,27 +1,27 @@
 import type { Route } from "next";
 import Link from "next/link";
+import type { SchoolClub } from "@/app/institutions/school/_components/school-clubs-copy";
 import { Reveal } from "@/components/motion/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { H2, P } from "@/components/ui/typography";
 import { ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import type { SchoolClub } from "@/app/institutions/school/_components/school-clubs-copy";
 
 export function ClubJoinCta({ club }: { readonly club: SchoolClub }) {
   return (
     <section className="gutter-x section-y border-t border-border">
       <div className="mx-auto max-w-page">
         <Reveal>
-          <div className="field-ink relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16">
+          <div className="relative overflow-hidden rounded-3xl bg-[#284540] p-8 sm:p-12 lg:p-16 text-white shadow-xl">
             <div className="relative z-10 max-w-2xl">
-              <span className="inline-block rounded-full bg-white/15 px-3.5 py-1 font-body text-xs font-semibold text-white/90 backdrop-blur-xs">
+              <span className="inline-block rounded-full bg-[#F7CD00]/20 text-[#F7CD00] border border-[#F7CD00]/30 px-3.5 py-1 font-body text-xs font-semibold backdrop-blur-xs">
                 Membership & Participation
               </span>
               <H2 className="mt-4 text-white">
                 Become a member of the {club.title}
               </H2>
-              <P className="mt-4 text-sm text-white/80 sm:text-base leading-relaxed">
+              <P className="mt-4 text-sm text-white/85 sm:text-base leading-relaxed">
                 Club memberships open at the beginning of each academic term
                 during Student Club Registration Week. Students may also consult
                 their class teacher or the {club.facultyMentor} to get involved.
@@ -31,7 +31,7 @@ export function ClubJoinCta({ club }: { readonly club: SchoolClub }) {
                 <Link
                   className={cn(
                     buttonVariants({ size: "lg", variant: "default" }),
-                    "gap-2 bg-white text-primary-900 hover:bg-white/90 shadow-md",
+                    "gap-2 bg-[#BD1B21] text-white hover:bg-[#9e1419] font-semibold shadow-md",
                   )}
                   href={"/admissions" as Route}
                 >
@@ -45,7 +45,7 @@ export function ClubJoinCta({ club }: { readonly club: SchoolClub }) {
                   )}
                   href={"/institutions/school" as Route}
                 >
-                  <span>Back to NAMI Institutions</span>
+                  <span>Back to NAMI School</span>
                 </Link>
               </div>
             </div>

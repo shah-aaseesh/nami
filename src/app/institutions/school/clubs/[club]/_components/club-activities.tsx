@@ -1,7 +1,7 @@
+import type { SchoolClub } from "@/app/institutions/school/_components/school-clubs-copy";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { H3, P } from "@/components/ui/typography";
-import type { SchoolClub } from "@/app/institutions/school/_components/school-clubs-copy";
 
 export function ClubActivities({ club }: { readonly club: SchoolClub }) {
   return (
@@ -24,7 +24,7 @@ export function ClubActivities({ club }: { readonly club: SchoolClub }) {
               <div className="flex h-full flex-col justify-between rounded-3xl border border-border bg-white p-7 sm:p-8 shadow-xs transition-shadow duration-300 hover:shadow-md">
                 <div>
                   <div className="flex items-center justify-between gap-4">
-                    <span className="rounded-full bg-primary-50 px-3 py-1 font-body text-xs font-semibold text-primary-800">
+                    <span className="rounded-full bg-[#9CC21A]/20 text-[#284540] border border-[#9CC21A]/30 px-3 py-1 font-body text-xs font-semibold">
                       {activity.tag}
                     </span>
                     <span className="font-display text-sm font-bold text-ink-muted">

@@ -81,6 +81,13 @@ const CARD_THEMES = [
     shadow: "shadow-purple-950/15 group-hover:shadow-purple-950/25",
     hoverText: "group-hover:text-purple-100",
   },
+  {
+    bg: "bg-[#E85296]",
+    border: "border-[#E85296]/40",
+    dashed: "border-[#E85296]/50 group-hover:border-[#E85296]",
+    shadow: "shadow-pink-950/15 group-hover:shadow-pink-950/25",
+    hoverText: "group-hover:text-pink-100",
+  },
 ] as const;
 
 function DiamondStepCard({

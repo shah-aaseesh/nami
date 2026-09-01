@@ -82,6 +82,7 @@ export type InquiryCourse = {
   readonly asksPendingQualifications: boolean;
   readonly asksEmploymentHistory: boolean;
   readonly proposedCourses?: readonly ProposedCourseOption[];
+  readonly proposedCourseLabel?: string;
 };
 
 // Diverges from INSTITUTIONS on purpose (decided 2026-08-20): the inquiry select splits the
@@ -95,6 +96,16 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     historyHeading: "Education History",
     asksPendingQualifications: false,
     asksEmploymentHistory: false,
+    proposedCourseLabel: "Grade",
+    proposedCourses: [
+      { value: "Grade 1", label: "Grade 1" },
+      { value: "Grade 2", label: "Grade 2" },
+      { value: "Grade 3", label: "Grade 3" },
+      { value: "Grade 4", label: "Grade 4" },
+      { value: "Grade 5", label: "Grade 5" },
+      { value: "Grade 6", label: "Grade 6" },
+      { value: "Grade 7", label: "Grade 7" },
+    ],
   },
   {
     id: "school-plus-two",

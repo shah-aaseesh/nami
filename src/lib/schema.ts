@@ -164,7 +164,13 @@ export const admissionsSchema = z
     };
 
     if (isProposedCourseRequired(data.program) && data.proposedCourse === "") {
-      missing("proposedCourse", "Select your proposed course");
+      const isSchoolPrimary = data.program === "school-primary";
+      missing(
+        "proposedCourse",
+        isSchoolPrimary
+          ? "Select the grade you are applying for"
+          : "Select your proposed course",
+      );
     }
 
     if (isGuardianLedProgram(data.program)) {

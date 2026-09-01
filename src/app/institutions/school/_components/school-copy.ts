@@ -63,8 +63,6 @@ const masthead: SchoolHeroCopy = {
 
 const bands: SchoolBandsCopy = {
   eyebrow: "Academics",
-  heading: "A primary division and a +2, under one roof.",
-  standfirst: `The primary division teaches ${schoolGrades.labelPlural}. The +2 runs at Grades 11 and 12, in Science and Management.`,
   primary: {
     label: schoolGrades.labelPlural,
     affiliationSlug: "neb-school",

@@ -214,12 +214,13 @@ function buildBlocks(
   data: AdmissionsFormData,
   course: InquiryCourse,
 ): readonly Block[] {
+  const isSchoolPrimary = course.id === "school-primary";
   const courseRows: Row[] = [
     { label: "Course applied for", value: sanitize(course.label) },
   ];
   if (data.proposedCourse.trim()) {
     courseRows.push({
-      label: "Proposed course",
+      label: isSchoolPrimary ? "Grade applied for" : "Proposed course",
       value: text(data.proposedCourse),
     });
   }

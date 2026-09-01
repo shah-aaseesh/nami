@@ -26,12 +26,12 @@ export type SchoolBand = {
 };
 
 export type SchoolBandsCopy = {
-  readonly eyebrow: string;
-  readonly heading: string;
-  readonly standfirst: string;
+  readonly eyebrow?: string;
+  readonly heading?: string;
+  readonly standfirst?: string;
   readonly primary: SchoolBand;
   readonly secondary: SchoolBand;
-  readonly photo: ContentImage;
+  readonly photo?: ContentImage;
 };
 
 function BandContent({ band }: { readonly band: SchoolBand }) {

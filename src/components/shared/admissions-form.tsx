@@ -449,9 +449,18 @@ export function MultiStepForm() {
                 <SelectField
                   control={control}
                   name="proposedCourse"
-                  label="Proposed Course"
+                  label={
+                    course?.proposedCourseLabel ??
+                    (course?.id === "school-primary"
+                      ? "Grade"
+                      : "Proposed Course")
+                  }
                   options={proposedCourseOptions}
-                  placeholder="Select a course"
+                  placeholder={
+                    course?.id === "school-primary"
+                      ? "Select a grade"
+                      : "Select a course"
+                  }
                   required
                 />
               )}

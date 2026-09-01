@@ -8,6 +8,105 @@ export type AlumniMetric = {
   readonly detail: string;
 };
 
+export type AlumniEmployer = {
+  readonly id: string;
+  readonly name: string;
+  readonly sector: string;
+  readonly logoSrc?: string | null;
+};
+
+export const alumniEmployers: readonly AlumniEmployer[] = [
+  {
+    id: "leapfrog",
+    name: "Leapfrog Technology",
+    sector: "Software & AI Solutions",
+  },
+  {
+    id: "nabil-bank",
+    name: "Nabil Bank",
+    sector: "Commercial Banking",
+  },
+  {
+    id: "northampton",
+    name: "University of Northampton",
+    sector: "Higher Education (UK)",
+    logoSrc: "/universities/northampton.png",
+  },
+  {
+    id: "wwf-nepal",
+    name: "WWF Nepal",
+    sector: "Conservation & Climate",
+  },
+  {
+    id: "cotiviti",
+    name: "Cotiviti Nepal",
+    sector: "Healthcare Informatics",
+  },
+  {
+    id: "cambridge",
+    name: "Cambridge International",
+    sector: "Global Education",
+    logoSrc: "/universities/cambridge.png",
+  },
+  {
+    id: "f1soft",
+    name: "F1Soft International",
+    sector: "Fintech & Cloud Engineering",
+  },
+  {
+    id: "standard-chartered",
+    name: "Standard Chartered Bank",
+    sector: "Global Banking",
+  },
+  {
+    id: "ku",
+    name: "Kathmandu University",
+    sector: "Academic Research",
+    logoSrc: "/universities/Kathmandu_University_Logo.webp",
+  },
+  {
+    id: "cloudfactory",
+    name: "CloudFactory",
+    sector: "Data & AI Operations",
+  },
+  {
+    id: "icimod",
+    name: "ICIMOD",
+    sector: "Environmental Research",
+  },
+  {
+    id: "hertfordshire",
+    name: "University of Hertfordshire",
+    sector: "Higher Education (UK)",
+    logoSrc: "/universities/hertfordshire.png",
+  },
+  {
+    id: "sanima-bank",
+    name: "Sanima Bank",
+    sector: "Banking & Financial Services",
+  },
+  {
+    id: "genese",
+    name: "Genese Solutions",
+    sector: "Cloud Architecture & DevOps",
+  },
+  {
+    id: "bajra",
+    name: "Bajra Technologies",
+    sector: "Enterprise Software",
+  },
+  {
+    id: "unccd",
+    name: "United Nations (UNCCD)",
+    sector: "Global Sustainable Dev",
+  },
+  {
+    id: "pathao",
+    name: "Pathao Nepal",
+    sector: "Consumer Tech & Mobility",
+  },
+];
+
 export const alumniCopy = {
   meta: {
     title: "Alumni Network",
@@ -52,6 +151,15 @@ export const alumniCopy = {
       },
     ] as const satisfies readonly AlumniMetric[],
   },
+  employers: {
+    navLabel: "Employers",
+    eyebrow: "CAREER DESTINATIONS",
+    heading: "Where our alumni are working.",
+    standfirst:
+      "From global technology companies and leading commercial banks to international conservation bodies and research institutes, NAMI graduates are making an impact worldwide.",
+    cta: null,
+    emptyState: null,
+  } satisfies SectionCopy,
   testimonials: {
     navLabel: "Alumni Stories",
     eyebrow: "ALUMNI STORIES",

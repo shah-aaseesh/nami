@@ -82,10 +82,10 @@ function StreamCard({
       </h3>
 
       <Tabs className="mt-4 flex-1" defaultValue={stream.groups[0]?.key}>
-        <TabsList aria-label={stream.label}>
+        <TabsList aria-label={stream.label} className="gap-6 sm:gap-8">
           {stream.groups.map((group) => (
             <TabsTab
-              className="py-2.5 text-sm sm:text-base"
+              className="py-3 font-display text-lg sm:text-xl lg:text-2xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-accent data-active:font-semibold"
               key={group.key}
               value={group.key}
             >

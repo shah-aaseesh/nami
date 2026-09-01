@@ -138,11 +138,17 @@ export function SchoolBands({
 
         <RevealItem className="mt-6 sm:mt-8 lg:mt-14">
           <Tabs defaultValue="primary" className="w-full">
-            <TabsList className="mb-4 sm:mb-6 lg:mb-8">
-              <TabsTab value="primary" className="text-base sm:text-lg">
+            <TabsList className="mb-6 sm:mb-8 lg:mb-10 gap-8 sm:gap-12">
+              <TabsTab
+                value="primary"
+                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-accent data-active:font-semibold"
+              >
                 {copy.primary.label}
               </TabsTab>
-              <TabsTab value="secondary" className="text-base sm:text-lg">
+              <TabsTab
+                value="secondary"
+                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-accent data-active:font-semibold"
+              >
                 {copy.secondary.label}
               </TabsTab>
             </TabsList>

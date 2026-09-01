@@ -46,8 +46,8 @@ export async function SiteFooter() {
             stagger={0.06}
             y={16}
           >
-            <div className="flex flex-col items-center text-center lg:col-span-4">
-              <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col lg:col-span-4">
+              <div>
                 <Link
                   className="inline-block transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-100 focus-visible:ring-offset-2"
                   href="/"
@@ -56,14 +56,14 @@ export async function SiteFooter() {
                   <SiteFooterWordmark name={group.name} />
                 </Link>
 
-                <p className="mt-4 font-body text-xs font-normal leading-relaxed text-white/90 text-pretty text-center">
+                <p className="mt-4 font-body text-xs font-normal leading-relaxed text-white/90 text-justify">
                   Naaya Aayam Multi-Disciplinary Institute (NAMI) is an
                   educational institution with the aim of contributing
                   meaningfully to Nepal&apos;s social and economic development
                   through the delivery of high-quality education.
                 </p>
 
-                <div className="mt-5 flex items-center justify-center gap-2.5">
+                <div className="mt-5 flex items-center gap-2.5">
                   {contact.socialProfiles.map((social) => {
                     const iconMap: Record<string, typeof FacebookIcon> = {
                       facebook: FacebookIcon,
@@ -91,14 +91,14 @@ export async function SiteFooter() {
               </div>
             </div>
 
-            <div className="flex flex-col items-center text-center lg:col-span-2">
+            <div className="lg:col-span-2">
               <Eyebrow
                 as="h2"
-                className="text-xs font-semibold uppercase tracking-widest text-white text-center"
+                className="text-xs font-semibold uppercase tracking-widest text-white"
               >
                 Quick Links
               </Eyebrow>
-              <ul className="mt-4 flex flex-col items-center space-y-2.5 font-body text-xs text-center">
+              <ul className="mt-4 space-y-2.5 font-body text-xs">
                 {FOOTER_NAV_LINKS.map((item) => (
                   <li key={item.href}>
                     <Link
@@ -120,11 +120,11 @@ export async function SiteFooter() {
                 Institutions & Contacts
               </Eyebrow>
 
-              <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 text-center">
-                <div className="border-t border-white/15 pt-4 text-center">
+              <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div className="border-t border-white/15 pt-4">
                   <Link
                     href={institutionPath("school")}
-                    className="group inline-block"
+                    className="group block"
                   >
                     <span className="block font-body text-sm font-semibold text-white transition-colors group-hover:text-white group-hover:underline underline-offset-4">
                       {entities.school.name}
@@ -134,12 +134,12 @@ export async function SiteFooter() {
                     </span>
                   </Link>
 
-                  <div className="mt-3 flex flex-col items-center space-y-1.5 font-body text-xs">
+                  <div className="mt-3 space-y-1.5 font-body text-xs">
                     <Link
                       href={
                         `tel:${contact.byEntity.school.phone.replace(/[^+\d]/g, "")}` as Route
                       }
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={PhoneIcon}
@@ -149,7 +149,7 @@ export async function SiteFooter() {
                     </Link>
                     <Link
                       href={`mailto:${contact.byEntity.school.email}` as Route}
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={MailIcon}
@@ -160,10 +160,10 @@ export async function SiteFooter() {
                   </div>
                 </div>
 
-                <div className="border-t border-white/15 pt-4 text-center">
+                <div className="border-t border-white/15 pt-4">
                   <Link
                     href={institutionPath("college")}
-                    className="group inline-block"
+                    className="group block"
                   >
                     <span className="block font-body text-sm font-semibold text-white transition-colors group-hover:text-white group-hover:underline underline-offset-4">
                       {entities.college.name}
@@ -173,12 +173,12 @@ export async function SiteFooter() {
                     </span>
                   </Link>
 
-                  <div className="mt-3 flex flex-col items-center space-y-1.5 font-body text-xs">
+                  <div className="mt-3 space-y-1.5 font-body text-xs">
                     <Link
                       href={
                         `tel:${contact.byEntity.college.phone.replace(/[^+\d]/g, "")}` as Route
                       }
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={PhoneIcon}
@@ -188,7 +188,7 @@ export async function SiteFooter() {
                     </Link>
                     <Link
                       href={`mailto:${contact.byEntity.college.email}` as Route}
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={MailIcon}
@@ -199,7 +199,7 @@ export async function SiteFooter() {
                   </div>
                 </div>
 
-                <div className="border-t border-white/15 pt-4 sm:col-span-2 text-center">
+                <div className="border-t border-white/15 pt-4 sm:col-span-2 text-center flex flex-col items-center">
                   <Link
                     href={institutionPath("bachelors")}
                     className="group inline-block"

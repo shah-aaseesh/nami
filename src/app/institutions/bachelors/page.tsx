@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { CareerPlacement } from "@/components/shared/career-placement";
 import { InstitutionAwarding } from "@/components/shared/institution-awarding";
+import { InstitutionClubsSection } from "@/components/shared/institution-clubs-section";
 import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import type { CareerPartner } from "@/components/shared/partner-carousel";
 import { PrincipalMessage } from "@/components/shared/principal-message";
-import { SharedCollegeGallery } from "@/components/shared/shared-college-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
@@ -14,6 +14,7 @@ import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
 import { bachelorsCopy } from "./_components/bachelors-copy";
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
+import { WhyUndergraduateSection } from "./_components/why-undergraduate-section";
 
 export const metadata: Metadata = createMetadata({
   path: institutionPath("bachelors"),
@@ -75,6 +76,8 @@ export default async function BachelorsPage() {
         />
       )}
 
+      <WhyUndergraduateSection />
+
       <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
 
       <InstitutionAwarding
@@ -92,10 +95,7 @@ export default async function BachelorsPage() {
 
       <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
 
-      <SharedCollegeGallery
-        institution={institution.entities.institute.role}
-        tone="brand"
-      />
+      <InstitutionClubsSection tone="brand" />
 
       <InstitutionNotices
         copy={bachelorsCopy.notices}

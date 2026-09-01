@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { InstitutionClubsSection } from "@/components/shared/institution-clubs-section";
 import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
-import { SharedCollegeGallery } from "@/components/shared/shared-college-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
@@ -15,6 +15,7 @@ import { SchoolApproachBanner } from "./_components/school-approach-banner";
 import { SchoolBands } from "./_components/school-bands";
 import { parentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
+import { WhySchoolSection } from "./_components/why-school-section";
 
 export const metadata: Metadata = createMetadata({
   path: institutionPath("school"),
@@ -62,6 +63,8 @@ export default async function SchoolPage() {
         />
       )}
 
+      <WhySchoolSection />
+
       <SchoolApproachBanner />
 
       <SchoolAdmission copy={schoolCopy.admission} />
@@ -69,14 +72,12 @@ export default async function SchoolPage() {
 
       <SchoolDay copy={schoolCopy.day} id="day" />
 
+      <InstitutionClubsSection />
+
       <Testimonials
         id="parents"
         items={parentTestimonials}
         section={schoolCopy.parents}
-      />
-      <SharedCollegeGallery
-        institution={institution.entities.school.role}
-        tone="surface"
       />
 
       <InstitutionNotices

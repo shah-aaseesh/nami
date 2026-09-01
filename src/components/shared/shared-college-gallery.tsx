@@ -5,7 +5,7 @@ import type { EntityRole } from "@/lib/content";
 function getGalleryCopy(institution: EntityRole) {
   const isSchool = institution === "school";
   return {
-    eyebrow: isSchool ? "The school" : "The college",
+    eyebrow: isSchool ? "ECA/CLUBS" : "The college",
     heading: isSchool
       ? "School life, photographed."
       : "College life, photographed.",

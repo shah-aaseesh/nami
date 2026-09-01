@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useId } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
@@ -27,12 +28,25 @@ export function SiteCtaBand({ heading, standfirst }: SiteCtaBandProps) {
       />
 
       <Reveal className="relative mx-auto max-w-page">
-        <div className="field-ink flex flex-col items-start justify-between gap-y-8 rounded-xl px-8 py-10 sm:px-12 lg:min-h-52 lg:flex-row lg:items-center lg:gap-x-12 lg:px-16 lg:py-8">
-          <div className="max-w-md lg:max-w-lg">
-            <H3 as="h2" id={headingId}>
-              {heading}
-            </H3>
-            <P className="mt-2 text-sm text-ink-muted">{standfirst}</P>
+        <div className="field-ink flex flex-col items-start justify-between gap-y-6 rounded-xl px-6 py-7 sm:px-10 sm:py-8 lg:flex-row lg:items-center lg:gap-x-8 lg:px-12 lg:py-7">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <div className="shrink-0 overflow-hidden rounded-xl bg-white p-2 sm:p-2.5 shadow-md">
+              <Image
+                alt="Scan to subscribe to NAMI Newsletter"
+                className="size-20 sm:size-24 object-contain"
+                height={96}
+                priority
+                src="/newsletter-qr.png"
+                unoptimized
+                width={96}
+              />
+            </div>
+            <div className="max-w-sm sm:max-w-md">
+              <H3 as="h2" id={headingId}>
+                {heading}
+              </H3>
+              <P className="mt-1 text-xs sm:text-sm text-ink-muted">{standfirst}</P>
+            </div>
           </div>
 
           <form

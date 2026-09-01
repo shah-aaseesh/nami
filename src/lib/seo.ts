@@ -37,9 +37,54 @@ export const siteRoutes: readonly SiteRoute[] = [
     priority: 0.9,
   },
   {
+    path: "/institutions/school/clubs/sports-club",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/school/clubs/art-and-literature-club",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/school/clubs/event-management-club",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/school/clubs/social-service-club",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/school/clubs/science-and-technology-club",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
     path: institutionPath("college"),
     changeFrequency: "monthly",
     priority: 0.9,
+  },
+  {
+    path: "/institutions/a-levels/clubs/social-services",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/a-levels/clubs/sports",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/a-levels/clubs/environment",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/institutions/a-levels/clubs/arts-and-crafts",
+    changeFrequency: "monthly",
+    priority: 0.8,
   },
   {
     path: institutionPath("bachelors"),

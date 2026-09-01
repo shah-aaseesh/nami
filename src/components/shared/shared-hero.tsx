@@ -1,12 +1,10 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { H3 } from "@/components/ui/typography";
 import type {
   ContentLink,
-  EntityRole,
   NamedEntity,
   SocialProfile,
 } from "@/lib/content";
@@ -15,15 +13,6 @@ import { cn } from "@/lib/utils";
 import { type SharedHeroSlide, SharedHeroSlider } from "./shared-hero-slider";
 
 export type { SharedHeroSlide };
-
-const PLACEHOLDER_INSTITUTION_LOGO = "/logo/nami-color.svg";
-const LOGO_MARK_SIZE = 1000;
-
-const INSTITUTION_LOGO: Readonly<Record<EntityRole, string>> = {
-  college: PLACEHOLDER_INSTITUTION_LOGO,
-  institute: PLACEHOLDER_INSTITUTION_LOGO,
-  school: "/logo/nami-school.png",
-};
 
 export type SharedHeroProps = {
   readonly entity: NamedEntity;
@@ -57,7 +46,7 @@ export function SharedHero({
     >
       <div className="mx-auto max-w-page">
         <SharedHeroSlider
-          className="flex min-h-96 flex-col justify-between gap-6 rounded-3xl bg-neutral-950 p-5 sm:min-h-100 sm:rounded-4xl sm:p-8 lg:px-10 xl:aspect-21/9"
+          className="flex min-h-96 flex-col justify-end gap-6 rounded-3xl bg-neutral-950 p-5 sm:min-h-100 sm:rounded-4xl sm:p-8 lg:px-10 xl:aspect-21/9"
           label={heroLabel}
           slides={slides}
         >
@@ -69,30 +58,6 @@ export function SharedHero({
             aria-hidden
             className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-neutral-950/40 via-neutral-950/5 to-transparent"
           />
-
-          <div className="relative z-20 flex animate-hero-fade justify-end">
-            <div
-              className={
-                entity.role === "school"
-                  ? "inline-flex items-center rounded-2xl bg-white/95 px-4 py-2 shadow-sm backdrop-blur-xs"
-                  : undefined
-              }
-            >
-              <Image
-                alt={`${entity.name} logo`}
-                className={
-                  entity.role === "school"
-                    ? "h-10 w-auto object-contain sm:h-14 md:h-16"
-                    : "h-16 w-auto sm:h-24 md:h-28"
-                }
-                height={LOGO_MARK_SIZE}
-                loading="eager"
-                sizes="(min-width: 640px) 96px, 64px"
-                src={INSTITUTION_LOGO[entity.role]}
-                width={LOGO_MARK_SIZE}
-              />
-            </div>
-          </div>
 
           <div className="relative z-20 flex max-w-2xl flex-col items-start gap-4 sm:gap-5">
             <H3

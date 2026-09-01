@@ -3,18 +3,19 @@ import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
-import { SharedCollegeGallery } from "@/components/shared/shared-college-gallery";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
+import { ALevelsClubsSection } from "./_components/a-levels-clubs-section";
 import { CollegeCambridge } from "./_components/college-cambridge";
 import { collegeCopy } from "./_components/college-copy";
 import { CollegeEntry } from "./_components/college-entry";
 import { CollegeMilestones } from "./_components/college-milestones";
 import { collegeMilestonesCopy } from "./_components/college-milestones-copy";
 import { CollegeSubjects } from "./_components/college-subjects";
+import { WhyALevelsSection } from "./_components/why-a-levels-section";
 
 export const metadata: Metadata = createMetadata({
   path: institutionPath("college"),
@@ -66,15 +67,14 @@ export default async function CollegePage() {
         />
       )}
 
+      <WhyALevelsSection />
+
       <CollegeCambridge copy={collegeCopy.cambridge} />
       <CollegeSubjects copy={collegeCopy.subjects} />
 
       <CollegeMilestones copy={collegeMilestonesCopy} />
 
-      <SharedCollegeGallery
-        institution={institution.entities.college.role}
-        tone="surface"
-      />
+      <ALevelsClubsSection />
 
       <Testimonials id="alumni" items={alumni} section={collegeCopy.alumni} />
 

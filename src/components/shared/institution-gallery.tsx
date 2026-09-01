@@ -72,7 +72,12 @@ export async function InstitutionGallery({
 }) {
   const gallery = await content.getGallery();
   const photographs = gallery.filter(
-    (entry) => entry.institution === institution,
+    (entry) =>
+      entry.institution === institution ||
+      (institution === "school" &&
+        (entry.institution === "primary" ||
+          entry.institution === "higher-secondary" ||
+          entry.institution === "school")),
   );
 
   if (photographs.length === 0) return null;

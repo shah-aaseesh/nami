@@ -34,16 +34,16 @@ export function FacultyCard({
     <>
       <div
         className={cn(
-          "group flex flex-col snap-center shrink-0",
+          "group flex flex-col snap-center shrink-0 h-full",
           className
             ? className
             : cn(
-                "w-[75vw] max-w-[260px] sm:w-[40vw] sm:max-w-[280px]",
+                "w-[75vw] max-w-[280px] sm:w-[40vw] sm:max-w-[300px]",
                 isScrollable
                   ? "lg:w-[calc((100%-6rem)/4)] lg:max-w-none"
                   : isSolo
                     ? "w-full max-w-[280px] sm:max-w-[320px] lg:max-w-sm"
-                    : "lg:w-[calc(25%-1.5rem)] lg:max-w-none",
+                    : "w-full sm:w-[280px] lg:w-[300px] lg:max-w-[320px]",
               ),
         )}
       >
@@ -70,16 +70,18 @@ export function FacultyCard({
         </div>
 
         <div className="mt-4 flex flex-col flex-1">
-          <p className="font-body text-xs font-bold uppercase tracking-wider text-accent">
-            {leader.title}
-          </p>
+          <div className="min-h-[2.5rem] flex flex-col justify-start">
+            <p className="font-body text-xs font-bold uppercase tracking-wider text-accent leading-snug">
+              {leader.title}
+            </p>
+          </div>
           <h3 className="mt-1 font-display text-lg font-medium text-ink">
             {leader.name}
           </h3>
           <P className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-3">
             {leader.brief}
           </P>
-          <div className="mt-auto pt-3 flex items-center justify-start">
+          <div className="mt-auto pt-4 flex items-center justify-start">
             <Button
               type="button"
               variant="outline"

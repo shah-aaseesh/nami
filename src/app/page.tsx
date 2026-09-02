@@ -6,6 +6,7 @@ import { content } from "@/lib/content";
 import { schoolPrincipal } from "@/lib/content/school-principal";
 import { About } from "./_components/about";
 import { Hero } from "./_components/hero";
+import { HomePopup } from "./_components/home-popup";
 import { ceoHeading } from "./_components/principal-copy";
 import { ProgrammeMarquee } from "./_components/programme-marquee";
 import { Stats } from "./_components/stats";
@@ -52,6 +53,7 @@ export default async function Home() {
       <Stats poster={band} section={copy.sections.stats} stats={stats} />
       <Testimonials section={copy.sections.testimonials} />
       <Updates />
+      <HomePopup />
     </>
   );
 }

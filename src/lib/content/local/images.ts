@@ -136,64 +136,64 @@ export const plantationProgramme: ContentImage = {
 export const rameshwarThapaPortrait: ContentImage = {
   src: "/team/rameshwar-thapa.webp",
   alt: "Studio portrait of Capt. Rameshwar Thapa, Chairperson of NAMI, arms folded in a pale blue mandarin-collar shirt against a mottled blue-grey backdrop.",
-  width: 1467,
-  height: 2000,
+  width: 1173,
+  height: 1600,
 };
 
 export const sureshRajGhimirePortrait: ContentImage = {
   src: "/team/suresh-raj-ghimire.webp",
   alt: "Studio portrait of Mr. Suresh Raj Ghimire, Director at NAMI, arms folded in a light grey suit and patterned tie against a mottled blue-grey backdrop.",
-  width: 1448,
-  height: 2000,
+  width: 1158,
+  height: 1600,
 };
 
 export const soniJoshiPortrait: ContentImage = {
   src: "/team/soni-joshi.webp",
   alt: "Studio portrait of Ms. Soni Joshi, Director at NAMI, hands clasped in a green and blue floral sari against a mottled blue-grey backdrop.",
-  width: 1448,
-  height: 2000,
+  width: 1158,
+  height: 1600,
 };
 
 export const yogRajKandelSharmaPortrait: ContentImage = {
   src: "/team/yog-raj-kandel-sharma.webp",
   alt: "Studio portrait of Mr. Yog Raj Kandel Sharma, Director at NAMI, arms folded in a navy suit and blue tie against a mottled blue-grey backdrop.",
-  width: 1522,
-  height: 2000,
+  width: 1217,
+  height: 1600,
 };
 
 export const robinRanaPortrait: ContentImage = {
   src: "/team/robin-rana.webp",
   alt: "Studio portrait of Mr. Robin Rana, Director at NAMI, arms folded in a slate blue suit and striped grey tie against a mottled blue-grey backdrop.",
-  width: 1507,
-  height: 2000,
+  width: 1205,
+  height: 1600,
 };
 
 export const samjhanaPhuyalPortrait: ContentImage = {
   src: "/team/samjhana-phuyal.webp",
   alt: "Studio portrait of Ms. Samjhana Phuyal, Director at NAMI, hands clasped in a cream embroidered sari over a red blouse against a mottled blue-grey backdrop.",
-  width: 1448,
-  height: 2000,
+  width: 1158,
+  height: 1600,
 };
 
 export const rameshPrasadTiwariPortrait: ContentImage = {
   src: "/team/ramesh-prasad-tiwari.webp",
   alt: "Studio portrait of Mr. Ramesh Prasad Tiwari, Director at NAMI, arms folded in a dark checked suit and red tie against a mottled blue-grey backdrop.",
-  width: 1542,
-  height: 2000,
+  width: 1233,
+  height: 1600,
 };
 
 export const pranilPandeyPortrait: ContentImage = {
   src: "/team/pranil-pandey.webp",
   alt: "Studio portrait of Mr. Pranil Pandey, Chief Executive Officer of NAMI, hands clasped in a blue suit and blue tie against a mottled blue-grey backdrop.",
-  width: 1411,
-  height: 2000,
+  width: 3174,
+  height: 4500,
 };
 
 export const nischalKhadkaPortrait: ContentImage = {
   src: "/team/nischal-khadka.webp",
   alt: "Studio portrait of Mr. Nischal Khadka, Academic Head at NAMI, arms folded in a dark navy suit and patterned blue tie against a mottled blue-grey backdrop.",
-  width: 1507,
-  height: 2000,
+  width: 1086,
+  height: 1449,
 };
 
 export const anishaPandayJoshiPortrait: ContentImage = {
@@ -206,6 +206,13 @@ export const anishaPandayJoshiPortrait: ContentImage = {
 export const philipBadikarHilarioPortrait: ContentImage = {
   src: "/team/philip-badikar-hilario.webp",
   alt: "Studio portrait of Mr. Philip Badikar Hilario, A Level Principal at NAMI College, arms folded in a charcoal suit and black tie against a mottled blue-grey backdrop.",
-  width: 1538,
-  height: 2000,
+  width: 1084,
+  height: 1451,
+};
+
+export const karunRegmiPortrait: ContentImage = {
+  src: "/team/karun-regmi.webp",
+  alt: "Studio portrait of Mr. Karun Regmi, Head of Business Development and Marketing & Branding at NAMI, arms folded in a black suit, red tie and glasses against a mottled blue-grey backdrop.",
+  width: 1086,
+  height: 1449,
 };

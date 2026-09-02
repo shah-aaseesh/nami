@@ -17,9 +17,9 @@ export type SchoolDayMoment = {
 };
 
 export type SchoolDayCopy = {
-  readonly eyebrow: string;
-  readonly heading: string;
-  readonly standfirst: string;
+  readonly eyebrow?: string | null;
+  readonly heading?: string | null;
+  readonly standfirst?: string | null;
   readonly campusLabel: string;
   readonly campus: readonly SchoolDayMoment[];
 };

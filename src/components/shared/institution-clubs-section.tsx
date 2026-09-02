@@ -1,23 +1,28 @@
+"use client";
+
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SCHOOL_CLUBS } from "@/app/institutions/school/_components/school-clubs-copy";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselControls,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { Icon } from "@/components/ui/icon";
 import { H3, P } from "@/components/ui/typography";
 import { ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
-const CARD_GRID_LAYOUT: Record<number, string> = {
-  0: "lg:col-span-6",
-  1: "lg:col-span-6",
-  2: "lg:col-span-4",
-  3: "lg:col-span-4",
-  4: "lg:col-span-4",
-};
-
 export type InstitutionClubsTone = "brand" | "surface";
+
+const CARD_SIZES =
+  "(min-width: 1280px) 350px, (min-width: 1024px) 340px, (min-width: 640px) 310px, 78vw";
 
 export function InstitutionClubsSection({
   tone = "surface",
@@ -26,6 +31,19 @@ export function InstitutionClubsSection({
   readonly tone?: InstitutionClubsTone;
   readonly className?: string;
 }) {
+  const total = SCHOOL_CLUBS.length;
+
+  if (total === 0) return null;
+
+  // Clone items if less than 8 for continuous infinite loop
+  const displayClubs =
+    total > 1 && total < 8
+      ? [
+          ...SCHOOL_CLUBS.map((c) => ({ ...c, itemKey: `${c.slug}-1` })),
+          ...SCHOOL_CLUBS.map((c) => ({ ...c, itemKey: `${c.slug}-2` })),
+        ]
+      : SCHOOL_CLUBS.map((c) => ({ ...c, itemKey: c.slug }));
+
   return (
     <section
       className={cn(
@@ -35,87 +53,99 @@ export function InstitutionClubsSection({
       )}
       id="eca-clubs"
     >
-      <div className="mx-auto max-w-page">
-        <SectionHeader
-          description="Five vibrant student-led clubs nurturing physical vitality, creative expression, leadership, social empathy, and scientific inquiry."
-          eyebrow="Extracurricular & Co-Curricular"
-          layout="stacked"
-          title="ECA / CLUBS"
-        />
+      <Carousel
+        aria-label="ECA / CLUBS"
+        aria-roledescription="carousel"
+        autoplay={true}
+        autoplayIntervalMs={2800}
+        opts={{
+          align: "start",
+          duration: 35,
+          loop: true,
+          slidesToScroll: 1,
+        }}
+        pauseOnHover={true}
+      >
+        <div className="mx-auto max-w-page">
+          <SectionHeader
+            action={
+              <CarouselControls className="ms-auto">
+                <CarouselPrevious
+                  aria-label="Previous club"
+                  className="size-9 sm:size-11 [&_svg]:size-4 sm:[&_svg]:size-5"
+                />
+                <CarouselNext
+                  aria-label="Next club"
+                  className="size-9 sm:size-11 [&_svg]:size-4 sm:[&_svg]:size-5"
+                />
+              </CarouselControls>
+            }
+            description="Five vibrant student-led clubs nurturing physical vitality, creative expression, leadership, social empathy, and scientific inquiry."
+            eyebrow="Extracurricular & Co-Curricular"
+            layout="action"
+            title="ECA / CLUBS"
+          />
+        </div>
 
-        <Reveal
-          className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6"
-          stagger={0.06}
-          y={20}
-        >
-          {SCHOOL_CLUBS.map((club, index) => {
-            const clubHref = `/institutions/school/clubs/${club.slug}` as Route;
-            const gridColClass = CARD_GRID_LAYOUT[index] ?? "lg:col-span-4";
-            const isTopRow = index < 2;
+        <Reveal className="mx-auto mt-8 max-w-page sm:mt-10 lg:mt-12" y={24}>
+          <CarouselContent className="-ms-4 sm:-ms-5 lg:-ms-6">
+            {displayClubs.map((club) => {
+              const clubHref =
+                `/institutions/school/clubs/${club.slug}` as Route;
 
-            return (
-              <RevealItem
-                className={cn("h-full", gridColClass)}
-                key={club.slug}
-              >
-                <Link
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-primary-300 hover:shadow-lg"
-                  href={clubHref}
+              return (
+                <CarouselItem
+                  className="basis-[78vw] ps-4 sm:basis-[310px] sm:ps-5 md:basis-[330px] lg:basis-[340px] lg:ps-6 xl:basis-[350px]"
+                  key={club.itemKey}
                 >
-                  {/* Card Cover Image - Compact & proportional */}
-                  <div
-                    className={cn(
-                      "relative w-full overflow-hidden bg-neutral-900",
-                      isTopRow
-                        ? "aspect-16/9 sm:aspect-2/1 lg:aspect-21/9"
-                        : "aspect-16/9 sm:aspect-16/10",
-                    )}
+                  <Link
+                    className="group flex h-full min-h-[420px] sm:min-h-[440px] flex-col overflow-hidden rounded-2xl border border-[#BD1B21]/80 bg-[#BD1B21] shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#BD1B21]/20"
+                    href={clubHref}
                   >
-                    <Image
-                      alt={club.coverImage.alt}
-                      className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      height={club.coverImage.height}
-                      sizes={
-                        isTopRow
-                          ? "(min-width: 1024px) 50vw, 100vw"
-                          : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      }
-                      src={club.coverImage.src}
-                      width={club.coverImage.width}
-                    />
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
-                    <div>
-                      <H3
-                        as="h3"
-                        className="font-display text-lg font-normal text-ink transition-colors group-hover:text-primary-700 sm:text-xl"
-                      >
-                        {club.title}
-                      </H3>
-
-                      <P className="mt-2 line-clamp-2 font-body text-xs text-ink-muted leading-relaxed sm:text-sm">
-                        {club.tagline}
-                      </P>
+                    {/* Card Cover Image */}
+                    <div className="relative aspect-16/11 w-full overflow-hidden bg-neutral-900">
+                      <Image
+                        alt={club.coverImage.alt}
+                        className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        fill
+                        loading="lazy"
+                        sizes={CARD_SIZES}
+                        src={club.coverImage.src}
+                      />
                     </div>
 
-                    {/* Action link */}
-                    <div className="mt-5 flex items-center justify-between border-t border-border/60 pt-3">
-                      <span className="font-body text-xs font-semibold text-primary-700 transition-colors group-hover:text-primary-800">
-                        Explore Club
-                      </span>
-                      <span className="flex size-7 items-center justify-center rounded-full bg-primary-50 text-primary-700 transition-all duration-200 group-hover:bg-primary-700 group-hover:text-white group-hover:translate-x-1">
-                        <Icon className="size-3.5" icon={ArrowRightIcon} />
-                      </span>
+                    {/* Card Content - Red bottom part */}
+                    <div className="flex flex-1 flex-col justify-between bg-[#BD1B21] p-5 sm:p-6 text-white">
+                      <div>
+                        <H3
+                          as="h3"
+                          className="font-display text-lg font-normal text-white transition-opacity group-hover:opacity-95 sm:text-xl"
+                        >
+                          {club.title}
+                        </H3>
+
+                        <P className="mt-2 line-clamp-3 font-body text-xs text-white/85 leading-relaxed sm:text-sm">
+                          {club.tagline}
+                        </P>
+                      </div>
+
+                      {/* Action link */}
+                      <div className="mt-5 flex items-center justify-between border-t border-white/20 pt-3">
+                        <span className="font-body text-xs font-semibold text-white/90 transition-colors group-hover:text-white">
+                          Explore Club
+                        </span>
+                        <span className="flex size-7 items-center justify-center rounded-full bg-white text-[#BD1B21] shadow-xs transition-all duration-200 group-hover:scale-110 group-hover:bg-white group-hover:translate-x-1">
+                          <Icon className="size-3.5" icon={ArrowRightIcon} />
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </RevealItem>
-            );
-          })}
+                  </Link>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
         </Reveal>
-      </div>
+      </Carousel>
     </section>
   );
 }

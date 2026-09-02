@@ -3,9 +3,9 @@ import { SplitText } from "@/components/motion/split-text";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
 
 export type GalleryMastheadCopy = {
-  readonly eyebrow: string;
+  readonly eyebrow?: string | null;
   readonly heading: string;
-  readonly standfirst: string | null;
+  readonly standfirst?: string | null;
 };
 
 export function GalleryMasthead({
@@ -18,14 +18,16 @@ export function GalleryMasthead({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-12 items-end">
           <Reveal className="lg:col-span-7" stagger={0.08}>
-            <RevealItem>
-              <Eyebrow className="text-[#BD1B21] font-semibold tracking-wider">
-                {copy.eyebrow}
-              </Eyebrow>
-            </RevealItem>
+            {copy.eyebrow && (
+              <RevealItem>
+                <Eyebrow className="text-[#BD1B21] font-semibold tracking-wider">
+                  {copy.eyebrow}
+                </Eyebrow>
+              </RevealItem>
+            )}
             <SplitText
               as="h1"
-              className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl font-normal text-ink leading-[1.1] tracking-tight"
+              className={`${copy.eyebrow ? "mt-3 " : ""}font-display text-4xl sm:text-5xl md:text-6xl font-normal text-ink leading-[1.1] tracking-tight`}
             >
               {copy.heading}
             </SplitText>

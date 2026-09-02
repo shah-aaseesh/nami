@@ -519,10 +519,9 @@ export const galleryCopy = {
       "Explore the photographic record of NAMI in Kathmandu — Primary, Higher Secondary, Cambridge A-Levels, and University of Northampton Bachelors & Masters.",
   },
   masthead: {
-    eyebrow: "VISUAL ARCHIVE",
-    heading: "Life & Moments at NAMI.",
-    standfirst:
-      "Click on any event folder to view all high-resolution photos from that specific event.",
+    eyebrow: null,
+    heading: "Life at NAMI",
+    standfirst: null,
   },
   allLabel: "All Institutions",
   filterGroupLabel: "Filter by institution",

@@ -47,7 +47,7 @@ export function ClubOtherRail({
           {otherClubs.map((club) => (
             <RevealItem className="h-full" key={club.slug}>
               <Link
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-primary-300 hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#BD1B21]/80 bg-[#BD1B21] shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 href={`/institutions/school/clubs/${club.slug}` as Route}
               >
                 <div className="relative aspect-16/10 w-full overflow-hidden bg-neutral-900">
@@ -65,17 +65,17 @@ export function ClubOtherRail({
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col justify-between p-5">
+                <div className="flex flex-1 flex-col justify-between bg-[#BD1B21] p-5 text-white">
                   <div>
-                    <h3 className="font-display text-base font-normal text-ink group-hover:text-primary-700 transition-colors">
+                    <h3 className="font-display text-base font-normal text-white transition-opacity group-hover:opacity-95">
                       {club.title}
                     </h3>
-                    <P className="mt-2 line-clamp-2 font-body text-xs text-ink-muted">
+                    <P className="mt-2 line-clamp-2 font-body text-xs text-white/85">
                       {club.tagline}
                     </P>
                   </div>
 
-                  <div className="mt-4 flex items-center gap-1.5 font-body text-xs font-semibold text-primary-700 group-hover:text-primary-800">
+                  <div className="mt-4 flex items-center gap-1.5 font-body text-xs font-semibold text-white/90 group-hover:text-white">
                     <span>View details</span>
                     <Icon
                       className="size-3 transition-transform group-hover:translate-x-1"

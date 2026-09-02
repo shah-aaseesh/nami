@@ -24,7 +24,13 @@ export function useCarouselAutoplay({
   useEffect(() => {
     if (!api || !enabled || isPaused) return;
     const id = window.setInterval(() => {
-      if (!document.hidden) api.scrollNext();
+      if (!document.hidden) {
+        if (api.canScrollNext()) {
+          api.scrollNext();
+        } else {
+          api.scrollTo(0);
+        }
+      }
     }, intervalMs);
     return () => window.clearInterval(id);
   }, [api, enabled, intervalMs, isPaused, selectedIndex]);

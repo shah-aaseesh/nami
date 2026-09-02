@@ -36,6 +36,7 @@ export async function SiteFooter() {
     <>
       <SiteCtaBand
         heading="Subscribe to our Newsletter"
+        onFooterSeam
         standfirst={group.name}
       />
 

@@ -47,7 +47,7 @@ export function ClubOtherRail({
           {otherClubs.map((club) => (
             <RevealItem className="h-full" key={club.slug}>
               <Link
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-[#BD1B21]/50 hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#BD1B21]/80 bg-[#BD1B21] shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 href={`/institutions/a-levels/clubs/${club.slug}` as Route}
               >
                 <div className="relative aspect-16/10 w-full overflow-hidden bg-neutral-900">
@@ -61,25 +61,25 @@ export function ClubOtherRail({
                   />
                 </div>
 
-                <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
+                <div className="flex flex-1 flex-col justify-between bg-[#BD1B21] p-5 sm:p-6 text-white">
                   <div>
                     <H3
                       as="h3"
-                      className="font-display text-lg font-normal text-ink transition-colors group-hover:text-[#BD1B21] sm:text-xl"
+                      className="font-display text-lg font-normal text-white transition-opacity group-hover:opacity-95 sm:text-xl"
                     >
                       {club.title}
                     </H3>
 
-                    <P className="mt-2 line-clamp-2 font-body text-xs text-ink-muted leading-relaxed sm:text-sm">
+                    <P className="mt-2 line-clamp-2 font-body text-xs text-white/85 leading-relaxed sm:text-sm">
                       {club.tagline}
                     </P>
                   </div>
 
-                  <div className="mt-5 flex items-center justify-between border-t border-border/60 pt-3">
-                    <span className="font-body text-xs font-semibold text-[#BD1B21] transition-colors group-hover:text-[#9e1419]">
+                  <div className="mt-5 flex items-center justify-between border-t border-white/20 pt-3">
+                    <span className="font-body text-xs font-semibold text-white/90 transition-colors group-hover:text-white">
                       Explore Club
                     </span>
-                    <span className="flex size-7 items-center justify-center rounded-full bg-[#BD1B21]/10 text-[#BD1B21] transition-all duration-200 group-hover:bg-[#BD1B21] group-hover:text-white group-hover:translate-x-1">
+                    <span className="flex size-7 items-center justify-center rounded-full bg-white text-[#BD1B21] shadow-xs transition-all duration-200 group-hover:scale-110 group-hover:bg-white group-hover:translate-x-1">
                       <Icon className="size-3.5" icon={ArrowRightIcon} />
                     </span>
                   </div>

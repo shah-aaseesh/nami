@@ -43,10 +43,10 @@ export function AboutOverview({
 
           {image === null ? null : (
             <Reveal className="lg:col-span-5" y={32}>
-              <figure className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/4.5] w-full overflow-hidden rounded-3xl border border-border/80 bg-surface-raised shadow-sm">
+              <figure className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] w-full overflow-hidden rounded-3xl border border-border/80 bg-surface-raised shadow-sm">
                 <Image
                   alt={image.alt}
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
                   height={image.height}
                   loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 480px"

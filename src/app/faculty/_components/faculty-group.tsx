@@ -128,7 +128,7 @@ export function FacultyGroup({
 
           <div
             className={cn(
-              "flex items-start gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:overflow-visible pb-4",
+              "flex items-stretch gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:overflow-visible pb-4",
               isSolo ? "justify-center overflow-visible" : "md:justify-center",
             )}
           >

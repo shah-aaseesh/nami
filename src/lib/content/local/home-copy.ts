@@ -60,10 +60,9 @@ export const homeCopy: HomeCopy = {
     },
     affiliations: {
       navLabel: "Accreditation",
-      eyebrow: "Recognition",
+      eyebrow: null,
       heading: "Accredited where it counts.",
-      standfirst:
-        "Every programme carries the seal of the board or university that awards it.",
+      standfirst: null,
       cta: null,
       emptyState: null,
     },

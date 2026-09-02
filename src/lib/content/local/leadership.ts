@@ -2,6 +2,7 @@ import { entryOf } from "../identifiers";
 import type { Leader, LeadershipProfile } from "../types";
 import {
   anishaPandayJoshiPortrait,
+  karunRegmiPortrait,
   nischalKhadkaPortrait,
   philipBadikarHilarioPortrait,
   pranilPandeyPortrait,
@@ -143,6 +144,28 @@ At NAMI, Mr. Pandey leads key strategic initiatives, including institutional acc
 
 Mr. Pandey holds a Master's degree in Management, a Bachelor of Business Administration (BBA) from IEC University, and completed his GCE A and O Levels under the University of Cambridge curriculum.`,
     portrait: pranilPandeyPortrait,
+  },
+  {
+    ...entryOf("leader-karun-regmi"),
+    name: "Mr. Karun Regmi",
+    title: "Head, Business Development And Marketing & Branding",
+    group: "management",
+    brief:
+      "Head of Business Development and Marketing & Branding at NAMI, bringing multidisciplinary expertise in marketing strategy, brand communications, banking operations, and media content development. Holds an MBS from Tribhuvan University.",
+    bio: `Mr. Karun Regmi is an experienced professional currently serving as the Head of Marketing and Branding at Naaya Aayam Multi-Disciplinary Institute (NAMI). He has professional experience spanning marketing and branding, communication, content development, banking, credit management, branch operations and customer relations. Mr. Regmi holds strong leadership, communication, analytical and problem-solving skills.
+
+At NAMI, Mr. Regmi is responsible for supporting the institution's marketing, branding, communication and promotional activities. His role involves contributing to institutional visibility, policy making, developing communication and promotional content, coordinating marketing initiatives and supporting the organization's overall branding and outreach efforts.
+
+Prior to joining NAMI, he gained extensive experience in the banking and financial services sector. He worked as an Assistant at Muktinath Bikas Bank Ltd. for two years, handling retail and SME credit-related activities, credit file preparation and legal documentation reporting. He subsequently worked as an Assistant at Garima Bikas Bank Ltd. for two years, where he was involved in retail and SME credit functions, documentation, customer service and credit file management.
+
+He also worked for two years at Kamana Sewa Bikas Bank Ltd. as a Branch Manager/Supervisor, where he was responsible for branch operations, deposit-related activities, customer service, staff coordination and communication with the Head Office.
+
+In the field of communication and media, Karun worked as a Content Writing Expert at Shilalekha Multimedia Pvt. Ltd., Banke and Montage Media Pvt. Ltd., Surkhet, gaining experience in content development and communication. He also served as an Officer/Content Writing Expert at the Trade and Export Promotion Centre, Pulchowk, Lalitpur, where he was involved in content development, communication, documentation and information dissemination.
+
+Mr. Regmi holds a Master of Business Studies (MBS) from Baneshwor Multiple Campus, Tribhuvan University. He has completed professional training in Advanced Office Package, General Banking Knowledge and Basic Credit Management. He possesses practical skills in MS Office, communication, content development, documentation, marketing coordination and stakeholder engagement.
+
+Mr. Regmi has strong leadership, communication, interpersonal, coordination and organizational skills. His diverse professional background in marketing, banking, communication and media enables him to bring a practical and multidisciplinary approach to institutional branding, stakeholder engagement and organizational development at NAMI.`,
+    portrait: karunRegmiPortrait,
   },
 ];
 

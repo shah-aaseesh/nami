@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useId } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
@@ -9,26 +10,51 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { H3, P } from "@/components/ui/typography";
 import { ArrowUpRightIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type SiteCtaBandProps = {
   heading: string;
   standfirst: string;
+  onFooterSeam?: boolean;
+  className?: string;
 };
 
-export function SiteCtaBand({ heading, standfirst }: SiteCtaBandProps) {
+export function SiteCtaBand({
+  heading,
+  standfirst,
+  onFooterSeam = false,
+  className,
+}: SiteCtaBandProps) {
   const headingId = useId();
   const nameId = useId();
   const emailId = useId();
 
+  const pathname = usePathname();
+  const isInstitutionPage = pathname?.startsWith("/institutions");
+
+  // Suppress footer-seam newsletter band on institution pages
+  if (onFooterSeam && isInstitutionPage) {
+    return null;
+  }
+
   return (
-    <section aria-labelledby={headingId} className="relative gutter-x">
-      <div
-        aria-hidden="true"
-        className="field-brand absolute inset-x-0 top-1/2 bottom-0"
-      />
+    <section
+      aria-labelledby={headingId}
+      className={cn(
+        "relative gutter-x",
+        onFooterSeam ? "" : "py-10 sm:py-12 lg:py-14",
+        className,
+      )}
+    >
+      {onFooterSeam && (
+        <div
+          aria-hidden="true"
+          className="field-brand absolute inset-x-0 top-1/2 bottom-0"
+        />
+      )}
 
       <Reveal className="relative mx-auto max-w-page">
-        <div className="field-ink flex flex-col items-start justify-between gap-y-6 rounded-xl px-6 py-7 sm:px-10 sm:py-8 lg:flex-row lg:items-center lg:gap-x-8 lg:px-12 lg:py-7">
+        <div className="field-ink flex flex-col items-start justify-between gap-y-6 rounded-xl px-6 py-7 sm:px-10 sm:py-8 lg:flex-row lg:items-center lg:gap-x-8 lg:px-12 lg:py-7 shadow-lg">
           <div className="flex items-center gap-4 sm:gap-6">
             <div className="shrink-0 overflow-hidden rounded-xl bg-white p-2 sm:p-2.5 shadow-md">
               <Image

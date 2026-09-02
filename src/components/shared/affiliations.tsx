@@ -10,7 +10,7 @@ function SectionHead({ copy }: { copy: SectionCopy }) {
   return (
     <SectionHeader
       eyebrow={copy.heading}
-      title={copy.eyebrow ?? "Accreditation"}
+      title={copy.eyebrow}
       description={copy.standfirst}
     />
   );
@@ -74,16 +74,16 @@ export async function Affiliations({ section }: { section: SectionCopy }) {
   );
 
   return (
-    <section className="gutter-x section-y" id="affiliations">
+    <section className="gutter-x section-y-compact" id="affiliations">
       <div className="mx-auto max-w-page">
         <SectionHead copy={section} />
 
         {timeline.length === 0 ? (
           section.emptyState === null ? null : (
-            <P className="mt-12 lg:w-5/12">{section.emptyState}</P>
+            <P className="mt-6 lg:w-5/12">{section.emptyState}</P>
           )
         ) : (
-          <Reveal className="mt-10 lg:mt-14" y={32}>
+          <Reveal className="mt-6 sm:mt-8" y={16}>
             <Marquee
               copies={3}
               label={section.eyebrow ?? section.heading}

@@ -15,7 +15,7 @@ export interface SectionHeaderProps {
   /** The small uppercase tag/strapline above the border */
   eyebrow?: ReactNode;
   /** Main section heading */
-  title: ReactNode;
+  title?: ReactNode;
   /** Secondary description/standfirst copy */
   description?: ReactNode;
   /** Optional CTA button, link, or controls placed on the right */
@@ -111,9 +111,16 @@ export function SectionHeader({
   };
 
   const renderBody = () => {
+    if (!title && !description && !action) return null;
+
     if (effectiveLayout === "split") {
       return (
-        <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-x-16">
+        <div
+          className={cn(
+            eyebrow ? "mt-4" : "",
+            "flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-x-16",
+          )}
+        >
           <div>{renderTitle()}</div>
           {description && (
             <div className="lg:max-w-md">{renderDescription()}</div>
@@ -125,7 +132,12 @@ export function SectionHeader({
     if (effectiveLayout === "action") {
       return (
         <>
-          <div className="mt-4 flex items-center justify-between gap-4 sm:items-start sm:gap-x-8">
+          <div
+            className={cn(
+              eyebrow ? "mt-4" : "",
+              "flex items-center justify-between gap-4 sm:items-start sm:gap-x-8",
+            )}
+          >
             <div>{renderTitle()}</div>
             {action && (
               <div className="shrink-0 sm:self-start">
@@ -140,7 +152,7 @@ export function SectionHeader({
 
     // "stacked" layout
     return (
-      <div className="mt-4 max-w-3xl">
+      <div className={cn(eyebrow ? "mt-4" : "", "max-w-3xl")}>
         <div>{renderTitle()}</div>
         {description && renderDescription("mt-4 max-w-2xl")}
         {action && (

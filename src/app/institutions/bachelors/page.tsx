@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SiteCtaBand } from "@/components/layout/site-cta-band";
 import { CareerPlacement } from "@/components/shared/career-placement";
 import { InstitutionAwarding } from "@/components/shared/institution-awarding";
 import { InstitutionClubsSection } from "@/components/shared/institution-clubs-section";
@@ -109,6 +110,11 @@ export default async function BachelorsPage() {
       />
 
       <InstitutionEnrollCta institution="institute" />
+
+      <SiteCtaBand
+        heading="Subscribe to our Newsletter"
+        standfirst={institution.entities.institute.name}
+      />
 
       <InstitutionContact id="contact" institution="institute" />
     </>

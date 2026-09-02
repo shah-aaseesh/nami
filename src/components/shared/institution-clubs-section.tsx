@@ -57,14 +57,14 @@ export function InstitutionClubsSection({
         aria-label="ECA / CLUBS"
         aria-roledescription="carousel"
         autoplay={true}
-        autoplayIntervalMs={2800}
+        autoplayIntervalMs={2500}
         opts={{
           align: "start",
           duration: 35,
           loop: true,
           slidesToScroll: 1,
         }}
-        pauseOnHover={true}
+        pauseOnHover={false}
       >
         <div className="mx-auto max-w-page">
           <SectionHeader

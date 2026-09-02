@@ -107,7 +107,7 @@ export function Carousel({
 
   const { pause, resume } = useCarouselAutoplay({
     api,
-    enabled: autoplay && scrollSnaps.length > 1,
+    enabled: autoplay && (scrollSnaps.length > 1 || Boolean(api)),
     intervalMs: autoplayIntervalMs,
     selectedIndex,
   });

@@ -20,18 +20,19 @@ export function useCarouselAutoplay({
 }) {
   const [isPaused, setIsPaused] = useState(false);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: selectedIndex is an intentional re-key — every slide change (arrows, dots, swipe) must restart the autoplay countdown.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: selectedIndex restarts the timer on manual navigation
   useEffect(() => {
     if (!api || !enabled || isPaused) return;
+
     const id = window.setInterval(() => {
-      if (!document.hidden) {
-        if (api.canScrollNext()) {
-          api.scrollNext();
-        } else {
-          api.scrollTo(0);
-        }
+      if (document.hidden) return;
+      if (api.canScrollNext()) {
+        api.scrollNext();
+      } else {
+        api.scrollTo(0);
       }
     }, intervalMs);
+
     return () => window.clearInterval(id);
   }, [api, enabled, intervalMs, isPaused, selectedIndex]);
 

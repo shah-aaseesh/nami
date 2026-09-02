@@ -180,7 +180,6 @@ export function GalleryArchive({
     setWingFilter("all");
     setCategoryFilter("all");
     setSearchQuery("");
-    onResetAlbum?.();
   };
 
   const institutionOptions: readonly FilterOption<GalleryFilter>[] = [

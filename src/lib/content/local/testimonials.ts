@@ -24,7 +24,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "Cambridge A-Level (Science)",
     institution: "college",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
   {
     ...entryOf("anisha-gurung"),
@@ -34,7 +34,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "Cambridge A-Level (Science)",
     institution: "college",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
   {
     ...entryOf("nirdishta-amatya"),
@@ -44,7 +44,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BSc (Hons) Environmental Science",
     institution: "institute",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
   {
     ...entryOf("ronak-bastola"),
@@ -54,7 +54,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BSc (Hons) Computing (Software Engineering)",
     institution: "institute",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
   {
     ...entryOf("ananda-roy"),
@@ -64,7 +64,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "Bachelor of Business Administration (BBA)",
     institution: "institute",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
   {
     ...entryOf("devashree-niroula"),
@@ -74,7 +74,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: null,
     institution: "institute",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
   {
     ...entryOf("yamato-sherpa"),
@@ -84,7 +84,7 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BBA (Hons)",
     institution: "institute",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
   {
     ...entryOf("pankaj-badu"),
@@ -94,6 +94,6 @@ export const testimonials: readonly Testimonial[] = [
     programme: "BSc (Hons) Computing",
     institution: "institute",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: null,
   },
 ];

@@ -28,7 +28,7 @@ export function WhySchoolSection() {
                 <span className="h-px flex-1 bg-border" />
               </div>
               <SplitText as="h2" className="mt-4 text-ink">
-                Why School at NAMI?
+                Why Study at NAMI?
               </SplitText>
             </Reveal>
           </div>

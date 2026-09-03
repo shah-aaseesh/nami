@@ -5,7 +5,6 @@ import { H6, P } from "@/components/ui/typography";
 import type { ContentImage, RichText } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content";
 import { ImageIcon } from "@/lib/icons";
-import { PrincipalPortraitPin } from "./principal-portrait-pin";
 
 export type PrincipalMessagePerson = {
   readonly name: string;
@@ -63,26 +62,20 @@ export function PrincipalMessage({
   return (
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
-        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-10">
-          <Reveal className="flex flex-col gap-4 lg:col-span-9 lg:row-start-1">
-            <H6
-              as="p"
-              className="text-accent tracking-widest uppercase font-body"
-            >
-              {eyebrow}
-            </H6>
+        <Reveal className="flex flex-col gap-4">
+          <H6
+            as="p"
+            className="text-accent tracking-widest uppercase font-body"
+          >
+            {eyebrow}
+          </H6>
 
-            <span className="block h-1 w-16 rounded-full bg-accent" />
-          </Reveal>
+          <span className="block h-1 w-16 rounded-full bg-accent" />
+        </Reveal>
 
-          <PrincipalPortraitPin className="mx-auto max-w-xs lg:col-span-3 lg:col-start-10 lg:row-start-1 lg:row-span-2 lg:mx-0 lg:max-w-none">
-            <Reveal>
-              <PortraitCard person={person} />
-            </Reveal>
-          </PrincipalPortraitPin>
-
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-10 items-start">
           <Reveal
-            className="space-y-5 lg:col-span-9 lg:row-start-2"
+            className="space-y-5 lg:col-span-8 xl:col-span-9"
             stagger={0.1}
           >
             {letter.map((paragraph, index) => (
@@ -92,6 +85,12 @@ export function PrincipalMessage({
               </RevealItem>
             ))}
           </Reveal>
+
+          <div className="mx-auto w-full max-w-xs lg:col-span-4 xl:col-span-3 lg:mx-0 lg:max-w-none">
+            <Reveal>
+              <PortraitCard person={person} />
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

@@ -9,7 +9,7 @@ export const academicLevels: readonly AcademicLevel[] = [
   {
     ...entryOf("school"),
     entity: "school",
-    stage: `${schoolGrades.label}, and +2 NEB in Science and Management`,
+    stage: `From Grades ${schoolGrades.first} through ${schoolGrades.last} and +2 in Science and Management`,
     summary: richText(
       `NAMI International School opened its primary division in 2024 and now teaches ${schoolGrades.labelPlural} within the framework of the Government of Nepal's National Curriculum, with Mandarin introduced as a foreign language from Grade I and computer instruction from the first grade.`,
       "The school has also offered National Examination Board affiliated +2 programmes in Science and Management since 2019, taught in modern classrooms with well-equipped science laboratories, ICT facilities and a well-stocked library.",

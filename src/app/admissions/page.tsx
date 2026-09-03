@@ -16,14 +16,14 @@ export default function AdmissionsPage() {
     <>
       <section className="gutter-x section-y-masthead">
         <div className="mx-auto max-w-page">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-x-10 items-end">
             <div className="lg:col-span-7">
               <Eyebrow>Admissions</Eyebrow>
-              <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+              <Display className="mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                 Start Your Journey
               </Display>
             </div>
-            <Standfirst className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
+            <Standfirst className="mt-5 max-w-xl text-neutral-700 lg:col-span-5 lg:mt-0">
               Join a progressive academic institution offering global standards
               of education from School to Bachelor level. Transform yourself to
               lead the world.

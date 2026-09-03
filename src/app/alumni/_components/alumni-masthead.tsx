@@ -19,12 +19,12 @@ export function AlumniMasthead({
           <div className="lg:col-span-7">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
 
-            <h1 className="mt-5 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-balance text-ink">
+            <h1 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-balance text-ink">
               {copy.heading}
             </h1>
 
             {copy.standfirst === "" ? null : (
-              <Standfirst className="mt-6 max-w-xl text-ink-muted">
+              <Standfirst className="mt-5 max-w-xl text-neutral-700 leading-relaxed">
                 {copy.standfirst}
               </Standfirst>
             )}

@@ -57,7 +57,7 @@ export async function Hero() {
 
   const splitAt = hero.headline.indexOf(", ");
   const lead =
-    splitAt === -1 ? hero.headline : hero.headline.slice(0, splitAt + 1);
+    splitAt === -1 ? hero.headline : hero.headline.slice(0, splitAt);
   const tail = splitAt === -1 ? null : hero.headline.slice(splitAt + 2);
 
   const heroSlides = hero.images;
@@ -68,19 +68,23 @@ export async function Hero() {
       id="hero"
     >
       <div className="relative mx-auto max-w-page">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 sm:gap-3.5">
           <Icon
-            className="size-5 sm:size-6 text-accent"
+            className="size-6 sm:size-7 text-accent shrink-0"
             icon={MortarboardIcon}
           />
-          <Eyebrow>{hero.eyebrow}</Eyebrow>
+          <Eyebrow className="text-base sm:text-lg lg:text-xl font-medium tracking-normal sm:tracking-wide">
+            {hero.eyebrow}
+          </Eyebrow>
         </div>
 
-        <div className="mt-4 sm:mt-6 lg:mt-7 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
-          <HeroHeadline className="lg:col-span-7" lead={lead} tail={tail} />
+        <div className="mt-4 sm:mt-5 lg:mt-6 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-12 items-start">
+          <HeroHeadline className="lg:col-span-6 xl:col-span-6" lead={lead} tail={tail} />
 
-          <div className="mt-6 sm:mt-8 flex flex-col items-start gap-4 sm:gap-6 lg:col-span-4 lg:col-start-9 lg:mt-0">
-            <Standfirst>{hero.standfirst}</Standfirst>
+          <div className="mt-5 flex flex-col items-start gap-4 sm:gap-5 lg:col-span-6 xl:col-span-6 lg:mt-0">
+            <Standfirst className="text-sm sm:text-base leading-relaxed text-neutral-700">
+              {hero.standfirst}
+            </Standfirst>
             <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <HeroCta link={hero.primaryCta} variant="default" />
               <HeroCta link={hero.secondaryCta} variant="outline" />
@@ -88,7 +92,7 @@ export async function Hero() {
           </div>
         </div>
 
-        <div className="mt-6 sm:mt-8 lg:mt-8 xl:mt-10 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
+        <div className="mt-4 sm:mt-5 lg:mt-6 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
           <HeroBadgePin className="lg:col-span-2">
             <div className="relative flex items-start justify-start lg:flex-col lg:items-start lg:justify-start">
               <HeroBadge
@@ -100,13 +104,13 @@ export async function Hero() {
           </HeroBadgePin>
 
           {heroSlides.length === 0 ? null : (
-            <figure className="mt-6 lg:col-span-10 lg:col-start-3 lg:mt-0">
+            <figure className="mt-4 lg:col-span-10 lg:col-start-3 lg:mt-0">
               <Carousel
                 aria-label={hero.eyebrow}
                 aria-roledescription="carousel"
                 autoplay
                 autoplayIntervalMs={5000}
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-3 sm:gap-4"
                 opts={{ align: "start", duration: 20, loop: true }}
                 pauseOnHover={false}
               >

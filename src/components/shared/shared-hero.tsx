@@ -38,7 +38,7 @@ export function SharedHero({
   return (
     <section
       aria-label={entity.name}
-      className="gutter-x section-y-masthead pt-10"
+      className="gutter-x pt-2 pb-6 sm:pt-4 sm:pb-8 lg:pt-4 lg:pb-10"
     >
       <div className="mx-auto max-w-page">
         <SharedHeroSlider

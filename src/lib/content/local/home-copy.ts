@@ -9,10 +9,10 @@ import {
 
 export const homeCopy: HomeCopy = {
   hero: {
-    eyebrow: "Naaya Aayam Multi-Disciplinary Institute · Kathmandu",
-    headline: "Transform yourself, to lead the world",
+    eyebrow: "Transform yourself, to lead the world",
+    headline: "Naaya Aayam Multi-Disciplinary Institute",
     standfirst:
-      "Grade 1 to a Master's degree on one academic pathway — NEB, Cambridge and British qualifications, taught in Kathmandu.",
+      "At NAMI, we provide a comprehensive academic pathway from Grade 1 to Master’s degree, empowering learners through world-class education, holistic development and leadership to transform themselves and lead the world.",
     primaryCta: {
       label: "Start an application",
       href: "/admissions",
@@ -35,17 +35,17 @@ export const homeCopy: HomeCopy = {
     about: {
       navLabel: "About NAMI",
       eyebrow: "NAMI since 2012",
-      heading: "A Nepali institution, built to world standards.",
+      heading:
+        "A Nepali entity committed to delivering education of global standards.",
       standfirst: null,
       cta: null,
       emptyState: null,
     },
     levels: {
       navLabel: "Institutions",
-      eyebrow: "Institutions and training",
-      heading: "Under one name, separately accredited.",
-      standfirst:
-        "Grade 1 to a Master's degree, and short-term vocational training alongside them. Each stands on its own accreditation.",
+      eyebrow: "NAMI Entities",
+      heading: "One Name, Independently Accredited Educational Institutions.",
+      standfirst: null,
       cta: null,
       emptyState: null,
     },
@@ -61,7 +61,7 @@ export const homeCopy: HomeCopy = {
     affiliations: {
       navLabel: "Accreditation",
       eyebrow: null,
-      heading: "Accredited where it counts.",
+      heading: "Accredited for Excellence.",
       standfirst: null,
       cta: null,
       emptyState: null,
@@ -85,10 +85,10 @@ export const homeCopy: HomeCopy = {
     },
     stats: {
       navLabel: "NAMI in numbers",
-      eyebrow: "The record",
-      heading: "The institution, in numbers.",
+      eyebrow: "Our Milestones",
+      heading: "NAMI, by the Numbers.",
       standfirst:
-        "Over a decade of academic excellence, measured across four learning tiers and the thousands of students who shape our community.",
+        "Over a decade of academic excellence, shaped across four learning tiers and a thriving community of thousands.",
       cta: null,
       emptyState: null,
     },
@@ -104,7 +104,7 @@ export const homeCopy: HomeCopy = {
     updates: {
       navLabel: "Notices",
       eyebrow: "Notices",
-      heading: "What's happening at NAMI.",
+      heading: "",
       standfirst: null,
       cta: {
         label: "View all notices",

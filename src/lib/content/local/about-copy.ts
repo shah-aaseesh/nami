@@ -90,8 +90,8 @@ export const aboutCopy: AboutCopy = {
     },
     stats: {
       navLabel: "NAMI in numbers",
-      eyebrow: "The record",
-      heading: "The institution, in numbers.",
+      eyebrow: "Our Milestones",
+      heading: "NAMI, by the Numbers.",
       standfirst:
         "A decade of teaching across four academic levels, measured in the people it has graduated.",
       cta: null,

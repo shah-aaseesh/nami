@@ -52,7 +52,7 @@ export async function Updates() {
       : (section.cta.href as Route);
 
   return (
-    <section className="gutter-x section-y" id="updates">
+    <section className="gutter-x section-y-compact" id="updates">
       <div className="mx-auto max-w-page">
         <SectionHeader
           action={
@@ -65,11 +65,11 @@ export async function Updates() {
         />
 
         {updates.length === 0 && section.emptyState !== null ? (
-          <P className="mt-12 max-w-xl">{section.emptyState}</P>
+          <P className="mt-8 max-w-xl">{section.emptyState}</P>
         ) : null}
 
         {updates.length === 0 ? null : (
-          <Reveal className="mt-10 lg:mt-14" stagger={0.08}>
+          <Reveal className="mt-6 sm:mt-8" stagger={0.08}>
             <UpdateBoard indexHref={indexHref} items={updates} />
           </Reveal>
         )}

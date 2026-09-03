@@ -18,27 +18,27 @@ export function Stats({
   if (rows.length === 0) return null;
 
   return (
-    <section className="field-brand gutter-x section-y" id="stats">
+    <section className="field-brand gutter-x section-y-compact" id="stats">
       <div className="mx-auto max-w-page">
         <SectionHeader
           description={section.standfirst}
           eyebrow={section.heading}
-          layout="split"
+          layout="stacked"
           title={section.eyebrow ?? "NAMI in numbers"}
         />
 
         <div
           className={
             poster === null
-              ? "mt-8 lg:mt-12"
-              : "mt-8 lg:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12 lg:items-stretch"
+              ? "mt-6 sm:mt-8"
+              : "mt-6 sm:mt-8 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-8 xl:gap-10 lg:items-stretch"
           }
         >
           <div
             className={
               poster === null
                 ? ""
-                : "lg:col-span-7 flex flex-col justify-center"
+                : "lg:col-span-7 flex flex-col justify-start"
             }
           >
             <Reveal

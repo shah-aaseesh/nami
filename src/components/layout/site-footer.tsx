@@ -59,9 +59,11 @@ export async function SiteFooter() {
 
                 <p className="mt-4 font-body text-xs font-normal leading-relaxed text-white/90 text-justify">
                   Naaya Aayam Multi-Disciplinary Institute (NAMI) is an
-                  educational institution with the aim of contributing
-                  meaningfully to Nepal&apos;s social and economic development
-                  through the delivery of high-quality education.
+                  educational entity established in 2012, committed to
+                  advancing human capital through world-class education, global
+                  standards and holistic development while empowering
+                  individuals with the knowledge, skills and leadership
+                  capabilities to create meaningful impact locally and globally.
                 </p>
 
                 <div className="mt-5 flex items-center gap-2.5">
@@ -159,6 +161,45 @@ export async function SiteFooter() {
                       <span>{contact.byEntity.school.email}</span>
                     </Link>
                   </div>
+
+                  <div className="mt-3 flex items-center gap-2">
+                    <Link
+                      href={"https://www.facebook.com/namischoolnepal/" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI School Facebook"
+                    >
+                      <Icon icon={FacebookIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.instagram.com/nami.school/" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI School Instagram"
+                    >
+                      <Icon icon={InstagramIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.youtube.com/user/naminepal" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI School YouTube"
+                    >
+                      <Icon icon={YouTubeIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.tiktok.com/@namicollege" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI School TikTok"
+                    >
+                      <Icon icon={TikTokIcon} className="size-3.5" />
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="border-t border-white/15 pt-4">
@@ -196,6 +237,45 @@ export async function SiteFooter() {
                         className="size-3.5 shrink-0 text-white"
                       />
                       <span>{contact.byEntity.college.email}</span>
+                    </Link>
+                  </div>
+
+                  <div className="mt-3 flex items-center gap-2">
+                    <Link
+                      href={"https://www.facebook.com/NamiCollege/" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI College Facebook"
+                    >
+                      <Icon icon={FacebookIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.instagram.com/namicollege/" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI College Instagram"
+                    >
+                      <Icon icon={InstagramIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.linkedin.com/company/nami-college" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI College LinkedIn"
+                    >
+                      <Icon icon={LinkedInIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.tiktok.com/@namicollege" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI College TikTok"
+                    >
+                      <Icon icon={TikTokIcon} className="size-3.5" />
                     </Link>
                   </div>
                 </div>
@@ -237,6 +317,54 @@ export async function SiteFooter() {
                         className="size-3.5 shrink-0 text-white"
                       />
                       <span>{contact.byEntity.institute.email}</span>
+                    </Link>
+                  </div>
+
+                  <div className="mt-3 flex items-center justify-center gap-2">
+                    <Link
+                      href={"https://www.facebook.com/NamiCollege/" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI Institute Facebook"
+                    >
+                      <Icon icon={FacebookIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.instagram.com/namicollege/" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI Institute Instagram"
+                    >
+                      <Icon icon={InstagramIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.linkedin.com/company/nami-college" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI Institute LinkedIn"
+                    >
+                      <Icon icon={LinkedInIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.youtube.com/user/naminepal" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI Institute YouTube"
+                    >
+                      <Icon icon={YouTubeIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.tiktok.com/@namicollege" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI Institute TikTok"
+                    >
+                      <Icon icon={TikTokIcon} className="size-3.5" />
                     </Link>
                   </div>
                 </div>

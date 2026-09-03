@@ -175,14 +175,11 @@
     }
   }
 
-  /* Spacing Design System Tokens - tightened for balanced whitespace */
-  --spacing-section-py: clamp(2.5rem, 1.75rem + 1.5vw, 4.25rem);
+  /* Spacing Design System Tokens - standardized for balanced visual cadence */
+  --spacing-section-py: clamp(2rem, 1.25rem + 1.2vw, 3.5rem);
   --spacing-section-py-compact: clamp(1.25rem, 0.85rem + 0.75vw, 2rem);
   --spacing-section-py-hero: clamp(1.25rem, 1rem + 0.75vw, 2.25rem);
-  --spacing-section-pt-masthead: calc(
-    var(--spacing-section-py-hero) +
-    clamp(1.5rem, 1rem + 1.5vw, 2.75rem)
-  );
+  --spacing-section-pt-masthead: clamp(1.5rem, 1rem + 1vw, 2.5rem);
 }
 
 @utility gutter-x {

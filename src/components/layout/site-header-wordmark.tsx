@@ -20,14 +20,14 @@ export function SiteHeaderWordmark({
     <Image
       alt={name}
       className={cn(
-        "w-auto transition-[height] duration-300",
-        scrolled ? "h-16" : "h-18 lg:h-20",
+        "w-auto transition-[height] duration-300 object-contain",
+        scrolled ? "h-14 sm:h-16" : "h-18 sm:h-22 lg:h-24",
         className,
       )}
       data-slot="wordmark"
       height={MARK_HEIGHT}
       loading="eager"
-      sizes="(min-width: 1024px) 80px, 64px"
+      sizes="(min-width: 1024px) 120px, 90px"
       src={MARK_SRC}
       width={MARK_WIDTH}
     />

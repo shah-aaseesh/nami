@@ -14,7 +14,7 @@ export function GalleryMasthead({
   readonly copy: GalleryMastheadCopy;
 }) {
   return (
-    <section className="gutter-x pt-10 sm:pt-14 pb-8 sm:pb-10">
+    <section className="gutter-x section-y-masthead">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-12 items-end">
           <Reveal className="lg:col-span-7" stagger={0.08}>
@@ -27,7 +27,7 @@ export function GalleryMasthead({
             )}
             <SplitText
               as="h1"
-              className={`${copy.eyebrow ? "mt-3 " : ""}font-display text-4xl sm:text-5xl md:text-6xl font-normal text-ink leading-[1.1] tracking-tight`}
+              className={`${copy.eyebrow ? "mt-3 " : ""}font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-ink leading-[1.1] tracking-tight`}
             >
               {copy.heading}
             </SplitText>

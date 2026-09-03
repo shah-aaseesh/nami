@@ -17,7 +17,10 @@ export async function About({
   const paragraphs = paragraphsOf(overview).slice(0, 2);
 
   return (
-    <section className="gutter-x section-y" id="about">
+    <section
+      className="gutter-x pt-8 sm:pt-10 lg:pt-12 pb-16 sm:pb-20"
+      id="about"
+    >
       <div className="mx-auto max-w-page">
         {/* Full-width Eyebrow Bar at top for clean horizontal alignment */}
         <Reveal>

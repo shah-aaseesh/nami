@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Parallax } from "@/components/motion/parallax";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Eyebrow, Standfirst } from "@/components/ui/typography";
+import { Standfirst } from "@/components/ui/typography";
 import type { AboutCopy } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -17,21 +17,20 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
       id="about"
     >
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
-          <div className="lg:col-span-7">
-            <Eyebrow>About NAMI</Eyebrow>
-            <h1 className="mt-2.5 sm:mt-3.5 font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-normal tracking-tight leading-[1.1] text-balance text-ink">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-12 items-start">
+          <div className="lg:col-span-6 xl:col-span-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-normal tracking-tight leading-[1.1] text-balance text-ink">
               {copy.title}
             </h1>
           </div>
 
-          <div className="mt-5 sm:mt-6 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:flex lg:flex-col lg:justify-between lg:self-end">
+          <div className="mt-5 max-w-xl lg:col-span-6 xl:col-span-6 lg:mt-0 flex flex-col justify-start">
             {copy.standfirst === "" ? null : (
-              <Standfirst className="text-ink-muted text-sm sm:text-base">
+              <Standfirst className="text-neutral-700 text-sm sm:text-base leading-relaxed">
                 {copy.standfirst}
               </Standfirst>
             )}
-            <div className="mt-4 sm:mt-5 lg:mt-6">
+            <div className="mt-4 sm:mt-5">
               <Link
                 className={cn(
                   buttonVariants({ size: "lg", variant: "default" }),

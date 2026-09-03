@@ -29,26 +29,26 @@ function InstitutionCard({
 
   return (
     <li
-      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-primary-900/10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-primary-900/15 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
       data-reveal-item=""
     >
       {level.image === null ? null : (
         <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
           <Image
             alt={level.image.alt}
-            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-103"
+            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             height={level.image.height}
             sizes={MEDIA_SIZES}
             src={level.image.src}
             width={level.image.width}
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/10" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/15" />
 
           <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
             {established === null ? (
               <span />
             ) : (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/70 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/75 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
                 <span className="size-1.5 rounded-full bg-primary-400" />
                 <span>{established}</span>
               </span>
@@ -57,16 +57,16 @@ function InstitutionCard({
         </figure>
       )}
 
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <H5
           as="h3"
-          className="font-display text-lg font-normal leading-snug text-neutral-900"
+          className="font-display text-xl font-medium leading-tight text-primary-700 group-hover:text-primary-800 transition-colors"
         >
           {href === null ? (
             entity.name
           ) : (
             <Link
-              className="transition-colors after:absolute after:inset-0 group-hover:text-primary-700"
+              className="after:absolute after:inset-0 focus-visible:outline-none"
               href={href}
             >
               {entity.name}
@@ -74,9 +74,24 @@ function InstitutionCard({
           )}
         </H5>
 
-        <p className="mt-2 mb-5 font-body text-xs font-normal leading-relaxed text-neutral-600">
+        <p className="mt-2.5 font-body text-sm font-medium leading-snug text-neutral-800">
           {level.stage}
         </p>
+
+        {/* Highlights List to fulfill the gap */}
+        {level.highlights && level.highlights.length > 0 && (
+          <ul className="mt-4 mb-5 space-y-2 border-t border-neutral-100 pt-3.5 flex-1">
+            {level.highlights.slice(0, 3).map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-2 font-body text-xs text-neutral-600 leading-snug"
+              >
+                <span className="mt-1 size-1.5 rounded-full bg-primary-600 shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
         <div className="mt-auto flex items-center justify-between border-t border-neutral-100 pt-3.5">
           <span className="font-body text-xs font-semibold text-primary-800 transition-colors group-hover:text-primary-950">
@@ -100,23 +115,23 @@ function VocationalCard({
 }) {
   return (
     <li
-      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-primary-900/10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-primary-900/15 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
       data-reveal-item=""
     >
       {image === null ? null : (
         <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
           <Image
             alt={image.alt}
-            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-103"
+            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             height={image.height}
             sizes={MEDIA_SIZES}
             src={image.src}
             width={image.width}
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/10" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/15" />
 
           <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-neutral-950/70 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/75 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
               <span className="size-1.5 rounded-full bg-primary-400" />
               <span>{`Approved ${approval.approvedYear}`}</span>
             </span>
@@ -124,17 +139,32 @@ function VocationalCard({
         </figure>
       )}
 
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <H5
           as="h3"
-          className="font-display text-lg font-normal leading-snug text-neutral-900"
+          className="font-display text-xl font-medium leading-tight text-primary-700 group-hover:text-primary-800 transition-colors"
         >
-          {approval.council}
+          Vocational & Technical Training
         </H5>
 
-        <p className="mt-2 mb-5 font-body text-xs font-normal leading-relaxed text-neutral-600">
-          {approval.scope}
+        <p className="mt-2.5 font-body text-sm font-medium leading-snug text-neutral-800">
+          CTEVT Approved Short-Term Vocational Programmes
         </p>
+
+        <ul className="mt-4 mb-5 space-y-2 border-t border-neutral-100 pt-3.5 flex-1">
+          <li className="flex items-start gap-2 font-body text-xs text-neutral-600 leading-snug">
+            <span className="mt-1 size-1.5 rounded-full bg-primary-600 shrink-0" />
+            <span>Council for Technical Education & Vocational Training</span>
+          </li>
+          <li className="flex items-start gap-2 font-body text-xs text-neutral-600 leading-snug">
+            <span className="mt-1 size-1.5 rounded-full bg-primary-600 shrink-0" />
+            <span>Skill-based practical & industry-aligned training</span>
+          </li>
+          <li className="flex items-start gap-2 font-body text-xs text-neutral-600 leading-snug">
+            <span className="mt-1 size-1.5 rounded-full bg-primary-600 shrink-0" />
+            <span>Employment & entrepreneurship-oriented pathways</span>
+          </li>
+        </ul>
 
         <div className="mt-auto flex items-center justify-between border-t border-neutral-100 pt-3.5">
           <span className="font-body text-xs font-semibold text-primary-800">

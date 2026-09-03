@@ -18,7 +18,7 @@ export function TestimonialsDots({
   return (
     <div
       className={cn(
-        "mt-8 flex items-center justify-center sm:mt-10",
+        "mt-4 flex items-center justify-center sm:mt-5",
         className,
       )}
       data-slot="testimonials-dots"

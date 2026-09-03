@@ -51,7 +51,7 @@ const heroSlides: readonly SharedHeroSlide[] = [
 
 const masthead: SchoolHeroCopy = {
   eyebrow: "Gokarneshwor-7, Kathmandu",
-  tagline: `From ${schoolGrades.labelPlural} to +2 in Science and Management.`,
+  tagline: `From Grades ${schoolGrades.first} through ${schoolGrades.last} and +2 in Science and Management.`,
   heroLabel: "NAMI International School",
   slides: heroSlides,
   admissionCta: {

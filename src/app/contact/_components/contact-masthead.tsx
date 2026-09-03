@@ -39,19 +39,19 @@ export async function ContactMasthead() {
   return (
     <section className="gutter-x section-y-masthead">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10 items-end">
           <div className="lg:col-span-7">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <Display className="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            <Display className="mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               {copy.heading}
             </Display>
           </div>
-          <Standfirst className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
+          <Standfirst className="mt-5 max-w-xl text-neutral-700 lg:col-span-5 lg:mt-0">
             {copy.standfirst}
           </Standfirst>
         </div>
 
-        <div className="mt-14 grid gap-y-10 border-t pt-10 sm:grid-cols-2 sm:gap-x-10 lg:mt-20 lg:grid-cols-12">
+        <div className="mt-10 sm:mt-12 grid gap-y-8 border-t border-border/80 pt-8 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-12">
           {email === null ? null : (
             <div className="lg:col-span-5">
               <Eyebrow as="h2" className="text-ink-muted">

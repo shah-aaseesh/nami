@@ -39,7 +39,7 @@ export default async function Home() {
       <Affiliations section={copy.sections.affiliations} />
       {ceo === null ? null : (
         <PrincipalMessage
-          eyebrow="From the CEO"
+          eyebrow="Message from the CEO"
           heading={ceoHeading}
           id="ceo-message"
           message={schoolPrincipal.message}

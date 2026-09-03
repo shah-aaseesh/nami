@@ -56,7 +56,7 @@ export async function Testimonials({
       : testimonials.map((t) => ({ ...t, itemKey: t.id }));
 
   return (
-    <section className="gutter-x section-y" id={id}>
+    <section className="gutter-x section-y-compact" id={id}>
       <div className="mx-auto max-w-page">
         {testimonials.length > 1 ? (
           <Carousel
@@ -85,7 +85,7 @@ export async function Testimonials({
               </CarouselControls>
             </TestimonialsHeader>
 
-            <Reveal className="mt-12 lg:mt-16" y={32}>
+            <Reveal className="mt-6 sm:mt-8" y={24}>
               <CarouselContent className="-ms-4 lg:-ms-6">
                 {displayTestimonials.map((testimonial) => (
                   <CarouselItem
@@ -112,7 +112,7 @@ export async function Testimonials({
                 <P className="mt-12 lg:w-5/12">{section.emptyState}</P>
               )
             ) : (
-              <Reveal className="mt-12 lg:mt-16" y={32}>
+              <Reveal className="mt-6 sm:mt-8" y={24}>
                 <TestimonialCard className="lg:w-7/12" testimonial={single} />
               </Reveal>
             )}

@@ -57,11 +57,11 @@ export function HomePopup() {
             <Image
               alt="NAMI College - Admission Open"
               className="h-auto w-full object-contain"
-              height={1254}
+              height={1200}
               priority
               sizes="(max-width: 640px) 92vw, (max-width: 768px) 480px, 520px"
-              src="/popup-ad.webp"
-              width={1254}
+              src="/popup ad 2.jpeg"
+              width={1200}
             />
           </Link>
         </div>

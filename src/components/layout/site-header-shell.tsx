@@ -268,7 +268,7 @@ export function SiteHeaderShell({
         <div
           className={cn(
             "mx-auto flex max-w-page items-center justify-between gap-6 transition-[height] duration-300",
-            scrolled ? "h-16" : "h-20 lg:h-20",
+            scrolled ? "h-18 lg:h-20" : "h-22 sm:h-24 lg:h-28",
           )}
         >
           <Link href="/" className="flex items-center h-full shrink-0">

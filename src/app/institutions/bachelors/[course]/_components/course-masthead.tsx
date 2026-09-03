@@ -68,21 +68,21 @@ export function CourseMasthead({
   return (
     <section className="gutter-x section-y-masthead">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10 items-end">
           <Reveal className="lg:col-span-7" stagger={0.08}>
             <RevealItem>
               <Eyebrow>{eyebrow}</Eyebrow>
             </RevealItem>
             <SplitText
               as="h1"
-              className="mt-5 font-display text-4xl font-normal text-balance sm:text-5xl md:text-6xl lg:text-7xl"
+              className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-balance"
             >
               {course.fullTitle}
             </SplitText>
           </Reveal>
 
           {lead === null ? null : (
-            <Reveal className="mt-8 max-w-xl lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
+            <Reveal className="mt-5 max-w-xl text-neutral-700 lg:col-span-5 lg:mt-0">
               <Standfirst>{lead}</Standfirst>
             </Reveal>
           )}
@@ -90,7 +90,7 @@ export function CourseMasthead({
 
         <dl
           className={cn(
-            "mt-14 grid grid-cols-1 gap-x-10 gap-y-10 border-t border-border pt-10 lg:mt-20",
+            "mt-10 sm:mt-12 grid grid-cols-1 gap-x-8 gap-y-8 border-t border-border/80 pt-8 lg:mt-14",
             FACT_GRID_COLS[facts.length] ?? "sm:grid-cols-4",
           )}
         >

@@ -260,7 +260,7 @@ export function SiteHeaderShell({
 
       <div
         className={cn(
-          "pointer-events-auto border-b transition-colors gutter-x bg-surface",
+          "pointer-events-auto border-b transition-colors gutter-x bg-surface-raised",
           scrolled ? "border-border" : "border-transparent",
         )}
         ref={bar}

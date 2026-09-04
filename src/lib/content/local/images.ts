@@ -183,10 +183,10 @@ export const rameshPrasadTiwariPortrait: ContentImage = {
 };
 
 export const pranilPandeyPortrait: ContentImage = {
-  src: "/team/pranil-pandey.webp",
+  src: "/team/pranil.jpeg",
   alt: "Studio portrait of Mr. Pranil Pandey, Chief Executive Officer of NAMI, hands clasped in a blue suit and blue tie against a mottled blue-grey backdrop.",
-  width: 3174,
-  height: 4500,
+  width: 1173,
+  height: 1600,
 };
 
 export const nischalKhadkaPortrait: ContentImage = {

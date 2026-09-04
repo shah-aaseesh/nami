@@ -1,7 +1,5 @@
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
-import { P } from "@/components/ui/typography";
 
 export type SubjectGroupKey = "s1" | "s2" | "ns1" | "ns2";
 
@@ -21,7 +19,7 @@ export type CollegeSubjectStream = {
   readonly key: string;
   readonly label: string;
   readonly minimumNote: string;
-  readonly overlapNote: string;
+  readonly overlapNote?: string;
   readonly listLabel: string;
   readonly groups: readonly SubjectGroup[];
   readonly subjects: readonly CollegeSubject[];
@@ -37,82 +35,77 @@ export type CollegeSubjectsCopy = {
   readonly notOfferedLabel: (group: string) => string;
 };
 
-function GroupSubjects({
-  copy,
+function PathwayCard({
   group,
   stream,
+  copy,
 }: {
-  readonly copy: CollegeSubjectsCopy;
   readonly group: SubjectGroup;
   readonly stream: CollegeSubjectStream;
+  readonly copy: CollegeSubjectsCopy;
 }) {
+  const groupSubjects = stream.subjects.filter((s) =>
+    s.groups.includes(group.key),
+  );
+  const compulsorySubject = groupSubjects.find((s) => s.compulsory);
+  const electiveSubjects = groupSubjects.filter((s) => !s.compulsory);
+
   return (
-    // biome-ignore lint/a11y/noRedundantRoles: Tailwind preflight's list-style:none drops the implicit list role in Safari
-    <ul className="flex flex-col gap-2 sm:gap-2.5" role="list">
-      {stream.subjects
-        .filter((subject) => subject.groups.includes(group.key))
-        .map((subject) => (
-          <li
-            className="font-display text-base sm:text-lg font-normal text-ink flex items-center justify-between"
-            key={subject.name}
-          >
-            <span>{subject.name}</span>
-            {subject.compulsory ? (
-              <span className="rounded-full bg-[#E9EC6B]/30 px-2.5 py-0.5 text-[11px] font-semibold text-[#5A5C00] border border-[#E9EC6B]/60">
+    <div className="flex h-full flex-col justify-between rounded-2xl border border-border/80 bg-surface-raised p-6 sm:p-8 transition-colors duration-200 hover:border-neutral-400 shadow-2xs">
+      <div>
+        {/* Pathway Header */}
+        <div className="border-b border-border/70 pb-4">
+          <span className="text-xs font-semibold uppercase tracking-wider text-ink-muted">
+            {stream.label}
+          </span>
+          <h4 className="mt-1 font-display text-xl sm:text-2xl font-bold tracking-tight text-ink">
+            {group.label}
+          </h4>
+        </div>
+
+        {/* Subjects Roster */}
+        <div className="mt-5 space-y-4">
+          {/* Compulsory Subject */}
+          {compulsorySubject && (
+            <div className="flex items-center justify-between border-b border-border/50 py-2.5">
+              <span className="font-display text-base sm:text-lg font-semibold text-ink">
+                {compulsorySubject.name}
+              </span>
+              <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent border border-accent/20">
                 {copy.compulsoryLabel}
               </span>
-            ) : null}
-          </li>
-        ))}
-    </ul>
-  );
-}
+            </div>
+          )}
 
-function StreamCard({
-  copy,
-  stream,
-}: {
-  readonly copy: CollegeSubjectsCopy;
-  readonly stream: CollegeSubjectStream;
-}) {
-  return (
-    <div className="flex h-full flex-col rounded-2xl border border-border bg-surface-raised p-5 sm:p-6 lg:p-7">
-      <div className="flex items-center justify-between">
-        <h3 className="font-display text-2xl font-normal text-ink sm:text-3xl">
-          {stream.label}
-        </h3>
-        <span className="rounded-full bg-[#88DBDF]/25 px-2.5 py-0.5 text-[11px] font-semibold text-[#135A5D] border border-[#88DBDF]/40 uppercase tracking-wider">
-          A-Level Stream
-        </span>
+          {/* Elective Subjects */}
+          <div className="pt-2">
+            <span className="mb-3 block text-xs font-semibold uppercase tracking-wider text-ink-muted">
+              Electives
+            </span>
+            <ul
+              className="grid grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2"
+              role="list"
+            >
+              {electiveSubjects.map((subject) => (
+                <li
+                  key={subject.name}
+                  className="flex items-center gap-2.5 font-display text-base font-normal text-ink"
+                >
+                  <span className="size-1.5 shrink-0 rounded-full bg-neutral-400" />
+                  <span>{subject.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <Tabs className="mt-4 flex-1" defaultValue={stream.groups[0]?.key}>
-        <TabsList aria-label={stream.label} className="gap-6 sm:gap-8">
-          {stream.groups.map((group) => (
-            <TabsTab
-              className="py-3 font-display text-lg sm:text-xl lg:text-2xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
-              key={group.key}
-              value={group.key}
-            >
-              {group.label}
-            </TabsTab>
-          ))}
-        </TabsList>
-
-        {stream.groups.map((group) => (
-          <TabsPanel className="pt-4 sm:pt-5" key={group.key} value={group.key}>
-            <GroupSubjects copy={copy} group={group} stream={stream} />
-          </TabsPanel>
-        ))}
-      </Tabs>
-
-      <div className="mt-6 border-t border-border/60 pt-4">
-        <P className="text-xs sm:text-sm text-ink-muted">
+      {/* Requirement Footnote */}
+      <div className="mt-8 border-t border-border/60 pt-4">
+        <p className="font-body text-xs text-ink-muted leading-relaxed">
+          <strong className="font-medium text-ink">Requirement:</strong>{" "}
           {stream.minimumNote}
-        </P>
-        <P className="mt-1.5 text-xs sm:text-sm text-ink-muted">
-          {stream.overlapNote}
-        </P>
+        </p>
       </div>
     </div>
   );
@@ -132,17 +125,32 @@ export function CollegeSubjects({
           description={copy.standfirst}
         />
 
-        <Reveal
-          className="mt-8 grid gap-6 sm:mt-10 lg:mt-12 lg:grid-cols-2 lg:gap-8"
-          stagger={0.08}
-          y={16}
-        >
+        <div className="mt-10 space-y-12 sm:mt-12 sm:space-y-16">
           {copy.streams.map((stream) => (
-            <RevealItem key={stream.key}>
-              <StreamCard copy={copy} stream={stream} />
-            </RevealItem>
+            <div key={stream.key}>
+              {/* Stream Title with Hairline */}
+              <div className="mb-6 flex items-center gap-4 sm:mb-8">
+                <h3 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                  {stream.label}
+                </h3>
+                <span className="h-px flex-1 bg-border/80" />
+              </div>
+
+              {/* Pathway Cards */}
+              <Reveal
+                className="grid gap-6 sm:grid-cols-2 lg:gap-8"
+                stagger={0.08}
+                y={16}
+              >
+                {stream.groups.map((group) => (
+                  <RevealItem key={group.key}>
+                    <PathwayCard copy={copy} group={group} stream={stream} />
+                  </RevealItem>
+                ))}
+              </Reveal>
+            </div>
           ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   );

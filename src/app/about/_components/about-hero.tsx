@@ -13,7 +13,7 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
 
   return (
     <section
-      className="gutter-x pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-3 lg:pb-12"
+      className="gutter-x pt-4 pb-8 sm:pt-6 sm:pb-10 lg:pt-8 lg:pb-12"
       id="about"
     >
       <div className="mx-auto max-w-page">

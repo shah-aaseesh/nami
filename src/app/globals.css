@@ -39,17 +39,17 @@
   --color-college-chartreuse: #e9ec6b;
   --color-college-sky: #88dbdf;
 
-  --color-neutral-50: #f9fcfb;
-  --color-neutral-100: #f1f6f5;
-  --color-neutral-200: #e3eae9;
-  --color-neutral-300: #d0d9d7;
-  --color-neutral-400: #b0bab9;
-  --color-neutral-500: #8e9997;
-  --color-neutral-600: #6e7977;
-  --color-neutral-700: #525d5b;
-  --color-neutral-800: #394341;
-  --color-neutral-900: #212928;
-  --color-neutral-950: #0d1312;
+  --color-neutral-50: #ffffff;
+  --color-neutral-100: #f8f9fa;
+  --color-neutral-200: #e9ecef;
+  --color-neutral-300: #dee2e6;
+  --color-neutral-400: #ced4da;
+  --color-neutral-500: #adb5bd;
+  --color-neutral-600: #6c757d;
+  --color-neutral-700: #495057;
+  --color-neutral-800: #343a40;
+  --color-neutral-900: #212529;
+  --color-neutral-950: #0f1114;
 
   --text-xs: clamp(0.75rem, 0.7321rem + 0.0893vw, 0.8125rem);
   --text-xs--line-height: 1.55;
@@ -179,7 +179,7 @@
   --spacing-section-py: clamp(2rem, 1.25rem + 1.2vw, 3.5rem);
   --spacing-section-py-compact: clamp(1.25rem, 0.85rem + 0.75vw, 2rem);
   --spacing-section-py-hero: clamp(1.25rem, 1rem + 0.75vw, 2.25rem);
-  --spacing-section-pt-masthead: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+  --spacing-section-pt-masthead: clamp(1rem, 0.75rem + 0.75vw, 2rem);
 }
 
 @utility gutter-x {

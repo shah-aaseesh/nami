@@ -100,14 +100,20 @@ const subjects: CollegeSubjectsCopy = {
       key: "science",
       label: "Science",
       minimumNote:
-        "A minimum of four subjects is required to qualify in the science stream.",
-      overlapNote:
-        "The two groups share seven subjects. Biology is offered in Group S1 only, and Economics in Group S2 only.",
+        "English General Paper (AS) is compulsory and any other 3 or more subjects of your choice to complete your A Levels.",
       listLabel:
-        "A Level science subjects offered at NAMI College, and whether each one is available in Group S1, Group S2 or both.",
+        "A Level science subjects offered at NAMI College across Medicine & Biological Sciences and Engineering, Computer Science & Architecture.",
       groups: [
-        { key: "s1", short: "S1", label: "Group S1" },
-        { key: "s2", short: "S2", label: "Group S2" },
+        {
+          key: "s1",
+          short: "Medicine",
+          label: "Medicine & Biological Sciences",
+        },
+        {
+          key: "s2",
+          short: "Engineering",
+          label: "Engineering, Computer Science & Architecture",
+        },
       ],
       subjects: [
         {
@@ -117,26 +123,35 @@ const subjects: CollegeSubjectsCopy = {
         },
         { name: "Physics", compulsory: false, groups: ["s1", "s2"] },
         { name: "Chemistry", compulsory: false, groups: ["s1", "s2"] },
-        { name: "Mathematics", compulsory: false, groups: ["s1", "s2"] },
         { name: "Biology", compulsory: false, groups: ["s1"] },
-        { name: "Economics", compulsory: false, groups: ["s2"] },
-        { name: "Computer Science", compulsory: false, groups: ["s1", "s2"] },
-        { name: "Psychology", compulsory: false, groups: ["s1", "s2"] },
-        { name: "Sociology", compulsory: false, groups: ["s1", "s2"] },
+        { name: "Mathematics", compulsory: false, groups: ["s1", "s2"] },
+        {
+          name: "Further Mathematics",
+          compulsory: false,
+          groups: ["s1", "s2"],
+        },
+        { name: "Psychology", compulsory: false, groups: ["s1"] },
+        { name: "Computer Science", compulsory: false, groups: ["s2"] },
       ],
     },
     {
       key: "non-science",
-      label: "Non-science",
+      label: "Non-Science",
       minimumNote:
-        "A minimum of five subjects is required to qualify in the non-science stream.",
-      overlapNote:
-        "The two groups share three subjects. Accounting, Mathematics and Computer Science are offered in Group NS1 only, and Sociology, Psychology and Art and Design in Group NS2 only.",
+        "English General Paper (AS) is compulsory and any other 3 or more subjects of your choice to complete your A Levels.",
       listLabel:
-        "A Level non-science subjects offered at NAMI College, and whether each one is available in Group NS1, Group NS2 or both.",
+        "A Level non-science subjects offered at NAMI College across Business, Economics & Finance and Humanities & Social Sciences.",
       groups: [
-        { key: "ns1", short: "NS1", label: "Group NS1" },
-        { key: "ns2", short: "NS2", label: "Group NS2" },
+        {
+          key: "ns1",
+          short: "Business",
+          label: "Business, Economics & Finance",
+        },
+        {
+          key: "ns2",
+          short: "Humanities",
+          label: "Humanities & Social Sciences",
+        },
       ],
       subjects: [
         {
@@ -145,10 +160,10 @@ const subjects: CollegeSubjectsCopy = {
           groups: ["ns1", "ns2"],
         },
         { name: "Business", compulsory: false, groups: ["ns1", "ns2"] },
-        { name: "Economics", compulsory: false, groups: ["ns1", "ns2"] },
+        { name: "Economics", compulsory: false, groups: ["ns1"] },
         { name: "Accounting", compulsory: false, groups: ["ns1"] },
-        { name: "Mathematics", compulsory: false, groups: ["ns1"] },
         { name: "Computer Science", compulsory: false, groups: ["ns1"] },
+        { name: "Mathematics", compulsory: false, groups: ["ns1"] },
         { name: "Sociology", compulsory: false, groups: ["ns2"] },
         { name: "Psychology", compulsory: false, groups: ["ns2"] },
         { name: "Art and Design", compulsory: false, groups: ["ns2"] },

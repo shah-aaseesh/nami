@@ -50,7 +50,7 @@ export function FacultyGroup({
         className={cn(
           "gutter-x",
           isFirstGroup
-            ? "pt-2 sm:pt-4 pb-12 lg:pb-16"
+            ? "pt-4 sm:pt-6 lg:pt-8 pb-12 lg:pb-16"
             : "pt-8 lg:pt-12 pb-12 lg:pb-16",
         )}
       >
@@ -116,7 +116,7 @@ export function FacultyGroup({
       className={cn(
         "gutter-x",
         isFirstGroup
-          ? "pt-2 sm:pt-4 pb-12 lg:pb-16"
+          ? "pt-4 sm:pt-6 lg:pt-8 pb-12 lg:pb-16"
           : "pt-8 lg:pt-12 pb-12 lg:pb-16",
       )}
     >

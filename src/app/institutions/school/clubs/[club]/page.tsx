@@ -7,6 +7,7 @@ import {
 } from "@/app/institutions/school/_components/school-clubs-copy";
 import { createMetadata } from "@/lib/seo";
 import { ClubActivities } from "./_components/club-activities";
+import { ClubGallery } from "./_components/club-gallery";
 import { ClubJoinCta } from "./_components/club-join-cta";
 import { ClubMasthead } from "./_components/club-masthead";
 import { ClubOtherRail } from "./_components/club-other-rail";
@@ -57,6 +58,7 @@ export default async function ClubDetailPage({ params }: Props) {
       <ClubMasthead club={club} />
       <ClubOverview club={club} />
       <ClubActivities club={club} />
+      <ClubGallery club={club} />
       <ClubSkills club={club} />
       <ClubJoinCta club={club} />
       <ClubOtherRail currentClub={club} />

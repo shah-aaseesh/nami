@@ -56,8 +56,7 @@ export async function Hero() {
   const watch = socials.find((profile) => profile.platform === "youtube");
 
   const splitAt = hero.headline.indexOf(", ");
-  const lead =
-    splitAt === -1 ? hero.headline : hero.headline.slice(0, splitAt);
+  const lead = splitAt === -1 ? hero.headline : hero.headline.slice(0, splitAt);
   const tail = splitAt === -1 ? null : hero.headline.slice(splitAt + 2);
 
   const heroSlides = hero.images;
@@ -79,7 +78,11 @@ export async function Hero() {
         </div>
 
         <div className="mt-4 sm:mt-5 lg:mt-6 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-12 items-start">
-          <HeroHeadline className="lg:col-span-6 xl:col-span-6" lead={lead} tail={tail} />
+          <HeroHeadline
+            className="lg:col-span-6 xl:col-span-6"
+            lead={lead}
+            tail={tail}
+          />
 
           <div className="mt-5 flex flex-col items-start gap-4 sm:gap-5 lg:col-span-6 xl:col-span-6 lg:mt-0">
             <Standfirst className="text-sm sm:text-base leading-relaxed text-neutral-700">

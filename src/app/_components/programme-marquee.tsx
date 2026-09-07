@@ -6,37 +6,41 @@ import { AsteriskIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 type MarqueeItem = {
+  id: string;
   text: string;
   isLevel?: boolean;
 };
 
 const ACADEMIC_TRACKS: readonly MarqueeItem[] = [
   // 10+2 NEB
-  { text: "10+2 (NEB)", isLevel: true },
-  { text: "Science" },
-  { text: "Management" },
+  { id: "neb-level", text: "10+2 (NEB)", isLevel: true },
+  { id: "neb-science", text: "Science" },
+  { id: "neb-management", text: "Management" },
 
   // Cambridge A-Level
-  { text: "Cambridge A-Level", isLevel: true },
-  { text: "Science" },
-  { text: "Non-Science" },
+  { id: "alevel-level", text: "Cambridge A-Level", isLevel: true },
+  { id: "alevel-science", text: "Science" },
+  { id: "alevel-non-science", text: "Non-Science" },
 
   // Bachelor's
-  { text: "Bachelor's Degrees", isLevel: true },
-  { text: "BSc (Hons) Computer Science" },
-  { text: "BSc (Hons) Software Engineering" },
-  { text: "BSc (Hons) Networking Engineering" },
-  { text: "BSc (Hons) Environmental Science" },
-  { text: "BBA (Hons) Business Administration" },
-  { text: "BSc Environmental Studies" },
+  { id: "bachelors-level", text: "Bachelor's Degrees", isLevel: true },
+  { id: "ug-cs", text: "BSc (Hons) Computer Science" },
+  { id: "ug-se", text: "BSc (Hons) Software Engineering" },
+  { id: "ug-net", text: "BSc (Hons) Networking Engineering" },
+  { id: "ug-env-sci", text: "BSc (Hons) Environmental Science" },
+  { id: "ug-bba", text: "BBA (Hons) Business Administration" },
+  { id: "ug-env-stud", text: "BSc Environmental Studies" },
 
   // Master's
-  { text: "Master's Degree", isLevel: true },
-  { text: "MSc Computer Science" },
+  { id: "masters-level", text: "Master's Degree", isLevel: true },
+  { id: "pg-cs", text: "MSc Computer Science" },
 
   // Primary School
-  { text: "School", isLevel: true },
-  { text: `Grades ${schoolGrades.first} through ${schoolGrades.last}` },
+  { id: "school-level", text: "School", isLevel: true },
+  {
+    id: "school-grades",
+    text: `Grades ${schoolGrades.first} through ${schoolGrades.last}`,
+  },
 ];
 
 function bodyStep(): string {
@@ -60,7 +64,7 @@ function MarqueeRow({
             {item}
           </span>
           <Icon
-            className={cn("text-accent", glyphClassName)}
+            className={cn("text-white/60", glyphClassName)}
             icon={AsteriskIcon}
           />
         </li>
@@ -78,10 +82,10 @@ function AcademicMarqueeRow({
 }) {
   return (
     <ul className="flex items-center whitespace-nowrap">
-      {items.map((item, index) => (
+      {items.map((item) => (
         <li
           className="flex items-center gap-6 sm:gap-8 pe-6 sm:pe-8"
-          key={`${item.text}-${index}`}
+          key={item.id}
         >
           <span
             className={cn(

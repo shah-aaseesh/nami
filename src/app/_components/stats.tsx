@@ -36,9 +36,7 @@ export function Stats({
         >
           <div
             className={
-              poster === null
-                ? ""
-                : "lg:col-span-7 flex flex-col justify-start"
+              poster === null ? "" : "lg:col-span-7 flex flex-col justify-start"
             }
           >
             <Reveal

@@ -59,11 +59,11 @@ export async function SiteFooter() {
 
                 <p className="mt-4 font-body text-xs font-normal leading-relaxed text-white/90 text-justify">
                   Naaya Aayam Multi-Disciplinary Institute (NAMI) is an
-                  educational entity established in 2012, committed to
-                  advancing human capital through world-class education, global
-                  standards and holistic development while empowering
-                  individuals with the knowledge, skills and leadership
-                  capabilities to create meaningful impact locally and globally.
+                  educational entity established in 2012, committed to advancing
+                  human capital through world-class education, global standards
+                  and holistic development while empowering individuals with the
+                  knowledge, skills and leadership capabilities to create
+                  meaningful impact locally and globally.
                 </p>
 
                 <div className="mt-5 flex items-center gap-2.5">
@@ -164,7 +164,9 @@ export async function SiteFooter() {
 
                   <div className="mt-3 flex items-center gap-2">
                     <Link
-                      href={"https://www.facebook.com/namischoolnepal/" as Route}
+                      href={
+                        "https://www.facebook.com/namischoolnepal/" as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -260,7 +262,9 @@ export async function SiteFooter() {
                       <Icon icon={InstagramIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.linkedin.com/company/nami-college" as Route}
+                      href={
+                        "https://www.linkedin.com/company/nami-college" as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -340,7 +344,9 @@ export async function SiteFooter() {
                       <Icon icon={InstagramIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.linkedin.com/company/nami-college" as Route}
+                      href={
+                        "https://www.linkedin.com/company/nami-college" as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"

@@ -12,10 +12,12 @@ import { institutionPath } from "@/lib/content/institutions";
 import { schoolPrincipal } from "@/lib/content/school-principal";
 import { createMetadata } from "@/lib/seo";
 import { SchoolAdmission } from "./_components/school-admission";
-import { SchoolApproachBanner } from "./_components/school-approach-banner";
+import { SchoolApproachValuesSection } from "./_components/school-approach-values-section";
 import { SchoolBands } from "./_components/school-bands";
+import { SchoolCollaboratorsSection } from "./_components/school-collaborators-section";
 import { parentTestimonials, schoolCopy } from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
+import { SchoolFaqSection } from "./_components/school-faq-section";
 import { WhySchoolSection } from "./_components/why-school-section";
 
 export const metadata: Metadata = createMetadata({
@@ -66,20 +68,24 @@ export default async function SchoolPage() {
         />
       )}
 
-      <SchoolApproachBanner />
+      <SchoolApproachValuesSection />
 
       <SchoolAdmission copy={schoolCopy.admission} />
       <SchoolBands copy={schoolCopy.bands} id="academics" />
 
       <SchoolDay copy={schoolCopy.day} id="day" />
 
-      <InstitutionClubsSection />
+      <InstitutionClubsSection tone="brand" />
+
+      <SchoolCollaboratorsSection />
 
       <Testimonials
         id="parents"
         items={parentTestimonials}
         section={schoolCopy.parents}
       />
+
+      <SchoolFaqSection />
 
       <InstitutionNotices
         copy={schoolCopy.notices}

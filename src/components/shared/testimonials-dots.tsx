@@ -17,10 +17,7 @@ export function TestimonialsDots({
 
   return (
     <div
-      className={cn(
-        "mt-4 flex items-center justify-center sm:mt-5",
-        className,
-      )}
+      className={cn("mt-4 flex items-center justify-center sm:mt-5", className)}
       data-slot="testimonials-dots"
     >
       <div className="flex items-center gap-1.5 rounded-full bg-primary-100/90 px-3.5 py-2 shadow-xs ring-1 ring-primary-200 backdrop-blur-xs">

@@ -3,7 +3,7 @@ import { RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
-import { H6, P } from "@/components/ui/typography";
+import { H4, P } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import { CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -63,14 +63,14 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
       )}
 
       {band.streams.length === 0 ? null : (
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="mt-10 sm:mt-12 grid gap-6 sm:grid-cols-2">
           {band.streams.map((stream, idx) => (
             <div
-              className="rounded-2xl border border-border/70 bg-surface-raised p-6 lg:p-8 transition-shadow hover:shadow-lg"
+              className="rounded-2xl border border-[#E5DECf] bg-white p-6 lg:p-8 transition-all duration-300 shadow-2xs hover:shadow-xl hover:-translate-y-0.5"
               key={stream.name}
             >
               {stream.photo && (
-                <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl">
+                <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl bg-neutral-100">
                   <Image
                     alt={stream.photo.alt}
                     className="object-cover"
@@ -81,9 +81,12 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                 </div>
               )}
               <div className="flex items-center gap-3">
-                <H6 as="h4" className="text-ink font-semibold">
+                <H4
+                  as="h3"
+                  className="font-display text-lg sm:text-xl font-semibold text-ink"
+                >
                   {stream.name}
-                </H6>
+                </H4>
                 <span
                   className={cn(
                     "rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider",
@@ -95,13 +98,13 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                   Stream
                 </span>
               </div>
-              <p className="mt-2 font-body text-sm text-ink-muted">
+              <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">
                 {stream.note}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {stream.subjects.map((subject) => (
                   <span
-                    className="rounded-full bg-surface px-3 py-1 font-body text-xs text-ink-muted ring-1 ring-border"
+                    className="rounded-full bg-surface px-3 py-1 font-body text-xs text-ink-muted ring-1 ring-border/80"
                     key={subject}
                   >
                     {subject}
@@ -125,10 +128,20 @@ export function SchoolBands({
 }) {
   return (
     <section
-      className="gutter-x pt-6 sm:pt-8 lg:pt-12 pb-16 sm:pb-24 lg:pb-32"
+      className="gutter-x section-y border-t border-[#EAE3D4] bg-gradient-to-b from-[#FAF7F0] via-[#F4EFE5] to-[#FAF7F0] relative overflow-hidden"
       id={id}
     >
-      <div className="mx-auto max-w-page">
+      {/* Ambient background blur */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-10 right-0 size-[450px] rounded-full bg-[#BD1B21]/5 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 size-[450px] rounded-full bg-[#F7CD00]/8 blur-3xl"
+      />
+
+      <div className="relative mx-auto max-w-page">
         <SectionHeader
           description={copy.standfirst}
           eyebrow={copy.heading}
@@ -136,18 +149,18 @@ export function SchoolBands({
           title={copy.eyebrow ?? "Academic Bands"}
         />
 
-        <RevealItem className="mt-6 sm:mt-8 lg:mt-14">
+        <RevealItem className="mt-8 sm:mt-10 lg:mt-14">
           <Tabs defaultValue="primary" className="w-full">
-            <TabsList className="mb-6 sm:mb-8 lg:mb-10 gap-8 sm:gap-12">
+            <TabsList className="mb-6 sm:mb-8 lg:mb-10 gap-8 sm:gap-12 border-b border-[#E0D8C8] pb-1">
               <TabsTab
                 value="primary"
-                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-accent data-active:font-semibold"
+                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
               >
                 {copy.primary.label}
               </TabsTab>
               <TabsTab
                 value="secondary"
-                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-accent data-active:font-semibold"
+                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
               >
                 {copy.secondary.label}
               </TabsTab>

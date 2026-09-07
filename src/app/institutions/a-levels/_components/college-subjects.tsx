@@ -82,10 +82,7 @@ function PathwayCard({
             <span className="mb-3 block text-xs font-semibold uppercase tracking-wider text-ink-muted">
               Electives
             </span>
-            <ul
-              className="grid grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2"
-              role="list"
-            >
+            <ul className="grid grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2">
               {electiveSubjects.map((subject) => (
                 <li
                   key={subject.name}

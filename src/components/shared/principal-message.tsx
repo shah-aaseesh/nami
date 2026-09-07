@@ -27,13 +27,13 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
     <figure className="w-full">
       <div className="overflow-hidden rounded-t-xl border border-border border-b-0 bg-surface-raised">
         {portrait === null ? (
-          <div className="grid aspect-4/5 w-full place-items-center">
+          <div className="grid aspect-[3/4] sm:aspect-[1154/1600] w-full place-items-center">
             <Icon className="size-8 text-ink-muted/50" icon={ImageIcon} />
           </div>
         ) : (
           <Image
             alt={portrait.alt}
-            className="aspect-4/5 w-full object-cover"
+            className="aspect-[3/4] sm:aspect-[1154/1600] w-full object-cover object-top"
             height={portrait.height}
             loading="lazy"
             sizes="(max-width: 1023px) 320px, 23vw"

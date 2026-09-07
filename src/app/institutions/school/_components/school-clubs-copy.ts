@@ -13,6 +13,14 @@ export type ClubActivity = {
   readonly tag: string;
 };
 
+export type ClubGalleryPhoto = {
+  readonly src: string;
+  readonly alt: string;
+  readonly caption?: string;
+  readonly width: number;
+  readonly height: number;
+};
+
 export type SchoolClub = {
   readonly slug: ClubSlug;
   readonly title: string;
@@ -31,6 +39,7 @@ export type SchoolClub = {
     readonly title: string;
     readonly description: string;
   }[];
+  readonly galleryImages?: readonly ClubGalleryPhoto[];
   readonly meetingSchedule: string;
   readonly eligibility: string;
   readonly facultyMentor: string;
@@ -46,10 +55,10 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     metaDescription:
       "NAMI International School Sports Club promotes fitness, inter-house leagues, basketball tournaments, and football championships for all student grades.",
     coverImage: {
-      src: "/nami/campus-sports.jpg",
-      alt: "NAMI International School students engaged in competitive sports and fitness training on campus.",
-      width: 1500,
-      height: 1000,
+      src: "/gallery/Sports Club/Annual Sports Meet/Basketball.jpg",
+      alt: "NAMI International School students engaged in competitive sports and basketball tournaments.",
+      width: 4000,
+      height: 3000,
     },
     overview: [
       "The NAMI Sports Club is dedicated to building strong physical health, stamina, and camaraderie among students. We believe sports teach values that extend far beyond the pitch — resilience under pressure, strategic thinking, mutual trust, and humble victory.",
@@ -113,6 +122,36 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
           "Establishing lifelong habits of cardiovascular fitness and bodily health.",
       },
     ],
+    galleryImages: [
+      {
+        src: "/gallery/Sports Club/Annual Sports Meet/Basketball.jpg",
+        alt: "Inter-house basketball championship fixture",
+        caption: "Inter-house basketball championship match",
+        width: 4000,
+        height: 3000,
+      },
+      {
+        src: "/gallery/Sports Club/Intra Futsal/4fe72723-53bd-4408-a417-776bb9af9ce1.jfif",
+        alt: "Intra-school futsal tournament on the green turf ground",
+        caption: "Intra-school green turf futsal league",
+        width: 1280,
+        height: 960,
+      },
+      {
+        src: "/gallery/Sports Club/Annual Sports Meet/Carrom.JPG",
+        alt: "Indoor carrom championship round",
+        caption: "Indoor precision carrom contest",
+        width: 6000,
+        height: 4000,
+      },
+      {
+        src: "/gallery/Sports Club/Inter School Basketball/46dcb38e-ac84-4ac8-b0ea-a11f6cb8f43b.jfif",
+        alt: "Valley-wide inter-school basketball playoffs",
+        caption: "Inter-school basketball invitational cup",
+        width: 1280,
+        height: 960,
+      },
+    ],
     meetingSchedule: "Tuesdays & Thursdays (3:30 PM – 5:00 PM)",
     eligibility: "Open to students from Grade 1 to Grade 12 (+2)",
     facultyMentor: "Department of Physical Education & Sports",
@@ -126,10 +165,10 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     metaDescription:
       "Explore creative writing, fine arts, drama, poetry, and publishing with the NAMI International School Art and Literature Club.",
     coverImage: {
-      src: "/nami/school/nami-school-national-dress-day.jpg",
-      alt: "Students showcasing artistic culture and literary expression during a school arts showcase.",
-      width: 1000,
-      height: 750,
+      src: "/gallery/Art and literature/Art Competition/20251224_101654.jpg",
+      alt: "Students showcasing artistic creativity and live painting during the school art competition.",
+      width: 4000,
+      height: 3000,
     },
     overview: [
       "The Art and Literature Club serves as the creative heartbeat of NAMI International School. It is an open studio and salon where young authors, poets, painters, illustrators, and theatrical performers converge to celebrate the beauty of human expression.",
@@ -193,6 +232,36 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
           "Confidence in public speaking, declamation, and theatrical expression.",
       },
     ],
+    galleryImages: [
+      {
+        src: "/gallery/Art and literature/Art Competition/20251224_101654.jpg",
+        alt: "Pupils immersed in live watercolor and sketching contest",
+        caption: "Live sketching & acrylic painting competition",
+        width: 4000,
+        height: 3000,
+      },
+      {
+        src: "/gallery/Art and literature/Art Competition/20251224_110720.jpg",
+        alt: "Creative artwork and visual illustrations in classroom",
+        caption: "Classroom mixed-media art studio",
+        width: 4000,
+        height: 2252,
+      },
+      {
+        src: "/gallery/Art and literature/PPts/IMG-42c20df59da55331efb1eb2055eddc72-V.jpg",
+        alt: "Digital storytelling and literature presentation slide deck",
+        caption: "Digital storytelling & prose presentation",
+        width: 1191,
+        height: 717,
+      },
+      {
+        src: "/gallery/Art and literature/PPts/IMG-b5bc243a81739f47f9b8eb0ea6f3de35-V.jpg",
+        alt: "Poetic analysis and creative writing review",
+        caption: "Poetry critique & literary analysis",
+        width: 973,
+        height: 709,
+      },
+    ],
     meetingSchedule: "Wednesdays & Fridays (3:30 PM – 4:45 PM)",
     eligibility: "Open to students from Grade 1 to Grade 12 (+2)",
     facultyMentor: "Department of Languages & Fine Arts",
@@ -206,10 +275,10 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     metaDescription:
       "Learn public relations, stage lighting, sound engineering, logistics, and executive event coordination with NAMI Event Management Club.",
     coverImage: {
-      src: "/nami/school/nami-international-school-auditorium.jpg",
-      alt: "NAMI International School auditorium stage and acoustic hall prepared for a grand student production.",
-      width: 1000,
-      height: 1333,
+      src: "/gallery/Event Management/Award & Cultural/DSC08026.JPG",
+      alt: "NAMI International School auditorium stage and cultural performance prepared for a grand student production.",
+      width: 4734,
+      height: 4000,
     },
     overview: [
       "The Event Management Club is the powerhouse behind every major event, assembly, cultural festival, and ceremony at NAMI International School. Students learn the intricate arts of event design, timeline planning, sound engineering, backstage coordination, and hospitality management.",
@@ -273,6 +342,36 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
           "Operating modern digital soundboards, acoustic consoles, and multimedia projectors.",
       },
     ],
+    galleryImages: [
+      {
+        src: "/gallery/Event Management/Award & Cultural/DSC08026.JPG",
+        alt: "Cultural dance performance and stage lighting in auditorium",
+        caption: "Auditorium stage lighting & cultural performance",
+        width: 4734,
+        height: 4000,
+      },
+      {
+        src: "/gallery/Event Management/Award & Cultural/3.jpg",
+        alt: "Annual awards ceremony and student honors",
+        caption: "Annual awards & ceremony protocol",
+        width: 2231,
+        height: 2149,
+      },
+      {
+        src: "/gallery/Event Management/Orientation Program/_GN_1060.jpg",
+        alt: "Orientation assembly in the main auditorium",
+        caption: "Auditorium orientation assembly",
+        width: 6641,
+        height: 4427,
+      },
+      {
+        src: "/gallery/Event Management/Welcome Program/IMG_9595.JPG",
+        alt: "Stage lighting and technical coordination",
+        caption: "Stage lighting & audio-visual management",
+        width: 5282,
+        height: 3521,
+      },
+    ],
     meetingSchedule: "Mondays & Thursdays (3:30 PM – 5:00 PM)",
     eligibility: "Open to students from Grade 6 to Grade 12 (+2)",
     facultyMentor: "Student Affairs & Cultural Committee",
@@ -286,10 +385,10 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     metaDescription:
       "Engage in community service camps, environmental tree plantation, disaster relief drives, and social welfare with NAMI Social Service Club.",
     coverImage: {
-      src: "/nami/campus-service-camp.jpg",
+      src: "/gallery/Social Service Club/Donation Camp/4.jpg",
       alt: "NAMI International School students distributing relief materials during a community service outreach camp.",
-      width: 1190,
-      height: 793,
+      width: 4000,
+      height: 3000,
     },
     overview: [
       "Rooted in the NAMI philosophy that education must contribute meaningfully to society, the Social Service Club instills deep civic consciousness and active compassion in every member. We believe that true education is measured by how effectively we uplift those around us.",
@@ -353,6 +452,36 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
           "Leading initiatives with integrity, transparency, and genuine respect for diverse communities.",
       },
     ],
+    galleryImages: [
+      {
+        src: "/gallery/Social Service Club/Donation Camp/4.jpg",
+        alt: "Student volunteers packaging community relief kits",
+        caption: "Relief kit sorting & charity packaging",
+        width: 4000,
+        height: 3000,
+      },
+      {
+        src: "/gallery/Social Service Club/Donation Camp/5.jpg",
+        alt: "Distributing warm clothing to community families",
+        caption: "Winter relief & clothing distribution",
+        width: 960,
+        height: 1280,
+      },
+      {
+        src: "/gallery/Social Service Club/Blood Donation/Blood Donation..jpg",
+        alt: "Campus blood donation camp banner",
+        caption: "Campus voluntary blood donation drive",
+        width: 986,
+        height: 1339,
+      },
+      {
+        src: "/gallery/Social Service Club/Blood Donation/IMG-c96541748440d49ea99a6c662ccc1edd-V.jpg",
+        alt: "Youth volunteers supporting medical donors",
+        caption: "Youth medical volunteer support",
+        width: 913,
+        height: 1438,
+      },
+    ],
     meetingSchedule: "Fridays (3:30 PM – 5:00 PM) + Weekend Field Trips",
     eligibility: "Open to students from Grade 1 to Grade 12 (+2)",
     facultyMentor: "Social Sciences & Community Outreach Cell",
@@ -366,10 +495,10 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     metaDescription:
       "Build robots, code software, conduct laboratory experiments, and innovate at the NAMI International School Science and Technology Club.",
     coverImage: {
-      src: "/nami/school/nami-school-science-lab.jpg",
-      alt: "Students conducting chemistry and physics experiments in the advanced NAMI science laboratory.",
-      width: 1000,
-      height: 666,
+      src: "/gallery/Science & Tech/bio Excursion/IMG-4c57ac4b6ca59fd28fd1d147218f6fe3-V.jpg",
+      alt: "Students conducting biological field research and science experiments in the advanced NAMI science laboratory.",
+      width: 1600,
+      height: 900,
     },
     overview: [
       "The Science and Technology Club is a dynamic incubator for young inventors, coders, aspiring engineers, and curious researchers. From building autonomous micro-robots and writing Python algorithms to conducting chemical titration experiments, members explore how STEM transforms our world.",
@@ -431,6 +560,36 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
         title: "Innovation Mindset",
         description:
           "Transforming abstract theoretical concepts into functional physical and digital prototypes.",
+      },
+    ],
+    galleryImages: [
+      {
+        src: "/gallery/Science & Tech/bio Excursion/IMG-4c57ac4b6ca59fd28fd1d147218f6fe3-V.jpg",
+        alt: "Students exploring botanical species during outdoor field excursion",
+        caption: "Outdoor biology field excursion & research",
+        width: 1600,
+        height: 900,
+      },
+      {
+        src: "/gallery/Science & Tech/bio Excursion/IMG-f46f1eb2db148ca96464c442f1ba0e6c-V.jpg",
+        alt: "Botanical taxonomy and field observation",
+        caption: "Botanical taxonomy & nature study",
+        width: 1600,
+        height: 900,
+      },
+      {
+        src: "/nami/school/nami-school-science-lab.jpg",
+        alt: "Junior science laboratory practical demonstration",
+        caption: "Hands-on laboratory apparatus & experiments",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/nami/school/nami-school-computer-lab.jpg",
+        alt: "Digital ICT and coding workstations",
+        caption: "ICT coding & digital literacy workshops",
+        width: 1000,
+        height: 750,
       },
     ],
     meetingSchedule: "Tuesdays & Wednesdays (3:30 PM – 5:00 PM)",

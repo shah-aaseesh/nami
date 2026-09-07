@@ -12,6 +12,14 @@ export type ALevelsClubActivity = {
   readonly tag: string;
 };
 
+export type ALevelsClubGalleryPhoto = {
+  readonly src: string;
+  readonly alt: string;
+  readonly caption?: string;
+  readonly width: number;
+  readonly height: number;
+};
+
 export type ALevelsClub = {
   readonly slug: ALevelsClubSlug;
   readonly title: string;
@@ -30,6 +38,7 @@ export type ALevelsClub = {
     readonly title: string;
     readonly description: string;
   }[];
+  readonly galleryImages?: readonly ALevelsClubGalleryPhoto[];
   readonly meetingSchedule: string;
   readonly eligibility: string;
   readonly facultyMentor: string;
@@ -112,6 +121,36 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
           "Mobilizing rapid volunteer relief and aid campaigns during national contingencies.",
       },
     ],
+    galleryImages: [
+      {
+        src: "/gallery/Social Service Club/Donation Camp/4.jpg",
+        alt: "Community relief supplies and charity package packing",
+        caption: "Relief supplies packaging & distribution",
+        width: 4000,
+        height: 3000,
+      },
+      {
+        src: "/gallery/Social Service Club/Donation Camp/5.jpg",
+        alt: "Distributing warm clothing to families",
+        caption: "Winter relief & community donation drive",
+        width: 960,
+        height: 1280,
+      },
+      {
+        src: "/gallery/Social Service Club/Blood Donation/Blood Donation..jpg",
+        alt: "Campus blood donation campaign",
+        caption: "Quarterly campus blood donation drive",
+        width: 986,
+        height: 1339,
+      },
+      {
+        src: "/nami/campus-service-camp.jpg",
+        alt: "A-Levels student volunteers on rural outreach expedition",
+        caption: "Sindhupalchowk rural outreach expedition",
+        width: 1190,
+        height: 793,
+      },
+    ],
     meetingSchedule: "Fridays (3:30 PM – 5:00 PM) + Weekend Field Drives",
     eligibility: "Open to all Cambridge A-Level students (AS and A2)",
     facultyMentor: "Department of Social Sciences & Student Affairs",
@@ -190,6 +229,36 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
         title: "Sportsmanship",
         description:
           "Treating opponents, referees, and teammates with unwavering respect and fairness.",
+      },
+    ],
+    galleryImages: [
+      {
+        src: "/gallery/Sports Club/Annual Sports Meet/Basketball.jpg",
+        alt: "Basketball championship match in progress",
+        caption: "NAMI SEE & +2 3x3 Basketball Cup",
+        width: 4000,
+        height: 3000,
+      },
+      {
+        src: "/gallery/Sports Club/Intra Futsal/4fe72723-53bd-4408-a417-776bb9af9ce1.jfif",
+        alt: "Intra-college futsal league action on turf",
+        caption: "Inter-house futsal league on campus turf",
+        width: 1280,
+        height: 960,
+      },
+      {
+        src: "/gallery/Sports Club/Annual Sports Meet/Table Tennis.jpg",
+        alt: "Table tennis singles knockout match",
+        caption: "Table tennis & indoor racket tournament",
+        width: 891,
+        height: 660,
+      },
+      {
+        src: "/gallery/Sports Club/Inter School Basketball/46dcb38e-ac84-4ac8-b0ea-a11f6cb8f43b.jfif",
+        alt: "Inter-college basketball match action",
+        caption: "Valley-wide inter-college tournament finals",
+        width: 1280,
+        height: 960,
       },
     ],
     meetingSchedule: "Tuesdays & Thursdays (3:45 PM – 5:15 PM)",
@@ -272,6 +341,36 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
           "Designing creative upcycling, composting, and energy-saving solutions on campus.",
       },
     ],
+    galleryImages: [
+      {
+        src: "/gallery/Science & Tech/bio Excursion/IMG-4c57ac4b6ca59fd28fd1d147218f6fe3-V.jpg",
+        alt: "Students exploring botanical species during outdoor field study",
+        caption: "Biodiversity sampling & nature exploration",
+        width: 1600,
+        height: 900,
+      },
+      {
+        src: "/nami/event-mustang.jpg",
+        alt: "A-Level scholars gathered in Mustang valley",
+        caption: "Mustang Himalayan geological & environmental fieldwork",
+        width: 1200,
+        height: 800,
+      },
+      {
+        src: "/nami/event-plantation.jpg",
+        alt: "Community tree plantation drive",
+        caption: "Community tree sapling plantation drive",
+        width: 1200,
+        height: 800,
+      },
+      {
+        src: "/nami/event-eco-club.jpg",
+        alt: "Eco club awareness campaign",
+        caption: "Green campus & ecological awareness campaign",
+        width: 1200,
+        height: 800,
+      },
+    ],
     meetingSchedule: "Wednesdays (3:30 PM – 4:45 PM)",
     eligibility: "Open to all Cambridge A-Level students (AS and A2)",
     facultyMentor: "Department of Environmental Science & Ecology",
@@ -285,10 +384,10 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
     metaDescription:
       "NAMI College A-Levels Arts and Crafts Club provides studio spaces for painting, sketching, sculpting, and art exhibitions.",
     coverImage: {
-      src: "/nami/event-mascot.jpg",
+      src: "/gallery/Art and literature/Art Competition/20251224_101654.jpg",
       alt: "NAMI College A-Levels arts and craftsmanship exhibition and creative design installations.",
-      width: 1000,
-      height: 750,
+      width: 4000,
+      height: 3000,
     },
     overview: [
       "The Arts and Crafts Club at NAMI College provides a vibrant open studio for young artists, sculptors, graphic illustrators, and craftspeople. It celebrates aesthetic creativity as a vital counterpoint to academic rigor, encouraging students to experiment with diverse mediums and techniques.",
@@ -350,6 +449,36 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
         title: "Exhibition Curation",
         description:
           "Mounting, lighting, and curating public gallery exhibitions with professional polish.",
+      },
+    ],
+    galleryImages: [
+      {
+        src: "/gallery/Art and literature/Art Competition/20251224_101654.jpg",
+        alt: "Fine art canvas painting and sketching competition",
+        caption: "Live studio painting & fine art showcase",
+        width: 4000,
+        height: 3000,
+      },
+      {
+        src: "/gallery/Art and literature/Art Competition/20251224_110720.jpg",
+        alt: "Creative mixed media and color sketches",
+        caption: "Visual arts & mixed-media illustrations",
+        width: 4000,
+        height: 2252,
+      },
+      {
+        src: "/nami/event-mascot.jpg",
+        alt: "Festive stage installation and mascot design",
+        caption: "Stage mascot & decorative installations",
+        width: 1000,
+        height: 750,
+      },
+      {
+        src: "/nami/campus-reading-hall.jpg",
+        alt: "College gallery and art exhibition",
+        caption: "Annual campus art & craft gallery",
+        width: 1200,
+        height: 800,
       },
     ],
     meetingSchedule: "Mondays & Thursdays (3:30 PM – 4:45 PM)",

@@ -13,10 +13,20 @@ export function WhySchoolSection() {
 
   return (
     <section
-      className="gutter-x section-y border-t border-border bg-surface"
+      className="gutter-x section-y border-t border-[#E8E2D5] bg-gradient-to-b from-[#FAF8F3] via-[#F5EFE6] to-[#FAF8F3] relative overflow-hidden"
       id="why-school"
     >
-      <div className="mx-auto max-w-page">
+      {/* Subtle brand color accent background glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 -left-24 size-96 rounded-full bg-[#BD1B21]/5 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -right-24 size-96 rounded-full bg-[#284540]/5 blur-3xl"
+      />
+
+      <div className="relative mx-auto max-w-page">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-16 items-center">
           {/* Left Column: Vertically Centered Title */}
           <div className="lg:col-span-5">
@@ -38,13 +48,14 @@ export function WhySchoolSection() {
             <Reveal stagger={0.08}>
               <RevealItem>
                 <P className="text-base sm:text-lg font-body leading-relaxed text-ink">
-                  NAMI International School provides a student-centred learning
-                  environment designed to build strong academic foundations
-                  while supporting the overall development of every student.
-                  With modern classrooms, well-equipped science laboratories,
-                  ICT facilities, a well-stocked library and experienced
-                  faculty, students receive the resources and guidance needed to
-                  develop academically and personally.
+                  At NAMI International School, we believe education is about
+                  more than acquiring knowledge. It is about helping students
+                  understand the world, discover their strengths, build
+                  meaningful relationships, and grow into confident, responsible
+                  individuals. We create an environment where students are
+                  encouraged to ask questions, explore ideas, work with others,
+                  think critically, and connect what they learn with real-life
+                  experiences.
                 </P>
               </RevealItem>
 
@@ -59,14 +70,14 @@ export function WhySchoolSection() {
               >
                 <div className="overflow-hidden">
                   <P className="text-base sm:text-lg font-body leading-relaxed text-ink-muted">
-                    Learning at NAMI extends beyond the classroom through
-                    extracurricular activities, internships, volunteer
-                    engagement and structured career counselling. This
-                    integrated approach helps students develop practical
-                    competencies, confidence, leadership, communication and
-                    decision-making skills while preparing them for higher
-                    education and diverse professional pathways in Nepal and
-                    internationally.
+                    Our educational approach is grounded in progressive
+                    education, with an emphasis on meaningful learning, student
+                    participation, inclusion, values, creativity, and personal
+                    growth. Through classroom learning, practical activities,
+                    creative pursuits, sports, community engagement, modern
+                    science and computer laboratories, and student well-being
+                    support, we help learners develop the confidence and
+                    competencies to succeed in higher education and life.
                   </P>
                 </div>
               </div>

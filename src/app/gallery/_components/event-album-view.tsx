@@ -108,6 +108,11 @@ export function EventAlbumView({
               <Icon className="size-3 text-[#BD1B21]" icon={Folder01Icon} />
               {album.category}
             </span>
+            {album.clubLabel && (
+              <span className="inline-flex items-center rounded-full bg-neutral-100 text-ink border border-border px-3 py-0.5 text-xs font-semibold">
+                {album.clubLabel}
+              </span>
+            )}
             <span className="text-xs font-medium text-ink-muted">
               • {album.date}
             </span>
@@ -156,11 +161,6 @@ export function EventAlbumView({
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#FFAD00]">
                       Photo {index + 1} of {album.photos.length}
                     </span>
-                    {photo.caption && (
-                      <p className="mt-1 line-clamp-2 text-xs text-white leading-relaxed font-body">
-                        {photo.caption}
-                      </p>
-                    )}
                   </div>
                 </div>
               </button>
@@ -262,13 +262,6 @@ export function EventAlbumView({
             >
               <Icon className="size-5" icon={ArrowRight01Icon} />
             </button>
-          </div>
-
-          {/* Lightbox Caption Footer */}
-          <div className="w-full max-w-3xl text-center">
-            <p className="text-sm sm:text-base text-white/90 leading-relaxed font-body">
-              {currentPhoto.caption ?? currentPhoto.alt}
-            </p>
           </div>
         </div>
       )}

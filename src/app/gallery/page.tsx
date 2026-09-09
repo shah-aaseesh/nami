@@ -3,8 +3,8 @@ import { Suspense } from "react";
 
 import { createMetadata } from "@/lib/seo";
 import { galleryCopy } from "./_components/gallery-copy";
-import { GalleryMasthead } from "./_components/gallery-masthead";
-import { GalleryView } from "./_components/gallery-view";
+import { GalleryHero } from "./_components/gallery-hero";
+import { GalleryMoments } from "./_components/gallery-moments";
 
 export const metadata: Metadata = createMetadata({
   path: "/gallery",
@@ -14,11 +14,11 @@ export const metadata: Metadata = createMetadata({
 
 export default function GalleryPage() {
   return (
-    <>
-      <GalleryMasthead copy={galleryCopy.masthead} />
+    <main>
+      <GalleryHero />
       <Suspense fallback={null}>
-        <GalleryView />
+        <GalleryMoments />
       </Suspense>
-    </>
+    </main>
   );
 }

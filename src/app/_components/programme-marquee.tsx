@@ -114,7 +114,7 @@ export async function ProgrammeMarquee() {
   ];
 
   return (
-    <section className="gutter-x py-0" id="programmes">
+    <section className="gutter-x py-0 overflow-x-clip" id="programmes">
       <Reveal className="bleed-x" stagger={0.12}>
         <RevealItem className="field-ink py-4">
           <Marquee label="Programmes" speed={70}>

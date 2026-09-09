@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { createMetadata } from "@/lib/seo";
 import { alumniCopy, alumniEmployers } from "./_components/alumni-copy";
 import { AlumniEmployers } from "./_components/alumni-employers";
+import { AlumniForm } from "./_components/alumni-form";
 import { AlumniMasthead } from "./_components/alumni-masthead";
 import { AlumniMetrics } from "./_components/alumni-metrics";
 import { AlumniNetworkCta } from "./_components/alumni-network-cta";
@@ -18,8 +19,9 @@ export default function AlumniPage() {
   return (
     <>
       <AlumniMasthead copy={alumniCopy.masthead} />
-      <AlumniMetrics copy={alumniCopy.metrics} />
       <AlumniStories copy={alumniCopy.storiesSection} />
+      <AlumniForm email={alumniCopy.connect.email} />
+      <AlumniMetrics copy={alumniCopy.metrics} />
       <AlumniEmployers
         employers={alumniEmployers}
         section={alumniCopy.employers}

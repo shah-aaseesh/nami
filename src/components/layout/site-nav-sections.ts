@@ -46,11 +46,6 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     href: "/alumni",
     descriptor: "Our global alumni network, stories, and impact.",
   },
-  {
-    label: "Careers",
-    href: "/careers",
-    descriptor: "See what the group is recruiting for.",
-  },
 ];
 
 export const SITE_FOOTER_NAV_ITEMS: SiteNavItem[] = [
@@ -61,6 +56,5 @@ export const SITE_FOOTER_NAV_ITEMS: SiteNavItem[] = [
   { label: "Student Life", href: "/student-life" },
   { label: "Gallery", href: "/gallery" },
   { label: "Alumni", href: "/alumni" },
-  { label: "Careers", href: "/careers" },
   { label: "Notices", href: "/notices" },
 ];

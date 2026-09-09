@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { SiteCtaBand } from "@/components/layout/site-cta-band";
 import { CareerPlacement } from "@/components/shared/career-placement";
 import { InstitutionAwarding } from "@/components/shared/institution-awarding";
-import { InstitutionClubsSection } from "@/components/shared/institution-clubs-section";
 import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
@@ -15,6 +14,7 @@ import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
 import { bachelorsCopy } from "./_components/bachelors-copy";
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
+import { MouPartnersSection } from "./_components/mou-partners-section";
 import { PearsonVueBanner } from "./_components/pearson-vue-banner";
 import { WhyUndergraduateSection } from "./_components/why-undergraduate-section";
 
@@ -101,7 +101,7 @@ export default async function BachelorsPage() {
 
       <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
 
-      <InstitutionClubsSection tone="surface" />
+      <MouPartnersSection id="mou-partners" />
 
       <InstitutionNotices
         copy={bachelorsCopy.notices}

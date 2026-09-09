@@ -153,8 +153,16 @@ export function SmoothScrollProvider({
     <>
       <MountSmootherBeforeSiblings />
       {chrome}
-      <div id={WRAPPER_ID} ref={wrapperRef}>
-        <div id={CONTENT_ID} ref={contentRef}>
+      <div
+        id={WRAPPER_ID}
+        ref={wrapperRef}
+        className="w-full max-w-full overflow-x-hidden min-w-0"
+      >
+        <div
+          id={CONTENT_ID}
+          ref={contentRef}
+          className="w-full max-w-full overflow-x-hidden min-w-0"
+        >
           {children}
         </div>
       </div>

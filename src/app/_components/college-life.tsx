@@ -10,7 +10,7 @@ export async function CollegeLife() {
   if (band === null) return null;
 
   return (
-    <section className="field-ink gutter-x section-y" id="college-life">
+    <section className="field-ink gutter-x section-y overflow-x-clip" id="college-life">
       <Reveal className="bleed-x" y={24}>
         <figure className="relative h-72 overflow-hidden md:h-96 lg:h-140 xl:h-150">
           <Parallax

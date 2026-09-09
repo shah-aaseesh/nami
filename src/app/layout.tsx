@@ -31,9 +31,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spectral.variable} font-sans antialiased`}
+      className={`${inter.variable} ${spectral.variable} font-sans antialiased w-full max-w-full overflow-x-hidden`}
     >
-      <body>
+      <body className="w-full max-w-full overflow-x-hidden min-w-0">
         <StructuredData />
         <SmoothScrollProvider
           chrome={

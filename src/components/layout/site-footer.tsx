@@ -23,7 +23,7 @@ const FOOTER_NAV_LINKS = [
   { label: "Admissions", href: "/admissions" },
   { label: "Student Life", href: "/student-life" },
   { label: "Photo Gallery", href: "/gallery" },
-  { label: "Careers", href: "/careers" },
+  { label: "Alumni", href: "/alumni" },
   { label: "Notices & Events", href: "/notices" },
 ] as const;
 
@@ -65,32 +65,6 @@ export async function SiteFooter() {
                   knowledge, skills and leadership capabilities to create
                   meaningful impact locally and globally.
                 </p>
-
-                <div className="mt-5 flex items-center gap-2.5">
-                  {contact.socialProfiles.map((social) => {
-                    const iconMap: Record<string, typeof FacebookIcon> = {
-                      facebook: FacebookIcon,
-                      instagram: InstagramIcon,
-                      linkedin: LinkedInIcon,
-                      youtube: YouTubeIcon,
-                      tiktok: TikTokIcon,
-                    };
-                    const SocialIcon = iconMap[social.platform];
-                    if (!SocialIcon) return null;
-                    return (
-                      <Link
-                        key={social.platform}
-                        href={social.href as Route}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex size-8 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
-                        aria-label={social.label}
-                      >
-                        <Icon icon={SocialIcon} className="size-4" />
-                      </Link>
-                    );
-                  })}
-                </div>
               </div>
             </div>
 
@@ -118,7 +92,7 @@ export async function SiteFooter() {
             <div className="lg:col-span-6">
               <Eyebrow
                 as="h2"
-                className="text-xs font-semibold uppercase tracking-widest text-white text-center"
+                className="text-xs font-semibold uppercase tracking-widest text-white"
               >
                 Institutions & Contacts
               </Eyebrow>
@@ -284,10 +258,10 @@ export async function SiteFooter() {
                   </div>
                 </div>
 
-                <div className="border-t border-white/15 pt-4 sm:col-span-2 text-center flex flex-col items-center">
+                <div className="border-t border-white/15 pt-4 sm:col-span-2">
                   <Link
                     href={institutionPath("bachelors")}
-                    className="group inline-block"
+                    className="group block"
                   >
                     <span className="block font-body text-sm font-semibold text-white transition-colors group-hover:text-white group-hover:underline underline-offset-4">
                       {entities.institute.name}
@@ -297,12 +271,12 @@ export async function SiteFooter() {
                     </span>
                   </Link>
 
-                  <div className="mt-3 flex flex-col items-center justify-center gap-2 font-body text-xs sm:flex-row sm:gap-6">
+                  <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1.5 font-body text-xs">
                     <Link
                       href={
                         `tel:${contact.byEntity.institute.phone.replace(/[^+\d]/g, "")}` as Route
                       }
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={PhoneIcon}
@@ -314,7 +288,7 @@ export async function SiteFooter() {
                       href={
                         `mailto:${contact.byEntity.institute.email}` as Route
                       }
-                      className="flex items-center justify-center gap-2 text-white/90 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
                       <Icon
                         icon={MailIcon}
@@ -324,7 +298,7 @@ export async function SiteFooter() {
                     </Link>
                   </div>
 
-                  <div className="mt-3 flex items-center justify-center gap-2">
+                  <div className="mt-3 flex items-center gap-2">
                     <Link
                       href={"https://www.facebook.com/NamiCollege/" as Route}
                       target="_blank"

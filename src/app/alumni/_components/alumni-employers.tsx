@@ -84,13 +84,18 @@ export function AlumniEmployers({
 
   return (
     <section
-      className="gutter-x section-y overflow-hidden"
+      className="gutter-x section-y overflow-hidden bg-neutral-50/70 border-t border-border/80"
       id="alumni-employers"
     >
       <div className="mx-auto max-w-page">
         <SectionHeader
           description={section.standfirst}
-          eyebrow={section.heading}
+          eyebrow={
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-100 border border-primary-200/80 px-3 py-0.5 text-xs font-semibold tracking-wider text-primary-700 uppercase">
+              <span className="size-1.5 rounded-full bg-primary-700" />
+              {section.heading}
+            </span>
+          }
           layout="split"
           title={section.eyebrow ?? "Where Our Alumni Work"}
         />

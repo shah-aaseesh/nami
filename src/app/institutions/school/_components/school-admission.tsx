@@ -179,7 +179,7 @@ export function SchoolAdmission({
 
   return (
     <section
-      className="bg-surface text-ink gutter-x section-y border-t border-border"
+      className="bg-surface text-ink gutter-x section-y border-t border-border overflow-x-clip"
       id={id}
     >
       <div className="mx-auto max-w-page">

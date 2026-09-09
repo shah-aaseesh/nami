@@ -68,8 +68,12 @@ export function AlumniStories({
         {/* Section Header */}
         <SectionHeader
           description={copy.standfirst}
-          eyebrow={copy.eyebrow}
-          eyebrowClassName="text-[#BD1B21] font-semibold"
+          eyebrow={
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-100 border border-primary-200/80 px-3 py-0.5 text-xs font-semibold tracking-wider text-primary-700 uppercase">
+              <span className="size-1.5 rounded-full bg-primary-700" />
+              {copy.eyebrow}
+            </span>
+          }
           layout="split"
           title={copy.heading}
         />
@@ -90,8 +94,8 @@ export function AlumniStories({
                   className={cn(
                     "group flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all cursor-pointer",
                     isActive
-                      ? "bg-[#BD1B21] text-white shadow-sm"
-                      : "bg-surface-raised border border-border text-ink-muted hover:border-[#BD1B21]/50 hover:text-ink",
+                      ? "bg-primary-700 text-white shadow-sm shadow-primary-700/25"
+                      : "bg-surface-raised border border-border text-ink-muted hover:border-primary-400 hover:text-primary-700 hover:bg-primary-100/30",
                   )}
                   key={tab.id}
                   onClick={() => setSelectedWing(tab.id)}
@@ -103,7 +107,7 @@ export function AlumniStories({
                       "rounded-full px-2 py-0.5 text-[11px] font-semibold",
                       isActive
                         ? "bg-white/20 text-white"
-                        : "bg-muted text-ink-muted group-hover:text-ink",
+                        : "bg-muted text-ink-muted group-hover:text-primary-700 group-hover:bg-primary-200/60",
                     )}
                   >
                     {count}
@@ -122,7 +126,7 @@ export function AlumniStories({
         <div className="mt-6 divide-y divide-border border-y border-border">
           {filteredStories.map((story) => (
             <button
-              className="group w-full py-6 sm:py-7 text-left transition-all duration-200 hover:bg-neutral-50/70 cursor-pointer block focus-visible:outline-2 focus-visible:outline-[#BD1B21]"
+              className="group w-full py-6 sm:py-7 text-left transition-all duration-200 hover:bg-primary-100/25 cursor-pointer block focus-visible:outline-2 focus-visible:outline-primary-700 rounded-xl px-2 sm:px-4"
               key={story.id}
               onClick={() => setActiveStory(story)}
               type="button"
@@ -130,7 +134,7 @@ export function AlumniStories({
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center">
                 {/* 1. Alumnus Profile & Identity (Cols 1-4) */}
                 <div className="lg:col-span-4 flex items-center gap-4">
-                  <div className="relative size-14 sm:size-16 shrink-0 overflow-hidden rounded-full border-2 border-border group-hover:border-[#BD1B21] transition-colors shadow-xs">
+                  <div className="relative size-14 sm:size-16 shrink-0 overflow-hidden rounded-full border-2 border-primary-200 group-hover:border-primary-700 group-hover:ring-2 group-hover:ring-primary-700/20 transition-all shadow-xs">
                     <Image
                       alt={story.name}
                       className="size-full object-cover transition-transform duration-500 group-hover:scale-108"
@@ -142,7 +146,7 @@ export function AlumniStories({
 
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-display text-lg sm:text-xl font-medium text-ink group-hover:text-[#BD1B21] transition-colors truncate">
+                      <h3 className="font-display text-lg sm:text-xl font-medium text-ink group-hover:text-primary-700 transition-colors truncate">
                         {story.name}
                       </h3>
                       <span className="text-xs text-ink-muted shrink-0">
@@ -154,7 +158,7 @@ export function AlumniStories({
                       {story.currentRole}
                     </p>
 
-                    <p className="font-body text-xs text-[#BD1B21] font-medium truncate">
+                    <p className="font-body text-xs text-primary-700 font-medium truncate">
                       {story.company} •{" "}
                       <span className="text-ink-muted">{story.location}</span>
                     </p>
@@ -163,7 +167,7 @@ export function AlumniStories({
 
                 {/* 2. Key Story Highlights Summarized (Cols 5-9) */}
                 <div className="lg:col-span-5 space-y-1.5">
-                  <span className="inline-block rounded-full bg-neutral-100 border border-border px-2.5 py-0.5 text-[11px] font-medium text-ink-muted mb-1">
+                  <span className="inline-block rounded-full bg-primary-100/70 border border-primary-200/80 px-2.5 py-0.5 text-[11px] font-semibold text-primary-700 mb-1">
                     {story.institutionLabel}
                   </span>
                   <p className="font-body text-xs sm:text-sm text-ink/85 leading-relaxed">
@@ -176,9 +180,9 @@ export function AlumniStories({
 
                 {/* 3. PDF Story Action Button (Cols 10-12) */}
                 <div className="lg:col-span-3 flex lg:justify-end items-center">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-4 py-2 text-xs font-semibold text-ink shadow-xs transition-all duration-200 group-hover:border-[#BD1B21] group-hover:bg-[#BD1B21] group-hover:text-white">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-primary-200/80 bg-surface-raised px-4 py-2 text-xs font-semibold text-ink shadow-xs transition-all duration-200 group-hover:border-primary-700 group-hover:bg-primary-700 group-hover:text-white">
                     <Icon
-                      className="size-3.5 text-[#BD1B21] group-hover:text-white"
+                      className="size-3.5 text-primary-700 group-hover:text-white"
                       icon={File01Icon}
                     />
                     <span>Read PDF Story</span>

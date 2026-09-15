@@ -306,8 +306,9 @@ export type AlumniStory = {
   readonly pdfData: {
     readonly documentId: string;
     readonly title: string;
-    readonly bioSummary: string;
-    readonly academicJourney: string;
+    readonly publishedDate: string;
+    readonly headline: string;
+    readonly storyParagraphs: readonly string[];
     readonly careerMilestones: readonly {
       readonly year: string;
       readonly title: string;
@@ -324,280 +325,173 @@ export type AlumniStory = {
 
 export const alumniStories: readonly AlumniStory[] = [
   {
-    id: "pragati-rai",
-    name: "Pragati Rai",
-    avatar: "/nami/alumna-pragati-rai.jpg",
-    programme: "Cambridge A-Levels (Science)",
-    graduationYear: "Batch of 2018",
-    institution: "college",
-    institutionLabel: "Cambridge A-Levels",
-    currentRole: "Lead Cloud Systems Engineer",
-    company: "Leapfrog Technology",
-    sector: "Cloud & AI Infrastructure",
-    location: "Kathmandu / USA Remote",
-    summaryHighlights: [
-      "Top-scoring Cambridge A-Levels graduate in Mathematics and Physics.",
-      "Spearheaded enterprise cloud migrations and generative AI deployment pipelines.",
-      "Active mentor for junior women in STEM through NAMI's peer mentorship circle.",
-    ],
-    keyQuote:
-      "NAMI taught me analytical rigor. The Cambridge faculty encouraged us to dissect problems rather than memorize formulas, which became my biggest advantage in tech.",
-    pdfData: {
-      documentId: "NAMI-ALM-2018-042",
-      title: "Alumni Spotlight Case Study: Pragati Rai",
-      bioSummary:
-        "Pragati graduated from NAMI College with distinction in Cambridge A-Levels. She pursued Software Engineering and quickly rose to lead mission-critical cloud reliability engineering teams at Leapfrog Technology.",
-      academicJourney:
-        "Completed AS & A2 levels with straight A grades in Physics, Mathematics, and Chemistry. Led the Science & Astronomy Club and served as Student Council Academic Secretary.",
-      careerMilestones: [
-        {
-          year: "2018",
-          title: "Cambridge A-Levels Distinction",
-          organization: "NAMI College",
-          description:
-            "Awarded Academic Excellence Trophy for highest composite percentile in Cambridge Science stream.",
-        },
-        {
-          year: "2021",
-          title: "Associate DevOps Engineer",
-          organization: "Genese Solutions",
-          description:
-            "Architected AWS cloud automation pipelines and containerization for regional banking apps.",
-        },
-        {
-          year: "2023 – Present",
-          title: "Lead Cloud Systems Engineer",
-          organization: "Leapfrog Technology",
-          description:
-            "Leading a distributed team building resilient cloud architecture and high-throughput AI microservices.",
-        },
-      ],
-      interviewQnA: [
-        {
-          question: "How did NAMI prepare you for leadership in tech?",
-          answer:
-            "The laboratory environment and Cambridge curriculum fostered an inquiry-first mindset. When tackling unexpected software bottlenecks today, I rely on the exact problem-decomposition techniques I practiced in NAMI laboratories.",
-        },
-        {
-          question: "What advice do you have for current students?",
-          answer:
-            "Build practical projects early. Participate in student clubs, hackathons, and research excursions. The friendships and network you cultivate at NAMI stay with you across your entire career.",
-        },
-      ],
-      skillsAcquired: [
-        "Distributed Systems",
-        "Cloud Architecture (AWS)",
-        "Kubernetes & Docker",
-        "Analytical Problem Solving",
-        "Team Mentorship",
-      ],
-    },
-  },
-  {
-    id: "aayush-shrestha",
-    name: "Aayush Shrestha",
-    avatar: "/team/robin-rana.webp",
+    id: "reesav-rokka",
+    name: "Reesav Rokka",
+    avatar: "/nami/reesav-rokka.jpg",
     programme: "BSc (Hons) Computing",
-    graduationYear: "Batch of 2020",
+    graduationYear: "Alumnus",
     institution: "institute",
     institutionLabel: "Bachelors (Northampton UK)",
-    currentRole: "Senior AI & Data Specialist",
-    company: "CloudFactory",
-    sector: "Artificial Intelligence & Data Ops",
-    location: "Kathmandu & UK",
+    currentRole: "Senior IT Head",
+    company: "Gokarneshwor Municipal Hospital",
+    sector: "Healthcare Information Technology",
+    location: "Kathmandu, Nepal",
     summaryHighlights: [
-      "Graduated with First Class Honours from the University of Northampton UK programme.",
-      "Built machine learning models deployed across global medical imaging datasets.",
-      "Delivered guest keynote lectures at NAMI's annual ELITE Tech Symposium.",
+      "Senior IT Head managing hospital technology systems, digital workflows, and healthcare IT infrastructure.",
+      "Introduced digital tools and systems that empower doctors, nurses, and staff to provide faster, better patient services.",
     ],
     keyQuote:
-      "Having a British university curriculum in Nepal gave us a direct international benchmark. Our capstone projects were audited to UK university standards.",
+      "Presentations gave me confidence, group projects taught me collaboration, and practical assignments prepared me to solve real-world problems. What began with a desire to build an IT career became a role where technical skills improve hospital services and support the community.",
     pdfData: {
-      documentId: "NAMI-ALM-2020-109",
-      title: "Alumni Spotlight Case Study: Aayush Shrestha",
-      bioSummary:
-        "Aayush completed his BSc (Hons) in Computing with First Class Honours from the University of Northampton at NAMI. He currently designs enterprise AI data preparation pipelines at CloudFactory.",
-      academicJourney:
-        "Excelled in algorithms, artificial intelligence, and database design. Won 1st Prize at the NAMI ELITE IT Innovation competition with an automated natural hazard alert prototype.",
+      documentId: "NAMI-ALM-IT-018",
+      title: "Alumni Spotlight Case Study: Reesav Rokka",
+      publishedDate: "Alumni Relations Publication",
+      headline:
+        "Turning an Interest in Technology into Meaningful Healthcare Impact",
+      storyParagraphs: [
+        "Reesav Rokka first learned about Naaya Aayam Multi-Disciplinary Institute (NAMI) through his friends and educational counselors. They spoke highly of its quality education, supportive environment, and practical approach to learning. At the time, Reesav wanted to build a career in Information Technology (IT), and he felt NAMI would give him the practical skills and foundation he needed rather than focusing only on textbook knowledge.",
+        "During his time at NAMI, Reesav found the college welcoming and felt comfortable approaching teachers for guidance. His growth came not only from classroom lessons but also from projects, presentations, and group assignments. These experiences taught him problem-solving, communication, teamwork, leadership, and how to listen to others. He came to understand that technical knowledge alone was not enough for a successful career.",
+        "After graduating, Reesav started working as an IT professional at Gokarneshwor Municipal Hospital. With experience and increasing responsibility, he became Senior IT Head. His role involves managing the hospital's technology systems, protecting information, managing software, supporting digital projects, and working with doctors, nurses, administrators, and other staff to solve practical problems through technology.",
+        "He has also contributed to several improvements at the hospital, including introducing digital systems, strengthening its technology infrastructure, and developing tools that support healthcare professionals. What matters most to him is seeing how these technological improvements can help staff access information faster, work more accurately, and provide better services to patients.",
+        "Looking back, Reesav sees a strong connection between his education and his career. Presentations gave him confidence, group projects taught him collaboration, and practical assignments prepared him to solve real-world problems. He believes students should use every classroom activity as preparation for their future, while also continuing to learn because technology constantly changes.",
+        "His journey is ultimately about turning an interest in technology into meaningful work. What began with a desire to build an IT career became a role where his technical skills help improve hospital services and support the wider community.",
+      ],
       careerMilestones: [
         {
-          year: "2020",
-          title: "BSc (Hons) First Class Honours",
-          organization: "University of Northampton / NAMI",
-          description:
-            "Graduated with distinction in Computing and published undergraduate paper on localized NLP datasets.",
-        },
-        {
-          year: "2021",
-          title: "Machine Learning Associate",
-          organization: "Diyo AI",
-          description:
-            "Trained neural network classifiers for automated document OCR and identity verification.",
-        },
-        {
-          year: "2023 – Present",
-          title: "Senior AI & Data Specialist",
-          organization: "CloudFactory",
-          description:
-            "Managing large-scale data labelling and model validation pipelines for Fortune 500 AI clients.",
-        },
-      ],
-      interviewQnA: [
-        {
-          question: "Why chose Northampton UK at NAMI?",
-          answer:
-            "The international curriculum and faculty mentorship were unmatched. We studied the same modules as students in the UK while building solutions directly relevant to our region.",
-        },
-        {
-          question: "How valuable was the campus research environment?",
-          answer:
-            "The high-spec computer laboratories, central digital libraries, and collaborative culture allowed us to test real-world software prototypes 24/7.",
-        },
-      ],
-      skillsAcquired: [
-        "Machine Learning Pipelines",
-        "Python & PyTorch",
-        "Data Engineering",
-        "Agile Software Development",
-      ],
-    },
-  },
-  {
-    id: "sneha-karki",
-    name: "Sneha Karki",
-    avatar: "/team/samjhana-phuyal.webp",
-    programme: "BSc (Hons) Environmental Science",
-    graduationYear: "Batch of 2019",
-    institution: "institute",
-    institutionLabel: "Bachelors (Northampton UK)",
-    currentRole: "Climate Resilience Lead",
-    company: "ICIMOD",
-    sector: "Environmental Policy & Research",
-    location: "South Asia Regional Office",
-    summaryHighlights: [
-      "Led biodiversity fieldwork studies across the Mustang and Sindhupalchowk watersheds.",
-      "Author of published research on Himalayan glacier retreat and community adaptation.",
-      "Recipient of the UK University Vice-Chancellor's International Scholar Commendation.",
-    ],
-    keyQuote:
-      "Field excursions at NAMI were transformative. We didn't just learn about ecology in classrooms—we measured soil pH and analyzed high-altitude river samples on mountain ridges.",
-    pdfData: {
-      documentId: "NAMI-ALM-2019-078",
-      title: "Alumni Spotlight Case Study: Sneha Karki",
-      bioSummary:
-        "Sneha graduated in Environmental Science from NAMI / University of Northampton. She now leads regional community climate adaptation research across the Hindu Kush Himalaya at ICIMOD.",
-      academicJourney:
-        "Specialized in hydrology, GIS mapping, and environmental impact assessments. Spearheaded the NAMI Eco-Vision Club and community tree plantation drives.",
-      careerMilestones: [
-        {
-          year: "2019",
-          title: "BSc Environmental Science Honours",
+          year: "Academic",
+          title: "BSc (Hons) Computing & Practical Foundation",
           organization: "NAMI / University of Northampton",
           description:
-            "Recognized with Best Undergraduate Thesis Award for watershed conservation modeling.",
+            "Completed hands-on software development, systems engineering, collaborative projects, and communication-focused presentations.",
         },
         {
-          year: "2020",
-          title: "Research Officer",
-          organization: "Wildlife Conservation Nepal",
+          year: "Career Start",
+          title: "IT Professional",
+          organization: "Gokarneshwor Municipal Hospital",
           description:
-            "Conducted environmental education and wildlife habitat restoration projects across 5 districts.",
+            "Managed core hospital technology systems, ensured clinical data integrity, and supported digital tooling for healthcare workers.",
         },
         {
-          year: "2023 – Present",
-          title: "Climate Resilience Lead",
-          organization: "ICIMOD",
+          year: "Present",
+          title: "Senior IT Head",
+          organization: "Gokarneshwor Municipal Hospital",
           description:
-            "Directing international stakeholder working groups on transboundary water resource sustainability.",
-        },
-      ],
-      interviewQnA: [
-        {
-          question: "What made the Environmental Science program unique?",
-          answer:
-            "The blend of hands-on laboratory chemistry and rigorous mountain fieldwork. NAMI provided full lab instrumentation that allowed us to publish legitimate research early in our careers.",
-        },
-        {
-          question: "What is your message to prospective students?",
-          answer:
-            "Environmental science is the defining field of our century. NAMI gives you the global credibility and local practical exposure to create tangible impact.",
-        },
-      ],
-      skillsAcquired: [
-        "GIS & Remote Sensing",
-        "Environmental Impact Assessment",
-        "Policy Analysis",
-        "Field Research & Sampling",
-      ],
-    },
-  },
-  {
-    id: "rohan-sharma",
-    name: "Rohan Sharma",
-    avatar: "/team/suresh-raj-ghimire.webp",
-    programme: "NEB +2 Science (Physics & Mathematics)",
-    graduationYear: "Batch of 2017",
-    institution: "higher-secondary",
-    institutionLabel: "Higher Secondary (+2)",
-    currentRole: "Biomedical Technology Researcher",
-    company: "University of Sydney",
-    sector: "Biotechnology & Health Systems",
-    location: "Sydney, Australia",
-    summaryHighlights: [
-      "Distinction in NEB Board examinations with highest college score in Physics.",
-      "Awarded full international postgraduate research fellowship in Australia.",
-      "Co-inventor of patented low-cost digital diagnostic biosensors for remote clinics.",
-    ],
-    keyQuote:
-      "The dedicated faculty at NAMI built my foundational discipline. Daily conceptual problem sets in +2 Science gave me the confidence to compete globally.",
-    pdfData: {
-      documentId: "NAMI-ALM-2017-015",
-      title: "Alumni Spotlight Case Study: Rohan Sharma",
-      bioSummary:
-        "After graduating with top honors in +2 Science from NAMI, Rohan completed biomedical engineering and now leads translational diagnostic device research in Australia.",
-      academicJourney:
-        "Achieved straight A+ grades in NEB Higher Secondary Science. Participated actively in the Science Exhibition and Inter-School Mathematics Olympiad.",
-      careerMilestones: [
-        {
-          year: "2017",
-          title: "+2 Science Distinction",
-          organization: "NAMI Higher Secondary",
-          description:
-            "Ranked in top 1% nationwide in National Examinations Board Physics & Chemistry.",
-        },
-        {
-          year: "2021",
-          title: "B.Eng Biomedical Engineering",
-          organization: "Australia Institute of Tech",
-          description:
-            "First Class Honours and recipient of Academic Dean's Award.",
-        },
-        {
-          year: "2023 – Present",
-          title: "Doctoral Fellow & Research Associate",
-          organization: "University of Sydney",
-          description:
-            "Designing wearable microfluidic health monitors for continuous patient vital surveillance.",
+            "Directs institutional technology infrastructure, digital systems, cybersecurity, and practical software tools supporting medical staff and patients.",
         },
       ],
       interviewQnA: [
         {
           question:
-            "How did NAMI's +2 program prepare you for university abroad?",
+            "How did your education at NAMI connect with your current healthcare leadership role?",
           answer:
-            "The rigorous testing schedule, disciplined laboratory practicals, and encouraging teachers meant I experienced zero shock when transitioning to international engineering courses.",
+            "Presentations gave me confidence, group projects taught me collaboration, and practical assignments prepared me to solve real-world problems. Working with doctors, nurses, and administrators requires strong communication alongside technical expertise.",
         },
         {
-          question: "What memories stand out from your time at NAMI?",
+          question: "What is most rewarding about your current work?",
           answer:
-            "The late afternoons in the chemistry lab and basketball tournaments. NAMI balanced hard academic focus with vibrant student life.",
+            "Seeing how technological improvements help staff access information faster, work more accurately, and provide better services to patients. It is about turning an interest in technology into meaningful work that supports the wider community.",
+        },
+        {
+          question: "What is your advice for current students?",
+          answer:
+            "Use every classroom activity as preparation for your future, while also continuing to learn because technology constantly changes.",
         },
       ],
       skillsAcquired: [
-        "Biomedical Instrumentation",
-        "Signal Processing",
-        "Mathematical Modeling",
-        "Experimental Design",
+        "Healthcare IT Systems",
+        "Infrastructure & Security",
+        "Digital Transformation",
+        "Team Leadership & Collaboration",
+        "Problem-Solving & Communication",
+      ],
+    },
+  },
+  {
+    id: "daniel-sapkota",
+    name: "Daniel Sapkota",
+    avatar: "/nami/daniel-sapkota.jpg",
+    programme: "BSc (Hons) Computing",
+    graduationYear: "Alumnus",
+    institution: "institute",
+    institutionLabel: "Bachelors (Northampton UK)",
+    currentRole: "Co-founder",
+    company: "Lightcone",
+    sector: "Fintech & Venture Capital",
+    location: "New York, USA",
+    summaryHighlights: [
+      "Co-founder of Lightcone, a New York fintech startup that has raised USD 4 million in venture capital from US and European investors.",
+      "Awarded a full scholarship and stipend to pursue a PhD in Computer Science at the University of Nevada, Las Vegas (UNLV).",
+    ],
+    keyQuote:
+      "Build something quickly, get users, learn from the process, iterate, innovate, and keep taking action.",
+    pdfData: {
+      documentId: "NAMI-ALM-FT-007",
+      title: "Alumni Spotlight Case Study: Daniel Sapkota",
+      publishedDate: "Alumni Relations Publication",
+      headline:
+        "From Kathmandu to New York: Founding a $4M Venture-Backed Fintech Startup",
+      storyParagraphs: [
+        "Daniel Sapkota is a Co-founder of Lightcone, a fintech startup based in New York, USA. His journey began at NAMI, where he developed an interest in technology and entrepreneurship.",
+        "After graduating from NAMI, Daniel received a full scholarship and stipend to pursue a PhD in Computer Science at the University of Nevada, Las Vegas (UNLV). He later moved into the technology industry and co-founded Lightcone, a fintech startup that has raised USD 4 million in venture capital from investors in the United States and Europe.",
+        "Daniel credits NAMI’s hands-on, industry-focused learning for helping him develop the confidence and initiative that have been important throughout his career. He particularly remembers how the curriculum encouraged him to act quickly and build things rather than only study theory. He also highlights the value of the US technology industry’s emphasis on agency.",
+        "His advice to current students is straightforward: build something quickly, get users, learn from the process, iterate, innovate, and keep taking action.",
+        "Daniel also remembers his teachers at NAMI fondly, especially Deepak Karna, whom he credits as his mentor. He describes himself as a student who was difficult to keep under control, but says he loved his teachers and values the mentorship he received.",
+        "Overall, Daniel’s story shows a path from NAMI → PhD in Computer Science at UNLV → technology industry → fintech entrepreneurship in New York, eventually becoming a co-founder of a startup that attracted significant international venture investment.",
+      ],
+      careerMilestones: [
+        {
+          year: "Academic",
+          title: "BSc Computing & Entrepreneurship Foundation",
+          organization: "NAMI / University of Northampton",
+          description:
+            "Cultivated engineering discipline and startup initiative under the close mentorship of Deepak Karna and faculty.",
+        },
+        {
+          year: "PhD Fellowship",
+          title: "PhD in Computer Science (Full Scholarship & Stipend)",
+          organization: "University of Nevada, Las Vegas (UNLV)",
+          description:
+            "Awarded full scholarship and stipend for advanced computing doctoral studies and academic research in the United States.",
+        },
+        {
+          year: "US Tech",
+          title: "Technology Industry & High-Agency Execution",
+          organization: "US Tech Ecosystem",
+          description:
+            "Transitioned into the US tech industry, embracing rapid prototyping, user feedback, and high personal agency.",
+        },
+        {
+          year: "Present",
+          title: "Co-founder",
+          organization: "Lightcone (New York, USA)",
+          description:
+            "Co-founded fintech startup Lightcone, raising USD 4 Million in venture capital from prominent investors across the US and Europe.",
+        },
+      ],
+      interviewQnA: [
+        {
+          question:
+            "How did NAMI's learning approach influence your entrepreneurial path?",
+          answer:
+            "NAMI's hands-on, industry-focused learning helped me develop confidence and initiative. The curriculum encouraged me to act quickly and build things rather than only study theory, matching the emphasis on agency in the US tech ecosystem.",
+        },
+        {
+          question: "What mentorship stood out during your time at NAMI?",
+          answer:
+            "I remember my teachers at NAMI fondly, especially Deepak Karna, whom I credit as my mentor. I was a student who was difficult to keep under control, but I loved my teachers and value the mentorship and encouragement I received.",
+        },
+        {
+          question: "What is your key advice to current students?",
+          answer:
+            "Build something quickly, get users, learn from the process, iterate, innovate, and keep taking action.",
+        },
+      ],
+      skillsAcquired: [
+        "Fintech Innovation",
+        "Venture Capital & Fundraising",
+        "Computer Science Research",
+        "Rapid Product Iteration",
+        "High-Agency Leadership",
       ],
     },
   },
@@ -651,7 +545,7 @@ export const alumniCopy = {
     eyebrow: "ALUMNI VOICES",
     heading: "Where NAMI Graduates Go",
     standfirst:
-      "From Kathmandu tech pioneers to international researchers in the UK and Australia, explore the career paths of our graduates. Click any profile to view their full case study report.",
+      "From healthcare technology leaders in Kathmandu to venture-backed fintech entrepreneurs in New York, explore the career journeys of our graduates. Click any profile to view their full story.",
   },
   employers: {
     navLabel: "Employers",

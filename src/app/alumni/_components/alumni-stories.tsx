@@ -1,14 +1,15 @@
 "use client";
 
-import {
-  ArrowRight01Icon,
-  Cancel01Icon,
-  File01Icon,
-  PrinterIcon,
-} from "@hugeicons/core-free-icons";
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { SectionHeader } from "@/components/shared/section-header";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
 import { type AlumniStory, alumniStories } from "./alumni-copy";
@@ -25,39 +26,23 @@ export function AlumniStories({
   const [activeStory, setActiveStory] = useState<AlumniStory | null>(null);
   const [selectedWing, setSelectedWing] = useState<string>("all");
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      setActiveStory(null);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
-
-  useEffect(() => {
-    if (activeStory) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activeStory]);
-
   const filteredStories =
     selectedWing === "all"
       ? alumniStories
       : alumniStories.filter((s) => s.institution === selectedWing);
 
-  const wingFilters = [
-    { id: "all", label: "All Wings" },
-    { id: "college", label: "Cambridge A-Levels" },
+  const allWings = [
+    { id: "all", label: "All Alumni" },
     { id: "institute", label: "Northampton UK" },
+    { id: "college", label: "Cambridge A-Levels" },
     { id: "higher-secondary", label: "+2 Science" },
   ] as const;
+
+  const wingFilters = allWings.filter(
+    (tab) =>
+      tab.id === "all" ||
+      alumniStories.some((s) => s.institution === tab.id),
+  );
 
   return (
     <section
@@ -118,11 +103,11 @@ export function AlumniStories({
           </div>
 
           <span className="text-xs text-ink-muted font-body">
-            Click any profile to open the PDF case study
+            Click any profile to read their full story
           </span>
         </div>
 
-        {/* Editorial Alumni Ledger (Summarized as a Whole) */}
+        {/* Editorial Alumni Ledger */}
         <div className="mt-6 divide-y divide-border border-y border-border">
           {filteredStories.map((story) => (
             <button
@@ -165,7 +150,7 @@ export function AlumniStories({
                   </div>
                 </div>
 
-                {/* 2. Key Story Highlights Summarized (Cols 5-9) */}
+                {/* 2. Key Story Highlights (Cols 5-9) */}
                 <div className="lg:col-span-5 space-y-1.5">
                   <span className="inline-block rounded-full bg-primary-100/70 border border-primary-200/80 px-2.5 py-0.5 text-[11px] font-semibold text-primary-700 mb-1">
                     {story.institutionLabel}
@@ -178,14 +163,10 @@ export function AlumniStories({
                   </p>
                 </div>
 
-                {/* 3. PDF Story Action Button (Cols 10-12) */}
+                {/* 3. Action Button (Cols 10-12) */}
                 <div className="lg:col-span-3 flex lg:justify-end items-center">
                   <span className="inline-flex items-center gap-2 rounded-full border border-primary-200/80 bg-surface-raised px-4 py-2 text-xs font-semibold text-ink shadow-xs transition-all duration-200 group-hover:border-primary-700 group-hover:bg-primary-700 group-hover:text-white">
-                    <Icon
-                      className="size-3.5 text-primary-700 group-hover:text-white"
-                      icon={File01Icon}
-                    />
-                    <span>Read PDF Story</span>
+                    <span>Read Story</span>
                     <Icon
                       className="size-3 transition-transform group-hover:translate-x-0.5"
                       icon={ArrowRight01Icon}
@@ -198,147 +179,108 @@ export function AlumniStories({
         </div>
       </div>
 
-      {/* Authentic University Prospectus / Case Study PDF Popup */}
-      {activeStory && (
-        <div
-          aria-modal="true"
-          className="fixed inset-0 z-60 flex flex-col bg-neutral-950/90 backdrop-blur-md animate-in fade-in duration-200"
-          role="dialog"
-        >
-          {/* PDF Viewer Header Toolbar */}
-          <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/15 bg-neutral-950 px-4 py-3 sm:px-8 text-white">
-            <div className="flex items-center gap-3 min-w-0">
-              <span className="flex size-7 items-center justify-center rounded bg-[#BD1B21] text-white">
-                <Icon className="size-4" icon={File01Icon} />
-              </span>
-
-              <div className="min-w-0">
-                <h4 className="text-xs sm:text-sm font-medium truncate text-white/90">
-                  NAMI-Alumni-Story-{activeStory.name.replace(" ", "-")}.pdf
-                </h4>
-                <p className="text-[11px] text-white/60 font-body">
-                  NAMI Alumni Relations • Case Study Publication
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20 transition-colors cursor-pointer"
-                onClick={() => window.print()}
-                title="Print PDF Document"
-                type="button"
-              >
-                <Icon className="size-3.5" icon={PrinterIcon} />
-                <span>Print</span>
-              </button>
-
-              <button
-                aria-label="Close document"
-                className="flex size-8 items-center justify-center rounded-full bg-white/15 text-white hover:bg-[#BD1B21] transition-colors cursor-pointer"
-                onClick={() => setActiveStory(null)}
-                type="button"
-              >
-                <Icon className="size-4" icon={Cancel01Icon} />
-              </button>
-            </div>
-          </header>
-
-          {/* PDF Page Canvas (White A4 Editorial Sheet) */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-8 lg:p-12 flex justify-center bg-neutral-900">
-            <article className="w-full max-w-3xl rounded-xl bg-white p-6 sm:p-12 shadow-2xl text-ink border border-neutral-200">
-              {/* Top Collegiate Header Bar */}
-              <div className="border-b border-neutral-300 pb-5 flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-display text-xl font-bold tracking-tight text-[#BD1B21]">
-                      NAMI
-                    </span>
-                    <span className="text-[11px] font-semibold tracking-wider text-neutral-500 uppercase">
-                      • ALUMNI CASE STUDY
-                    </span>
-                  </div>
-                  <p className="text-xs text-neutral-500 mt-0.5">
-                    Kathmandu, Nepal • In Partnership with University of
-                    Northampton UK
-                  </p>
-                </div>
-
-                <span className="rounded bg-neutral-100 px-2.5 py-1 text-[11px] font-mono font-medium text-neutral-600">
-                  {activeStory.pdfData.documentId}
-                </span>
+      {/* Standard Story Modal Dialog */}
+      <Dialog
+        open={Boolean(activeStory)}
+        onOpenChange={(open) => {
+          if (!open) {
+            setActiveStory(null);
+          }
+        }}
+      >
+        {activeStory && (
+          <DialogContent className="max-w-2xl sm:max-w-3xl max-h-[88vh] flex flex-col p-0 overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl">
+            {/* Modal Header */}
+            <div className="flex items-start gap-4 sm:gap-5 p-5 sm:p-7 border-b border-border bg-surface-raised/50 shrink-0">
+              <div className="relative size-16 sm:size-20 shrink-0 overflow-hidden rounded-2xl border border-border/80 shadow-md">
+                <Image
+                  alt={activeStory.name}
+                  className="size-full object-cover"
+                  height={100}
+                  src={activeStory.avatar}
+                  width={100}
+                />
               </div>
 
-              {/* Story Hero Header */}
-              <div className="mt-8 flex flex-col sm:flex-row items-start gap-6 border-b border-neutral-200 pb-8">
-                <div className="relative size-24 sm:size-28 shrink-0 overflow-hidden rounded-xl border border-neutral-300 shadow-xs">
-                  <Image
-                    alt={activeStory.name}
-                    className="size-full object-cover"
-                    height={120}
-                    src={activeStory.avatar}
-                    width={120}
-                  />
-                </div>
-
-                <div className="flex-1 space-y-1">
-                  <span className="inline-block rounded-full bg-[#BD1B21]/10 text-[#BD1B21] px-3 py-0.5 text-xs font-semibold">
-                    {activeStory.institutionLabel} •{" "}
+              <DialogHeader className="min-w-0 flex-1 text-left">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-block rounded-full bg-primary-100 text-primary-700 px-2.5 py-0.5 text-xs font-semibold border border-primary-200/70">
+                    {activeStory.institutionLabel}
+                  </span>
+                  <span className="inline-block rounded-full bg-surface text-ink-muted px-2.5 py-0.5 text-xs font-medium border border-border">
                     {activeStory.graduationYear}
                   </span>
-                  <h2 className="font-display text-2xl sm:text-3xl font-medium text-ink tracking-tight">
-                    {activeStory.name}
-                  </h2>
-                  <p className="font-body text-sm font-semibold text-[#BD1B21]">
-                    {activeStory.currentRole} at {activeStory.company}
-                  </p>
-                  <p className="font-body text-xs text-neutral-600">
-                    Programme: {activeStory.programme} • Based in{" "}
-                    {activeStory.location}
-                  </p>
                 </div>
-              </div>
 
+                <DialogTitle className="mt-1 text-xl sm:text-2xl font-display font-medium text-ink">
+                  {activeStory.name}
+                </DialogTitle>
+
+                <p className="font-body text-xs sm:text-sm font-semibold text-primary-700 mt-0.5">
+                  {activeStory.currentRole} at {activeStory.company}
+                </p>
+
+                <p className="font-body text-xs text-ink-muted">
+                  Programme: {activeStory.programme} • {activeStory.location}
+                </p>
+              </DialogHeader>
+            </div>
+
+            {/* Modal Body: Scrollable Story Content */}
+            <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
               {/* Highlight Quote */}
-              <div className="mt-8 rounded-xl bg-neutral-50 p-5 border-l-4 border-[#BD1B21] italic text-sm sm:text-base text-neutral-800 font-display leading-relaxed">
+              <div className="rounded-xl bg-primary-100/30 p-4 sm:p-5 border-l-4 border-primary-700 italic text-sm sm:text-base text-ink font-display leading-relaxed">
                 &ldquo;{activeStory.keyQuote}&rdquo;
               </div>
 
-              {/* Story Section 1: Background & Academic Life */}
-              <div className="mt-8 space-y-3">
-                <h3 className="font-display text-base font-semibold text-ink uppercase tracking-wider text-xs border-b border-neutral-200 pb-1.5">
-                  Academic Experience at NAMI
-                </h3>
-                <p className="font-body text-xs sm:text-sm text-neutral-700 leading-relaxed">
-                  {activeStory.pdfData.bioSummary}
-                </p>
-                <p className="font-body text-xs sm:text-sm text-neutral-700 leading-relaxed">
-                  {activeStory.pdfData.academicJourney}
-                </p>
+              {/* Story Narrative */}
+              <div className="space-y-3">
+                <h4 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-ink border-b border-border pb-1.5">
+                  The Journey & Educational Experience
+                </h4>
+                <div className="space-y-3 text-xs sm:text-sm text-ink/85 leading-relaxed font-body">
+                  {activeStory.pdfData.storyParagraphs.map((paragraph, idx) => (
+                    <p key={idx}>
+                      {paragraph.split(/(\*\*.*?\*\*)/g).map((part, pIdx) => {
+                        if (part.startsWith("**") && part.endsWith("**")) {
+                          return (
+                            <strong
+                              key={pIdx}
+                              className="font-semibold text-ink"
+                            >
+                              {part.slice(2, -2)}
+                            </strong>
+                          );
+                        }
+                        return part;
+                      })}
+                    </p>
+                  ))}
+                </div>
               </div>
 
-              {/* Story Section 2: Career Path Timeline */}
-              <div className="mt-8 space-y-4">
-                <h3 className="font-display text-base font-semibold text-ink uppercase tracking-wider text-xs border-b border-neutral-200 pb-1.5">
+              {/* Milestones */}
+              <div className="space-y-3">
+                <h4 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-ink border-b border-border pb-1.5">
                   Career Trajectory & Milestones
-                </h3>
-                <div className="space-y-4">
+                </h4>
+                <div className="space-y-3">
                   {activeStory.pdfData.careerMilestones.map((milestone) => (
                     <div
-                      className="flex items-start gap-4 text-xs sm:text-sm"
+                      className="flex items-start gap-3 sm:gap-4 text-xs sm:text-sm"
                       key={milestone.year + milestone.title}
                     >
-                      <span className="font-mono font-semibold text-[#BD1B21] shrink-0 w-20">
+                      <span className="font-mono font-bold text-primary-700 shrink-0 w-24 sm:w-28 text-xs pt-0.5">
                         {milestone.year}
                       </span>
-                      <div>
+                      <div className="flex-1 pb-2.5 border-b border-border/50 last:border-0 last:pb-0">
                         <p className="font-semibold text-ink">
                           {milestone.title} —{" "}
-                          <span className="font-normal text-neutral-600">
+                          <span className="font-normal text-ink-muted">
                             {milestone.organization}
                           </span>
                         </p>
-                        <p className="text-neutral-600 text-xs mt-0.5 leading-relaxed">
+                        <p className="text-ink-muted text-xs mt-0.5 leading-relaxed">
                           {milestone.description}
                         </p>
                       </div>
@@ -347,45 +289,48 @@ export function AlumniStories({
                 </div>
               </div>
 
-              {/* Story Section 3: Graduate Q&A Interview */}
-              <div className="mt-8 space-y-4">
-                <h3 className="font-display text-base font-semibold text-ink uppercase tracking-wider text-xs border-b border-neutral-200 pb-1.5">
+              {/* Graduate Reflections / Q&A */}
+              <div className="space-y-3">
+                <h4 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-ink border-b border-border pb-1.5">
                   In Conversation with {activeStory.name}
-                </h3>
-                {activeStory.pdfData.interviewQnA.map((item) => (
-                  <div
-                    className="space-y-1 text-xs sm:text-sm"
-                    key={item.question.slice(0, 30)}
-                  >
-                    <p className="font-semibold text-neutral-900">
-                      Q: {item.question}
-                    </p>
-                    <p className="text-neutral-700 leading-relaxed italic">
-                      &ldquo;{item.answer}&rdquo;
-                    </p>
-                  </div>
-                ))}
+                </h4>
+                <div className="space-y-3">
+                  {activeStory.pdfData.interviewQnA.map((item) => (
+                    <div
+                      className="space-y-1 text-xs sm:text-sm bg-surface-raised rounded-xl p-3.5 sm:p-4 border border-border"
+                      key={item.question.slice(0, 30)}
+                    >
+                      <p className="font-semibold text-ink">
+                        Q: {item.question}
+                      </p>
+                      <p className="text-ink/85 leading-relaxed italic text-xs sm:text-sm">
+                        &ldquo;{item.answer}&rdquo;
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* PDF Document Footer */}
-              <footer className="mt-12 border-t border-neutral-300 pt-6 flex flex-wrap items-center justify-between text-xs text-neutral-500 gap-4">
-                <div>
-                  <p className="font-semibold text-neutral-800">
-                    NAMI College Alumni Relations
-                  </p>
-                  <p>
-                    Gokarneshwor-7, Jorpati, Kathmandu, Nepal •
-                    alumni@nami.edu.np
-                  </p>
+              {/* Skills Tags */}
+              <div className="space-y-2">
+                <h4 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-ink border-b border-border pb-1.5">
+                  Core Skills & Focus Areas
+                </h4>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {activeStory.pdfData.skillsAcquired.map((skill) => (
+                    <span
+                      className="rounded-full bg-surface-raised border border-border px-3 py-1 text-xs font-medium text-ink-muted"
+                      key={skill}
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-                <div className="text-right font-mono text-[11px]">
-                  <span>OFFICIAL ALUMNI PROFILE • PAGE 1 OF 1</span>
-                </div>
-              </footer>
-            </article>
-          </div>
-        </div>
-      )}
+              </div>
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
     </section>
   );
 }

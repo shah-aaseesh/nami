@@ -182,23 +182,10 @@ export function EventAlbumModal({
                   />
 
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col justify-between p-4">
-                    <div className="flex justify-end">
-                      <span className="flex size-8 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-xs">
-                        <Icon className="size-4" icon={ViewIcon} />
-                      </span>
-                    </div>
-
-                    <div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#FFAD00]">
-                        Photo {index + 1} of {album.photos.length}
-                      </span>
-                      {photo.caption && (
-                        <p className="mt-1 line-clamp-2 text-xs text-white leading-relaxed font-body">
-                          {photo.caption}
-                        </p>
-                      )}
-                    </div>
+                  <div className="absolute inset-0 bg-black/25 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                    <span className="flex size-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-xs shadow-md group-hover:scale-105 transition-transform">
+                      <Icon className="size-5" icon={ViewIcon} />
+                    </span>
                   </div>
                 </button>
               ))}
@@ -211,90 +198,96 @@ export function EventAlbumModal({
       {currentPhoto && (
         <div
           aria-modal="true"
-          className="fixed inset-0 z-60 flex flex-col items-center justify-between bg-black/95 p-4 sm:p-8 animate-in fade-in duration-200"
+          className="fixed inset-0 z-[9999] flex flex-col justify-between bg-black/92 backdrop-blur-md p-4 sm:p-6 lg:p-8 animate-in fade-in duration-200 select-none cursor-zoom-out"
+          onClick={() => setActivePhotoIndex(null)}
           role="dialog"
         >
           {/* Lightbox Header Bar */}
-          <div className="flex w-full max-w-6xl items-center justify-between text-white">
-            <div className="flex items-center gap-3">
+          <div
+            className="flex w-full max-w-7xl mx-auto items-center justify-between text-white z-20 cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 min-w-0">
               <span
                 className={cn(
-                  "rounded-full px-3 py-0.5 text-xs font-semibold uppercase tracking-wider border",
+                  "rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider border shadow-sm",
                   getInstitutionBadgeClass(album.institution),
                 )}
               >
                 {album.institutionLabel}
               </span>
-              <span className="text-xs text-neutral-400 font-medium">
-                {activePhotoIndex !== null ? activePhotoIndex + 1 : 1} /{" "}
-                {album.photos.length}
+              <span className="hidden sm:inline-block text-xs text-white/80 font-medium truncate max-w-md">
+                {album.title}
               </span>
             </div>
 
-            <button
-              aria-label="Close fullscreen photo view"
-              className="flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-[#BD1B21]"
-              onClick={() => setActivePhotoIndex(null)}
-              type="button"
-            >
-              <Icon className="size-5" icon={Cancel01Icon} />
-            </button>
+            <div className="flex items-center gap-3">
+              <span className="rounded-full bg-white/10 backdrop-blur-md px-3 py-1 font-mono text-xs text-white/90 border border-white/15">
+                {activePhotoIndex !== null ? activePhotoIndex + 1 : 1} /{" "}
+                {album.photos.length}
+              </span>
+
+              <button
+                aria-label="Close fullscreen photo view"
+                className="flex size-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-all duration-150 hover:bg-[#BD1B21] hover:scale-105 border border-white/15 cursor-pointer shadow-lg"
+                onClick={() => setActivePhotoIndex(null)}
+                type="button"
+              >
+                <Icon className="size-5" icon={Cancel01Icon} />
+              </button>
+            </div>
           </div>
 
           {/* Center High-Res Image with Prev / Next Navigation */}
-          <div className="relative flex flex-1 items-center justify-center w-full max-w-5xl my-4">
+          <div
+            className="relative flex flex-1 items-center justify-center w-full max-w-7xl mx-auto my-auto py-3 cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Prev Button */}
-            <button
-              aria-label="Previous photograph"
-              className="absolute left-2 sm:left-4 z-20 flex size-11 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all hover:bg-[#BD1B21] hover:scale-105"
-              onClick={(e) => {
-                e.stopPropagation();
-                setActivePhotoIndex(
-                  (prev) =>
-                    (prev === null ? 0 : prev - 1 + album.photos.length) %
-                    album.photos.length,
-                );
-              }}
-              type="button"
-            >
-              <Icon className="size-5" icon={ArrowLeft01Icon} />
-            </button>
+            {album.photos.length > 1 && (
+              <button
+                aria-label="Previous photograph"
+                className="absolute left-1 sm:left-4 z-30 flex size-11 sm:size-12 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all duration-150 hover:bg-[#BD1B21] hover:scale-110 hover:border-[#BD1B21] cursor-pointer shadow-2xl"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActivePhotoIndex(
+                    (prev) =>
+                      (prev === null ? 0 : prev - 1 + album.photos.length) %
+                      album.photos.length,
+                  );
+                }}
+                type="button"
+              >
+                <Icon className="size-6" icon={ArrowLeft01Icon} />
+              </button>
+            )}
 
-            {/* Current Image */}
-            <div className="relative max-h-[75vh] w-full aspect-16/10 flex items-center justify-center">
-              <Image
+            {/* Pure Unboxed Expanded Image */}
+            <div className="relative flex items-center justify-center max-h-[86vh] sm:max-h-[90vh] max-w-full">
+              <img
                 alt={currentPhoto.alt}
-                className="max-h-[75vh] w-auto max-w-full rounded-xl object-contain shadow-2xl"
-                height={currentPhoto.height}
-                priority
-                sizes="(min-width: 1024px) 80vw, 100vw"
+                className="max-h-[84vh] sm:max-h-[88vh] max-w-[94vw] lg:max-w-[90vw] w-auto h-auto object-contain rounded-xl sm:rounded-2xl shadow-2xl animate-in zoom-in-95 duration-200 transition-all pointer-events-auto"
                 src={currentPhoto.src}
-                width={currentPhoto.width}
               />
             </div>
 
             {/* Next Button */}
-            <button
-              aria-label="Next photograph"
-              className="absolute right-2 sm:right-4 z-20 flex size-11 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all hover:bg-[#BD1B21] hover:scale-105"
-              onClick={(e) => {
-                e.stopPropagation();
-                setActivePhotoIndex(
-                  (prev) =>
-                    (prev === null ? 0 : prev + 1) % album.photos.length,
-                );
-              }}
-              type="button"
-            >
-              <Icon className="size-5" icon={ArrowRight01Icon} />
-            </button>
-          </div>
-
-          {/* Lightbox Caption Footer */}
-          <div className="w-full max-w-3xl text-center">
-            <p className="text-sm sm:text-base text-white/90 leading-relaxed font-body">
-              {currentPhoto.caption ?? currentPhoto.alt}
-            </p>
+            {album.photos.length > 1 && (
+              <button
+                aria-label="Next photograph"
+                className="absolute right-1 sm:right-4 z-30 flex size-11 sm:size-12 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all duration-150 hover:bg-[#BD1B21] hover:scale-110 hover:border-[#BD1B21] cursor-pointer shadow-2xl"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActivePhotoIndex(
+                    (prev) =>
+                      (prev === null ? 0 : prev + 1) % album.photos.length,
+                  );
+                }}
+                type="button"
+              >
+                <Icon className="size-6" icon={ArrowRight01Icon} />
+              </button>
+            )}
           </div>
         </div>
       )}

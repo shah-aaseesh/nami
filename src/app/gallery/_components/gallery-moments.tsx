@@ -7,6 +7,7 @@ import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { Icon } from "@/components/ui/icon";
 import {
   CalendarIcon,
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   CloseIcon,
@@ -632,16 +633,25 @@ function TabIcon({ iconType }: { readonly iconType: CategoryFilterTab["iconType"
   }
 }
 
+const INITIAL_MOMENTS_COUNT = 9;
+const LOAD_MORE_STEP = 6;
+
 export function GalleryMoments() {
   const [mounted, setMounted] = useState(false);
   const [activeInstitution, setActiveInstitution] = useState<GalleryInstitution>("all");
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>("all");
+  const [visibleCount, setVisibleCount] = useState<number>(INITIAL_MOMENTS_COUNT);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Reset visible items count whenever filter changes
+  useEffect(() => {
+    setVisibleCount(INITIAL_MOMENTS_COUNT);
+  }, [activeInstitution, activeCategory]);
 
   const filteredMoments = GALLERY_MOMENTS.filter((item) => {
     // 1. Institution check
@@ -661,6 +671,8 @@ export function GalleryMoments() {
 
     return true;
   });
+
+  const displayedMoments = filteredMoments.slice(0, visibleCount);
 
   const imageMoments = filteredMoments.filter(
     (item) => item.type === "image" || item.type === "video",
@@ -797,57 +809,101 @@ export function GalleryMoments() {
           </div>
         ) : (
           /* 4. Moments Bento Grid */
-          <Reveal
-            className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
-            key={`${activeInstitution}-${activeCategory}`}
-            stagger={0.04}
-            y={16}
-          >
-            {filteredMoments.map((item) => {
-              // A. Special Quote Card (Row 3, Col 2)
-              if (item.type === "quote" && item.quote) {
-                return (
-                  <RevealItem className="h-full" key={item.id}>
-                    <div className="relative flex aspect-4/3 h-full flex-col justify-between overflow-hidden rounded-2xl bg-[#8B1519] p-6 sm:p-8 text-white shadow-md transition-all duration-300 hover:shadow-xl hover:shadow-[#8B1519]/20">
-                      {/* Lotus Watermark in Bottom Right Corner */}
-                      <div className="pointer-events-none absolute -bottom-6 -right-6 size-44 opacity-15">
-                        <Image
-                          alt=""
-                          className="size-full object-contain"
-                          height={180}
-                          src="/lotus.png"
-                          width={180}
-                        />
-                      </div>
+          <>
+            <Reveal
+              className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
+              key={`${activeInstitution}-${activeCategory}-${visibleCount}`}
+              stagger={0.04}
+              y={16}
+            >
+              {displayedMoments.map((item) => {
+                // A. Special Quote Card (Row 3, Col 2)
+                if (item.type === "quote" && item.quote) {
+                  return (
+                    <RevealItem className="h-full" key={item.id}>
+                      <div className="relative flex aspect-4/3 h-full flex-col justify-between overflow-hidden rounded-2xl bg-[#8B1519] p-6 sm:p-8 text-white shadow-md transition-all duration-300 hover:shadow-xl hover:shadow-[#8B1519]/20">
+                        {/* Lotus Watermark in Bottom Right Corner */}
+                        <div className="pointer-events-none absolute -bottom-6 -right-6 size-44 opacity-15">
+                          <Image
+                            alt=""
+                            className="size-full object-contain"
+                            height={180}
+                            src="/lotus.png"
+                            width={180}
+                          />
+                        </div>
 
-                      {/* Quotation Icon */}
-                      <div className="relative z-10">
-                        <div className="flex size-10 items-center justify-center rounded-lg bg-white/10 backdrop-blur-xs">
-                          <Icon className="size-5 text-white" icon={QuoteIcon} />
+                        {/* Quotation Icon */}
+                        <div className="relative z-10">
+                          <div className="flex size-10 items-center justify-center rounded-lg bg-white/10 backdrop-blur-xs">
+                            <Icon className="size-5 text-white" icon={QuoteIcon} />
+                          </div>
+                        </div>
+
+                        {/* Quote Text & Author */}
+                        <div className="relative z-10 space-y-3">
+                          <p className="font-display text-lg sm:text-xl font-medium leading-snug text-white">
+                            {item.quote.text}
+                          </p>
+                          <p className="font-body text-xs sm:text-sm font-semibold tracking-wide text-white/80">
+                            — {item.quote.author}
+                          </p>
                         </div>
                       </div>
+                    </RevealItem>
+                  );
+                }
 
-                      {/* Quote Text & Author */}
-                      <div className="relative z-10 space-y-3">
-                        <p className="font-display text-lg sm:text-xl font-medium leading-snug text-white">
-                          {item.quote.text}
-                        </p>
-                        <p className="font-body text-xs sm:text-sm font-semibold tracking-wide text-white/80">
-                          — {item.quote.author}
-                        </p>
-                      </div>
-                    </div>
-                  </RevealItem>
+                // B. Video Card with Circular Play Button (Row 4, Col 2)
+                if (item.type === "video") {
+                  return (
+                    <RevealItem className="h-full" key={item.id}>
+                      <button
+                        aria-label={item.title}
+                        className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+                        onClick={() => setIsVideoModalOpen(true)}
+                        type="button"
+                      >
+                        {item.src && (
+                          <Image
+                            alt={item.alt ?? item.title}
+                            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            fill
+                            loading="lazy"
+                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                            src={item.src}
+                          />
+                        )}
+
+                        {/* Dark Scrim Overlay */}
+                        <div className="absolute inset-0 bg-black/30 transition-opacity duration-300 group-hover:bg-black/20" />
+
+                        {/* Centered Circular Play Button */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="flex size-14 sm:size-16 items-center justify-center rounded-full border-2 border-white/90 bg-black/40 text-white backdrop-blur-xs shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-[#BD1B21] group-hover:border-[#BD1B21]">
+                            <Icon className="size-6 text-white translate-x-0.5" icon={PlayIcon} />
+                          </div>
+                        </div>
+                      </button>
+                    </RevealItem>
+                  );
+                }
+
+                // C. Standard Image Card
+                const currentImageIndex = imageMoments.findIndex(
+                  (m) => m.id === item.id,
                 );
-              }
 
-              // B. Video Card with Circular Play Button (Row 4, Col 2)
-              if (item.type === "video") {
                 return (
                   <RevealItem className="h-full" key={item.id}>
                     <button
-                      className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-                      onClick={() => setIsVideoModalOpen(true)}
+                      aria-label={item.title}
+                      className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-2 hover:ring-[#BD1B21]/50 cursor-pointer"
+                      onClick={() =>
+                        setLightboxIndex(
+                          currentImageIndex >= 0 ? currentImageIndex : null,
+                        )
+                      }
                       type="button"
                     >
                       {item.src && (
@@ -861,193 +917,167 @@ export function GalleryMoments() {
                         />
                       )}
 
-                      {/* Dark Scrim Overlay */}
-                      <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/30" />
+                      {/* Subtle Dark Overlay on Hover */}
+                      <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                      {/* Centered Circular Play Button */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex size-14 sm:size-16 items-center justify-center rounded-full border-2 border-white/90 bg-black/40 text-white backdrop-blur-xs shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-[#BD1B21] group-hover:border-[#BD1B21]">
-                          <Icon className="size-6 text-white translate-x-0.5" icon={PlayIcon} />
-                        </div>
-                      </div>
-
-                      {/* Institution Badge + Title Banner */}
-                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 bg-gradient-to-t from-black/85 via-black/40 to-transparent">
-                        <span className="inline-block rounded-md bg-white/20 px-2 py-0.5 font-body text-[10px] font-semibold text-white backdrop-blur-xs mb-1">
-                          {item.institutionLabel}
-                        </span>
-                        <p className="font-display text-sm sm:text-base font-semibold text-white drop-shadow-sm line-clamp-1">
-                          {item.title}
-                        </p>
+                      {/* Expand icon on hover */}
+                      <div className="absolute top-3 right-3 flex size-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-xs opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105 shadow-md">
+                        <svg className="size-4.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                       </div>
                     </button>
                   </RevealItem>
                 );
-              }
+              })}
+            </Reveal>
 
-              // C. Standard Image Card
-              const currentImageIndex = imageMoments.findIndex(
-                (m) => m.id === item.id,
-              );
-
-              return (
-                <RevealItem className="h-full" key={item.id}>
-                  <button
-                    className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-2 hover:ring-[#BD1B21]/50 cursor-pointer"
-                    onClick={() =>
-                      setLightboxIndex(
-                        currentImageIndex >= 0 ? currentImageIndex : null,
-                      )
-                    }
-                    type="button"
-                  >
-                    {item.src && (
-                      <Image
-                        alt={item.alt ?? item.title}
-                        className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        fill
-                        loading="lazy"
-                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                        src={item.src}
-                      />
-                    )}
-
-                    {/* Subtle Gradient Backdrop on Hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                    {/* Expand icon on hover */}
-                    <div className="absolute top-3 right-3 flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-xs opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105">
-                      <svg className="size-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-
-                    {/* Institution Tag + Title Bar on Hover */}
-                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <span className="inline-block rounded-md bg-[#BD1B21] px-2 py-0.5 font-body text-[10px] font-semibold text-white mb-1">
-                        {item.institutionLabel}
-                      </span>
-                      <p className="font-display text-sm sm:text-base font-semibold text-white drop-shadow-sm line-clamp-2 leading-snug">
-                        {item.title}
-                      </p>
-                    </div>
-                  </button>
-                </RevealItem>
-              );
-            })}
-          </Reveal>
+            {/* 5. See More Moments Action */}
+            {visibleCount < filteredMoments.length && (
+              <div className="mt-10 sm:mt-12 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((prev) => prev + LOAD_MORE_STEP)}
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#BD1B21] px-8 py-3.5 text-sm font-semibold text-white shadow-md shadow-[#BD1B21]/20 transition-all duration-200 hover:bg-[#a0161b] hover:shadow-lg hover:shadow-[#BD1B21]/30 hover:scale-[1.02] cursor-pointer active:scale-95"
+                >
+                  <span>See More Moments</span>
+                  <Icon className="size-4 transition-transform duration-200 group-hover:translate-y-0.5" icon={ChevronDownIcon} />
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
-      {/* 5. Clean Centered Image Modal Dialog Portal */}
+      {/* 5. Fluid Unboxed Fullscreen Image Expansion (No restrictive box / card) */}
       {mounted &&
         lightboxIndex !== null &&
         currentImage &&
         createPortal(
           <div
-            aria-label="Image Modal"
+            aria-label="Expanded Image View"
             aria-modal="true"
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-xs p-4 sm:p-6 animate-in fade-in duration-150"
+            className="fixed inset-0 z-[9999] flex flex-col justify-between bg-black/92 backdrop-blur-md p-4 sm:p-6 lg:p-8 animate-in fade-in duration-200 select-none cursor-zoom-out"
             onClick={() => setLightboxIndex(null)}
             role="dialog"
           >
-            {/* Modal Dialog Card */}
+            {/* Top Floating Control Bar */}
             <div
-              className="relative flex flex-col w-full max-w-4xl max-h-[90vh] bg-surface rounded-2xl overflow-hidden shadow-2xl border border-border animate-in zoom-in-95 duration-150"
+              className="flex items-center justify-between w-full max-w-7xl mx-auto text-white z-20 cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close (X) Button */}
-              <button
-                aria-label="Close"
-                className="absolute top-3 right-3 z-30 flex size-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-xs transition-all duration-150 hover:bg-[#BD1B21] hover:scale-105 cursor-pointer"
-                onClick={() => setLightboxIndex(null)}
-                type="button"
-              >
-                <Icon className="size-4.5" icon={CloseIcon} />
-              </button>
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="rounded-full bg-[#BD1B21] px-3 py-1 font-body text-xs font-semibold text-white tracking-wide shadow-sm">
+                  {currentImage.institutionLabel}
+                </span>
+                <span className="hidden sm:inline-block text-xs text-white/80 font-medium truncate max-w-md drop-shadow-sm">
+                  {currentImage.title}
+                </span>
+              </div>
 
-              {/* Prev Navigation Button */}
+              <div className="flex items-center gap-3">
+                {/* Counter */}
+                <span className="rounded-full bg-white/10 backdrop-blur-md px-3 py-1 font-mono text-xs text-white/90 border border-white/15 shadow-sm">
+                  {lightboxIndex + 1} / {imageMoments.length}
+                </span>
+
+                {/* Close Button */}
+                <button
+                  aria-label="Close fullscreen view"
+                  className="flex size-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-all duration-150 hover:bg-[#BD1B21] hover:scale-105 border border-white/15 cursor-pointer shadow-lg"
+                  onClick={() => setLightboxIndex(null)}
+                  type="button"
+                >
+                  <Icon className="size-5" icon={CloseIcon} />
+                </button>
+              </div>
+            </div>
+
+            {/* Main Center Stage: Natural Unconstrained Image with Floating Prev/Next Controls */}
+            <div
+              className="relative flex-1 flex items-center justify-center w-full max-w-7xl mx-auto my-auto py-2 cursor-default"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Prev Button */}
               {imageMoments.length > 1 && (
                 <button
                   aria-label="Previous Image"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-30 flex size-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-xs transition-all duration-150 hover:bg-[#BD1B21] hover:scale-105 cursor-pointer"
-                  onClick={handlePrev}
+                  className="absolute left-1 sm:left-4 z-30 flex size-11 sm:size-12 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all duration-150 hover:bg-[#BD1B21] hover:scale-110 hover:border-[#BD1B21] cursor-pointer shadow-2xl"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrev();
+                  }}
                   type="button"
                 >
-                  <Icon className="size-5" icon={ChevronLeftIcon} />
+                  <Icon className="size-6" icon={ChevronLeftIcon} />
                 </button>
               )}
 
-              {/* Next Navigation Button */}
-              {imageMoments.length > 1 && (
-                <button
-                  aria-label="Next Image"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-30 flex size-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-xs transition-all duration-150 hover:bg-[#BD1B21] hover:scale-105 cursor-pointer"
-                  onClick={handleNext}
-                  type="button"
-                >
-                  <Icon className="size-5" icon={ChevronRightIcon} />
-                </button>
-              )}
-
-              {/* Expanded Image Viewport */}
-              <div className="relative w-full aspect-16/10 sm:aspect-16/9 bg-neutral-900 flex items-center justify-center overflow-hidden">
+              {/* Pure Expanded Image (Unboxed & Naturally Proportioned) */}
+              <div className="relative flex items-center justify-center max-h-[86vh] sm:max-h-[90vh] max-w-full">
                 {currentImage.src && (
-                  <Image
+                  <img
                     alt={currentImage.alt ?? currentImage.title}
-                    className="size-full object-contain"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 896px, 95vw"
+                    className="max-h-[84vh] sm:max-h-[88vh] max-w-[94vw] lg:max-w-[90vw] w-auto h-auto object-contain rounded-xl sm:rounded-2xl shadow-2xl animate-in zoom-in-95 duration-200 transition-all pointer-events-auto"
                     src={currentImage.src}
                   />
                 )}
               </div>
 
-              {/* Modal Footer / Context */}
-              <div className="p-4 sm:p-5 flex items-center justify-between gap-4 bg-surface border-t border-border">
-                <div className="space-y-1 min-w-0">
-                  <span className="inline-block rounded-md bg-[#BD1B21] px-2 py-0.5 font-body text-[10px] font-semibold text-white">
-                    {currentImage.institutionLabel}
-                  </span>
-                  <p className="font-display text-sm sm:text-base md:text-lg font-semibold text-ink line-clamp-1">
-                    {currentImage.title}
-                  </p>
-                </div>
-                <span className="shrink-0 rounded-full bg-surface-raised border border-border px-3 py-1 font-mono text-xs text-ink-muted">
-                  {lightboxIndex + 1} / {imageMoments.length}
-                </span>
-              </div>
+              {/* Next Button */}
+              {imageMoments.length > 1 && (
+                <button
+                  aria-label="Next Image"
+                  className="absolute right-1 sm:right-4 z-30 flex size-11 sm:size-12 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all duration-150 hover:bg-[#BD1B21] hover:scale-110 hover:border-[#BD1B21] cursor-pointer shadow-2xl"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNext();
+                  }}
+                  type="button"
+                >
+                  <Icon className="size-6" icon={ChevronRightIcon} />
+                </button>
+              )}
             </div>
           </div>,
           document.body,
         )}
 
-      {/* 6. Clean Video Modal Dialog Portal */}
+      {/* 6. Fluid Unboxed Video Modal Dialog Portal */}
       {mounted &&
         isVideoModalOpen &&
         createPortal(
           <div
             aria-label="Video Player"
             aria-modal="true"
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-xs p-4 sm:p-6 animate-in fade-in duration-150"
+            className="fixed inset-0 z-[9999] flex flex-col justify-between bg-black/92 backdrop-blur-md p-4 sm:p-6 lg:p-8 animate-in fade-in duration-200 select-none cursor-zoom-out"
             onClick={() => setIsVideoModalOpen(false)}
             role="dialog"
           >
+            {/* Top Close Bar */}
             <div
-              className="relative w-full max-w-4xl overflow-hidden rounded-2xl bg-black shadow-2xl border border-border animate-in zoom-in-95 duration-150"
+              className="flex items-center justify-between w-full max-w-5xl mx-auto text-white z-20 cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
+              <span className="rounded-full bg-[#BD1B21] px-3 py-1 font-body text-xs font-semibold text-white tracking-wide shadow-sm">
+                Campus Video
+              </span>
               <button
                 aria-label="Close Video"
-                className="absolute top-3 right-3 z-30 flex size-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-xs transition-colors hover:bg-[#BD1B21] cursor-pointer"
+                className="flex size-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-all duration-150 hover:bg-[#BD1B21] hover:scale-105 border border-white/15 cursor-pointer shadow-lg"
                 onClick={() => setIsVideoModalOpen(false)}
                 type="button"
               >
-                <Icon className="size-4.5" icon={CloseIcon} />
+                <Icon className="size-5" icon={CloseIcon} />
               </button>
+            </div>
 
-              <div className="relative aspect-video w-full">
+            {/* Video Stage */}
+            <div
+              className="relative flex-1 flex items-center justify-center w-full max-w-5xl mx-auto my-auto py-3 cursor-default"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-black animate-in zoom-in-95 duration-200">
                 <video
                   autoPlay
                   className="size-full object-cover"
@@ -1057,12 +1087,12 @@ export function GalleryMoments() {
                 />
               </div>
             </div>
+
+            {/* Bottom spacer */}
+            <div className="h-6" />
           </div>,
           document.body,
         )}
     </section>
   );
 }
-
-
-

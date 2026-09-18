@@ -93,9 +93,9 @@ export function SectionHeader({
       );
 
     return animated ? (
-      <RevealItem className={extraClass}>{content}</RevealItem>
+      <RevealItem className={cn("text-justify", extraClass)}>{content}</RevealItem>
     ) : (
-      <div className={extraClass}>{content}</div>
+      <div className={cn("text-justify", extraClass)}>{content}</div>
     );
   };
 

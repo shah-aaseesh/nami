@@ -79,6 +79,7 @@ export type InquiryCourse = {
   readonly institutionId: InstitutionId;
   readonly historyStepLabel: string;
   readonly historyHeading: string;
+  readonly asksEducationHistory: boolean;
   readonly asksPendingQualifications: boolean;
   readonly asksEmploymentHistory: boolean;
   readonly proposedCourses?: readonly ProposedCourseOption[];
@@ -94,6 +95,7 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     institutionId: "school",
     historyStepLabel: "Education History",
     historyHeading: "Education History",
+    asksEducationHistory: false,
     asksPendingQualifications: false,
     asksEmploymentHistory: false,
     proposedCourseLabel: "Grade",
@@ -113,6 +115,7 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     institutionId: "school",
     historyStepLabel: "Education History",
     historyHeading: "Education History",
+    asksEducationHistory: true,
     asksPendingQualifications: true,
     asksEmploymentHistory: false,
     proposedCourses: [
@@ -126,6 +129,7 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     institutionId: "college",
     historyStepLabel: "Education History",
     historyHeading: "Education History",
+    asksEducationHistory: true,
     asksPendingQualifications: true,
     asksEmploymentHistory: false,
     proposedCourses: [
@@ -139,6 +143,7 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     institutionId: "bachelors",
     historyStepLabel: "Qualifications",
     historyHeading: "Qualifications Achieved",
+    asksEducationHistory: true,
     asksPendingQualifications: true,
     asksEmploymentHistory: true,
     proposedCourses: [

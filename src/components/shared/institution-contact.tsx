@@ -98,6 +98,17 @@ export async function InstitutionContact({
                 >
                   {entityContact.email}
                 </Link>
+                {entityContact.admissionsEmail && (
+                  <>
+                    <span className="text-ink-muted/50 mx-2">•</span>
+                    <Link
+                      className="text-ink-muted transition-colors hover:text-accent"
+                      href={`mailto:${entityContact.admissionsEmail}` as Route}
+                    >
+                      {entityContact.admissionsEmail}
+                    </Link>
+                  </>
+                )}
               </p>
 
               {socials.length > 0 ? (

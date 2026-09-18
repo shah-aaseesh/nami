@@ -17,23 +17,27 @@ export function AboutOverview({
   const paragraphs = paragraphsOf(overview);
 
   return (
-    <section className="gutter-x section-y" id="overview">
+    <section className="gutter-x py-12 sm:py-16 lg:py-20" id="overview">
       <div className="mx-auto max-w-page">
-        <Reveal>
-          <div className="flex items-center gap-5">
-            <Eyebrow>{section.heading}</Eyebrow>
-            <span className="h-px flex-1 bg-border" />
-          </div>
-        </Reveal>
+        {/* Section Heading */}
+        <div>
+          <Reveal>
+            <SplitText
+              as="h2"
+              className="font-display text-3xl sm:text-4xl text-accent font-normal"
+            >
+              {section.eyebrow ?? "NAMI since 2012"}
+            </SplitText>
+          </Reveal>
+        </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-10 lg:mt-8 lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          <div className="lg:col-span-7">
-            <SplitText as="h2">{section.eyebrow ?? "Overview"}</SplitText>
-
-            <Reveal className="mt-6 flex flex-col gap-5 lg:mt-8" stagger={0.08}>
+        {/* 2-Column Content Grid: Left Narrative & Right Image */}
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-12 items-stretch">
+          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
+            <Reveal className="flex flex-col gap-4 sm:gap-5" stagger={0.08}>
               {paragraphs.map((paragraph) => (
                 <RevealItem key={paragraph}>
-                  <P className="text-sm sm:text-base leading-relaxed text-ink/80">
+                  <P className="text-base sm:text-lg leading-relaxed text-ink/90 font-normal text-justify [text-align-last:left] [hyphens:auto]">
                     {paragraph}
                   </P>
                 </RevealItem>
@@ -42,19 +46,21 @@ export function AboutOverview({
           </div>
 
           {image === null ? null : (
-            <Reveal className="lg:col-span-5" y={32}>
-              <figure className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] w-full overflow-hidden rounded-3xl border border-border/80 bg-surface-raised shadow-sm">
-                <Image
-                  alt={image.alt}
-                  className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
-                  height={image.height}
-                  loading="lazy"
-                  sizes="(max-width: 1024px) 100vw, 480px"
-                  src={image.src}
-                  width={image.width}
-                />
-              </figure>
-            </Reveal>
+            <div className="lg:col-span-6 xl:col-span-6 flex flex-col">
+              <Reveal className="h-full flex flex-col" y={16}>
+                <figure className="relative h-full min-h-[280px] sm:min-h-[340px] lg:min-h-[380px] w-full overflow-hidden rounded-2xl border border-border/80 bg-surface-raised shadow-sm">
+                  <Image
+                    alt={image.alt}
+                    className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                    height={image.height}
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 100vw, 560px"
+                    src={image.src}
+                    width={image.width}
+                  />
+                </figure>
+              </Reveal>
+            </div>
           )}
         </div>
       </div>

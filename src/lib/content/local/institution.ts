@@ -143,14 +143,20 @@ export const institution: InstitutionProfile = {
       },
     ],
     byEntity: {
-      institute: { phone: "+977 1 4917444", email: "info@nami.edu.np" },
+      institute: {
+        phone: "+977 1 4917444",
+        email: "info@nami.edu.np",
+        admissionsEmail: "admissions@nami.edu.np",
+      },
       college: {
         phone: "+977 1 4917442",
-        email: "admissions@college.nami.edu.np",
+        email: "info@nami.edu.np",
+        admissionsEmail: "admissions@college.nami.edu.np",
       },
       school: {
         phone: "+977 1 4917445",
-        email: "admissions@school.nami.edu.np",
+        email: "info@nami.edu.np",
+        admissionsEmail: "admissions@school.nami.edu.np",
       },
     },
   },

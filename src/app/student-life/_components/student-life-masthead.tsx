@@ -15,8 +15,7 @@ export function StudentLifeMasthead({
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10 items-end">
           <div className="lg:col-span-7">
-            <Eyebrow>College Life</Eyebrow>
-            <Display className="mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+            <Display className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               {copy.title}
             </Display>
           </div>

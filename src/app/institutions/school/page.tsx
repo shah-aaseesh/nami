@@ -71,11 +71,21 @@ export default async function SchoolPage() {
       <SchoolApproachValuesSection />
 
       <SchoolAdmission copy={schoolCopy.admission} />
-      <SchoolBands copy={schoolCopy.bands} id="academics" />
+      <SchoolBands
+        copy={schoolCopy.bands}
+        id="academics"
+        primaryExtra={
+          <SchoolFaqSection className="!bg-transparent !border-0 !px-0 !py-0" />
+        }
+        secondaryExtra={
+          <InstitutionClubsSection
+            className="!bg-transparent !px-0 !py-0"
+            tone="brand"
+          />
+        }
+      />
 
       <SchoolDay copy={schoolCopy.day} id="day" />
-
-      <InstitutionClubsSection tone="brand" />
 
       <SchoolCollaboratorsSection />
 
@@ -84,8 +94,6 @@ export default async function SchoolPage() {
         items={parentTestimonials}
         section={schoolCopy.parents}
       />
-
-      <SchoolFaqSection />
 
       <InstitutionNotices
         copy={schoolCopy.notices}

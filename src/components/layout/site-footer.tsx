@@ -134,6 +134,20 @@ export async function SiteFooter() {
                       />
                       <span>{contact.byEntity.school.email}</span>
                     </Link>
+                    {contact.byEntity.school.admissionsEmail && (
+                      <Link
+                        href={
+                          `mailto:${contact.byEntity.school.admissionsEmail}` as Route
+                        }
+                        className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
+                      >
+                        <Icon
+                          icon={MailIcon}
+                          className="size-3.5 shrink-0 text-white"
+                        />
+                        <span>{contact.byEntity.school.admissionsEmail}</span>
+                      </Link>
+                    )}
                   </div>
 
                   <div className="mt-3 flex items-center gap-2">
@@ -214,6 +228,20 @@ export async function SiteFooter() {
                       />
                       <span>{contact.byEntity.college.email}</span>
                     </Link>
+                    {contact.byEntity.college.admissionsEmail && (
+                      <Link
+                        href={
+                          `mailto:${contact.byEntity.college.admissionsEmail}` as Route
+                        }
+                        className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
+                      >
+                        <Icon
+                          icon={MailIcon}
+                          className="size-3.5 shrink-0 text-white"
+                        />
+                        <span>{contact.byEntity.college.admissionsEmail}</span>
+                      </Link>
+                    )}
                   </div>
 
                   <div className="mt-3 flex items-center gap-2">
@@ -296,6 +324,20 @@ export async function SiteFooter() {
                       />
                       <span>{contact.byEntity.institute.email}</span>
                     </Link>
+                    {contact.byEntity.institute.admissionsEmail && (
+                      <Link
+                        href={
+                          `mailto:${contact.byEntity.institute.admissionsEmail}` as Route
+                        }
+                        className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
+                      >
+                        <Icon
+                          icon={MailIcon}
+                          className="size-3.5 shrink-0 text-white"
+                        />
+                        <span>{contact.byEntity.institute.admissionsEmail}</span>
+                      </Link>
+                    )}
                   </div>
 
                   <div className="mt-3 flex items-center gap-2">

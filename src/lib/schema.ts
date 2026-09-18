@@ -7,15 +7,17 @@ import {
 const PHONE_SHAPE = /^[\d\s+().-]{7,20}$/;
 const PHONE_EXTENSION = /\s*(?:extension|extn|ext|x)\.?\s*\d{1,6}$/i;
 
-const GUARDIAN_LED_PROGRAMS = new Set<string>(
-  INQUIRY_COURSES.filter((course) => course.institutionId === "school").map(
-    (course) => course.id,
-  ),
-);
+const SCHOOL_OR_COLLEGE_PROGRAMS = new Set<string>([
+  "school-primary",
+  "school-plus-two",
+  "a-level",
+]);
 
-export function isGuardianLedProgram(program: string): boolean {
-  return GUARDIAN_LED_PROGRAMS.has(program.trim());
+export function isSchoolOrCollegeProgram(program: string): boolean {
+  return SCHOOL_OR_COLLEGE_PROGRAMS.has(program.trim());
 }
+
+export const isGuardianLedProgram = isSchoolOrCollegeProgram;
 
 function isPhone(value: string) {
   const base = value.replace(PHONE_EXTENSION, "");
@@ -88,8 +90,22 @@ function requiredPastDate(missing: string, unreadable: string, future: string) {
 
 type ConditionalField =
   | "proposedCourse"
+  | "age"
   | "fatherName"
   | "fatherContact"
+  | "fatherJob"
+  | "otherFatherJob"
+  | "fatherEmail"
+  | "motherName"
+  | "motherContact"
+  | "motherJob"
+  | "otherMotherJob"
+  | "motherEmail"
+  | "guardianName"
+  | "guardianRelationship"
+  | "otherGuardianRelationship"
+  | "guardianContact"
+  | "guardianEmail"
   | "telephone"
   | "email"
   | "signature"
@@ -97,7 +113,7 @@ type ConditionalField =
 
 export const qualificationSchema = z.object({
   id: z.string(),
-  place: requiredText("Enter where you studied, or remove this qualification"),
+  place: z.string().trim(),
   dates: z.string().trim(),
   awards: z.string().trim(),
   dateObtained: z.string().nullable(),
@@ -121,32 +137,53 @@ export const admissionsSchema = z
     proposedCourse: z.string().trim(),
     surname: requiredText("Enter your surname"),
     firstName: requiredText("Enter your first name"),
+    gender: z.string().trim(),
     dob: requiredPastDate(
       "Choose your date of birth",
       "That date of birth could not be read — pick it from the calendar",
       "Your date of birth cannot be in the future",
     ),
+    age: z.string().trim(),
     nationality: requiredText("Enter your nationality"),
     telephone: optionalPhone("Enter a valid telephone number"),
     email: optionalEmail("Enter a valid email address"),
-    photo: z.instanceof(File).nullable(),
     specialNeeds: z.boolean(),
+
+    // Father details (Compulsory for School 1-7, +2, and A Levels)
     fatherName: z.string().trim(),
     fatherContact: optionalPhone(
       "Enter a valid contact number, or leave blank",
     ),
-    fatherEmail: optionalEmail("Enter a valid email address, or leave blank"),
     fatherJob: z.string().trim(),
+    otherFatherJob: z.string().trim(),
+    fatherEmail: optionalEmail("Enter a valid email address, or leave blank"),
+
+    // Mother details (Compulsory for School 1-7, +2, and A Levels)
     motherName: z.string().trim(),
     motherContact: optionalPhone(
       "Enter a valid contact number, or leave blank",
     ),
-    motherEmail: optionalEmail("Enter a valid email address, or leave blank"),
     motherJob: z.string().trim(),
+    otherMotherJob: z.string().trim(),
+    motherEmail: optionalEmail("Enter a valid email address, or leave blank"),
+
+    // Local Guardian details (Compulsory for Degree)
+    guardianName: z.string().trim(),
+    guardianRelationship: z.string().trim(),
+    otherGuardianRelationship: z.string().trim(),
+    guardianContact: optionalPhone(
+      "Enter a valid contact number, or leave blank",
+    ),
+    guardianEmail: optionalEmail("Enter a valid email address, or leave blank"),
+
+    // Secondary / Emergency Contact (Optional)
+    secondaryName: z.string().trim(),
+    secondaryRelationship: z.string().trim(),
+    otherSecondaryRelationship: z.string().trim(),
     secondaryContact: optionalPhone(
       "Enter a valid contact number, or leave blank",
     ),
-    relationship: z.string().trim(),
+
     qualifications: z.array(qualificationSchema),
     pendingQualifications: z.string().trim(),
     employment: z.array(employmentSchema),
@@ -173,30 +210,69 @@ export const admissionsSchema = z
       );
     }
 
-    if (isGuardianLedProgram(data.program)) {
-      if (data.fatherName === "" && data.motherName === "") {
-        missing("fatherName", "Enter at least one parent or guardian name");
+    if (data.program === "school-primary" && data.age === "") {
+      missing("age", "Enter student's age");
+    }
+
+    if (isSchoolOrCollegeProgram(data.program)) {
+      if (data.fatherName === "") {
+        missing("fatherName", "Enter father's full name");
       }
-      if (data.fatherContact === "" && data.motherContact === "") {
-        missing(
-          "fatherContact",
-          "Enter a contact number for at least one parent or guardian",
-        );
+      if (data.fatherContact === "") {
+        missing("fatherContact", "Enter father's contact number");
+      }
+      if (data.fatherJob === "") {
+        missing("fatherJob", "Select father's job / occupation");
+      }
+      if (data.fatherJob === "Others" && data.otherFatherJob === "") {
+        missing("otherFatherJob", "Please specify father's job / occupation");
+      }
+      if (data.motherName === "") {
+        missing("motherName", "Enter mother's full name");
+      }
+      if (data.motherContact === "") {
+        missing("motherContact", "Enter mother's contact number");
+      }
+      if (data.motherJob === "") {
+        missing("motherJob", "Select mother's job / occupation");
+      }
+      if (data.motherJob === "Others" && data.otherMotherJob === "") {
+        missing("otherMotherJob", "Please specify mother's job / occupation");
       }
     } else {
+      // Graduate / Degree
+      if (data.guardianName === "") {
+        missing("guardianName", "Enter local guardian's name");
+      }
+      if (data.guardianRelationship === "") {
+        missing("guardianRelationship", "Select relationship to student");
+      }
+      if (
+        data.guardianRelationship === "Others" &&
+        data.otherGuardianRelationship === ""
+      ) {
+        missing("otherGuardianRelationship", "Please specify relationship");
+      }
+      if (data.guardianContact === "") {
+        missing(
+          "guardianContact",
+          "Enter a contact number for local guardian",
+        );
+      }
       if (data.telephone === "") {
         missing("telephone", "Enter a telephone number we can reach you on");
       }
       if (data.email === "") {
         missing("email", "Enter your email address");
       }
-      if (data.signature === "") {
-        missing("signature", "Type your full name to sign the declaration");
-      }
+    }
+
+    if (data.signature === "") {
+      missing("signature", "Type your full name to sign the declaration");
     }
 
     if (data.signature !== "" && isBlank(data.signatureDate)) {
-      missing("signatureDate", "Choose the date you signed");
+      data.signatureDate = new Date().toISOString().slice(0, 10);
     }
   });
 

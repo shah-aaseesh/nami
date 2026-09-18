@@ -860,9 +860,9 @@ const partners: CareerPlacementCopy = {
 const alumni: SectionCopy = {
   navLabel: "Voices",
   eyebrow: "Student voices",
-  heading: "Six voices, on what the degree is actually worth.",
+  heading: "In their own words, on what the degree is actually worth.",
   standfirst:
-    "In their own words — on the British system of learning, the workload, and where the degree has carried them.",
+    "Hear directly from our students on the British system of learning, practical innovation, and personal growth at NAMI.",
   cta: null,
   emptyState: "Student stories will appear here as they are shared.",
 };

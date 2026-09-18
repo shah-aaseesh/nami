@@ -63,7 +63,6 @@ const masthead: SchoolHeroCopy = {
 
 const bands: SchoolBandsCopy = {
   eyebrow: "Academics",
-  heading: "Grades I–VII & +2 Secondary School",
   standfirst:
     "A progressive education approach grounded in meaningful learning, student participation, inclusion, values, creativity, and personal growth.",
   primary: {
@@ -196,7 +195,7 @@ const bands: SchoolBandsCopy = {
 
 const day: SchoolDayCopy = {
   eyebrow: "Facilities & Student Experience",
-  heading: "Campus & Learning Environment",
+  heading: "School & Learning Environment",
   standfirst:
     "NAMI International School provides facilities designed to support learning, creativity, technology, physical development, and student well-being.",
   campusLabel: "Facilities",
@@ -377,8 +376,8 @@ export const parentTestimonials: readonly Testimonial[] = [
 ];
 
 const admission: SchoolAdmissionCopy = {
-  eyebrow: "Admission",
-  heading: "Seven steps, written for parents and guardians.",
+  eyebrow: "Admission Process",
+  heading: "",
   standfirst:
     "The step-by-step admissions procedure from registration to final enrolment.",
   stepLabel: "Step",

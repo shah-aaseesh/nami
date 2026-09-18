@@ -69,15 +69,15 @@ export const campusLife: readonly CampusLifePillar[] = [
   {
     ...entryOf("sustainability"),
     title: "Sustainability",
-    lead: "A plastic-free college aligned with the UN Sustainable Development Goals.",
+    lead: "Our 5-year sustainability roadmap towards a green, zero-waste, and plastic-free campus aligned with the UN Sustainable Development Goals.",
     body: richText(
-      "Sustainability is a core principle at NAMI, embedded in its operations, academic framework and strategic development: renewable energy, efficient resource management, structured waste segregation and recycling, reduced reliance on paper, sustainable mobility across the college and a plastic-free zone.",
-      "These initiatives are aligned with the United Nations Sustainable Development Goals, particularly climate action, responsible consumption and production, and quality education, and are carried into teaching through interdisciplinary curricula, applied research and community engagement.",
+      "Sustainability is a core institutional priority at NAMI. Under our 5-year sustainability roadmap, we are actively transforming our operations, academic framework, and campus infrastructure towards renewable energy, resource efficiency, structured waste segregation and recycling, reduced paper reliance, sustainable mobility, and transitioning to a fully plastic-free zone.",
+      "These initiatives are aligned with the United Nations Sustainable Development Goals—particularly climate action, responsible consumption and production, and quality education—and are carried into teaching through interdisciplinary curricula, student-led green initiatives, applied research, and community engagement.",
     ),
     highlights: [
-      "Renewable energy and efficient resource management",
-      "Waste segregation, recycling and a plastic-free zone",
-      "Curriculum, research and community engagement on environmental challenges",
+      "5-year strategic roadmap towards a fully plastic-free campus",
+      "Structured waste segregation, recycling, and resource management",
+      "Curriculum, applied research, and community action on environmental challenges",
     ],
     image: null,
   },

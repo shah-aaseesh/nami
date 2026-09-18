@@ -43,6 +43,8 @@ export type SocialProfile = ContentLink & {
 export type EntityContactChannel = {
   readonly phone: string;
   readonly email: string;
+  readonly admissionsEmail?: string;
+  readonly infoEmail?: string;
 };
 
 export type ContactChannel = {

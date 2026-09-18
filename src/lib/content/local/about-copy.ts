@@ -37,9 +37,9 @@ export const aboutCopy: AboutCopy = {
   metaTitle: "About NAMI",
   metaDescription:
     "The institution behind NAMI in Kathmandu — its story and scale, mission and vision, the people who govern and teach it, and the red lotus the five values its petals carry.",
-  title: "The institution behind NAMI.",
+  title: "Institutions under NAMI",
   standfirst:
-    "One institute, two schools, and the five values carried in the petals of a red lotus.",
+    "1 entity, 3 institutions, and the five values carried in the petals of a red lotus.",
   openingImage: readingHall,
   overviewImage: studentsOnCampus,
   statsImage: readingHall,
@@ -49,7 +49,7 @@ export const aboutCopy: AboutCopy = {
     chronology: {
       navLabel: "About NAMI",
       eyebrow: "NAMI since 2012",
-      heading: "Three names, one institution.",
+      heading: "",
       standfirst: null,
       cta: null,
       emptyState: null,
@@ -80,8 +80,8 @@ export const aboutCopy: AboutCopy = {
     },
     awards: {
       navLabel: "Awards",
-      eyebrow: "Awards & honours",
-      heading: "What NAMI has been awarded.",
+      eyebrow: "Awards & Honours",
+      heading: "",
       standfirst:
         "Distinctions the institution and its students have carried home, and the bodies that conferred them.",
       cta: null,
@@ -100,7 +100,7 @@ export const aboutCopy: AboutCopy = {
     testimonials: {
       navLabel: "Testimonials",
       eyebrow: "Stakeholder Voice",
-      heading: "What our stakeholders say.",
+      heading: "",
       standfirst: null,
       cta: null,
       emptyState:

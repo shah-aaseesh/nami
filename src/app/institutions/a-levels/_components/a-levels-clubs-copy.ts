@@ -3,7 +3,6 @@ import type { ContentImage } from "@/lib/content";
 export type ALevelsClubSlug =
   | "social-services"
   | "sports"
-  | "environment"
   | "arts-and-crafts";
 
 export type ALevelsClubActivity = {
@@ -264,116 +263,6 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
     meetingSchedule: "Tuesdays & Thursdays (3:45 PM – 5:15 PM)",
     eligibility: "Open to all Cambridge A-Level students (AS and A2)",
     facultyMentor: "Department of Physical Education & Sports",
-  },
-  {
-    slug: "environment",
-    title: "Environment",
-    category: "Ecology, Conservation & Climate Action",
-    tagline:
-      "Championing ecological sustainability, afforestation drives, waste reduction, and climate action on campus and beyond.",
-    metaDescription:
-      "NAMI College A-Levels Environment Club leads tree plantation drives, waste management campaigns, and ecological research.",
-    coverImage: {
-      src: "/nami/event-eco-club.jpg",
-      alt: "NAMI College Eco Club members participating in environmental conservation and green campus drives.",
-      width: 1200,
-      height: 800,
-    },
-    overview: [
-      "The Environment Club at NAMI College is at the forefront of ecological education and grassroots climate action. As future global leaders, A-Level students analyze ecological challenges and implement tangible sustainability projects that minimize carbon footprints and promote biodiversity.",
-      "The club spearheads community afforestation projects, campus recycling and zero-waste policies, climate policy symposiums, and nature expeditions across Kathmandu valley's protected watersheds and community forests.",
-    ],
-    quote: {
-      text: "We do not inherit the earth from our ancestors; we borrow it from our children. Action begins with us.",
-      author: "Environment Club Advisor",
-    },
-    objectives: [
-      "Raise awareness on climate change, biodiversity loss, and sustainable resource management.",
-      "Implement campus-wide green policies including waste segregation and plastic reduction.",
-      "Conduct recurring afforestation and urban plantation drives across Gokarneshwor.",
-      "Organize ecological field studies and environmental symposiums with climate researchers.",
-    ],
-    keyActivities: [
-      {
-        title: "World Environment Day Afforestation Drive",
-        description:
-          "Mass sapling plantation in local community forests and along the Bagmati watershed corridors.",
-        tag: "Afforestation",
-      },
-      {
-        title: "Zero-Waste Campus Initiative",
-        description:
-          "Student-monitored waste segregation, organic compost pits, and plastic audit programs.",
-        tag: "Sustainability",
-      },
-      {
-        title: "Climate Action Panel & Symposium",
-        description:
-          "Hosting environmental researchers, forestry experts, and policymakers for campus debates.",
-        tag: "Symposium",
-      },
-      {
-        title: "Shivapuri National Park Eco-Trek",
-        description:
-          "Guided ecological field study documenting botanical diversity and watershed preservation.",
-        tag: "Field Study",
-      },
-    ],
-    skillsDeveloped: [
-      {
-        title: "Ecological Literacy",
-        description:
-          "Deep understanding of ecosystem dynamics, biodiversity, and global climate policies.",
-      },
-      {
-        title: "Policy & Advocacy",
-        description:
-          "Advocating for institutional sustainability guidelines and community awareness campaigns.",
-      },
-      {
-        title: "Field Research",
-        description:
-          "Gathering empirical environmental data, soil sampling, and ecological monitoring.",
-      },
-      {
-        title: "Green Innovation",
-        description:
-          "Designing creative upcycling, composting, and energy-saving solutions on campus.",
-      },
-    ],
-    galleryImages: [
-      {
-        src: "/gallery/Science & Tech/bio Excursion/IMG-4c57ac4b6ca59fd28fd1d147218f6fe3-V.jpg",
-        alt: "Students exploring botanical species during outdoor field study",
-        caption: "Biodiversity sampling & nature exploration",
-        width: 1600,
-        height: 900,
-      },
-      {
-        src: "/nami/event-mustang.jpg",
-        alt: "A-Level scholars gathered in Mustang valley",
-        caption: "Mustang Himalayan geological & environmental fieldwork",
-        width: 1200,
-        height: 800,
-      },
-      {
-        src: "/nami/event-plantation.jpg",
-        alt: "Community tree plantation drive",
-        caption: "Community tree sapling plantation drive",
-        width: 1200,
-        height: 800,
-      },
-      {
-        src: "/nami/event-eco-club.jpg",
-        alt: "Eco club awareness campaign",
-        caption: "Green campus & ecological awareness campaign",
-        width: 1200,
-        height: 800,
-      },
-    ],
-    meetingSchedule: "Wednesdays (3:30 PM – 4:45 PM)",
-    eligibility: "Open to all Cambridge A-Level students (AS and A2)",
-    facultyMentor: "Department of Environmental Science & Ecology",
   },
   {
     slug: "arts-and-crafts",

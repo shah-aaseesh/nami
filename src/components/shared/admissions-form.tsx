@@ -15,7 +15,6 @@ import {
   CheckboxField,
   CheckboxGroupField,
   DateField,
-  FileField,
   SelectField,
   TextareaField,
   TextField,
@@ -30,6 +29,7 @@ import {
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
+  CalendarIcon,
   CheckIcon,
   DownloadIcon,
   PlusIcon,
@@ -38,7 +38,7 @@ import {
 import {
   type AdmissionsFormData,
   admissionsSchema,
-  isGuardianLedProgram,
+  isSchoolOrCollegeProgram,
 } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
@@ -69,29 +69,73 @@ const HEAR_OPTIONS = [
   "Other",
 ] as const;
 
+const GENDER_OPTIONS = [
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
+  { value: "Other", label: "Other" },
+] as const;
+
+const RELATIONSHIP_OPTIONS = [
+  { value: "Father", label: "Father" },
+  { value: "Mother", label: "Mother" },
+  { value: "Sibling", label: "Sibling" },
+  { value: "Relative", label: "Relative" },
+  { value: "Others", label: "Others" },
+] as const;
+
+const OCCUPATION_OPTIONS = [
+  { value: "Business / Entrepreneur", label: "Business / Entrepreneur" },
+  { value: "Government / Civil Service", label: "Government / Civil Service" },
+  { value: "Private Sector / Corporate", label: "Private Sector / Corporate" },
+  {
+    value: "Banking / Financial Services",
+    label: "Banking / Financial Services",
+  },
+  { value: "Doctor / Healthcare", label: "Doctor / Healthcare" },
+  {
+    value: "Engineering / IT / Technical",
+    label: "Engineering / IT / Technical",
+  },
+  { value: "Teaching / Academia", label: "Teaching / Academia" },
+  { value: "Armed Forces / Police", label: "Armed Forces / Police" },
+  { value: "Agriculture / Farming", label: "Agriculture / Farming" },
+  { value: "Homemaker", label: "Homemaker" },
+  { value: "Others", label: "Others" },
+] as const;
+
 const STEP_FIELDS: Record<StepKey, readonly FieldPath<AdmissionsFormData>[]> = {
   course: ["program", "proposedCourse"],
   student: [
     "firstName",
     "surname",
+    "gender",
     "dob",
+    "age",
     "nationality",
     "telephone",
     "email",
-    "photo",
     "specialNeeds",
   ],
   parents: [
     "fatherName",
     "fatherContact",
-    "fatherEmail",
     "fatherJob",
+    "otherFatherJob",
+    "fatherEmail",
     "motherName",
     "motherContact",
-    "motherEmail",
     "motherJob",
+    "otherMotherJob",
+    "motherEmail",
+    "guardianName",
+    "guardianRelationship",
+    "otherGuardianRelationship",
+    "guardianContact",
+    "guardianEmail",
+    "secondaryName",
+    "secondaryRelationship",
+    "otherSecondaryRelationship",
     "secondaryContact",
-    "relationship",
   ],
   history: ["qualifications", "pendingQualifications"],
   employment: ["employment"],
@@ -104,12 +148,23 @@ const STEP_FIELDS: Record<StepKey, readonly FieldPath<AdmissionsFormData>[]> = {
 };
 
 function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
+  const isSchoolOrCollege = course?.id
+    ? isSchoolOrCollegeProgram(course.id)
+    : false;
   const steps: Step[] = [
     { key: "course", label: "Course Details" },
     { key: "student", label: "Student Details" },
-    { key: "parents", label: "Parent Details" },
-    { key: "history", label: course?.historyStepLabel ?? "Qualifications" },
+    {
+      key: "parents",
+      label: isSchoolOrCollege ? "Parent Details" : "Guardian Details",
+    },
   ];
+  if (!course || course.asksEducationHistory) {
+    steps.push({
+      key: "history",
+      label: course?.historyStepLabel ?? "Qualifications",
+    });
+  }
   if (!course || course.asksEmploymentHistory) {
     steps.push({ key: "employment", label: "Employment History" });
   }
@@ -150,7 +205,7 @@ function QualificationRow({
         <TextField
           control={control}
           name={`qualifications.${index}.place`}
-          label="Place of Study"
+          label="Previous Institution"
           required
         />
         <TextField
@@ -248,22 +303,32 @@ export function MultiStepForm() {
         proposedCourse: "",
         surname: "",
         firstName: "",
+        gender: "",
         dob: null,
+        age: "",
         nationality: "",
         telephone: "",
         email: "",
-        photo: null,
         specialNeeds: false,
         fatherName: "",
         fatherContact: "",
-        fatherEmail: "",
         fatherJob: "",
+        otherFatherJob: "",
+        fatherEmail: "",
         motherName: "",
         motherContact: "",
-        motherEmail: "",
         motherJob: "",
+        otherMotherJob: "",
+        motherEmail: "",
+        guardianName: "",
+        guardianRelationship: "",
+        otherGuardianRelationship: "",
+        guardianContact: "",
+        guardianEmail: "",
+        secondaryName: "",
+        secondaryRelationship: "",
+        otherSecondaryRelationship: "",
         secondaryContact: "",
-        relationship: "",
         qualifications: [
           {
             id: "1",
@@ -280,7 +345,7 @@ export function MultiStepForm() {
         personalStatement: "",
         howDidYouHear: [],
         signature: "",
-        signatureDate: null,
+        signatureDate: new Date().toISOString().split("T")[0],
       },
     });
 
@@ -304,7 +369,13 @@ export function MultiStepForm() {
   });
 
   const selectedProgram = useWatch({ control, name: "program" }) ?? "";
-  const guardianLed = isGuardianLedProgram(selectedProgram);
+  const isSchoolOrCollege = isSchoolOrCollegeProgram(selectedProgram);
+  const watchedFatherJob = useWatch({ control, name: "fatherJob" }) ?? "";
+  const watchedMotherJob = useWatch({ control, name: "motherJob" }) ?? "";
+  const watchedGuardianRelationship =
+    useWatch({ control, name: "guardianRelationship" }) ?? "";
+  const watchedSecondaryRelationship =
+    useWatch({ control, name: "secondaryRelationship" }) ?? "";
   const course = findInquiryCourse(selectedProgram);
   const steps = stepsForCourse(course);
   const stepIndex = Math.min(currentStep, steps.length - 1);
@@ -489,6 +560,13 @@ export function MultiStepForm() {
                 autoComplete="family-name"
                 required
               />
+              <SelectField
+                control={control}
+                name="gender"
+                label="Gender"
+                placeholder="Select gender"
+                options={GENDER_OPTIONS}
+              />
               <DateField
                 control={control}
                 name="dob"
@@ -502,33 +580,39 @@ export function MultiStepForm() {
                 autoComplete="country-name"
                 required
               />
-              <TextField
-                control={control}
-                name="telephone"
-                label="Telephone Number"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                required={!guardianLed}
-              />
-              <TextField
-                control={control}
-                name="email"
-                label="Email Address"
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                required={!guardianLed}
-              />
-              <div className="lg:col-span-2">
-                <FileField
+              {selectedProgram === "school-primary" ? (
+                <TextField
                   control={control}
-                  name="photo"
-                  label="Photo Upload"
-                  accept="image/*"
-                  description="Files stay on this device. They are not sent anywhere and are not included in the PDF you download."
+                  name="age"
+                  label="Age"
+                  type="number"
+                  min={3}
+                  max={18}
+                  placeholder="e.g. 7"
+                  required
                 />
-              </div>
+              ) : (
+                <TextField
+                  control={control}
+                  name="telephone"
+                  label="Telephone Number"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required={!isSchoolOrCollege}
+                />
+              )}
+              {selectedProgram !== "school-primary" && (
+                <TextField
+                  control={control}
+                  name="email"
+                  label="Email Address"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  required={!isSchoolOrCollege}
+                />
+              )}
               <CheckboxField
                 control={control}
                 name="specialNeeds"
@@ -538,98 +622,250 @@ export function MultiStepForm() {
             </div>
           </div>
         );
-      case "parents":
+      case "parents": {
+        if (isSchoolOrCollege) {
+          return (
+            <div className="space-y-8">
+              <H6 as="h3" className="text-ink mb-6">
+                Parent Details
+              </H6>
+
+              {/* Father's Details */}
+              <div className="space-y-4">
+                <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
+                  Father&apos;s Details
+                </h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <TextField
+                    control={control}
+                    name="fatherName"
+                    label="Father's Full Name"
+                    required
+                  />
+                  <TextField
+                    control={control}
+                    name="fatherContact"
+                    label="Father's Contact Number"
+                    type="tel"
+                    inputMode="tel"
+                    required
+                  />
+                  <SelectField
+                    control={control}
+                    name="fatherJob"
+                    label="Job / Occupation"
+                    placeholder="Select occupation"
+                    options={OCCUPATION_OPTIONS}
+                    required
+                  />
+                  <TextField
+                    control={control}
+                    name="fatherEmail"
+                    label="Father's Email Address"
+                    type="email"
+                    inputMode="email"
+                  />
+                  {watchedFatherJob === "Others" && (
+                    <div className="lg:col-span-2">
+                      <TextField
+                        control={control}
+                        name="otherFatherJob"
+                        label="Specify Job / Occupation"
+                        placeholder="e.g. Architect, Consultant, Artist"
+                        required
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Mother's Details */}
+              <div className="space-y-4 pt-6 border-t border-border/50">
+                <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
+                  Mother&apos;s Details
+                </h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <TextField
+                    control={control}
+                    name="motherName"
+                    label="Mother's Full Name"
+                    required
+                  />
+                  <TextField
+                    control={control}
+                    name="motherContact"
+                    label="Mother's Contact Number"
+                    type="tel"
+                    inputMode="tel"
+                    required
+                  />
+                  <SelectField
+                    control={control}
+                    name="motherJob"
+                    label="Job / Occupation"
+                    placeholder="Select occupation"
+                    options={OCCUPATION_OPTIONS}
+                    required
+                  />
+                  <TextField
+                    control={control}
+                    name="motherEmail"
+                    label="Mother's Email Address"
+                    type="email"
+                    inputMode="email"
+                  />
+                  {watchedMotherJob === "Others" && (
+                    <div className="lg:col-span-2">
+                      <TextField
+                        control={control}
+                        name="otherMotherJob"
+                        label="Specify Job / Occupation"
+                        placeholder="e.g. Architect, Consultant, Artist"
+                        required
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Secondary / Emergency Contact */}
+              <div className="space-y-4 pt-6 border-t border-border/50">
+                <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
+                  Secondary / Emergency Contact (Optional)
+                </h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <TextField
+                    control={control}
+                    name="secondaryName"
+                    label="Secondary Contact Name"
+                  />
+                  <SelectField
+                    control={control}
+                    name="secondaryRelationship"
+                    label="Relationship to Student"
+                    placeholder="Select relationship"
+                    options={RELATIONSHIP_OPTIONS}
+                  />
+                  {watchedSecondaryRelationship === "Others" && (
+                    <div className="lg:col-span-2">
+                      <TextField
+                        control={control}
+                        name="otherSecondaryRelationship"
+                        label="Specify Relationship"
+                        placeholder="e.g. Aunt, Family Friend, Uncle"
+                      />
+                    </div>
+                  )}
+                  <div className="lg:col-span-2">
+                    <TextField
+                      control={control}
+                      name="secondaryContact"
+                      label="Secondary Contact Number"
+                      type="tel"
+                      inputMode="tel"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        }
+
         return (
           <div className="space-y-8">
             <H6 as="h3" className="text-ink mb-6">
-              Parent / Guardian Details
+              Local Guardian Details
             </H6>
 
             <div className="space-y-4">
               <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                Father's Details
+                Local Guardian Details
               </h4>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <TextField
                   control={control}
-                  name="fatherName"
-                  label="Father's Name"
+                  name="guardianName"
+                  label="Local Guardian Name"
+                  required
                 />
+                <SelectField
+                  control={control}
+                  name="guardianRelationship"
+                  label="Relationship to Student"
+                  placeholder="Select relationship"
+                  options={RELATIONSHIP_OPTIONS}
+                  required
+                />
+                {watchedGuardianRelationship === "Others" && (
+                  <div className="lg:col-span-2">
+                    <TextField
+                      control={control}
+                      name="otherGuardianRelationship"
+                      label="Specify Relationship"
+                      placeholder="e.g. Legal Guardian, Grandparent, Uncle"
+                      required
+                    />
+                  </div>
+                )}
                 <TextField
                   control={control}
-                  name="fatherContact"
-                  label="Father's Contact Number"
+                  name="guardianContact"
+                  label="Contact Number"
                   type="tel"
                   inputMode="tel"
+                  required
                 />
                 <TextField
                   control={control}
-                  name="fatherEmail"
-                  label="Father's Email"
+                  name="guardianEmail"
+                  label="Email Address"
                   type="email"
                   inputMode="email"
-                />
-                <TextField
-                  control={control}
-                  name="fatherJob"
-                  label="Father's Job Designation"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-4 pt-4 border-t border-border/50">
-              <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                Mother's Details
-              </h4>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <TextField
-                  control={control}
-                  name="motherName"
-                  label="Mother's Name"
-                />
-                <TextField
-                  control={control}
-                  name="motherContact"
-                  label="Mother's Contact Number"
-                  type="tel"
-                  inputMode="tel"
-                />
-                <TextField
-                  control={control}
-                  name="motherEmail"
-                  label="Mother's Email"
-                  type="email"
-                  inputMode="email"
-                />
-                <TextField
-                  control={control}
-                  name="motherJob"
-                  label="Mother's Job Designation"
                 />
               </div>
             </div>
 
             <div className="space-y-4 pt-6 border-t border-border/50">
               <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                Emergency / Secondary Contact
+                Secondary / Emergency Contact (Optional)
               </h4>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <TextField
                   control={control}
-                  name="secondaryContact"
-                  label="Secondary Contact Number"
-                  type="tel"
-                  inputMode="tel"
+                  name="secondaryName"
+                  label="Secondary Contact Name"
                 />
-                <TextField
+                <SelectField
                   control={control}
-                  name="relationship"
+                  name="secondaryRelationship"
                   label="Relationship to Student"
+                  placeholder="Select relationship"
+                  options={RELATIONSHIP_OPTIONS}
                 />
+                {watchedSecondaryRelationship === "Others" && (
+                  <div className="lg:col-span-2">
+                    <TextField
+                      control={control}
+                      name="otherSecondaryRelationship"
+                      label="Specify Relationship"
+                      placeholder="e.g. Aunt, Family Friend, Uncle"
+                    />
+                  </div>
+                )}
+                <div className="lg:col-span-2">
+                  <TextField
+                    control={control}
+                    name="secondaryContact"
+                    label="Secondary Contact Number"
+                    type="tel"
+                    inputMode="tel"
+                  />
+                </div>
               </div>
             </div>
           </div>
         );
+      }
       case "history":
         return (
           <div className="space-y-8">
@@ -743,20 +979,36 @@ export function MultiStepForm() {
                   this application is accurate and complete to the best of my
                   knowledge.
                 </P>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4 items-start">
                   <TextField
                     control={control}
                     name="signature"
-                    label="Student Signature (Type Name)"
+                    label={
+                      isSchoolOrCollege
+                        ? "Applicant / Guardian Signature (Type Name)"
+                        : "Student Signature (Type Name)"
+                    }
                     autoComplete="name"
-                    required={!guardianLed}
+                    required
                   />
-                  <DateField
-                    control={control}
-                    name="signatureDate"
-                    label="Date"
-                    required={!guardianLed}
-                  />
+                  <div>
+                    <span className="block text-sm font-medium text-ink mb-1.5">
+                      Date
+                    </span>
+                    <div className="flex h-10 w-full items-center gap-2 rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-ink select-none">
+                      <Icon
+                        icon={CalendarIcon}
+                        className="size-4 text-ink-muted shrink-0"
+                      />
+                      <span>
+                        {new Date().toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

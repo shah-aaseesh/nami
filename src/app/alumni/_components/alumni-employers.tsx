@@ -93,11 +93,11 @@ export function AlumniEmployers({
           eyebrow={
             <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-100 border border-primary-200/80 px-3 py-0.5 text-xs font-semibold tracking-wider text-primary-700 uppercase">
               <span className="size-1.5 rounded-full bg-primary-700" />
-              {section.heading}
+              {section.eyebrow ?? "CAREER NETWORK"}
             </span>
           }
           layout="split"
-          title={section.eyebrow ?? "Where Our Alumni Work"}
+          title={section.heading ?? "Where our alumnae are"}
         />
 
         <Reveal className="mt-8 sm:mt-12 flex flex-col gap-3 sm:gap-5" y={24}>

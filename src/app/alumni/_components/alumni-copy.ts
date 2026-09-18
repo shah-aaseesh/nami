@@ -545,12 +545,12 @@ export const alumniCopy = {
     eyebrow: "ALUMNI VOICES",
     heading: "Where NAMI Graduates Go",
     standfirst:
-      "From healthcare technology leaders in Kathmandu to venture-backed fintech entrepreneurs in New York, explore the career journeys of our graduates. Click any profile to view their full story.",
+      "From healthcare technology leaders in Kathmandu to venture-backed fintech entrepreneurs in New York, explore the career journeys of our graduates.",
   },
   employers: {
     navLabel: "Employers",
-    eyebrow: "CAREER DESTINATIONS",
-    heading: "Where our alumni are working.",
+    eyebrow: "CAREER NETWORK",
+    heading: "Where our alumnae are",
     standfirst:
       "From global technology companies and leading commercial banks to international conservation bodies and research institutes, NAMI graduates are making an impact worldwide.",
     cta: null,

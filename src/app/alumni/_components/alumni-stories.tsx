@@ -101,10 +101,6 @@ export function AlumniStories({
               );
             })}
           </div>
-
-          <span className="text-xs text-ink-muted font-body">
-            Click any profile to read their full story
-          </span>
         </div>
 
         {/* Editorial Alumni Ledger */}

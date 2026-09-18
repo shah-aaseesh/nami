@@ -1,10 +1,9 @@
-import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Eyebrow, H5 } from "@/components/ui/typography";
+import { Eyebrow, P } from "@/components/ui/typography";
 import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
-import { AboutCreedPin } from "./about-creed-pin";
 
-function CreedStatement({
+function CreedCard({
   label,
   paragraphs,
 }: {
@@ -14,16 +13,26 @@ function CreedStatement({
   if (paragraphs.length === 0) return null;
 
   return (
-    <RevealItem className="border-t border-border pt-10 first:border-0 first:pt-0 lg:pt-14">
-      <Eyebrow as="h3">{label}</Eyebrow>
-      <div className="mt-5 flex flex-col gap-4 lg:mt-6">
-        {paragraphs.map((paragraph) => (
-          <H5 as="p" className="text-pretty lg:text-3xl" key={paragraph}>
-            {paragraph}
-          </H5>
-        ))}
+    <div className="flex h-full flex-col justify-between rounded-2xl sm:rounded-3xl border border-border/80 bg-surface-raised p-6 sm:p-8 lg:p-10 shadow-xs transition-shadow duration-300 hover:shadow-md">
+      <div>
+        <div className="flex items-center gap-3">
+          <span className="size-2.5 rounded-full bg-accent" />
+          <Eyebrow as="h3" className="text-accent text-sm font-semibold tracking-wider uppercase">
+            {label}
+          </Eyebrow>
+        </div>
+        <div className="mt-5 sm:mt-6 flex flex-col gap-4">
+          {paragraphs.map((paragraph) => (
+            <P
+              className="text-base sm:text-lg lg:text-xl leading-relaxed text-ink/90 font-normal text-justify [text-align-last:left] [hyphens:auto]"
+              key={paragraph}
+            >
+              {paragraph}
+            </P>
+          ))}
+        </div>
       </div>
-    </RevealItem>
+    </div>
   );
 }
 
@@ -44,27 +53,35 @@ export function AboutCreed({
   }
 
   return (
-    <section className="gutter-x section-y" id="creed">
+    <section className="gutter-x py-12 sm:py-16 lg:py-20" id="creed">
       <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
-          <AboutCreedPin className="lg:col-span-4 lg:col-start-1 lg:row-start-1">
-            <Reveal>
-              <div className="flex items-center gap-5">
-                <Eyebrow>{section.heading}</Eyebrow>
-                <span className="h-px flex-1 bg-border" />
-              </div>
-            </Reveal>
-            <SplitText as="h2" className="mt-4">
-              {section.eyebrow ?? "Our Creed"}
-            </SplitText>
-          </AboutCreedPin>
+        {/* Section Heading */}
+        <Reveal>
+          <div className="flex items-center gap-5">
+            <Eyebrow>{section.heading}</Eyebrow>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+        </Reveal>
 
-          <Reveal
-            className="mt-12 flex flex-col gap-10 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:mt-0 lg:gap-14"
-            stagger={0.12}
-          >
-            <CreedStatement label="Mission" paragraphs={missionParagraphs} />
-            <CreedStatement label="Vision" paragraphs={visionParagraphs} />
+        <div className="mt-4 sm:mt-5">
+          <Reveal>
+            <SplitText
+              as="h2"
+              className="font-display text-3xl sm:text-4xl text-accent font-normal"
+            >
+              {section.eyebrow ?? "Mission & Vision"}
+            </SplitText>
+          </Reveal>
+        </div>
+
+        {/* 2-Column Side-by-Side Cards: Left Mission & Right Vision */}
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+          <Reveal className="h-full" y={16}>
+            <CreedCard label="Mission" paragraphs={missionParagraphs} />
+          </Reveal>
+
+          <Reveal className="h-full" y={24}>
+            <CreedCard label="Vision" paragraphs={visionParagraphs} />
           </Reveal>
         </div>
       </div>

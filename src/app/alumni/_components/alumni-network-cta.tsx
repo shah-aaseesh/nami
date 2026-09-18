@@ -1,10 +1,12 @@
-import { Mail01Icon } from "@hugeicons/core-free-icons";
-import type { Route } from "next";
-import Link from "next/link";
+"use client";
+
+import { SparklesIcon } from "@hugeicons/core-free-icons";
+import { useState } from "react";
 import { SectionHeader } from "@/components/shared/section-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
+import { AlumniFormModal } from "./alumni-form";
 
 export function AlumniNetworkCta({
   copy,
@@ -16,43 +18,52 @@ export function AlumniNetworkCta({
     readonly email: string;
   };
 }) {
-  const mailtoHref = `mailto:${copy.email}?subject=NAMI%20Alumni%20Network%20Registration%20-%20[Your%20Name]&body=Dear%20NAMI%20Alumni%20Relations,%0D%0A%0D%0AI%20am%20a%20NAMI%20graduate%20and%20would%20like%20to%20update%20my%20details%20/%20join%20the%20Alumni%20Network.%0D%0A%0D%0AName:%20%0D%0ABatch%20/%20Graduation%20Year:%20%0D%0AProgramme:%20%0D%0ACurrent%20Organization%20&%20Role:%20%0D%0ACity%20&%20Country:%20%0D%0APhone%20/%20WhatsApp:%20%0D%0ALinkedIn%20Profile:%20%0D%0A%0D%0AThank%20you,%0D%0A[Your%20Name]`;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section className="gutter-x section-y" id="connect">
-      <div className="mx-auto max-w-page">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-800 via-primary-700 to-primary-900 p-8 sm:p-12 lg:p-16 shadow-xl shadow-primary-950/10 border border-primary-600/30">
-          {/* Ambient lighting */}
-          <div className="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-white/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 size-96 rounded-full bg-black/25 blur-3xl" />
+    <>
+      <section className="gutter-x section-y" id="connect">
+        <div className="mx-auto max-w-page">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-800 via-primary-700 to-primary-900 p-8 sm:p-12 lg:p-16 shadow-xl shadow-primary-950/10 border border-primary-600/30">
+            {/* Ambient lighting */}
+            <div className="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-white/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-24 -left-24 size-96 rounded-full bg-black/25 blur-3xl" />
 
-          <div className="relative">
-            <SectionHeader
-              action={
-                <Link
-                  className={cn(
-                    buttonVariants({ size: "lg" }),
-                    "inline-flex items-center justify-center gap-2 px-8 bg-white text-primary-800 hover:bg-neutral-100 hover:text-primary-900 font-semibold shadow-lg shadow-black/10 transition-all duration-200 cursor-pointer",
-                  )}
-                  href={mailtoHref as Route}
-                >
-                  <Icon className="size-4" icon={Mail01Icon} />
-                  <span>Email Us</span>
-                </Link>
-              }
-              description={<span className="text-white/85">{copy.standfirst}</span>}
-              eyebrow={
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-3 py-0.5 text-xs font-semibold tracking-wider text-white uppercase">
-                  <span className="size-1.5 rounded-full bg-white animate-pulse" />
-                  {copy.eyebrow ?? "Stay Connected"}
-                </span>
-              }
-              layout="action"
-              title={<span className="text-white">{copy.heading}</span>}
-            />
+            <div className="relative">
+              <SectionHeader
+                action={
+                  <button
+                    className={cn(
+                      buttonVariants({ size: "lg" }),
+                      "inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white text-primary-800 hover:bg-neutral-100 hover:text-primary-900 font-semibold shadow-lg shadow-black/15 transition-all duration-200 cursor-pointer active:scale-95 text-sm sm:text-base",
+                    )}
+                    onClick={() => setIsModalOpen(true)}
+                    type="button"
+                  >
+                    <Icon className="size-4.5 text-primary-700" icon={SparklesIcon} />
+                    <span>Share Your Story</span>
+                  </button>
+                }
+                description={<span className="text-white/85">{copy.standfirst}</span>}
+                eyebrow={
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-3 py-0.5 text-xs font-semibold tracking-wider text-white uppercase">
+                    <span className="size-1.5 rounded-full bg-white animate-pulse" />
+                    {copy.eyebrow ?? "Stay Connected"}
+                  </span>
+                }
+                layout="action"
+                title={<span className="text-white">{copy.heading}</span>}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <AlumniFormModal
+        email={copy.email}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }

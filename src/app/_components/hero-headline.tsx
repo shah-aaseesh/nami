@@ -8,12 +8,18 @@ const AT_FOLD_Y_PERCENT = 10;
 const AT_FOLD_DURATION = 0.6;
 
 export type HeroHeadlineProps = {
-  lead: string;
-  tail: string | null;
+  headline?: string;
+  lead?: string;
+  tail?: string | null;
   className?: string;
 };
 
-export function HeroHeadline({ lead, tail, className }: HeroHeadlineProps) {
+export function HeroHeadline({
+  headline,
+  lead,
+  tail,
+  className,
+}: HeroHeadlineProps) {
   const root = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
@@ -51,13 +57,21 @@ export function HeroHeadline({ lead, tail, className }: HeroHeadlineProps) {
   return (
     <h1
       className={cn(
-        "font-display text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-normal tracking-tight leading-[1.1] text-ink",
+        "font-display text-3xl sm:text-4xl lg:text-[2.6rem] xl:text-[3.15rem] 2xl:text-6xl font-normal tracking-tight leading-[1.1] text-ink",
         className,
       )}
       ref={root}
     >
-      <span className="block">{lead}</span>
-      {tail === null ? null : <span className="block">{tail}</span>}
+      {headline ? (
+        headline
+      ) : (
+        <>
+          <span className="block">{lead}</span>
+          {tail === null || tail === undefined ? null : (
+            <span className="block">{tail}</span>
+          )}
+        </>
+      )}
     </h1>
   );
 }

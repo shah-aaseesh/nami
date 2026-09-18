@@ -3,18 +3,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowReloadHorizontalIcon,
-  Mail01Icon,
   SentIcon,
   SparklesIcon,
   Tick02Icon,
 } from "@hugeicons/core-free-icons";
 import type { Route } from "next";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Reveal } from "@/components/motion/reveal";
-import { SectionHeader } from "@/components/shared/section-header";
 import { buttonVariants } from "@/components/ui/button";
 import {
   CheckboxField,
@@ -24,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Icon } from "@/components/ui/icon";
 import { H3, H4, P } from "@/components/ui/typography";
+import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, CloseIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 const alumniStorySchema = z.object({
@@ -45,13 +44,20 @@ const alumniStorySchema = z.object({
   }),
 });
 
-type AlumniStoryFormData = z.infer<typeof alumniStorySchema>;
+export type AlumniStoryFormData = z.infer<typeof alumniStorySchema>;
 
 const WING_OPTIONS = [
   { value: "Cambridge A-Levels", label: "Cambridge A-Levels (NAMI College)" },
   { value: "Northampton UK Degree", label: "BSc / MSc / BBA / MBA (Northampton UK)" },
   { value: "NEB +2 Science/Management", label: "NEB +2 (Science / Management)" },
   { value: "School", label: "NAMI International School" },
+] as const;
+
+const STEPS = [
+  { id: 1, title: "Personal Details", short: "Contact" },
+  { id: 2, title: "Academic Background", short: "Academics" },
+  { id: 3, title: "Current Career", short: "Profession" },
+  { id: 4, title: "Story & Reflection", short: "Story" },
 ] as const;
 
 function createAlumniMailto(email: string, values: AlumniStoryFormData): string {
@@ -91,17 +97,48 @@ function createAlumniMailto(email: string, values: AlumniStoryFormData): string 
   return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-export function AlumniForm({ email }: { email: string }) {
-  const [submittedData, setSubmittedData] = useState<AlumniStoryFormData | null>(
-    null,
-  );
+export function AlumniFormModal({
+  email,
+  isOpen,
+  onClose,
+}: {
+  readonly email: string;
+  readonly isOpen: boolean;
+  readonly onClose: () => void;
+}) {
+  const [mounted, setMounted] = useState(false);
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [submittedData, setSubmittedData] = useState<AlumniStoryFormData | null>(null);
   const [mailtoLink, setMailtoLink] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll and handle escape key
+  useEffect(() => {
+    if (!isOpen) return;
+
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   const {
     control,
     handleSubmit,
+    trigger,
     reset,
-    formState: { isSubmitting, isValid },
+    formState: { isSubmitting },
   } = useForm<AlumniStoryFormData>({
     resolver: zodResolver(alumniStorySchema),
     mode: "onTouched",
@@ -123,6 +160,26 @@ export function AlumniForm({ email }: { email: string }) {
     },
   });
 
+  const handleNextStep = async () => {
+    let isValidStep = false;
+
+    if (currentStep === 1) {
+      isValidStep = await trigger(["fullName", "email"]);
+    } else if (currentStep === 2) {
+      isValidStep = await trigger(["wing", "program", "graduationYear"]);
+    } else if (currentStep === 3) {
+      isValidStep = await trigger(["currentRole", "currentOrg", "location"]);
+    }
+
+    if (isValidStep) {
+      setCurrentStep((prev) => Math.min(prev + 1, 4));
+    }
+  };
+
+  const handlePrevStep = () => {
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
+  };
+
   const onSubmit = (data: AlumniStoryFormData) => {
     const link = createAlumniMailto(email, data);
     setSubmittedData(data);
@@ -132,277 +189,405 @@ export function AlumniForm({ email }: { email: string }) {
 
   const handleReset = () => {
     reset();
+    setCurrentStep(1);
     setSubmittedData(null);
     setMailtoLink(null);
   };
 
-  return (
-    <section
-      className="gutter-x section-y border-t border-border bg-gradient-to-b from-surface via-primary-100/20 to-neutral-100/40 relative overflow-hidden"
-      id="share-experience"
+  if (!mounted || !isOpen) return null;
+
+  return createPortal(
+    <div
+      aria-labelledby="share-experience-title"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto bg-black/80 backdrop-blur-xs animate-in fade-in duration-200"
+      role="dialog"
     >
-      <div className="mx-auto max-w-page relative">
-        <SectionHeader
-          eyebrow={
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-100 border border-primary-200/80 px-3 py-0.5 text-xs font-semibold tracking-wider text-primary-700 uppercase">
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0"
+        onClick={onClose}
+      />
+
+      {/* Modal Container */}
+      <div className="relative z-10 w-full max-w-2xl max-h-[92vh] flex flex-col rounded-3xl border border-border/80 bg-surface shadow-2xl my-auto overflow-hidden">
+        {/* Top Dynamic Brand Accent Progress Bar */}
+        <div className="h-1 w-full shrink-0 bg-neutral-100/80 overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-primary-700 via-primary-600 to-primary-700 transition-all duration-500 ease-out"
+            style={{ width: `${(currentStep / 4) * 100}%` }}
+          />
+        </div>
+
+        {/* Modal Top Header */}
+        <div className="p-5 sm:p-7 border-b border-border bg-neutral-50/50 relative shrink-0">
+          {/* Close Button */}
+          <button
+            aria-label="Close dialog"
+            className="absolute right-4 top-4 sm:right-6 sm:top-6 z-20 flex size-9 items-center justify-center rounded-full bg-white border border-border text-ink-muted hover:bg-neutral-100 hover:text-ink transition-colors cursor-pointer shadow-2xs"
+            onClick={onClose}
+            type="button"
+          >
+            <Icon className="size-4" icon={CloseIcon} />
+          </button>
+
+          <div className="pr-10">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-primary-100 border border-primary-200/80 px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-primary-700 uppercase mb-2">
               <span className="size-1.5 rounded-full bg-primary-700" />
-              SHARE YOUR STORY
-            </span>
-          }
-          layout="split"
-          title="Share Your NAMI Experience"
-          description="Are you a NAMI alumnus? Share your journey, professional milestones, and memories with us to inspire the next generation and get featured in our alumni spotlights."
-        />
+              <span>SHARE YOUR STORY</span>
+            </div>
+            <h2
+              className="font-display text-xl sm:text-2xl font-bold text-ink"
+              id="share-experience-title"
+            >
+              Share Your NAMI Experience
+            </h2>
+          </div>
 
-        <div className="mt-12 lg:mt-16">
-          {submittedData && mailtoLink ? (
-            <Reveal>
-              <div className="mx-auto max-w-2xl relative overflow-hidden rounded-3xl border border-primary-200 bg-surface-raised p-8 text-center sm:p-12 shadow-lg shadow-primary-900/5 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:bg-gradient-to-r before:from-primary-700 before:via-primary-500 before:to-primary-800">
-                <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                  <Icon icon={Tick02Icon} className="size-8 text-emerald-600" />
-                </div>
-                <H3 className="font-display text-2xl text-ink sm:text-3xl">
-                  Thank You, {submittedData.fullName}!
-                </H3>
-                <P className="mx-auto mt-3 max-w-lg text-ink-muted text-base sm:text-lg">
-                  Your story has been formatted. Click below if your email client
-                  didn&apos;t open automatically to send it to{" "}
-                  <span className="font-semibold text-primary-700">{email}</span>.
-                </P>
+          {/* Stepper Progress Indicator */}
+          {!submittedData && (
+            <div className="mt-5">
+              <div className="relative flex items-center justify-between">
+                {/* Background Connecting Line */}
+                <div className="absolute top-3.5 sm:top-4 inset-x-8 sm:inset-x-10 h-0.5 bg-neutral-200 -z-0" />
+                {/* Active Connecting Progress */}
+                <div
+                  className="absolute top-3.5 sm:top-4 left-8 sm:left-10 h-0.5 bg-primary-700 -z-0 transition-all duration-500 ease-out"
+                  style={{
+                    width: `calc(${((currentStep - 1) / 3) * 100}% - ${((currentStep - 1) / 3) * (typeof window !== "undefined" && window.innerWidth < 640 ? 4 : 5)}rem)`,
+                    maxWidth: "calc(100% - 4rem)",
+                  }}
+                />
 
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                  <Link
-                    href={mailtoLink as Route}
-                    className={cn(
-                      buttonVariants({ size: "lg", variant: "default" }),
-                      "inline-flex items-center gap-2 bg-primary-700 hover:bg-primary-800 text-white shadow-md shadow-primary-700/20",
-                    )}
-                  >
-                    <Icon icon={SentIcon} className="size-4" />
-                    <span>Send via Email</span>
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={handleReset}
-                    className={cn(
-                      buttonVariants({ size: "lg", variant: "outline" }),
-                      "inline-flex items-center gap-2 border-primary-200 text-ink hover:border-primary-400 hover:text-primary-700",
-                    )}
-                  >
-                    <Icon icon={ArrowReloadHorizontalIcon} className="size-4" />
-                    <span>Submit Another Story</span>
-                  </button>
-                </div>
-              </div>
-            </Reveal>
-          ) : (
-            <Reveal>
-              <div className="mx-auto max-w-6xl relative overflow-hidden rounded-3xl border border-primary-200/80 bg-surface-raised p-6 sm:p-8 lg:p-10 shadow-lg shadow-primary-900/5 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:bg-gradient-to-r before:from-primary-700 before:via-primary-500 before:to-primary-800">
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  noValidate
-                >
-                  <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-                    {/* LEFT COLUMN: Profile, NAMI Background & Career */}
-                    <div className="space-y-8">
-                      {/* Section 1: Personal & Contact */}
-                      <div className="rounded-2xl border border-border/70 bg-neutral-50/50 p-5 sm:p-6 space-y-4">
-                        <div className="flex items-center gap-2.5 border-b border-primary-100 pb-3">
-                          <div className="flex size-7 items-center justify-center rounded-full bg-primary-700 text-white font-bold text-xs shadow-xs">
-                            1
-                          </div>
-                          <H4 className="text-base font-semibold text-ink">
-                            Personal & Contact Details
-                          </H4>
-                        </div>
+                {STEPS.map((step) => {
+                  const isDone = currentStep > step.id;
+                  const isCurrent = currentStep === step.id;
 
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                          <TextField
-                            control={control}
-                            name="fullName"
-                            label="Full Name"
-                            placeholder="e.g. Aarav Sharma"
-                            required
-                          />
-                          <TextField
-                            control={control}
-                            name="email"
-                            label="Email Address"
-                            type="email"
-                            placeholder="e.g. aarav@example.com"
-                            required
-                          />
-                          <TextField
-                            control={control}
-                            name="phone"
-                            label="Phone / WhatsApp"
-                            placeholder="e.g. +977 98XXXXXXXX"
-                          />
-                          <TextField
-                            control={control}
-                            name="linkedin"
-                            label="LinkedIn Profile URL"
-                            placeholder="e.g. linkedin.com/in/aarav"
-                          />
-                        </div>
+                  return (
+                    <div
+                      className="relative z-10 flex flex-col items-center gap-1.5"
+                      key={step.id}
+                    >
+                      <div
+                        className={cn(
+                          "flex size-7 sm:size-8 items-center justify-center rounded-full text-xs font-bold transition-all duration-300 border-2",
+                          isDone
+                            ? "bg-primary-700 border-primary-700 text-white shadow-xs"
+                            : isCurrent
+                              ? "bg-primary-700 border-primary-700 text-white ring-4 ring-primary-100 shadow-sm"
+                              : "bg-surface border-neutral-300 text-neutral-500",
+                        )}
+                      >
+                        {isDone ? (
+                          <Icon className="size-3.5 text-white" icon={CheckIcon} />
+                        ) : (
+                          step.id
+                        )}
                       </div>
-
-                      {/* Section 2: Academic Background */}
-                      <div className="rounded-2xl border border-border/70 bg-neutral-50/50 p-5 sm:p-6 space-y-4">
-                        <div className="flex items-center gap-2.5 border-b border-primary-100 pb-3">
-                          <div className="flex size-7 items-center justify-center rounded-full bg-primary-700 text-white font-bold text-xs shadow-xs">
-                            2
-                          </div>
-                          <H4 className="text-base font-semibold text-ink">
-                            Your NAMI Academic Background
-                          </H4>
-                        </div>
-
-                        <div className="space-y-4">
-                          <SelectField
-                            control={control}
-                            name="wing"
-                            label="Academic Wing"
-                            placeholder="Select wing"
-                            options={WING_OPTIONS}
-                            required
-                          />
-
-                          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <TextField
-                              control={control}
-                              name="program"
-                              label="Programme / Degree"
-                              placeholder="e.g. BSc (Hons) Computing"
-                              required
-                            />
-                            <TextField
-                              control={control}
-                              name="graduationYear"
-                              label="Graduation Year / Batch"
-                              placeholder="e.g. 2021"
-                              required
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Section 3: Professional Endeavour */}
-                      <div className="rounded-2xl border border-border/70 bg-neutral-50/50 p-5 sm:p-6 space-y-4">
-                        <div className="flex items-center gap-2.5 border-b border-primary-100 pb-3">
-                          <div className="flex size-7 items-center justify-center rounded-full bg-primary-700 text-white font-bold text-xs shadow-xs">
-                            3
-                          </div>
-                          <H4 className="text-base font-semibold text-ink">
-                            Current Professional Endeavour
-                          </H4>
-                        </div>
-
-                        <div className="space-y-4">
-                          <TextField
-                            control={control}
-                            name="currentRole"
-                            label="Current Designation / Role"
-                            placeholder="e.g. Senior Software Engineer"
-                            required
-                          />
-
-                          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <TextField
-                              control={control}
-                              name="currentOrg"
-                              label="Company / University"
-                              placeholder="e.g. Leapfrog Technology"
-                              required
-                            />
-                            <TextField
-                              control={control}
-                              name="location"
-                              label="City & Country"
-                              placeholder="e.g. Kathmandu, Nepal"
-                              required
-                            />
-                          </div>
-                        </div>
-                      </div>
+                      <span
+                        className={cn(
+                          "text-[10px] sm:text-xs font-semibold text-center whitespace-nowrap transition-colors",
+                          isCurrent
+                            ? "text-primary-700 font-bold"
+                            : isDone
+                              ? "text-ink"
+                              : "text-neutral-400",
+                        )}
+                      >
+                        {step.short}
+                      </span>
                     </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
 
-                    {/* RIGHT COLUMN: Experience, Advice & Consent/Submit */}
-                    <div className="flex flex-col justify-between space-y-6">
-                      {/* Section 4: Story & Experience */}
-                      <div className="rounded-2xl border border-border/70 bg-neutral-50/50 p-5 sm:p-6 space-y-4 flex-1">
-                        <div className="flex items-center gap-2.5 border-b border-primary-100 pb-3">
-                          <div className="flex size-7 items-center justify-center rounded-full bg-primary-700 text-white font-bold text-xs shadow-xs">
-                            4
-                          </div>
-                          <H4 className="text-base font-semibold text-ink">
-                            Share Your Story & Experience
-                          </H4>
-                        </div>
+        {/* Modal Scrollable Form Body */}
+        <div className="flex-1 overflow-y-auto p-5 sm:p-7">
+          {submittedData && mailtoLink ? (
+            <div className="py-6 text-center">
+              <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                <Icon className="size-8 text-emerald-600" icon={Tick02Icon} />
+              </div>
+              <H3 className="font-display text-2xl text-ink sm:text-3xl">
+                Thank You, {submittedData.fullName}!
+              </H3>
+              <P className="mx-auto mt-2.5 max-w-md text-ink-muted text-sm sm:text-base">
+                Your spotlight has been formatted. Click below if your email client didn&apos;t open automatically to send it to{" "}
+                <span className="font-semibold text-primary-700">{email}</span>.
+              </P>
 
-                        <div className="space-y-4">
-                          <TextField
-                            control={control}
-                            name="storyHeadline"
-                            label="Story Headline / Summary"
-                            placeholder="e.g. How NAMI gave me the technical foundation to build AI products globally"
-                            required
-                          />
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  className={cn(
+                    buttonVariants({ size: "lg", variant: "default" }),
+                    "inline-flex items-center gap-2 bg-primary-700 hover:bg-primary-800 text-white shadow-md shadow-primary-700/20",
+                  )}
+                  href={mailtoLink as Route}
+                >
+                  <Icon className="size-4" icon={SentIcon} />
+                  <span>Send via Email</span>
+                </Link>
+                <button
+                  className={cn(
+                    buttonVariants({ size: "lg", variant: "outline" }),
+                    "inline-flex items-center gap-2 border-primary-200 text-ink hover:border-primary-400 hover:text-primary-700 cursor-pointer",
+                  )}
+                  onClick={handleReset}
+                  type="button"
+                >
+                  <Icon className="size-4" icon={ArrowReloadHorizontalIcon} />
+                  <span>Submit Another Story</span>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <form
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              {/* STEP 1: Personal & Contact */}
+              {currentStep === 1 && (
+                <div className="space-y-5 animate-in fade-in duration-200">
+                  <div className="border-b border-primary-100 pb-3">
+                    <H4 className="text-base font-semibold text-ink">
+                      Step 1: Personal & Contact Details
+                    </H4>
+                    <p className="text-xs text-ink-muted mt-0.5">
+                      Let us know who you are and how we can stay in touch.
+                    </p>
+                  </div>
 
-                          <TextareaField
-                            control={control}
-                            name="experience"
-                            label="Your NAMI Experience & Journey"
-                            placeholder="Tell us about your learning experience, faculty, campus life, and how NAMI prepared you for your career..."
-                            rows={4}
-                            required
-                          />
-
-                          <TextareaField
-                            control={control}
-                            name="advice"
-                            label="Advice for Current Students (Optional)"
-                            placeholder="What advice would you give to current NAMI students pursuing their goals?"
-                            rows={3}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Section 5: Consent & Submit Box */}
-                      <div className="rounded-2xl bg-primary-100/40 p-5 sm:p-6 border border-primary-200/80 space-y-4">
-                        <CheckboxField
-                          control={control}
-                          name="consent"
-                          label="I consent to NAMI College featuring my profile, testimonial, and career updates on the NAMI website, alumni spotlights, and promotional publications."
-                          required
-                        />
-
-                        <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-primary-200/60">
-                          <P className="text-xs text-ink-muted">
-                            Reviewed by the NAMI Alumni Relations team.
-                          </P>
-
-                          <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className={cn(
-                              buttonVariants({ size: "lg", variant: "default" }),
-                              "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 font-medium bg-primary-700 hover:bg-primary-800 text-white shadow-md shadow-primary-700/25 transition-all duration-200 cursor-pointer",
-                            )}
-                          >
-                            <Icon icon={SparklesIcon} className="size-4" />
-                            <span>Submit Experience</span>
-                          </button>
-                        </div>
-                      </div>
+                  <div className="space-y-4">
+                    <TextField
+                      control={control}
+                      label="Full Name"
+                      name="fullName"
+                      placeholder="e.g. Aarav Sharma"
+                      required
+                    />
+                    <TextField
+                      control={control}
+                      label="Email Address"
+                      name="email"
+                      placeholder="e.g. aarav@example.com"
+                      required
+                      type="email"
+                    />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <TextField
+                        control={control}
+                        label="Phone / WhatsApp"
+                        name="phone"
+                        placeholder="e.g. +977 98XXXXXXXX"
+                      />
+                      <TextField
+                        control={control}
+                        label="LinkedIn Profile URL"
+                        name="linkedin"
+                        placeholder="e.g. linkedin.com/in/aarav"
+                      />
                     </div>
                   </div>
-                </form>
+                </div>
+              )}
+
+              {/* STEP 2: Academic Background */}
+              {currentStep === 2 && (
+                <div className="space-y-5 animate-in fade-in duration-200">
+                  <div className="border-b border-primary-100 pb-3">
+                    <H4 className="text-base font-semibold text-ink">
+                      Step 2: Your NAMI Academic Journey
+                    </H4>
+                    <p className="text-xs text-ink-muted mt-0.5">
+                      Tell us about your programme and graduating batch.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <SelectField
+                      control={control}
+                      label="Academic Wing"
+                      name="wing"
+                      options={WING_OPTIONS}
+                      placeholder="Select your wing"
+                      required
+                    />
+                    <TextField
+                      control={control}
+                      label="Programme / Degree"
+                      name="program"
+                      placeholder="e.g. BSc (Hons) Computing or A-Levels"
+                      required
+                    />
+                    <TextField
+                      control={control}
+                      label="Graduation Year / Batch"
+                      name="graduationYear"
+                      placeholder="e.g. 2021"
+                      required
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 3: Current Profession */}
+              {currentStep === 3 && (
+                <div className="space-y-5 animate-in fade-in duration-200">
+                  <div className="border-b border-primary-100 pb-3">
+                    <H4 className="text-base font-semibold text-ink">
+                      Step 3: Current Professional Profile
+                    </H4>
+                    <p className="text-xs text-ink-muted mt-0.5">
+                      Where are you working or studying right now?
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <TextField
+                      control={control}
+                      label="Current Designation / Role"
+                      name="currentRole"
+                      placeholder="e.g. Senior Software Engineer / Founder"
+                      required
+                    />
+                    <TextField
+                      control={control}
+                      label="Company / Organization / University"
+                      name="currentOrg"
+                      placeholder="e.g. Leapfrog Technology / Oxford University"
+                      required
+                    />
+                    <TextField
+                      control={control}
+                      label="Current City & Country"
+                      name="location"
+                      placeholder="e.g. Kathmandu, Nepal / London, UK"
+                      required
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 4: Story & Reflection */}
+              {currentStep === 4 && (
+                <div className="space-y-5 animate-in fade-in duration-200">
+                  <div className="border-b border-primary-100 pb-3">
+                    <H4 className="text-base font-semibold text-ink">
+                      Step 4: Your Story & Reflection
+                    </H4>
+                    <p className="text-xs text-ink-muted mt-0.5">
+                      Share your fondest memories, key takeaways, and words of inspiration.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <TextField
+                      control={control}
+                      label="Story Headline / Key Takeaway"
+                      name="storyHeadline"
+                      placeholder="e.g. How NAMI gave me the foundation to innovate"
+                      required
+                    />
+
+                    <TextareaField
+                      control={control}
+                      description="Min 20 characters. Reflect on faculty, campus life, or memorable moments."
+                      label="Your NAMI Experience & Journey"
+                      name="experience"
+                      placeholder="Tell us about your learning experience, faculty, campus life, and how NAMI prepared you for your career..."
+                      required
+                      rows={4}
+                    />
+
+                    <TextareaField
+                      control={control}
+                      description="Optional: Words of inspiration for upcoming students."
+                      label="Advice for Current & Future Students"
+                      name="advice"
+                      placeholder="e.g. Focus on hands-on practical learning, collaborate actively..."
+                      rows={2}
+                    />
+
+                    <div className="rounded-xl border border-primary-200/80 bg-primary-100/30 p-3.5 mt-2">
+                      <CheckboxField
+                        control={control}
+                        description="I agree to share my story with NAMI and understand it may be featured in alumni spotlights, social media, or publications."
+                        label="Consent to Share Story"
+                        name="consent"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Modal Footer Controls */}
+              <div className="mt-7 pt-4 border-t border-border flex items-center justify-between gap-3">
+                {currentStep > 1 ? (
+                  <button
+                    className={cn(
+                      buttonVariants({ size: "default", variant: "outline" }),
+                      "inline-flex items-center gap-1.5 border-neutral-300 text-ink hover:bg-neutral-100 cursor-pointer text-xs sm:text-sm",
+                    )}
+                    onClick={handlePrevStep}
+                    type="button"
+                  >
+                    <Icon className="size-4" icon={ArrowLeftIcon} />
+                    <span>Back</span>
+                  </button>
+                ) : (
+                  <button
+                    className={cn(
+                      buttonVariants({ size: "default", variant: "ghost" }),
+                      "text-ink-muted hover:text-ink cursor-pointer text-xs sm:text-sm",
+                    )}
+                    onClick={onClose}
+                    type="button"
+                  >
+                    <span>Cancel</span>
+                  </button>
+                )}
+
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-ink-muted font-medium hidden sm:inline">
+                    Step {currentStep} of 4
+                  </span>
+
+                  {currentStep < 4 ? (
+                    <button
+                      className={cn(
+                        buttonVariants({ size: "default", variant: "default" }),
+                        "inline-flex items-center gap-1.5 bg-primary-700 hover:bg-primary-800 text-white font-semibold shadow-sm shadow-primary-700/20 cursor-pointer px-5 text-xs sm:text-sm",
+                      )}
+                      onClick={handleNextStep}
+                      type="button"
+                    >
+                      <span>Continue</span>
+                      <Icon className="size-4" icon={ArrowRightIcon} />
+                    </button>
+                  ) : (
+                    <button
+                      className={cn(
+                        buttonVariants({ size: "default", variant: "default" }),
+                        "inline-flex items-center gap-2 bg-primary-700 hover:bg-primary-800 text-white font-semibold shadow-md shadow-primary-700/25 cursor-pointer px-6 text-xs sm:text-sm",
+                      )}
+                      disabled={isSubmitting}
+                      type="submit"
+                    >
+                      <Icon className="size-4" icon={SparklesIcon} />
+                      <span>Submit & Send</span>
+                    </button>
+                  )}
+                </div>
               </div>
-            </Reveal>
+            </form>
           )}
         </div>
       </div>
-    </section>
+    </div>,
+    document.body,
   );
 }

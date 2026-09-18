@@ -56,7 +56,8 @@ export async function Hero() {
   const watch = socials.find((profile) => profile.platform === "youtube");
 
   const splitAt = hero.headline.indexOf(", ");
-  const lead = splitAt === -1 ? hero.headline : hero.headline.slice(0, splitAt);
+  const lead =
+    splitAt === -1 ? hero.headline : hero.headline.slice(0, splitAt + 1);
   const tail = splitAt === -1 ? null : hero.headline.slice(splitAt + 2);
 
   const heroSlides = hero.images;

@@ -443,7 +443,7 @@ export const eventAlbums: readonly EventAlbum[] = [
   },
   {
     id: "plus-two-events-ceremonies",
-    title: "Investiture Ceremony, Holi Fest & Zero Plastic 2040",
+    title: "Holi Fest, Zero Plastic 2040 & Social Service Drives",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary",
     club: "event-management-club",
@@ -451,24 +451,16 @@ export const eventAlbums: readonly EventAlbum[] = [
     category: "Events & Stage",
     date: "Campus Assemblies",
     description:
-      "Formal investiture of student council leaders, Spring Holi celebrations, Welcome ceremonies, and the Zero Plastic 2040 campus sustainability drive.",
+      "Spring Holi celebrations, the Zero Plastic 2040 campus sustainability drive, and community initiatives.",
     coverImage: {
-      src: "/gallery/Higher Secondary/Events/investiture ceremony.jpeg",
-      alt: "Higher Secondary student leaders taking the pledge during the Investiture Ceremony.",
+      src: "/gallery/Higher Secondary/Events/HOLI.jpeg",
+      alt: "Higher Secondary students celebrating Spring Holi on campus.",
       width: 1600,
       height: 1200,
     },
     photos: [
       {
         id: "p2-evt-1",
-        src: "/gallery/Higher Secondary/Events/investiture ceremony.jpeg",
-        alt: "Student Council investiture ceremony and badge pinning on stage.",
-        width: 1600,
-        height: 1200,
-        caption: "Leadership sash and badge pinning at the Investiture Ceremony.",
-      },
-      {
-        id: "p2-evt-2",
         src: "/gallery/Higher Secondary/Events/HOLI.jpeg",
         alt: "+2 cohort celebrating Spring Holi with vibrant organic colors on campus.",
         width: 1600,
@@ -476,7 +468,7 @@ export const eventAlbums: readonly EventAlbum[] = [
         caption: "Spring Holi festival celebrations with friends and faculty.",
       },
       {
-        id: "p2-evt-3",
+        id: "p2-evt-2",
         src: "/gallery/Higher Secondary/Events/Zero Plastic 2040.jpg",
         alt: "Zero Plastic 2040 campus environmental pledge and banner signing.",
         width: 1600,
@@ -484,15 +476,15 @@ export const eventAlbums: readonly EventAlbum[] = [
         caption: "Zero Plastic 2040 eco-awareness commitment.",
       },
       {
-        id: "p2-evt-4",
-        src: "/gallery/Higher Secondary/Events/welcome program.jpeg",
-        alt: "Fresher welcome ceremony and stage presentations.",
+        id: "p2-evt-3",
+        src: "/gallery/Higher Secondary/Events/Social Service Club.jpeg",
+        alt: "Social Service Club campus campaign.",
         width: 1600,
         height: 1200,
-        caption: "Academic welcome program welcoming the new +2 batch.",
+        caption: "Social Service Club initiatives.",
       },
     ],
-    photoCount: 4,
+    photoCount: 3,
   },
   {
     id: "plus-two-sports-championships",

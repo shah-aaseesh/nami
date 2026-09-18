@@ -47,7 +47,7 @@ export function WhySchoolSection() {
           <div className="lg:col-span-7">
             <Reveal stagger={0.08}>
               <RevealItem>
-                <P className="text-base sm:text-lg font-body leading-relaxed text-ink">
+                <P className="text-base sm:text-lg font-body leading-relaxed text-ink text-justify [text-align-last:left] [hyphens:auto]">
                   At NAMI International School, we believe education is about
                   more than acquiring knowledge. It is about helping students
                   understand the world, discover their strengths, build
@@ -69,7 +69,7 @@ export function WhySchoolSection() {
                 )}
               >
                 <div className="overflow-hidden">
-                  <P className="text-base sm:text-lg font-body leading-relaxed text-ink-muted">
+                  <P className="text-base sm:text-lg font-body leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">
                     Our educational approach is grounded in progressive
                     education, with an emphasis on meaningful learning, student
                     participation, inclusion, values, creativity, and personal

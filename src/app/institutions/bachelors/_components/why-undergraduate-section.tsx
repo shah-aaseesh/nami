@@ -37,7 +37,7 @@ export function WhyUndergraduateSection() {
           <div className="lg:col-span-7">
             <Reveal stagger={0.08}>
               <RevealItem>
-                <P className="text-base sm:text-lg font-body leading-relaxed text-ink">
+                <P className="text-base sm:text-lg font-body leading-relaxed text-ink text-justify [text-align-last:left] [hyphens:auto]">
                   NAMI offers internationally oriented undergraduate education
                   through its academic collaboration with the University of
                   Northampton, UK. Students can pursue British degrees across
@@ -58,7 +58,7 @@ export function WhyUndergraduateSection() {
                 )}
               >
                 <div className="overflow-hidden">
-                  <P className="text-base sm:text-lg font-body leading-relaxed text-ink-muted">
+                  <P className="text-base sm:text-lg font-body leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">
                     The undergraduate experience goes beyond academic study.
                     NAMI&apos;s industry partnerships provide opportunities for
                     internships, mentorship, job placements and collaborative

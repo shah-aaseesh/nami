@@ -17,7 +17,7 @@ export function AboutAwards({
     <section className="gutter-x section-y" id="awards">
       <div className="mx-auto max-w-page">
         <SectionHeader
-          eyebrow={section.heading}
+          eyebrow={section.heading || undefined}
           title={section.eyebrow ?? "Awards & Recognition"}
           description={section.standfirst}
         />

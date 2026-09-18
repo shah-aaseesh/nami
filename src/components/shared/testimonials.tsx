@@ -26,9 +26,10 @@ function TestimonialsHeader({
     <SectionHeader
       action={children}
       description={section.standfirst}
-      eyebrow={section.heading}
+      eyebrow={section.heading || undefined}
       layout="action"
       title={section.eyebrow ?? "Student voices"}
+      titleClassName="text-accent"
     />
   );
 }

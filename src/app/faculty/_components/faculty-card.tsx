@@ -13,6 +13,71 @@ import { P } from "@/components/ui/typography";
 import type { Leader } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
+function BioContent({ text }: { readonly text: string }) {
+  const blocks = text.split(/\n\n+/).filter(Boolean);
+
+  return (
+    <div className="space-y-4">
+      {blocks.map((block, bIdx) => {
+        const lines = block
+          .split(/\n/)
+          .map((l) => l.trim())
+          .filter(Boolean);
+
+        const hasBullets = lines.some(
+          (l) => l.startsWith("•") || l.startsWith("-"),
+        );
+
+        if (hasBullets) {
+          const headings: string[] = [];
+          const bullets: string[] = [];
+
+          for (const line of lines) {
+            if (line.startsWith("•") || line.startsWith("-")) {
+              bullets.push(line.replace(/^[•\-]\s*/, ""));
+            } else {
+              headings.push(line);
+            }
+          }
+
+          return (
+            <div className="space-y-2" key={bIdx}>
+              {headings.map((h, hIdx) => (
+                <p
+                  className="font-semibold text-xs sm:text-sm text-ink font-body"
+                  key={hIdx}
+                >
+                  {h}
+                </p>
+              ))}
+              <ul className="space-y-2 pl-1">
+                {bullets.map((bullet, idx) => (
+                  <li
+                    className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-ink/85 font-body text-justify [text-align-last:left] [hyphens:auto]"
+                    key={idx}
+                  >
+                    <span className="size-1.5 mt-2 shrink-0 rounded-full bg-accent" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+
+        return (
+          <p
+            className="text-xs sm:text-sm leading-relaxed text-ink/85 font-body text-justify [text-align-last:left] [hyphens:auto]"
+            key={bIdx}
+          >
+            {block}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 export function FacultyCard({
   leader,
   index,
@@ -78,7 +143,7 @@ export function FacultyCard({
           <h3 className="mt-1 font-display text-lg font-medium text-ink">
             {leader.name}
           </h3>
-          <P className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-3">
+          <P className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-3 text-justify [text-align-last:left] [hyphens:auto]">
             {leader.brief}
           </P>
           <div className="mt-auto pt-4 flex items-center justify-start">
@@ -121,15 +186,8 @@ export function FacultyCard({
             </DialogHeader>
           </div>
 
-          <div className="flex-1 overflow-y-auto pt-4 pr-1 space-y-3.5">
-            {(leader.bio ?? leader.brief).split("\n\n").map((para) => (
-              <p
-                className="text-xs sm:text-sm leading-relaxed text-ink/85 font-body"
-                key={para.slice(0, 30)}
-              >
-                {para}
-              </p>
-            ))}
+          <div className="flex-1 overflow-y-auto pt-4 pr-1">
+            <BioContent text={leader.bio ?? leader.brief} />
           </div>
         </DialogContent>
       </Dialog>

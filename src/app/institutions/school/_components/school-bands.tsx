@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
@@ -37,7 +38,9 @@ export type SchoolBandsCopy = {
 function BandContent({ band }: { readonly band: SchoolBand }) {
   return (
     <div>
-      <P className="max-w-2xl text-ink-muted leading-relaxed">{band.body}</P>
+      <P className="w-full max-w-none text-ink-muted leading-relaxed text-justify [text-align-last:left] [hyphens:auto]">
+        {band.body}
+      </P>
 
       {band.notes.length === 0 ? null : (
         <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
@@ -87,18 +90,8 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
                 >
                   {stream.name}
                 </H4>
-                <span
-                  className={cn(
-                    "rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider",
-                    idx === 0
-                      ? "bg-[#BD1B21]/10 text-[#BD1B21] border border-[#BD1B21]/20"
-                      : "bg-[#284540]/10 text-[#284540] border border-[#284540]/20",
-                  )}
-                >
-                  Stream
-                </span>
               </div>
-              <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">
+              <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">
                 {stream.note}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
@@ -122,9 +115,13 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
 export function SchoolBands({
   copy,
   id,
+  primaryExtra,
+  secondaryExtra,
 }: {
   readonly copy: SchoolBandsCopy;
   readonly id?: string;
+  readonly primaryExtra?: ReactNode;
+  readonly secondaryExtra?: ReactNode;
 }) {
   return (
     <section
@@ -168,10 +165,20 @@ export function SchoolBands({
 
             <TabsPanel value="primary">
               <BandContent band={copy.primary} />
+              {primaryExtra && (
+                <div className="mt-12 sm:mt-16">
+                  {primaryExtra}
+                </div>
+              )}
             </TabsPanel>
 
             <TabsPanel value="secondary">
               <BandContent band={copy.secondary} />
+              {secondaryExtra && (
+                <div className="mt-12 sm:mt-16 pt-10 sm:pt-14 border-t border-[#E0D8C8]">
+                  {secondaryExtra}
+                </div>
+              )}
             </TabsPanel>
           </Tabs>
         </RevealItem>

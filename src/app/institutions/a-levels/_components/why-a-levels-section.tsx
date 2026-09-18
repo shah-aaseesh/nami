@@ -35,7 +35,7 @@ export function WhyALevelsSection() {
           <div className="lg:col-span-7">
             <Reveal stagger={0.08}>
               <RevealItem>
-                <P className="text-base sm:text-lg font-body leading-relaxed text-ink">
+                <P className="text-base sm:text-lg font-body leading-relaxed text-ink text-justify [text-align-last:left] [hyphens:auto]">
                   NAMI College offers the internationally recognised Cambridge
                   A-Level programme, providing students with a rigorous academic
                   pathway that is valued for university admissions both in Nepal
@@ -56,7 +56,7 @@ export function WhyALevelsSection() {
                 )}
               >
                 <div className="overflow-hidden">
-                  <P className="text-base sm:text-lg font-body leading-relaxed text-ink-muted">
+                  <P className="text-base sm:text-lg font-body leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">
                     With a wide range of subjects and flexible subject
                     combinations, students can build an academic pathway suited
                     to their future ambitions, whether in Science, Medicine,

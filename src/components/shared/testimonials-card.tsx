@@ -33,7 +33,7 @@ export function TestimonialCard({
       <Icon className="size-6 text-accent" icon={QuoteIcon} />
 
       <blockquote className="mt-4 grow">
-        <p className="font-display text-base text-ink text-pretty font-medium tracking-wide leading-relaxed lg:text-lg">
+        <p className="font-display text-base text-ink font-medium tracking-wide leading-relaxed lg:text-lg text-justify [text-align-last:left] [hyphens:auto]">
           {testimonial.quote}
         </p>
       </blockquote>

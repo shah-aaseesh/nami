@@ -20,24 +20,24 @@ export type CollegeCambridgeCopy = {
 
 const PROPOSITION_THEMES = [
   {
-    numberColor: "text-[#FF6720]",
-    borderColor: "border-[#FF6720]/40",
-    badgeBg: "bg-[#FF6720]/15 text-[#FF6720]",
+    numberColor: "text-[#BD1B21]",
+    borderColor: "border-[#BD1B21]/30",
+    badgeBg: "bg-[#BD1B21]/10 text-[#BD1B21]",
   },
   {
-    numberColor: "text-[#FFAD00]",
-    borderColor: "border-[#FFAD00]/50",
-    badgeBg: "bg-[#FFAD00]/20 text-[#8A5A00]",
+    numberColor: "text-[#BD1B21]",
+    borderColor: "border-[#BD1B21]/30",
+    badgeBg: "bg-[#BD1B21]/10 text-[#BD1B21]",
   },
   {
-    numberColor: "text-[#E9C355]",
-    borderColor: "border-[#E9C355]/50",
-    badgeBg: "bg-[#E9C355]/25 text-[#5C4800]",
+    numberColor: "text-[#BD1B21]",
+    borderColor: "border-[#BD1B21]/30",
+    badgeBg: "bg-[#BD1B21]/10 text-[#BD1B21]",
   },
   {
-    numberColor: "text-[#FF6720]",
-    borderColor: "border-[#FF6720]/40",
-    badgeBg: "bg-[#FF6720]/15 text-[#FF6720]",
+    numberColor: "text-[#BD1B21]",
+    borderColor: "border-[#BD1B21]/30",
+    badgeBg: "bg-[#BD1B21]/10 text-[#BD1B21]",
   },
 ] as const;
 

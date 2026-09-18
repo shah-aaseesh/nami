@@ -2,8 +2,16 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Reveal, RevealItem } from "@/components/motion/reveal";
+import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselControls,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import {
   Dialog,
   DialogContent,
@@ -96,6 +104,17 @@ export function SchoolCollaboratorsSection({
   const [selectedCollab, setSelectedCollab] =
     useState<SchoolCollaborator | null>(null);
 
+  const total = schoolCollaborators.length;
+
+  // Clone items if less than 8 for continuous infinite loop matching ECA / Clubs carousel
+  const displayCollabs =
+    total > 1 && total < 8
+      ? [
+          ...schoolCollaborators.map((c) => ({ ...c, itemKey: `${c.id}-1` })),
+          ...schoolCollaborators.map((c) => ({ ...c, itemKey: `${c.id}-2` })),
+        ]
+      : schoolCollaborators.map((c) => ({ ...c, itemKey: c.id }));
+
   return (
     <section
       className="gutter-x section-y border-t border-[#E8E2D2] bg-gradient-to-b from-[#FCFBF7] via-[#F7F3E8] to-[#FCFBF7] relative overflow-hidden"
@@ -111,85 +130,113 @@ export function SchoolCollaboratorsSection({
         className="pointer-events-none absolute -bottom-20 -left-20 size-80 rounded-full bg-[#BD1B21]/5 blur-3xl"
       />
 
-      <div className="relative mx-auto max-w-page">
-        <SectionHeader
-          description="We collaborate with premier specialized learning partners to complement classroom education and enrich student discovery."
-          eyebrow="Partners in Learning"
-          layout="split"
-          title="Our Learning Collaborators"
-        />
+      <Carousel
+        aria-label="Our Learning Collaborators"
+        aria-roledescription="carousel"
+        autoplay={true}
+        autoplayIntervalMs={2500}
+        opts={{
+          align: "start",
+          duration: 35,
+          loop: true,
+          slidesToScroll: 1,
+        }}
+        pauseOnHover={false}
+      >
+        <div className="mx-auto max-w-page">
+          <SectionHeader
+            action={
+              <CarouselControls className="ms-auto">
+                <CarouselPrevious
+                  aria-label="Previous partner"
+                  className="size-9 sm:size-11 [&_svg]:size-4 sm:[&_svg]:size-5"
+                />
+                <CarouselNext
+                  aria-label="Next partner"
+                  className="size-9 sm:size-11 [&_svg]:size-4 sm:[&_svg]:size-5"
+                />
+              </CarouselControls>
+            }
+            description="We collaborate with premier specialized learning partners to complement classroom education and enrich student discovery."
+            eyebrow="Partners in Learning"
+            layout="action"
+            title="Our Learning Collaborators"
+          />
+        </div>
 
-        <Reveal
-          className="mt-8 sm:mt-10 lg:mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
-          stagger={0.06}
-        >
-          {schoolCollaborators.map((collab) => (
-            <RevealItem key={collab.id}>
-              <div
-                className={cn(
-                  "group flex h-full flex-col justify-between rounded-2xl border border-[#E5DECf] bg-white p-5 transition-all duration-300 shadow-2xs hover:shadow-xl hover:-translate-y-1",
-                  collab.borderHover,
-                )}
+        <Reveal className="mx-auto mt-8 max-w-page sm:mt-10 lg:mt-12" y={24}>
+          <CarouselContent className="-ms-4 sm:-ms-5 lg:-ms-6">
+            {displayCollabs.map((collab) => (
+              <CarouselItem
+                className="basis-[72vw] ps-4 sm:basis-[240px] sm:ps-5 md:basis-[255px] lg:basis-[265px] lg:ps-6 xl:basis-[275px]"
+                key={collab.itemKey}
               >
-                <div className="flex flex-col flex-1">
-                  {/* Partner Logo - Clean Transparent Stage */}
-                  <div className="relative flex h-24 w-full items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105">
-                    <Image
-                      alt={`${collab.name} logo`}
-                      className="max-h-20 w-auto max-w-[190px] object-contain drop-shadow-2xs"
-                      height={80}
-                      loading="lazy"
-                      src={collab.logo}
-                      width={200}
-                    />
+                <div
+                  className={cn(
+                    "group flex h-full min-h-[370px] flex-col justify-between rounded-2xl border border-[#E5DECf] bg-white p-5 sm:p-5.5 transition-all duration-300 shadow-2xs hover:shadow-xl hover:-translate-y-1",
+                    collab.borderHover,
+                  )}
+                >
+                  <div className="flex flex-col flex-1">
+                    {/* Partner Logo */}
+                    <div className="relative flex h-20 w-full items-center justify-center p-2 transition-transform duration-300 group-hover:scale-105">
+                      <Image
+                        alt={`${collab.name} logo`}
+                        className="max-h-16 w-auto max-w-[180px] object-contain drop-shadow-2xs"
+                        height={64}
+                        loading="lazy"
+                        src={collab.logo}
+                        width={180}
+                      />
+                    </div>
+
+                    {/* Partner Tag & Name */}
+                    <div className="mt-3.5 flex flex-col flex-1">
+                      <span
+                        className={cn(
+                          "self-start inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border",
+                          collab.accent,
+                        )}
+                      >
+                        Partner
+                      </span>
+                      <H4
+                        as="h3"
+                        className="mt-2 font-display text-base sm:text-lg font-semibold text-ink"
+                      >
+                        {collab.name}
+                      </H4>
+                      <p className="mt-0.5 font-body text-[11px] font-semibold text-ink-muted uppercase tracking-wider line-clamp-1">
+                        {collab.tagline}
+                      </p>
+                      <P className="mt-2.5 text-xs sm:text-sm leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto] line-clamp-3">
+                        {collab.shortDescription}
+                      </P>
+                    </div>
                   </div>
 
-                  {/* Partner Tag & Name */}
-                  <div className="mt-3 flex flex-col flex-1">
-                    <span
-                      className={cn(
-                        "self-start inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border",
-                        collab.accent,
-                      )}
+                  {/* Read More Trigger Button */}
+                  <div className="mt-4 pt-3 border-t border-[#F0EBE0]">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCollab(collab)}
+                      className="group/btn inline-flex items-center gap-1.5 text-xs font-semibold text-[#BD1B21] transition-colors hover:text-[#93151A] cursor-pointer"
                     >
-                      Partner
-                    </span>
-                    <H4
-                      as="h3"
-                      className="mt-2.5 font-display text-base sm:text-lg font-semibold text-ink line-clamp-1"
-                    >
-                      {collab.name}
-                    </H4>
-                    <p className="mt-0.5 font-body text-[11px] font-semibold text-ink-muted uppercase tracking-wider line-clamp-1">
-                      {collab.tagline}
-                    </p>
-                    <P className="mt-2.5 text-xs sm:text-sm leading-relaxed text-ink-muted line-clamp-2">
-                      {collab.shortDescription}
-                    </P>
+                      <span>Read more</span>
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform duration-200 group-hover/btn:translate-x-0.5"
+                      >
+                        &rarr;
+                      </span>
+                    </button>
                   </div>
                 </div>
-
-                {/* Read More Trigger Button */}
-                <div className="mt-4 pt-3 border-t border-[#F0EBE0]">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCollab(collab)}
-                    className="group/btn inline-flex items-center gap-1.5 text-xs font-semibold text-[#BD1B21] transition-colors hover:text-[#93151A] cursor-pointer"
-                  >
-                    <span>Read more</span>
-                    <span
-                      aria-hidden="true"
-                      className="transition-transform duration-200 group-hover/btn:translate-x-0.5"
-                    >
-                      &rarr;
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </RevealItem>
-          ))}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
         </Reveal>
-      </div>
+      </Carousel>
 
       {/* Full Collaborator Details Modal */}
       <Dialog

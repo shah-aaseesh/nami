@@ -184,8 +184,8 @@ export function SchoolAdmission({
     >
       <div className="mx-auto max-w-page">
         <SectionHeader
-          eyebrow={copy.heading}
-          title={copy.eyebrow ?? "Admissions"}
+          eyebrow={copy.heading || undefined}
+          title={copy.eyebrow ?? "Admission Process"}
           description={copy.standfirst}
         />
 

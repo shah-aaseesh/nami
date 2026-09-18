@@ -108,36 +108,30 @@ function InstitutionCard({
 
 function VocationalCard({
   approval,
-  image,
 }: {
   readonly approval: VocationalApproval;
-  readonly image: ContentImage | null;
 }) {
   return (
     <li
       className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-primary-900/15 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
       data-reveal-item=""
     >
-      {image === null ? null : (
-        <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
-          <Image
-            alt={image.alt}
-            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-            height={image.height}
-            sizes={MEDIA_SIZES}
-            src={image.src}
-            width={image.width}
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/15" />
+      <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-50 flex items-center justify-center p-3 sm:p-4 border-b border-neutral-100 transition-colors group-hover:bg-neutral-100/60">
+        <Image
+          alt="CTEVT — Council for Technical Education and Vocational Training"
+          className="h-28 sm:h-36 max-h-[82%] w-auto max-w-[85%] object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+          height={144}
+          src="/logo/ctevt-logo-removebg-preview.png"
+          width={180}
+        />
 
-          <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/75 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
-              <span className="size-1.5 rounded-full bg-primary-400" />
-              <span>{`Approved ${approval.approvedYear}`}</span>
-            </span>
-          </div>
-        </figure>
-      )}
+        <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/75 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
+            <span className="size-1.5 rounded-full bg-primary-400" />
+            <span>{`Approved ${approval.approvedYear}`}</span>
+          </span>
+        </div>
+      </figure>
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <H5
@@ -188,8 +182,6 @@ export async function AcademicLevels() {
   ]);
 
   const section = copy.sections.levels;
-  const bachelorsImage =
-    levels.find((level) => level.slug === slug("bachelors"))?.image ?? null;
 
   return (
     <section className="field-brand gutter-x section-y" id="institutions">
@@ -221,7 +213,7 @@ export async function AcademicLevels() {
                   level={level}
                 />
               ))}
-              <VocationalCard approval={vocational} image={bachelorsImage} />
+              <VocationalCard approval={vocational} />
             </ul>
           </Reveal>
         )}

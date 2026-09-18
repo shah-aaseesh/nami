@@ -62,6 +62,6 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
     note: null,
-    logo: "/universities/hertfordshire.png",
+    logo: "/logo/uni of hertforshire.png",
   },
 ];

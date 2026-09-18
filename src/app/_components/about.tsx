@@ -30,22 +30,24 @@ export async function About({
           </div>
         </Reveal>
 
-        {/* 2-Column Content Grid: Left Title+Video & Right Narrative+Button */}
-        <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16 items-start">
-          {/* Left Column: Heading + Video directly below */}
-          <div className="lg:col-span-5 flex flex-col">
-            <Reveal>
-              <SplitText
-                as="h2"
-                className="font-display text-3xl sm:text-4xl text-ink font-normal"
-              >
-                {section.eyebrow ?? "About NAMI"}
-              </SplitText>
-            </Reveal>
+        {/* Section Heading */}
+        <div className="mt-3 sm:mt-4">
+          <Reveal>
+            <SplitText
+              as="h2"
+              className="font-display text-3xl sm:text-4xl text-accent font-normal"
+            >
+              {section.eyebrow ?? "About NAMI"}
+            </SplitText>
+          </Reveal>
+        </div>
 
-            {/* Video embedded right below NAMI since 2012 */}
-            <Reveal className="mt-6 sm:mt-8" y={16}>
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-border bg-neutral-950 shadow-md">
+        {/* 2-Column Content Grid: Left Video & Right Narrative+Button, equalized levels */}
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-12 items-stretch">
+          {/* Left Column: Video aligned and equal level with right column */}
+          <div className="lg:col-span-6 flex flex-col">
+            <Reveal className="h-full flex flex-col" y={16}>
+              <div className="relative aspect-video lg:aspect-auto flex-1 min-h-[280px] sm:min-h-[320px] w-full overflow-hidden rounded-2xl border border-border bg-neutral-950 shadow-md">
                 <iframe
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -58,12 +60,12 @@ export async function About({
             </Reveal>
           </div>
 
-          {/* Right Column: Paragraphs starting at exact same top baseline */}
-          <div className="lg:col-span-7 flex flex-col">
+          {/* Right Column: Paragraphs & Button matching video height level */}
+          <div className="lg:col-span-6 flex flex-col justify-between">
             <Reveal className="flex flex-col gap-4 sm:gap-5" stagger={0.08}>
               {paragraphs.map((paragraph) => (
                 <RevealItem key={paragraph}>
-                  <P className="text-base sm:text-lg leading-relaxed text-ink/90 font-normal">
+                  <P className="text-base sm:text-lg leading-relaxed text-ink/90 font-normal text-justify [text-align-last:left] [hyphens:auto]">
                     {paragraph}
                   </P>
                 </RevealItem>

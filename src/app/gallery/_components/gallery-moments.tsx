@@ -6,12 +6,10 @@ import { createPortal } from "react-dom";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { Icon } from "@/components/ui/icon";
 import {
-  CalendarIcon,
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   CloseIcon,
-  MortarboardIcon,
   PlayIcon,
   QuoteIcon,
 } from "@/lib/icons";
@@ -24,6 +22,29 @@ export type GalleryInstitution =
   | "a-levels"
   | "bachelors";
 
+export type SubcategoryIconType =
+  | "grid"
+  | "tech"
+  | "sports"
+  | "math"
+  | "arts"
+  | "culture"
+  | "trips"
+  | "science"
+  | "social"
+  | "events"
+  | "business"
+  | "convocation"
+  | "music";
+
+export type SubcategoryItem = {
+  readonly id: string;
+  readonly label: string;
+  readonly shortLabel: string;
+  readonly iconType: SubcategoryIconType;
+  readonly thumbnail?: string;
+};
+
 export type GalleryCategory =
   | "all"
   | "academics"
@@ -35,15 +56,62 @@ export type GalleryCategory =
 export type InstitutionTab = {
   readonly id: GalleryInstitution;
   readonly label: string;
+  readonly badgeLabel: string;
 };
 
 export const INSTITUTION_TABS: readonly InstitutionTab[] = [
-  { id: "all", label: "All Institutions" },
-  { id: "primary", label: "Primary" },
-  { id: "higher-secondary", label: "Higher Secondary (+2)" },
-  { id: "a-levels", label: "A-Levels" },
-  { id: "bachelors", label: "Bachelors / Masters" },
+  { id: "all", label: "All Institutions", badgeLabel: "All" },
+  { id: "primary", label: "Primary (Grades I–VII)", badgeLabel: "Primary" },
+  { id: "higher-secondary", label: "+2 Higher Secondary", badgeLabel: "+2" },
+  { id: "a-levels", label: "A-Levels", badgeLabel: "A-Levels" },
+  { id: "bachelors", label: "Bachelors & Masters", badgeLabel: "Degree" },
 ];
+
+export const INSTITUTION_SUBCATEGORIES: Record<GalleryInstitution, readonly SubcategoryItem[]> = {
+  all: [
+    { id: "all", label: "All Moments", shortLabel: "All Highlights", iconType: "grid", thumbnail: "/nami/gallery-hero.jpg" },
+    { id: "academics", label: "Academics & Labs", shortLabel: "Academics", iconType: "math", thumbnail: "/gallery/Bachelors/Academic/ai.jpeg" },
+    { id: "clubs", label: "Clubs & Activities", shortLabel: "Clubs", iconType: "social", thumbnail: "/gallery/A-levels/Events/farewell.jpeg" },
+    { id: "events", label: "Events & Festivals", shortLabel: "Events", iconType: "events", thumbnail: "/gallery/Higher Secondary/Events/HOLI.jpeg" },
+    { id: "sports", label: "Sports & Athletics", shortLabel: "Sports", iconType: "sports", thumbnail: "/gallery/A-levels/Sports/xyz.jpeg" },
+    { id: "achievements", label: "Convocations & Wins", shortLabel: "Honors", iconType: "convocation", thumbnail: "/gallery/Bachelors/Events/graduation.jpeg" },
+  ],
+  primary: [
+    { id: "all", label: "All Primary Activities", shortLabel: "All Primary", iconType: "grid", thumbnail: "/nami/level-school.jpg" },
+    { id: "tech-3di", label: "3Di School New Zealand", shortLabel: "3Di School", iconType: "tech", thumbnail: "/collaborators/3di.png" },
+    { id: "sports-playnepal", label: "Play Nepal Sports", shortLabel: "Play Nepal", iconType: "sports", thumbnail: "/collaborators/play-nepal.png" },
+    { id: "academics-math", label: "UnMath Programme", shortLabel: "UnMath", iconType: "math", thumbnail: "/collaborators/unmath.png" },
+    { id: "mero-coding", label: "Mero Coding Hub", shortLabel: "Mero Coding", iconType: "tech", thumbnail: "/collaborators/mero-coding.png" },
+    { id: "samatva-wellness", label: "Samatva Wellness & Vaav", shortLabel: "Samatva", iconType: "culture", thumbnail: "/collaborators/samatva-wellness.png" },
+    { id: "others", label: "Other School Activities", shortLabel: "Others", iconType: "arts", thumbnail: "/gallery/Primary School/School Life/CLAYMATION.jpg" },
+  ],
+  "higher-secondary": [
+    { id: "all", label: "All (+2) Activities", shortLabel: "All (+2)", iconType: "grid", thumbnail: "/nami/level-plus-two.jpg" },
+    { id: "sports-club", label: "Sports Club", shortLabel: "Sports Club", iconType: "sports", thumbnail: "/gallery/Higher Secondary/Sports/Basketball Tournament—2082.jpeg" },
+    { id: "science-tech", label: "Science & Tech Club", shortLabel: "Science & Tech", iconType: "science", thumbnail: "/gallery/Higher Secondary/Academic/KIST FAIR- 2081.jpeg" },
+    { id: "social-service", label: "Social Service Club", shortLabel: "Social Service", iconType: "social", thumbnail: "/gallery/Higher Secondary/Events/Social Service Club.jpeg" },
+    { id: "event-management", label: "Event Management Club", shortLabel: "Events Club", iconType: "events", thumbnail: "/gallery/Higher Secondary/Events/HOLI.jpeg" },
+    { id: "art-literature", label: "Art & Literature Club", shortLabel: "Art & Lit", iconType: "arts", thumbnail: "/gallery/Higher Secondary/Events/intra-school art competition .jpeg" },
+    { id: "academic-tours", label: "Academics & Tours", shortLabel: "Study Tours", iconType: "math", thumbnail: "/gallery/Higher Secondary/School Life/Educational Tour.jpeg" },
+  ],
+  "a-levels": [
+    { id: "all", label: "All A-Levels Activities", shortLabel: "All A-Levels", iconType: "grid", thumbnail: "/nami/level-a-level.jpg" },
+    { id: "sports", label: "Sports Club", shortLabel: "Sports Club", iconType: "sports", thumbnail: "/gallery/A-levels/Sports/karate.jpeg" },
+    { id: "social-services", label: "Social Services Club", shortLabel: "Social Services", iconType: "social", thumbnail: "/nami/hero-mustang.jpg" },
+    { id: "arts-crafts", label: "Arts & Crafts Club", shortLabel: "Arts & Crafts", iconType: "arts", thumbnail: "/gallery/A-levels/Events/xyz.jpeg" },
+    { id: "academics", label: "Cambridge Academics", shortLabel: "Academics", iconType: "math", thumbnail: "/gallery/A-levels/Academic/xyz1.jpeg" },
+    { id: "student-life", label: "Student Life & Fests", shortLabel: "Student Life", iconType: "events", thumbnail: "/gallery/A-levels/Events/farewell.jpeg" },
+  ],
+  bachelors: [
+    { id: "all", label: "All Degree Activities", shortLabel: "All Degree", iconType: "grid", thumbnail: "/nami/level-bachelor-master.jpg" },
+    { id: "websurfer", label: "WebSurfer Nepal", shortLabel: "WebSurfer", iconType: "tech", thumbnail: "/partners/mou/websurfer.png" },
+    { id: "startup-discovery", label: "Startup Discovery Asia", shortLabel: "Startup Asia", iconType: "business", thumbnail: "/partners/mou/startup-discovery-asia.svg" },
+    { id: "machan", label: "Machan Wildlife Resort", shortLabel: "Machan Resort", iconType: "science", thumbnail: "/partners/mou/machan.png" },
+    { id: "suraj-interior", label: "Suraj Interior & Design", shortLabel: "Suraj Interior", iconType: "arts", thumbnail: "/partners/mou/suraj-interior.svg" },
+    { id: "cross-web", label: "Cross Web IT Solutions", shortLabel: "Cross Web", iconType: "tech", thumbnail: "/partners/mou/cross-web.svg" },
+    { id: "others", label: "Other Degree Activities", shortLabel: "Others", iconType: "convocation", thumbnail: "/gallery/Bachelors/Events/graduation.jpeg" },
+  ],
+};
 
 export type CategoryFilterTab = {
   readonly id: GalleryCategory;
@@ -66,6 +134,7 @@ export type GalleryMoment = {
   readonly category: GalleryCategory;
   readonly institution: GalleryInstitution;
   readonly institutionLabel: string;
+  readonly subcategory?: string;
   readonly type: "image" | "quote" | "video";
   readonly src?: string;
   readonly alt?: string;
@@ -80,10 +149,11 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
   // --- ROW 1 ---
   {
     id: "moment-1",
-    title: "University AI & Machine Learning Workshop",
+    title: "WebSurfer Industry AI & Computing Lab",
     category: "academics",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "websurfer",
     type: "image",
     src: "/gallery/Bachelors/Academic/ai.jpeg",
     alt: "University students in interactive AI workshop and computing lab",
@@ -94,19 +164,21 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "campus-life",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "student-life",
     type: "image",
     src: "/gallery/A-levels/Events/xyz1.jpeg",
     alt: "A-Levels students on campus during annual events",
   },
   {
     id: "moment-3",
-    title: "Higher Secondary Investiture & Leadership Address",
-    category: "achievements",
+    title: "Higher Secondary Holi Fest & Campus Celebrations",
+    category: "events",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary (+2)",
+    subcategory: "event-management",
     type: "image",
-    src: "/gallery/Higher Secondary/Events/investiture ceremony.jpeg",
-    alt: "Student leaders receiving badges during investiture ceremony",
+    src: "/gallery/Higher Secondary/Events/HOLI.jpeg",
+    alt: "+2 cohort celebrating Spring Holi with vibrant organic colors on campus",
   },
 
   // --- ROW 2 ---
@@ -116,6 +188,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "academics",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "tech-3di",
     type: "image",
     src: "/nami/level-school.jpg",
     alt: "Primary school faculty teaching in interactive modern classroom",
@@ -126,16 +199,18 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "sports",
     type: "image",
     src: "/gallery/A-levels/Sports/xyz.jpeg",
     alt: "A-Levels students playing basketball in sports fixture",
   },
   {
     id: "moment-6",
-    title: "BSc Computer Science & Data Innovation Lab",
+    title: "Cross Web Data Innovation & Computing Laboratory",
     category: "academics",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "cross-web",
     type: "image",
     src: "/gallery/Bachelors/Academic/ai1.jpeg",
     alt: "Students coding and working in university computing laboratory",
@@ -148,6 +223,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "events",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "arts-crafts",
     type: "image",
     src: "/gallery/A-levels/Events/xyz.jpeg",
     alt: "Students performing cultural and musical items on stage",
@@ -170,6 +246,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "campus-life",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "others",
     type: "image",
     src: "/nami/event-plantation-2022.jpg",
     alt: "Students walking through university campus garden with books",
@@ -182,6 +259,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "achievements",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Bachelors/Events/graduation.jpeg",
     alt: "Graduating class in formal convocation caps and gowns",
@@ -192,6 +270,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "events",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "others",
     type: "video",
     src: "/nami/event-elite-2023.jpg",
     videoUrl: "/nami-video.mp4",
@@ -203,6 +282,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "events",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "student-life",
     type: "image",
     src: "/gallery/A-levels/Events/farewell.jpeg",
     alt: "A-Levels farewell celebration and gathering",
@@ -213,63 +293,80 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
   // ==========================================
   {
     id: "bachelors-academic-ai3",
-    title: "Advanced Technology & Data Science Seminar",
+    title: "WebSurfer Telecom & High-Performance Computing Seminar",
     category: "academics",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "websurfer",
     type: "image",
     src: "/gallery/Bachelors/Academic/ai3.jpeg",
     alt: "Students attending advanced machine learning and computing lecture",
   },
   {
     id: "bachelors-academic-internship",
-    title: "Industry Internship & Corporate Placement Induction",
+    title: "Startup Discovery Asia Corporate Internship Induction",
     category: "academics",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "startup-discovery",
     type: "image",
     src: "/gallery/Bachelors/Academic/internship.jpeg",
     alt: "Bachelors students during corporate internship onboarding",
   },
   {
     id: "bachelors-event-climate-ai",
-    title: "Climate AI & Sustainable Innovation Symposium",
+    title: "Machan Eco-Tourism & Climate AI Symposium",
     category: "events",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "machan",
     type: "image",
     src: "/gallery/Bachelors/Events/ClimateAI.jpeg",
     alt: "University symposium focusing on climate change and artificial intelligence",
   },
   {
     id: "bachelors-event-climate-ai-panel",
-    title: "Interactive Climate Innovation Panel Discussion",
+    title: "Machan Wildlife Resort Sustainability Panel",
     category: "events",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "machan",
     type: "image",
     src: "/gallery/Bachelors/Events/ClimateAI1.jpeg",
     alt: "Panel session with experts and students discussing climate solutions",
   },
   {
     id: "bachelors-event-pitchday",
-    title: "Startup Pitch Day & Venture Innovation Showcase",
+    title: "Startup Discovery Asia Venture Pitch Day",
     category: "achievements",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "startup-discovery",
     type: "image",
     src: "/gallery/Bachelors/Events/pitchday.jpeg",
     alt: "Undergraduate student entrepreneurs pitching business ideas",
   },
   {
     id: "bachelors-event-pitchday-presentation",
-    title: "Student Entrepreneurship & Project Presentation",
+    title: "Cross Web Office Automation & Software Showcase",
     category: "events",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "cross-web",
     type: "image",
     src: "/gallery/Bachelors/Events/pitchday1.jpeg",
     alt: "Students presenting technical project before panel of judges",
+  },
+  {
+    id: "bachelors-event-suraj-interior",
+    title: "Suraj Interior Architecture & Space Design Study",
+    category: "academics",
+    institution: "bachelors",
+    institutionLabel: "Bachelors / Masters",
+    subcategory: "suraj-interior",
+    type: "image",
+    src: "/gallery/Bachelors/College Life/tour.jpeg",
+    alt: "University design and engineering students during spatial architecture study",
   },
   {
     id: "bachelors-event-graduation-gala",
@@ -277,6 +374,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "achievements",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Bachelors/Events/graduation1.jpeg",
     alt: "Graduates celebrating convocation milestone",
@@ -287,6 +385,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Bachelors/Sports/esport.jpeg",
     alt: "Bachelors students competing in university esports tournament",
@@ -297,6 +396,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Bachelors/Sports/esport1.jpeg",
     alt: "Finals stage match of inter-college gaming cup",
@@ -307,6 +407,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "campus-life",
     institution: "bachelors",
     institutionLabel: "Bachelors / Masters",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Bachelors/College Life/tour.jpeg",
     alt: "Bachelors students group photograph during national field excursion",
@@ -321,6 +422,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "academics",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "academics",
     type: "image",
     src: "/gallery/A-levels/Academic/xyz.jpeg",
     alt: "A-Levels students engaged in academic seminar",
@@ -331,6 +433,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "academics",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "academics",
     type: "image",
     src: "/gallery/A-levels/Academic/xyz1.jpeg",
     alt: "A-Levels science practicals and laboratory session",
@@ -341,6 +444,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "academics",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "academics",
     type: "image",
     src: "/gallery/A-levels/Academic/xyz2.jpeg",
     alt: "Interactive study and group discussions",
@@ -351,6 +455,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "sports",
     type: "image",
     src: "/gallery/A-levels/Sports/karate.jpeg",
     alt: "Students demonstrating martial arts in the dojo",
@@ -361,6 +466,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "sports",
     type: "image",
     src: "/gallery/A-levels/Sports/xyz1.jpeg",
     alt: "Track and field sports meet in progress",
@@ -371,6 +477,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "sports",
     type: "image",
     src: "/gallery/A-levels/Sports/xyz2.jpeg",
     alt: "Futsal match action on campus turf",
@@ -381,6 +488,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "sports",
     type: "image",
     src: "/gallery/A-levels/Sports/xyz3.jpeg",
     alt: "Indoor sports and recreational games",
@@ -391,6 +499,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "achievements",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "sports",
     type: "image",
     src: "/gallery/A-levels/Sports/xyz4.jpeg",
     alt: "Students receiving awards and medals",
@@ -401,102 +510,178 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "events",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "student-life",
     type: "image",
     src: "/gallery/A-levels/Events/farewell1.jpeg",
-    alt: "A-Levels graduating batch group celebration",
+    alt: "Students celebrating with teachers and classmates",
   },
   {
-    id: "a-level-leadership",
-    title: "A-Levels Student Leadership & Event Coordination",
-    category: "achievements",
+    id: "a-level-events-freshers",
+    title: "A-Levels Orientation & Welcome Reception",
+    category: "events",
     institution: "a-levels",
     institutionLabel: "A-Levels",
+    subcategory: "student-life",
     type: "image",
     src: "/gallery/A-levels/Events/xyz2.jpeg",
-    alt: "Student leaders organizing and conducting event",
+    alt: "New batch welcome ceremonies and campus orientation",
+  },
+  {
+    id: "a-level-social-services-camp",
+    title: "Mustang Academic & Community Service Trip",
+    category: "events",
+    institution: "a-levels",
+    institutionLabel: "A-Levels",
+    subcategory: "social-services",
+    type: "image",
+    src: "/nami/hero-mustang.jpg",
+    alt: "A-Levels students on community and ecological trip in Mustang",
   },
 
   // ==========================================
   // --- HIGHER SECONDARY (+2) GALLERY MOMENTS ---
   // ==========================================
   {
-    id: "moment-hs-academic-hm",
-    title: "Hotel Management Culinary Practicals & Hands-on Training",
+    id: "moment-higher-sec-hotel-management",
+    title: "Hotel Management Culinary & Table Service Practicals",
     category: "academics",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary (+2)",
+    subcategory: "academic-tours",
     type: "image",
     src: "/gallery/Higher Secondary/Academic/HotelManagementHandsOnlearning.jpeg",
-    alt: "Hotel Management students in culinary lab training",
+    alt: "+2 Hotel Management students demonstrating culinary and guest service skills",
   },
   {
-    id: "moment-hs-academic-kist",
-    title: "KIST Science & Innovation Exhibition Fair",
-    category: "achievements",
+    id: "moment-higher-sec-hotel-management-2",
+    title: "Hospitality Industry Simulation Laboratory",
+    category: "academics",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary (+2)",
+    subcategory: "academic-tours",
     type: "image",
-    src: "/gallery/Higher Secondary/Academic/KIST FAIR- 2081.jpeg",
-    alt: "Students showcasing science and technology project at fair",
+    src: "/gallery/Higher Secondary/Academic/HotelManagementHandsOnlearning1.jpeg",
+    alt: "Hospitality students preparing dining presentation",
   },
   {
-    id: "moment-hs-events-holi",
-    title: "Holi Cultural Festival & Campus Color Celebration",
+    id: "moment-higher-sec-kist-fair",
+    title: "KIST Science & Technology Innovation Fair 2081",
+    category: "academics",
+    institution: "higher-secondary",
+    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "science-tech",
+    type: "image",
+    src: "/gallery/Higher Secondary/Academic/KIST FAIR- 2081.jpeg",
+    alt: "+2 Science students showcasing science and engineering models at KIST Fair",
+  },
+  {
+    id: "moment-higher-sec-kist-fair-2",
+    title: "Robotics & Hardware Prototype Demonstration",
+    category: "academics",
+    institution: "higher-secondary",
+    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "science-tech",
+    type: "image",
+    src: "/gallery/Higher Secondary/Academic/KIST FAIR1- 2081.jpeg",
+    alt: "Students presenting engineering projects to visitors",
+  },
+  {
+    id: "moment-higher-sec-event-plastic",
+    title: "Zero Plastic 2040 Campus Sustainability Pledge",
     category: "events",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary (+2)",
-    type: "image",
-    src: "/gallery/Higher Secondary/Events/HOLI.jpeg",
-    alt: "+2 students celebrating Holi colors festival on campus",
-  },
-  {
-    id: "moment-hs-events-plastic",
-    title: "Zero Plastic 2040 Environmental Sustainability Campaign",
-    category: "campus-life",
-    institution: "higher-secondary",
-    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "event-management",
     type: "image",
     src: "/gallery/Higher Secondary/Events/Zero Plastic 2040.jpg",
-    alt: "Students holding banner for zero plastic campaign",
+    alt: "+2 students and teachers taking the Zero Plastic 2040 pledge on campus",
   },
   {
-    id: "moment-hs-sports-basketball",
-    title: "Annual Inter-College Basketball Championship",
+    id: "moment-higher-sec-art-competition",
+    title: "Intra-School Visual Arts & Creative Painting Contest",
+    category: "events",
+    institution: "higher-secondary",
+    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "art-literature",
+    type: "image",
+    src: "/gallery/Higher Secondary/Events/intra-school art competition .jpeg",
+    alt: "+2 students creating paintings and sketches during art competition",
+  },
+  {
+    id: "moment-higher-sec-art-competition-2",
+    title: "Fine Arts Exhibition & Gallery Presentation",
+    category: "events",
+    institution: "higher-secondary",
+    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "art-literature",
+    type: "image",
+    src: "/gallery/Higher Secondary/Events/intra-school art competition 1.jpeg",
+    alt: "Creative art showcase displayed along the campus corridor",
+  },
+  {
+    id: "moment-higher-sec-social-service",
+    title: "Youth Social Service Club Community Drive",
+    category: "events",
+    institution: "higher-secondary",
+    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "social-service",
+    type: "image",
+    src: "/gallery/Higher Secondary/Events/Social Service Club.jpeg",
+    alt: "+2 Social Service Club students leading community awareness drive",
+  },
+  {
+    id: "moment-higher-sec-social-service-2",
+    title: "Campus Blood Donation & Health Campaign",
+    category: "events",
+    institution: "higher-secondary",
+    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "social-service",
+    type: "image",
+    src: "/gallery/Higher Secondary/Events/Social Service Club1.jpeg",
+    alt: "Students organizing health camp and blood donation registration",
+  },
+  {
+    id: "moment-higher-sec-sports-1",
+    title: "Basketball Tournament 2082 Championship Victory",
     category: "sports",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary (+2)",
+    subcategory: "sports-club",
     type: "image",
     src: "/gallery/Higher Secondary/Sports/Basketball Tournament—2082.jpeg",
-    alt: "+2 basketball team competing on home court",
+    alt: "Higher Secondary basketball team lifting championship trophy",
   },
   {
-    id: "moment-hs-sports-taekwondo",
-    title: "Japan Open International Taekwondo Championship",
-    category: "achievements",
-    institution: "higher-secondary",
-    institutionLabel: "Higher Secondary (+2)",
-    type: "image",
-    src: "/gallery/Higher Secondary/Sports/Japan Open International Taekwondo Championship.jpeg",
-    alt: "NAMI martial artists competing in international championship",
-  },
-  {
-    id: "moment-hs-sports-futsal",
-    title: "Higher Secondary Futsal Tournament Cup",
+    id: "moment-higher-sec-sports-2",
+    title: "Inter-College Basketball Championship Match",
     category: "sports",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary (+2)",
+    subcategory: "sports-club",
     type: "image",
-    src: "/gallery/Higher Secondary/Sports/futsal.jpeg",
-    alt: "+2 futsal tournament team action",
+    src: "/gallery/Higher Secondary/Sports/Basketball Tournament—20821.jpeg",
+    alt: "+2 basketball match in progress with roaring crowds",
   },
   {
-    id: "moment-hs-life-tour",
-    title: "Higher Secondary Annual Educational Tour",
+    id: "moment-higher-sec-futsal",
+    title: "Annual +2 Futsal Championship League",
+    category: "sports",
+    institution: "higher-secondary",
+    institutionLabel: "Higher Secondary (+2)",
+    subcategory: "sports-club",
+    type: "image",
+    src: "/gallery/Higher Secondary/Sports/futsal.jpeg",
+    alt: "Action photograph from the +2 futsal tournament finals",
+  },
+  {
+    id: "moment-higher-sec-tour",
+    title: "Higher Secondary Educational & Cultural Excursion",
     category: "campus-life",
     institution: "higher-secondary",
     institutionLabel: "Higher Secondary (+2)",
+    subcategory: "academic-tours",
     type: "image",
-    src: "/gallery/Higher Secondary/School Life/tour.jpeg",
+    src: "/gallery/Higher Secondary/School Life/Educational Tour.jpeg",
     alt: "Group photograph of students during educational tour",
   },
 
@@ -509,6 +694,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "academics",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "academics-math",
     type: "image",
     src: "/gallery/Primary School/Academic/Math Olympiad 2026.jpg",
     alt: "Primary pupils celebrating Math Olympiad achievements",
@@ -519,6 +705,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "academics",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Primary School/Academic/Basantapur Square academicvisit.jpg",
     alt: "Primary school students visiting Basantapur Durbar Square",
@@ -529,6 +716,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "academics",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "academics-math",
     type: "image",
     src: "/gallery/Primary School/Academic/Human Number Line Activity.jpg",
     alt: "Pupils learning mathematics on the courtyard number line",
@@ -539,6 +727,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "events",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Primary School/Cultural/World Day for Cultural Diversity 2026.jpg",
     alt: "Primary school cultural diversity day performances and traditional attire",
@@ -549,6 +738,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "events",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Primary School/Events/Literacy week.jpg",
     alt: "Students engaging in library storytelling and reading activities",
@@ -559,6 +749,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "campus-life",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Primary School/School Life/CLAYMATION.jpg",
     alt: "Primary pupils crafting stop-motion clay characters",
@@ -569,6 +760,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "campus-life",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "others",
     type: "image",
     src: "/gallery/Primary School/School Life/field trip to the National Museum of Nepal.jpg",
     alt: "Primary children discovering historic artifacts at the national museum",
@@ -579,6 +771,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "sports-playnepal",
     type: "image",
     src: "/gallery/Primary School/Sports/Play Nepal IOCC 2026 Obstacle Challenge.jpg",
     alt: "Primary pupils navigating athletic obstacle course challenges",
@@ -589,45 +782,180 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     category: "sports",
     institution: "primary",
     institutionLabel: "Primary",
+    subcategory: "sports-playnepal",
     type: "image",
     src: "/gallery/Primary School/Sports/25th Anniversary of IOFTC & 15th International Open Friendship Taekwondo Championship 2025.jpeg",
     alt: "Primary martial arts pupils with championship medals and certificates",
   },
+  {
+    id: "moment-primary-10",
+    title: "3Di School Innovation & Science Exploration",
+    category: "academics",
+    institution: "primary",
+    institutionLabel: "Primary",
+    subcategory: "tech-3di",
+    type: "image",
+    src: "/gallery/Primary School/Academic/identifying living and non-living things.jpg",
+    alt: "Primary students working with 3Di science models and specimens",
+  },
+  {
+    id: "moment-primary-11",
+    title: "Zero Waste & Ecological Stewardship Workshop",
+    category: "campus-life",
+    institution: "primary",
+    institutionLabel: "Primary",
+    subcategory: "tech-3di",
+    type: "image",
+    src: "/gallery/Primary School/School Life/Zero Waste Workshop.jpg",
+    alt: "Primary pupils learning zero-waste recycling and sustainability practices",
+  },
+  {
+    id: "moment-primary-12",
+    title: "Mero Coding Robotics & Project Model Making",
+    category: "academics",
+    institution: "primary",
+    institutionLabel: "Primary",
+    subcategory: "mero-coding",
+    type: "image",
+    src: "/gallery/Primary School/School Life/project model-making.jpg",
+    alt: "Primary pupils building project models and exploring coding logic",
+  },
+  {
+    id: "moment-primary-13",
+    title: "Mero Coding Digital Logic & Career Horizons",
+    category: "academics",
+    institution: "primary",
+    institutionLabel: "Primary",
+    subcategory: "mero-coding",
+    type: "image",
+    src: "/gallery/Primary School/Academic/career path.jpg",
+    alt: "Primary students attending computational thinking and tech workshop",
+  },
+  {
+    id: "moment-primary-14",
+    title: "Samatva Wellness Yoga & Mindfulness Practice",
+    category: "campus-life",
+    institution: "primary",
+    institutionLabel: "Primary",
+    subcategory: "samatva-wellness",
+    type: "image",
+    src: "/gallery/Primary School/School Life/yoga.jpg",
+    alt: "Primary children practicing mindful movement and yoga on campus",
+  },
+  {
+    id: "moment-primary-15",
+    title: "Samatva Oral Health & Hygiene Awareness Camp",
+    category: "campus-life",
+    institution: "primary",
+    institutionLabel: "Primary",
+    subcategory: "samatva-wellness",
+    type: "image",
+    src: "/gallery/Primary School/School Life/Oral Health Camp and Oral Hygiene Awareness Session.jpg",
+    alt: "Primary pupils in health and hygiene education workshop",
+  },
 ];
 
-function TabIcon({ iconType }: { readonly iconType: CategoryFilterTab["iconType"] }) {
+function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
   switch (iconType) {
     case "grid":
       return (
-        <svg className="size-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zm-9 9h7v7H4v-7zm9 0h7v7h-7v-7z" />
+        <svg className="size-6 sm:size-7 text-[#BD1B21]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <rect height="7" rx="1.5" width="7" x="3" y="3" />
+          <rect height="7" rx="1.5" width="7" x="14" y="3" />
+          <rect height="7" rx="1.5" width="7" x="14" y="14" />
+          <rect height="7" rx="1.5" width="7" x="3" y="14" />
         </svg>
       );
-    case "mortarboard":
-      return <Icon className="size-4 shrink-0" icon={MortarboardIcon} />;
-    case "users":
+    case "tech":
       return (
-        <svg className="size-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round" />
-          <circle cx="9" cy="7" r="4" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" strokeLinejoin="round" />
+        <svg className="size-6 sm:size-7 text-sky-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <rect height="14" rx="2" width="20" x="2" y="3" />
+          <line x1="8" x2="16" y1="21" y2="21" />
+          <line x1="12" x2="12" y1="17" y2="21" />
+          <path d="M7 8l3 3-3 3M13 14h4" />
         </svg>
       );
-    case "calendar":
-      return <Icon className="size-4 shrink-0" icon={CalendarIcon} />;
     case "sports":
       return (
-        <svg className="size-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg className="size-6 sm:size-7 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10" />
           <path d="M2.5 12h19M12 2.5a14 14 0 0 1 0 19M12 2.5a14 14 0 0 0 0 19" />
         </svg>
       );
-    case "trophy":
+    case "math":
       return (
-        <svg className="size-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2m12 6h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2M6 3h12v7a6 6 0 0 1-12 0V3z" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M9 21h6m-3-6v6" strokeLinecap="round" strokeLinejoin="round" />
+        <svg className="size-6 sm:size-7 text-amber-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+          <path d="M9 7h6M12 10v6M9 13h6" />
+        </svg>
+      );
+    case "arts":
+      return (
+        <svg className="size-6 sm:size-7 text-rose-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <circle cx="13.5" cy="6.5" fill="currentColor" r=".5" />
+          <circle cx="17.5" cy="10.5" fill="currentColor" r=".5" />
+          <circle cx="8.5" cy="7.5" fill="currentColor" r=".5" />
+          <circle cx="6.5" cy="12.5" fill="currentColor" r=".5" />
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+        </svg>
+      );
+    case "culture":
+      return (
+        <svg className="size-6 sm:size-7 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z" />
+        </svg>
+      );
+    case "trips":
+      return (
+        <svg className="size-6 sm:size-7 text-teal-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+        </svg>
+      );
+    case "science":
+      return (
+        <svg className="size-6 sm:size-7 text-cyan-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M10 2v7.31L4.62 18.27A2 2 0 0 0 6.34 21h11.32a2 2 0 0 0 1.72-2.73L14 9.31V2" />
+          <line x1="8.5" x2="15.5" y1="2" y2="2" />
+          <line x1="7" x2="17" y1="14" y2="14" />
+        </svg>
+      );
+    case "social":
+      return (
+        <svg className="size-6 sm:size-7 text-pink-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        </svg>
+      );
+    case "events":
+      return (
+        <svg className="size-6 sm:size-7 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <rect height="18" rx="2" ry="2" width="18" x="3" y="4" />
+          <line x1="16" x2="16" y1="2" y2="6" />
+          <line x1="8" x2="8" y1="2" y2="6" />
+          <line x1="3" x2="21" y1="10" y2="10" />
+        </svg>
+      );
+    case "business":
+      return (
+        <svg className="size-6 sm:size-7 text-blue-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <rect height="14" rx="2" ry="2" width="20" x="2" y="7" />
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>
+      );
+    case "convocation":
+      return (
+        <svg className="size-6 sm:size-7 text-yellow-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+          <path d="M6 12v5c3 3 9 3 12 0v-5" />
+        </svg>
+      );
+    case "music":
+      return (
+        <svg className="size-6 sm:size-7 text-violet-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M9 18V5l12-2v13" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="18" cy="16" r="3" />
         </svg>
       );
   }
@@ -639,7 +967,7 @@ const LOAD_MORE_STEP = 6;
 export function GalleryMoments() {
   const [mounted, setMounted] = useState(false);
   const [activeInstitution, setActiveInstitution] = useState<GalleryInstitution>("all");
-  const [activeCategory, setActiveCategory] = useState<GalleryCategory>("all");
+  const [activeSubcategory, setActiveSubcategory] = useState<string>("all");
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_MOMENTS_COUNT);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
@@ -648,10 +976,19 @@ export function GalleryMoments() {
     setMounted(true);
   }, []);
 
-  // Reset visible items count whenever filter changes
-  useEffect(() => {
+  // Reset visible items count & active subcategory when institution changes
+  const handleInstitutionChange = (inst: GalleryInstitution) => {
+    setActiveInstitution(inst);
+    setActiveSubcategory("all");
     setVisibleCount(INITIAL_MOMENTS_COUNT);
-  }, [activeInstitution, activeCategory]);
+  };
+
+  const handleSubcategoryChange = (subId: string) => {
+    setActiveSubcategory(subId);
+    setVisibleCount(INITIAL_MOMENTS_COUNT);
+  };
+
+  const currentSubcategories = INSTITUTION_SUBCATEGORIES[activeInstitution] ?? INSTITUTION_SUBCATEGORIES.all;
 
   const filteredMoments = GALLERY_MOMENTS.filter((item) => {
     // 1. Institution check
@@ -661,11 +998,43 @@ export function GalleryMoments() {
       }
     }
 
-    // 2. Category check
-    if (activeCategory !== "all") {
+    // 2. Subcategory / Club check
+    if (activeSubcategory !== "all") {
       if (item.type === "quote") return false;
-      if (item.category !== activeCategory) {
-        return false;
+      if (activeInstitution === "primary" && activeSubcategory === "others") {
+        const primaryCollaboratorIds = [
+          "tech-3di",
+          "sports-playnepal",
+          "academics-math",
+          "mero-coding",
+          "samatva-wellness",
+        ];
+        if (primaryCollaboratorIds.includes(item.subcategory ?? "")) {
+          return false;
+        }
+        return true;
+      }
+      if (activeInstitution === "bachelors" && activeSubcategory === "others") {
+        const bachelorsCollaboratorIds = [
+          "websurfer",
+          "startup-discovery",
+          "machan",
+          "suraj-interior",
+          "cross-web",
+        ];
+        if (bachelorsCollaboratorIds.includes(item.subcategory ?? "")) {
+          return false;
+        }
+        return true;
+      }
+      if (activeInstitution === "all") {
+        if (item.category !== activeSubcategory && item.subcategory !== activeSubcategory) {
+          return false;
+        }
+      } else {
+        if (item.subcategory !== activeSubcategory && item.category !== activeSubcategory) {
+          return false;
+        }
       }
     }
 
@@ -726,7 +1095,7 @@ export function GalleryMoments() {
   const currentImage = lightboxIndex !== null ? imageMoments[lightboxIndex] : null;
 
   return (
-    <section className="gutter-x pb-16 sm:pb-24 pt-12 sm:pt-16" id="our-gallery">
+    <section className="gutter-x section-y-masthead pb-16 sm:pb-24" id="our-gallery">
       <div className="mx-auto max-w-page">
         {/* 1. Section Heading */}
         <div className="text-center">
@@ -739,52 +1108,111 @@ export function GalleryMoments() {
           <div className="mx-auto mt-3 h-1 w-14 rounded-full bg-[#BD1B21]" />
         </div>
 
-        {/* 2. Filter Bar: Institutions + Themes */}
-        <div className="mt-8 sm:mt-10 space-y-3.5">
-          {/* 2a. Institution Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {INSTITUTION_TABS.map((inst) => {
-              const isActive = activeInstitution === inst.id;
-              return (
-                <button
-                  className={cn(
-                    "rounded-full px-4 py-2 font-body text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer",
-                    isActive
-                      ? "bg-[#BD1B21] text-white shadow-sm shadow-[#BD1B21]/30"
-                      : "bg-surface border border-border/80 text-ink-muted hover:border-[#BD1B21]/50 hover:text-ink hover:bg-surface-raised",
-                  )}
-                  key={inst.id}
-                  onClick={() => setActiveInstitution(inst.id)}
-                  type="button"
-                >
-                  {inst.label}
-                </button>
-              );
-            })}
+        {/* 2. Filter Navigation */}
+        <div className="mt-8 sm:mt-10 space-y-6">
+          {/* Institution Selector (Single Row Segmented Bar) */}
+          <div className="flex flex-col items-center">
+            <div className="inline-flex flex-wrap md:flex-nowrap items-center justify-center p-1.5 rounded-2xl md:rounded-full bg-surface-raised border border-border shadow-xs gap-1.5">
+              {INSTITUTION_TABS.map((inst) => {
+                const isActive = activeInstitution === inst.id;
+                return (
+                  <button
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-xl md:rounded-full px-3.5 sm:px-5 py-2 font-body text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap",
+                      isActive
+                        ? "bg-[#BD1B21] text-white shadow-md shadow-[#BD1B21]/30 scale-[1.02]"
+                        : "text-ink-muted hover:text-ink hover:bg-neutral-100/80",
+                    )}
+                    key={inst.id}
+                    onClick={() => handleInstitutionChange(inst.id)}
+                    type="button"
+                  >
+                    <span>{inst.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* 2b. Category / Theme Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-            {CATEGORY_TABS.map((tab) => {
-              const isActive = activeCategory === tab.id;
-              return (
-                <button
-                  className={cn(
-                    "group flex items-center gap-2 rounded-xl px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer",
-                    isActive
-                      ? "bg-[#1C1917] text-white shadow-sm"
-                      : "bg-surface border border-border/70 text-ink-muted hover:border-ink/40 hover:text-ink hover:bg-surface-raised",
-                  )}
-                  key={tab.id}
-                  onClick={() => setActiveCategory(tab.id)}
-                  type="button"
-                >
-                  <TabIcon iconType={tab.iconType} />
-                  <span>{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
+          {/* Instagram/Stories-Style Circular Highlights Rail (Shown only when a specific institution is selected) */}
+          {activeInstitution !== "all" && currentSubcategories.length > 0 && (
+            <div className="relative mx-auto w-full max-w-6xl py-1 animate-in fade-in duration-300">
+              {/* Horizontal Story Highlights Rail */}
+              <div className="flex items-start justify-start md:justify-center gap-4 sm:gap-6 md:gap-8 overflow-x-auto pt-5 pb-4 px-4 no-scrollbar scroll-smooth">
+                {currentSubcategories.map((sub) => {
+                  const isActive = activeSubcategory === sub.id;
+
+                  return (
+                    <button
+                      aria-pressed={isActive}
+                      className={cn(
+                        "group flex flex-col items-center justify-start shrink-0 cursor-pointer transition-all duration-300 focus:outline-hidden",
+                        "w-22 sm:w-26 md:w-30",
+                      )}
+                      key={sub.id}
+                      onClick={() => handleSubcategoryChange(sub.id)}
+                      type="button"
+                    >
+                      {/* Story Circle Avatar Disc */}
+                      <div
+                        className={cn(
+                          "relative my-1 flex size-20 sm:size-24 md:size-28 items-center justify-center rounded-full transition-all duration-300",
+                          isActive
+                            ? "p-[3.5px] bg-[#BD1B21] shadow-xl shadow-[#BD1B21]/30 scale-106 -translate-y-1"
+                            : "p-[3px] bg-neutral-200 hover:bg-[#BD1B21]/50 group-hover:scale-105 group-hover:shadow-md",
+                        )}
+                      >
+                        {/* Inner White Gap Ring */}
+                        <div className="relative size-full rounded-full bg-white p-[2.5px] overflow-hidden">
+                          {/* Photo Thumbnail or Collaborator Logo */}
+                          {sub.thumbnail ? (
+                            <div className="relative size-full rounded-full overflow-hidden bg-white flex items-center justify-center">
+                              <Image
+                                alt={sub.label}
+                                className={cn(
+                                  "size-full rounded-full transition-transform duration-500 group-hover:scale-110",
+                                  sub.thumbnail.includes("/collaborators/") ||
+                                    sub.thumbnail.includes("/partners/")
+                                    ? "object-contain p-1.5 sm:p-2 bg-white"
+                                    : "object-cover",
+                                )}
+                                fill
+                                loading="lazy"
+                                quality={95}
+                                sizes="(max-width: 640px) 96px, (max-width: 1024px) 120px, 140px"
+                                src={sub.thumbnail}
+                              />
+                            </div>
+                          ) : (
+                            <div className="flex size-full items-center justify-center rounded-full bg-neutral-50">
+                              <BubbleIcon iconType={sub.iconType} />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Text Label Below Circle */}
+                      <span
+                        className={cn(
+                          "mt-2.5 text-center font-body text-xs sm:text-sm transition-colors line-clamp-2 leading-tight max-w-[92px] sm:max-w-[115px]",
+                          isActive
+                            ? "text-[#BD1B21] font-bold drop-shadow-xs"
+                            : "text-ink-muted group-hover:text-ink font-semibold",
+                        )}
+                      >
+                        {sub.shortLabel}
+                      </span>
+
+                      {/* Active Indicator Dot */}
+                      {isActive && (
+                        <span className="mt-1 size-1.5 rounded-full bg-[#BD1B21] shadow-xs" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 3. Empty State if no moments match combined filters */}
@@ -794,13 +1222,13 @@ export function GalleryMoments() {
               No moments found
             </h3>
             <p className="mt-2 text-sm text-ink-muted">
-              Try selecting "All Institutions" or "All Moments" to explore the full gallery.
+              Try selecting "All" in the focus ribbon to explore all moments for this institution.
             </p>
             <button
               className="mt-5 rounded-full bg-[#BD1B21] px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-[#a0161b] transition-colors cursor-pointer"
               onClick={() => {
                 setActiveInstitution("all");
-                setActiveCategory("all");
+                setActiveSubcategory("all");
               }}
               type="button"
             >
@@ -812,7 +1240,7 @@ export function GalleryMoments() {
           <>
             <Reveal
               className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
-              key={`${activeInstitution}-${activeCategory}-${visibleCount}`}
+              key={`${activeInstitution}-${activeSubcategory}-${visibleCount}`}
               stagger={0.04}
               y={16}
             >
@@ -912,6 +1340,7 @@ export function GalleryMoments() {
                           className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                           fill
                           loading="lazy"
+                          quality={90}
                           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           src={item.src}
                         />

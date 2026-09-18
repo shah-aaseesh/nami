@@ -67,7 +67,7 @@ export function ALevelsClubsSection() {
                 />
               </CarouselControls>
             }
-            description="Student-led clubs fostering community engagement, competitive sports, environmental stewardship, and artistic creativity."
+            description="Student-led clubs fostering community engagement, competitive sports, and artistic creativity."
             eyebrow="Extracurricular & Co-Curricular"
             layout="action"
             title="ECA / CLUBS"
@@ -104,12 +104,6 @@ export function ALevelsClubsSection() {
                     {/* Card Content - Red bottom part */}
                     <div className="flex flex-1 flex-col justify-between bg-[#BD1B21] p-5 sm:p-6 text-white">
                       <div>
-                        <div className="mb-2">
-                          <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-semibold uppercase tracking-wider text-white border border-white/20 backdrop-blur-xs">
-                            {club.category}
-                          </span>
-                        </div>
-
                         <H3
                           as="h3"
                           className="font-display text-lg font-normal text-white transition-opacity group-hover:opacity-95 sm:text-xl"

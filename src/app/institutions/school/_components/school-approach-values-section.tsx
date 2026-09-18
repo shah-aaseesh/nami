@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
@@ -41,6 +40,10 @@ export const educationalApproach = [
     description:
       "We recognise that every student is different. We strive to create a caring environment where students with different interests, learning needs, backgrounds, and abilities feel valued and included.",
   },
+  {
+    title: "Intrinsic Motivation",
+    description: "Nurturing internal motivation for learning.",
+  },
 ] as const;
 
 export const schoolValues = [
@@ -54,7 +57,7 @@ export const schoolValues = [
     name: "Kindness",
     meaning:
       "We encourage students to treat others with care and consideration.",
-    color: "bg-[#284540]/10 text-[#284540] border-[#284540]/20",
+    color: "bg-[#E85296]/15 text-[#C2185B] border-[#E85296]/30",
   },
   {
     name: "Honesty",
@@ -106,42 +109,19 @@ export function SchoolApproachValuesSection({
         <div>
           <SectionHeader
             description="At NAMI International School, students are active participants in their learning. Teachers guide, support, and challenge students while creating opportunities to explore ideas, develop understanding, collaborate, and make meaningful connections."
-            eyebrow="Grades I – VII"
             layout="split"
-            title="Our Educational Approach"
+            title="Our Educational Approach to Learning"
           />
-
-          {/* Progressive Approach Infographic */}
-          <Reveal className="mt-8 sm:mt-10 max-w-4xl mx-auto" y={20}>
-            <div className="relative overflow-hidden rounded-2xl border border-[#D3E2DB] bg-white shadow-md">
-              <Image
-                alt="The Progressive Approach to Education - NAMI International School"
-                className="h-auto w-full object-contain"
-                height={1000}
-                loading="lazy"
-                sizes="(max-width: 896px) 100vw, 896px"
-                src="/ChatGPT Image Aug 25, 2026, 05_43_29 PM (1).png"
-                width={2000}
-              />
-            </div>
-          </Reveal>
 
           <Reveal
             className="mt-8 sm:mt-10 lg:mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             stagger={0.05}
           >
             {educationalApproach.map((item, idx) => {
-              const isRed = idx === 0 || idx === 3 || idx === 6;
+              const isRed = idx === 0 || idx === 2 || idx === 5 || idx === 7;
 
               return (
-                <RevealItem
-                  className={
-                    idx === educationalApproach.length - 1
-                      ? "sm:col-span-2 lg:col-span-3 xl:col-span-2"
-                      : ""
-                  }
-                  key={item.title}
-                >
+                <RevealItem key={item.title}>
                   <div
                     className={
                       isRed
@@ -173,8 +153,8 @@ export function SchoolApproachValuesSection({
                     <P
                       className={
                         isRed
-                          ? "mt-3 font-body text-xs sm:text-sm leading-relaxed text-white/90"
-                          : "mt-3 font-body text-xs sm:text-sm leading-relaxed text-ink-muted"
+                          ? "mt-3 font-body text-xs sm:text-sm leading-relaxed text-white/90 text-justify [text-align-last:left] [hyphens:auto]"
+                          : "mt-3 font-body text-xs sm:text-sm leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]"
                       }
                     >
                       {item.description}
@@ -223,8 +203,8 @@ export function SchoolApproachValuesSection({
                     <P
                       className={
                         isRed
-                          ? "mt-4 font-body text-sm leading-relaxed text-white/95"
-                          : "mt-4 font-body text-sm leading-relaxed text-ink"
+                          ? "mt-4 font-body text-sm leading-relaxed text-white/95 text-justify [text-align-last:left] [hyphens:auto]"
+                          : "mt-4 font-body text-sm leading-relaxed text-ink text-justify [text-align-last:left] [hyphens:auto]"
                       }
                     >
                       {val.meaning}

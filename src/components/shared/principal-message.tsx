@@ -24,28 +24,28 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
   const { portrait } = person;
 
   return (
-    <figure className="w-full">
-      <div className="overflow-hidden rounded-t-xl border border-border border-b-0 bg-surface-raised">
+    <figure className="w-full max-w-[340px] sm:max-w-[360px]">
+      <div className="overflow-hidden rounded-t-2xl border border-border border-b-0 bg-surface-raised shadow-xs">
         {portrait === null ? (
-          <div className="grid aspect-[3/4] sm:aspect-[1154/1600] w-full place-items-center">
+          <div className="grid aspect-[1154/1600] w-full place-items-center">
             <Icon className="size-8 text-ink-muted/50" icon={ImageIcon} />
           </div>
         ) : (
           <Image
             alt={portrait.alt}
-            className="aspect-[3/4] sm:aspect-[1154/1600] w-full object-cover object-top"
+            className="aspect-[1154/1600] w-full object-cover object-top"
             height={portrait.height}
             loading="lazy"
-            sizes="(max-width: 1023px) 320px, 23vw"
+            sizes="(max-width: 1023px) 340px, 360px"
             src={portrait.src}
             width={portrait.width}
           />
         )}
       </div>
 
-      <figcaption className="rounded-b-xl border border-border bg-surface px-4 py-3">
-        <p className="font-body text-sm font-medium text-ink">{person.name}</p>
-        <p className="mt-0.5 font-body text-xs text-accent">{person.title}</p>
+      <figcaption className="rounded-b-2xl border border-border bg-surface px-5 py-3.5 shadow-xs">
+        <p className="font-body text-base font-semibold text-ink">{person.name}</p>
+        <p className="mt-0.5 font-body text-xs font-medium text-accent">{person.title}</p>
       </figcaption>
     </figure>
   );
@@ -73,21 +73,21 @@ export function PrincipalMessage({
           <span className="block h-1 w-16 rounded-full bg-accent" />
         </Reveal>
 
-        <div className="mt-8 sm:mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-10 items-start">
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-12 items-start">
           <Reveal
-            className="space-y-5 lg:col-span-8 xl:col-span-9"
-            stagger={0.1}
+            className="space-y-5 lg:col-span-7 xl:col-span-8"
+            stagger={0.08}
           >
             {letter.map((paragraph, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
               <RevealItem key={index}>
-                <P className="lg:text-justify">{paragraph}</P>
+                <P className="lg:text-justify leading-relaxed">{paragraph}</P>
               </RevealItem>
             ))}
           </Reveal>
 
-          <div className="mx-auto w-full max-w-xs lg:col-span-4 xl:col-span-3 lg:mx-0 lg:max-w-none">
-            <Reveal>
+          <div className="flex justify-center lg:justify-end lg:col-span-5 xl:col-span-4">
+            <Reveal className="w-full flex justify-center lg:justify-end">
               <PortraitCard person={person} />
             </Reveal>
           </div>

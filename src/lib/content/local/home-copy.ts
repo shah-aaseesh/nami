@@ -9,8 +9,8 @@ import {
 
 export const homeCopy: HomeCopy = {
   hero: {
-    eyebrow: "Transform yourself, to lead the world",
-    headline: "Naaya Aayam Multi-Disciplinary Institute",
+    eyebrow: "Naaya Aayam Multi-Disciplinary Institute",
+    headline: "Transform yourself, to lead the world",
     standfirst:
       "At NAMI, we provide a comprehensive academic pathway from Grade 1 to Master’s degree, empowering learners through world-class education, holistic development and leadership to transform themselves and lead the world.",
     primaryCta: {

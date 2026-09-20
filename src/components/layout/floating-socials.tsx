@@ -15,18 +15,27 @@ export type FloatingSocialsProps = {
   className?: string;
 };
 
-function formatWhatsAppLink(phone: string, message: string): string {
-  const digits = phone.replace(/\D/g, "");
-  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+function formatWhatsAppLink(target: string, message: string): string {
+  if (target.startsWith("http://") || target.startsWith("https://")) {
+    const url = new URL(target);
+    if (!url.searchParams.has("text") && message) {
+      url.searchParams.set("text", message);
+    }
+    return url.toString();
+  }
+  const clean = target.replace(/^@/, "").trim();
+  const isNumeric = /^[\d\s+\-]+$/.test(clean);
+  const identifier = isNumeric ? clean.replace(/\D/g, "") : clean;
+  return `https://wa.me/${identifier}?text=${encodeURIComponent(message)}`;
 }
 
 export async function FloatingSocials({ className }: FloatingSocialsProps) {
   const institution = await content.getInstitution();
   const { contact } = institution;
 
-  const whatsappPhone = contact.whatsapp ?? "+977 971-2037224";
+  const whatsappTarget = contact.whatsapp ?? "namicollege";
   const whatsappUrl = formatWhatsAppLink(
-    whatsappPhone,
+    whatsappTarget,
     "Hello NAMI, I would like to enquire about admissions, programmes, and campus visits.",
   );
 

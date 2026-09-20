@@ -14,7 +14,6 @@ import {
 } from "@/lib/content/institutions";
 import {
   type AdmissionsFormData,
-  isSchoolOrCollegeProgram,
 } from "@/lib/schema";
 
 const PAGE_WIDTH = 595.28;
@@ -257,91 +256,41 @@ function buildBlocks(
     },
   ];
 
-  if (isSchoolOrCollegeProgram(course.id)) {
-    const parentRows: Row[] = [
-      { label: "Father's name", value: text(data.fatherName) },
-      { label: "Father's contact number", value: text(data.fatherContact) },
-      {
-        label: "Father's job / occupation",
-        value: text(
-          data.fatherJob === "Others" && data.otherFatherJob.trim()
-            ? `Others (${data.otherFatherJob.trim()})`
-            : data.fatherJob,
-        ),
-      },
-      { label: "Father's email address", value: text(data.fatherEmail) },
-      { label: "Mother's name", value: text(data.motherName) },
-      { label: "Mother's contact number", value: text(data.motherContact) },
-      {
-        label: "Mother's job / occupation",
-        value: text(
-          data.motherJob === "Others" && data.otherMotherJob.trim()
-            ? `Others (${data.otherMotherJob.trim()})`
-            : data.motherJob,
-        ),
-      },
-      { label: "Mother's email address", value: text(data.motherEmail) },
-    ];
-    if (data.secondaryName.trim() || data.secondaryContact.trim()) {
-      parentRows.push(
-        { label: "Secondary contact name", value: text(data.secondaryName) },
+  const guardianGroups = data.guardians
+    .map((guardian) => {
+      const fullName = [guardian.firstName, guardian.lastName]
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .join(" ");
+      const relationshipLabel =
+        guardian.relationship === "Others" && guardian.otherRelationship.trim()
+          ? `Others (${guardian.otherRelationship.trim()})`
+          : guardian.relationship;
+
+      return [
+        { label: "Guardian's name", value: text(fullName) },
         {
-          label: "Secondary relationship",
-          value: text(
-            data.secondaryRelationship === "Others" &&
-              data.otherSecondaryRelationship.trim()
-              ? `Others (${data.otherSecondaryRelationship.trim()})`
-              : data.secondaryRelationship,
-          ),
+          label: "Relationship to student",
+          value: text(relationshipLabel),
         },
-        {
-          label: "Secondary contact number",
-          value: text(data.secondaryContact),
-        },
-      );
-    }
+        { label: "Contact number", value: text(guardian.contact) },
+        { label: "Email address", value: text(guardian.email) },
+      ];
+    })
+    .filter((rows) => !isBlankRowSet(rows));
+
+  if (guardianGroups.length === 1 && guardianGroups[0]) {
     blocks.push({
       kind: "fields",
-      heading: "Parent Details",
-      rows: parentRows,
+      heading: "Guardian Details",
+      rows: guardianGroups[0],
     });
-  } else {
-    const guardianRows: Row[] = [
-      { label: "Local guardian name", value: text(data.guardianName) },
-      {
-        label: "Relationship to student",
-        value: text(
-          data.guardianRelationship === "Others" &&
-            data.otherGuardianRelationship.trim()
-            ? `Others (${data.otherGuardianRelationship.trim()})`
-            : data.guardianRelationship,
-        ),
-      },
-      { label: "Contact number", value: text(data.guardianContact) },
-      { label: "Email address", value: text(data.guardianEmail) },
-    ];
-    if (data.secondaryName.trim() || data.secondaryContact.trim()) {
-      guardianRows.push(
-        { label: "Secondary contact name", value: text(data.secondaryName) },
-        {
-          label: "Secondary relationship",
-          value: text(
-            data.secondaryRelationship === "Others" &&
-              data.otherSecondaryRelationship.trim()
-              ? `Others (${data.otherSecondaryRelationship.trim()})`
-              : data.secondaryRelationship,
-          ),
-        },
-        {
-          label: "Secondary contact number",
-          value: text(data.secondaryContact),
-        },
-      );
-    }
+  } else if (guardianGroups.length > 1) {
     blocks.push({
-      kind: "fields",
-      heading: "Local Guardian Details",
-      rows: guardianRows,
+      kind: "groups",
+      heading: "Guardian Details",
+      entryLabel: "Guardian",
+      groups: guardianGroups,
     });
   }
 
@@ -353,9 +302,8 @@ function buildBlocks(
       groups: data.qualifications
         .map((entry) => [
           { label: "Previous institution", value: text(entry.place) },
-          { label: "Dates attended", value: text(entry.dates) },
           { label: "Awards / grades", value: text(entry.awards) },
-          { label: "Date obtained", value: formatDate(entry.dateObtained) },
+          { label: "Graduation date", value: formatDate(entry.graduationDate) },
         ])
         .filter((rows) => !isBlankRowSet(rows)),
     });

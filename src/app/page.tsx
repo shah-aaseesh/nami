@@ -4,6 +4,7 @@ import { PrincipalMessage } from "@/components/shared/principal-message";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { schoolPrincipal } from "@/lib/content/school-principal";
+import { stakeholderTestimonials } from "@/lib/content/local/testimonials";
 import { About } from "./_components/about";
 import { Hero } from "./_components/hero";
 import { HomePopup } from "./_components/home-popup";
@@ -51,7 +52,11 @@ export default async function Home() {
         />
       )}
       <Stats poster={band} section={copy.sections.stats} stats={stats} />
-      <Testimonials section={copy.sections.testimonials} />
+      <Testimonials
+        id="stakeholders"
+        items={stakeholderTestimonials}
+        section={copy.sections.testimonials}
+      />
       <Updates />
       <HomePopup />
     </>

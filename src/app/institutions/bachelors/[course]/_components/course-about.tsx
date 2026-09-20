@@ -14,18 +14,27 @@ export function CourseAbout({
   if (paragraphs.length === 0) return null;
 
   return (
-    <section className="gutter-x section-y">
-      <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
-        <SplitText
-          as="h2"
-          className="font-display text-3xl font-normal text-balance text-ink lg:col-span-4 lg:text-4xl"
-        >
-          {courseDetailCopy.aboutHeading}
-        </SplitText>
+    <section className="gutter-x py-8 sm:py-10 lg:py-12 border-b border-border/60 bg-surface">
+      <div className="mx-auto max-w-page space-y-4">
+        <div>
+          <SplitText
+            as="h2"
+            className="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-balance text-ink"
+          >
+            {courseDetailCopy.aboutHeading}
+          </SplitText>
+        </div>
 
-        <Reveal className="mt-8 flex flex-col gap-6 lg:col-span-7 lg:col-start-6 lg:mt-0">
-          {paragraphs.map((paragraph) => (
-            <P className="text-lg" key={paragraph}>
+        <Reveal className="space-y-4 pt-1">
+          {paragraphs.map((paragraph, index) => (
+            <P
+              key={index}
+              className={
+                index === 0
+                  ? "text-base sm:text-lg text-ink font-normal leading-relaxed"
+                  : "text-sm sm:text-base text-ink-muted leading-relaxed"
+              }
+            >
               {paragraph}
             </P>
           ))}

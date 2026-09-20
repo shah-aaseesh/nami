@@ -99,7 +99,12 @@ export default async function BachelorsPage() {
         tone="surface"
       />
 
-      <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
+      <Testimonials
+        id="alumni"
+        items={alumni}
+        section={bachelorsCopy.alumni}
+        size="sm"
+      />
 
       <MouPartnersSection id="mou-partners" />
 

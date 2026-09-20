@@ -327,7 +327,7 @@ export const alumniStories: readonly AlumniStory[] = [
   {
     id: "reesav-rokka",
     name: "Reesav Rokka",
-    avatar: "/nami/reesav-rokka.jpg",
+    avatar: "/alumni stories/eesav rokka.png",
     programme: "BSc (Hons) Computing",
     graduationYear: "Alumnus",
     institution: "institute",
@@ -353,7 +353,7 @@ export const alumniStories: readonly AlumniStory[] = [
         "During his time at NAMI, Reesav found the college welcoming and felt comfortable approaching teachers for guidance. His growth came not only from classroom lessons but also from projects, presentations, and group assignments. These experiences taught him problem-solving, communication, teamwork, leadership, and how to listen to others. He came to understand that technical knowledge alone was not enough for a successful career.",
         "After graduating, Reesav started working as an IT professional at Gokarneshwor Municipal Hospital. With experience and increasing responsibility, he became Senior IT Head. His role involves managing the hospital's technology systems, protecting information, managing software, supporting digital projects, and working with doctors, nurses, administrators, and other staff to solve practical problems through technology.",
         "He has also contributed to several improvements at the hospital, including introducing digital systems, strengthening its technology infrastructure, and developing tools that support healthcare professionals. What matters most to him is seeing how these technological improvements can help staff access information faster, work more accurately, and provide better services to patients.",
-        "Looking back, Reesav sees a strong connection between his education and his career. Presentations gave him confidence, group projects taught him collaboration, and practical assignments prepared him to solve real-world problems. He believes students should use every classroom activity as preparation for their future, while also continuing to learn because technology constantly changes.",
+        "Looking back, Reesav sees a strong connection between his education and his career. Presentations gave me confidence, group projects taught me collaboration, and practical assignments prepared him to solve real-world problems. He believes students should use every classroom activity as preparation for their future, while also continuing to learn because technology constantly changes.",
         "His journey is ultimately about turning an interest in technology into meaningful work. What began with a desire to build an IT career became a role where his technical skills help improve hospital services and support the wider community.",
       ],
       careerMilestones: [
@@ -409,7 +409,7 @@ export const alumniStories: readonly AlumniStory[] = [
   {
     id: "daniel-sapkota",
     name: "Daniel Sapkota",
-    avatar: "/nami/daniel-sapkota.jpg",
+    avatar: "/alumni stories/daniel sapkota.png",
     programme: "BSc (Hons) Computing",
     graduationYear: "Alumnus",
     institution: "institute",
@@ -495,6 +495,87 @@ export const alumniStories: readonly AlumniStory[] = [
       ],
     },
   },
+  {
+    id: "abhishek-gautam",
+    name: "Abhishek Gautam",
+    avatar: "/alumni stories/abhishek sharma.png",
+    programme: "BSc (Hons) Computing",
+    graduationYear: "Alumnus",
+    institution: "institute",
+    institutionLabel: "Bachelors (Northampton UK)",
+    currentRole: "Network Security Engineer & Lecturer",
+    company: "DNS & KFA College",
+    sector: "Cybersecurity & Higher Education",
+    location: "Kathmandu, Nepal",
+    summaryHighlights: [
+      "Network Security Engineer at DNS designing, implementing, and managing network security solutions to keep client infrastructure secure and reliable.",
+      "Part-time Lecturer at KFA College teaching Computer Networks, Data Communication, and Networking to BCS-IT students.",
+    ],
+    keyQuote:
+      "Stay curious about emerging trends, seek guidance from seniors and industry professionals when choosing your specialization and keep an eye on global developments in IT.",
+    pdfData: {
+      documentId: "NAMI-ALM-SEC-015",
+      title: "Alumni Spotlight Case Study: Abhishek Gautam",
+      publishedDate: "August 2026 (Series 15)",
+      headline: "Building a Secure Digital Future",
+      storyParagraphs: [
+        "Abhishek first heard about NAMI while preparing for the IOE entrance exam in Kathmandu — a teacher at his training institute recommended the college, and after comparing curricula with other universities, he was drawn to NAMI's practical, industry-oriented approach.",
+        "As a student, he found NAMI supportive and engaging, with hands-on learning at the core of the experience. He credits the approachable faculty, collaborative culture, and project-based coursework for building both his technical skills and his confidence for the professional world.",
+        "Today, he works as a Network Security Engineer at DNS, where he designs, implements, and manages network security solutions to keep client infrastructure secure and reliable. Alongside that, he's a part-time Lecturer at KFA College, teaching Computer Networks, Data Communication, and Networking to BCS-IT students — a dual role he says lets him apply industry expertise while mentoring the next generation of IT professionals.",
+        "He finds the most rewarding part of his work to be solving complex technical challenges and knowing his efforts help protect critical systems while enabling businesses to operate securely. He encourages current NAMI students to stay curious about emerging trends and keep building practical skills.",
+        "His fondest NAMI memories are the last-minute assignment sessions with friends, the shared excitement of meeting deadlines, and the lasting friendships from his college years. His journey stands as a testament to how practical education, perseverance, and continuous growth can build a successful, impactful career.",
+      ],
+      careerMilestones: [
+        {
+          year: "Academic",
+          title: "BSc Computing & Practical Foundation",
+          organization: "NAMI / University of Northampton",
+          description:
+            "Built technical proficiency through hands-on lab learning, collaborative assignments, and industry-oriented coursework.",
+        },
+        {
+          year: "Industry",
+          title: "Network Security Engineer",
+          organization: "DNS",
+          description:
+            "Designs, implements, and manages network security solutions to protect critical systems and maintain reliable client infrastructure.",
+        },
+        {
+          year: "Academia",
+          title: "Part-time Lecturer (BCS-IT)",
+          organization: "KFA College",
+          description:
+            "Teaches Computer Networks, Data Communication, and Networking to BCS-IT students, mentoring emerging technology professionals.",
+        },
+      ],
+      interviewQnA: [
+        {
+          question:
+            "How did you first discover NAMI and what drew you to it?",
+          answer:
+            "While preparing for the IOE entrance exam in Kathmandu, a teacher at my training institute recommended NAMI. After comparing curricula with other universities, I was drawn to NAMI's practical, industry-oriented approach.",
+        },
+        {
+          question:
+            "What is most rewarding about your dual role in cybersecurity and academia?",
+          answer:
+            "Solving complex technical challenges and knowing my efforts help protect critical systems while enabling businesses to operate securely. Alongside that, teaching lets me apply real-world industry expertise while mentoring the next generation of IT professionals.",
+        },
+        {
+          question: "What is your advice for current NAMI students?",
+          answer:
+            "Stay curious about emerging trends, seek guidance from seniors and industry professionals when choosing your specialization and keep an eye on global developments in IT.",
+        },
+      ],
+      skillsAcquired: [
+        "Network Security & Defense",
+        "Data Communication & Routing",
+        "Infrastructure Resilience",
+        "Higher Education Mentorship",
+        "Complex Problem Solving",
+      ],
+    },
+  },
 ];
 
 export const alumniCopy = {
@@ -545,7 +626,7 @@ export const alumniCopy = {
     eyebrow: "ALUMNI VOICES",
     heading: "Where NAMI Graduates Go",
     standfirst:
-      "From healthcare technology leaders in Kathmandu to venture-backed fintech entrepreneurs in New York, explore the career journeys of our graduates.",
+      "From healthcare technology leaders in Kathmandu and network security engineers to venture-backed fintech entrepreneurs in New York, explore the career journeys of our graduates.",
   },
   employers: {
     navLabel: "Employers",

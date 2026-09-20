@@ -80,7 +80,7 @@ export function InstitutionEnrollCta({
         isSchool && "bg-[#284540] text-white",
         isCollege && "field-brand",
         isInstitute && "field-ink",
-        "gutter-x py-10 sm:py-14 lg:py-16",
+        "gutter-x section-y",
         className,
       )}
       id={id}

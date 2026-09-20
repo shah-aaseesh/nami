@@ -42,7 +42,7 @@ export function SiteCtaBand({
       aria-labelledby={headingId}
       className={cn(
         "relative gutter-x",
-        onFooterSeam ? "" : "py-10 sm:py-12 lg:py-14",
+        onFooterSeam ? "" : "section-y",
         className,
       )}
     >
@@ -54,7 +54,7 @@ export function SiteCtaBand({
       )}
 
       <Reveal className="relative mx-auto max-w-page">
-        <div className="field-ink flex flex-col items-start justify-between gap-y-6 rounded-xl px-6 py-7 sm:px-10 sm:py-8 lg:flex-row lg:items-center lg:gap-x-8 lg:px-12 lg:py-7 shadow-lg">
+        <div className="field-ink flex flex-col items-start justify-between gap-y-6 rounded-2xl px-6 py-7 sm:px-10 sm:py-8 lg:flex-row lg:items-center lg:gap-x-8 lg:px-12 lg:py-7 shadow-lg">
           <div className="flex items-center gap-4 sm:gap-6">
             <div className="shrink-0 overflow-hidden rounded-xl bg-white p-2 sm:p-2.5 shadow-md">
               <Image

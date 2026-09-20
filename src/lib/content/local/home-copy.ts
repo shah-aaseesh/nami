@@ -94,12 +94,12 @@ export const homeCopy: HomeCopy = {
     },
     testimonials: {
       navLabel: "Testimonials",
-      eyebrow: "Student voices",
-      heading: "What our students say.",
+      eyebrow: "Stakeholder Voice",
+      heading: "",
       standfirst: null,
       cta: null,
       emptyState:
-        "Student stories are being collected — this space is reserved for them.",
+        "Stakeholder stories are being collected — this space is reserved for them.",
     },
     updates: {
       navLabel: "Notices",

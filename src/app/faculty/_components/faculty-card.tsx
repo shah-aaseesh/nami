@@ -53,7 +53,7 @@ function BioContent({ text }: { readonly text: string }) {
               <ul className="space-y-2 pl-1">
                 {bullets.map((bullet, idx) => (
                   <li
-                    className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-ink/85 font-body text-justify [text-align-last:left] [hyphens:auto]"
+                    className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-ink/85 font-body text-justify [text-align-last:left]"
                     key={idx}
                   >
                     <span className="size-1.5 mt-2 shrink-0 rounded-full bg-accent" />
@@ -67,7 +67,7 @@ function BioContent({ text }: { readonly text: string }) {
 
         return (
           <p
-            className="text-xs sm:text-sm leading-relaxed text-ink/85 font-body text-justify [text-align-last:left] [hyphens:auto]"
+            className="text-xs sm:text-sm leading-relaxed text-ink/85 font-body text-justify [text-align-last:left]"
             key={bIdx}
           >
             {block}
@@ -99,7 +99,7 @@ export function FacultyCard({
     <>
       <div
         className={cn(
-          "group flex flex-col snap-center shrink-0 h-full",
+          "group flex flex-col snap-center shrink-0 h-full rounded-2xl overflow-hidden border border-border/75 bg-surface-raised shadow-xs hover:shadow-xl hover:-translate-y-1.5 hover:border-accent/40 transition-all duration-300",
           className
             ? className
             : cn(
@@ -112,7 +112,7 @@ export function FacultyCard({
               ),
         )}
       >
-        <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-neutral-100 border border-border/40">
+        <div className="relative aspect-4/5 w-full overflow-hidden bg-neutral-100">
           {leader.portrait ? (
             <Image
               alt={leader.portrait.alt}
@@ -131,32 +131,43 @@ export function FacultyCard({
               </svg>
             </div>
           )}
-          <div className="absolute inset-0 ring-1 ring-inset ring-ink/10 rounded-2xl" />
         </div>
 
-        <div className="mt-4 flex flex-col flex-1">
-          <div className="min-h-[2.5rem] flex flex-col justify-start">
-            <p className="font-body text-xs font-bold uppercase tracking-wider text-accent leading-snug">
+        <div className="p-3.5 sm:p-4 flex flex-col flex-1">
+          {/* Role / Title Slot - Single Line */}
+          <div className="h-5 flex items-center">
+            <p
+              className="font-body text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-accent truncate w-full"
+              title={leader.title}
+            >
               {leader.title}
             </p>
           </div>
-          <h3 className="mt-1 font-display text-lg font-medium text-ink">
-            {leader.name}
-          </h3>
-          <P className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-3 text-justify [text-align-last:left] [hyphens:auto]">
-            {leader.brief}
-          </P>
-          <div className="mt-auto pt-4 flex items-center justify-start">
-            <Button
+
+          {/* Name Slot */}
+          <div className="mt-1 h-6 flex items-center">
+            <h3 className="font-display text-base sm:text-[17px] font-medium text-ink line-clamp-1 group-hover:text-accent transition-colors">
+              {leader.name}
+            </h3>
+          </div>
+
+          {/* Bio Excerpt Slot - Justified with equal left & right gap */}
+          <div className="mt-2 h-[4.25rem] overflow-hidden">
+            <p className="text-xs sm:text-[12.5px] text-ink-muted leading-relaxed line-clamp-3 text-justify [text-align-last:left] break-words [hyphens:auto]">
+              {leader.brief}
+            </p>
+          </div>
+
+          {/* Bottom Action */}
+          <div className="mt-auto pt-3.5 flex items-center justify-start">
+            <button
               type="button"
-              variant="outline"
-              size="sm"
               onClick={() => setOpen(true)}
-              className="self-start gap-1.5 px-3.5 border-accent/40 text-accent hover:bg-accent hover:text-white font-medium transition-colors cursor-pointer text-xs rounded-md shadow-2xs"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
             >
               <span>Read full bio</span>
-              <span aria-hidden="true">&rarr;</span>
-            </Button>
+              <span aria-hidden="true" className="transition-transform group-hover/btn:translate-x-0.5">&rarr;</span>
+            </button>
           </div>
         </div>
       </div>

@@ -3,10 +3,6 @@ import { SplitText } from "@/components/motion/split-text";
 import type { BachelorsProgramme } from "../../_components/bachelors-copy";
 import { courseDetailCopy } from "./course-detail-copy";
 
-const headCell =
-  "border-b border-border-strong py-3 pe-6 font-body text-xs font-medium tracking-widest text-ink-muted uppercase last:pe-0";
-const bodyCell = "border-b border-border py-4 pe-6 align-top last:pe-0";
-
 export function CourseEligibility({
   course,
 }: {
@@ -17,60 +13,86 @@ export function CourseEligibility({
   const columns = courseDetailCopy.entryColumns;
 
   return (
-    <section className="gutter-x section-y">
-      <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
-        <SplitText
-          as="h2"
-          className="font-display text-3xl font-normal text-balance text-ink lg:col-span-4 lg:text-4xl"
-        >
-          {course.entryLabel}
-        </SplitText>
+    <section className="gutter-x py-8 sm:py-10 lg:py-12 border-b border-border/60 bg-surface">
+      <div className="mx-auto max-w-page space-y-5">
+        <div>
+          <SplitText
+            as="h2"
+            className="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-balance text-ink"
+          >
+            {course.entryLabel}
+          </SplitText>
+          <p className="mt-2 text-sm sm:text-base text-ink-muted leading-relaxed">
+            All formal admissions decisions and offer letters are issued in direct alignment with the academic quality frameworks of {course.awardingBody}.
+          </p>
+        </div>
 
-        <Reveal className="mt-8 lg:col-span-7 lg:col-start-6 lg:mt-0">
-          <table className="w-full border-collapse text-left font-body text-sm">
-            <caption className="sr-only">
-              {`${course.fullTitle} — ${course.entryLabel}`}
-            </caption>
+        <Reveal className="space-y-5">
+          {/* Requirements Table */}
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface-raised/40 shadow-2xs">
+            <table className="w-full border-collapse text-left font-body text-sm table-fixed">
+              <caption className="sr-only">
+                {`${course.fullTitle} — ${course.entryLabel}`}
+              </caption>
 
-            <thead>
-              <tr>
-                <th className={`${headCell} w-2/5`} scope="col">
-                  {columns.qualification}
-                </th>
-                <th className={headCell} scope="col">
-                  {columns.requirement}
-                </th>
-              </tr>
-            </thead>
+              <colgroup>
+                <col className="w-2/5 sm:w-1/3" />
+                <col className="w-3/5 sm:w-2/3" />
+              </colgroup>
 
-            <tbody>
-              {course.entry.map((item) => (
-                <tr key={item.label}>
+              <thead>
+                <tr className="border-b border-border bg-muted/60">
                   <th
-                    className={`${bodyCell} font-body font-medium text-ink`}
-                    scope="row"
+                    className="py-3.5 px-4 sm:px-6 font-body text-xs font-semibold tracking-widest text-ink-muted uppercase"
+                    scope="col"
                   >
-                    {item.label}
+                    {columns.qualification}
                   </th>
-                  <td className={`${bodyCell} text-pretty text-ink-muted`}>
-                    {item.requirement}
-                  </td>
+                  <th
+                    className="py-3.5 px-4 sm:px-6 font-body text-xs font-semibold tracking-widest text-ink-muted uppercase"
+                    scope="col"
+                  >
+                    {columns.requirement}
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
 
-          {course.entryNotes.length === 0 ? null : (
-            <ul className="mt-8 flex flex-col gap-3">
-              {course.entryNotes.map((note) => (
-                <li
-                  className="font-body text-sm text-pretty text-ink-muted"
-                  key={note}
-                >
-                  {note}
-                </li>
-              ))}
-            </ul>
+              <tbody className="divide-y divide-border/60">
+                {course.entry.map((item) => (
+                  <tr key={item.label} className="hover:bg-muted/20 transition-colors">
+                    <th
+                      className="py-3.5 px-4 sm:px-6 font-medium text-ink align-top"
+                      scope="row"
+                    >
+                      {item.label}
+                    </th>
+                    <td className="py-3.5 px-4 sm:px-6 text-ink-muted leading-relaxed align-top">
+                      {item.requirement}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Entry Notes */}
+          {course.entryNotes.length > 0 && (
+            <div className="rounded-xl border border-border/70 bg-muted/30 p-4 sm:p-5 space-y-2.5">
+              <span className="block text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                Important Entry Notes
+              </span>
+              <ul className="space-y-2">
+                {course.entryNotes.map((note, idx) => (
+                  <li
+                    className="font-body text-xs sm:text-sm text-ink-muted leading-relaxed flex items-start gap-2.5"
+                    key={idx}
+                  >
+                    <span className="size-1.5 rounded-full bg-accent mt-2 shrink-0" />
+                    <span>{note}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </Reveal>
       </div>

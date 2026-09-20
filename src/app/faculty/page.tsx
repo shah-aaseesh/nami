@@ -15,16 +15,22 @@ export default async function FacultyPage() {
   const leadership = await content.getLeadership();
 
   return (
-    <div className="pb-12 lg:pb-16">
+    <div className="min-h-screen bg-surface pt-8 sm:pt-10 lg:pt-12 pb-16 space-y-10 sm:space-y-12 lg:space-y-14">
       <FacultyGroup
         isFirstGroup
         leaders={leadership.board}
         title="Board of Directors"
       />
 
-      <FacultyGroup leaders={leadership.management} title="Management Team" />
+      <FacultyGroup
+        leaders={leadership.management}
+        title="Management Team"
+      />
 
-      <FacultyGroup leaders={leadership.academics} title="Academic Heads" />
+      <FacultyGroup
+        leaders={leadership.academics}
+        title="Academic Heads"
+      />
     </div>
   );
 }

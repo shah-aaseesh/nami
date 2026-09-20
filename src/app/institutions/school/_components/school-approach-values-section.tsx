@@ -3,6 +3,7 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { Icon } from "@/components/ui/icon";
 import { H4, P } from "@/components/ui/typography";
 import { CheckIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export const educationalApproach = [
   {
@@ -114,48 +115,48 @@ export function SchoolApproachValuesSection({
           />
 
           <Reveal
-            className="mt-8 sm:mt-10 lg:mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            className="mt-8 sm:mt-10 lg:mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
             stagger={0.05}
           >
-            {educationalApproach.map((item, idx) => {
-              const isRed = idx === 0 || idx === 2 || idx === 5 || idx === 7;
+            {educationalApproach.map((item, index) => {
+              const isRed = (Math.floor(index / 4) + (index % 4)) % 2 === 0;
 
               return (
                 <RevealItem key={item.title}>
                   <div
-                    className={
+                    className={cn(
+                      "h-full rounded-2xl p-5 sm:p-6 transition-all duration-300 shadow-2xs hover:shadow-lg hover:-translate-y-0.5 flex flex-col justify-start border",
                       isRed
-                        ? "h-full rounded-2xl border border-[#BD1B21] bg-[#BD1B21] p-5 sm:p-6 text-white transition-all duration-300 shadow-md shadow-[#BD1B21]/20 hover:shadow-xl hover:shadow-[#BD1B21]/30 hover:-translate-y-0.5"
-                        : "h-full rounded-2xl border border-[#D3E2DB] bg-white p-5 sm:p-6 transition-all duration-300 shadow-2xs hover:shadow-lg hover:-translate-y-0.5 hover:border-[#BD1B21]/40"
-                    }
+                        ? "bg-[#BD1B21] text-white border-[#BD1B21] hover:bg-[#a81419]"
+                        : "bg-white text-ink border-[#D3E2DB] hover:border-[#BD1B21]/40",
+                    )}
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className={
+                        className={cn(
+                          "flex size-7 shrink-0 items-center justify-center rounded-full",
                           isRed
-                            ? "flex size-7 shrink-0 items-center justify-center rounded-full bg-white text-[#BD1B21] shadow-xs"
-                            : "flex size-7 shrink-0 items-center justify-center rounded-full bg-[#BD1B21]/10 text-[#BD1B21]"
-                        }
+                            ? "bg-white/20 text-white"
+                            : "bg-[#BD1B21]/10 text-[#BD1B21]",
+                        )}
                       >
                         <Icon className="size-3.5" icon={CheckIcon} />
                       </div>
                       <H4
                         as="h3"
-                        className={
-                          isRed
-                            ? "font-display text-base sm:text-lg font-semibold text-white"
-                            : "font-display text-base sm:text-lg font-semibold text-ink"
-                        }
+                        className={cn(
+                          "font-display text-base sm:text-lg font-semibold",
+                          isRed ? "text-white" : "text-ink",
+                        )}
                       >
                         {item.title}
                       </H4>
                     </div>
                     <P
-                      className={
-                        isRed
-                          ? "mt-3 font-body text-xs sm:text-sm leading-relaxed text-white/90 text-justify [text-align-last:left] [hyphens:auto]"
-                          : "mt-3 font-body text-xs sm:text-sm leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]"
-                      }
+                      className={cn(
+                        "mt-3 font-body text-xs sm:text-sm leading-relaxed text-justify [text-align-last:left] [hyphens:auto]",
+                        isRed ? "text-white/90" : "text-ink-muted",
+                      )}
                     >
                       {item.description}
                     </P>
@@ -179,40 +180,20 @@ export function SchoolApproachValuesSection({
             className="mt-8 sm:mt-10 lg:mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
             stagger={0.06}
           >
-            {schoolValues.map((val, idx) => {
-              const isRed = idx === 0 || idx === 2 || idx === 4;
-
-              return (
-                <RevealItem key={val.name}>
-                  <div
-                    className={
-                      isRed
-                        ? "h-full rounded-2xl border border-[#BD1B21] bg-[#BD1B21] p-6 text-white transition-all duration-300 shadow-md shadow-[#BD1B21]/20 hover:shadow-xl hover:shadow-[#BD1B21]/30 hover:-translate-y-0.5"
-                        : "h-full rounded-2xl border border-[#D3E2DB] bg-white p-6 transition-all duration-300 shadow-2xs hover:shadow-lg hover:-translate-y-0.5 hover:border-[#BD1B21]/40"
-                    }
+            {schoolValues.map((val) => (
+              <RevealItem key={val.name}>
+                <div className="h-full rounded-2xl border border-[#D3E2DB] bg-white p-6 transition-all duration-300 shadow-2xs hover:shadow-lg hover:-translate-y-0.5 hover:border-[#BD1B21]/40 flex flex-col justify-start">
+                  <span
+                    className={`inline-block self-start rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-wider border shadow-2xs ${val.color}`}
                   >
-                    <span
-                      className={
-                        isRed
-                          ? "inline-block rounded-full bg-white text-[#BD1B21] px-3 py-1 text-xs font-bold uppercase tracking-wider shadow-xs"
-                          : `inline-block rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider border ${val.color}`
-                      }
-                    >
-                      {val.name}
-                    </span>
-                    <P
-                      className={
-                        isRed
-                          ? "mt-4 font-body text-sm leading-relaxed text-white/95 text-justify [text-align-last:left] [hyphens:auto]"
-                          : "mt-4 font-body text-sm leading-relaxed text-ink text-justify [text-align-last:left] [hyphens:auto]"
-                      }
-                    >
-                      {val.meaning}
-                    </P>
-                  </div>
-                </RevealItem>
-              );
-            })}
+                    {val.name}
+                  </span>
+                  <P className="mt-4 font-body text-sm leading-relaxed text-ink/85 text-justify [text-align-last:left] [hyphens:auto]">
+                    {val.meaning}
+                  </P>
+                </div>
+              </RevealItem>
+            ))}
           </Reveal>
         </div>
       </div>

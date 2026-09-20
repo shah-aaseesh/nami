@@ -112,9 +112,9 @@ function UpdateRow({
         >
           <span className="inline-flex items-center gap-2">
             <Icon className="size-4" icon={CalendarIcon} />
-            <span className="sr-only">Published </span>
-            <time dateTime={item.publishedAt}>
-              {formatDate(item.publishedAt)}
+            <span className="sr-only">Date </span>
+            <time dateTime={item.happensAt ?? item.publishedAt}>
+              {formatDate(item.happensAt ?? item.publishedAt)}
             </time>
           </span>
 
@@ -134,19 +134,23 @@ function UpdateRow({
 export function UpdateBoard({
   indexHref = null,
   items,
+  showImages = true,
   showInstitution = true,
 }: {
   readonly indexHref?: Route | null;
   readonly items: readonly Update[];
+  readonly showImages?: boolean;
   readonly showInstitution?: boolean;
 }) {
-  const slides = items
-    .map((item) => item.image)
-    .filter((image): image is ContentImage => image !== null)
-    .filter(
-      (image, index, all) =>
-        all.findIndex((other) => other.src === image.src) === index,
-    );
+  const slides = showImages
+    ? items
+        .map((item) => item.image)
+        .filter((image): image is ContentImage => image !== null)
+        .filter(
+          (image, index, all) =>
+            all.findIndex((other) => other.src === image.src) === index,
+        )
+    : [];
 
   return (
     <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-y-0">

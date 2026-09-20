@@ -1,9 +1,13 @@
 import type { Route } from "next";
 import Link from "next/link";
+import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
+import { UpdateBoard } from "@/components/shared/update-board";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import { P } from "@/components/ui/typography";
 import type { EntityRole } from "@/lib/content";
+import { content } from "@/lib/content";
 import { ArrowRightIcon } from "@/lib/icons";
 import { INSTITUTION_PARAM } from "@/lib/institution-filter";
 import { cn } from "@/lib/utils";
@@ -16,7 +20,7 @@ export type InstitutionNoticesCopy = {
   readonly emptyState: string;
 };
 
-export function InstitutionNotices({
+export async function InstitutionNotices({
   copy,
   id,
   institution,
@@ -25,6 +29,11 @@ export function InstitutionNotices({
   readonly id?: string;
   readonly institution: EntityRole;
 }) {
+  const allUpdates = await content.getUpdates();
+  const notices = allUpdates.filter(
+    (item) => item.institution === institution && item.kind === "notice",
+  );
+
   const href = `/notices?${INSTITUTION_PARAM}=${institution}` as Route;
 
   return (
@@ -44,6 +53,19 @@ export function InstitutionNotices({
           layout="action"
           title={copy.eyebrow}
         />
+
+        {notices.length === 0 ? (
+          <P className="mt-8 max-w-xl text-ink-muted">{copy.emptyState}</P>
+        ) : (
+          <Reveal className="mt-6 sm:mt-8" stagger={0.08}>
+            <UpdateBoard
+              indexHref={href}
+              items={notices}
+              showImages={false}
+              showInstitution={false}
+            />
+          </Reveal>
+        )}
       </div>
     </section>
   );

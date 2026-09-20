@@ -12,6 +12,7 @@ import {
 import { P } from "@/components/ui/typography";
 import type { SectionCopy, Testimonial } from "@/lib/content";
 import { content } from "@/lib/content";
+import { cn } from "@/lib/utils";
 import { TestimonialCard } from "./testimonials-card";
 import { TestimonialsDots } from "./testimonials-dots";
 
@@ -35,13 +36,19 @@ function TestimonialsHeader({
 }
 
 export async function Testimonials({
+  cardClassName,
+  className,
   id = "testimonials",
   items,
   section,
+  size = "md",
 }: {
+  cardClassName?: string;
+  className?: string;
   id?: string;
   items?: readonly Testimonial[];
   section: SectionCopy;
+  size?: "sm" | "md";
 }) {
   const testimonials = items ?? (await content.getTestimonials());
 
@@ -57,7 +64,10 @@ export async function Testimonials({
       : testimonials.map((t) => ({ ...t, itemKey: t.id }));
 
   return (
-    <section className="gutter-x section-y-compact" id={id}>
+    <section
+      className={cn("gutter-x section-y-compact", className)}
+      id={id}
+    >
       <div className="mx-auto max-w-page">
         {testimonials.length > 1 ? (
           <Carousel
@@ -87,14 +97,23 @@ export async function Testimonials({
             </TestimonialsHeader>
 
             <Reveal className="mt-6 sm:mt-8" y={24}>
-              <CarouselContent className="-ms-4 lg:-ms-6">
+              <CarouselContent
+                className={cn(
+                  "-ms-4",
+                  size === "sm" ? "lg:-ms-5" : "lg:-ms-6",
+                )}
+              >
                 {displayTestimonials.map((testimonial) => (
                   <CarouselItem
-                    className="ps-4 basis-full md:basis-1/2 lg:basis-1/3 lg:ps-6"
+                    className={cn(
+                      "ps-4 basis-full md:basis-1/2 lg:basis-1/3",
+                      size === "sm" ? "lg:ps-5" : "lg:ps-6",
+                    )}
                     key={testimonial.itemKey}
                   >
                     <TestimonialCard
-                      className="h-full"
+                      className={cn("h-full", cardClassName)}
+                      size={size}
                       testimonial={testimonial}
                     />
                   </CarouselItem>
@@ -114,7 +133,11 @@ export async function Testimonials({
               )
             ) : (
               <Reveal className="mt-6 sm:mt-8" y={24}>
-                <TestimonialCard className="lg:w-7/12" testimonial={single} />
+                <TestimonialCard
+                  className={cn("lg:w-7/12", cardClassName)}
+                  size={size}
+                  testimonial={single}
+                />
               </Reveal>
             )}
           </>

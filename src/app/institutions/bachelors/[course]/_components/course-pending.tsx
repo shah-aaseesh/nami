@@ -13,17 +13,21 @@ export function CoursePending({
   if (course.pendingNote === null) return null;
 
   return (
-    <section className="gutter-x section-y">
-      <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
-        <SplitText
-          as="h2"
-          className="font-display text-3xl font-normal text-balance text-ink lg:col-span-4 lg:text-4xl"
-        >
-          {heading}
-        </SplitText>
+    <section className="gutter-x py-8 sm:py-10 lg:py-12 border-b border-border/60 bg-surface">
+      <div className="mx-auto max-w-page space-y-4">
+        <div>
+          <SplitText
+            as="h2"
+            className="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-balance text-ink"
+          >
+            {heading}
+          </SplitText>
+        </div>
 
-        <Reveal className="mt-8 border-t border-border pt-8 lg:col-span-7 lg:col-start-6 lg:mt-0">
-          <Standfirst>{course.pendingNote}</Standfirst>
+        <Reveal className="rounded-2xl border border-border bg-surface-raised/40 p-5 sm:p-6 shadow-2xs">
+          <Standfirst className="text-ink-muted text-sm sm:text-base leading-relaxed">
+            {course.pendingNote}
+          </Standfirst>
         </Reveal>
       </div>
     </section>

@@ -157,10 +157,14 @@
     --color-input: var(--color-border-strong);
     --color-ring: var(--color-focus);
   }
+
+  :root {
+    --gutter-x: clamp(1rem, 0.5rem + 3vw, 4.5rem);
+  }
 }
 
 @theme {
-  --gutter-x: clamp(1rem, 0.4643rem + 3.9286vw, 4rem);
+  --gutter-x: clamp(1rem, 0.5rem + 3vw, 4.5rem);
 
   --animate-hero-fade: hero-fade 0.7s ease-out both;
 

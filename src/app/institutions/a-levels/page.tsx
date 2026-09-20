@@ -77,7 +77,12 @@ export default async function CollegePage() {
 
       <ALevelsClubsSection />
 
-      <Testimonials id="alumni" items={alumni} section={collegeCopy.alumni} />
+      <Testimonials
+        id="alumni"
+        items={alumni}
+        section={collegeCopy.alumni}
+        size="sm"
+      />
 
       <CollegeEntry copy={collegeCopy.entry} />
 

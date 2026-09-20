@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
@@ -123,66 +125,66 @@ export function SchoolBands({
   readonly primaryExtra?: ReactNode;
   readonly secondaryExtra?: ReactNode;
 }) {
-  return (
-    <section
-      className="gutter-x section-y border-t border-[#EAE3D4] bg-gradient-to-b from-[#FAF7F0] via-[#F4EFE5] to-[#FAF7F0] relative overflow-hidden"
-      id={id}
-    >
-      {/* Ambient background blur */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-10 right-0 size-[450px] rounded-full bg-[#BD1B21]/5 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 size-[450px] rounded-full bg-[#F7CD00]/8 blur-3xl"
-      />
+  const [activeTab, setActiveTab] = useState<string>("primary");
 
-      <div className="relative mx-auto max-w-page">
-        <SectionHeader
-          description={copy.standfirst}
-          eyebrow={copy.heading}
-          layout="split"
-          title={copy.eyebrow ?? "Academic Bands"}
+  return (
+    <div id={id}>
+      <section className="gutter-x section-y border-t border-[#EAE3D4] bg-gradient-to-b from-[#FAF7F0] via-[#F4EFE5] to-[#FAF7F0] relative overflow-hidden">
+        {/* Ambient background blur */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-10 right-0 size-[450px] rounded-full bg-[#BD1B21]/5 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 left-0 size-[450px] rounded-full bg-[#F7CD00]/8 blur-3xl"
         />
 
-        <RevealItem className="mt-8 sm:mt-10 lg:mt-14">
-          <Tabs defaultValue="primary" className="w-full">
-            <TabsList className="mb-6 sm:mb-8 lg:mb-10 gap-8 sm:gap-12 border-b border-[#E0D8C8] pb-1">
-              <TabsTab
-                value="primary"
-                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
-              >
-                {copy.primary.label}
-              </TabsTab>
-              <TabsTab
-                value="secondary"
-                className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
-              >
-                {copy.secondary.label}
-              </TabsTab>
-            </TabsList>
+        <div className="relative mx-auto max-w-page">
+          <SectionHeader
+            description={copy.standfirst}
+            eyebrow={copy.heading}
+            layout="split"
+            title={copy.eyebrow ?? "Academic Bands"}
+          />
 
-            <TabsPanel value="primary">
-              <BandContent band={copy.primary} />
-              {primaryExtra && (
-                <div className="mt-12 sm:mt-16">
-                  {primaryExtra}
-                </div>
-              )}
-            </TabsPanel>
+          <RevealItem className="mt-8 sm:mt-10 lg:mt-14">
+            <Tabs
+              value={activeTab}
+              onValueChange={(val) => {
+                if (typeof val === "string") setActiveTab(val);
+              }}
+              className="w-full"
+            >
+              <TabsList className="mb-6 sm:mb-8 lg:mb-10 gap-8 sm:gap-12 border-b border-[#E0D8C8] pb-1">
+                <TabsTab
+                  value="primary"
+                  className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
+                >
+                  {copy.primary.label}
+                </TabsTab>
+                <TabsTab
+                  value="secondary"
+                  className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
+                >
+                  {copy.secondary.label}
+                </TabsTab>
+              </TabsList>
 
-            <TabsPanel value="secondary">
-              <BandContent band={copy.secondary} />
-              {secondaryExtra && (
-                <div className="mt-12 sm:mt-16 pt-10 sm:pt-14 border-t border-[#E0D8C8]">
-                  {secondaryExtra}
-                </div>
-              )}
-            </TabsPanel>
-          </Tabs>
-        </RevealItem>
-      </div>
-    </section>
+              <TabsPanel value="primary">
+                <BandContent band={copy.primary} />
+              </TabsPanel>
+
+              <TabsPanel value="secondary">
+                <BandContent band={copy.secondary} />
+              </TabsPanel>
+            </Tabs>
+          </RevealItem>
+        </div>
+      </section>
+
+      {/* Full-width Extra Section (Collaborators for School / Clubs for +2) */}
+      {activeTab === "primary" ? primaryExtra : secondaryExtra}
+    </div>
   );
 }

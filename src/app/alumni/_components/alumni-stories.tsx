@@ -31,18 +31,12 @@ export function AlumniStories({
       ? alumniStories
       : alumniStories.filter((s) => s.institution === selectedWing);
 
-  const allWings = [
+  const wingFilters = [
     { id: "all", label: "All Alumni" },
     { id: "institute", label: "Northampton UK" },
-    { id: "college", label: "Cambridge A-Levels" },
-    { id: "higher-secondary", label: "+2 Science" },
+    { id: "college", label: "A-Levels" },
+    { id: "higher-secondary", label: "+2" },
   ] as const;
-
-  const wingFilters = allWings.filter(
-    (tab) =>
-      tab.id === "all" ||
-      alumniStories.some((s) => s.institution === tab.id),
-  );
 
   return (
     <section
@@ -104,75 +98,94 @@ export function AlumniStories({
         </div>
 
         {/* Editorial Alumni Ledger */}
-        <div className="mt-6 divide-y divide-border border-y border-border">
-          {filteredStories.map((story) => (
-            <button
-              className="group w-full py-6 sm:py-7 text-left transition-all duration-200 hover:bg-primary-100/25 cursor-pointer block focus-visible:outline-2 focus-visible:outline-primary-700 rounded-xl px-2 sm:px-4"
-              key={story.id}
-              onClick={() => setActiveStory(story)}
-              type="button"
+        {filteredStories.length === 0 ? (
+          <div className="mt-8 py-16 px-6 text-center rounded-2xl border border-dashed border-border bg-surface-raised/40 max-w-xl mx-auto">
+            <p className="font-display text-lg font-medium text-ink mb-2">
+              Spotlights Coming Soon
+            </p>
+            <p className="text-sm text-ink-muted leading-relaxed mb-6">
+              Alumni spotlights for this program are currently being compiled.
+              Are you an alumnus? Share your story with us.
+            </p>
+            <a
+              href="#alumni-network"
+              className="inline-flex items-center gap-2 rounded-full bg-primary-700 text-white px-5 py-2 text-xs font-semibold hover:bg-primary-800 transition-colors"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center">
-                {/* 1. Alumnus Profile & Identity (Cols 1-4) */}
-                <div className="lg:col-span-4 flex items-center gap-4">
-                  <div className="relative size-14 sm:size-16 shrink-0 overflow-hidden rounded-full border-2 border-primary-200 group-hover:border-primary-700 group-hover:ring-2 group-hover:ring-primary-700/20 transition-all shadow-xs">
-                    <Image
-                      alt={story.name}
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-108"
-                      height={80}
-                      src={story.avatar}
-                      width={80}
-                    />
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-display text-lg sm:text-xl font-medium text-ink group-hover:text-primary-700 transition-colors truncate">
-                        {story.name}
-                      </h3>
-                      <span className="text-xs text-ink-muted shrink-0">
-                        ({story.graduationYear.replace("Batch of ", "’")})
-                      </span>
+              Submit Your Story
+              <Icon icon={ArrowRight01Icon} className="size-3.5" />
+            </a>
+          </div>
+        ) : (
+          <div className="mt-6 divide-y divide-border border-y border-border">
+            {filteredStories.map((story) => (
+              <button
+                className="group w-full py-6 sm:py-7 text-left transition-all duration-200 hover:bg-primary-100/25 cursor-pointer block focus-visible:outline-2 focus-visible:outline-primary-700 rounded-xl px-2 sm:px-4"
+                key={story.id}
+                onClick={() => setActiveStory(story)}
+                type="button"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center">
+                  {/* 1. Alumnus Profile & Identity (Cols 1-4) */}
+                  <div className="lg:col-span-4 flex items-center gap-4">
+                    <div className="relative size-14 sm:size-16 shrink-0 overflow-hidden rounded-full border-2 border-primary-200 group-hover:border-primary-700 group-hover:ring-2 group-hover:ring-primary-700/20 transition-all shadow-xs">
+                      <Image
+                        alt={story.name}
+                        className="size-full object-cover transition-transform duration-500 group-hover:scale-108"
+                        height={80}
+                        src={story.avatar}
+                        width={80}
+                      />
                     </div>
 
-                    <p className="font-body text-xs sm:text-sm font-semibold text-ink/80 mt-0.5 truncate">
-                      {story.currentRole}
-                    </p>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-display text-lg sm:text-xl font-medium text-ink group-hover:text-primary-700 transition-colors truncate">
+                          {story.name}
+                        </h3>
+                        <span className="text-xs text-ink-muted shrink-0">
+                          ({story.graduationYear.replace("Batch of ", "’")})
+                        </span>
+                      </div>
 
-                    <p className="font-body text-xs text-primary-700 font-medium truncate">
-                      {story.company} •{" "}
-                      <span className="text-ink-muted">{story.location}</span>
+                      <p className="font-body text-xs sm:text-sm font-semibold text-ink/80 mt-0.5 truncate">
+                        {story.currentRole}
+                      </p>
+
+                      <p className="font-body text-xs text-primary-700 font-medium truncate">
+                        {story.company} •{" "}
+                        <span className="text-ink-muted">{story.location}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 2. Key Story Highlights (Cols 5-9) */}
+                  <div className="lg:col-span-5 space-y-1.5">
+                    <span className="inline-block rounded-full bg-primary-100/70 border border-primary-200/80 px-2.5 py-0.5 text-[11px] font-semibold text-primary-700 mb-1">
+                      {story.institutionLabel}
+                    </span>
+                    <p className="font-body text-xs sm:text-sm text-ink/85 leading-relaxed">
+                      {story.summaryHighlights[0]}
+                    </p>
+                    <p className="font-body text-xs text-ink-muted leading-relaxed hidden sm:block">
+                      {story.summaryHighlights[1]}
                     </p>
                   </div>
-                </div>
 
-                {/* 2. Key Story Highlights (Cols 5-9) */}
-                <div className="lg:col-span-5 space-y-1.5">
-                  <span className="inline-block rounded-full bg-primary-100/70 border border-primary-200/80 px-2.5 py-0.5 text-[11px] font-semibold text-primary-700 mb-1">
-                    {story.institutionLabel}
-                  </span>
-                  <p className="font-body text-xs sm:text-sm text-ink/85 leading-relaxed">
-                    {story.summaryHighlights[0]}
-                  </p>
-                  <p className="font-body text-xs text-ink-muted leading-relaxed hidden sm:block">
-                    {story.summaryHighlights[1]}
-                  </p>
+                  {/* 3. Action Button (Cols 10-12) */}
+                  <div className="lg:col-span-3 flex lg:justify-end items-center">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-primary-200/80 bg-surface-raised px-4 py-2 text-xs font-semibold text-ink shadow-xs transition-all duration-200 group-hover:border-primary-700 group-hover:bg-primary-700 group-hover:text-white">
+                      <span>Read Story</span>
+                      <Icon
+                        className="size-3 transition-transform group-hover:translate-x-0.5"
+                        icon={ArrowRight01Icon}
+                      />
+                    </span>
+                  </div>
                 </div>
-
-                {/* 3. Action Button (Cols 10-12) */}
-                <div className="lg:col-span-3 flex lg:justify-end items-center">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-primary-200/80 bg-surface-raised px-4 py-2 text-xs font-semibold text-ink shadow-xs transition-all duration-200 group-hover:border-primary-700 group-hover:bg-primary-700 group-hover:text-white">
-                    <span>Read Story</span>
-                    <Icon
-                      className="size-3 transition-transform group-hover:translate-x-0.5"
-                      icon={ArrowRight01Icon}
-                    />
-                  </span>
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Standard Story Modal Dialog */}
@@ -234,7 +247,7 @@ export function AlumniStories({
                 <h4 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-ink border-b border-border pb-1.5">
                   The Journey & Educational Experience
                 </h4>
-                <div className="space-y-3 text-xs sm:text-sm text-ink/85 leading-relaxed font-body">
+                <div className="space-y-3 text-xs sm:text-sm text-ink/85 leading-relaxed font-body text-justify [text-align-last:left] [hyphens:auto]">
                   {activeStory.pdfData.storyParagraphs.map((paragraph, idx) => (
                     <p key={idx}>
                       {paragraph.split(/(\*\*.*?\*\*)/g).map((part, pIdx) => {

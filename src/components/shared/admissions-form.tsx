@@ -79,27 +79,7 @@ const RELATIONSHIP_OPTIONS = [
   { value: "Father", label: "Father" },
   { value: "Mother", label: "Mother" },
   { value: "Sibling", label: "Sibling" },
-  { value: "Relative", label: "Relative" },
-  { value: "Others", label: "Others" },
-] as const;
-
-const OCCUPATION_OPTIONS = [
-  { value: "Business / Entrepreneur", label: "Business / Entrepreneur" },
-  { value: "Government / Civil Service", label: "Government / Civil Service" },
-  { value: "Private Sector / Corporate", label: "Private Sector / Corporate" },
-  {
-    value: "Banking / Financial Services",
-    label: "Banking / Financial Services",
-  },
-  { value: "Doctor / Healthcare", label: "Doctor / Healthcare" },
-  {
-    value: "Engineering / IT / Technical",
-    label: "Engineering / IT / Technical",
-  },
-  { value: "Teaching / Academia", label: "Teaching / Academia" },
-  { value: "Armed Forces / Police", label: "Armed Forces / Police" },
-  { value: "Agriculture / Farming", label: "Agriculture / Farming" },
-  { value: "Homemaker", label: "Homemaker" },
+  { value: "Local Guardian", label: "Local Guardian" },
   { value: "Others", label: "Others" },
 ] as const;
 
@@ -116,27 +96,7 @@ const STEP_FIELDS: Record<StepKey, readonly FieldPath<AdmissionsFormData>[]> = {
     "email",
     "specialNeeds",
   ],
-  parents: [
-    "fatherName",
-    "fatherContact",
-    "fatherJob",
-    "otherFatherJob",
-    "fatherEmail",
-    "motherName",
-    "motherContact",
-    "motherJob",
-    "otherMotherJob",
-    "motherEmail",
-    "guardianName",
-    "guardianRelationship",
-    "otherGuardianRelationship",
-    "guardianContact",
-    "guardianEmail",
-    "secondaryName",
-    "secondaryRelationship",
-    "otherSecondaryRelationship",
-    "secondaryContact",
-  ],
+  parents: ["guardians"],
   history: ["qualifications", "pendingQualifications"],
   employment: ["employment"],
   additional: [
@@ -148,16 +108,10 @@ const STEP_FIELDS: Record<StepKey, readonly FieldPath<AdmissionsFormData>[]> = {
 };
 
 function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
-  const isSchoolOrCollege = course?.id
-    ? isSchoolOrCollegeProgram(course.id)
-    : false;
   const steps: Step[] = [
     { key: "course", label: "Course Details" },
     { key: "student", label: "Student Details" },
-    {
-      key: "parents",
-      label: isSchoolOrCollege ? "Parent Details" : "Guardian Details",
-    },
+    { key: "parents", label: "Guardian Details" },
   ];
   if (!course || course.asksEducationHistory) {
     steps.push({
@@ -172,6 +126,18 @@ function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
   return steps;
 }
 
+function emptyGuardian() {
+  return {
+    id: crypto.randomUUID(),
+    firstName: "",
+    lastName: "",
+    relationship: "",
+    otherRelationship: "",
+    contact: "",
+    email: "",
+  };
+}
+
 function emptyEmployment() {
   return {
     id: crypto.randomUUID(),
@@ -180,6 +146,96 @@ function emptyEmployment() {
     position: "",
     duties: "",
   };
+}
+
+function GuardianRow({
+  control,
+  index,
+  showRemove,
+  onRemove,
+}: {
+  control: Control<AdmissionsFormData>;
+  index: number;
+  showRemove: boolean;
+  onRemove: () => void;
+}) {
+  const watchedRelationship =
+    useWatch({
+      control,
+      name: `guardians.${index}.relationship`,
+    }) ?? "";
+
+  return (
+    <div className="p-5 sm:p-6 rounded-2xl border border-border bg-muted/40 relative space-y-4">
+      <div className="flex items-center justify-between">
+        <h4 className="font-semibold text-ink-muted text-xs uppercase tracking-wider">
+          Guardian {index + 1}
+        </h4>
+        {showRemove && (
+          <button
+            type="button"
+            onClick={onRemove}
+            aria-label={`Remove guardian ${index + 1}`}
+            className="text-ink-muted hover:text-accent transition-colors flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+          >
+            <Icon icon={TrashIcon} className="size-4" />
+            <span>Remove</span>
+          </button>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <TextField
+          control={control}
+          name={`guardians.${index}.firstName`}
+          label="First Name"
+          autoComplete="given-name"
+          required
+        />
+        <TextField
+          control={control}
+          name={`guardians.${index}.lastName`}
+          label="Last Name"
+          autoComplete="family-name"
+          required
+        />
+        <SelectField
+          control={control}
+          name={`guardians.${index}.relationship`}
+          label="Relationship Status"
+          placeholder="Select relationship"
+          options={RELATIONSHIP_OPTIONS}
+          required
+        />
+        {watchedRelationship === "Others" && (
+          <TextField
+            control={control}
+            name={`guardians.${index}.otherRelationship`}
+            label="Specify Relationship"
+            placeholder="e.g. Grandparent, Uncle, Aunt"
+            required
+          />
+        )}
+        <TextField
+          control={control}
+          name={`guardians.${index}.contact`}
+          label="Contact Number"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          required
+        />
+        <TextField
+          control={control}
+          name={`guardians.${index}.email`}
+          label="Email Address"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+        />
+      </div>
+    </div>
+  );
 }
 
 function QualificationRow({
@@ -201,18 +257,12 @@ function QualificationRow({
       >
         <Icon icon={TrashIcon} className="size-4" />
       </button>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2">
         <TextField
           control={control}
           name={`qualifications.${index}.place`}
           label="Previous Institution"
           required
-        />
-        <TextField
-          control={control}
-          name={`qualifications.${index}.dates`}
-          label="Dates Attended"
-          placeholder="e.g. 2018 - 2022"
         />
         <TextField
           control={control}
@@ -222,8 +272,8 @@ function QualificationRow({
         />
         <DateField
           control={control}
-          name={`qualifications.${index}.dateObtained`}
-          label="Date Obtained"
+          name={`qualifications.${index}.graduationDate`}
+          label="Graduation Date"
         />
       </div>
     </div>
@@ -310,32 +360,13 @@ export function MultiStepForm() {
         telephone: "",
         email: "",
         specialNeeds: false,
-        fatherName: "",
-        fatherContact: "",
-        fatherJob: "",
-        otherFatherJob: "",
-        fatherEmail: "",
-        motherName: "",
-        motherContact: "",
-        motherJob: "",
-        otherMotherJob: "",
-        motherEmail: "",
-        guardianName: "",
-        guardianRelationship: "",
-        otherGuardianRelationship: "",
-        guardianContact: "",
-        guardianEmail: "",
-        secondaryName: "",
-        secondaryRelationship: "",
-        otherSecondaryRelationship: "",
-        secondaryContact: "",
+        guardians: [emptyGuardian()],
         qualifications: [
           {
             id: "1",
             place: "",
-            dates: "",
             awards: "",
-            dateObtained: null,
+            graduationDate: null,
           },
         ],
         pendingQualifications: "",
@@ -348,6 +379,15 @@ export function MultiStepForm() {
         signatureDate: new Date().toISOString().split("T")[0],
       },
     });
+
+  const {
+    fields: guardianFields,
+    append: appendGuardian,
+    remove: removeGuardian,
+  } = useFieldArray({
+    control,
+    name: "guardians",
+  });
 
   const {
     fields: qualificationFields,
@@ -370,12 +410,6 @@ export function MultiStepForm() {
 
   const selectedProgram = useWatch({ control, name: "program" }) ?? "";
   const isSchoolOrCollege = isSchoolOrCollegeProgram(selectedProgram);
-  const watchedFatherJob = useWatch({ control, name: "fatherJob" }) ?? "";
-  const watchedMotherJob = useWatch({ control, name: "motherJob" }) ?? "";
-  const watchedGuardianRelationship =
-    useWatch({ control, name: "guardianRelationship" }) ?? "";
-  const watchedSecondaryRelationship =
-    useWatch({ control, name: "secondaryRelationship" }) ?? "";
   const course = findInquiryCourse(selectedProgram);
   const steps = stepsForCourse(course);
   const stepIndex = Math.min(currentStep, steps.length - 1);
@@ -402,9 +436,8 @@ export function MultiStepForm() {
     appendQualification({
       id: crypto.randomUUID(),
       place: "",
-      dates: "",
       awards: "",
-      dateObtained: null,
+      graduationDate: null,
     });
   };
 
@@ -599,7 +632,7 @@ export function MultiStepForm() {
                   type="tel"
                   inputMode="tel"
                   autoComplete="tel"
-                  required={!isSchoolOrCollege}
+                  required
                 />
               )}
               {selectedProgram !== "school-primary" && (
@@ -610,7 +643,7 @@ export function MultiStepForm() {
                   type="email"
                   inputMode="email"
                   autoComplete="email"
-                  required={!isSchoolOrCollege}
+                  required
                 />
               )}
               <CheckboxField
@@ -623,245 +656,37 @@ export function MultiStepForm() {
           </div>
         );
       case "parents": {
-        if (isSchoolOrCollege) {
-          return (
-            <div className="space-y-8">
-              <H6 as="h3" className="text-ink mb-6">
-                Parent Details
-              </H6>
-
-              {/* Father's Details */}
-              <div className="space-y-4">
-                <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                  Father&apos;s Details
-                </h4>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <TextField
-                    control={control}
-                    name="fatherName"
-                    label="Father's Full Name"
-                    required
-                  />
-                  <TextField
-                    control={control}
-                    name="fatherContact"
-                    label="Father's Contact Number"
-                    type="tel"
-                    inputMode="tel"
-                    required
-                  />
-                  <SelectField
-                    control={control}
-                    name="fatherJob"
-                    label="Job / Occupation"
-                    placeholder="Select occupation"
-                    options={OCCUPATION_OPTIONS}
-                    required
-                  />
-                  <TextField
-                    control={control}
-                    name="fatherEmail"
-                    label="Father's Email Address"
-                    type="email"
-                    inputMode="email"
-                  />
-                  {watchedFatherJob === "Others" && (
-                    <div className="lg:col-span-2">
-                      <TextField
-                        control={control}
-                        name="otherFatherJob"
-                        label="Specify Job / Occupation"
-                        placeholder="e.g. Architect, Consultant, Artist"
-                        required
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Mother's Details */}
-              <div className="space-y-4 pt-6 border-t border-border/50">
-                <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                  Mother&apos;s Details
-                </h4>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <TextField
-                    control={control}
-                    name="motherName"
-                    label="Mother's Full Name"
-                    required
-                  />
-                  <TextField
-                    control={control}
-                    name="motherContact"
-                    label="Mother's Contact Number"
-                    type="tel"
-                    inputMode="tel"
-                    required
-                  />
-                  <SelectField
-                    control={control}
-                    name="motherJob"
-                    label="Job / Occupation"
-                    placeholder="Select occupation"
-                    options={OCCUPATION_OPTIONS}
-                    required
-                  />
-                  <TextField
-                    control={control}
-                    name="motherEmail"
-                    label="Mother's Email Address"
-                    type="email"
-                    inputMode="email"
-                  />
-                  {watchedMotherJob === "Others" && (
-                    <div className="lg:col-span-2">
-                      <TextField
-                        control={control}
-                        name="otherMotherJob"
-                        label="Specify Job / Occupation"
-                        placeholder="e.g. Architect, Consultant, Artist"
-                        required
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Secondary / Emergency Contact */}
-              <div className="space-y-4 pt-6 border-t border-border/50">
-                <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                  Secondary / Emergency Contact (Optional)
-                </h4>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <TextField
-                    control={control}
-                    name="secondaryName"
-                    label="Secondary Contact Name"
-                  />
-                  <SelectField
-                    control={control}
-                    name="secondaryRelationship"
-                    label="Relationship to Student"
-                    placeholder="Select relationship"
-                    options={RELATIONSHIP_OPTIONS}
-                  />
-                  {watchedSecondaryRelationship === "Others" && (
-                    <div className="lg:col-span-2">
-                      <TextField
-                        control={control}
-                        name="otherSecondaryRelationship"
-                        label="Specify Relationship"
-                        placeholder="e.g. Aunt, Family Friend, Uncle"
-                      />
-                    </div>
-                  )}
-                  <div className="lg:col-span-2">
-                    <TextField
-                      control={control}
-                      name="secondaryContact"
-                      label="Secondary Contact Number"
-                      type="tel"
-                      inputMode="tel"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        }
-
         return (
-          <div className="space-y-8">
-            <H6 as="h3" className="text-ink mb-6">
-              Local Guardian Details
-            </H6>
-
-            <div className="space-y-4">
-              <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                Local Guardian Details
-              </h4>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <TextField
-                  control={control}
-                  name="guardianName"
-                  label="Local Guardian Name"
-                  required
-                />
-                <SelectField
-                  control={control}
-                  name="guardianRelationship"
-                  label="Relationship to Student"
-                  placeholder="Select relationship"
-                  options={RELATIONSHIP_OPTIONS}
-                  required
-                />
-                {watchedGuardianRelationship === "Others" && (
-                  <div className="lg:col-span-2">
-                    <TextField
-                      control={control}
-                      name="otherGuardianRelationship"
-                      label="Specify Relationship"
-                      placeholder="e.g. Legal Guardian, Grandparent, Uncle"
-                      required
-                    />
-                  </div>
-                )}
-                <TextField
-                  control={control}
-                  name="guardianContact"
-                  label="Contact Number"
-                  type="tel"
-                  inputMode="tel"
-                  required
-                />
-                <TextField
-                  control={control}
-                  name="guardianEmail"
-                  label="Email Address"
-                  type="email"
-                  inputMode="email"
-                />
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <H6 as="h3" className="text-ink">
+                  Guardian Details
+                </H6>
+                <P className="text-sm text-ink-muted mt-1">
+                  Add details for one or more parents / guardians.
+                </P>
               </div>
+              <Button
+                type="button"
+                size="sm"
+                onClick={() => appendGuardian(emptyGuardian())}
+                className="gap-2 shrink-0 bg-transparent border border-border text-ink hover:bg-muted shadow-none"
+              >
+                <Icon icon={PlusIcon} className="size-4" /> Add Guardian
+              </Button>
             </div>
 
-            <div className="space-y-4 pt-6 border-t border-border/50">
-              <h4 className="font-semibold text-ink-muted text-sm uppercase tracking-wider">
-                Secondary / Emergency Contact (Optional)
-              </h4>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <TextField
+            <div className="space-y-6">
+              {guardianFields.map((field, index) => (
+                <GuardianRow
+                  key={field.id}
                   control={control}
-                  name="secondaryName"
-                  label="Secondary Contact Name"
+                  index={index}
+                  showRemove={guardianFields.length > 1}
+                  onRemove={() => removeGuardian(index)}
                 />
-                <SelectField
-                  control={control}
-                  name="secondaryRelationship"
-                  label="Relationship to Student"
-                  placeholder="Select relationship"
-                  options={RELATIONSHIP_OPTIONS}
-                />
-                {watchedSecondaryRelationship === "Others" && (
-                  <div className="lg:col-span-2">
-                    <TextField
-                      control={control}
-                      name="otherSecondaryRelationship"
-                      label="Specify Relationship"
-                      placeholder="e.g. Aunt, Family Friend, Uncle"
-                    />
-                  </div>
-                )}
-                <div className="lg:col-span-2">
-                  <TextField
-                    control={control}
-                    name="secondaryContact"
-                    label="Secondary Contact Number"
-                    type="tel"
-                    inputMode="tel"
-                  />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         );
@@ -1210,17 +1035,19 @@ export function MultiStepForm() {
 export function AdmissionsFormSection() {
   return (
     <section className="section-y gutter-x" id="apply">
-      <div className="text-center mb-12 max-w-3xl mx-auto">
-        <H2 className="font-display mb-4 text-3xl sm:text-4xl lg:text-5xl">
-          Start Your Application
-        </H2>
-        <P className="text-ink-muted text-lg">
-          Tell us about yourself in the inquiry form below, then download your
-          answers as a PDF. Everything stays on your device.
-        </P>
-      </div>
+      <div className="mx-auto max-w-page">
+        <div className="text-center mb-10 sm:mb-12 max-w-3xl mx-auto">
+          <H2 className="font-display mb-3 sm:mb-4 text-3xl sm:text-4xl lg:text-5xl">
+            Start Your Application
+          </H2>
+          <P className="text-ink-muted text-base sm:text-lg">
+            Tell us about yourself in the inquiry form below, then download your
+            answers as a PDF. Everything stays on your device.
+          </P>
+        </div>
 
-      <MultiStepForm />
+        <MultiStepForm />
+      </div>
     </section>
   );
 }

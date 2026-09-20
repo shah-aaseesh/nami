@@ -1,6 +1,5 @@
 import { Reveal } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
-import { H5, Standfirst } from "@/components/ui/typography";
+import { H5 } from "@/components/ui/typography";
 import type {
   BachelorsProgramme,
   ProgrammeStage,
@@ -8,8 +7,9 @@ import type {
 import { courseDetailCopy } from "./course-detail-copy";
 
 const headCell =
-  "border-b border-border-strong py-3 pe-6 align-bottom font-body text-xs font-medium tracking-widest text-ink-muted uppercase last:pe-0";
-const bodyCell = "border-b border-border py-4 pe-6 align-top last:pe-0";
+  "border-b border-border-strong py-3.5 pe-4 sm:pe-6 align-bottom font-body text-xs font-semibold tracking-wider text-ink-muted uppercase text-left last:pe-0";
+const bodyCell =
+  "border-b border-border/80 py-4 pe-4 sm:pe-6 align-middle text-left font-body text-sm last:pe-0";
 
 function StageTable({
   courseTitle,
@@ -25,21 +25,32 @@ function StageTable({
   );
 
   return (
-    <div>
-      <H5 as="h3" className="text-ink">
-        {stage.label}
-      </H5>
+    <div className="space-y-4">
+      <div className="flex items-center gap-2.5">
+        <span className="size-2 rounded-full bg-accent" />
+        <H5 as="h3" className="text-ink font-display text-lg sm:text-xl font-semibold">
+          {stage.label}
+        </H5>
+      </div>
 
-      <section
+      <div
         aria-label={`${stage.label} modules`}
-        className="mt-6 overflow-x-auto"
+        className="overflow-x-auto rounded-2xl border border-border bg-surface-raised/30 p-4 sm:p-6 shadow-2xs"
         // biome-ignore lint/a11y/noNoninteractiveTabindex: a horizontally scrolling container must be reachable by keyboard alone (WCAG 2.1.1, axe scrollable-region-focusable) and the table holds no focusable child of its own.
         tabIndex={0}
       >
-        <table className="w-full min-w-3xl border-collapse text-left font-body text-sm">
+        <table className="w-full min-w-xl table-fixed border-collapse text-left font-body text-sm">
           <caption className="sr-only">
             {`${courseTitle} — ${stage.label} modules`}
           </caption>
+
+          <colgroup>
+            <col className={showStatus && showPrerequisites ? "w-[16%] sm:w-[15%]" : "w-[20%] sm:w-[18%]"} />
+            <col className={showStatus && showPrerequisites ? "w-[38%] sm:w-[43%]" : "w-[45%] sm:w-[52%]"} />
+            <col className="w-[14%] sm:w-[12%]" />
+            {showStatus && <col className="w-[16%] sm:w-[15%]" />}
+            {showPrerequisites && <col className="w-[16%] sm:w-[15%]" />}
+          </colgroup>
 
           <thead>
             <tr>
@@ -67,14 +78,16 @@ function StageTable({
 
           <tbody>
             {stage.modules.map((module) => (
-              <tr key={module.code}>
+              <tr className="transition-colors hover:bg-muted/20" key={module.code}>
                 <th
-                  className={`${bodyCell} font-body font-medium whitespace-nowrap text-ink`}
+                  className={`${bodyCell} font-body font-semibold whitespace-nowrap text-ink`}
                   scope="row"
                 >
                   {module.code}
                 </th>
-                <td className={`${bodyCell} text-ink`}>{module.title}</td>
+                <td className={`${bodyCell} font-normal text-ink`}>
+                  {module.title}
+                </td>
                 <td className={`${bodyCell} tabular-nums text-ink-muted`}>
                   {module.credits}
                 </td>
@@ -94,10 +107,10 @@ function StageTable({
             ))}
           </tbody>
         </table>
-      </section>
+      </div>
 
       {stage.note === null ? null : (
-        <p className="mt-4 font-body text-sm text-pretty text-ink-muted">
+        <p className="font-body text-xs sm:text-sm text-pretty text-ink-muted pl-1">
           {stage.note}
         </p>
       )}
@@ -113,24 +126,15 @@ export function CourseModules({
   if (course.stages.length === 0) return null;
 
   return (
-    <section className="gutter-x section-y">
-      <div className="mx-auto max-w-page">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
-          <SplitText
-            as="h2"
-            className="font-display text-3xl font-normal text-balance text-ink lg:col-span-4 lg:text-4xl"
-          >
-            {courseDetailCopy.modulesHeading}
-          </SplitText>
+    <section className="gutter-x py-8 sm:py-10 lg:py-12 border-b border-border/60 bg-surface">
+      <div className="mx-auto max-w-page space-y-6">
+        {course.stagesNote === null ? null : (
+          <p className="text-sm sm:text-base text-ink-muted leading-relaxed">
+            {course.stagesNote}
+          </p>
+        )}
 
-          {course.stagesNote === null ? null : (
-            <Reveal className="mt-6 max-w-xl lg:col-span-7 lg:col-start-6 lg:mt-0">
-              <Standfirst>{course.stagesNote}</Standfirst>
-            </Reveal>
-          )}
-        </div>
-
-        <Reveal className="mt-14 flex flex-col gap-14 lg:mt-20 lg:gap-20">
+        <Reveal className="space-y-6 sm:space-y-8">
           {course.stages.map((stage) => (
             <StageTable
               courseTitle={course.fullTitle}

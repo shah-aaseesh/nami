@@ -91,32 +91,42 @@ function requiredPastDate(missing: string, unreadable: string, future: string) {
 type ConditionalField =
   | "proposedCourse"
   | "age"
-  | "fatherName"
-  | "fatherContact"
-  | "fatherJob"
-  | "otherFatherJob"
-  | "fatherEmail"
-  | "motherName"
-  | "motherContact"
-  | "motherJob"
-  | "otherMotherJob"
-  | "motherEmail"
-  | "guardianName"
-  | "guardianRelationship"
-  | "otherGuardianRelationship"
-  | "guardianContact"
-  | "guardianEmail"
   | "telephone"
   | "email"
+  | "guardians"
   | "signature"
   | "signatureDate";
+
+export const guardianSchema = z
+  .object({
+    id: z.string(),
+    firstName: requiredText("Enter guardian's first name"),
+    lastName: requiredText("Enter guardian's last name"),
+    relationship: requiredText("Select relationship to student"),
+    otherRelationship: z.string().trim(),
+    contact: requiredPhone(
+      "Enter guardian's contact number",
+      "Enter a valid contact number",
+    ),
+    email: optionalEmail("Enter a valid email address, or leave blank"),
+  })
+  .superRefine((val, ctx) => {
+    if (val.relationship === "Others" && val.otherRelationship === "") {
+      ctx.addIssue({
+        code: "custom",
+        path: ["otherRelationship"],
+        message: "Please specify relationship",
+      });
+    }
+  });
+
+export type Guardian = z.infer<typeof guardianSchema>;
 
 export const qualificationSchema = z.object({
   id: z.string(),
   place: z.string().trim(),
-  dates: z.string().trim(),
   awards: z.string().trim(),
-  dateObtained: z.string().nullable(),
+  graduationDate: z.string().nullable(),
 });
 
 export type Qualification = z.infer<typeof qualificationSchema>;
@@ -149,40 +159,8 @@ export const admissionsSchema = z
     email: optionalEmail("Enter a valid email address"),
     specialNeeds: z.boolean(),
 
-    // Father details (Compulsory for School 1-7, +2, and A Levels)
-    fatherName: z.string().trim(),
-    fatherContact: optionalPhone(
-      "Enter a valid contact number, or leave blank",
-    ),
-    fatherJob: z.string().trim(),
-    otherFatherJob: z.string().trim(),
-    fatherEmail: optionalEmail("Enter a valid email address, or leave blank"),
-
-    // Mother details (Compulsory for School 1-7, +2, and A Levels)
-    motherName: z.string().trim(),
-    motherContact: optionalPhone(
-      "Enter a valid contact number, or leave blank",
-    ),
-    motherJob: z.string().trim(),
-    otherMotherJob: z.string().trim(),
-    motherEmail: optionalEmail("Enter a valid email address, or leave blank"),
-
-    // Local Guardian details (Compulsory for Degree)
-    guardianName: z.string().trim(),
-    guardianRelationship: z.string().trim(),
-    otherGuardianRelationship: z.string().trim(),
-    guardianContact: optionalPhone(
-      "Enter a valid contact number, or leave blank",
-    ),
-    guardianEmail: optionalEmail("Enter a valid email address, or leave blank"),
-
-    // Secondary / Emergency Contact (Optional)
-    secondaryName: z.string().trim(),
-    secondaryRelationship: z.string().trim(),
-    otherSecondaryRelationship: z.string().trim(),
-    secondaryContact: optionalPhone(
-      "Enter a valid contact number, or leave blank",
-    ),
+    // Guardians list
+    guardians: z.array(guardianSchema).min(1, "At least one guardian is required"),
 
     qualifications: z.array(qualificationSchema),
     pendingQualifications: z.string().trim(),
@@ -210,55 +188,12 @@ export const admissionsSchema = z
       );
     }
 
-    if (data.program === "school-primary" && data.age === "") {
-      missing("age", "Enter student's age");
-    }
-
-    if (isSchoolOrCollegeProgram(data.program)) {
-      if (data.fatherName === "") {
-        missing("fatherName", "Enter father's full name");
-      }
-      if (data.fatherContact === "") {
-        missing("fatherContact", "Enter father's contact number");
-      }
-      if (data.fatherJob === "") {
-        missing("fatherJob", "Select father's job / occupation");
-      }
-      if (data.fatherJob === "Others" && data.otherFatherJob === "") {
-        missing("otherFatherJob", "Please specify father's job / occupation");
-      }
-      if (data.motherName === "") {
-        missing("motherName", "Enter mother's full name");
-      }
-      if (data.motherContact === "") {
-        missing("motherContact", "Enter mother's contact number");
-      }
-      if (data.motherJob === "") {
-        missing("motherJob", "Select mother's job / occupation");
-      }
-      if (data.motherJob === "Others" && data.otherMotherJob === "") {
-        missing("otherMotherJob", "Please specify mother's job / occupation");
+    if (data.program === "school-primary") {
+      if (data.age === "") {
+        missing("age", "Enter student's age");
       }
     } else {
-      // Graduate / Degree
-      if (data.guardianName === "") {
-        missing("guardianName", "Enter local guardian's name");
-      }
-      if (data.guardianRelationship === "") {
-        missing("guardianRelationship", "Select relationship to student");
-      }
-      if (
-        data.guardianRelationship === "Others" &&
-        data.otherGuardianRelationship === ""
-      ) {
-        missing("otherGuardianRelationship", "Please specify relationship");
-      }
-      if (data.guardianContact === "") {
-        missing(
-          "guardianContact",
-          "Enter a contact number for local guardian",
-        );
-      }
+      // Telephone and email are compulsory for +2, A-Levels, Bachelors, Masters, etc.
       if (data.telephone === "") {
         missing("telephone", "Enter a telephone number we can reach you on");
       }

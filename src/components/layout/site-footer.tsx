@@ -21,6 +21,7 @@ const FOOTER_NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Admissions", href: "/admissions" },
+  { label: "Documents & Downloads", href: "/documents" },
   { label: "Student Life", href: "/student-life" },
   { label: "Photo Gallery", href: "/gallery" },
   { label: "Alumni", href: "/alumni" },
@@ -396,7 +397,7 @@ export async function SiteFooter() {
         </div>
 
         <div className="field-ink gutter-x py-4 sm:py-5 border-t border-neutral-800">
-          <div className="mx-auto max-w-page text-center">
+          <div className="mx-auto max-w-page flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <p className="font-body text-xs text-neutral-300">
               © {new Date().getFullYear()} {group.name}
               {group.establishedYear
@@ -404,6 +405,28 @@ export async function SiteFooter() {
                 : null}
               . All rights reserved.
             </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-body text-neutral-400 justify-center sm:justify-end">
+              <Link
+                href={"/documents" as Route}
+                className="hover:text-white transition-colors underline-offset-4 hover:underline"
+              >
+                Official Documents
+              </Link>
+              <span className="text-neutral-600">•</span>
+              <Link
+                href={"/privacy" as Route}
+                className="hover:text-white transition-colors underline-offset-4 hover:underline"
+              >
+                Privacy Policy
+              </Link>
+              <span className="text-neutral-600">•</span>
+              <Link
+                href={"/terms" as Route}
+                className="hover:text-white transition-colors underline-offset-4 hover:underline"
+              >
+                Terms & Conditions
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

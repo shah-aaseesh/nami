@@ -98,8 +98,10 @@ export const schoolCollaborators: readonly SchoolCollaborator[] = [
 
 export function SchoolCollaboratorsSection({
   id = "collaborators",
+  className,
 }: {
   readonly id?: string;
+  readonly className?: string;
 }) {
   const [selectedCollab, setSelectedCollab] =
     useState<SchoolCollaborator | null>(null);
@@ -117,19 +119,12 @@ export function SchoolCollaboratorsSection({
 
   return (
     <section
-      className="gutter-x section-y border-t border-[#E8E2D2] bg-gradient-to-b from-[#FCFBF7] via-[#F7F3E8] to-[#FCFBF7] relative overflow-hidden"
+      className={cn(
+        "gutter-x section-y border-t border-border bg-surface relative",
+        className,
+      )}
       id={id}
     >
-      {/* Subtle brand glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-20 -right-20 size-80 rounded-full bg-[#F7CD00]/10 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-20 -left-20 size-80 rounded-full bg-[#BD1B21]/5 blur-3xl"
-      />
-
       <Carousel
         aria-label="Our Learning Collaborators"
         aria-roledescription="carousel"

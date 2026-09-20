@@ -5,27 +5,29 @@ import { FacultyCard } from "./faculty-card";
 import { FacultyGroupTrack } from "./faculty-group-track";
 
 export function FacultyGroup({
+  id,
   isFirstGroup = false,
   leaders,
   title,
 }: {
+  readonly id?: string;
   readonly isFirstGroup?: boolean;
   readonly leaders: readonly Leader[];
   readonly title: string;
 }) {
-  const isScrollable = leaders.length > 4;
+  const isScrollable = leaders.length > 4 && title !== "Board of Directors";
   const isSolo = leaders.length === 1;
 
   if (leaders.length === 0) return null;
 
   const heading = (
-    <div className="border-b border-border/80 pb-4 mb-8 sm:mb-12">
+    <div className="border-b border-border/80 pb-3 mb-6 sm:mb-8">
       <H2
         className={cn(
           "font-display font-normal text-ink tracking-tight",
           isFirstGroup
-            ? "text-3xl sm:text-4xl lg:text-5xl"
-            : "text-2xl sm:text-3xl lg:text-4xl",
+            ? "text-2xl sm:text-3xl lg:text-4xl"
+            : "text-xl sm:text-2xl lg:text-3xl",
         )}
       >
         {title}
@@ -39,23 +41,16 @@ export function FacultyGroup({
     const row2 = leaders.slice(4, 7);
 
     return (
-      <section
-        className={cn(
-          "gutter-x",
-          isFirstGroup
-            ? "pt-4 sm:pt-6 lg:pt-8 pb-12 lg:pb-16"
-            : "pt-8 lg:pt-12 pb-12 lg:pb-16",
-        )}
-      >
+      <section className="gutter-x scroll-mt-24" id={id}>
         <div className="mx-auto max-w-page">
           {heading}
 
-          <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
+          <div className="flex flex-col gap-6 sm:gap-8">
             {/* Row 1: 4 Directors */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 w-full">
               {row1.map((leader, index) => (
                 <FacultyCard
-                  className="w-full max-w-[280px] sm:max-w-[300px]"
+                  className="w-full"
                   index={index}
                   isFirstGroup={isFirstGroup}
                   key={leader.id}
@@ -65,10 +60,10 @@ export function FacultyGroup({
             </div>
 
             {/* Row 2: 3 Directors (Centered) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center max-w-5xl mx-auto w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto w-full">
               {row2.map((leader, index) => (
                 <FacultyCard
-                  className="w-full max-w-[280px] sm:max-w-[300px]"
+                  className="w-full"
                   index={index + 4}
                   isFirstGroup={isFirstGroup}
                   key={leader.id}
@@ -84,6 +79,7 @@ export function FacultyGroup({
 
   const cards = leaders.map((leader, index) => (
     <FacultyCard
+      className="w-full"
       index={index}
       isFirstGroup={isFirstGroup}
       isScrollable={isScrollable}
@@ -94,24 +90,23 @@ export function FacultyGroup({
   ));
 
   return (
-    <section
-      className={cn(
-        "gutter-x",
-        isFirstGroup
-          ? "pt-4 sm:pt-6 lg:pt-8 pb-12 lg:pb-16"
-          : "pt-8 lg:pt-12 pb-12 lg:pb-16",
-      )}
-    >
+    <section className="gutter-x scroll-mt-24" id={id}>
       {isScrollable ? (
         <FacultyGroupTrack heading={heading}>{cards}</FacultyGroupTrack>
       ) : (
-        <div className="mx-auto max-w-page overflow-x-clip py-2">
+        <div className="mx-auto max-w-page">
           {heading}
 
           <div
             className={cn(
-              "flex items-stretch gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:flex-wrap md:overflow-visible pb-4",
-              isSolo ? "justify-center overflow-visible" : "md:justify-center",
+              "grid gap-6 sm:gap-8",
+              leaders.length === 1
+                ? "max-w-md mx-auto grid-cols-1"
+                : leaders.length === 2
+                  ? "max-w-2xl mx-auto grid-cols-1 sm:grid-cols-2"
+                  : leaders.length === 3
+                    ? "max-w-5xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
             )}
           >
             {cards}

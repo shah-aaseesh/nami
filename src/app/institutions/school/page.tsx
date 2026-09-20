@@ -75,19 +75,15 @@ export default async function SchoolPage() {
         copy={schoolCopy.bands}
         id="academics"
         primaryExtra={
-          <SchoolFaqSection className="!bg-transparent !border-0 !px-0 !py-0" />
+          <>
+            <SchoolCollaboratorsSection />
+            <SchoolFaqSection />
+          </>
         }
-        secondaryExtra={
-          <InstitutionClubsSection
-            className="!bg-transparent !px-0 !py-0"
-            tone="brand"
-          />
-        }
+        secondaryExtra={<InstitutionClubsSection tone="brand" />}
       />
 
       <SchoolDay copy={schoolCopy.day} id="day" />
-
-      <SchoolCollaboratorsSection />
 
       <Testimonials
         id="parents"

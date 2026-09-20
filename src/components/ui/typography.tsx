@@ -77,17 +77,17 @@ export const Eyebrow = createText(
 export const Standfirst = createText(
   "p",
   "standfirst",
-  "font-body text-sm sm:text-base font-normal text-ink-muted leading-relaxed text-justify",
+  "font-body text-sm sm:text-base font-normal text-ink-muted leading-relaxed text-justify [text-align-last:left] [hyphens:auto]",
 );
 
 export const P = createText(
   "p",
   "p",
-  "font-body text-sm sm:text-base font-normal text-ink-muted leading-relaxed text-justify",
+  "font-body text-sm sm:text-base font-normal text-ink-muted leading-relaxed text-justify [text-align-last:left] [hyphens:auto]",
 );
 
 export const Small = createText(
   "p",
   "small",
-  "font-body text-xs sm:text-sm font-normal text-ink-muted text-justify",
+  "font-body text-xs sm:text-sm font-normal text-ink-muted text-justify [text-align-last:left] [hyphens:auto]",
 );

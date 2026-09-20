@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
+import { stakeholderTestimonials } from "@/lib/content/local/testimonials";
 import { createMetadata } from "@/lib/seo";
 import { AboutAwards } from "./_components/about-awards";
 import { AboutCreed } from "./_components/about-creed";
@@ -46,7 +47,11 @@ export default async function AboutPage() {
       />
       <AboutMascot section={mascotSection} story={mascotStory} />
       <AboutAwards awards={copy.awards} section={copy.sections.awards} />
-      <Testimonials section={copy.sections.testimonials} />
+      <Testimonials
+        id="stakeholders"
+        items={stakeholderTestimonials}
+        section={copy.sections.testimonials}
+      />
     </>
   );
 }

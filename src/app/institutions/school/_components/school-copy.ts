@@ -304,35 +304,15 @@ const day: SchoolDayCopy = {
 };
 
 const parents: SectionCopy = {
-  navLabel: "Parents",
-  eyebrow: "Parent voices",
-  heading: "The school their children come home from.",
+  navLabel: "Voices",
+  eyebrow: "Parent & Student voices",
+  heading: "Stories from our students and families.",
   cta: null,
   emptyState:
-    "Parent accounts of the school appear here as families share them.",
+    "Stories and experiences from our students and families appear here as they are shared.",
 };
 
 export const parentTestimonials: readonly Testimonial[] = [
-  {
-    ...entryOf("parent-sarita-adhikari"),
-    quote:
-      "The jump into Grade 11 science worried us. Her teachers flagged where she was slipping before we had to ask, and the laboratories are properly staffed.",
-    name: "Sarita Adhikari",
-    programme: "Parent, Grade 11 Science",
-    institution: "school",
-    graduatedYear: null,
-    portrait: pragatiRaiPortrait,
-  },
-  {
-    ...entryOf("parent-prakash-maharjan"),
-    quote:
-      "He started Grade 1 barely speaking to anyone. Six months on he tells us about his collaborative projects over dinner and loves his Mandarin classes.",
-    name: "Prakash Maharjan",
-    programme: "Parent of a Grade 1 student",
-    institution: "school",
-    graduatedYear: null,
-    portrait: pragatiRaiPortrait,
-  },
   {
     ...entryOf("parent-bikash-shrestha"),
     quote:
@@ -342,6 +322,21 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: pragatiRaiPortrait,
+  },
+  {
+    ...entryOf("student-evana-khanal"),
+    name: "Evana Khanal",
+    programme: "Grade 4",
+    quote:
+      "We learn from our own mistakes. Making mistakes while learning doesn't mean we are bad. Our teachers help us understand our mistakes with kindness, so we can do better next time.",
+    institution: "school",
+    graduatedYear: null,
+    portrait: {
+      src: "/School Testimonials/evana khanal.png",
+      alt: "Evana Khanal",
+      width: 400,
+      height: 400,
+    },
   },
   {
     ...entryOf("parent-rekha-tamang"),
@@ -354,11 +349,76 @@ export const parentTestimonials: readonly Testimonial[] = [
     portrait: pragatiRaiPortrait,
   },
   {
+    ...entryOf("student-hriden-jung-karki"),
+    name: "Hriden Jung Karki",
+    programme: "Grade 5",
+    quote:
+      "At Nami, we learn through fun activities. In Science, we played football to understand force. Football is my favourite sport so it was my best experience.",
+    institution: "school",
+    graduatedYear: null,
+    portrait: {
+      src: "/School Testimonials/Hriden Jung Karki.png",
+      alt: "Hriden Jung Karki",
+      width: 400,
+      height: 400,
+    },
+  },
+  {
     ...entryOf("parent-sunita-karki"),
     quote:
       "She comes home excited about creative arts, science experiments and her UnMath projects. Far more of her day is spent exploring and making things than rote learning.",
     name: "Sunita Karki",
     programme: "Parent of a Grade 4 student",
+    institution: "school",
+    graduatedYear: null,
+    portrait: pragatiRaiPortrait,
+  },
+  {
+    ...entryOf("student-himanshu-raya"),
+    name: "Himanshu Raya",
+    programme: "Grade 5",
+    quote:
+      "At Nami, I learned to adapt to new challenges and become more confident through public speaking and teamwork.",
+    institution: "school",
+    graduatedYear: null,
+    portrait: {
+      src: "/School Testimonials/Himanshu Raya.png",
+      alt: "Himanshu Raya",
+      width: 400,
+      height: 400,
+    },
+  },
+  {
+    ...entryOf("parent-prakash-maharjan"),
+    quote:
+      "He started Grade 1 barely speaking to anyone. Six months on he tells us about his collaborative projects over dinner and loves his Mandarin classes.",
+    name: "Prakash Maharjan",
+    programme: "Parent of a Grade 1 student",
+    institution: "school",
+    graduatedYear: null,
+    portrait: pragatiRaiPortrait,
+  },
+  {
+    ...entryOf("student-aarushi-poudyal"),
+    name: "Aarushi Poudyal",
+    programme: "Grade 5",
+    quote:
+      "I will never forget visiting Namgyal School during Environment Week, where I learned to segregate, reuse, and recycle different types of waste.",
+    institution: "school",
+    graduatedYear: null,
+    portrait: {
+      src: "/School Testimonials/Aarushi Poudyal.png",
+      alt: "Aarushi Poudyal",
+      width: 400,
+      height: 400,
+    },
+  },
+  {
+    ...entryOf("parent-sarita-adhikari"),
+    quote:
+      "The jump into Grade 11 science worried us. Her teachers flagged where she was slipping before we had to ask, and the laboratories are properly staffed.",
+    name: "Sarita Adhikari",
+    programme: "Parent, Grade 11 Science",
     institution: "school",
     graduatedYear: null,
     portrait: pragatiRaiPortrait,

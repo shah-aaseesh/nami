@@ -12,19 +12,33 @@ function CreedCard({
 }) {
   if (paragraphs.length === 0) return null;
 
+  // Clean any wrapping or trailing/leading quotation marks so quotes aren't in the sentence
+  const cleanParagraphs = paragraphs.map((paragraph) =>
+    paragraph.trim().replace(/^["“]/, "").replace(/["”]$/, "")
+  );
+
   return (
-    <div className="flex h-full flex-col justify-between rounded-2xl sm:rounded-3xl border border-border/80 bg-surface-raised p-6 sm:p-8 lg:p-10 shadow-xs transition-shadow duration-300 hover:shadow-md">
-      <div>
-        <div className="flex items-center gap-3">
-          <span className="size-2.5 rounded-full bg-accent" />
+    <div className="group relative overflow-hidden flex h-full flex-col justify-between rounded-2xl sm:rounded-3xl border border-border/80 bg-surface-raised p-6 sm:p-8 lg:p-10 shadow-xs transition-all duration-300 hover:shadow-md hover:border-accent/40">
+      {/* Big Decorative Red Double Quote Mark in Background (Left Aligned) */}
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute left-4 sm:left-6 top-3 sm:top-4 size-20 sm:size-28 lg:size-32 text-[#BD1B21]/10 transition-all duration-500 group-hover:text-[#BD1B21]/16 group-hover:scale-105"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+      </svg>
+
+      <div className="relative z-10">
+        <div>
           <Eyebrow as="h3" className="text-accent text-sm font-semibold tracking-wider uppercase">
             {label}
           </Eyebrow>
         </div>
         <div className="mt-5 sm:mt-6 flex flex-col gap-4">
-          {paragraphs.map((paragraph) => (
+          {cleanParagraphs.map((paragraph) => (
             <P
-              className="text-base sm:text-lg lg:text-xl leading-relaxed text-ink/90 font-normal text-justify [text-align-last:left] [hyphens:auto]"
+              className="text-base sm:text-lg lg:text-xl leading-relaxed text-ink/90 font-normal text-left"
               key={paragraph}
             >
               {paragraph}

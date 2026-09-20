@@ -16,30 +16,49 @@ function initialsOf(name: string): string {
 
 export function TestimonialCard({
   className,
+  size = "md",
   testimonial,
 }: {
   className?: string;
+  size?: "sm" | "md";
   testimonial: Testimonial;
 }) {
   const { portrait } = testimonial;
+  const isSmall = size === "sm";
 
   return (
     <figure
       className={cn(
-        "flex h-full w-full flex-col rounded-2xl border border-accent/70 hover:border-accent transition-colors bg-surface-raised p-6 lg:p-8 shadow-xs",
+        "flex h-full w-full flex-col rounded-2xl border border-accent/70 hover:border-accent transition-colors bg-surface-raised shadow-xs",
+        isSmall ? "p-4.5 sm:p-5 lg:p-6" : "p-6 lg:p-8",
         className,
       )}
     >
-      <Icon className="size-6 text-accent" icon={QuoteIcon} />
+      <Icon
+        className={cn("text-accent", isSmall ? "size-5" : "size-6")}
+        icon={QuoteIcon}
+      />
 
-      <blockquote className="mt-4 grow">
-        <p className="font-display text-base text-ink font-medium tracking-wide leading-relaxed lg:text-lg text-justify [text-align-last:left] [hyphens:auto]">
+      <blockquote className={cn("grow", isSmall ? "mt-3" : "mt-4")}>
+        <p
+          className={cn(
+            "font-display text-ink font-medium tracking-wide leading-relaxed text-justify [text-align-last:left] [hyphens:auto]",
+            isSmall
+              ? "text-[13.5px] sm:text-sm lg:text-[15px] leading-relaxed"
+              : "text-base lg:text-lg",
+          )}
+        >
           {testimonial.quote}
         </p>
       </blockquote>
 
-      <figcaption className="mt-6 flex items-center gap-4">
-        <Avatar size="md">
+      <figcaption
+        className={cn(
+          "flex items-center",
+          isSmall ? "mt-4.5 sm:mt-5 gap-3" : "mt-6 gap-4",
+        )}
+      >
+        <Avatar size={isSmall ? "sm" : "md"}>
           {portrait === null ? null : (
             <AvatarImage
               alt=""
@@ -53,16 +72,29 @@ export function TestimonialCard({
           </AvatarFallback>
         </Avatar>
         <span className="min-w-0">
-          <H6 as="span" className="block text-base">
+          <H6
+            as="span"
+            className={cn("block", isSmall ? "text-sm font-semibold" : "text-base")}
+          >
             {testimonial.name}
           </H6>
           {testimonial.programme === null ? null : (
-            <span className="block font-body text-sm text-ink-muted">
+            <span
+              className={cn(
+                "block font-body text-ink-muted",
+                isSmall ? "text-xs sm:text-[13px]" : "text-sm",
+              )}
+            >
               {testimonial.programme}
             </span>
           )}
           {testimonial.graduatedYear === null ? null : (
-            <span className="block font-body text-sm text-ink-muted">
+            <span
+              className={cn(
+                "block font-body text-ink-muted",
+                isSmall ? "text-xs sm:text-[13px]" : "text-sm",
+              )}
+            >
               {testimonial.graduatedYear}
             </span>
           )}

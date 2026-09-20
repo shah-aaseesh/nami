@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Spectral } from "next/font/google";
+import { CookieConsent } from "@/components/layout/cookie-consent";
 import { FloatingSocials } from "@/components/layout/floating-socials";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <>
               <SiteHeader />
               <FloatingSocials />
+              <CookieConsent />
             </>
           }
         >

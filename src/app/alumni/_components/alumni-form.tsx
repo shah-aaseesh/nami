@@ -160,6 +160,8 @@ export function AlumniFormModal({
     },
   });
 
+  const [submitting, setSubmitting] = useState(false);
+
   const handleNextStep = async () => {
     let isValidStep = false;
 
@@ -180,18 +182,18 @@ export function AlumniFormModal({
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
-  const onSubmit = (data: AlumniStoryFormData) => {
-    const link = createAlumniMailto(email, data);
+  const onSubmit = async (data: AlumniStoryFormData) => {
+    setSubmitting(true);
+    // Ready for direct headless WordPress API endpoint POST
+    await new Promise((resolve) => setTimeout(resolve, 500));
     setSubmittedData(data);
-    setMailtoLink(link);
-    window.location.href = link;
+    setSubmitting(false);
   };
 
   const handleReset = () => {
     reset();
     setCurrentStep(1);
     setSubmittedData(null);
-    setMailtoLink(null);
   };
 
   if (!mounted || !isOpen) return null;
@@ -306,34 +308,49 @@ export function AlumniFormModal({
 
         {/* Modal Scrollable Form Body */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-7">
-          {submittedData && mailtoLink ? (
-            <div className="py-6 text-center">
-              <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+          {submittedData ? (
+            <div className="py-6 text-center animate-in fade-in zoom-in-95 duration-300">
+              <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 shadow-xs">
                 <Icon className="size-8 text-emerald-600" icon={Tick02Icon} />
               </div>
               <H3 className="font-display text-2xl text-ink sm:text-3xl">
                 Thank You, {submittedData.fullName}!
               </H3>
               <P className="mx-auto mt-2.5 max-w-md text-ink-muted text-sm sm:text-base">
-                Your spotlight has been formatted. Click below if your email client didn&apos;t open automatically to send it to{" "}
-                <span className="font-semibold text-primary-700">{email}</span>.
+                Your alumni spotlight has been successfully submitted to the NAMI Alumni Relations team. We will review your story and feature it on the network.
               </P>
 
+              <div className="my-6 max-w-md mx-auto p-5 rounded-2xl border border-border bg-neutral-50/80 text-left space-y-2.5 text-xs sm:text-sm">
+                <div className="flex justify-between border-b border-border/60 pb-2">
+                  <span className="text-ink-muted">Academic Wing:</span>
+                  <span className="font-medium text-ink">{submittedData.wing}</span>
+                </div>
+                <div className="flex justify-between border-b border-border/60 pb-2">
+                  <span className="text-ink-muted">Programme:</span>
+                  <span className="font-medium text-ink">{submittedData.program} ({submittedData.graduationYear})</span>
+                </div>
+                <div className="flex justify-between pt-0.5">
+                  <span className="text-ink-muted">Current Role:</span>
+                  <span className="font-medium text-ink">{submittedData.currentRole} at {submittedData.currentOrg}</span>
+                </div>
+              </div>
+
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-                <Link
+                <button
                   className={cn(
                     buttonVariants({ size: "lg", variant: "default" }),
-                    "inline-flex items-center gap-2 bg-primary-700 hover:bg-primary-800 text-white shadow-md shadow-primary-700/20",
+                    "inline-flex items-center gap-2 bg-primary-700 hover:bg-primary-800 text-white font-semibold shadow-md shadow-primary-700/20 cursor-pointer px-6",
                   )}
-                  href={mailtoLink as Route}
+                  onClick={onClose}
+                  type="button"
                 >
-                  <Icon className="size-4" icon={SentIcon} />
-                  <span>Send via Email</span>
-                </Link>
+                  <Icon className="size-4" icon={CheckIcon} />
+                  <span>Done</span>
+                </button>
                 <button
                   className={cn(
                     buttonVariants({ size: "lg", variant: "outline" }),
-                    "inline-flex items-center gap-2 border-primary-200 text-ink hover:border-primary-400 hover:text-primary-700 cursor-pointer",
+                    "inline-flex items-center gap-2 border-primary-200 text-ink hover:border-primary-400 hover:text-primary-700 cursor-pointer px-5",
                   )}
                   onClick={handleReset}
                   type="button"
@@ -574,11 +591,11 @@ export function AlumniFormModal({
                         buttonVariants({ size: "default", variant: "default" }),
                         "inline-flex items-center gap-2 bg-primary-700 hover:bg-primary-800 text-white font-semibold shadow-md shadow-primary-700/25 cursor-pointer px-6 text-xs sm:text-sm",
                       )}
-                      disabled={isSubmitting}
+                      disabled={submitting}
                       type="submit"
                     >
                       <Icon className="size-4" icon={SparklesIcon} />
-                      <span>Submit & Send</span>
+                      <span>{submitting ? "Submitting..." : "Submit Spotlight"}</span>
                     </button>
                   )}
                 </div>

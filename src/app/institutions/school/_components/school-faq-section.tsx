@@ -14,20 +14,21 @@ export function SchoolFaqSection({
   readonly className?: string;
 }) {
   return (
-    <div
+    <section
       className={cn(
-        "relative mt-12 sm:mt-16 pt-10 sm:pt-14 border-t border-[#E2DAD0]",
+        "gutter-x px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 section-y border-t border-border bg-surface relative",
         className,
       )}
       id={id}
     >
-      <div className="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
-        {/* Left Column: Context, Narrative & Creative Interactive Elements */}
-        <div className="flex flex-col justify-between h-full lg:col-span-5 space-y-6 sm:space-y-8">
-          <div>
-            <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-semibold text-ink leading-tight tracking-tight">
-              Answers To <span className="text-[#BD1B21]">Your Most</span>{" "}
-              <span className="text-[#284540]">Common Questions</span>
+      <div className="relative mx-auto max-w-page">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
+          {/* Left Column: Context, Narrative & Creative Interactive Elements */}
+          <div className="flex flex-col justify-between h-full lg:col-span-5 space-y-6 sm:space-y-8">
+            <div>
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-semibold text-ink leading-tight tracking-tight">
+                Answers To <span className="text-[#BD1B21]">Your Most</span>{" "}
+                <span className="text-[#284540]">Common Questions</span>
             </h3>
 
             <p className="mt-4 font-body text-sm sm:text-[15px] leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">
@@ -146,6 +147,7 @@ export function SchoolFaqSection({
           </AccordionPrimitive.Root>
         </div>
       </div>
-    </div>
+      </div>
+    </section>
   );
 }

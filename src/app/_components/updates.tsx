@@ -41,7 +41,7 @@ export async function Updates() {
   ]);
 
   const updates = allUpdates
-    .filter((item) => item.kind === "news")
+    .filter((item) => item.kind === "notice" || item.kind === "news")
     .slice(0, HOME_TEASER_COUNT);
 
   const section = copy.sections.updates;

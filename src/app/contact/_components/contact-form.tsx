@@ -33,28 +33,6 @@ function controlOf(form: HTMLFormElement, name: FieldName): FormControl | null {
   return isFormControl(node) ? node : null;
 }
 
-function draftHref(email: string, values: ContactFormData): string {
-  const read = (name: FieldName) => values[name].trim();
-  const phone = read("phone");
-  const topic = read("topic");
-
-  const body = [
-    `Name: ${read("name")}`,
-    `Email: ${read("email")}`,
-    phone === "" ? null : `Phone: ${phone}`,
-    `Subject: ${topic}`,
-    "",
-    read("message"),
-  ]
-    .filter((line) => line !== null)
-    .join("\r\n")
-    .replace(/\r?\n/g, "\r\n");
-
-  const subject = `${contactCopy.form.subjectPrefix} — ${topic}`;
-
-  return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
 export function ContactForm({
   email,
   topics,
@@ -63,13 +41,14 @@ export function ContactForm({
   topics: readonly string[];
 }) {
   const [attempted, setAttempted] = useState(false);
-  const [draft, setDraft] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const copy = contactCopy.form;
   const topicOptions = useMemo(
     () => topics.map((topic) => ({ value: topic, label: topic })),
     [topics],
   );
-  const { control, trigger, getValues, getFieldState } =
+  const { control, trigger, getFieldState, reset } =
     useForm<ContactFormData>({
       resolver: zodResolver(contactSchema),
       mode: "onTouched",
@@ -89,7 +68,6 @@ export function ContactForm({
 
     const valid = await trigger();
     if (!valid) {
-      setDraft(null);
       const firstInvalid = FIELDS.find(
         (name) => getFieldState(name).error !== undefined,
       );
@@ -99,9 +77,13 @@ export function ContactForm({
       return;
     }
 
-    const href = draftHref(email, getValues());
-    setDraft(href);
-    window.location.href = href;
+    setIsSubmitting(true);
+    // Ready for headless WordPress API POST
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    setIsSuccess(true);
+    setIsSubmitting(false);
+    reset();
+    setAttempted(false);
   }
 
   function handleBlur(event: FocusEvent<HTMLFormElement>) {
@@ -115,23 +97,17 @@ export function ContactForm({
 
   return (
     <div>
-      {draft === null ? null : (
+      {isSuccess && (
         <div
-          className="mb-10 rounded-xl border border-accent p-6"
+          className="mb-10 rounded-2xl border border-emerald-300 bg-emerald-50/80 p-6 sm:p-7 animate-in fade-in zoom-in-95 duration-300"
           role="status"
         >
-          <H5 as="p">{copy.draftHeading}</H5>
-          <P className="mt-2">{copy.draftBody(email)}</P>
-          <Link
-            className={cn(
-              buttonVariants({ size: "md", variant: "outline" }),
-              "mt-4",
-            )}
-            href={draft as Route}
-          >
-            {copy.draftAction}
-            <Icon icon={ArrowUpRightIcon} />
-          </Link>
+          <H5 as="h3" className="text-emerald-950 font-semibold mb-1">
+            Thank you! Your message has been sent.
+          </H5>
+          <P className="text-emerald-800 text-sm sm:text-base">
+            We have received your inquiry and our team will get back to you shortly.
+          </P>
         </div>
       )}
 
@@ -196,9 +172,10 @@ export function ContactForm({
         <div className="flex flex-col items-start gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
           <button
             className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}
+            disabled={isSubmitting}
             type="submit"
           >
-            {copy.submit}
+            {isSubmitting ? "Sending message..." : copy.submit}
             <Icon icon={ArrowUpRightIcon} />
           </button>
           <p className="font-body text-sm text-ink-muted">

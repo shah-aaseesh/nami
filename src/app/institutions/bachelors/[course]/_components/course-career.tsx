@@ -1,6 +1,5 @@
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { Standfirst } from "@/components/ui/typography";
 import type { BachelorsProgramme } from "../../_components/bachelors-copy";
 
 export function CourseCareer({
@@ -13,31 +12,50 @@ export function CourseCareer({
   }
 
   return (
-    <section className="field-ink gutter-x section-y">
-      <div className="mx-auto max-w-page lg:grid lg:grid-cols-12 lg:gap-x-10">
-        <SplitText
-          as="h2"
-          className="font-display text-3xl font-normal text-balance text-ink lg:col-span-4 lg:text-4xl"
-        >
-          {course.careersLabel}
-        </SplitText>
+    <section className="gutter-x py-10 sm:py-14 lg:py-16 bg-accent text-white relative overflow-hidden">
+      {/* Subtle ambient lighting */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-white/5 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -left-24 size-96 rounded-full bg-black/10 blur-3xl"
+      />
 
-        <Reveal className="mt-8 lg:col-span-7 lg:col-start-6 lg:mt-0">
+      <div className="relative mx-auto max-w-page space-y-6">
+        <div>
+          <SplitText
+            as="h2"
+            className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-balance text-white"
+          >
+            {course.careersLabel}
+          </SplitText>
+        </div>
+
+        <Reveal className="space-y-8 pt-1">
           {course.careerSummary === null ? null : (
-            <Standfirst>{course.careerSummary}</Standfirst>
+            <p className="text-base sm:text-lg leading-relaxed text-white/95 font-body">
+              {course.careerSummary}
+            </p>
           )}
 
           {course.careerSectors.length === 0 ? null : (
-            <ul className="mt-10 flex flex-wrap gap-3">
-              {course.careerSectors.map((sector) => (
-                <li
-                  className="rounded-full border border-border-strong px-4 py-2 font-body text-sm text-ink"
-                  key={sector}
-                >
-                  {sector}
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-3">
+              <span className="block text-xs font-bold uppercase tracking-wider text-white/80">
+                Key Industry Sectors & Roles
+              </span>
+              <ul className="flex flex-wrap gap-2 sm:gap-2.5">
+                {course.careerSectors.map((sector) => (
+                  <li
+                    className="rounded-full border border-white/30 bg-white/10 backdrop-blur-xs px-3.5 py-1.5 font-body text-xs sm:text-sm font-medium text-white shadow-2xs transition-all duration-200 hover:bg-white hover:text-accent"
+                    key={sector}
+                  >
+                    {sector}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </Reveal>
       </div>

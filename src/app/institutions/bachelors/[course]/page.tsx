@@ -6,6 +6,7 @@ import type {
   CourseKey,
 } from "../_components/bachelors-copy";
 import { bachelorsCopy } from "../_components/bachelors-copy";
+import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { CourseAbout } from "./_components/course-about";
 import { CourseCareer } from "./_components/course-career";
 import { CourseEligibility } from "./_components/course-eligibility";
@@ -62,12 +63,13 @@ export default async function CoursePage(
 
   return (
     <>
-      <CourseMasthead course={programme} eyebrow={programmes.eyebrow} />
+      <CourseMasthead course={programme} />
       <CourseAbout course={programme} />
       <CourseModules course={programme} />
       <CourseEligibility course={programme} />
       <CoursePending course={programme} heading={programmes.pendingLabel} />
       <CourseCareer course={programme} />
+      <InstitutionEnrollCta institution="institute" />
     </>
   );
 }

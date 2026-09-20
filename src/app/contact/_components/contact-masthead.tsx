@@ -12,6 +12,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TikTokIcon,
+  WhatsappIcon,
   YouTubeIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ const SOCIAL_GLYPHS: Record<SocialPlatform, IconSvgElement> = {
   linkedin: LinkedInIcon,
   tiktok: TikTokIcon,
   youtube: YouTubeIcon,
+  whatsapp: WhatsappIcon,
 };
 
 export async function ContactMasthead() {

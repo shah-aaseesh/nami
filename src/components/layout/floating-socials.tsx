@@ -24,11 +24,10 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
   const institution = await content.getInstitution();
   const { contact } = institution;
 
-  const primaryPhone =
-    contact.phones[0] ?? contact.byEntity.institute.phone ?? "+977 1 4917444";
+  const whatsappPhone = contact.whatsapp ?? "+977 971-2037224";
   const whatsappUrl = formatWhatsAppLink(
-    primaryPhone,
-    "Hello NAMI, I would like to enquire about admissions and programmes.",
+    whatsappPhone,
+    "Hello NAMI, I would like to enquire about admissions, programmes, and campus visits.",
   );
 
   const linkedinUrl =

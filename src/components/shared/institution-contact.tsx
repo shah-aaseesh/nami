@@ -11,6 +11,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TikTokIcon,
+  WhatsappIcon,
   YouTubeIcon,
 } from "@/lib/icons";
 
@@ -32,6 +33,7 @@ const SOCIAL_ICONS = {
   linkedin: LinkedInIcon,
   youtube: YouTubeIcon,
   tiktok: TikTokIcon,
+  whatsapp: WhatsappIcon,
 } as const;
 
 export async function InstitutionContact({

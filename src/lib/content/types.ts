@@ -34,7 +34,8 @@ export type SocialPlatform =
   | "instagram"
   | "linkedin"
   | "tiktok"
-  | "youtube";
+  | "youtube"
+  | "whatsapp";
 
 export type SocialProfile = ContentLink & {
   readonly platform: SocialPlatform;
@@ -49,6 +50,7 @@ export type EntityContactChannel = {
 
 export type ContactChannel = {
   readonly phones: readonly string[];
+  readonly whatsapp?: string;
   readonly email: string | null;
   readonly websites: readonly ContentLink[];
   readonly socialProfiles: readonly SocialProfile[];

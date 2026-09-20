@@ -104,11 +104,11 @@ export const INSTITUTION_SUBCATEGORIES: Record<GalleryInstitution, readonly Subc
   ],
   bachelors: [
     { id: "all", label: "All Degree Activities", shortLabel: "All Degree", iconType: "grid", thumbnail: "/nami/level-bachelor-master.jpg" },
-    { id: "websurfer", label: "WebSurfer Nepal", shortLabel: "WebSurfer", iconType: "tech", thumbnail: "/partners/mou/websurfer.png" },
-    { id: "startup-discovery", label: "Startup Discovery Asia", shortLabel: "Startup Asia", iconType: "business", thumbnail: "/partners/mou/startup-discovery-asia.svg" },
-    { id: "machan", label: "Machan Wildlife Resort", shortLabel: "Machan Resort", iconType: "science", thumbnail: "/partners/mou/machan.png" },
-    { id: "suraj-interior", label: "Suraj Interior & Design", shortLabel: "Suraj Interior", iconType: "arts", thumbnail: "/partners/mou/suraj-interior.svg" },
-    { id: "cross-web", label: "Cross Web IT Solutions", shortLabel: "Cross Web", iconType: "tech", thumbnail: "/partners/mou/cross-web.svg" },
+    { id: "websurfer", label: "WebSurfer Nepal", shortLabel: "WebSurfer", iconType: "tech", thumbnail: "/mou bachelors/websurfer-logo-brighter1920x658-removebg-preview.png" },
+    { id: "startup-discovery", label: "Startup Discovery Asia", shortLabel: "Startup Asia", iconType: "business", thumbnail: "/mou bachelors/Startup_Discovery-removebg-preview.png" },
+    { id: "machan", label: "Machan Wildlife Resort", shortLabel: "Machan Resort", iconType: "science", thumbnail: "/mou bachelors/machian-removebg-preview.png" },
+    { id: "suraj-interior", label: "Suraj Interior & Design", shortLabel: "Suraj Interior", iconType: "arts", thumbnail: "/mou bachelors/Suraj-removebg-preview.png" },
+    { id: "cross-web", label: "Cross Web IT Solutions", shortLabel: "Cross Web", iconType: "tech", thumbnail: "/mou bachelors/Cross_web-removebg-preview.png" },
     { id: "others", label: "Other Degree Activities", shortLabel: "Others", iconType: "convocation", thumbnail: "/gallery/Bachelors/Events/graduation.jpeg" },
   ],
 };

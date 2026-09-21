@@ -1,18 +1,37 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ContentImage } from "@/lib/content";
 
-const BAND_VIDEO_SRC = "/nami-video.mp4";
+const YOUTUBE_ID = "XW2vMPwdPg8";
 
 export function CollegeLifeBand({ poster }: { poster: ContentImage }) {
-  const band = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
-      className="relative aspect-video sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[260px] w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl border border-white/10"
-      ref={band}
+      className="relative aspect-video sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[260px] w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl border border-white/10 bg-neutral-950"
+      ref={containerRef}
     >
       <Image
         alt=""
@@ -25,16 +44,16 @@ export function CollegeLifeBand({ poster }: { poster: ContentImage }) {
         width={poster.width}
       />
 
-      <video
-        aria-hidden="true"
-        autoPlay
-        className="absolute inset-0 h-full w-full object-cover scale-[1.18]"
-        loop
-        muted
-        playsInline
-        src={BAND_VIDEO_SRC}
-        tabIndex={-1}
-      />
+      {isInView && (
+        <iframe
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          aria-hidden="true"
+          className="absolute inset-0 size-full pointer-events-none scale-[1.35] object-cover"
+          src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
+          tabIndex={-1}
+          title="Campus Life Video"
+        />
+      )}
     </div>
   );
 }

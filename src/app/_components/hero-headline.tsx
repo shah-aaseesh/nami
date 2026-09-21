@@ -57,7 +57,7 @@ export function HeroHeadline({
   return (
     <h1
       className={cn(
-        "font-display text-[1.4rem] min-[360px]:text-[1.5rem] min-[390px]:text-[1.65rem] sm:text-4xl lg:text-[2.6rem] xl:text-[3.15rem] 2xl:text-6xl font-semibold sm:font-normal tracking-tight leading-[1.12] text-balance text-ink whitespace-nowrap lg:whitespace-normal",
+        "font-display text-[1.85rem] min-[360px]:text-[2.15rem] sm:text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[3.15rem] 2xl:text-6xl font-semibold sm:font-normal tracking-tight leading-[1.12] text-balance text-ink",
         className,
       )}
       ref={root}
@@ -66,9 +66,9 @@ export function HeroHeadline({
         headline
       ) : (
         <>
-          <span className="inline lg:block">{lead}{tail ? " " : ""}</span>
+          <span className="block">{lead}</span>
           {tail === null || tail === undefined ? null : (
-            <span className="inline lg:block">{tail}</span>
+            <span className="block">{tail}</span>
           )}
         </>
       )}

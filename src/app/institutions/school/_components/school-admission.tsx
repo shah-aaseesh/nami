@@ -166,6 +166,61 @@ function DiamondStepCard({
   );
 }
 
+function MobileStepCard({
+  index,
+  step,
+  isLast,
+}: {
+  index: number;
+  step: SchoolAdmissionStep;
+  isLast: boolean;
+}) {
+  const IconComponent = STEP_ICONS[index % STEP_ICONS.length] ?? SparklesIcon;
+  const theme = CARD_THEMES[index % CARD_THEMES.length] ?? CARD_THEMES[0];
+
+  return (
+    <li className="relative flex items-start gap-4 pb-6 last:pb-0">
+      {/* Vertical Connecting Line */}
+      {!isLast && (
+        <span
+          aria-hidden="true"
+          className="absolute left-5 top-11 bottom-0 w-0.5 -translate-x-1/2 bg-border/80"
+        />
+      )}
+
+      {/* Step Icon & Number Badge */}
+      <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-2xl border border-border/80 bg-surface-raised shadow-xs">
+        <div
+          className={cn(
+            "flex size-7.5 items-center justify-center rounded-xl",
+            theme.bg,
+            "text-white shadow-2xs",
+          )}
+        >
+          <Icon className="size-4 text-white" icon={IconComponent} />
+        </div>
+      </div>
+
+      {/* Main Content Card taking full width */}
+      <div className="flex-1 min-w-0 rounded-2xl border border-border bg-surface-raised p-4 sm:p-5 shadow-2xs transition-all hover:border-accent/40">
+        <div className="flex items-center justify-between gap-2">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+            Step {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
+
+        <h4 className="mt-1 font-display text-base font-semibold text-ink leading-snug">
+          {step.title}
+        </h4>
+
+        <p className="mt-1.5 font-body text-xs sm:text-sm leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">
+          {step.body}
+        </p>
+      </div>
+    </li>
+  );
+}
+
 export function SchoolAdmission({
   copy,
   id = "admissions",
@@ -189,15 +244,29 @@ export function SchoolAdmission({
           description={copy.standfirst}
         />
 
-        {/* 7-Step Zig-Zag Diamond Flow — Calibrated sizing fitting all desktop widths without clipping */}
-        <div className="mt-8 sm:mt-10 lg:mt-12 w-full">
-          <div className="overflow-x-auto snap-x snap-mandatory scrollbar-hide pt-4 pb-8 sm:pb-10 -mx-[var(--gutter-x)] px-[var(--gutter-x)] lg:mx-0 lg:px-0 lg:overflow-visible flex lg:justify-center w-full">
-            <ol className="flex items-start -space-x-3.5 sm:-space-x-4 lg:-space-x-4 xl:-space-x-5 2xl:-space-x-6 w-max lg:w-full lg:justify-center px-4 sm:px-6 lg:px-0">
+        {/* Desktop View: 7-Step Zig-Zag Diamond Flow (lg and above) */}
+        <div className="hidden lg:block mt-8 sm:mt-10 lg:mt-12 w-full">
+          <div className="overflow-visible flex justify-center w-full pt-4 pb-8">
+            <ol className="flex items-start lg:-space-x-4 xl:-space-x-5 2xl:-space-x-6 w-full justify-center">
               {copy.steps.map((step, index) => (
                 <DiamondStepCard index={index} key={step.title} step={step} />
               ))}
             </ol>
           </div>
+        </div>
+
+        {/* Mobile View: Vertical Step Timeline (below lg) */}
+        <div className="block lg:hidden mt-8 sm:mt-10 w-full">
+          <ol className="relative flex flex-col w-full">
+            {copy.steps.map((step, index) => (
+              <MobileStepCard
+                index={index}
+                isLast={index === copy.steps.length - 1}
+                key={step.title}
+                step={step}
+              />
+            ))}
+          </ol>
         </div>
       </div>
     </section>

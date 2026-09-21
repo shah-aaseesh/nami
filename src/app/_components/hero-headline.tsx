@@ -57,7 +57,7 @@ export function HeroHeadline({
   return (
     <h1
       className={cn(
-        "font-display text-4xl sm:text-5xl lg:text-[2.6rem] xl:text-[3.15rem] 2xl:text-6xl font-normal tracking-tight leading-[1.08] text-balance text-ink",
+        "font-display text-4xl sm:text-5xl lg:text-[2.6rem] xl:text-[3.15rem] 2xl:text-6xl font-bold sm:font-normal tracking-tight leading-[1.08] text-balance text-ink",
         className,
       )}
       ref={root}

@@ -26,7 +26,7 @@ export function SchoolFaqSection({
           {/* Left Column: Context, Narrative & Creative Interactive Elements */}
           <div className="flex flex-col justify-between h-full lg:col-span-5 space-y-6 sm:space-y-8">
             <div>
-              <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-ink leading-tight tracking-tight">
+              <h3 className="font-display text-3xl sm:text-3xl lg:text-4xl font-bold sm:font-normal text-ink leading-tight tracking-tight">
                 Answers To <span className="text-[#BD1B21]">Your Most</span>{" "}
                 <span className="text-[#284540]">Common Questions</span>
               </h3>

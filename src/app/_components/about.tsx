@@ -37,7 +37,7 @@ export async function About({
           <Reveal>
             <SplitText
               as="h2"
-              className="font-display text-3xl sm:text-4xl text-accent font-normal"
+              className="font-display text-3xl sm:text-4xl text-accent font-bold sm:font-normal"
             >
               {section.eyebrow ?? "About NAMI"}
             </SplitText>

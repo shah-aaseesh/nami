@@ -78,7 +78,7 @@ export function CourseMasthead({
             <SplitText
               as="h1"
               className={cn(
-                "font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-balance text-accent",
+                "font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold sm:font-normal text-balance text-accent",
                 eyebrow && "mt-3",
               )}
             >

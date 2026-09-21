@@ -36,7 +36,7 @@ export function CollegeLifeBand({ poster }: { poster: ContentImage }) {
       <Image
         alt=""
         aria-hidden="true"
-        className="h-full w-full object-cover scale-110"
+        className="h-full w-full object-cover scale-105"
         height={poster.height}
         loading="lazy"
         sizes="(max-width: 1023px) 100vw, 45vw"
@@ -48,8 +48,8 @@ export function CollegeLifeBand({ poster }: { poster: ContentImage }) {
         <iframe
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           aria-hidden="true"
-          className="absolute inset-0 size-full pointer-events-none scale-[1.35] object-cover"
-          src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none object-cover border-0"
+          src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=0`}
           tabIndex={-1}
           title="Campus Life Video"
         />

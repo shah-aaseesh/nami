@@ -12,7 +12,7 @@ export function CourseCareer({
   }
 
   return (
-    <section className="gutter-x py-10 sm:py-14 lg:py-16 bg-accent text-white relative overflow-hidden">
+    <section className="gutter-x section-y bg-accent text-white relative overflow-hidden">
       {/* Subtle ambient lighting */}
       <div
         aria-hidden="true"

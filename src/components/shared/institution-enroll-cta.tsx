@@ -30,6 +30,7 @@ const DEFAULTS_BY_ROLE: Record<
     heading: string;
     description: string;
     brochureLabel: string;
+    phone: string;
   }
 > = {
   school: {
@@ -37,18 +38,21 @@ const DEFAULTS_BY_ROLE: Record<
     description:
       "We are here to guide you through every step of the admissions process. If you have any questions or need assistance, our admissions team is ready to help.",
     brochureLabel: "Brochure",
+    phone: "014917441/42/43/44, 014913353",
   },
   college: {
     heading: "Ready to Enroll?",
     description:
       "We are here to guide you through every step of the Cambridge A-Level admissions process. If you have any questions, our admissions desk is here to support you.",
     brochureLabel: "Prospectus",
+    phone: "014917441/42/43/44, 014913353",
   },
   institute: {
     heading: "Ready to Enroll?",
     description:
       "We are here to guide you through every step of university admissions. If you have any questions about Northampton UK degree programmes, our advisors are ready to assist.",
     brochureLabel: "Prospectus",
+    phone: "015920335/36",
   },
 };
 
@@ -62,13 +66,14 @@ export function InstitutionEnrollCta({
   applyHref = "/admissions",
   brochureLabel,
   brochureHref = "/admissions",
-  phone = "+977-1-4917441",
+  phone,
   className,
 }: InstitutionEnrollCtaProps) {
   const roleDefaults = DEFAULTS_BY_ROLE[institution] ?? DEFAULTS_BY_ROLE.school;
   const effectiveHeading = heading ?? roleDefaults.heading;
   const effectiveDescription = description ?? roleDefaults.description;
   const effectiveBrochureLabel = brochureLabel ?? roleDefaults.brochureLabel;
+  const effectivePhone = phone ?? roleDefaults.phone;
 
   const isSchool = institution === "school";
   const isCollege = institution === "college";
@@ -174,7 +179,7 @@ export function InstitutionEnrollCta({
           </RevealItem>
 
           {/* Help Line / Contact Link */}
-          {phone && (
+          {effectivePhone && (
             <RevealItem
               className={cn(
                 "mt-8 flex items-center justify-center gap-2 text-xs sm:text-sm",
@@ -191,10 +196,12 @@ export function InstitutionEnrollCta({
               />
               <span>Need help? Call Admissions at</span>
               <Link
-                href={`tel:${phone.replace(/[^+\d]/g, "")}` as Route}
+                href={
+                  `tel:${(effectivePhone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                }
                 className="font-semibold text-white underline underline-offset-4 decoration-white/40 hover:decoration-white transition-colors"
               >
-                {phone}
+                {effectivePhone}
               </Link>
             </RevealItem>
           )}

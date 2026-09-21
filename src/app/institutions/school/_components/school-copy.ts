@@ -3,7 +3,6 @@ import type { InstitutionNoticesCopy } from "@/components/shared/institution-not
 import type { SharedHeroSlide } from "@/components/shared/shared-hero";
 import type { ContentLink, SectionCopy, Testimonial } from "@/lib/content";
 import { entryOf, schoolGrades } from "@/lib/content";
-import { pragatiRaiPortrait } from "@/lib/content/local/images";
 import type { SchoolAdmissionCopy } from "./school-admission";
 import type { SchoolBandsCopy } from "./school-bands";
 import type { SchoolDayCopy } from "./school-day";
@@ -305,8 +304,8 @@ const day: SchoolDayCopy = {
 
 const parents: SectionCopy = {
   navLabel: "Voices",
-  eyebrow: "Parent & Student voices",
-  heading: "Stories from our students and families.",
+  eyebrow: "Parent & Student Voices",
+  heading: "",
   cta: null,
   emptyState:
     "Stories and experiences from our students and families appear here as they are shared.",
@@ -314,21 +313,26 @@ const parents: SectionCopy = {
 
 export const parentTestimonials: readonly Testimonial[] = [
   {
-    ...entryOf("parent-bikash-shrestha"),
+    ...entryOf("parent-bishwo-rana"),
+    name: "Bishwo Rana",
+    programme: "Abigyah's Parents, Grade 7",
     quote:
-      "My son went quiet for most of a term and I could not reach him. The school counsellor did, patiently, without ever making him feel like a problem.",
-    name: "Bikash Shrestha",
-    programme: "Parent of a Grade 6 student",
+      "Being part of the founding batch and watching the community grow has been special. I value the individual attention, open teacher communication, and the feeling of building something together.",
     institution: "school",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: {
+      src: "/Testimonials Photos/parents/Dayana Shakya.jpeg",
+      alt: "Bishwo Rana",
+      width: 334,
+      height: 363,
+    },
   },
   {
     ...entryOf("student-evana-khanal"),
     name: "Evana Khanal",
     programme: "Grade 4",
     quote:
-      "We learn from our own mistakes. Making mistakes while learning doesn't mean we are bad. Our teachers help us understand our mistakes with kindness, so we can do better next time.",
+      "We learn from our own mistakes. Our teachers help us understand our mistakes with kindness, so we can do better next time.",
     institution: "school",
     graduatedYear: null,
     portrait: {
@@ -339,21 +343,26 @@ export const parentTestimonials: readonly Testimonial[] = [
     },
   },
   {
-    ...entryOf("parent-rekha-tamang"),
+    ...entryOf("parent-arun-poudyal"),
+    name: "Arun Poudyal",
+    programme: "Arushi Poudyal’s Parent",
     quote:
-      "Admissions rang us the week we registered and walked us through every step. The Principal's orientation and the tour afterwards are what decided it.",
-    name: "Rekha Tamang",
-    programme: "Parent of a Grade 2 student",
+      "Associating with NAMI has been a great experience. I have noticed remarkable growth in my child’s confidence, communication, and essential life skills beyond regular academics.",
     institution: "school",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: {
+      src: "/Testimonials Photos/parents/Arun Poudyal.jpeg",
+      alt: "Arun Poudyal",
+      width: 344,
+      height: 351,
+    },
   },
   {
     ...entryOf("student-hriden-jung-karki"),
     name: "Hriden Jung Karki",
     programme: "Grade 5",
     quote:
-      "At Nami, we learn through fun activities. In Science, we played football to understand force. Football is my favourite sport so it was my best experience.",
+      "At NAMI, we learn through fun activities. In Science, we played football to understand force, which was my best learning experience.",
     institution: "school",
     graduatedYear: null,
     portrait: {
@@ -364,21 +373,26 @@ export const parentTestimonials: readonly Testimonial[] = [
     },
   },
   {
-    ...entryOf("parent-sunita-karki"),
+    ...entryOf("parent-milan-phuyal"),
+    name: "Mr. Milan Phuyal",
+    programme: "Parent of Sanvika Phuyal",
     quote:
-      "She comes home excited about creative arts, science experiments and her UnMath projects. Far more of her day is spent exploring and making things than rote learning.",
-    name: "Sunita Karki",
-    programme: "Parent of a Grade 4 student",
+      "Being part of the NAMI community has been truly rewarding. We value the supportive teachers, welcoming environment, and strong partnership fostering our child’s growth and well-being.",
     institution: "school",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: {
+      src: "/Testimonials Photos/parents/Milan Phuyal.jpeg",
+      alt: "Mr. Milan Phuyal",
+      width: 257,
+      height: 292,
+    },
   },
   {
     ...entryOf("student-himanshu-raya"),
     name: "Himanshu Raya",
     programme: "Grade 5",
     quote:
-      "At Nami, I learned to adapt to new challenges and become more confident through public speaking and teamwork.",
+      "At NAMI, I learned to adapt to new challenges and become much more confident through public speaking and teamwork.",
     institution: "school",
     graduatedYear: null,
     portrait: {
@@ -389,14 +403,19 @@ export const parentTestimonials: readonly Testimonial[] = [
     },
   },
   {
-    ...entryOf("parent-prakash-maharjan"),
+    ...entryOf("parent-pooja-shrestha"),
+    name: "Pooja Shrestha",
+    programme: "Mother of Satwik Ghimire, Grade 7 and Saarvi Ghimire, Grade 3",
     quote:
-      "He started Grade 1 barely speaking to anyone. Six months on he tells us about his collaborative projects over dinner and loves his Mandarin classes.",
-    name: "Prakash Maharjan",
-    programme: "Parent of a Grade 1 student",
+      "Enrolling our kids at NAMI has proved to be our best decision. The kids love interacting with their teachers in academics and ECA activities, and have become noticeably confident and vocal.",
     institution: "school",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: {
+      src: "/Testimonials Photos/parents/Pooja Shrestha.jpeg",
+      alt: "Pooja Shrestha",
+      width: 189,
+      height: 255,
+    },
   },
   {
     ...entryOf("student-aarushi-poudyal"),
@@ -414,26 +433,79 @@ export const parentTestimonials: readonly Testimonial[] = [
     },
   },
   {
-    ...entryOf("parent-sarita-adhikari"),
+    ...entryOf("parent-enu-shrestha"),
+    name: "Enu Shrestha (Yuvan Krien Shrestha)",
+    programme: "Parent, Grade 1",
     quote:
-      "The jump into Grade 11 science worried us. Her teachers flagged where she was slipping before we had to ask, and the laboratories are properly staffed.",
-    name: "Sarita Adhikari",
-    programme: "Parent, Grade 11 Science",
+      "It gives us immense pride to see Yuvan thriving at NAMI. In a short time, we have witnessed remarkable growth in his confidence, curiosity, and overall learning environment.",
     institution: "school",
     graduatedYear: null,
-    portrait: pragatiRaiPortrait,
-  },
-  {
-    ...entryOf("parent-deepak-bhattarai"),
-    quote:
-      "Both our children finished +2 here, Management and then Science. The career counselling and the internship placements are what set this school apart.",
-    name: "Deepak Bhattarai",
-    programme: "Parent, Grades 11 and 12",
-    institution: "school",
-    graduatedYear: null,
-    portrait: pragatiRaiPortrait,
+    portrait: {
+      src: "/Testimonials Photos/parents/Enu shrestha.jpeg",
+      alt: "Enu Shrestha (Yuvan Krien Shrestha)",
+      width: 219,
+      height: 214,
+    },
   },
 ];
+
+export const plusTwoVoices: SectionCopy = {
+  navLabel: "Voices",
+  eyebrow: "From our +2 graduates.",
+  heading: "",
+  cta: null,
+  emptyState:
+    "Testimonials and experiences from our +2 students and graduates appear here as they are shared.",
+};
+
+export const plusTwoTestimonials: readonly Testimonial[] = [
+  {
+    ...entryOf("student-nirakar-bhandari"),
+    name: "Nirakar Bhandari",
+    programme: "Batch of 2026",
+    quote:
+      "My journey at NAMI has been a meaningful and memorable part of my academic life. The supportive environment, teacher guidance, friendships, and experiences helped me grow in confidence, knowledge, and skills. I am proud to be part of the NAMI family.",
+    institution: "school",
+    graduatedYear: null,
+    portrait: {
+      src: "/Testimonials Photos/+2/Nirakar Bhandari.jpeg",
+      alt: "Nirakar Bhandari",
+      width: 301,
+      height: 334,
+    },
+  },
+  {
+    ...entryOf("student-avni-adhikari"),
+    name: "Avni Adhikari",
+    programme: "Batch of 2026",
+    quote:
+      "My two years at NAMI were filled with learning, friendships, and unforgettable memories. From lab classes and Holi celebrations to leading the Arts and Literature Club, every experience helped me grow in confidence and gratitude.",
+    institution: "school",
+    graduatedYear: null,
+    portrait: {
+      src: "/Testimonials Photos/+2/Avni Adhikari.png",
+      alt: "Avni Adhikari",
+      width: 1175,
+      height: 1338,
+    },
+  },
+  {
+    ...entryOf("student-yunisha-shrestha"),
+    name: "Yunisha Shrestha",
+    programme: "Batch of 2026",
+    quote:
+      "My journey at NAMI was a memorable blend of learning, friendship, and personal growth. Supportive teachers guided and encouraged me throughout my studies, while the welcoming campus made my time at NAMI truly special.",
+    institution: "school",
+    graduatedYear: null,
+    portrait: {
+      src: "/Testimonials Photos/+2/Yunisha Shrestha.jpeg",
+      alt: "Yunisha Shrestha",
+      width: 273,
+      height: 349,
+    },
+  },
+];
+
 
 const admission: SchoolAdmissionCopy = {
   eyebrow: "Admission Process",
@@ -550,6 +622,8 @@ export const schoolCopy = {
   bands,
   day,
   parents,
+  plusTwoVoices,
+  plusTwoTestimonials,
   admission,
   gallery,
   notices,

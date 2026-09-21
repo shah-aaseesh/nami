@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import Image from "next/image";
 import { RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
@@ -10,6 +10,7 @@ import { H4, P } from "@/components/ui/typography";
 import type { ContentImage } from "@/lib/content";
 import { CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
+import { useSchoolBand } from "./school-band-context";
 
 export type SchoolStream = {
   readonly name: string;
@@ -125,7 +126,7 @@ export function SchoolBands({
   readonly primaryExtra?: ReactNode;
   readonly secondaryExtra?: ReactNode;
 }) {
-  const [activeTab, setActiveTab] = useState<string>("primary");
+  const { activeBand, setActiveBand } = useSchoolBand();
 
   return (
     <div id={id}>
@@ -150,22 +151,24 @@ export function SchoolBands({
 
           <RevealItem className="mt-8 sm:mt-10 lg:mt-14">
             <Tabs
-              value={activeTab}
+              value={activeBand}
               onValueChange={(val) => {
-                if (typeof val === "string") setActiveTab(val);
+                if (val === "primary" || val === "secondary") {
+                  setActiveBand(val);
+                }
               }}
               className="w-full"
             >
-              <TabsList className="mb-6 sm:mb-8 lg:mb-10 gap-8 sm:gap-12 border-b border-[#E0D8C8] pb-1">
+              <TabsList className="mb-6 sm:mb-8 lg:mb-10 gap-6 sm:gap-10 lg:gap-12 border-b border-[#E0D8C8] pb-1">
                 <TabsTab
                   value="primary"
-                  className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
+                  className="py-3 sm:py-3.5 font-display text-base sm:text-xl lg:text-2xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
                 >
                   {copy.primary.label}
                 </TabsTab>
                 <TabsTab
                   value="secondary"
-                  className="py-3.5 font-display text-xl sm:text-2xl lg:text-3xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
+                  className="py-3 sm:py-3.5 font-display text-base sm:text-xl lg:text-2xl font-medium text-ink-muted transition-all duration-200 hover:text-ink data-active:text-[#BD1B21] data-active:font-semibold"
                 >
                   {copy.secondary.label}
                 </TabsTab>
@@ -184,7 +187,7 @@ export function SchoolBands({
       </section>
 
       {/* Full-width Extra Section (Collaborators for School / Clubs for +2) */}
-      {activeTab === "primary" ? primaryExtra : secondaryExtra}
+      {activeBand === "primary" ? primaryExtra : secondaryExtra}
     </div>
   );
 }

@@ -115,7 +115,7 @@ export async function SiteFooter() {
                   <div className="mt-3 space-y-1.5 font-body text-xs">
                     <Link
                       href={
-                        `tel:${contact.byEntity.school.phone.replace(/[^+\d]/g, "")}` as Route
+                        `tel:${(contact.byEntity.school.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
                       }
                       className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
@@ -209,7 +209,7 @@ export async function SiteFooter() {
                   <div className="mt-3 space-y-1.5 font-body text-xs">
                     <Link
                       href={
-                        `tel:${contact.byEntity.college.phone.replace(/[^+\d]/g, "")}` as Route
+                        `tel:${(contact.byEntity.college.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
                       }
                       className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >
@@ -303,7 +303,7 @@ export async function SiteFooter() {
                   <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1.5 font-body text-xs">
                     <Link
                       href={
-                        `tel:${contact.byEntity.institute.phone.replace(/[^+\d]/g, "")}` as Route
+                        `tel:${(contact.byEntity.institute.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
                       }
                       className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
                     >

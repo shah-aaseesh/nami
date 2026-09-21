@@ -3,7 +3,7 @@ import { Affiliations } from "@/components/shared/affiliations";
 import { PrincipalMessage } from "@/components/shared/principal-message";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
-import { schoolPrincipal } from "@/lib/content/school-principal";
+import { ceoMessage } from "@/lib/content/ceo-message";
 import { stakeholderTestimonials } from "@/lib/content/local/testimonials";
 import { About } from "./_components/about";
 import { Hero } from "./_components/hero";
@@ -40,10 +40,10 @@ export default async function Home() {
       <Affiliations section={copy.sections.affiliations} />
       {ceo === null ? null : (
         <PrincipalMessage
-          eyebrow="Message from the CEO"
+          eyebrow={ceoMessage.eyebrow}
           heading={ceoHeading}
           id="ceo-message"
-          message={schoolPrincipal.message}
+          message={ceoMessage.message}
           person={{
             name: ceo.name,
             portrait: ceo.portrait,

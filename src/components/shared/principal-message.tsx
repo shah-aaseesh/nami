@@ -1,15 +1,20 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { Icon } from "@/components/ui/icon";
 import { H6, P } from "@/components/ui/typography";
 import type { ContentImage, RichText } from "@/lib/content";
 import { paragraphsOf } from "@/lib/content";
 import { ImageIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type PrincipalMessagePerson = {
   readonly name: string;
   readonly title: string;
   readonly portrait: ContentImage | null;
+  readonly expandedPortrait?: ContentImage | null;
 };
 
 export type PrincipalMessageProps = {
@@ -18,32 +23,57 @@ export type PrincipalMessageProps = {
   readonly id?: string;
   readonly message: RichText;
   readonly person: PrincipalMessagePerson;
+  readonly collapsible?: boolean;
 };
 
-function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
-  const { portrait } = person;
+function PortraitCard({
+  person,
+  isExpanded,
+}: {
+  readonly person: PrincipalMessagePerson;
+  readonly isExpanded: boolean;
+}) {
+  const { portrait, expandedPortrait } = person;
 
   return (
-    <figure className="w-full max-w-[340px] sm:max-w-[360px]">
-      <div className="overflow-hidden rounded-t-2xl border border-border border-b-0 bg-surface-raised shadow-xs">
+    <figure className="w-full max-w-[340px] sm:max-w-[360px] lg:max-w-none h-full flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-xs">
+      <div className="relative flex-1 min-h-[340px] sm:min-h-[400px] w-full bg-surface-raised overflow-hidden">
         {portrait === null ? (
-          <div className="grid aspect-[1154/1600] w-full place-items-center">
+          <div className="grid h-full w-full place-items-center">
             <Icon className="size-8 text-ink-muted/50" icon={ImageIcon} />
           </div>
         ) : (
-          <Image
-            alt={portrait.alt}
-            className="aspect-[1154/1600] w-full object-cover object-top"
-            height={portrait.height}
-            loading="lazy"
-            sizes="(max-width: 1023px) 340px, 360px"
-            src={portrait.src}
-            width={portrait.width}
-          />
+          <>
+            <Image
+              alt={portrait.alt}
+              className={cn(
+                "object-cover object-top transition-opacity duration-300",
+                isExpanded && expandedPortrait ? "opacity-0 pointer-events-none" : "opacity-100",
+              )}
+              fill
+              loading="lazy"
+              sizes="(max-width: 1023px) 360px, 400px"
+              src={portrait.src}
+            />
+
+            {expandedPortrait && (
+              <Image
+                alt={expandedPortrait.alt}
+                className={cn(
+                  "object-cover object-top transition-opacity duration-300",
+                  isExpanded ? "opacity-100" : "opacity-0 pointer-events-none",
+                )}
+                fill
+                loading="lazy"
+                sizes="(max-width: 1023px) 360px, 400px"
+                src={expandedPortrait.src}
+              />
+            )}
+          </>
         )}
       </div>
 
-      <figcaption className="rounded-b-2xl border border-border bg-surface px-5 py-3.5 shadow-xs">
+      <figcaption className="shrink-0 border-t border-border bg-surface px-5 py-4">
         <p className="font-body text-base font-semibold text-ink">{person.name}</p>
         <p className="mt-0.5 font-body text-xs font-medium text-accent">{person.title}</p>
       </figcaption>
@@ -51,13 +81,19 @@ function PortraitCard({ person }: { readonly person: PrincipalMessagePerson }) {
   );
 }
 
+const COLLAPSED_PARAGRAPH_COUNT = 3;
+
 export function PrincipalMessage({
   eyebrow,
   id,
   message,
   person,
+  collapsible = false,
 }: PrincipalMessageProps) {
+  const [isExpanded, setIsExpanded] = useState(!collapsible);
   const letter = paragraphsOf(message);
+  const hasMore = collapsible && letter.length > COLLAPSED_PARAGRAPH_COUNT;
+  const visibleParagraphs = isExpanded || !collapsible ? letter : letter.slice(0, COLLAPSED_PARAGRAPH_COUNT);
 
   return (
     <section className="gutter-x section-y" id={id}>
@@ -73,22 +109,49 @@ export function PrincipalMessage({
           <span className="block h-1 w-16 rounded-full bg-accent" />
         </Reveal>
 
-        <div className="mt-8 sm:mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-12 items-start">
-          <Reveal
-            className="space-y-5 lg:col-span-7 xl:col-span-8"
-            stagger={0.08}
-          >
-            {letter.map((paragraph, index) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: message is a static, never-reordered paragraph list; text isn't unique across callers
-              <RevealItem key={index}>
-                <P className="lg:text-justify leading-relaxed">{paragraph}</P>
-              </RevealItem>
-            ))}
-          </Reveal>
+        <div className="mt-8 sm:mt-10 flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 xl:gap-12">
+          <div className="flex-1 flex flex-col gap-4 sm:gap-5">
+            <Reveal
+              className="space-y-4 sm:space-y-5"
+              stagger={0.08}
+            >
+              {visibleParagraphs.map((paragraph, index) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: message is a static paragraph list
+                <RevealItem key={index}>
+                  <P className="lg:text-justify leading-relaxed">{paragraph}</P>
+                </RevealItem>
+              ))}
+            </Reveal>
 
-          <div className="flex justify-center lg:justify-end lg:col-span-5 xl:col-span-4">
-            <Reveal className="w-full flex justify-center lg:justify-end">
-              <PortraitCard person={person} />
+            {hasMore && (
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsExpanded((prev) => !prev)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
+                >
+                  <span>{isExpanded ? "Read less" : "Read more"}</span>
+                  <svg
+                    aria-hidden="true"
+                    className={cn(
+                      "size-3.5 transition-transform duration-200",
+                      isExpanded && "rotate-180",
+                    )}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="w-full lg:w-[340px] xl:w-[380px] shrink-0 flex justify-center lg:justify-end">
+            <Reveal className="w-full h-full flex justify-center lg:justify-end">
+              <PortraitCard isExpanded={isExpanded} person={person} />
             </Reveal>
           </div>
         </div>

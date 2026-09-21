@@ -103,7 +103,6 @@ export default async function BachelorsPage() {
         id="alumni"
         items={alumni}
         section={bachelorsCopy.alumni}
-        size="sm"
       />
 
       <MouPartnersSection id="mou-partners" />

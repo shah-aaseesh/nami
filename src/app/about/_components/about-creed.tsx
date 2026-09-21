@@ -67,7 +67,7 @@ export function AboutCreed({
   }
 
   return (
-    <section className="gutter-x py-12 sm:py-16 lg:py-20" id="creed">
+    <section className="gutter-x section-y" id="creed">
       <div className="mx-auto max-w-page">
         {/* Section Heading */}
         <Reveal>

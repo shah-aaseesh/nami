@@ -14,7 +14,7 @@ export function CourseAbout({
   if (paragraphs.length === 0) return null;
 
   return (
-    <section className="gutter-x py-8 sm:py-10 lg:py-12 border-b border-border/60 bg-surface">
+    <section className="gutter-x section-y border-b border-border/60 bg-surface">
       <div className="mx-auto max-w-page space-y-4">
         <div>
           <SplitText

@@ -7,6 +7,8 @@ import { Eyebrow, P } from "@/components/ui/typography";
 import { paragraphsOf, type RichText, type SectionCopy } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
+import { HomepageVideoPlayer } from "./homepage-video-player";
+
 export async function About({
   overview,
   section,
@@ -47,16 +49,11 @@ export async function About({
           {/* Left Column: Video aligned and equal level with right column */}
           <div className="lg:col-span-6 flex flex-col">
             <Reveal className="h-full flex flex-col" y={16}>
-              <div className="relative aspect-video lg:aspect-auto flex-1 min-h-[280px] sm:min-h-[320px] w-full overflow-hidden rounded-2xl border border-border bg-neutral-950 shadow-md">
-                <iframe
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="size-full border-0"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  src="https://www.youtube-nocookie.com/embed/-4GRT2mxQxY?si=WFIYKNDhk7_9KY64"
-                  title="YouTube video player"
-                />
-              </div>
+              <HomepageVideoPlayer
+                poster="/Homepage video thumbnails.png"
+                src="/Homepage Video.mp4"
+                title={section.heading ?? "NAMI College"}
+              />
             </Reveal>
           </div>
 

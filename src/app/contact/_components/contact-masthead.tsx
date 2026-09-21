@@ -78,7 +78,9 @@ export async function ContactMasthead() {
                   <li key={phone}>
                     <Link
                       className="font-body text-xl text-accent underline underline-offset-4 transition-colors hover:text-ink"
-                      href={`tel:${phone.replace(/\s+/g, "")}` as Route}
+                      href={
+                        `tel:${(phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                      }
                     >
                       {phone}
                     </Link>

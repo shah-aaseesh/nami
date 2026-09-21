@@ -3,7 +3,7 @@ import { Eyebrow, H3, P } from "@/components/ui/typography";
 
 export function PearsonVueBanner() {
   return (
-    <section className="gutter-x py-8 sm:py-12" id="pearson-vue">
+    <section className="gutter-x section-y-compact" id="pearson-vue">
       <div className="mx-auto max-w-page">
         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-linear-to-br from-white via-surface-raised to-neutral-50 p-6 sm:p-8 lg:p-10 shadow-xs">
           {/* Subtle decorative background glow */}

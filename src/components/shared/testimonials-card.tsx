@@ -25,6 +25,7 @@ export function TestimonialCard({
 }) {
   const { portrait } = testimonial;
   const isSmall = size === "sm";
+  const isLong = testimonial.quote.length > 200;
 
   return (
     <figure
@@ -45,7 +46,9 @@ export function TestimonialCard({
             "font-display text-ink font-medium tracking-wide leading-relaxed text-justify [text-align-last:left] [hyphens:auto]",
             isSmall
               ? "text-[13.5px] sm:text-sm lg:text-[15px] leading-relaxed"
-              : "text-base lg:text-lg",
+              : isLong
+                ? "text-[14px] sm:text-[15px] lg:text-[16px] leading-relaxed"
+                : "text-base lg:text-lg",
           )}
         >
           {testimonial.quote}

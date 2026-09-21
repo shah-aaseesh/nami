@@ -13,7 +13,7 @@ export function CourseEligibility({
   const columns = courseDetailCopy.entryColumns;
 
   return (
-    <section className="gutter-x py-8 sm:py-10 lg:py-12 border-b border-border/60 bg-surface">
+    <section className="gutter-x section-y border-b border-border/60 bg-surface">
       <div className="mx-auto max-w-page space-y-5">
         <div>
           <SplitText
@@ -29,8 +29,12 @@ export function CourseEligibility({
 
         <Reveal className="space-y-5">
           {/* Requirements Table */}
-          <div className="overflow-hidden rounded-2xl border border-border bg-surface-raised/40 shadow-2xs">
-            <table className="w-full border-collapse text-left font-body text-sm table-fixed">
+          <div
+            aria-label={`${course.fullTitle} — ${course.entryLabel}`}
+            className="overflow-x-auto rounded-2xl border border-border bg-surface-raised/40 shadow-2xs"
+            tabIndex={0}
+          >
+            <table className="w-full min-w-[480px] border-collapse text-left font-body text-sm table-fixed">
               <caption className="sr-only">
                 {`${course.fullTitle} — ${course.entryLabel}`}
               </caption>

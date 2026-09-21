@@ -203,6 +203,13 @@ export const anishaPandayJoshiPortrait: ContentImage = {
   height: 1600,
 };
 
+export const anishaPrincipalMessagePortrait: ContentImage = {
+  src: "/team/anisha newest.png",
+  alt: "Studio portrait of Ms. Anisha Panday Joshi, Principal of NAMI International School, hands clasped against a mottled blue-grey backdrop.",
+  width: 1041,
+  height: 1511,
+};
+
 export const philipBadikarHilarioPortrait: ContentImage = {
   src: "/team/philip-badikar-hilario.webp",
   alt: "Studio portrait of Mr. Philip Badikar Hilario, A Level Principal at NAMI College, arms folded in a charcoal suit and black tie against a mottled blue-grey backdrop.",

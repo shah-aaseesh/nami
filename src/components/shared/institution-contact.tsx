@@ -85,14 +85,14 @@ export async function InstitutionContact({
                 <Link
                   className="text-ink-muted transition-colors hover:text-accent"
                   href={
-                    `tel:${entityContact.phone.replace(/[^+\d]/g, "")}` as Route
+                    `tel:${(entityContact.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
                   }
                 >
                   {entityContact.phone}
                 </Link>
               </p>
 
-              <p className="font-body text-base sm:text-lg text-ink">
+              <div className="font-body text-base sm:text-lg text-ink flex flex-wrap items-center gap-x-2 gap-y-1">
                 <span className="font-medium text-ink">Email: </span>
                 <Link
                   className="text-ink-muted transition-colors hover:text-accent"
@@ -102,7 +102,7 @@ export async function InstitutionContact({
                 </Link>
                 {entityContact.admissionsEmail && (
                   <>
-                    <span className="text-ink-muted/50 mx-2">•</span>
+                    <span className="text-ink-muted/50 hidden sm:inline">•</span>
                     <Link
                       className="text-ink-muted transition-colors hover:text-accent"
                       href={`mailto:${entityContact.admissionsEmail}` as Route}
@@ -111,7 +111,7 @@ export async function InstitutionContact({
                     </Link>
                   </>
                 )}
-              </p>
+              </div>
 
               {socials.length > 0 ? (
                 <div className="pt-2 sm:pt-3">

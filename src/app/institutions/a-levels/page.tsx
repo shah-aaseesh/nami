@@ -81,7 +81,6 @@ export default async function CollegePage() {
         id="alumni"
         items={alumni}
         section={collegeCopy.alumni}
-        size="sm"
       />
 
       <CollegeEntry copy={collegeCopy.entry} />

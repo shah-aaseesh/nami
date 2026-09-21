@@ -16,7 +16,7 @@ export function SchoolFaqSection({
   return (
     <section
       className={cn(
-        "gutter-x px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 section-y border-t border-border bg-surface relative",
+        "gutter-x section-y border-t border-border bg-surface relative",
         className,
       )}
       id={id}
@@ -26,10 +26,10 @@ export function SchoolFaqSection({
           {/* Left Column: Context, Narrative & Creative Interactive Elements */}
           <div className="flex flex-col justify-between h-full lg:col-span-5 space-y-6 sm:space-y-8">
             <div>
-              <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-semibold text-ink leading-tight tracking-tight">
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-ink leading-tight tracking-tight">
                 Answers To <span className="text-[#BD1B21]">Your Most</span>{" "}
                 <span className="text-[#284540]">Common Questions</span>
-            </h3>
+              </h3>
 
             <p className="mt-4 font-body text-sm sm:text-[15px] leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">
               Everything you need to know about our progressive educational philosophy, curriculum, daily routines, healthy meals, and student well-being at NAMI International School.
@@ -91,7 +91,7 @@ export function SchoolFaqSection({
                 className="inline-flex items-center gap-2 rounded-lg bg-[#BD1B21] px-4 py-2 font-body text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#a0161b]"
               >
                 <Icon className="size-3.5" icon={PhoneIcon} />
-                <span>Call Admissions: 01-4917441</span>
+                <span>Call Admissions: 014917441/42/43/44</span>
               </a>
             </div>
           </div>

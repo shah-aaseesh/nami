@@ -35,11 +35,11 @@ function TestimonialsHeader({
   );
 }
 
-export async function Testimonials({
+export function Testimonials({
   cardClassName,
   className,
   id = "testimonials",
-  items,
+  items = [],
   section,
   size = "md",
 }: {
@@ -50,7 +50,7 @@ export async function Testimonials({
   section: SectionCopy;
   size?: "sm" | "md";
 }) {
-  const testimonials = items ?? (await content.getTestimonials());
+  const testimonials = items;
 
   const single = testimonials.length === 1 ? testimonials[0] : undefined;
 

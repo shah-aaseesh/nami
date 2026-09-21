@@ -126,7 +126,7 @@ export function CourseModules({
   if (course.stages.length === 0) return null;
 
   return (
-    <section className="gutter-x py-8 sm:py-10 lg:py-12 border-b border-border/60 bg-surface">
+    <section className="gutter-x section-y border-b border-border/60 bg-surface">
       <div className="mx-auto max-w-page space-y-6">
         {course.stagesNote === null ? null : (
           <p className="text-sm sm:text-base text-ink-muted leading-relaxed">

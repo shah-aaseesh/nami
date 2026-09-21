@@ -6,16 +6,21 @@ import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import { PrincipalMessage } from "@/components/shared/principal-message";
 import { SharedHero } from "@/components/shared/shared-hero";
-import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { institutionPath } from "@/lib/content/institutions";
 import { schoolPrincipal } from "@/lib/content/school-principal";
 import { createMetadata } from "@/lib/seo";
 import { SchoolAdmission } from "./_components/school-admission";
 import { SchoolApproachValuesSection } from "./_components/school-approach-values-section";
+import { SchoolBandProvider } from "./_components/school-band-context";
+import { SchoolBandTestimonials } from "./_components/school-band-testimonials";
 import { SchoolBands } from "./_components/school-bands";
 import { SchoolCollaboratorsSection } from "./_components/school-collaborators-section";
-import { parentTestimonials, schoolCopy } from "./_components/school-copy";
+import {
+  parentTestimonials,
+  plusTwoTestimonials,
+  schoolCopy,
+} from "./_components/school-copy";
 import { SchoolDay } from "./_components/school-day";
 import { SchoolFaqSection } from "./_components/school-faq-section";
 import { WhySchoolSection } from "./_components/why-school-section";
@@ -42,7 +47,7 @@ export default async function SchoolPage() {
   const watch = socials.find((profile) => profile.platform === "youtube");
 
   return (
-    <>
+    <SchoolBandProvider>
       <SharedHero
         entity={institution.entities.school}
         heroLabel={schoolCopy.masthead.heroLabel}
@@ -57,12 +62,14 @@ export default async function SchoolPage() {
 
       {principal === null ? null : (
         <PrincipalMessage
+          collapsible
           eyebrow={schoolPrincipal.eyebrow}
           id="principal"
           message={schoolPrincipal.message}
           person={{
             name: principal.name,
-            portrait: principal.portrait,
+            portrait: schoolPrincipal.portrait ?? principal.portrait,
+            expandedPortrait: schoolPrincipal.expandedPortrait ?? null,
             title: principal.title,
           }}
         />
@@ -85,10 +92,11 @@ export default async function SchoolPage() {
 
       <SchoolDay copy={schoolCopy.day} id="day" />
 
-      <Testimonials
-        id="parents"
-        items={parentTestimonials}
-        section={schoolCopy.parents}
+      <SchoolBandTestimonials
+        parentItems={parentTestimonials}
+        parentSection={schoolCopy.parents}
+        plusTwoItems={plusTwoTestimonials}
+        plusTwoSection={schoolCopy.plusTwoVoices}
       />
 
       <InstitutionNotices
@@ -105,6 +113,6 @@ export default async function SchoolPage() {
       />
 
       <InstitutionContact id="contact" institution="school" />
-    </>
+    </SchoolBandProvider>
   );
 }

@@ -162,12 +162,12 @@ export const institution: InstitutionProfile = {
       college: {
         phone: "014917441/42/43/44, 014913353",
         email: "info@nami.edu.np",
-        admissionsEmail: "admissions@college.nami.edu.np",
+        admissionsEmail: "admissions@nami.edu.np",
       },
       school: {
         phone: "014917441/42/43/44, 014913353",
         email: "info@nami.edu.np",
-        admissionsEmail: "admissions@school.nami.edu.np",
+        admissionsEmail: "admissions@nami.edu.np",
       },
     },
   },

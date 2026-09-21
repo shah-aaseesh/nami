@@ -84,7 +84,7 @@ export function ClubMasthead({ club }: { readonly club: ALevelsClub }) {
                   {club.category}
                 </span>
 
-                <h1 className="mt-4 font-display text-3xl sm:text-5xl lg:text-6xl font-bold sm:font-medium text-white tracking-tight leading-tight">
+                <h1 className="mt-4 font-display text-3xl sm:text-5xl lg:text-6xl font-semibold sm:font-medium text-white tracking-tight leading-tight">
                   {club.title}
                 </h1>
 

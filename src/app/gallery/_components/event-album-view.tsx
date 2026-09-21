@@ -118,7 +118,7 @@ export function EventAlbumView({
             </span>
           </div>
 
-          <H2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold sm:font-normal font-display text-ink tracking-tight">
+          <H2 className="mt-3 text-[2.1rem] sm:text-4xl lg:text-5xl font-semibold sm:font-normal font-display text-ink tracking-tight">
             {album.title}
           </H2>
 

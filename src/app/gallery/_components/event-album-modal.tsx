@@ -154,7 +154,7 @@ export function EventAlbumModal({
                 </span>
               </div>
 
-              <H2 className="mt-3 text-white text-3xl sm:text-4xl font-bold sm:font-normal font-display">
+              <H2 className="mt-3 text-white text-2xl sm:text-4xl font-semibold sm:font-normal font-display">
                 {album.title}
               </H2>
 

@@ -16,12 +16,12 @@ const SPLIT_TYPE: Record<SplitUnit, string> = {
 };
 
 const SPLIT_TAG_STYLES: Record<SplitTag, string> = {
-  h1: "font-display text-4xl sm:text-5xl lg:text-6xl font-bold sm:font-normal text-balance text-ink",
-  h2: "font-display text-3xl sm:text-4xl lg:text-5xl font-bold sm:font-normal text-balance text-ink",
-  h3: "font-display text-2xl sm:text-3xl lg:text-4xl font-bold sm:font-normal text-balance text-ink",
-  h4: "font-display text-xl sm:text-2xl lg:text-3xl font-bold sm:font-normal text-balance text-ink",
-  h5: "font-display text-lg sm:text-xl lg:text-2xl font-bold sm:font-normal text-balance text-ink",
-  h6: "font-display text-base sm:text-lg lg:text-xl font-bold sm:font-normal text-balance text-ink",
+  h1: "font-display text-5xl sm:text-5xl lg:text-6xl font-semibold sm:font-normal text-balance text-ink",
+  h2: "font-display text-[2.1rem] sm:text-4xl lg:text-5xl font-semibold sm:font-normal text-balance text-ink leading-[1.12]",
+  h3: "font-display text-2xl sm:text-3xl lg:text-4xl font-semibold sm:font-normal text-balance text-ink leading-[1.18]",
+  h4: "font-display text-xl sm:text-2xl lg:text-3xl font-semibold sm:font-normal text-balance text-ink leading-snug",
+  h5: "font-display text-lg sm:text-xl lg:text-2xl font-semibold sm:font-normal text-balance text-ink leading-snug",
+  h6: "font-display text-base sm:text-lg lg:text-xl font-semibold sm:font-normal text-balance text-ink leading-snug",
   p: "font-body text-base font-normal text-pretty text-ink-muted",
   span: "",
   div: "",

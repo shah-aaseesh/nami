@@ -90,7 +90,7 @@ export function CareersFirstJob({
         {/* Sticky Left Column */}
         <div className="lg:col-span-5" ref={stickyRef}>
           <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <H2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-bold sm:font-normal text-balance text-ink">
+          <H2 className="mt-4 font-display text-[2.1rem] sm:text-4xl lg:text-5xl font-semibold sm:font-normal text-balance text-ink">
             {copy.heading}
           </H2>
           <Standfirst className="mt-5 text-ink-muted leading-relaxed max-w-md">

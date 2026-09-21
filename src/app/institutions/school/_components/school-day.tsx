@@ -70,7 +70,7 @@ export function SchoolDay({
                   <Accordion className="border-none w-full">
                     <AccordionItem value={entry.title} className="border-none">
                       <AccordionTrigger className="p-0 text-start group hover:text-white transition-colors">
-                        <h3 className="font-display text-2xl sm:text-3xl font-normal text-white leading-snug group-hover:text-[#9CC21A]">
+                        <h3 className="font-display text-2xl sm:text-3xl font-semibold sm:font-normal text-white leading-snug group-hover:text-[#9CC21A]">
                           {entry.title}
                         </h3>
                       </AccordionTrigger>

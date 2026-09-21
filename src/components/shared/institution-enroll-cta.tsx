@@ -137,12 +137,13 @@ export function InstitutionEnrollCta({
           </RevealItem>
 
           {/* Action Button Row */}
-          <RevealItem className="mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <RevealItem className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
             {/* Primary Action: Apply Now */}
             <Link
               href={applyHref as Route}
               className={cn(
                 buttonVariants({ size: "lg" }),
+                "w-full sm:w-auto justify-center",
                 isCollege
                   ? "bg-white text-primary-800 hover:bg-neutral-100 font-semibold shadow-md"
                   : "bg-[#BD1B21] text-white hover:bg-[#9e1419] font-semibold shadow-lg border border-[#BD1B21]/60",
@@ -163,7 +164,7 @@ export function InstitutionEnrollCta({
               href={brochureHref as Route}
               className={cn(
                 buttonVariants({ size: "lg", variant: "outline" }),
-                "border-white/35 bg-white/10 text-white hover:bg-white/20 hover:border-white shadow-sm backdrop-blur-xs",
+                "w-full sm:w-auto justify-center border-white/35 bg-white/10 text-white hover:bg-white/20 hover:border-white shadow-sm backdrop-blur-xs",
               )}
             >
               <Icon

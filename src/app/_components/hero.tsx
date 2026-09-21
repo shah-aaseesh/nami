@@ -32,7 +32,10 @@ function HeroCta({
 
   return (
     <Link
-      className={cn(buttonVariants({ size: "lg", variant }))}
+      className={cn(
+        buttonVariants({ size: "lg", variant }),
+        "w-full sm:w-auto justify-center text-center",
+      )}
       href={link.href as Route}
       rel={isExternal ? "noopener noreferrer" : undefined}
       target={isExternal ? "_blank" : undefined}
@@ -68,28 +71,28 @@ export async function Hero() {
       id="hero"
     >
       <div className="relative mx-auto max-w-page">
-        <div className="flex items-center gap-3 sm:gap-3.5">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <Icon
-            className="size-6 sm:size-7 text-accent shrink-0"
+            className="size-4.5 sm:size-5 text-accent shrink-0"
             icon={MortarboardIcon}
           />
-          <Eyebrow className="text-base sm:text-lg lg:text-xl font-medium tracking-normal sm:tracking-wide">
+          <Eyebrow className="text-xs sm:text-sm font-semibold tracking-wider text-accent uppercase">
             {hero.eyebrow}
           </Eyebrow>
         </div>
 
-        <div className="mt-4 sm:mt-5 lg:mt-6 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-12 items-start">
+        <div className="mt-3 sm:mt-4 lg:mt-6 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-12 items-start">
           <HeroHeadline
             className="lg:col-span-6 xl:col-span-6"
             lead={lead}
             tail={tail}
           />
 
-          <div className="mt-5 flex flex-col items-start gap-4 sm:gap-5 lg:col-span-6 xl:col-span-6 lg:mt-0">
+          <div className="mt-4 flex flex-col items-start gap-4 sm:gap-5 lg:col-span-6 xl:col-span-6 lg:mt-0">
             <Standfirst className="text-sm sm:text-base leading-relaxed text-neutral-700">
               {hero.standfirst}
             </Standfirst>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
               <HeroCta link={hero.primaryCta} variant="default" />
               <HeroCta link={hero.secondaryCta} variant="outline" />
             </div>
@@ -97,7 +100,7 @@ export async function Hero() {
         </div>
 
         <div className="mt-4 sm:mt-5 lg:mt-6 lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-10">
-          <HeroBadgePin className="lg:col-span-2">
+          <HeroBadgePin className="hidden lg:block lg:col-span-2">
             <div className="relative flex items-start justify-start lg:flex-col lg:items-start lg:justify-start">
               <HeroBadge
                 entity={institution.entities.institute}
@@ -108,7 +111,7 @@ export async function Hero() {
           </HeroBadgePin>
 
           {heroSlides.length === 0 ? null : (
-            <figure className="mt-4 lg:col-span-10 lg:col-start-3 lg:mt-0">
+            <figure className="mt-2 lg:col-span-10 lg:col-start-3 lg:mt-0">
               <Carousel
                 aria-label={hero.eyebrow}
                 aria-roledescription="carousel"

@@ -67,9 +67,12 @@ export function SharedHero({
               {standfirst}
             </p>
 
-            <div className="flex animate-hero-fade flex-wrap items-center gap-3 [animation-delay:300ms] sm:gap-4">
+            <div className="flex animate-hero-fade flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto [animation-delay:300ms]">
               <Link
-                className={cn(buttonVariants({ size: "lg" }), "gap-2 px-6")}
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "w-full sm:w-auto justify-center text-center gap-2 px-6",
+                )}
                 href={primaryCta.href as Route}
                 rel={externalPrimary ? "noopener noreferrer" : undefined}
                 target={externalPrimary ? "_blank" : undefined}
@@ -83,7 +86,7 @@ export function SharedHero({
                 <Link
                   className={cn(
                     buttonVariants({ size: "lg", variant: "outline" }),
-                    "gap-2 border-white/35 px-6 text-white backdrop-blur hover:bg-white/15 hover:text-white",
+                    "w-full sm:w-auto justify-center text-center gap-2 border-white/35 px-6 text-white backdrop-blur hover:bg-white/15 hover:text-white",
                   )}
                   href={secondaryCta.href as Route}
                   rel={externalSecondary ? "noopener noreferrer" : undefined}

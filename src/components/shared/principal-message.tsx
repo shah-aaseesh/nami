@@ -36,7 +36,7 @@ function PortraitCard({
   const { portrait, expandedPortrait } = person;
 
   return (
-    <figure className="w-full max-w-[340px] sm:max-w-[360px] lg:max-w-none h-full flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-xs">
+    <figure className="w-full max-w-full lg:max-w-none h-full flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-xs">
       <div className="relative flex-1 min-h-[340px] sm:min-h-[400px] w-full bg-surface-raised overflow-hidden">
         {portrait === null ? (
           <div className="grid h-full w-full place-items-center">

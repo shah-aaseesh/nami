@@ -73,6 +73,7 @@ export async function About({
               <Link
                 className={cn(
                   buttonVariants({ size: "lg", variant: "default" }),
+                  "w-full sm:w-auto text-center justify-center",
                 )}
                 href={"/about" as Route}
               >

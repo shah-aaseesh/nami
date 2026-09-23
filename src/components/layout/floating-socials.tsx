@@ -120,7 +120,7 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
     <aside
       aria-label="Floating quick actions"
       className={cn(
-        "fixed right-0 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-0.5 rounded-l-lg border-y border-l border-primary-600/30 bg-primary-700 p-0.5 shadow-2xl xl:flex",
+        "fixed right-0 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-1 rounded-l-xl border-y border-l border-primary-600/30 bg-primary-700 p-1 shadow-2xl xl:flex",
         className,
       )}
     >
@@ -128,10 +128,10 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
       <div className="group/item relative">
         <button
           type="button"
-          className="flex size-7 items-center justify-center rounded-md text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          className="flex size-9 items-center justify-center rounded-lg text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
           aria-label="Download Forms & Brochures"
         >
-          <Icon className="size-4 text-white" icon={DownloadIcon} />
+          <Icon className="size-5 text-white" icon={DownloadIcon} />
           <span className="sr-only">Download Forms & Brochures</span>
         </button>
 
@@ -188,10 +188,10 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
           href={whatsappUrl as Route}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex size-7 items-center justify-center rounded-md text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          className="flex size-9 items-center justify-center rounded-lg text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
           aria-label="Chat on WhatsApp"
         >
-          <Icon className="size-4 text-white" icon={WhatsappIcon} />
+          <Icon className="size-5 text-white" icon={WhatsappIcon} />
           <span className="sr-only">Chat on WhatsApp</span>
         </Link>
 
@@ -208,10 +208,10 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
           href={tiktokUrl as Route}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex size-7 items-center justify-center rounded-md text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          className="flex size-9 items-center justify-center rounded-lg text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
           aria-label="Follow on TikTok"
         >
-          <Icon className="size-4 text-white" icon={TikTokIcon} />
+          <Icon className="size-5 text-white" icon={TikTokIcon} />
           <span className="sr-only">Follow on TikTok</span>
         </Link>
 
@@ -228,10 +228,10 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
           href={youtubeUrl as Route}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex size-7 items-center justify-center rounded-md text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          className="flex size-9 items-center justify-center rounded-lg text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
           aria-label="Watch on YouTube"
         >
-          <Icon className="size-4 text-white" icon={YouTubeIcon} />
+          <Icon className="size-5 text-white" icon={YouTubeIcon} />
           <span className="sr-only">Watch on YouTube</span>
         </Link>
 
@@ -248,10 +248,10 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
           href={linkedinUrl as Route}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex size-7 items-center justify-center rounded-md text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          className="flex size-9 items-center justify-center rounded-lg text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
           aria-label="Connect on LinkedIn"
         >
-          <Icon className="size-4 text-white" icon={LinkedInIcon} />
+          <Icon className="size-5 text-white" icon={LinkedInIcon} />
           <span className="sr-only">Connect on LinkedIn</span>
         </Link>
 

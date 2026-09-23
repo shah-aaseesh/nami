@@ -172,13 +172,24 @@ export async function SiteFooter() {
                       <Icon icon={FacebookIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.instagram.com/nami.school/" as Route}
+                      href={"https://www.instagram.com/nami.college" as Route}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
                       aria-label="NAMI School Instagram"
                     >
                       <Icon icon={InstagramIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={
+                        "https://www.linkedin.com/company/13186439/" as Route
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI School LinkedIn"
+                    >
+                      <Icon icon={LinkedInIcon} className="size-3.5" />
                     </Link>
                     <Link
                       href={"https://www.youtube.com/@naminepal" as Route}
@@ -294,6 +305,15 @@ export async function SiteFooter() {
                       aria-label="NAMI College LinkedIn"
                     >
                       <Icon icon={LinkedInIcon} className="size-3.5" />
+                    </Link>
+                    <Link
+                      href={"https://www.youtube.com/@naminepal" as Route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
+                      aria-label="NAMI College YouTube"
+                    >
+                      <Icon icon={YouTubeIcon} className="size-3.5" />
                     </Link>
                     <Link
                       href={

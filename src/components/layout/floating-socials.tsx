@@ -7,7 +7,9 @@ import {
   ChevronLeftIcon,
   DownloadIcon,
   LinkedInIcon,
+  TikTokIcon,
   WhatsappIcon,
+  YouTubeIcon,
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +40,14 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
     whatsappTarget,
     "Hello NAMI, I would like to enquire about admissions, programmes, and campus visits.",
   );
+
+  const tiktokUrl =
+    contact.socialProfiles.find((s) => s.platform === "tiktok")?.href ??
+    "https://www.tiktok.com/@nami.college?_r=1&_t=ZS-99xxwcx4jFE";
+
+  const youtubeUrl =
+    contact.socialProfiles.find((s) => s.platform === "youtube")?.href ??
+    "https://www.youtube.com/@naminepal";
 
   const linkedinUrl =
     contact.socialProfiles.find((s) => s.platform === "linkedin")?.href ??
@@ -192,7 +202,47 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
         </div>
       </div>
 
-      {/* 3. Direct LinkedIn Action */}
+      {/* 3. Direct TikTok Action */}
+      <div className="group/item relative">
+        <Link
+          href={tiktokUrl as Route}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex size-10 items-center justify-center rounded-xl text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          aria-label="Follow on TikTok"
+        >
+          <Icon className="size-5 text-white" icon={TikTokIcon} />
+          <span className="sr-only">Follow on TikTok</span>
+        </Link>
+
+        {/* Tooltip */}
+        <div className="invisible pointer-events-none absolute right-full top-1/2 z-50 mr-3 -translate-y-1/2 -translate-x-1.5 whitespace-nowrap rounded-lg border border-neutral-200/90 bg-white px-2.5 py-1 text-xs font-medium text-neutral-800 opacity-0 shadow-lg transition-all duration-150 ease-out group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100 group-focus-within/item:visible group-focus-within/item:translate-x-0 group-focus-within/item:opacity-100">
+          <div className="absolute -right-1 top-1/2 size-2 -translate-y-1/2 rotate-45 border-r border-t border-neutral-200/90 bg-white" />
+          <span>Follow on TikTok</span>
+        </div>
+      </div>
+
+      {/* 4. Direct YouTube Action */}
+      <div className="group/item relative">
+        <Link
+          href={youtubeUrl as Route}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex size-10 items-center justify-center rounded-xl text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          aria-label="Watch on YouTube"
+        >
+          <Icon className="size-5 text-white" icon={YouTubeIcon} />
+          <span className="sr-only">Watch on YouTube</span>
+        </Link>
+
+        {/* Tooltip */}
+        <div className="invisible pointer-events-none absolute right-full top-1/2 z-50 mr-3 -translate-y-1/2 -translate-x-1.5 whitespace-nowrap rounded-lg border border-neutral-200/90 bg-white px-2.5 py-1 text-xs font-medium text-neutral-800 opacity-0 shadow-lg transition-all duration-150 ease-out group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100 group-focus-within/item:visible group-focus-within/item:translate-x-0 group-focus-within/item:opacity-100">
+          <div className="absolute -right-1 top-1/2 size-2 -translate-y-1/2 rotate-45 border-r border-t border-neutral-200/90 bg-white" />
+          <span>Watch on YouTube</span>
+        </div>
+      </div>
+
+      {/* 5. Direct LinkedIn Action */}
       <div className="group/item relative">
         <Link
           href={linkedinUrl as Route}

@@ -138,7 +138,12 @@ function VocationalCard({
           as="h3"
           className="font-display text-xl font-medium leading-tight text-primary-700 group-hover:text-primary-800 transition-colors"
         >
-          Vocational & Technical Training
+          <Link
+            className="after:absolute after:inset-0 focus-visible:outline-none"
+            href="/institutions/ctevt"
+          >
+            Vocational & Technical Training
+          </Link>
         </H5>
 
         <p className="mt-2.5 font-body text-sm font-medium leading-snug text-neutral-800">

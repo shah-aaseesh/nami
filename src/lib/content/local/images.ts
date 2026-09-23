@@ -196,6 +196,13 @@ export const nischalKhadkaPortrait: ContentImage = {
   height: 1449,
 };
 
+export const nischalExpandedPortrait: ContentImage = {
+  src: "/team/Mr nischal.png",
+  alt: "Studio portrait of Mr. Nischal Khadka, Academic Head at NAMI.",
+  width: 1041,
+  height: 1511,
+};
+
 export const anishaPandayJoshiPortrait: ContentImage = {
   src: "/team/anisha-panday-joshi.webp",
   alt: "Studio portrait of Ms. Anisha Panday Joshi, Principal of NAMI International School, hands clasped in an olive and red patterned sari over a red blouse against a mottled blue-grey backdrop.",

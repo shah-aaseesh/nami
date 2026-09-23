@@ -36,8 +36,8 @@ function PortraitCard({
   const { portrait, expandedPortrait } = person;
 
   return (
-    <figure className="w-full max-w-full lg:max-w-none h-full flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-xs">
-      <div className="relative flex-1 min-h-[340px] sm:min-h-[400px] w-full bg-surface-raised overflow-hidden">
+    <figure className="w-full h-full flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-xs">
+      <div className="relative flex-1 min-h-[300px] sm:min-h-[340px] w-full bg-[#3b6e98] overflow-hidden">
         {portrait === null ? (
           <div className="grid h-full w-full place-items-center">
             <Icon className="size-8 text-ink-muted/50" icon={ImageIcon} />
@@ -52,7 +52,7 @@ function PortraitCard({
               )}
               fill
               loading="lazy"
-              sizes="(max-width: 1023px) 360px, 400px"
+              sizes="(max-width: 1023px) 100vw, (max-width: 1279px) 380px, 420px"
               src={portrait.src}
             />
 
@@ -65,7 +65,7 @@ function PortraitCard({
                 )}
                 fill
                 loading="lazy"
-                sizes="(max-width: 1023px) 360px, 400px"
+                sizes="(max-width: 1023px) 100vw, (max-width: 1279px) 380px, 420px"
                 src={expandedPortrait.src}
               />
             )}
@@ -109,8 +109,8 @@ export function PrincipalMessage({
           <span className="block h-1 w-16 rounded-full bg-accent" />
         </Reveal>
 
-        <div className="mt-8 sm:mt-10 flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 xl:gap-12">
-          <div className="flex-1 flex flex-col gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-10 flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 xl:gap-14">
+          <div className="flex-1 flex flex-col justify-between">
             <Reveal
               className="space-y-4 sm:space-y-5"
               stagger={0.08}
@@ -118,17 +118,17 @@ export function PrincipalMessage({
               {visibleParagraphs.map((paragraph, index) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: message is a static paragraph list
                 <RevealItem key={index}>
-                  <P className="lg:text-justify leading-relaxed">{paragraph}</P>
+                  <P className="text-justify [text-align-last:left] text-ink/90 leading-relaxed text-sm sm:text-base">{paragraph}</P>
                 </RevealItem>
               ))}
             </Reveal>
 
             {hasMore && (
-              <div className="pt-2">
+              <div className="shrink-0 pt-4 sm:pt-6">
                 <button
                   type="button"
                   onClick={() => setIsExpanded((prev) => !prev)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
+                  className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
                 >
                   <span>{isExpanded ? "Read less" : "Read more"}</span>
                   <svg
@@ -149,8 +149,8 @@ export function PrincipalMessage({
             )}
           </div>
 
-          <div className="w-full lg:w-[340px] xl:w-[380px] shrink-0 flex justify-center lg:justify-end">
-            <Reveal className="w-full h-full flex justify-center lg:justify-end">
+          <div className="w-full lg:w-[380px] xl:w-[420px] shrink-0 flex flex-col">
+            <Reveal className="w-full h-full flex flex-col">
               <PortraitCard isExpanded={isExpanded} person={person} />
             </Reveal>
           </div>

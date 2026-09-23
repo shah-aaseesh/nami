@@ -29,6 +29,10 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
         label: "Naaya Aayam Multi-Disciplinary Institute",
         href: institutionPath("bachelors"),
       },
+      {
+        label: "CTEVT Vocational Programmes",
+        href: "/institutions/ctevt",
+      },
     ],
   },
   {

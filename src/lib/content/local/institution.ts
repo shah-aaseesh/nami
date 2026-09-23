@@ -97,9 +97,9 @@ export const institution: InstitutionProfile = {
   ],
   contact: {
     phones: [
-      "014917441/42/43/44",
-      "014913353",
-      "015920335/36",
+      "+977-01-4917441/42/43/44",
+      "+977-01-4913353",
+      "+977-01-5920335/36",
     ],
     whatsapp: "namicollege",
     email: "info@nami.edu.np",
@@ -155,17 +155,17 @@ export const institution: InstitutionProfile = {
     ],
     byEntity: {
       institute: {
-        phone: "015920335/36",
+        phone: "+977-01-5920335/36",
         email: "info@nami.edu.np",
         admissionsEmail: "admissions@nami.edu.np",
       },
       college: {
-        phone: "014917441/42/43/44, 014913353",
+        phone: "+977-01-4917441/42/43/44, +977-01-4913353",
         email: "info@nami.edu.np",
         admissionsEmail: "admissions@nami.edu.np",
       },
       school: {
-        phone: "014917441/42/43/44, 014913353",
+        phone: "+977-01-4917441/42/43/44, +977-01-4913353",
         email: "info@nami.edu.np",
         admissionsEmail: "admissions@nami.edu.np",
       },

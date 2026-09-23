@@ -38,21 +38,21 @@ const DEFAULTS_BY_ROLE: Record<
     description:
       "We are here to guide you through every step of the admissions process. If you have any questions or need assistance, our admissions team is ready to help.",
     brochureLabel: "Brochure",
-    phone: "014917441/42/43/44, 014913353",
+    phone: "+977-01-4917441/42/43/44, +977-01-4913353",
   },
   college: {
     heading: "Ready to Enroll?",
     description:
       "We are here to guide you through every step of the Cambridge A-Level admissions process. If you have any questions, our admissions desk is here to support you.",
     brochureLabel: "Prospectus",
-    phone: "014917441/42/43/44, 014913353",
+    phone: "+977-01-4917441/42/43/44, +977-01-4913353",
   },
   institute: {
     heading: "Ready to Enroll?",
     description:
       "We are here to guide you through every step of university admissions. If you have any questions about Northampton UK degree programmes, our advisors are ready to assist.",
     brochureLabel: "Prospectus",
-    phone: "015920335/36",
+    phone: "+977-01-5920335/36",
   },
 };
 

@@ -62,14 +62,12 @@ export default async function SchoolPage() {
 
       {principal === null ? null : (
         <PrincipalMessage
-          collapsible
           eyebrow={schoolPrincipal.eyebrow}
           id="principal"
           message={schoolPrincipal.message}
           person={{
             name: principal.name,
             portrait: schoolPrincipal.portrait ?? principal.portrait,
-            expandedPortrait: schoolPrincipal.expandedPortrait ?? null,
             title: principal.title,
           }}
         />

@@ -1,5 +1,5 @@
 import type { ContentImage } from "./types";
-import { anishaPandayJoshiPortrait, anishaPrincipalMessagePortrait } from "./local/images";
+import { anishaPandayJoshiPortrait } from "./local/images";
 import type { RichText } from "./rich-text";
 import { richText } from "./rich-text";
 
@@ -8,20 +8,20 @@ export type SchoolPrincipalCopy = {
   readonly eyebrow: string;
   readonly message: RichText;
   readonly portrait?: ContentImage;
-  readonly expandedPortrait?: ContentImage;
 };
 
 export const schoolPrincipal: SchoolPrincipalCopy = {
   slug: "leader-anisha-joshi",
   eyebrow: "From the Principal",
   portrait: anishaPandayJoshiPortrait,
-  expandedPortrait: anishaPrincipalMessagePortrait,
   message: richText(
-    "Ms. Anisha Panday Joshi is the Principal of NAMI International School, with more than 15 years of experience in education, school leadership, administration, and organizational management. She holds a Master’s in Business Administration in Marketing from Kathmandu University and a Master’s in University of Applied Research & Development from the National Open College Network (NOCN), United Kingdom.",
-    "Throughout her career, Ms. Panday has worked in curriculum development, teacher development, school operations, student support, and academic leadership. Before joining NAMI, she served as a Secondary School Coordinator and English Language Teacher at Sanskriti International School and worked as an educational consultant at Shushrusha Serves. Her earlier experience in corporate marketing has also contributed to her strengths in communication, planning, teamwork, and organizational development.",
-    "As Principal, she provides leadership across the Primary and Secondary School, working closely with students, teachers, parents, and the wider NAMI community. She oversees academic planning and development, curriculum and assessment, teacher development, student wellbeing, school operations, and contributes to policy planning, review, and implementation. She also works closely with staff and families to strengthen communication, build a positive school culture, and ensure that students receive the guidance and support they need to grow with confidence. In 2024, she became the Founding Principal of NAMI International School’s Primary Wing, which has since grown into the Primary and Middle School, playing a significant role in establishing its academic and operational foundations and shaping its culture from the outset.",
-    "At the heart of her educational philosophy is the belief that schools should prepare students not only for academic success, but also to become thoughtful, responsible, confident, and compassionate individuals. She values open communication, collaboration, and shared responsibility, and believes that students make progress when they feel a genuine sense of belonging and are encouraged to take ownership of their choices and actions.",
-    "For Ms. Panday, leading a school is not simply about managing an institution; it is about creating a place where young people feel that they belong, where teachers feel that their work matters, and where what students learn and experience at school stays with them long after they leave the classroom.",
+    "My personal and professional commitment at NAMI International School is to guide the growth of students and ensure a nurturing environment for all.",
+    "At NAMI International School, we hold a deep conviction that education should be a catalyst for bringing out the best in every child. We work towards enhancing knowledge, skill, ability, and the overall potential of individuals to become successful and ready for a world that never ceases to change.",
+    "As my understanding of the world deepens, so does my conviction that we need to raise a generation of empathetic/compassionate individuals.",
+    "Therefore, it is crucial to instil a culture of care from an early age, both within the household and the school environment. This entails acknowledging parents as essential partners in moulding the educational path of the child.",
+    "Keeping the above in mind, our school curriculum is crafted through extensive research and is designed to address various facets of development—cognitive, social-emotional, physical, and creative. We aim to instill a genuine love for learning in our students and therefore embrace each child as an individual with unique talent and potential.",
+    "Academics at NAMI International School are not just about grades; Our focus is on creating an inclusive and caring community where every child feels seen, heard, and supported in all manner of ways.",
+    "Together with my team, we are dedicated to creating a centre of excellence in education, empowering students to become resilient lifelong learners and positive agents of change. As someone deeply passionate about enhancing the learning experiences of young minds and transforming children's lives through the power of education, I carry this devotion into my role as the Principal at NAMI International School.",
   ),
 };
 

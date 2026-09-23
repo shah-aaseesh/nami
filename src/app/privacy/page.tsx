@@ -185,8 +185,8 @@ export default function PrivacyPolicyPage() {
             </P>
             <div className="pt-2 font-body text-sm sm:text-base space-y-1 text-ink">
               <p className="font-semibold">Naaya Aayam Multi-Disciplinary Institute (NAMI)</p>
-              <p className="text-ink-muted">Jorpati Campus: Gokarneshwor-7, Jorpati Marg, Kathmandu | Phone: 014917441/42/43/44, 014913353</p>
-              <p className="text-ink-muted">New Baneshwor Campus: Shantinagar Marg, Kathmandu | Phone: 015920335/36</p>
+              <p className="text-ink-muted">Jorpati Campus: Gokarneshwor-7, Jorpati Marg, Kathmandu | Phone: +977-01-4917441/42/43/44, +977-01-4913353</p>
+              <p className="text-ink-muted">New Baneshwor Campus: Shantinagar Marg, Kathmandu | Phone: +977-01-5920335/36</p>
               <p className="text-ink-muted">
                 Email:{" "}
                 <a href="mailto:info@nami.edu.np" className="text-accent underline font-medium">

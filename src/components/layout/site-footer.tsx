@@ -113,18 +113,25 @@ export async function SiteFooter() {
                   </Link>
 
                   <div className="mt-3 space-y-1.5 font-body text-xs">
-                    <Link
-                      href={
-                        `tel:${(contact.byEntity.school.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
-                      }
-                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
-                    >
+                    <div className="flex items-center gap-2 text-white/90">
                       <Icon
                         icon={PhoneIcon}
                         className="size-3.5 shrink-0 text-white"
                       />
-                      <span>{contact.byEntity.school.phone}</span>
-                    </Link>
+                      <div className="flex flex-col">
+                        {contact.byEntity.school.phone.split(", ").map((num) => (
+                          <Link
+                            key={num}
+                            href={
+                              `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                            }
+                            className="transition-colors hover:text-white"
+                          >
+                            {num}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                     <Link
                       href={`mailto:${contact.byEntity.school.email}` as Route}
                       className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
@@ -207,18 +214,25 @@ export async function SiteFooter() {
                   </Link>
 
                   <div className="mt-3 space-y-1.5 font-body text-xs">
-                    <Link
-                      href={
-                        `tel:${(contact.byEntity.college.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
-                      }
-                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
-                    >
+                    <div className="flex items-center gap-2 text-white/90">
                       <Icon
                         icon={PhoneIcon}
                         className="size-3.5 shrink-0 text-white"
                       />
-                      <span>{contact.byEntity.college.phone}</span>
-                    </Link>
+                      <div className="flex flex-col">
+                        {contact.byEntity.college.phone.split(", ").map((num) => (
+                          <Link
+                            key={num}
+                            href={
+                              `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                            }
+                            className="transition-colors hover:text-white"
+                          >
+                            {num}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                     <Link
                       href={`mailto:${contact.byEntity.college.email}` as Route}
                       className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
@@ -301,18 +315,25 @@ export async function SiteFooter() {
                   </Link>
 
                   <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1.5 font-body text-xs">
-                    <Link
-                      href={
-                        `tel:${(contact.byEntity.institute.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
-                      }
-                      className="flex items-center gap-2 text-white/90 transition-colors hover:text-white"
-                    >
+                    <div className="flex items-center gap-2 text-white/90">
                       <Icon
                         icon={PhoneIcon}
                         className="size-3.5 shrink-0 text-white"
                       />
-                      <span>{contact.byEntity.institute.phone}</span>
-                    </Link>
+                      <div className="flex flex-col">
+                        {contact.byEntity.institute.phone.split(", ").map((num) => (
+                          <Link
+                            key={num}
+                            href={
+                              `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                            }
+                            className="transition-colors hover:text-white"
+                          >
+                            {num}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                     <Link
                       href={
                         `mailto:${contact.byEntity.institute.email}` as Route

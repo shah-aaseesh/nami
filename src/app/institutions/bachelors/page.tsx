@@ -6,13 +6,13 @@ import { InstitutionContact } from "@/components/shared/institution-contact";
 import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { InstitutionNotices } from "@/components/shared/institution-notices";
 import type { CareerPartner } from "@/components/shared/partner-carousel";
-import { PrincipalMessage } from "@/components/shared/principal-message";
 import { SharedHero } from "@/components/shared/shared-hero";
 import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
 import { bachelorsCopy } from "./_components/bachelors-copy";
+import { BachelorsAcademicHeadSection } from "./_components/bachelors-academic-head";
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
 import { MouPartnersSection } from "./_components/mou-partners-section";
 import { PearsonVueBanner } from "./_components/pearson-vue-banner";
@@ -69,13 +69,13 @@ export default async function BachelorsPage() {
       <WhyUndergraduateSection />
 
       {academicHead === null ? null : (
-        <PrincipalMessage
+        <BachelorsAcademicHeadSection
           eyebrow={bachelorsCopy.academicHead.eyebrow}
           id="academic-head"
           message={bachelorsCopy.academicHead.message}
           person={{
             name: academicHead.name,
-            portrait: bachelorsCopy.academicHead.portrait,
+            portrait: bachelorsCopy.academicHead.portrait ?? academicHead.portrait,
             title: academicHead.title,
           }}
         />

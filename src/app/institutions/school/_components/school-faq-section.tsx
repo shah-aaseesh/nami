@@ -87,11 +87,11 @@ export function SchoolFaqSection({
 
             <div className="mt-3.5 flex items-center gap-2.5 pt-2 border-t border-[#E5DECf]">
               <a
-                href="tel:014917441"
+                href="tel:+977014917441"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#BD1B21] px-4 py-2 font-body text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#a0161b]"
               >
                 <Icon className="size-3.5" icon={PhoneIcon} />
-                <span>Call Admissions: 014917441/42/43/44</span>
+                <span>Call Admissions: +977-01-4917441/42/43/44</span>
               </a>
             </div>
           </div>

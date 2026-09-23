@@ -4,8 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-const YOUTUBE_ID = "1FRj-NAHfoo";
-
 interface HomepageVideoPlayerProps {
   className?: string;
   poster?: string;
@@ -17,6 +15,7 @@ export function HomepageVideoPlayer({
   className,
   poster = "/Homepage video thumbnails.png",
   title = "NAMI College Video",
+  src = "/RE-EDIT VIEO-NAMI.mp4",
 }: HomepageVideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -28,13 +27,17 @@ export function HomepageVideoPlayer({
       )}
     >
       {isPlaying ? (
-        <iframe
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          className="size-full border-0"
-          src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&mute=0&controls=1&rel=0&loop=1&playlist=${YOUTUBE_ID}&modestbranding=1&iv_load_policy=3&playsinline=1`}
-          title={title}
-        />
+        <video
+          aria-label={title}
+          autoPlay
+          className="size-full object-cover"
+          controls
+          playsInline
+          preload="auto"
+          src={src}
+        >
+          Your browser does not support the video tag.
+        </video>
       ) : (
         <div
           aria-label="Play video"

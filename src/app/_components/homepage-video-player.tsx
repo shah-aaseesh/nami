@@ -15,9 +15,10 @@ export function HomepageVideoPlayer({
   className,
   poster = "/Homepage video thumbnails.png",
   title = "NAMI College Video",
-  src = "/RE-EDIT VIEO-NAMI.mp4",
+  src = "/nami-video.mp4",
 }: HomepageVideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(src);
 
   return (
     <div
@@ -32,9 +33,14 @@ export function HomepageVideoPlayer({
           autoPlay
           className="size-full object-cover"
           controls
+          onError={() => {
+            if (videoSrc !== "/nami-video.mp4") {
+              setVideoSrc("/nami-video.mp4");
+            }
+          }}
           playsInline
           preload="auto"
-          src={src}
+          src={videoSrc}
         >
           Your browser does not support the video tag.
         </video>

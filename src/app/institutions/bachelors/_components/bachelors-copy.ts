@@ -160,6 +160,20 @@ const undergraduateEntry: readonly ProgrammeRequirement[] = [
   },
 ];
 
+const bbaEntry: readonly ProgrammeRequirement[] = [
+  {
+    label: "NEB +2",
+    requirement: "55% / 2.2 GPA or equivalent",
+  },
+  { label: "CBSE", requirement: "60%" },
+  { label: "A Levels", requirement: "280 UCAS tariff points" },
+  {
+    label: "English",
+    requirement:
+      "60 marks in English at +2/CBSE or IELTS 6.0, no band below 5.5",
+  },
+];
+
 const undergraduateEntryNotes: readonly string[] = [
   "Students awaiting results, and students who have completed a foundation or bridge course (Level 3) from a recognised institution, are also encouraged to apply.",
   "All decisions regarding an offer letter are made by the University of Northampton, UK.",
@@ -566,34 +580,50 @@ const programmes: BachelorsProgrammesCopy = {
       key: "business-administration",
       qualification: "Bachelor",
       title: "Business Administration",
-      fullTitle: "Bachelor in Business Administration",
+      fullTitle: "Bachelor of Business Administration",
       metaDescription:
-        "Bachelor in Business Administration at NAMI, Kathmandu — a three-year degree awarded by the University of Northampton, UK, covering management, finance, marketing and entrepreneurship.",
+        "Bachelor of Business Administration (BBA) at NAMI, Kathmandu — a three-year undergraduate programme awarded by the University of Northampton, UK, preparing students for careers in business, management, finance, marketing and entrepreneurship.",
       image: auditoriumGathering,
       awardingBody: northamptonAward,
       startingFrom: null,
-      format: "Three-year degree",
+      format: "3 years | 360 credits",
       shortDescription:
-        "Three-year management degree covering marketing, finance, enterprise strategy, and leadership.",
+        "Build the knowledge, skills and confidence to succeed in the world of business.",
       summary: [
-        "A three-year degree for students building a career in the financial sector, the service sector, hospitality, or their own small business — developing interpersonal, team-building, critical-thinking, leadership and entrepreneurial skills alongside the management concepts.",
-        "Affiliated with the University of Northampton, the three years build in-depth knowledge across the management streams. Students are trained in project management, entrepreneurial skills, and accounting and finance, and the first year lays a foundation so the final-year dissertation can be written in the area that captivates them.",
-        "The learning pedagogy runs through advanced classroom lectures, management activities, group work, discussions, debates and case studies. Students need a minimum of 80 percent attendance to qualify for the examinations.",
+        "The BBA at NAMI, awarded by the University of Northampton, UK, is a three-year undergraduate programme designed to prepare students for careers in business, management, finance, marketing, entrepreneurship and a wide range of professional sectors. Through a combination of academic learning, real-world case studies, business projects, presentations, teamwork, industry engagement and practical activities, students develop the knowledge and professional skills needed to navigate today's dynamic business environment.",
+        "Why Study BBA at NAMI? Earn a UK University Award from the University of Northampton, giving you an internationally oriented business education. Develop practical business knowledge through case studies, business simulations, projects, presentations, discussions and problem-solving activities. Cultivate entrepreneurial thinking, gain a global business perspective across interconnected markets, and build practical expertise in finance, accounting, and data-informed decision-making.",
+        "Learning Beyond the Classroom: At NAMI, business education goes far beyond textbooks and lectures. Students apply their learning through business simulations, case-study competitions, entrepreneurship activities, student-led projects, pitching sessions, industry and guest-speaker sessions, seminars, workshops, business and management events, student clubs and societies, and leadership initiatives.",
+        "Skills You Will Develop: Throughout the programme, students build business and management expertise (strategic thinking, business decision-making, financial awareness, marketing knowledge, project management), professional excellence (communication, presentation, teamwork, leadership, negotiation), and future-focused capabilities (critical thinking, problem-solving, creativity, entrepreneurship, digital and analytical skills, and research skills).",
+        "Is BBA Right for You? The BBA is ideal for students who are interested in business and management, want to understand how organisations work, are interested in entrepreneurship or starting their own venture, enjoy collaborating in teams, want to develop leadership acumen, or seek a broad business degree before specialising.",
       ],
-      entryLabel: "Standard entry requirements",
-      entry: undergraduateEntry,
+      entryLabel: "Entry Requirements",
+      entry: bbaEntry,
       entryNotes: undergraduateEntryNotes,
-      careersLabel: "Career prospect",
+      careersLabel: "Where Can a BBA Take You?",
       careerSummary:
-        "The degree suits candidates with excellent communication and interpersonal skills who want a career in marketing, business or finance. It is built for students who want the management and business side of any industry, and the first-year foundation carries through to a final-year dissertation in the area they choose.",
-      careerSectors: ["Marketing", "Business", "Finance"],
+        "A BBA can provide a foundation for careers across a wide range of business functions and sectors. Graduates are prepared for roles such as Business Executive, Marketing Executive, HR Executive, Banking Professional, Business Development Executive, Project Coordinator, Operations Executive, Entrepreneur, Sales Executive, and Management Trainee.",
+      careerSectors: [
+        "Business Management",
+        "Banking and Financial Services",
+        "Marketing and Digital Marketing",
+        "Human Resource Management",
+        "Sales and Business Development",
+        "Operations Management",
+        "Project Management",
+        "Entrepreneurship",
+        "Consulting",
+        "Customer Relationship Management",
+        "Hospitality and Service Management",
+        "Business Analysis",
+        "Administration and Management",
+      ],
       pendingNote: null,
       stagesNote: null,
       stages: [
         {
           key: "bba-stage-1",
-          label: "Stage I",
-          note: "Students must take all modules.",
+          label: "Year 1 — Build Your Business Foundation",
+          note: "Focus: Understand business. Develop a broad understanding of how businesses operate across marketing, accounting and finance, business environment, business in society, entrepreneurship, and people management.",
           modules: [
             {
               code: "MKT1001",
@@ -641,8 +671,8 @@ const programmes: BachelorsProgrammesCopy = {
         },
         {
           key: "bba-stage-2",
-          label: "Stage II",
-          note: "Students must take all modules.",
+          label: "Year 2 — Develop Management Expertise",
+          note: "Focus: Manage and analyse business. Build deeper knowledge and develop practical management capabilities across strategic business analysis, human resources, operations, financial decision-making, project management, and brand management.",
           modules: [
             {
               code: "BUS2002",
@@ -690,8 +720,8 @@ const programmes: BachelorsProgrammesCopy = {
         },
         {
           key: "bba-stage-3",
-          label: "Stage III",
-          note: "Students must take the compulsory modules plus one of BUS4001, HRM4001 or ECN4001.",
+          label: "Year 3 — Think Strategically and Professionally",
+          note: "Focus: Lead, innovate and create solutions. Apply your knowledge to contemporary business challenges through innovation and entrepreneurship, strategic management, corporate social responsibility, global business, and an independent business dissertation (BUS4001).",
           modules: [
             {
               code: "MKT3026",

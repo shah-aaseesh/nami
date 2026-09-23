@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
+import { Icon } from "@/components/ui/icon";
 import { Eyebrow, Standfirst } from "@/components/ui/typography";
+import { ChevronDownIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import type { BachelorsProgramme } from "../../_components/bachelors-copy";
 import { courseDetailCopy } from "./course-detail-copy";
@@ -55,6 +60,20 @@ function factsOf(course: BachelorsProgramme): readonly CourseFact[] {
   return facts;
 }
 
+function splitLeadText(lead: string): {
+  initial: string;
+  expanded: string | null;
+} {
+  const periodIndex = lead.indexOf(". ");
+  if (periodIndex !== -1) {
+    return {
+      initial: lead.slice(0, periodIndex + 1),
+      expanded: lead.slice(periodIndex + 2).trim(),
+    };
+  }
+  return { initial: lead, expanded: null };
+}
+
 export function CourseMasthead({
   course,
   eyebrow,
@@ -62,8 +81,10 @@ export function CourseMasthead({
   readonly course: BachelorsProgramme;
   readonly eyebrow?: string;
 }) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const facts = factsOf(course);
   const lead = course.summary[0] ?? null;
+  const leadParts = lead !== null ? splitLeadText(lead) : null;
 
   return (
     <section className="gutter-x section-y-masthead">
@@ -86,11 +107,50 @@ export function CourseMasthead({
             </SplitText>
           </Reveal>
 
-          {lead === null ? null : (
+          {leadParts === null ? null : (
             <Reveal className="mt-5 max-w-xl text-neutral-700 lg:col-span-5 lg:mt-0">
-              <Standfirst className="text-ink-muted text-base sm:text-lg leading-relaxed">
-                {lead}
-              </Standfirst>
+              <div className="space-y-2">
+                <p className="text-sm sm:text-base font-body text-ink-muted leading-relaxed">
+                  {leadParts.initial}
+                </p>
+
+                {leadParts.expanded ? (
+                  <>
+                    <div
+                      className={cn(
+                        "grid transition-all duration-300 ease-in-out overflow-hidden",
+                        isExpanded
+                          ? "grid-rows-[1fr] opacity-100 mt-2"
+                          : "grid-rows-[0fr] opacity-0 mt-0",
+                      )}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="text-sm sm:text-base font-body text-ink-muted leading-relaxed">
+                          {leadParts.expanded}
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      aria-expanded={isExpanded}
+                      className="group inline-flex items-center gap-1.5 font-body text-xs font-semibold uppercase tracking-wider text-accent transition-colors hover:text-primary-800 cursor-pointer pt-0.5"
+                      onClick={() => setIsExpanded((prev) => !prev)}
+                      type="button"
+                    >
+                      <span>{isExpanded ? "Read less" : "Read more"}</span>
+                      <Icon
+                        className={cn(
+                          "size-3.5 transition-transform duration-300",
+                          isExpanded
+                            ? "rotate-180"
+                            : "group-hover:translate-y-0.5",
+                        )}
+                        icon={ChevronDownIcon}
+                      />
+                    </button>
+                  </>
+                ) : null}
+              </div>
             </Reveal>
           )}
         </div>

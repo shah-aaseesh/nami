@@ -2,7 +2,7 @@ import { Display, Standfirst } from "@/components/ui/typography";
 
 export function FacultyHero() {
   return (
-    <section className="gutter-x pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8 border-b border-border/70 bg-gradient-to-b from-primary-100/30 via-surface/50 to-surface">
+    <section className="gutter-x pt-4 sm:pt-5 lg:pt-6 pb-6 sm:pb-8 border-b border-border/70 bg-gradient-to-b from-primary-100/30 via-surface/50 to-surface">
       <div className="mx-auto max-w-page">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-10 items-end">
           <div className="lg:col-span-7">

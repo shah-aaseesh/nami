@@ -183,7 +183,7 @@
   --spacing-section-py: clamp(2rem, 1.25rem + 1.2vw, 3.5rem);
   --spacing-section-py-compact: clamp(1.25rem, 0.85rem + 0.75vw, 2rem);
   --spacing-section-py-hero: clamp(1.25rem, 1rem + 0.75vw, 2.25rem);
-  --spacing-section-pt-masthead: clamp(1rem, 0.75rem + 0.75vw, 2rem);
+  --spacing-section-pt-masthead: clamp(0.75rem, 0.5rem + 0.5vw, 1.25rem);
 }
 
 @utility gutter-x {

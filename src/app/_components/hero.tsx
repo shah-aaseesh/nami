@@ -67,7 +67,7 @@ export async function Hero() {
 
   return (
     <section
-      className="relative isolate gutter-x pt-4 pb-8 sm:pt-6 sm:pb-10 lg:pt-8 lg:pb-12"
+      className="relative isolate gutter-x pt-2.5 pb-8 sm:pt-3.5 sm:pb-10 lg:pt-4 lg:pb-12"
       id="hero"
     >
       <div className="relative mx-auto max-w-page">

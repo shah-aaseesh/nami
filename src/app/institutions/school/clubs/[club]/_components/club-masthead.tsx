@@ -11,7 +11,7 @@ const COVER_SIZES = "(min-width: 1024px) 1200px, 100vw";
 
 export function ClubMasthead({ club }: { readonly club: SchoolClub }) {
   return (
-    <section className="gutter-x pt-4 sm:pt-6 lg:pt-8 pb-10 sm:pb-14">
+    <section className="gutter-x pt-2.5 sm:pt-3.5 lg:pt-4 pb-10 sm:pb-14">
       <div className="mx-auto max-w-page">
         {/* Top Bar: Back Link + Quick Anchor Nav */}
         <Reveal>

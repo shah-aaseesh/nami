@@ -46,6 +46,7 @@ export type EntityContactChannel = {
   readonly email: string;
   readonly admissionsEmail?: string;
   readonly infoEmail?: string;
+  readonly facebook?: string;
 };
 
 export type ContactChannel = {

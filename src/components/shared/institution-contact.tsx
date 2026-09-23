@@ -56,7 +56,15 @@ export async function InstitutionContact({
 
   if (!campus) return null;
 
-  const socials = (profile.contact.socialProfiles ?? []).slice(0, 4);
+  const entityFacebook = entityContact.facebook;
+  const socials = (profile.contact.socialProfiles ?? [])
+    .map((social) => {
+      if (social.platform === "facebook" && entityFacebook) {
+        return { ...social, href: entityFacebook };
+      }
+      return social;
+    })
+    .slice(0, 4);
 
   return (
     <section className="gutter-x section-y border-t border-border/40" id={id}>

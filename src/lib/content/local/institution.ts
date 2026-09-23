@@ -125,7 +125,7 @@ export const institution: InstitutionProfile = {
       {
         platform: "facebook",
         label: "Facebook",
-        href: "https://www.facebook.com/NamiCollege/",
+        href: "https://www.facebook.com/share/1CS5HvZ6xf/?mibextid=wwXIfr",
         destination: "external",
       },
       {
@@ -158,16 +158,19 @@ export const institution: InstitutionProfile = {
         phone: "+977-01-5920335/36",
         email: "info@nami.edu.np",
         admissionsEmail: "admissions@nami.edu.np",
+        facebook: "https://www.facebook.com/share/1CS5HvZ6xf/?mibextid=wwXIfr",
       },
       college: {
         phone: "+977-01-4917441/42/43/44, +977-01-4913353",
         email: "info@nami.edu.np",
         admissionsEmail: "admissions@nami.edu.np",
+        facebook: "https://www.facebook.com/share/1513mfhP69m/?mibextid=wwXIfr",
       },
       school: {
         phone: "+977-01-4917441/42/43/44, +977-01-4913353",
         email: "info@nami.edu.np",
         admissionsEmail: "admissions@nami.edu.np",
+        facebook: "https://www.facebook.com/share/1DpZc6ubM8/?mibextid=wwXIfr",
       },
     },
   },

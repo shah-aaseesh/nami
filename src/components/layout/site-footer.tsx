@@ -161,7 +161,8 @@ export async function SiteFooter() {
                   <div className="mt-3 flex items-center gap-2">
                     <Link
                       href={
-                        "https://www.facebook.com/namischoolnepal/" as Route
+                        (contact.byEntity.school.facebook ??
+                          "https://www.facebook.com/share/1DpZc6ubM8/?mibextid=wwXIfr") as Route
                       }
                       target="_blank"
                       rel="noopener noreferrer"
@@ -261,7 +262,10 @@ export async function SiteFooter() {
 
                   <div className="mt-3 flex items-center gap-2">
                     <Link
-                      href={"https://www.facebook.com/NamiCollege/" as Route}
+                      href={
+                        (contact.byEntity.college.facebook ??
+                          "https://www.facebook.com/share/1513mfhP69m/?mibextid=wwXIfr") as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -364,7 +368,10 @@ export async function SiteFooter() {
 
                   <div className="mt-3 flex items-center gap-2">
                     <Link
-                      href={"https://www.facebook.com/NamiCollege/" as Route}
+                      href={
+                        (contact.byEntity.institute.facebook ??
+                          "https://www.facebook.com/share/1CS5HvZ6xf/?mibextid=wwXIfr") as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"

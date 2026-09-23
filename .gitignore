@@ -57,7 +57,9 @@ next-env.d.ts
 /*.jpeg
 /*.jpg
 
-# large media files
+# large media files (whitelist production video assets <= 50MB)
 *.mp4
+!/public/Final First Video.mp4
+!/public/nami-video.mp4
 *.mov
 *.avi

@@ -323,8 +323,10 @@ export default function CtevtAffiliationPage() {
               </div>
 
               <div className="shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto">
-                <Link
-                  href="/documents"
+                <a
+                  href="/CTEVT.jpeg"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold bg-accent text-white hover:bg-accent/90 transition-all duration-200 shadow-sm text-center"
                 >
                   <span>View CTEVT Approval Letter</span>
@@ -342,7 +344,7 @@ export default function CtevtAffiliationPage() {
                       d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
                     />
                   </svg>
-                </Link>
+                </a>
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold bg-surface border border-border text-ink hover:bg-surface-raised transition-all duration-200 text-center"

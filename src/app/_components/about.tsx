@@ -51,7 +51,7 @@ export async function About({
             <Reveal className="h-full flex flex-col" y={16}>
               <HomepageVideoPlayer
                 poster="/Homepage video thumbnails.png"
-                src="/nami-video.mp4"
+                src="/Final%20First%20Video.mp4"
                 title={section.heading ?? "NAMI College"}
               />
             </Reveal>

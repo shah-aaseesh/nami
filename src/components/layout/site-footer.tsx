@@ -181,7 +181,7 @@ export async function SiteFooter() {
                       <Icon icon={InstagramIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.youtube.com/user/naminepal" as Route}
+                      href={"https://www.youtube.com/@naminepal" as Route}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -190,7 +190,9 @@ export async function SiteFooter() {
                       <Icon icon={YouTubeIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.tiktok.com/@namicollege" as Route}
+                      href={
+                        "https://www.tiktok.com/@nami.college?_r=1&_t=ZS-99xxwcx4jFE" as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -274,7 +276,7 @@ export async function SiteFooter() {
                       <Icon icon={FacebookIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.instagram.com/namicollege/" as Route}
+                      href={"https://www.instagram.com/nami.college" as Route}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -284,7 +286,7 @@ export async function SiteFooter() {
                     </Link>
                     <Link
                       href={
-                        "https://www.linkedin.com/company/nami-college" as Route
+                        "https://www.linkedin.com/company/13186439/" as Route
                       }
                       target="_blank"
                       rel="noopener noreferrer"
@@ -294,7 +296,9 @@ export async function SiteFooter() {
                       <Icon icon={LinkedInIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.tiktok.com/@namicollege" as Route}
+                      href={
+                        "https://www.tiktok.com/@nami.college?_r=1&_t=ZS-99xxwcx4jFE" as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -380,7 +384,7 @@ export async function SiteFooter() {
                       <Icon icon={FacebookIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.instagram.com/namicollege/" as Route}
+                      href={"https://www.instagram.com/nami.college" as Route}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -390,7 +394,7 @@ export async function SiteFooter() {
                     </Link>
                     <Link
                       href={
-                        "https://www.linkedin.com/company/nami-college" as Route
+                        "https://www.linkedin.com/company/13186439/" as Route
                       }
                       target="_blank"
                       rel="noopener noreferrer"
@@ -400,7 +404,7 @@ export async function SiteFooter() {
                       <Icon icon={LinkedInIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.youtube.com/user/naminepal" as Route}
+                      href={"https://www.youtube.com/@naminepal" as Route}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"
@@ -409,7 +413,9 @@ export async function SiteFooter() {
                       <Icon icon={YouTubeIcon} className="size-3.5" />
                     </Link>
                     <Link
-                      href={"https://www.tiktok.com/@namicollege" as Route}
+                      href={
+                        "https://www.tiktok.com/@nami.college?_r=1&_t=ZS-99xxwcx4jFE" as Route
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex size-7 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white hover:text-primary-700 hover:scale-110"

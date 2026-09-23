@@ -41,7 +41,7 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
 
   const linkedinUrl =
     contact.socialProfiles.find((s) => s.platform === "linkedin")?.href ??
-    "https://www.linkedin.com/company/nami-college";
+    "https://www.linkedin.com/company/13186439/";
 
   const DOWNLOAD_CATEGORIES = [
     {

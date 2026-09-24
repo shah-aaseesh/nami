@@ -576,7 +576,7 @@ const programmes: BachelorsProgrammesCopy = {
       image: plantationProgramme,
       awardingBody: "Kathmandu University",
       startingFrom: "August 2026",
-      format: "4 years | 8 semesters | 127 credits",
+      format: "4 years | 8 semesters",
       shortDescription:
         "Four-year bachelor's degree focusing on the social, economic, and ecological dimensions of environmental issues.",
       summary: [

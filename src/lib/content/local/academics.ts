@@ -52,7 +52,7 @@ export const academicLevels: readonly AcademicLevel[] = [
     highlights: [
       "British degrees taught in Kathmandu since 2012",
       "MSc Computer Science",
-      "BSc Environmental Studies with Kathmandu University from August 2026",
+      "Bachelors in Environmental Studies (BES) with Kathmandu University from August 2026",
       "AWS Academy curriculum and certifications",
     ],
     campusSlug: slug("new-baneshwor"),
@@ -119,7 +119,7 @@ export const programmes: readonly Programme[] = [
     ...entryOf("bsc-environmental-studies"),
     title: "Environmental Studies",
     shortTitle: "Environmental Studies",
-    qualification: "BSc",
+    qualification: "BES",
     awardingBody: AWARDING_BODIES.kathmanduUniversity,
     levelSlug: slug("bachelors"),
     startingFrom: "August 2026",

@@ -580,15 +580,16 @@ const programmes: BachelorsProgrammesCopy = {
       shortDescription:
         "Four-year bachelor's degree focusing on the social, economic, and ecological dimensions of environmental issues.",
       summary: [
-        "The Bachelors in Environmental Studies (BES) is a four-year undergraduate programme designed with a focus on the social, economic, and ecological dimensions of environmental issues.",
-        "Environment is not only the \"surrounding\" — it is the sum total of all the living and non-living entities affecting each other including humans. Environment is the ultimate resource for all living beings, but with human need and greed, the status of the environment is undergoing degradation.",
-        "Accordingly, the environment has become the focus of many disciplines and discourses, encompassing biology, physics, chemistry, geography, sociology, economics, management, laws, governance and policies, ethics, and philosophy. Environmental issues are now part of every career path and employment, making holistic knowledge and understanding of different disciplines essential.",
-        "Course Highlights: BES is a four-year (eight-semester) programme. Featured courses and practicals include Environmental Issues, Green Entrepreneurship, Conservation and Protected Areas, Environmental Pollution, ITK and Practices, Environmental Arts and Design, Nature-Based Solutions and Innovation, Environmental Tourism, Community-Based Learning, and Internships & Environmental Projects.",
+        "The Bachelors in Environmental Studies (BES) at NAMI, awarded by Kathmandu University, is a four-year undergraduate programme designed with focus on the social, economic, and ecological dimensions of environmental issues. Through an interdisciplinary curriculum bridging ecological science, socio-economic dynamics, and governance, students gain a holistic understanding of how living and non-living systems interact and develop sustainable solutions.",
+        "Understanding Our Environment: Environment is not only the \"surrounding\" — it is the sum total of all the living and non-living entities affecting each other including humans. Environment is the ultimate resource for all living beings, but with human need and greed, the status of the environment is undergoing degradation, requiring multi-disciplinary intervention.",
+        "A Multi-Disciplinary Curriculum: The environment has become the focus of many disciplines and discourses, encompassing biology, physics, chemistry, geography, sociology, economics, management, laws, governance and policies, ethics, and philosophy. Because environmental issues are now part of every career path and employment, holistic multi-disciplinary knowledge is essential.",
+        "Practical & Field-Based Learning: At NAMI, environmental education is deeply immersive. Students participate in comprehensive field trips, in-house laboratory projects, GIS and remote sensing analysis, Environmental Impact Assessments (IEE/EIA), community-based learning, and internships at leading NGOs, INGOs, and research organisations.",
+        "Course Highlights & Specialisations: BES is an eight-semester (four-year) programme. Featured courses include Green Entrepreneurship, Conservation and Protected Areas, Environmental Pollution, Indigenous Traditional Knowledge (ITK) and Practices, Environmental Arts and Design, Nature-Based Solutions and Innovation, Environmental Tourism, and Final Year Projects.",
       ],
-      entryLabel: "Eligibility Criteria",
+      entryLabel: "Entry Requirements",
       entry: besEntry,
       entryNotes: besEntryNotes,
-      careersLabel: "Career Profiles",
+      careersLabel: "Where Can BES Take You?",
       careerSummary:
         "Environmental issues are now part of every career path and employment. The Bachelors in Environmental Studies equips graduates with holistic, multi-disciplinary expertise to pursue diverse career paths across public, private, research, and non-governmental organisations.",
       careerSectors: [
@@ -608,13 +609,12 @@ const programmes: BachelorsProgrammesCopy = {
         "Environmental Reporter",
       ],
       pendingNote: null,
-      stagesNote:
-        "BES is structured across eight semesters (four years), comprising 127 total credit hours with integrated practicals, field trips, internships, and research projects.",
+      stagesNote: null,
       stages: [
         {
-          key: "bes-year-1-sem-1",
-          label: "Year I — Semester I",
-          note: "Total Credits: 16",
+          key: "bes-stage-1",
+          label: "Year 1 — Build Your Foundation in Environmental Science & Systems",
+          note: "Focus: Understand ecological systems and scientific fundamentals. Modules span Semester I & Semester II (32 credits total), covering introductory environmental studies, development practices, ecosystems of the world and Nepal, chemistry, biodiversity, economics, Nepali/English communication, and in-house projects.",
           modules: [
             {
               code: "BEST 101",
@@ -658,13 +658,6 @@ const programmes: BachelorsProgrammesCopy = {
               status: "Compulsory",
               prerequisites: "None",
             },
-          ],
-        },
-        {
-          key: "bes-year-1-sem-2",
-          label: "Year I — Semester II",
-          note: "Total Credits: 16",
-          modules: [
             {
               code: "BEST 104",
               title: "Environmental Chemistry and the Major Material Cycle",
@@ -710,9 +703,9 @@ const programmes: BachelorsProgrammesCopy = {
           ],
         },
         {
-          key: "bes-year-2-sem-1",
-          label: "Year II — Semester I",
-          note: "Total Credits: 18",
+          key: "bes-stage-2",
+          label: "Year 2 — Environmental Dynamics & Natural Resource Management",
+          note: "Focus: Deepen scientific analysis and resource governance. Modules span Semester I & Semester II (34 credits total), covering climate dynamics, environmental physics, natural resource management, environmental statistics, sustainable development principles, pollution theory, geology, occupational health, and energy.",
           modules: [
             {
               code: "BEST 201",
@@ -756,13 +749,6 @@ const programmes: BachelorsProgrammesCopy = {
               status: "Compulsory",
               prerequisites: "None",
             },
-          ],
-        },
-        {
-          key: "bes-year-2-sem-2",
-          label: "Year II — Semester II",
-          note: "Total Credits: 16",
-          modules: [
             {
               code: "BEST 204",
               title: "Environmental Pollution Theory & Practical",
@@ -808,9 +794,9 @@ const programmes: BachelorsProgrammesCopy = {
           ],
         },
         {
-          key: "bes-year-3-sem-1",
-          label: "Year III — Semester I",
-          note: "Total Credits: 18",
+          key: "bes-stage-3",
+          label: "Year 3 — Conservation, Policy & Community Development",
+          note: "Focus: Bridge conservation, social systems, and legal frameworks. Modules span Semester I & Semester II (34 credits total), covering protected areas, indigenous knowledge, pollution control, research methods, disaster management, migration & mobility, environmental arts & design, food security, environmental sociology, conflict resolution, and environmental laws.",
           modules: [
             {
               code: "BEST 301",
@@ -854,13 +840,6 @@ const programmes: BachelorsProgrammesCopy = {
               status: "Compulsory",
               prerequisites: "None",
             },
-          ],
-        },
-        {
-          key: "bes-year-3-sem-2",
-          label: "Year III — Semester II",
-          note: "Total Credits: 16",
-          modules: [
             {
               code: "BEST 352",
               title: "Environmental Arts, Designs and Engineering",
@@ -906,9 +885,9 @@ const programmes: BachelorsProgrammesCopy = {
           ],
         },
         {
-          key: "bes-year-4-sem-1",
-          label: "Year IV — Semester I",
-          note: "Total Credits: 18",
+          key: "bes-stage-4",
+          label: "Year 4 — Applied Assessment, Policy & Capstone Project",
+          note: "Focus: Apply professional assessment and research. Modules span Semester I & Semester II (27 credits total), covering urban planning, GIS and remote sensing, EIA/SIA, environmental economics, watershed management, media & environment, institutional internships, and an independent final year project.",
           modules: [
             {
               code: "DEVS 401",
@@ -952,13 +931,6 @@ const programmes: BachelorsProgrammesCopy = {
               status: "Compulsory",
               prerequisites: "None",
             },
-          ],
-        },
-        {
-          key: "bes-year-4-sem-2",
-          label: "Year IV — Semester II",
-          note: "Total Credits: 9",
-          modules: [
             {
               code: "BEST 442",
               title: "Internship at NGOs/INGOs/Research Organizations",

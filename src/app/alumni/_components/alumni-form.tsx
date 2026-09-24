@@ -47,7 +47,7 @@ const alumniStorySchema = z.object({
 export type AlumniStoryFormData = z.infer<typeof alumniStorySchema>;
 
 const WING_OPTIONS = [
-  { value: "Cambridge A-Levels", label: "Cambridge A-Levels (NAMI College)" },
+  { value: "Cambridge A Levels", label: "Cambridge A Levels (NAMI College)" },
   { value: "Northampton UK Degree", label: "BSc / MSc / BBA / MBA (Northampton UK)" },
   { value: "NEB +2 Science/Management", label: "NEB +2 (Science / Management)" },
   { value: "School", label: "NAMI International School" },

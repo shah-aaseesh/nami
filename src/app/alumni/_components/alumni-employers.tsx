@@ -97,7 +97,7 @@ export function AlumniEmployers({
             </span>
           }
           layout="split"
-          title={section.heading ?? "Where our alumnae are"}
+          title={section.heading ?? "Where Our Alumni Are"}
         />
 
         <Reveal className="mt-8 sm:mt-12 flex flex-col gap-3 sm:gap-5" y={24}>

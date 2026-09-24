@@ -67,7 +67,7 @@ export function BachelorsAcademicHeadSection({
                     onClick={() => setIsExpanded(true)}
                     className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
                   >
-                    <span>Read more</span>
+                    <span>Read More</span>
                     <svg
                       aria-hidden="true"
                       className="size-3.5"
@@ -156,7 +156,7 @@ export function BachelorsAcademicHeadSection({
                   onClick={() => setIsExpanded(false)}
                   className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
                 >
-                  <span>Read less</span>
+                  <span>Read Less</span>
                   <svg
                     aria-hidden="true"
                     className="size-3.5 rotate-180"

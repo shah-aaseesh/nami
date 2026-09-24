@@ -100,7 +100,7 @@ const subjects: CollegeSubjectsCopy = {
       key: "science",
       label: "Science",
       minimumNote:
-        "English General Paper (AS) is compulsory and any other 3 or more subjects of your choice to complete your A Levels.",
+        "English General Paper (AS) is compulsory, along with any 3 or more additional subjects of your choice to complete your A Levels.",
       listLabel:
         "A Level science subjects offered at NAMI College across Medicine & Biological Sciences and Engineering, Computer Science & Architecture.",
       groups: [
@@ -138,7 +138,7 @@ const subjects: CollegeSubjectsCopy = {
       key: "non-science",
       label: "Non-Science",
       minimumNote:
-        "English General Paper (AS) is compulsory and any other 3 or more subjects of your choice to complete your A Levels.",
+        "English General Paper (AS) is compulsory, along with any 3 or more additional subjects of your choice to complete your A Levels.",
       listLabel:
         "A Level non-science subjects offered at NAMI College across Business, Economics & Finance and Humanities & Social Sciences.",
       groups: [
@@ -187,7 +187,7 @@ const gallery: InstitutionGalleryCopy = {
   heading: "Two years, photographed.",
   standfirst:
     "Trips, tournaments, service camps and the ordinary weeks between them — the college's own record of what an A Level here looks like.",
-  ctaLabel: "All college photographs",
+  ctaLabel: "All College Photographs",
 };
 
 const alumni: SectionCopy = {
@@ -206,7 +206,7 @@ const notices: InstitutionNoticesCopy = {
   heading: "What the college is announcing.",
   standfirst:
     "Registration windows, examination dates and standing notices for A Level students and their families.",
-  ctaLabel: "All college notices",
+  ctaLabel: "All College Notices",
   emptyState:
     "There is no college notice standing right now. Everything the college has published stays on the notice board.",
 };
@@ -215,7 +215,7 @@ const entry: CollegeEntryCopy = {
   eyebrow: "Entry and support",
   heading: "Who it is for, and how it is supported.",
   cta: {
-    label: "Start an application",
+    label: "Start an Application",
     href: "https://college.nami.edu.np/",
     destination: "external",
   },
@@ -247,7 +247,7 @@ export const collegeCopy = {
     message: richText(
       "Dear Parents and Well-Wishers,",
       "We are delighted and proud to share an important milestone in the journey of our institution. Since June 2024, NAMI College has been officially accredited as a Cambridge International Home Centre in Nepal. This recognition from Cambridge International reflects our continued commitment to quality education, strong academic standards, and creating an environment where students can learn, grow, and achieve their full potential.",
-      "This achievement is also being reflected in the performance of our students. We are especially proud that our students have begun to achieve Nepal Topper positions in various subjects under the Cambridge GCE A Level examinations. These results are a reflection of the students’ hard work and dedication, as well as the continuous guidance and support of our teachers and the encouragement of their parents.",
+      "This achievement is also being reflected in the performance of our students. We are especially proud that our students have begun to achieve Nepal Topper positions in various subjects under the Cambridge GCE A Level examinations. These results are a reflection of the students' hard work and dedication, as well as the continuous guidance and support of our teachers and the encouragement of their parents.",
       "At NAMI College, our aim goes beyond academic results. We focus on developing students’ critical thinking, confidence, creativity, analytical skills, and independent learning abilities, while preparing them for higher education and future opportunities in a changing global environment.",
       "We sincerely thank our parents, students, teachers, staff, and well-wishers for their continued trust, support, and contribution to our journey. These achievements are the result of a shared commitment and collective effort.",
       "As we move forward, we remain committed to providing our students with meaningful learning experiences and opportunities to achieve even greater success.",

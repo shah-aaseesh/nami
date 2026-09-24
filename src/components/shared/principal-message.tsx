@@ -130,7 +130,7 @@ export function PrincipalMessage({
                   onClick={() => setIsExpanded((prev) => !prev)}
                   className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
                 >
-                  <span>{isExpanded ? "Read less" : "Read more"}</span>
+                  <span>{isExpanded ? "Read Less" : "Read More"}</span>
                   <svg
                     aria-hidden="true"
                     className={cn(

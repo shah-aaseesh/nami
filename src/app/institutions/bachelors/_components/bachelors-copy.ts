@@ -127,12 +127,12 @@ const heroSlides: readonly ContentImage[] = [
 const masthead: BachelorsMastheadCopy = {
   heroLabel: "NAMI at New Baneshwor",
   slides: heroSlides,
-  motto: "Transform yourself, to lead the world",
+  motto: "Transform yourself to lead the world",
   heading: "NAAYA AAYAM MULTI-DISCIPLINARY INSTITUTE",
   standfirst:
     "British & KU degree programmes in Kathmandu, partnered with the University of Northampton (UK).",
   cta: {
-    label: "Start an application",
+    label: "Start an Application",
     href: "/admissions",
     destination: "internal",
   },
@@ -902,7 +902,7 @@ const gallery: InstitutionGalleryCopy = {
   heading: "Degree years, photographed.",
   standfirst:
     "Convocations, panels, field days and the ordinary weeks between them — the institute’s own record of what a degree here looks like.",
-  ctaLabel: "All institute photographs",
+  ctaLabel: "All Institute Photographs",
 };
 
 const notices: InstitutionNoticesCopy = {
@@ -910,7 +910,7 @@ const notices: InstitutionNoticesCopy = {
   heading: "What the institute is announcing.",
   standfirst:
     "Registration windows, submission deadlines and standing notices for undergraduate and postgraduate students.",
-  ctaLabel: "All institute notices",
+  ctaLabel: "All Institute Notices",
   emptyState:
     "There is no institute notice standing right now. Everything the institute has published stays on the notice board.",
 };

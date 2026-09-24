@@ -28,7 +28,7 @@ export const admissionCalls: readonly AdmissionCall[] = [
   {
     ...entryOf("admission-a-level"),
     levelSlug: slug("college"),
-    title: "Cambridge A-Level",
+    title: "Cambridge A Level",
     note: null,
     link: {
       label: "Visit College Website",
@@ -39,7 +39,7 @@ export const admissionCalls: readonly AdmissionCall[] = [
   {
     ...entryOf("admission-bachelor-master"),
     levelSlug: slug("bachelors"),
-    title: "Bachelor & Master",
+    title: "Bachelor's & Master's Degrees",
     note: null,
     link: {
       label: "Visit College Website",

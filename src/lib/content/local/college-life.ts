@@ -43,7 +43,7 @@ export const campusLife: readonly CampusLifePillar[] = [
     lead: "Structured career guidance, mentorship and leadership development.",
     body: richText(
       "NAMI treats career counselling and leadership development as core student support: structured career guidance, skills assessment, mentorship and exposure to diverse academic and professional pathways, alongside training, workshops and experiential learning.",
-      "A monthly motivational series, \"Motivational Stories by Inspirational Leaders of Change\", brings successful figures from different fields to students from secondary to Master's level. The NAMI Golden Z Club Orientation Program develops leadership through global leadership values and women's empowerment initiatives, in interaction with experienced Zontians.",
+      "A monthly motivational series, \"Motivational Stories by Inspirational Leaders of Change\", brings successful figures from different fields to students from secondary to Master's level. The NAMI Golden Z Club Orientation Programme develops leadership through global leadership values and women's empowerment initiatives, in interaction with experienced Zontians.",
     ),
     highlights: [
       "Skills assessment and one-to-one mentorship",

@@ -77,7 +77,7 @@ export async function About({
                 )}
                 href={"/about" as Route}
               >
-                Read the full story
+                Read the Full Story
               </Link>
             </Reveal>
           </div>

@@ -12,10 +12,10 @@ export const siteUrl = new URL(siteOrigin);
 export const siteConfig = {
   name: "NAMI",
   legalName: "Naaya Aayam Multi-Disciplinary Institute",
-  title: "NAMI — Transform yourself, to lead the world",
+  title: "NAMI — Transform yourself to lead the world",
   titleTemplate: "%s | NAMI",
   description:
-    "NAMI, Kathmandu, est. 2012 — NAMI International School (10+2 NEB), NAMI College (Cambridge A-Level) and Naaya Aayam Multi-Disciplinary Institute (degrees).",
+    "NAMI, Kathmandu, est. 2012 — NAMI International School (10+2 NEB), NAMI College (Cambridge A Level), and Naaya Aayam Multi-Disciplinary Institute (degrees).",
   locale: "en_US",
   themeColor: "#bd1b21",
 } as const;

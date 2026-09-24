@@ -612,11 +612,12 @@ export const alumniCopy = {
       {
         stat: "2,500+",
         label: "UG & PG Degree Holders",
-        detail: "Northampton UK accredited Bachelor and Master degree holders.",
+        detail:
+          "University of Northampton (UK) accredited Bachelor's and Master's degree holders.",
       },
       {
         stat: "500+",
-        label: "Cambridge A-Level Scholars",
+        label: "Cambridge A Level Scholars",
         detail:
           "Studying in world-leading universities across the UK, US, and Australia.",
       },
@@ -631,7 +632,7 @@ export const alumniCopy = {
   employers: {
     navLabel: "Employers",
     eyebrow: "CAREER NETWORK",
-    heading: "Where our alumnae are",
+    heading: "Where Our Alumni Are",
     standfirst:
       "From global technology companies and leading commercial banks to international conservation bodies and research institutes, NAMI graduates are making an impact worldwide.",
     cta: null,

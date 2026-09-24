@@ -22,9 +22,9 @@ export function Stats({
       <div className="mx-auto max-w-page">
         <SectionHeader
           description={section.standfirst}
-          eyebrow={section.heading}
+          eyebrow={section.eyebrow ?? "Our Milestones"}
           layout="stacked"
-          title={section.eyebrow ?? "NAMI in numbers"}
+          title={section.heading || "NAMI by the Numbers"}
         />
 
         <div

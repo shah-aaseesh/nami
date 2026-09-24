@@ -192,8 +192,8 @@ export async function AcademicLevels() {
     <section className="field-brand gutter-x section-y" id="institutions">
       <div className="mx-auto max-w-page">
         <SectionHeader
-          eyebrow={section.heading}
-          title={section.eyebrow ?? "Institutions"}
+          eyebrow={section.eyebrow ?? "NAMI Entities"}
+          title={section.heading}
           description={section.standfirst}
         />
 

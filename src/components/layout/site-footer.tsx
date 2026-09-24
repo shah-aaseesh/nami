@@ -223,7 +223,7 @@ export async function SiteFooter() {
                       {entities.college.name}
                     </span>
                     <span className="mt-0.5 block font-body text-xs text-white/75">
-                      Cambridge Assessment GCE A-Levels
+                      Cambridge Assessment GCE A Levels
                     </span>
                   </Link>
 

@@ -217,7 +217,7 @@ export function SchoolCollaboratorsSection({
                       onClick={() => setSelectedCollab(collab)}
                       className="group/btn inline-flex items-center gap-1.5 text-xs font-semibold text-[#BD1B21] transition-colors hover:text-[#93151A] cursor-pointer"
                     >
-                      <span>Read more</span>
+                      <span>Read More</span>
                       <span
                         aria-hidden="true"
                         className="transition-transform duration-200 group-hover/btn:translate-x-0.5"

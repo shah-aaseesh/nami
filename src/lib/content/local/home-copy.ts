@@ -10,16 +10,16 @@ import {
 export const homeCopy: HomeCopy = {
   hero: {
     eyebrow: "Naaya Aayam Multi-Disciplinary Institute",
-    headline: "Transform yourself, to lead the world",
+    headline: "Transform Yourself to Lead the World",
     standfirst:
-      "At NAMI, we provide a comprehensive academic pathway from Grade 1 to Master’s degree, empowering learners through world-class education, holistic development and leadership to transform themselves and lead the world.",
+      "At NAMI, we provide a comprehensive academic pathway from Grade 1 to Master's degrees, empowering learners through world-class education, holistic development and leadership to transform themselves and lead the world.",
     primaryCta: {
-      label: "Start an application",
+      label: "Start an Application",
       href: "/admissions",
       destination: "internal",
     },
     secondaryCta: {
-      label: "Our story",
+      label: "Our Story",
       href: "/about",
       destination: "internal",
     },
@@ -44,7 +44,7 @@ export const homeCopy: HomeCopy = {
     levels: {
       navLabel: "Institutions",
       eyebrow: "NAMI Entities",
-      heading: "One Name, Independently Accredited Educational Institutions.",
+      heading: "One Name, Independently Accredited Educational Institutions",
       standfirst: null,
       cta: null,
       emptyState: null,
@@ -53,7 +53,7 @@ export const homeCopy: HomeCopy = {
       navLabel: "Programmes",
       eyebrow: "What you can study",
       heading:
-        "British degrees, Cambridge A-Levels, NEB — taught in Kathmandu.",
+        "British degrees, Cambridge A Levels, NEB — taught in Kathmandu.",
       standfirst: null,
       cta: null,
       emptyState: null,
@@ -61,7 +61,7 @@ export const homeCopy: HomeCopy = {
     affiliations: {
       navLabel: "Accreditation",
       eyebrow: null,
-      heading: "Accredited for Excellence.",
+      heading: "Accredited for Excellence",
       standfirst: null,
       cta: null,
       emptyState: null,
@@ -86,7 +86,7 @@ export const homeCopy: HomeCopy = {
     stats: {
       navLabel: "NAMI in numbers",
       eyebrow: "Our Milestones",
-      heading: "NAMI, by the Numbers.",
+      heading: "NAMI, by the Numbers",
       standfirst:
         "Over a decade of academic excellence, shaped across four learning tiers and a thriving community of thousands.",
       cta: null,
@@ -107,7 +107,7 @@ export const homeCopy: HomeCopy = {
       heading: "",
       standfirst: null,
       cta: {
-        label: "View all notices",
+        label: "View All Notices",
         href: "/notices",
         destination: "internal",
       },

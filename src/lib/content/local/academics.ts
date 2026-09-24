@@ -27,9 +27,9 @@ export const academicLevels: readonly AcademicLevel[] = [
   {
     ...entryOf("college"),
     entity: "college",
-    stage: "Cambridge A-Level, entry from SEE, GCSE, CBSE or equivalent",
+    stage: "Cambridge A Level, entry from SEE, GCSE, CBSE or equivalent",
     summary: richText(
-      "NAMI offers the globally recognised Cambridge A-Level programme. The International A Level, regarded as the gold standard by Cambridge Assessment International Education, holds the same value as its UK equivalent for university admissions.",
+      "NAMI offers the globally recognised Cambridge A Level programme. The International A Level, regarded as the gold standard by Cambridge Assessment International Education, holds the same value as its UK equivalent for university admissions.",
       "Since 2024 the college has been recognised as an independent CAIE examination centre, and offers subject combinations that prepare students for university study in Science, Medicine, Engineering, Business, Humanities and Liberal Arts.",
     ),
     highlights: [
@@ -128,7 +128,7 @@ export const programmes: readonly Programme[] = [
     ...entryOf("a-level-programme"),
     title: "Science and non-science subject combinations",
     shortTitle: "Science & Non-Science",
-    qualification: "Cambridge International A-Level",
+    qualification: "Cambridge International A Level",
     awardingBody: AWARDING_BODIES.cambridge,
     levelSlug: slug("college"),
     startingFrom: null,
@@ -154,7 +154,7 @@ export const programmes: readonly Programme[] = [
 ];
 
 export const vocationalApproval: VocationalApproval = {
-  council: "Council for Technical Education and Vocational Training ( CTEVT )",
+  council: "Council for Technical Education and Vocational Training (CTEVT)",
   scope: "Short-term vocational training programmes approved for NAMI",
   approvedYear: 2026,
 };

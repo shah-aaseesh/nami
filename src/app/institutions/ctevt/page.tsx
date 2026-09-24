@@ -35,7 +35,7 @@ const APPROVED_PROGRAMS = [
     highlights: "Espresso extraction, latte art, coffee bean sensory profiling, brewing methods",
   },
   {
-    title: "Bar Tender",
+    title: "Bartender",
     duration: "390 Hours",
     sector: "Beverage Service & Mixology",
     code: "CTEVT-BT",
@@ -62,7 +62,7 @@ const TRAINING_STANDARDS = [
 ] as const;
 
 const APPROVAL_INFO = [
-  { label: "Institution", value: "Naya Aayam Multi Disciplinary Institute Pvt. Ltd." },
+  { label: "Institution", value: "Naaya Aayam Multi-Disciplinary Institute Pvt. Ltd." },
   { label: "Address", value: "Jorpati-07, Kathmandu, Nepal" },
   { label: "Type of Approval", value: "Short-Term Training Programs" },
   { label: "Approval Period", value: "Two years, as specified in the CTEVT approval letter" },
@@ -86,7 +86,7 @@ export default function CtevtAffiliationPage() {
               </H3>
               <p className="mt-4 font-body text-sm sm:text-base text-ink-muted leading-relaxed max-w-2xl text-justify [text-align-last:left]">
                 <strong className="text-ink font-semibold">
-                  Naya Aayam Multi Disciplinary Institute Pvt. Ltd. (NAMI)
+                  Naaya Aayam Multi-Disciplinary Institute Pvt. Ltd. (NAMI)
                 </strong>{" "}
                 is a CTEVT-affiliated institution authorized to conduct approved short-term vocational training programs in the hospitality sector.
               </p>

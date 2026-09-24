@@ -216,7 +216,7 @@ export function UpdateCard({
                 type="button"
                 variant="ghost"
               >
-                <span>Read more</span>
+                <span>Read More</span>
                 <span aria-hidden="true">&rarr;</span>
               </Button>
             ) : null}

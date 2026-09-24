@@ -24,7 +24,7 @@ export function ClubMasthead({ club }: { readonly club: ALevelsClub }) {
                 className="size-3.5 transition-transform group-hover:-translate-x-1"
                 icon={ArrowLeftIcon}
               />
-              <span>Back to A-Levels ECA & Clubs</span>
+              <span>Back to A Levels ECA & Clubs</span>
             </Link>
 
             {/* Quick In-Page Anchor Links */}

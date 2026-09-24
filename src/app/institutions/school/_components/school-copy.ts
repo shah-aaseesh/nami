@@ -54,7 +54,7 @@ const masthead: SchoolHeroCopy = {
   heroLabel: "NAMI International School",
   slides: heroSlides,
   admissionCta: {
-    label: "Apply for admission",
+    label: "Apply for Admission",
     href: "/admissions",
     destination: "internal",
   },
@@ -550,7 +550,7 @@ const gallery: InstitutionGalleryCopy = {
   heading: "Ordinary days, as they actually look.",
   standfirst:
     "Assemblies, sports, classrooms and the weeks in between — the school's own record of what a child's day here looks like.",
-  ctaLabel: "All school photographs",
+  ctaLabel: "All School Photographs",
 };
 
 const notices: InstitutionNoticesCopy = {
@@ -558,7 +558,7 @@ const notices: InstitutionNoticesCopy = {
   heading: "What the school is announcing.",
   standfirst:
     "Admission windows, examination dates, holidays and the standing notices that parents need in front of them.",
-  ctaLabel: "All school notices",
+  ctaLabel: "All School Notices",
   emptyState:
     "There is no school notice standing right now. Everything the school publishes appears here and on the notice board.",
 };

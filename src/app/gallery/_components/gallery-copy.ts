@@ -954,7 +954,7 @@ export const galleryCopy = {
   meta: {
     title: "Gallery & Visual Archive | NAMI",
     description:
-      "Explore the photographic record of NAMI in Kathmandu — Primary, Higher Secondary, Cambridge A-Levels, and University of Northampton Bachelors & Masters.",
+      "Explore the photographic record of NAMI in Kathmandu — Primary, Higher Secondary, Cambridge A Levels, and University of Northampton Bachelor's & Master's degrees.",
   },
   masthead: {
     eyebrow: null,
@@ -962,20 +962,20 @@ export const galleryCopy = {
     standfirst: null,
   },
   allLabel: "All Institutions",
-  filterGroupLabel: "Filter by institution",
-  clubFilterLabel: "Filter by club",
-  categoryGroupLabel: "Filter by category",
+  filterGroupLabel: "Filter by Institution",
+  clubFilterLabel: "Filter by Club",
+  categoryGroupLabel: "Filter by Category",
   searchPlaceholder:
     "Search event folders (e.g. Mustang, Convocation, Robotics, Sports)...",
   layoutMosaic: "Masonry Mosaic",
   layoutGrid: "Uniform Grid",
   viewingAlbumPrefix: "Viewing Collection",
-  clearFilter: "Clear filter",
-  resetAll: "Reset all filters",
+  clearFilter: "Clear Filter",
+  resetAll: "Reset All Filters",
   filterOptionLabel: (label: string, name: string | null) =>
     name === null ? label : `${label} — ${name}`,
   unattributedNote:
-    "Photographs are catalogued across Primary, Higher Secondary, A-Levels, and Higher Education.",
+    "Photographs are catalogued across Primary, Higher Secondary, Cambridge A Levels, and Higher Education.",
   emptyState:
     "No event folders matched your selected filters. Try selecting 'All Institutions' or 'All Clubs'.",
   emptyArchive:

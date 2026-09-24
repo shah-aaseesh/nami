@@ -165,7 +165,7 @@ export function FacultyCard({
               onClick={() => setOpen(true)}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent/10 text-accent hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group/btn"
             >
-              <span>Read full bio</span>
+              <span>Read Full Bio</span>
               <span aria-hidden="true" className="transition-transform group-hover/btn:translate-x-0.5">&rarr;</span>
             </button>
           </div>

@@ -25,7 +25,7 @@ export function ClubOtherRail({
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <Eyebrow>More Co-Curriculars</Eyebrow>
-            <H2 className="mt-2">Explore Other A-Level Clubs</H2>
+            <H2 className="mt-2">Explore Other A Level Clubs</H2>
           </div>
           <Link
             className="group inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-wider text-[#BD1B21] hover:text-[#9e1419]"

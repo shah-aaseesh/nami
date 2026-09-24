@@ -90,7 +90,7 @@ export function WhySchoolSection() {
                   onClick={() => setIsExpanded((prev) => !prev)}
                   type="button"
                 >
-                  <span>{isExpanded ? "Read less" : "Read more"}</span>
+                  <span>{isExpanded ? "Read Less" : "Read More"}</span>
                   <Icon
                     className={cn(
                       "size-3.5 transition-transform duration-300",

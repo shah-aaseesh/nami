@@ -22,7 +22,7 @@ export function WhyALevelsSection() {
           <div className="lg:col-span-5">
             <Reveal>
               <div className="flex items-center gap-5">
-                <Eyebrow className="text-[#BD1B21]">Cambridge A-Levels</Eyebrow>
+                <Eyebrow className="text-[#BD1B21]">Cambridge A Levels</Eyebrow>
                 <span className="h-px flex-1 bg-border" />
               </div>
               <SplitText as="h2" className="mt-4 text-ink">
@@ -37,7 +37,7 @@ export function WhyALevelsSection() {
               <RevealItem>
                 <P className="text-base sm:text-lg font-body leading-relaxed text-ink text-justify [text-align-last:left] [hyphens:auto]">
                   NAMI College offers the internationally recognised Cambridge
-                  A-Level programme, providing students with a rigorous academic
+                  A Level programme, providing students with a rigorous academic
                   pathway that is valued for university admissions both in Nepal
                   and internationally. The programme emphasises academic
                   excellence, critical thinking and independent learning,
@@ -78,7 +78,7 @@ export function WhyALevelsSection() {
                   onClick={() => setIsExpanded((prev) => !prev)}
                   type="button"
                 >
-                  <span>{isExpanded ? "Read less" : "Read more"}</span>
+                  <span>{isExpanded ? "Read Less" : "Read More"}</span>
                   <Icon
                     className={cn(
                       "size-3.5 transition-transform duration-300",

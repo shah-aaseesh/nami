@@ -32,14 +32,16 @@ export function CollegeEntry({ copy }: { readonly copy: CollegeEntryCopy }) {
       <div className="mx-auto max-w-page">
         {/* Full-width Eyebrow Bar */}
         <Reveal className="flex items-center gap-5" stagger={0.08}>
-          <Eyebrow className="text-[#BD1B21]">{copy.heading}</Eyebrow>
+          <Eyebrow className="text-[#BD1B21]">
+            {copy.eyebrow ?? "Admissions & Entry"}
+          </Eyebrow>
           <span className="h-px flex-1 bg-border" />
         </Reveal>
 
         <div className="mt-6 sm:mt-8 lg:mt-10 lg:grid lg:grid-cols-12 lg:gap-x-10">
           <Reveal className="lg:col-span-5" stagger={0.08}>
             <SplitText as="h2" className="mt-0 text-ink">
-              {copy.eyebrow ?? "Admissions & Entry"}
+              {copy.heading}
             </SplitText>
             <RevealItem className="mt-8 lg:mt-10">
               <Link

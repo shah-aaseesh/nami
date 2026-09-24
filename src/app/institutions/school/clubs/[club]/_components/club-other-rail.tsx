@@ -76,7 +76,7 @@ export function ClubOtherRail({
                   </div>
 
                   <div className="mt-4 flex items-center gap-1.5 font-body text-xs font-semibold text-white/90 group-hover:text-white">
-                    <span>View details</span>
+                    <span>View Details</span>
                     <Icon
                       className="size-3 transition-transform group-hover:translate-x-1"
                       icon={ArrowRightIcon}

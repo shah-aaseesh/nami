@@ -18,7 +18,7 @@ export const stats: readonly Stat[] = [
     group: "graduates",
     value: 500,
     suffix: "+",
-    label: "Cambridge A-Level graduates",
+    label: "Cambridge A Level graduates",
     detail: null,
   },
   {
@@ -27,7 +27,7 @@ export const stats: readonly Stat[] = [
     group: "graduates",
     value: 2500,
     suffix: "+",
-    label: "undergraduate and postgraduate graduates",
+    label: "undergraduate and postgraduate alumni",
     detail: null,
   },
   {
@@ -72,7 +72,7 @@ export const stats: readonly Stat[] = [
     group: "enrolment",
     value: 71,
     suffix: null,
-    label: "A-Level students",
+    label: "Cambridge A Level students",
     detail: null,
   },
   {

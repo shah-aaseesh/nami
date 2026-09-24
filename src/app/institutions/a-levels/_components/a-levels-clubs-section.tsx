@@ -41,7 +41,7 @@ export function ALevelsClubsSection() {
       id="eca-clubs"
     >
       <Carousel
-        aria-label="ECA / CLUBS"
+        aria-label="ECA & Clubs"
         aria-roledescription="carousel"
         autoplay={true}
         autoplayIntervalMs={2500}
@@ -70,7 +70,7 @@ export function ALevelsClubsSection() {
             description="Student-led clubs fostering community engagement, competitive sports, and artistic creativity."
             eyebrow="Extracurricular & Co-Curricular"
             layout="action"
-            title="ECA / CLUBS"
+            title="ECA & Clubs"
           />
         </div>
 

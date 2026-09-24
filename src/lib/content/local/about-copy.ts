@@ -36,10 +36,10 @@ const awards: readonly Award[] = [
 export const aboutCopy: AboutCopy = {
   metaTitle: "About NAMI",
   metaDescription:
-    "The institution behind NAMI in Kathmandu — its story and scale, mission and vision, the people who govern and teach it, and the red lotus the five values its petals carry.",
+    "The institution behind NAMI in Kathmandu — its story and scale, mission and vision, the people who govern and teach it, and the five values carried in the petals of the red lotus.",
   title: "Institutions under NAMI",
   standfirst:
-    "1 entity, 3 institutions, and the five values carried in the petals of a red lotus.",
+    "One entity, three institutions, and the five values carried in the petals of the red lotus.",
   openingImage: readingHall,
   overviewImage: studentsOnCampus,
   statsImage: readingHall,
@@ -91,7 +91,7 @@ export const aboutCopy: AboutCopy = {
     stats: {
       navLabel: "NAMI in numbers",
       eyebrow: "Our Milestones",
-      heading: "NAMI, by the Numbers.",
+      heading: "NAMI, by the Numbers",
       standfirst:
         "A decade of teaching across four academic levels, measured in the people it has graduated.",
       cta: null,

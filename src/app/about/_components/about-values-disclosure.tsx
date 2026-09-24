@@ -50,7 +50,7 @@ export function AboutValuesDisclosure({ children }: { children: ReactNode }) {
           <div className="lg:col-span-6 lg:col-start-7 flex justify-start">
             <AccordionTrigger className="w-fit gap-2">
               <span>
-                {isOpen ? "Show less" : "Read more"}
+                {isOpen ? "Show Less" : "Read More"}
                 <span className="sr-only">
                   {" "}
                   about the five petals and the values they carry

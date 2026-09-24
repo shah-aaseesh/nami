@@ -38,7 +38,7 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
                 )}
                 href={"/faculty"}
               >
-                <span>Meet the people behind NAMI</span>
+                <span>Meet the People Behind NAMI</span>
                 <Icon
                   className="size-4 transition-transform group-hover:translate-x-1"
                   icon={ArrowRightIcon}

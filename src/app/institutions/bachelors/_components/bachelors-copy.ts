@@ -570,7 +570,7 @@ const programmes: BachelorsProgrammesCopy = {
       key: "environmental-studies",
       qualification: "BES",
       title: "Environmental Studies",
-      fullTitle: "Bachelors in Environmental Studies (BES)",
+      fullTitle: "Bachelors in Environmental Studies",
       metaDescription:
         "Bachelors in Environmental Studies (BES) at NAMI, Kathmandu — a four-year undergraduate programme awarded by Kathmandu University, focusing on the social, economic, and ecological dimensions of environmental issues.",
       image: plantationProgramme,

@@ -30,7 +30,12 @@ export function AboutMascot({
 
         <div className="mt-4 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start lg:gap-x-16">
           <div className="lg:col-span-7">
-            <SplitText as="h2">{section.eyebrow ?? "The Mascot"}</SplitText>
+            <SplitText
+              as="h2"
+              className="font-display text-3xl sm:text-4xl font-normal"
+            >
+              {section.eyebrow ?? "The Mascot"}
+            </SplitText>
 
             <Reveal className="mt-6 flex flex-col gap-4 lg:mt-8" stagger={0.08}>
               {paragraphs.map((paragraph) => (

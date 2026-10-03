@@ -31,6 +31,7 @@ export type SiteRoute = {
 export const siteRoutes: readonly SiteRoute[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/about/history", changeFrequency: "monthly", priority: 0.8 },
   {
     path: institutionPath("school"),
     changeFrequency: "monthly",
@@ -108,11 +109,6 @@ export const siteRoutes: readonly SiteRoute[] = [
   },
   {
     path: "/institutions/bachelors/business-administration",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
-    path: "/institutions/bachelors/msc-computing",
     changeFrequency: "monthly",
     priority: 0.8,
   },

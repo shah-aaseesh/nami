@@ -16,6 +16,7 @@ import { BachelorsAcademicHeadSection } from "./_components/bachelors-academic-h
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
 import { MouPartnersSection } from "./_components/mou-partners-section";
 import { PearsonVueBanner } from "./_components/pearson-vue-banner";
+import { UniversityPartnersSection } from "./_components/university-partners-section";
 import { WhyUndergraduateSection } from "./_components/why-undergraduate-section";
 
 export const metadata: Metadata = createMetadata({
@@ -80,6 +81,9 @@ export default async function BachelorsPage() {
           }}
         />
       )}
+
+      {/* Dedicated University Partners & VC/Dean Messages */}
+      <UniversityPartnersSection />
 
       <BachelorsCourseRail copy={bachelorsCopy.programmes} id="programmes" />
 

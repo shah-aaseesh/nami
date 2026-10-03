@@ -2,7 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useRef, useState } from "react";
 import {
   type Control,
   type FieldPath,
@@ -270,10 +271,11 @@ function QualificationRow({
           label="Awards / Grades"
           placeholder="e.g. GPA 3.8 / A+"
         />
-        <DateField
+        <TextField
           control={control}
-          name={`qualifications.${index}.graduationDate`}
-          label="Graduation Date"
+          name={`qualifications.${index}.graduationYear`}
+          label="Graduation Year"
+          placeholder="e.g. 2024"
         />
       </div>
     </div>
@@ -366,7 +368,7 @@ export function MultiStepForm() {
             id: "1",
             place: "",
             awards: "",
-            graduationDate: null,
+            graduationYear: "",
           },
         ],
         pendingQualifications: "",
@@ -421,6 +423,40 @@ export function MultiStepForm() {
       (name) => getFieldState(name, formState).error !== undefined,
     );
 
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const programParam = searchParams.get("program");
+    const courseParam =
+      searchParams.get("course") || searchParams.get("proposedCourse");
+
+    if (programParam) {
+      let mappedProgram = programParam;
+      if (programParam === "school") mappedProgram = "school-plus-two";
+      if (programParam === "college" || programParam === "a-levels")
+        mappedProgram = "a-level";
+      if (programParam === "bachelors") mappedProgram = "degree";
+
+      const matched = findInquiryCourse(mappedProgram);
+      if (matched) {
+        setValue("program", matched.id);
+        if (courseParam) {
+          const decoded = decodeURIComponent(courseParam);
+          const foundCourse = matched.proposedCourses?.find(
+            (c) =>
+              c.value.toLowerCase() === decoded.toLowerCase() ||
+              c.label.toLowerCase().includes(decoded.toLowerCase()),
+          );
+          if (foundCourse) {
+            setValue("proposedCourse", foundCourse.value);
+          } else {
+            setValue("proposedCourse", decoded);
+          }
+        }
+      }
+    }
+  }, [searchParams, setValue]);
+
   useEffect(() => {
     if (!isSubmitted) return;
     confirmationRef.current?.focus();
@@ -437,7 +473,7 @@ export function MultiStepForm() {
       id: crypto.randomUUID(),
       place: "",
       awards: "",
-      graduationDate: null,
+      graduationYear: "",
     });
   };
 
@@ -1046,7 +1082,15 @@ export function AdmissionsFormSection() {
           </P>
         </div>
 
-        <MultiStepForm />
+        <Suspense
+          fallback={
+            <div className="min-h-[400px] flex items-center justify-center text-ink-muted">
+              Loading application form...
+            </div>
+          }
+        >
+          <MultiStepForm />
+        </Suspense>
       </div>
     </section>
   );

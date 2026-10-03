@@ -6,6 +6,7 @@ import {
   ArrowRightIcon,
   ChevronLeftIcon,
   DownloadIcon,
+  InstagramIcon,
   LinkedInIcon,
   TikTokIcon,
   WhatsappIcon,
@@ -40,6 +41,10 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
     whatsappTarget,
     "Hello NAMI, I would like to enquire about admissions, programmes, and campus visits.",
   );
+
+  const instagramUrl =
+    contact.socialProfiles.find((s) => s.platform === "instagram")?.href ??
+    "https://www.instagram.com/nami.college";
 
   const tiktokUrl =
     contact.socialProfiles.find((s) => s.platform === "tiktok")?.href ??
@@ -202,7 +207,27 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
         </div>
       </div>
 
-      {/* 3. Direct TikTok Action */}
+      {/* 3. Direct Instagram Action */}
+      <div className="group/item relative">
+        <Link
+          href={instagramUrl as Route}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex size-9 items-center justify-center rounded-lg text-white transition-all duration-150 hover:bg-primary-800 hover:scale-105 focus-visible:bg-primary-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset cursor-pointer"
+          aria-label="Follow on Instagram"
+        >
+          <Icon className="size-5 text-white" icon={InstagramIcon} />
+          <span className="sr-only">Follow on Instagram</span>
+        </Link>
+
+        {/* Tooltip */}
+        <div className="invisible pointer-events-none absolute right-full top-1/2 z-50 mr-3 -translate-y-1/2 -translate-x-1.5 whitespace-nowrap rounded-lg border border-neutral-200/90 bg-white px-2.5 py-1 text-xs font-medium text-neutral-800 opacity-0 shadow-lg transition-all duration-150 ease-out group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100 group-focus-within/item:visible group-focus-within/item:translate-x-0 group-focus-within/item:opacity-100">
+          <div className="absolute -right-1 top-1/2 size-2 -translate-y-1/2 rotate-45 border-r border-t border-neutral-200/90 bg-white" />
+          <span>Follow on Instagram</span>
+        </div>
+      </div>
+
+      {/* 4. Direct TikTok Action */}
       <div className="group/item relative">
         <Link
           href={tiktokUrl as Route}
@@ -222,7 +247,7 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
         </div>
       </div>
 
-      {/* 4. Direct YouTube Action */}
+      {/* 5. Direct YouTube Action */}
       <div className="group/item relative">
         <Link
           href={youtubeUrl as Route}
@@ -242,7 +267,7 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
         </div>
       </div>
 
-      {/* 5. Direct LinkedIn Action */}
+      {/* 6. Direct LinkedIn Action */}
       <div className="group/item relative">
         <Link
           href={linkedinUrl as Route}

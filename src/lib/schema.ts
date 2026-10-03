@@ -126,7 +126,7 @@ export const qualificationSchema = z.object({
   id: z.string(),
   place: z.string().trim(),
   awards: z.string().trim(),
-  graduationDate: z.string().nullable(),
+  graduationYear: z.string().trim(),
 });
 
 export type Qualification = z.infer<typeof qualificationSchema>;

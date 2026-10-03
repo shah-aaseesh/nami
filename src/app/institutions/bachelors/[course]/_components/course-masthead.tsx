@@ -34,18 +34,22 @@ function totalCreditsOf(course: BachelorsProgramme): number {
 }
 
 function factsOf(course: BachelorsProgramme): readonly CourseFact[] {
+  if (course.keyFacts && course.keyFacts.length > 0) {
+    return course.keyFacts;
+  }
   const credits = totalCreditsOf(course);
   const facts: CourseFact[] = [
-    { label: courseDetailCopy.awardedLabel, value: course.awardingBody },
+    { label: "Programme Name", value: course.fullTitle },
+    { label: "Level", value: "Undergraduate Degree" },
+    { label: "Duration", value: course.format ?? "3 years" },
+    { label: "Location", value: "New Baneshwor, Kathmandu" },
+    { label: "Awarding Institution", value: course.awardingBody },
+    { label: "Mode", value: "Full Time" },
   ];
-
-  if (course.format !== null) {
-    facts.push({ label: courseDetailCopy.formatLabel, value: course.format });
-  }
 
   if (credits > 0) {
     facts.push({
-      label: courseDetailCopy.creditsLabel,
+      label: "Total Credits",
       value: String(credits),
     });
   }
@@ -168,33 +172,23 @@ export function CourseMasthead({
           />
         </figure>
 
-        <div className="rounded-2xl border border-accent/25 bg-accent/[0.03] p-6 sm:p-8">
-          <dl
-            className={cn(
-              "grid grid-cols-1 divide-y sm:divide-y-0 sm:divide-x divide-accent/30 w-full",
-              facts.length === 2
-                ? "sm:grid-cols-2"
-                : facts.length === 3
-                  ? "sm:grid-cols-3"
-                  : "sm:grid-cols-4",
-            )}
-          >
-            {facts.map((fact, index) => (
+        <div className="rounded-2xl border border-accent/25 bg-accent/[0.03] p-6 sm:p-8 shadow-xs">
+          <div className="mb-5 pb-3.5 border-b border-accent/20 flex items-center gap-2.5">
+            <span className="size-2 rounded-full bg-accent" />
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-ink tracking-tight">
+              Key Facts
+            </h2>
+          </div>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 w-full">
+            {facts.map((fact) => (
               <div
                 key={fact.label}
-                className={cn(
-                  "space-y-1.5",
-                  index === 0
-                    ? "sm:pe-6 lg:pe-8 pb-5 sm:pb-0"
-                    : index === facts.length - 1
-                      ? "sm:ps-6 lg:ps-8 pt-5 sm:pt-0"
-                      : "sm:px-6 lg:px-8 py-5 sm:py-0",
-                )}
+                className="space-y-1.5 rounded-xl bg-surface p-4 sm:p-5 border border-border/80 shadow-2xs hover:border-accent/40 transition-colors"
               >
                 <span className="block font-body text-xs font-semibold tracking-wider text-accent uppercase">
                   {fact.label}
                 </span>
-                <dd className="font-display text-xl sm:text-2xl font-normal text-balance text-ink">
+                <dd className="font-display text-base sm:text-lg font-bold text-balance text-ink">
                   {fact.value}
                 </dd>
               </div>

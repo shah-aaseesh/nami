@@ -54,6 +54,17 @@ const PROGRAM_CONTENT: Record<
     image: "/nami/level-bachelor-master.jpg",
     cta: "See the Programmes",
   },
+  ctevt: {
+    description:
+      "CTEVT-approved vocational and skills training programs delivering hands-on expertise in culinary arts, hospitality, barista, bartending, and hotel operations.",
+    requirements: [
+      "SEE / SLC or equivalent qualifications",
+      "Motivation for career-oriented vocational training",
+      "Entrance registration and document verification",
+    ],
+    image: "/nami/level-bachelor-master.jpg",
+    cta: "Explore CTEVT Programmes",
+  },
 };
 
 const PROGRAMS = INSTITUTIONS.map((institution) => ({

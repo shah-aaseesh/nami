@@ -49,6 +49,31 @@ function isItemActive(item: SiteNavItem, pathname: string): boolean {
   return false;
 }
 
+function getInstitutionalLogo(pathname: string, defaultName: string) {
+  if (
+    pathname === "/institutions/school" ||
+    pathname.startsWith("/institutions/school/")
+  ) {
+    return {
+      src: "/logo/International School-ai.png",
+      name: "NAMI International School",
+    };
+  }
+  if (
+    pathname === "/institutions/a-levels" ||
+    pathname.startsWith("/institutions/a-levels/")
+  ) {
+    return {
+      src: "/logo/nami-college.png",
+      name: "NAMI College",
+    };
+  }
+  return {
+    src: "/logo/nami-color.svg",
+    name: defaultName,
+  };
+}
+
 function DesktopNavDropdown({
   item,
   pathname,
@@ -241,6 +266,8 @@ export function SiteHeaderShell({
     { scope: root },
   );
 
+  const institutionalLogo = getInstitutionalLogo(pathname, siteName);
+
   return (
     <header
       className="pointer-events-none fixed inset-x-0 top-0 z-50 flex flex-col"
@@ -272,7 +299,11 @@ export function SiteHeaderShell({
           )}
         >
           <Link href="/" className="flex items-center h-full shrink-0">
-            <SiteHeaderWordmark name={siteName} scrolled={scrolled} />
+            <SiteHeaderWordmark
+              name={institutionalLogo.name}
+              scrolled={scrolled}
+              src={institutionalLogo.src}
+            />
           </Link>
 
           <nav
@@ -344,7 +375,8 @@ export function SiteHeaderShell({
                     labelId={labelId}
                     places={places}
                     links={links}
-                    siteName={siteName}
+                    siteName={institutionalLogo.name}
+                    logoSrc={institutionalLogo.src}
                     onNavigate={() => setOpen(false)}
                   />
                 </div>

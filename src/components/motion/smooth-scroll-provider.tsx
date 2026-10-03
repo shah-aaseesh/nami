@@ -14,9 +14,10 @@ const SMOOTH_SCROLL_QUERY = `${FULL_MOTION_QUERY} and (pointer: fine)`;
 const EFFECT_TARGETS = "[data-speed], [data-lag]";
 const WRAPPER_ID = "smooth-wrapper";
 const CONTENT_ID = "smooth-content";
+const HEADER_OFFSET = 90;
 
-function hashTarget(): HTMLElement | null {
-  const raw = window.location.hash.slice(1);
+function hashTarget(hashStr?: string): HTMLElement | null {
+  const raw = hashStr ?? window.location.hash.slice(1);
   if (raw === "") return null;
   let id = raw;
   try {
@@ -25,6 +26,16 @@ function hashTarget(): HTMLElement | null {
     id = raw;
   }
   return document.getElementById(id);
+}
+
+function scrollToTargetElement(target: HTMLElement, smooth = true) {
+  const smoother = ScrollSmoother.get();
+  if (smoother) {
+    smoother.scrollTo(target, smooth, `top ${HEADER_OFFSET}px`);
+  } else {
+    const y = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    window.scrollTo({ top: Math.max(0, y), behavior: smooth ? "smooth" : "instant" });
+  }
 }
 
 function MountSmootherBeforeSiblings() {
@@ -61,12 +72,11 @@ export function SmoothScrollProvider({
   const pathname = usePathname();
   const scannedPath = useRef(pathname);
 
+  // Handle native scroll adopt, hashchange, and anchor click navigation
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    // The smoother fakes the scroll position, so a native scroll intent (hash nav,
-    // focus, find-in-page) lands on the fixed wrapper instead of moving the page.
     const adoptNativeScroll = () => {
       const nudge = wrapper.scrollTop;
       const smoother = ScrollSmoother.get();
@@ -77,15 +87,58 @@ export function SmoothScrollProvider({
 
     wrapper.addEventListener("scroll", adoptNativeScroll);
 
-    // The browser's own hash landing already happened, against the pre-smoother
-    // layout; redo it now that the smoother owns the scroll position.
-    const smoother = ScrollSmoother.get();
-    const target = hashTarget();
-    if (smoother && target) {
-      smoother.scrollTo(target, false, "top top");
-    }
+    // Initial page load hash landing
+    const timer = setTimeout(() => {
+      const target = hashTarget();
+      if (target) {
+        scrollToTargetElement(target, false);
+      }
+    }, 150);
 
-    return () => wrapper.removeEventListener("scroll", adoptNativeScroll);
+    const onHashChange = () => {
+      const target = hashTarget();
+      if (target) {
+        scrollToTargetElement(target, true);
+      }
+    };
+
+    // Global click listener for in-page hash anchor links
+    const onAnchorClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest("a");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href || !href.includes("#")) return;
+
+      const [pathPart, hashPart] = href.split("#");
+      if (!hashPart) return;
+
+      const currentPath = window.location.pathname;
+      const isCurrentPage =
+        pathPart === "" ||
+        pathPart === currentPath ||
+        pathPart === `${currentPath}/` ||
+        `${pathPart}/` === currentPath;
+
+      if (isCurrentPage) {
+        const target = hashTarget(hashPart);
+        if (target) {
+          e.preventDefault();
+          history.pushState(null, "", `#${hashPart}`);
+          scrollToTargetElement(target, true);
+        }
+      }
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    document.addEventListener("click", onAnchorClick, true);
+
+    return () => {
+      clearTimeout(timer);
+      wrapper.removeEventListener("scroll", adoptNativeScroll);
+      window.removeEventListener("hashchange", onHashChange);
+      document.removeEventListener("click", onAnchorClick, true);
+    };
   }, []);
 
   useEffect(() => {
@@ -93,8 +146,6 @@ export function SmoothScrollProvider({
     if (!content) return;
 
     let timeoutId: ReturnType<typeof setTimeout>;
-    // ScrollSmoother runs an equivalent observer, but only where it is created;
-    // this one is the sole content-resize refresh on coarse-pointer viewports.
     const ro = new ResizeObserver(() => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
@@ -110,26 +161,22 @@ export function SmoothScrollProvider({
   }, []);
 
   useEffect(() => {
-    // ScrollSmoother's own `effects: true` scan already covered the first route;
-    // this effect exists only for the soft navigations after it.
     if (scannedPath.current === pathname) return;
     scannedPath.current = pathname;
 
     const timeoutId = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 100);
-
-    const smoother = ScrollSmoother.get();
-    if (smoother) {
       const target = hashTarget();
       if (target) {
-        smoother.scrollTo(target, true, "top top");
+        scrollToTargetElement(target, true);
       } else {
-        smoother.scrollTo(0, false);
+        const smoother = ScrollSmoother.get();
+        if (smoother) smoother.scrollTo(0, false);
       }
-    }
+    }, 150);
 
     const content = contentRef.current;
+    const smoother = ScrollSmoother.get();
     if (!smoother || !content) return () => clearTimeout(timeoutId);
 
     const registered = smoother.effects();

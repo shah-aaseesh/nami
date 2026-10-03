@@ -51,7 +51,10 @@ export function AboutEmblem({
                 <span className="h-px flex-1 bg-border" />
               </div>
             </Reveal>
-            <SplitText as="h2" className="mt-4">
+            <SplitText
+              as="h2"
+              className="mt-4 font-display text-3xl sm:text-4xl font-normal"
+            >
               {section.eyebrow ?? "The Emblem"}
             </SplitText>
 

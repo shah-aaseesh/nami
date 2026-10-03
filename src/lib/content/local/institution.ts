@@ -84,6 +84,8 @@ export const institution: InstitutionProfile = {
       streetAddress: "Jorpati Marg, House No. 142",
       mapUrl:
         "https://www.google.com/maps/search/?api=1&query=NAMI+College%2C+Jorpati%2C+Gokarneshwor%2C+Kathmandu",
+      embedMapUrl:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d882.9749868182432!2d85.38358969999999!3d27.720375300000008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1bbf46821009%3A0xb8e1a147cb4dc56c!2sNaya%20Aayam%20Multi-Disciplinary%20Institute!5e0!3m2!1sen!2sin!4v1791065660030!5m2!1sen!2sin",
     },
     {
       ...entryOf("new-baneshwor"),
@@ -93,6 +95,8 @@ export const institution: InstitutionProfile = {
       streetAddress: "Shantinagar Marg, House No. 27",
       mapUrl:
         "https://www.google.com/maps/search/?api=1&query=NAMI+College%2C+New+Baneshwor%2C+Kathmandu",
+      embedMapUrl:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28263.043992494844!2d85.30609671562503!3d27.690088099999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19cc4a60df7d%3A0xa3d62c8a38b7e837!2sNAMI%20COLLEGE%20bachelors%20block!5e0!3m2!1sen!2sin!4v1791065743872!5m2!1sen!2sin",
     },
   ],
   contact: {

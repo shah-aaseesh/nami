@@ -2,7 +2,7 @@ import type { Route } from "next";
 import { schoolGrades } from "@/lib/content/school-grades";
 import type { EntityRole } from "./types";
 
-export type InstitutionId = "school" | "college" | "bachelors";
+export type InstitutionId = "school" | "college" | "bachelors" | "ctevt";
 
 // The one id -> public path map. The id is domain identity and never tracks the
 // URL: "college" is served at /institutions/a-levels.
@@ -10,6 +10,7 @@ const INSTITUTION_PATHS = {
   school: "/institutions/school",
   college: "/institutions/a-levels",
   bachelors: "/institutions/bachelors",
+  ctevt: "/institutions/ctevt",
 } as const satisfies Record<InstitutionId, Route>;
 
 const INSTITUTION_ID_BY_ENTITY_ROLE = {
@@ -52,7 +53,7 @@ export const INSTITUTIONS: readonly Institution[] = [
     id: "college",
     title: "NAMI College",
     href: institutionPath("college"),
-    applyLabel: "NAMI College",
+    applyLabel: "NAMI College (A-Levels)",
   },
   {
     id: "bachelors",
@@ -60,13 +61,20 @@ export const INSTITUTIONS: readonly Institution[] = [
     href: institutionPath("bachelors"),
     applyLabel: "Naaya Aayam Multi-Disciplinary Institute",
   },
+  {
+    id: "ctevt",
+    title: "CTEVT Programmes",
+    href: institutionPath("ctevt"),
+    applyLabel: "CTEVT Vocational Programmes",
+  },
 ];
 
 export type InquiryCourseId =
   | "school-primary"
   | "school-plus-two"
   | "a-level"
-  | "degree";
+  | "degree"
+  | "ctevt";
 
 export type ProposedCourseOption = {
   readonly value: string;
@@ -139,7 +147,7 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
   },
   {
     id: "degree",
-    label: "NAMI",
+    label: "NAMI Undergraduate and Postgraduate",
     institutionId: "bachelors",
     historyStepLabel: "Qualifications",
     historyHeading: "Qualifications Achieved",
@@ -172,6 +180,23 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
         value: "BSc Environmental Studies (KU)",
         label: "BSc Environmental Studies (KU)",
       },
+    ],
+  },
+  {
+    id: "ctevt",
+    label: "CTEVT Vocational Programmes",
+    institutionId: "ctevt",
+    historyStepLabel: "Qualifications",
+    historyHeading: "Qualifications Achieved",
+    asksEducationHistory: true,
+    asksPendingQualifications: false,
+    asksEmploymentHistory: false,
+    proposedCourses: [
+      { value: "General Cook Commis II", label: "General Cook Commis II (484 Hours)" },
+      { value: "Hotel Assistant", label: "Hotel Assistant (390 Hours)" },
+      { value: "Barista", label: "Barista (390 Hours)" },
+      { value: "Bartender", label: "Bartender (390 Hours)" },
+      { value: "Room Attendant", label: "Room Attendant (390 Hours)" },
     ],
   },
 ];

@@ -9,6 +9,9 @@ import { contactCopy } from "./contact-copy";
 const MAP_ORIGIN = "https://www.google.com/maps";
 
 function mapSrc(campus: Campus): string {
+  if (campus.embedMapUrl) {
+    return campus.embedMapUrl;
+  }
   const params = new URLSearchParams({
     q: `${campus.locality}, ${campus.city}, Nepal`,
     output: "embed",

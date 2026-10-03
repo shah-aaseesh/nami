@@ -7,9 +7,11 @@ import { AboutAwards } from "./_components/about-awards";
 import { AboutCreed } from "./_components/about-creed";
 import { AboutEmblem } from "./_components/about-emblem";
 import { AboutHero } from "./_components/about-hero";
+import { AboutLeadershipMessages } from "./_components/about-leadership-messages";
 import { AboutMascot } from "./_components/about-mascot";
 import { mascotSection, mascotStory } from "./_components/about-mascot-copy";
 import { AboutOverview } from "./_components/about-overview";
+import { CompactTimeline } from "./_components/compact-timeline";
 
 export async function generateMetadata(): Promise<Metadata> {
   const about = await content.getAboutCopy();
@@ -35,6 +37,17 @@ export default async function AboutPage() {
         overview={institution.overview}
         section={copy.sections.chronology}
       />
+
+      {/* History & Timeline Section */}
+      <section id="history" className="gutter-x bg-surface-raised/40 border-y border-border scroll-mt-24">
+        <div className="mx-auto max-w-page">
+          <CompactTimeline />
+        </div>
+      </section>
+
+      {/* Leadership Messages Section */}
+      <AboutLeadershipMessages />
+
       <AboutEmblem
         emblemStory={institution.emblemStory}
         petals={institution.values}

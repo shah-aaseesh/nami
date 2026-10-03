@@ -27,6 +27,7 @@ export type Campus = ContentEntry & {
   readonly hosts: readonly string[];
   readonly streetAddress: string | null;
   readonly mapUrl: string | null;
+  readonly embedMapUrl?: string | null;
 };
 
 export type SocialPlatform =

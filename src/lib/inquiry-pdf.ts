@@ -303,7 +303,7 @@ function buildBlocks(
         .map((entry) => [
           { label: "Previous institution", value: text(entry.place) },
           { label: "Awards / grades", value: text(entry.awards) },
-          { label: "Graduation date", value: formatDate(entry.graduationDate) },
+          { label: "Graduation year", value: text(entry.graduationYear) },
         ])
         .filter((rows) => !isBlankRowSet(rows)),
     });

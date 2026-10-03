@@ -20,6 +20,7 @@ export type ProgrammeModule = {
   readonly credits: number;
   readonly status: ModuleStatus | null;
   readonly prerequisites: string | null;
+  readonly description?: string;
 };
 
 export type ProgrammeStage = {
@@ -34,6 +35,11 @@ export type ProgrammeRequirement = {
   readonly requirement: string;
 };
 
+export type KeyFact = {
+  readonly label: string;
+  readonly value: string;
+};
+
 export type BachelorsProgramme = {
   readonly key: CourseKey;
   readonly qualification: string;
@@ -44,6 +50,8 @@ export type BachelorsProgramme = {
   readonly awardingBody: string;
   readonly startingFrom: string | null;
   readonly format: string | null;
+  readonly keyFacts?: readonly KeyFact[];
+  readonly whatYoullStudy?: string;
   readonly summary: readonly string[];
   readonly shortDescription?: string;
   readonly entryLabel: string;
@@ -218,14 +226,25 @@ const programmes: BachelorsProgrammesCopy = {
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
+      keyFacts: [
+        { label: "Programme Name", value: "BSc (Hons) Computer Science" },
+        { label: "Level", value: "Undergraduate Degree" },
+        { label: "Duration", value: "3 years" },
+        { label: "Intake", value: "September / January" },
+        { label: "Location", value: "New Baneshwor, Kathmandu" },
+        { label: "Awarding Institution", value: "University of Northampton" },
+        { label: "Mode", value: "Full Time" },
+        { label: "Total Credits", value: "360" },
+      ],
+      whatYoullStudy:
+        "Our BSc Computer Science degree gives you the opportunity to explore different ideas and develop innovative solutions to current issues in the computing industry. This three-year Computer Science university degree will give you an insight into the computing industry, investigating the wide-reaching influences that computers and computing technology have on the world. Studying this course will also contribute towards helping you find your ideal path for a career in Computing.",
       shortDescription:
         "Three-year honours degree with majors in Software Engineering, Computing Systems, and Networks.",
       summary: [
-        "A three-year degree available in three majors — Computing, Software Engineering and Computer Networks Engineering — giving an insight into the computing industry and the reach computer technology has on the world.",
-        "In affiliation with the University of Northampton, the three years build the in-depth knowledge and skills the computing streams require. The course is designed so students can explore different ideas and develop innovative improvements to current problems in the industry.",
-        "It covers software engineering methods, database implementation and system design with multiple users and platforms in mind, alongside the theory and practical implications of knowledge-based systems, neural networks and evolutionary algorithms in artificial intelligence.",
+        "This course is designed to give the students the opportunity to explore different ideas, developing innovative solutions of improvements to current issues in the computing industry. This program covers the fundamental principles that are key to computing technology and its various uses.",
+        "Throughout this degree, students will cover software engineering methods, database implementation and system design, with multiple users and multiple platforms in mind. It also includes background theory, practical implications of knowledge-based systems, neural networks and evolutionary algorithms on the development of artificial intelligence systems.",
       ],
-      entryLabel: "Eligibility",
+      entryLabel: "Entry Requirements:",
       entry: undergraduateEntry,
       entryNotes: undergraduateEntryNotes,
       careersLabel: "Career prospect",
@@ -256,6 +275,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "This module develops students' understanding of the principles of communication networks and how to classify the various network devices in the appropriate layer of the protocol stack. Students will learn how to manage IP addresses in a small network and will develop confidence in using network simulation software.",
             },
             {
               code: "CSY1061",
@@ -263,6 +284,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "This module provides knowledge of the hardware and software components that make up a computer system and overview the important concepts in preparation for future study of computer science.",
             },
             {
               code: "CSY1063",
@@ -270,6 +293,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "This purpose of this module is to give students an understanding of client side web technologies. This module provides students with: the essential knowledge and practical skills to design, develop and implement a Web site to contemporary web standard",
             },
             {
               code: "CSY1064",
@@ -277,6 +302,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "The purpose of this module is to develop student’s experience with the multiple stages of software engineering life-cycles from initial need and requirements identification through to the design and implementation of code in order to develop confidence in the use of terminology and techniques for each of the stages.",
             },
             {
               code: "CSY1020",
@@ -284,6 +311,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "This purpose of this module is to: introduce students to the skills, principles and concepts necessary to solve problems in computing; to develop essential skills to enable the solution of these problems with the construction of appropriate algorithms and a computer program; introduce principles underlying the design of a high level programming language (HLPL); gain experience and confidence in the use of a HLPL to implement algorithms; implement HLPL programs using an appropriate programming language e.g. Java; introduce an object-oriented language initially as a non-object language.",
             },
             {
               code: "CSY1060",
@@ -291,6 +320,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "This module introduces a set of mathematical topics, which include binary number system, logic circuits, linear systems, graph theory, probability and statistics, that are widely studied by those learning computing sciences. The module equips students with fundamental mathematical skills which underpin a range of computing disciplines.",
             },
           ],
         },
@@ -305,6 +336,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "CSY1061",
+              description:
+                "The purpose of this module is designed to give an understanding of the theory, application, structure and design principles of operating systems. This module requires a significant practical element delivered as formal laboratory sessions.",
             },
             {
               code: "CSY2087",
@@ -312,6 +345,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "This module provides students with a conceptual understanding of common data structures and algorithms used in Computer Science and Software Engineering. It enables students to implement and evaluate a selection of algorithms and abstract data types, including linked lists, stacks, queues, graphs and binary trees using an object-oriented language.",
             },
             {
               code: "CSY2088",
@@ -319,6 +354,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "CSY1062 or CSY1063 or CSY1064 or CSY1060",
+              description:
+                "The module is designed to develop higher-order intellectual skills (problem-solving) and appropriate personal qualities including team working. Each group will develop and document effective, robust and high-quality computing systems to a professional standard in response to a supplied specification of requirements.",
             },
             {
               code: "CSY2089",
@@ -326,6 +363,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "CSY1063 and CSY1020",
+              description:
+                "This purpose of this module is to give students an understanding of the concepts and technologies of web based server side technologies; teach students to use up-to-date programming techniques to design and develop coherent server side software for websites with a focus on security, functionality and usability.",
             },
             {
               code: "CSY2080",
@@ -333,6 +372,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "The purpose of this module is to understand and apply the principles of database integrity to implement and utilise efficient databases. RD is a practical module that employs data modelling and SQL techniques to design, define and manipulate data.",
             },
             {
               code: "CSY2094",
@@ -340,6 +381,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "CSY1020 and CSY1062 or CSY1063 or CSY1064",
+              description:
+                "This purpose of this module is to extend and apply system design and development to large scale systems; explore building GUIs so that the idea of specifying general software components and implementing re-usable classes will become familiar; provide tools and skills which the student will require when encountering design projects.",
             },
           ],
         },
@@ -355,6 +398,8 @@ const programmes: BachelorsProgrammesCopy = {
               status: "Compulsory",
               prerequisites:
                 "Students undertaking this module should have successfully completed all level 4 and at least 100 credits at level 5.",
+              description:
+                "This project module provides the opportunity for the student to undertake independent research, development, and self-management of a Computing related project leading to completing a dissertation. An essential outcome for this module is that the student’s project deliverable includes the design and development of a system, or a software application, or a novel functional approach that relates to the main areas of student study, and that can be used, applied or demonstrated in some way. Students on the BSc Business Computing may engage on a research centered project resulting in a report of analysis of an appropriate topic.",
             },
             {
               code: "CSY3058",
@@ -362,6 +407,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "CSY2089 or CSY2094",
+              description:
+                "Media Technology is an important aspect to Computer Science. This module will introduce a range of technologies relevant to modern multimedia systems. This includes computer graphics, digital image processing, online video streaming, immersive media, and other advanced applications. Student will develop audio-visual systems in a third generation computer language.",
             },
             {
               code: "CSY3062",
@@ -369,6 +416,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "This module provides students with the necessary practical skills and theoretical understanding of the technologies used to secure communications and protect the privacy of users within an online environment. Concepts introduced, and skills learnt, provide the necessary technical underpinning to enable the student to address the issues of effective Security.",
             },
             {
               code: "CSY3059",
@@ -376,6 +425,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "CSY2093 or CSY2080",
+              description:
+                "The purpose of this module is to study advanced/latest database topics. The module focuses primarily on NoSQL databases (e.g., graph and document databases), from designing and creating to querying the databases.",
             },
             {
               code: "CSY3060",
@@ -383,6 +434,8 @@ const programmes: BachelorsProgrammesCopy = {
               credits: 20,
               status: "Compulsory",
               prerequisites: "None",
+              description:
+                "The purpose of this module is to teach students the fundamental theory and practical applications of: knowledge-based systems, artificial neural networks, and deep neural network. The underpinning concepts will be introduced, followed by examples of how intelligent systems are used in engineering, software, or computer science in general. Students will explore core AI techniques including supervised and unsupervised learning, with selected advanced topics introduced to extend their understanding of modern intelligent systems. The course combines conceptual learning with practical implementation, encouraging individual exploration through technical analysis and applied project work.",
             },
           ],
         },
@@ -406,7 +459,7 @@ const programmes: BachelorsProgrammesCopy = {
         "Students undertake a wide variety of activities and encounter new challenges that support the theoretical learning. Accuracy, critical evaluation, the ability to research solutions and apply them in new ways, and the ability to communicate findings to a variety of audiences are all vital skills for an environmental scientist.",
         "Students examine research design and methodology across field and laboratory work — data collection, qualitative analysis and statistical tools — with field and lab activities running through the course so scientific concepts are developed in practice.",
       ],
-      entryLabel: "Eligibility",
+      entryLabel: "Entry Requirements:",
       entry: undergraduateEntry,
       entryNotes: undergraduateEntryNotes,
       careersLabel: "Career prospect",
@@ -586,7 +639,7 @@ const programmes: BachelorsProgrammesCopy = {
         "Practical & Field-Based Learning: At NAMI, environmental education is deeply immersive. Students participate in comprehensive field trips, in-house laboratory projects, GIS and remote sensing analysis, Environmental Impact Assessments (IEE/EIA), community-based learning, and internships at leading NGOs, INGOs, and research organisations.",
         "Course Highlights & Specialisations: BES is an eight-semester (four-year) programme. Featured courses include Green Entrepreneurship, Conservation and Protected Areas, Environmental Pollution, Indigenous Traditional Knowledge (ITK) and Practices, Environmental Arts and Design, Nature-Based Solutions and Innovation, Environmental Tourism, and Final Year Projects.",
       ],
-      entryLabel: "Entry Requirements",
+      entryLabel: "Entry Requirements:",
       entry: besEntry,
       entryNotes: besEntryNotes,
       careersLabel: "Where Can BES Take You?",
@@ -969,7 +1022,7 @@ const programmes: BachelorsProgrammesCopy = {
         "Skills You Will Develop: Throughout the programme, students build business and management expertise (strategic thinking, business decision-making, financial awareness, marketing knowledge, project management), professional excellence (communication, presentation, teamwork, leadership, negotiation), and future-focused capabilities (critical thinking, problem-solving, creativity, entrepreneurship, digital and analytical skills, and research skills).",
         "Is BBA Right for You? The BBA is ideal for students who are interested in business and management, want to understand how organisations work, are interested in entrepreneurship or starting their own venture, enjoy collaborating in teams, want to develop leadership acumen, or seek a broad business degree before specialising.",
       ],
-      entryLabel: "Entry Requirements",
+      entryLabel: "Entry Requirements:",
       entry: bbaEntry,
       entryNotes: undergraduateEntryNotes,
       careersLabel: "Where Can a BBA Take You?",
@@ -1135,114 +1188,6 @@ const programmes: BachelorsProgrammesCopy = {
         },
       ],
     },
-    {
-      key: "msc-computing",
-      qualification: "MSc",
-      title: "Computing",
-      fullTitle: "MSc Computing",
-      metaDescription:
-        "MSc Computing at NAMI, Kathmandu — a postgraduate degree awarded by the University of Northampton, UK, deepening research and analytical skills through a dissertation.",
-      image: readingHall,
-      awardingBody: northamptonAward,
-      startingFrom: null,
-      format: "Postgraduate degree",
-      shortDescription:
-        "Postgraduate programme deepening advanced software engineering, systems architecture, and business leadership.",
-      summary: [
-        "A postgraduate programme built on current global practice in computing, addressing the demand for exceptional leaders in a digital economy the course puts at a global value of $11.5 trillion.",
-        "With the technology and computing industries evolving rapidly, the programme equips participants with the skills to thrive in the field and provides a platform for developing the knowledge and experience that career progression in computing needs.",
-        "It deepens research and analytical skills and lets students explore individual interests through a thesis, with an emphasis on technical proficiency and business acumen together.",
-      ],
-      entryLabel: "Eligibility",
-      entry: [
-        {
-          label: "Bachelor’s degree",
-          requirement:
-            "An IT or computer-related Bachelor’s degree from a reputed institution.",
-        },
-        {
-          label: "Classification",
-          requirement:
-            "A Bachelor of Honours degree with 2:2 or above, or equivalent, in a computing-related subject area.",
-        },
-      ],
-      entryNotes: [
-        "All decisions regarding an offer letter are made after approval from the University of Northampton, UK.",
-      ],
-      careersLabel: "Career prospect",
-      careerSummary:
-        "The MSc suits innovators and problem-solvers who want to deepen technical proficiency and business acumen together. Graduates return to their own company or join new organisations prepared to navigate a computing career, across a spectrum that runs from software and IT to cyber security, consulting and research.",
-      careerSectors: [
-        "Software and IT",
-        "Cyber security",
-        "Communication",
-        "Teaching",
-        "Consulting",
-        "Programming",
-        "Research",
-        "Digital marketing",
-      ],
-      pendingNote: null,
-      stagesNote: null,
-      stages: [
-        {
-          key: "msc-modules",
-          label: "Modules",
-          note: null,
-          modules: [
-            {
-              code: "CSYM017",
-              title: "Databases",
-              credits: 20,
-              status: null,
-              prerequisites: null,
-            },
-            {
-              code: "CSYM025",
-              title: "Visual Object Software",
-              credits: 20,
-              status: null,
-              prerequisites: null,
-            },
-            {
-              code: "CSYM028",
-              title: "Modern Computer Architecture",
-              credits: 20,
-              status: null,
-              prerequisites: null,
-            },
-            {
-              code: "CSYM015",
-              title: "Intelligent Systems",
-              credits: 20,
-              status: null,
-              prerequisites: null,
-            },
-            {
-              code: "CSYM019",
-              title: "Internet Programming",
-              credits: 20,
-              status: null,
-              prerequisites: null,
-            },
-            {
-              code: "CSYM030",
-              title: "Mobile Device Software Development",
-              credits: 20,
-              status: null,
-              prerequisites: null,
-            },
-            {
-              code: "CSYM023",
-              title: "Dissertation",
-              credits: 60,
-              status: null,
-              prerequisites: null,
-            },
-          ],
-        },
-      ],
-    },
   ],
 };
 
@@ -1292,7 +1237,7 @@ export const bachelorsCopy = {
   meta: {
     title: "Naaya Aayam Multi-Disciplinary Institute",
     description:
-      "Naaya Aayam Multi-Disciplinary Institute teaches partner-university degrees at New Baneshwor, Kathmandu — BSc (Hons) Computer Science, BSc (Hons) Environmental Science, Bachelor in Business Administration and MSc Computing awarded by the University of Northampton, UK, and BSc Environmental Studies awarded by Kathmandu University from August 2026.",
+      "Naaya Aayam Multi-Disciplinary Institute teaches partner-university degrees at New Baneshwor, Kathmandu — BSc (Hons) Computer Science, BSc (Hons) Environmental Science, and Bachelor in Business Administration awarded by the University of Northampton, UK, and BSc Environmental Studies awarded by Kathmandu University from August 2026.",
   },
   levelSlug: "bachelors",
   masthead,

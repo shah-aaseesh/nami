@@ -70,7 +70,7 @@ function CourseCard({
       <div className="relative aspect-[16/11] w-full overflow-hidden bg-muted">
         <Image
           alt={course.image.alt}
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover object-left-top origin-top-left transition-transform duration-500 group-hover:scale-105"
           fill
           loading="lazy"
           sizes={CARD_SIZES}

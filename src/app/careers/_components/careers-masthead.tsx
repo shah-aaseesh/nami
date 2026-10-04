@@ -62,7 +62,7 @@ export function CareersMasthead({
                 fill
                 priority
                 sizes="(min-width: 1024px) 42vw, 92vw"
-                className="object-cover"
+                className="object-cover object-left-top"
               />
             </div>
           </div>

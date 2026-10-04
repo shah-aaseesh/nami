@@ -76,10 +76,10 @@ function BandContent({ band }: { readonly band: SchoolBand }) {
               key={stream.name}
             >
               {stream.photo && (
-                <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl bg-neutral-100">
+                <div className="relative mb-6 aspect-[16/11] w-full overflow-hidden rounded-xl bg-neutral-100">
                   <Image
                     alt={stream.photo.alt}
-                    className="object-cover"
+                    className="object-cover object-left-top"
                     fill
                     sizes="(max-width: 640px) 100vw, 50vw"
                     src={stream.photo.src}

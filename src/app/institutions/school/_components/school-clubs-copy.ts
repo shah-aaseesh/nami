@@ -55,10 +55,10 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     metaDescription:
       "NAMI International School Sports Club promotes fitness, inter-house leagues, basketball tournaments, and football championships for all student grades.",
     coverImage: {
-      src: "/gallery/Sports Club/Annual Sports Meet/Basketball.jpg",
+      src: "/gallery/Sports Club/Annual Sports Meet/Basketball-upright.jpg",
       alt: "NAMI International School students engaged in competitive sports and basketball tournaments.",
-      width: 4000,
-      height: 3000,
+      width: 2400,
+      height: 3200,
     },
     overview: [
       "The NAMI Sports Club is dedicated to building strong physical health, stamina, and camaraderie among students. We believe sports teach values that extend far beyond the pitch — resilience under pressure, strategic thinking, mutual trust, and humble victory.",
@@ -124,11 +124,11 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     ],
     galleryImages: [
       {
-        src: "/gallery/Sports Club/Annual Sports Meet/Basketball.jpg",
+        src: "/gallery/Sports Club/Annual Sports Meet/Basketball-upright.jpg",
         alt: "Inter-house basketball championship fixture",
         caption: "Inter-house basketball championship match",
-        width: 4000,
-        height: 3000,
+        width: 2400,
+        height: 3200,
       },
       {
         src: "/gallery/Sports Club/Intra Futsal/4fe72723-53bd-4408-a417-776bb9af9ce1.jfif",
@@ -385,10 +385,10 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     metaDescription:
       "Engage in community service camps, environmental tree plantation, disaster relief drives, and social welfare with NAMI Social Service Club.",
     coverImage: {
-      src: "/gallery/Social Service Club/Donation Camp/4.jpg",
+      src: "/gallery/Social Service Club/Donation Camp/4-upright.jpg",
       alt: "NAMI International School students distributing relief materials during a community service outreach camp.",
-      width: 4000,
-      height: 3000,
+      width: 1800,
+      height: 2400,
     },
     overview: [
       "Rooted in the NAMI philosophy that education must contribute meaningfully to society, the Social Service Club instills deep civic consciousness and active compassion in every member. We believe that true education is measured by how effectively we uplift those around us.",
@@ -454,11 +454,11 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
     ],
     galleryImages: [
       {
-        src: "/gallery/Social Service Club/Donation Camp/4.jpg",
+        src: "/gallery/Social Service Club/Donation Camp/4-upright.jpg",
         alt: "Student volunteers packaging community relief kits",
         caption: "Relief kit sorting & charity packaging",
-        width: 4000,
-        height: 3000,
+        width: 1800,
+        height: 2400,
       },
       {
         src: "/gallery/Social Service Club/Donation Camp/5.jpg",

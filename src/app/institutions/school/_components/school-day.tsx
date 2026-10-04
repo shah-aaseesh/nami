@@ -58,7 +58,7 @@ export function SchoolDay({
                   <div className="relative aspect-4/3 hidden sm:block sm:h-30 sm:w-40 lg:h-33 lg:w-44 shrink-0 overflow-hidden rounded-2xl shadow-md bg-black/20">
                     <Image
                       alt={entry.photo.alt}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-left-top"
                       fill
                       sizes={PHOTO_SIZES}
                       src={entry.photo.src}
@@ -79,7 +79,7 @@ export function SchoolDay({
                           <div className="mb-3 w-full overflow-hidden rounded-xl shadow-md bg-black/20 sm:hidden">
                             <Image
                               alt={entry.photo.alt}
-                              className="aspect-[16/10] w-full rounded-xl object-cover"
+                              className="aspect-[16/10] w-full rounded-xl object-cover object-left-top"
                               height={entry.photo.height}
                               sizes="(max-width: 640px) 100vw, 400px"
                               src={entry.photo.src}

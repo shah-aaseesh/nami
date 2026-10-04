@@ -122,11 +122,11 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
     ],
     galleryImages: [
       {
-        src: "/gallery/Social Service Club/Donation Camp/4.jpg",
+        src: "/gallery/Social Service Club/Donation Camp/4-upright.jpg",
         alt: "Community relief supplies and charity package packing",
         caption: "Relief supplies packaging & distribution",
-        width: 4000,
-        height: 3000,
+        width: 1800,
+        height: 2400,
       },
       {
         src: "/gallery/Social Service Club/Donation Camp/5.jpg",
@@ -232,11 +232,11 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
     ],
     galleryImages: [
       {
-        src: "/gallery/Sports Club/Annual Sports Meet/Basketball.jpg",
+        src: "/gallery/Sports Club/Annual Sports Meet/Basketball-upright.jpg",
         alt: "Basketball championship match in progress",
         caption: "NAMI SEE & +2 3x3 Basketball Cup",
-        width: 4000,
-        height: 3000,
+        width: 2400,
+        height: 3200,
       },
       {
         src: "/gallery/Sports Club/Intra Futsal/4fe72723-53bd-4408-a417-776bb9af9ce1.jfif",

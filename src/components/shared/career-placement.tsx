@@ -47,7 +47,7 @@ export function CareerPlacement({
           <div className="relative aspect-video lg:aspect-[16/10] overflow-hidden rounded-2xl lg:col-span-4 shadow-md w-full max-w-md lg:max-w-none mx-auto lg:mx-0">
             <Image
               alt={copy.image.alt}
-              className="object-cover"
+              className="object-cover object-left-top"
               fill
               loading="lazy"
               sizes="(min-width: 1024px) 28vw, 92vw"

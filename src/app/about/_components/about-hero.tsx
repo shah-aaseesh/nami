@@ -9,11 +9,16 @@ import { ArrowRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 export function AboutHero({ copy }: { copy: AboutCopy }) {
-  const image = copy.openingImage;
+  const images =
+    copy.openingImages && copy.openingImages.length > 0
+      ? copy.openingImages
+      : copy.openingImage
+        ? [copy.openingImage]
+        : [];
 
   return (
     <section
-      className="gutter-x pt-2.5 pb-8 sm:pt-3.5 sm:pb-10 lg:pt-4 lg:pb-12"
+      className="gutter-x pt-2.5 pb-2 sm:pt-3.5 sm:pb-3 lg:pt-4 lg:pb-4"
       id="about"
     >
       <div className="mx-auto max-w-page">
@@ -48,21 +53,42 @@ export function AboutHero({ copy }: { copy: AboutCopy }) {
           </div>
         </div>
 
-        {image === null ? null : (
+        {images.length === 0 ? null : images.length === 1 && images[0] ? (
           <Parallax
             className="mt-6 sm:mt-7 lg:mt-8 overflow-hidden rounded-2xl lg:rounded-3xl"
             speed={1.05}
           >
             <Image
-              alt={image.alt}
-              className="h-[34vh] sm:h-[38vh] lg:h-[42vh] xl:h-[48vh] max-h-[360px] xl:max-h-[440px] w-full object-cover"
-              height={image.height}
+              alt={images[0].alt}
+              className="h-[38vh] sm:h-[44vh] lg:h-[48vh] xl:h-[54vh] max-h-[440px] lg:max-h-[520px] xl:max-h-[580px] w-full object-cover object-left-top"
+              fetchPriority="high"
+              height={images[0].height}
               loading="eager"
+              priority
               sizes="(max-width: 1024px) 100vw, 1200px"
-              src={image.src}
-              width={image.width}
+              src={images[0].src}
+              width={images[0].width}
             />
           </Parallax>
+        ) : (
+          <div className="mt-6 sm:mt-7 lg:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 lg:gap-5">
+            {images.map((img, idx) => (
+              <div
+                className="group relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-[16/11] xl:aspect-[4/3] w-full overflow-hidden rounded-2xl lg:rounded-3xl bg-neutral-100 border border-neutral-200/80 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                key={img.src}
+              >
+                <Image
+                  alt={img.alt}
+                  className="size-full object-cover object-left-top transition-transform duration-500 ease-out group-hover:scale-105"
+                  fill
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 33vw, 100vw"
+                  src={img.src}
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </section>

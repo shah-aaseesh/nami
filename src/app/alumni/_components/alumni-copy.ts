@@ -590,7 +590,12 @@ export const alumniCopy = {
     standfirst:
       "From Kathmandu to global institutions across 15+ countries, NAMI graduates are leading innovation in computing, sustainable development, business, and research.",
     cta: "Explore Alumni Spotlights",
-    image: convocationCeremony,
+    image: {
+      src: "/final photos/25.jpg",
+      alt: "NAMI Alumni network and graduation celebration.",
+      width: 1500,
+      height: 1000,
+    },
   } satisfies CareersMastheadCopy,
   metrics: {
     eyebrow: "COMMUNITY & SCALE",

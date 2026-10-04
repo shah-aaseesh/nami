@@ -282,6 +282,7 @@ export type AboutCopy = {
   readonly title: string;
   readonly standfirst: string;
   readonly openingImage: ContentImage | null;
+  readonly openingImages?: readonly ContentImage[];
   readonly overviewImage: ContentImage | null;
   readonly statsImage: ContentImage | null;
   readonly creedImage: ContentImage | null;

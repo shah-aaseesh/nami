@@ -60,8 +60,8 @@ export function SharedHeroSlider({
               <Image
                 alt={slide.alt}
                 className={cn(
-                  "size-full object-cover transition-transform duration-[3000ms] ease-linear",
-                  index === selectedIndex ? "scale-105" : "scale-100",
+                  "size-full object-cover object-left-top origin-top-left transition-transform duration-[3500ms] ease-out",
+                  index === selectedIndex ? "scale-[1.025]" : "scale-100",
                 )}
                 draggable={false}
                 fetchPriority={index === 0 ? "high" : "auto"}

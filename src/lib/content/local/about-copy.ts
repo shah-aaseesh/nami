@@ -1,6 +1,12 @@
 import { entryOf } from "../identifiers";
 import type { AboutCopy, Award } from "../types";
-import { auditoriumGathering, readingHall, studentsOnCampus } from "./images";
+import {
+  aboutHeroCombined,
+  auditoriumGathering,
+  finalPhotoSeven,
+  readingHall,
+  studentsOnCampus,
+} from "./images";
 
 const awards: readonly Award[] = [
   {
@@ -40,8 +46,8 @@ export const aboutCopy: AboutCopy = {
   title: "Institutions under NAMI",
   standfirst:
     "One entity, three institutions, and the five values carried in the petals of the red lotus.",
-  openingImage: readingHall,
-  overviewImage: studentsOnCampus,
+  openingImage: aboutHeroCombined,
+  overviewImage: finalPhotoSeven,
   statsImage: readingHall,
   creedImage: auditoriumGathering,
   awards,

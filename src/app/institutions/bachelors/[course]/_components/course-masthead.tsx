@@ -162,7 +162,7 @@ export function CourseMasthead({
         <figure className="overflow-hidden rounded-3xl bg-muted border border-border/60 shadow-md">
           <Image
             alt={course.image.alt}
-            className="aspect-4/3 w-full object-cover sm:aspect-video"
+            className="aspect-4/3 w-full object-cover object-left-top origin-top-left sm:aspect-video"
             fetchPriority="high"
             height={course.image.height}
             loading="eager"

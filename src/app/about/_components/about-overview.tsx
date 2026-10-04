@@ -17,7 +17,7 @@ export function AboutOverview({
   const paragraphs = paragraphsOf(overview);
 
   return (
-    <section className="gutter-x py-12 sm:py-16 lg:py-20" id="overview">
+    <section className="gutter-x pt-3 sm:pt-5 lg:pt-6 pb-10 sm:pb-12 lg:pb-14" id="overview">
       <div className="mx-auto max-w-page">
         {/* Section Heading */}
         <div>
@@ -51,7 +51,7 @@ export function AboutOverview({
                 <figure className="relative h-full min-h-[280px] sm:min-h-[340px] lg:min-h-[380px] w-full overflow-hidden rounded-2xl border border-border/80 bg-surface-raised shadow-sm">
                   <Image
                     alt={image.alt}
-                    className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                    className="h-full w-full object-cover object-left-top origin-top-left transition-transform duration-700 hover:scale-105"
                     height={image.height}
                     loading="lazy"
                     sizes="(max-width: 1024px) 100vw, 560px"

@@ -123,7 +123,7 @@ export async function Hero() {
               >
                 <CarouselContent
                   className="h-full"
-                  viewportClassName="aspect-video rounded-xl sm:aspect-[2/1] lg:aspect-[2.4/1] xl:aspect-[5/2] max-h-[360px] xl:max-h-[420px]"
+                  viewportClassName="aspect-[16/10] rounded-2xl sm:aspect-[16/9] lg:aspect-[2.1/1] xl:aspect-[2.2/1] min-h-[300px] sm:min-h-[380px] lg:min-h-[440px] max-h-[480px] xl:max-h-[540px]"
                 >
                   {heroSlides.map((slide, position) => (
                     <CarouselItem
@@ -133,9 +133,11 @@ export async function Hero() {
                       <Parallax className="absolute inset-0" speed={0.94}>
                         <Image
                           alt={slide.alt}
-                          className="scale-110 object-cover"
+                          className="object-cover object-left-top"
+                          fetchPriority={position === 0 ? "high" : "auto"}
                           fill
-                          preload={position === 0}
+                          loading={position === 0 ? "eager" : "lazy"}
+                          priority={position === 0}
                           sizes="(min-width: 1024px) 74vw, 92vw"
                           src={slide.src}
                         />

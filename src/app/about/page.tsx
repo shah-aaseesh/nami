@@ -38,15 +38,15 @@ export default async function AboutPage() {
         section={copy.sections.chronology}
       />
 
+      {/* Leadership Messages Section */}
+      <AboutLeadershipMessages />
+
       {/* History & Timeline Section */}
       <section id="history" className="gutter-x bg-surface-raised/40 border-y border-border scroll-mt-24">
         <div className="mx-auto max-w-page">
           <CompactTimeline />
         </div>
       </section>
-
-      {/* Leadership Messages Section */}
-      <AboutLeadershipMessages />
 
       <AboutEmblem
         emblemStory={institution.emblemStory}

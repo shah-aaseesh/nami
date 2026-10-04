@@ -3,7 +3,11 @@ import { richText } from "../rich-text";
 import { schoolGrades } from "../school-grades";
 import type { AcademicLevel, Programme, VocationalApproval } from "../types";
 import { AWARDING_BODIES } from "./awarding-bodies";
-import { readingRoom, schoolTransport, studentsOnCampus } from "./images";
+import {
+  namiCollegeEntity,
+  namiInstituteEntity,
+  namiSchoolEntity,
+} from "./images";
 
 export const academicLevels: readonly AcademicLevel[] = [
   {
@@ -22,7 +26,7 @@ export const academicLevels: readonly AcademicLevel[] = [
       "Internships, career guidance, and international exposure trips",
     ],
     campusSlug: slug("gokarneshwor"),
-    image: schoolTransport,
+    image: namiSchoolEntity,
   },
   {
     ...entryOf("college"),
@@ -39,7 +43,7 @@ export const academicLevels: readonly AcademicLevel[] = [
       "Routes into Science, Medicine, Engineering, Business, Humanities and Liberal Arts",
     ],
     campusSlug: slug("gokarneshwor"),
-    image: studentsOnCampus,
+    image: namiCollegeEntity,
   },
   {
     ...entryOf("bachelors"),
@@ -56,7 +60,7 @@ export const academicLevels: readonly AcademicLevel[] = [
       "AWS Academy curriculum and certifications",
     ],
     campusSlug: slug("new-baneshwor"),
-    image: readingRoom,
+    image: namiInstituteEntity,
   },
 ];
 

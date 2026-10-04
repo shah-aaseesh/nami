@@ -884,10 +884,10 @@ export const eventAlbums: readonly EventAlbum[] = [
       },
       {
         id: "ug-sp-2",
-        src: "/gallery/Sports Club/Annual Sports Meet/Basketball.jpg",
+        src: "/gallery/Sports Club/Annual Sports Meet/Basketball-upright.jpg",
         alt: "Undergraduate sports tournament action.",
-        width: 4000,
-        height: 3000,
+        width: 2400,
+        height: 3200,
         caption: "Inter-faculty sporting action on campus basketball court.",
       },
     ],
@@ -905,18 +905,18 @@ export const eventAlbums: readonly EventAlbum[] = [
     description:
       "Undergraduate and postgraduate students leading health awareness, digital literacy camps, and emergency community aid.",
     coverImage: {
-      src: "/gallery/Social Service Club/Donation Camp/4.jpg",
+      src: "/gallery/Social Service Club/Donation Camp/4-upright.jpg",
       alt: "Higher education social welfare project.",
-      width: 4000,
-      height: 3000,
+      width: 1800,
+      height: 2400,
     },
     photos: [
       {
         id: "ug-welf-1",
-        src: "/gallery/Social Service Club/Donation Camp/4.jpg",
+        src: "/gallery/Social Service Club/Donation Camp/4-upright.jpg",
         alt: "Higher education social welfare project.",
-        width: 4000,
-        height: 3000,
+        width: 1800,
+        height: 2400,
         caption: "Delivering educational and welfare resources to communities.",
       },
       {

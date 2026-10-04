@@ -15,8 +15,8 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
     descriptor: "Discover our mission, vision, and values.",
     children: [
       { label: "Our Story", href: "/about" },
-      { label: "History of NAMI", href: "/about#history" },
       { label: "Messages from Leadership", href: "/about#leadership-messages" },
+      { label: "History of NAMI", href: "/about#history" },
       { label: "Faculty & Leadership", href: "/faculty" },
     ],
   },

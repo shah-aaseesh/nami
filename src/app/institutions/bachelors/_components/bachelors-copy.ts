@@ -98,6 +98,34 @@ const readingRoom: ContentImage = {
   height: 900,
 };
 
+const degreeComputerScience: ContentImage = {
+  src: "/final photos/degree (1).jpg",
+  alt: "NAMI BSc (Hons) Computer Science lecture and interactive computing workshop.",
+  width: 1500,
+  height: 1000,
+};
+
+const degreeClimateAI: ContentImage = {
+  src: "/final photos/degree (2).jpg",
+  alt: "NAMI ClimateAI Launchpad - Environmental Science and AI innovation initiative.",
+  width: 1500,
+  height: 1000,
+};
+
+const degreeBusinessAdmin: ContentImage = {
+  src: "/final photos/degree (3).jpg",
+  alt: "NAMI Bachelor of Business Administration (BBA) auditorium seminar and conference.",
+  width: 1500,
+  height: 1000,
+};
+
+const degreeClimateAITeam: ContentImage = {
+  src: "/gallery/Bachelors/Events/ClimateAI.jpeg",
+  alt: "NAMI Environmental Studies and ClimateAI innovation cohort.",
+  width: 1280,
+  height: 853,
+};
+
 const scienceLaboratory: ContentImage = {
   src: "/nami/campus-science-lab.jpg",
   alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
@@ -127,9 +155,36 @@ const auditoriumGathering: ContentImage = {
 };
 
 const heroSlides: readonly ContentImage[] = [
-  readingRoom,
-  scienceLaboratory,
-  readingHall,
+  {
+    src: "/final photos/26.jpg",
+    alt: "NAMI Higher Education student sports tournament and campus life.",
+    width: 1500,
+    height: 1000,
+  },
+  {
+    src: "/final photos/20.jpg",
+    alt: "NAMI Higher Education faculty, students, and graduation ceremony.",
+    width: 1500,
+    height: 1000,
+  },
+  {
+    src: "/final photos/21.jpg",
+    alt: "NAMI Higher Education campus facilities and learning environment.",
+    width: 1280,
+    height: 853,
+  },
+  {
+    src: "/final photos/22.jpg",
+    alt: "NAMI Higher Education academic campus and community.",
+    width: 1500,
+    height: 1000,
+  },
+  {
+    src: "/final photos/23.jpg",
+    alt: "NAMI Higher Education practical laboratories and campus life.",
+    width: 1500,
+    height: 1000,
+  },
 ];
 
 const masthead: BachelorsMastheadCopy = {
@@ -222,7 +277,7 @@ const programmes: BachelorsProgrammesCopy = {
       fullTitle: "BSc (Hons) Computer Science",
       metaDescription:
         "BSc (Hons) Computer Science at NAMI, Kathmandu — a three-year degree awarded by the University of Northampton, UK, with majors in Computing, Software Engineering and Computer Networks Engineering.",
-      image: readingRoom,
+      image: degreeComputerScience,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
@@ -448,7 +503,7 @@ const programmes: BachelorsProgrammesCopy = {
       fullTitle: "BSc (Hons) Environmental Science",
       metaDescription:
         "BSc (Hons) Environmental Science at NAMI, Kathmandu — a three-year degree awarded by the University of Northampton, UK, combining ecology and physical science with field and laboratory work.",
-      image: scienceLaboratory,
+      image: degreeClimateAI,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
@@ -626,7 +681,7 @@ const programmes: BachelorsProgrammesCopy = {
       fullTitle: "Bachelors in Environmental Studies",
       metaDescription:
         "Bachelors in Environmental Studies (BES) at NAMI, Kathmandu — a four-year undergraduate programme awarded by Kathmandu University, focusing on the social, economic, and ecological dimensions of environmental issues.",
-      image: plantationProgramme,
+      image: degreeClimateAITeam,
       awardingBody: "Kathmandu University",
       startingFrom: "August 2026",
       format: "4 years | 8 semesters",
@@ -1009,7 +1064,7 @@ const programmes: BachelorsProgrammesCopy = {
       fullTitle: "Bachelor of Business Administration",
       metaDescription:
         "Bachelor of Business Administration (BBA) at NAMI, Kathmandu — a three-year undergraduate programme awarded by the University of Northampton, UK, preparing students for careers in business, management, finance, marketing and entrepreneurship.",
-      image: auditoriumGathering,
+      image: degreeBusinessAdmin,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "3 years | 360 credits",
@@ -1192,10 +1247,10 @@ const programmes: BachelorsProgrammesCopy = {
 };
 
 const placementPanel: ContentImage = {
-  src: "/nami/event-climate-panel.jpg",
-  alt: "A panel discussion in a wood-panelled conference room, a speaker addressing a seated audience with a microphone while the other panellists listen from the front row.",
-  width: 800,
-  height: 533,
+  src: "/final photos/24.jpg",
+  alt: "Industry partner panel discussion and career placement session at NAMI.",
+  width: 1280,
+  height: 853,
 };
 
 const partners: CareerPlacementCopy = {

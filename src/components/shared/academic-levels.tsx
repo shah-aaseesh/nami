@@ -36,18 +36,16 @@ function InstitutionCard({
         <figure className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-neutral-900/10">
           <Image
             alt={level.image.alt}
-            className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            className="size-full object-cover object-left-top origin-top-left transition-transform duration-500 ease-out group-hover:scale-105"
             height={level.image.height}
             sizes={MEDIA_SIZES}
             src={level.image.src}
             width={level.image.width}
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/15" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-          <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
-            {established === null ? (
-              <span />
-            ) : (
+          <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-end">
+            {established === null ? null : (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/75 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
                 <span className="size-1.5 rounded-full bg-primary-400" />
                 <span>{established}</span>
@@ -125,7 +123,7 @@ function VocationalCard({
           width={180}
         />
 
-        <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
+        <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-end">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950/75 px-3 py-1 font-body text-xs font-medium tracking-wide text-white shadow-sm backdrop-blur-md">
             <span className="size-1.5 rounded-full bg-primary-400" />
             <span>{`Approved ${approval.approvedYear}`}</span>

@@ -42,17 +42,13 @@ export function SharedHero({
     >
       <div className="mx-auto max-w-page">
         <SharedHeroSlider
-          className="flex min-h-96 flex-col justify-end gap-6 rounded-3xl bg-neutral-950 p-5 sm:min-h-100 sm:rounded-4xl sm:p-8 lg:px-10 xl:aspect-21/9"
+          className="flex min-h-[420px] sm:min-h-[460px] lg:min-h-100 flex-col justify-end gap-6 rounded-3xl bg-neutral-950 p-5 sm:rounded-4xl sm:p-8 lg:px-10 xl:aspect-21/9"
           label={heroLabel}
           slides={slides}
         >
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-neutral-950/50 via-neutral-950/10 to-transparent"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-neutral-950/40 via-neutral-950/5 to-transparent"
+            className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-neutral-950/85 via-neutral-950/30 to-transparent"
           />
 
           <div className="relative z-20 flex max-w-2xl flex-col items-start gap-4 sm:gap-5">

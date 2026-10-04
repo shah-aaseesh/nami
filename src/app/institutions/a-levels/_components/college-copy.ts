@@ -28,20 +28,20 @@ const principalPortrait: ContentImage = {
 
 const heroSlides: readonly ContentImage[] = [
   {
-    src: "/nami/campus-basketball-award.jpg",
-    alt: "Prize-giving for the NAMI SEE 3x3 Basketball Tournament on the college auditorium stage, both teams wearing medals and holding certificates behind the winners' trophy and the tournament cheques.",
+    src: "/final photos/17.jpg",
+    alt: "NAMI College practical laboratory and science equipment.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/nami/campus-science-lab-2.jpg",
-    alt: "A NAMI practical laboratory, blue-topped stools ranked along a long bench of sinks and glassware with microscopes set out on the counter opposite.",
+    src: "/final photos/18.jpg",
+    alt: "NAMI College campus facilities and learning environment.",
     width: 1280,
     height: 853,
   },
   {
-    src: "/nami/campus-sports.jpg",
-    alt: "Students on the NAMI sports ground during a college tournament or sports day.",
+    src: "/final photos/19.jpg",
+    alt: "NAMI College campus grounds and facilities.",
     width: 1500,
     height: 1000,
   },

@@ -7,6 +7,62 @@ export const mustangTrip: ContentImage = {
   height: 446,
 };
 
+export const namiSchoolEntity: ContentImage = {
+  src: "/final photos/1.jpg",
+  alt: "NAMI International School campus and activities",
+  width: 1178,
+  height: 667,
+};
+
+export const namiCollegeEntity: ContentImage = {
+  src: "/final photos/2.jpg",
+  alt: "NAMI College students on campus",
+  width: 1600,
+  height: 1066,
+};
+
+export const namiInstituteEntity: ContentImage = {
+  src: "/final photos/3.jpg",
+  alt: "Naaya Aayam Multi-Disciplinary Institute facilities and campus",
+  width: 1600,
+  height: 1066,
+};
+
+export const finalPhotoFour: ContentImage = {
+  src: "/final photos/4.jpg",
+  alt: "NAMI campus facilities and academic environment",
+  width: 1600,
+  height: 900,
+};
+
+export const finalPhotoFive: ContentImage = {
+  src: "/final photos/5.jpg",
+  alt: "NAMI academic blocks and campus grounds",
+  width: 1600,
+  height: 1066,
+};
+
+export const finalPhotoSix: ContentImage = {
+  src: "/final photos/6.jpg",
+  alt: "NAMI learning spaces and facilities",
+  width: 1280,
+  height: 960,
+};
+
+export const aboutHeroCombined: ContentImage = {
+  src: "/final photos/download.png",
+  alt: "NAMI campus facilities, learning spaces, and academic environments",
+  width: 1200,
+  height: 399,
+};
+
+export const finalPhotoSeven: ContentImage = {
+  src: "/final photos/7.jpg",
+  alt: "NAMI students and faculty on campus",
+  width: 1600,
+  height: 1062,
+};
+
 export const schoolTransport: ContentImage = {
   src: "/nami/level-school.jpg",
   alt: "A yellow NAMI International School minibus parked in the school yard alongside the rest of the fleet.",
@@ -229,4 +285,102 @@ export const karunRegmiPortrait: ContentImage = {
   alt: "Studio portrait of Mr. Karun Regmi, Head of Business Development and Marketing & Branding at NAMI, arms folded in a black suit, red tie and glasses against a mottled blue-grey backdrop.",
   width: 1086,
   height: 1449,
+};
+
+export const homeHeroSlide1: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM-watermarked.jpg",
+  alt: "NAMI campus life and academic excellence.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide2: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (12)-watermarked.jpg",
+  alt: "NAMI student activities and learning spaces.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide3: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (13)-watermarked.jpg",
+  alt: "NAMI campus community and student experiences.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide4: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (15)-watermarked.jpg",
+  alt: "NAMI faculty and practical academic workshops.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide5: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (18)-watermarked.jpg",
+  alt: "NAMI library and collaborative study areas.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide6: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (19)-watermarked.jpg",
+  alt: "NAMI events, conferences, and seminars.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide7: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (20)-watermarked.jpg",
+  alt: "NAMI laboratories and scientific research.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide8: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (21)-watermarked.jpg",
+  alt: "NAMI auditorium presentations and student achievements.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide9: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (22)-watermarked.jpg",
+  alt: "NAMI sports, courts, and extracurricular engagement.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide10: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (23)-watermarked.jpg",
+  alt: "NAMI modern classrooms and campus infrastructure.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide11: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (24)-watermarked.jpg",
+  alt: "NAMI campus grounds and student collaboration.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide12: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.22 AM (25)-watermarked.jpg",
+  alt: "NAMI student leadership and academic community.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide13: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.23 AM (6)-watermarked.jpg",
+  alt: "NAMI cultural celebrations and academic events.",
+  width: 1500,
+  height: 1000,
+};
+
+export const homeHeroSlide14: ContentImage = {
+  src: "/final photos/WhatsApp Image 2026-09-27 at 10.42.23 AM (23)-watermarked.jpg",
+  alt: "NAMI holistic education and student development.",
+  width: 1500,
+  height: 1000,
 };

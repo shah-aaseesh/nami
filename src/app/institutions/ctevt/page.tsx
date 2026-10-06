@@ -18,35 +18,40 @@ const APPROVED_PROGRAMS = [
     duration: "484 Hours",
     sector: "Culinary & Kitchen Operations",
     code: "CTEVT-GCC",
-    highlights: "Food safety, culinary fundamentals, hot & cold kitchen operations, knife skills",
+    highlights:
+      "Food safety, culinary fundamentals, hot & cold kitchen operations, knife skills",
   },
   {
     title: "Hotel Assistant",
     duration: "390 Hours",
     sector: "Hospitality Management",
     code: "CTEVT-HA",
-    highlights: "Front office operations, guest handling, reservation systems, service standards",
+    highlights:
+      "Front office operations, guest handling, reservation systems, service standards",
   },
   {
     title: "Barista",
     duration: "390 Hours",
     sector: "Beverage & Coffee Art",
     code: "CTEVT-BAR",
-    highlights: "Espresso extraction, latte art, coffee bean sensory profiling, brewing methods",
+    highlights:
+      "Espresso extraction, latte art, coffee bean sensory profiling, brewing methods",
   },
   {
     title: "Bartender",
     duration: "390 Hours",
     sector: "Beverage Service & Mixology",
     code: "CTEVT-BT",
-    highlights: "Mixology, cocktail preparation, beverage inventory, customer service & safety",
+    highlights:
+      "Mixology, cocktail preparation, beverage inventory, customer service & safety",
   },
   {
     title: "Room Attendant",
     duration: "390 Hours",
     sector: "Housekeeping Operations",
     code: "CTEVT-RA",
-    highlights: "Guestroom preparation, linen management, hygiene protocols, aesthetic upkeep",
+    highlights:
+      "Guestroom preparation, linen management, hygiene protocols, aesthetic upkeep",
   },
 ] as const;
 
@@ -62,11 +67,21 @@ const TRAINING_STANDARDS = [
 ] as const;
 
 const APPROVAL_INFO = [
-  { label: "Institution", value: "Naaya Aayam Multi-Disciplinary Institute Pvt. Ltd." },
+  {
+    label: "Institution",
+    value: "Naaya Aayam Multi-Disciplinary Institute Pvt. Ltd.",
+  },
   { label: "Address", value: "Jorpati-07, Kathmandu, Nepal" },
   { label: "Type of Approval", value: "Short-Term Training Programs" },
-  { label: "Approval Period", value: "Two years, as specified in the CTEVT approval letter" },
-  { label: "Approving Authority", value: "Council for Technical Education and Vocational Training (CTEVT), Nepal" },
+  {
+    label: "Approval Period",
+    value: "Two years, as specified in the CTEVT approval letter",
+  },
+  {
+    label: "Approving Authority",
+    value:
+      "Council for Technical Education and Vocational Training (CTEVT), Nepal",
+  },
 ] as const;
 
 export default function CtevtAffiliationPage() {
@@ -81,14 +96,19 @@ export default function CtevtAffiliationPage() {
               <Display className="mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-ink">
                 CTEVT Affiliation
               </Display>
-              <H3 as="p" className="mt-2 text-lg sm:text-xl font-medium text-accent">
+              <H3
+                as="p"
+                className="mt-2 text-lg sm:text-xl font-medium text-accent"
+              >
                 Council for Technical Education and Vocational Training
               </H3>
               <p className="mt-4 font-body text-sm sm:text-base text-ink-muted leading-relaxed max-w-2xl text-justify [text-align-last:left]">
                 <strong className="text-ink font-semibold">
                   Naaya Aayam Multi-Disciplinary Institute Pvt. Ltd. (NAMI)
                 </strong>{" "}
-                is a CTEVT-affiliated institution authorized to conduct approved short-term vocational training programs in the hospitality sector.
+                is a CTEVT-affiliated institution authorized to conduct approved
+                short-term vocational training programs in the hospitality
+                sector.
               </p>
             </div>
 
@@ -118,10 +138,15 @@ export default function CtevtAffiliationPage() {
           <Reveal>
             <div className="rounded-3xl border border-accent/20 bg-accent/5 p-6 sm:p-8 lg:p-10">
               <P className="text-base sm:text-lg font-medium text-ink leading-relaxed text-justify [text-align-last:left]">
-                The affiliation reflects NAMI&apos;s commitment to providing structured, practical and industry-oriented vocational education in accordance with the curriculum and requirements prescribed by the{" "}
+                The affiliation reflects NAMI&apos;s commitment to providing
+                structured, practical and industry-oriented vocational education
+                in accordance with the curriculum and requirements prescribed by
+                the{" "}
                 <strong className="text-accent font-semibold">
-                  Council for Technical Education and Vocational Training (CTEVT), Nepal
-                </strong>.
+                  Council for Technical Education and Vocational Training
+                  (CTEVT), Nepal
+                </strong>
+                .
               </P>
             </div>
           </Reveal>
@@ -134,7 +159,9 @@ export default function CtevtAffiliationPage() {
                 CTEVT-Approved Training Programs
               </H2>
               <p className="text-sm sm:text-base text-ink-muted leading-relaxed">
-                NAMI is authorized to conduct 5 specialized short-term vocational training programs tailored for the growing hospitality and service industries.
+                NAMI is authorized to conduct 5 specialized short-term
+                vocational training programs tailored for the growing
+                hospitality and service industries.
               </p>
             </Reveal>
 
@@ -192,10 +219,21 @@ export default function CtevtAffiliationPage() {
                   About CTEVT
                 </H3>
                 <P className="text-justify [text-align-last:left] text-ink/85 leading-relaxed text-sm sm:text-base">
-                  The <strong className="text-ink font-semibold">Council for Technical Education and Vocational Training (CTEVT)</strong> is Nepal&apos;s national apex body for technical and vocational education and training. CTEVT is responsible for areas including curriculum development, quality control, skills standards, skills testing and the development of skilled human resources.
+                  The{" "}
+                  <strong className="text-ink font-semibold">
+                    Council for Technical Education and Vocational Training
+                    (CTEVT)
+                  </strong>{" "}
+                  is Nepal&apos;s national apex body for technical and
+                  vocational education and training. CTEVT is responsible for
+                  areas including curriculum development, quality control,
+                  skills standards, skills testing and the development of
+                  skilled human resources.
                 </P>
                 <P className="text-justify [text-align-last:left] text-ink/85 leading-relaxed text-sm sm:text-base">
-                  Through its affiliation, NAMI conducts approved short-term training programs following the applicable CTEVT curriculum, standards and institutional requirements.
+                  Through its affiliation, NAMI conducts approved short-term
+                  training programs following the applicable CTEVT curriculum,
+                  standards and institutional requirements.
                 </P>
               </div>
 
@@ -214,7 +252,10 @@ export default function CtevtAffiliationPage() {
                 </H3>
                 <dl className="space-y-3 font-body text-xs sm:text-sm">
                   {APPROVAL_INFO.map((info, idx) => (
-                    <div key={idx} className="flex flex-col sm:flex-row sm:justify-between py-1.5 border-b border-border/40 gap-1">
+                    <div
+                      key={idx}
+                      className="flex flex-col sm:flex-row sm:justify-between py-1.5 border-b border-border/40 gap-1"
+                    >
                       <dt className="font-semibold text-ink shrink-0 sm:w-1/3">
                         {info.label}:
                       </dt>
@@ -225,12 +266,15 @@ export default function CtevtAffiliationPage() {
                   ))}
                 </dl>
                 <p className="font-body text-xs text-ink-muted italic pt-2">
-                  The approval was granted following the required institutional review and inspection process.
+                  The approval was granted following the required institutional
+                  review and inspection process.
                 </p>
               </div>
 
               <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between">
-                <span className="text-xs font-medium text-ink-muted">Official Approval Record</span>
+                <span className="text-xs font-medium text-ink-muted">
+                  Official Approval Record
+                </span>
                 <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600">
                   Approved & Active
                 </span>
@@ -246,11 +290,15 @@ export default function CtevtAffiliationPage() {
                 Training Standards
               </H2>
               <p className="text-sm sm:text-base text-ink-muted leading-relaxed">
-                NAMI&apos;s approved programs are conducted in strict accordance with the requirements specified by CTEVT:
+                NAMI&apos;s approved programs are conducted in strict accordance
+                with the requirements specified by CTEVT:
               </p>
             </Reveal>
 
-            <Reveal className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5" stagger={0.04}>
+            <Reveal
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
+              stagger={0.04}
+            >
               {TRAINING_STANDARDS.map((standard, idx) => (
                 <RevealItem
                   key={idx}
@@ -278,16 +326,37 @@ export default function CtevtAffiliationPage() {
               </div>
 
               <P className="text-justify [text-align-last:left] text-ink/90 leading-relaxed text-sm sm:text-base">
-                NAMI&apos;s CTEVT-approved programs focus on developing practical skills relevant to hospitality and service-sector employment. The programs provide learners with structured training in areas including <strong className="text-ink font-semibold">culinary operations, hotel services, coffee preparation, beverage service and housekeeping</strong>.
+                NAMI&apos;s CTEVT-approved programs focus on developing
+                practical skills relevant to hospitality and service-sector
+                employment. The programs provide learners with structured
+                training in areas including{" "}
+                <strong className="text-ink font-semibold">
+                  culinary operations, hotel services, coffee preparation,
+                  beverage service and housekeeping
+                </strong>
+                .
               </P>
               <P className="text-justify [text-align-last:left] text-ink/90 leading-relaxed text-sm sm:text-base">
-                Through practical learning and occupation-specific training, NAMI aims to equip learners with skills that can be applied in professional hospitality environments.
+                Through practical learning and occupation-specific training,
+                NAMI aims to equip learners with skills that can be applied in
+                professional hospitality environments.
               </P>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-4">
-                {["Culinary Operations", "Hotel Services", "Coffee Preparation", "Beverage Service", "Housekeeping"].map((item, idx) => (
-                  <div key={idx} className="p-3 rounded-xl border border-border bg-surface text-center">
-                    <p className="font-body text-xs font-semibold text-accent">{item}</p>
+                {[
+                  "Culinary Operations",
+                  "Hotel Services",
+                  "Coffee Preparation",
+                  "Beverage Service",
+                  "Housekeeping",
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3 rounded-xl border border-border bg-surface text-center"
+                  >
+                    <p className="font-body text-xs font-semibold text-accent">
+                      {item}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -303,10 +372,13 @@ export default function CtevtAffiliationPage() {
                   Official Recognition
                 </H3>
                 <p className="font-body text-sm font-semibold text-accent">
-                  CTEVT Affiliated Institution — Approved Short-Term Training Programs
+                  CTEVT Affiliated Institution — Approved Short-Term Training
+                  Programs
                 </p>
                 <p className="font-body text-xs sm:text-sm text-ink-muted leading-relaxed">
-                  NAMI&apos;s CTEVT affiliation and approved programs are documented through the official approval issued by the Council for Technical Education and Vocational Training.
+                  NAMI&apos;s CTEVT affiliation and approved programs are
+                  documented through the official approval issued by the Council
+                  for Technical Education and Vocational Training.
                 </p>
 
                 <div className="flex flex-wrap gap-4 pt-2 text-xs font-medium text-ink">
@@ -317,7 +389,8 @@ export default function CtevtAffiliationPage() {
                     Training Duration: <strong>390–484 Hours</strong>
                   </span>
                   <span className="px-3 py-1.5 rounded-lg bg-surface-raised border border-border">
-                    Approval: <strong>CTEVT Short-Term Training Programs</strong>
+                    Approval:{" "}
+                    <strong>CTEVT Short-Term Training Programs</strong>
                   </span>
                 </div>
               </div>
@@ -366,7 +439,10 @@ export default function CtevtAffiliationPage() {
                   Learn. Practice. Build Skills.
                 </H2>
                 <p className="text-sm sm:text-base text-white/90 leading-relaxed font-body max-w-2xl mx-auto">
-                  NAMI is committed to maintaining the standards and requirements associated with its CTEVT-approved programs and to providing learners with quality vocational education, practical training and industry-relevant skills.
+                  NAMI is committed to maintaining the standards and
+                  requirements associated with its CTEVT-approved programs and
+                  to providing learners with quality vocational education,
+                  practical training and industry-relevant skills.
                 </p>
                 <div className="pt-4">
                   <Link

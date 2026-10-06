@@ -62,13 +62,22 @@ const MILESTONES: readonly Milestone[] = [
       "Opened Primary School (Grades 1–7) and earned independent Cambridge International Home Examination Centre status in Nepal.",
   },
   {
+    year: "2024",
+    era: "Global Testing",
+    title: "Pearson VUE-Authorized Test Center Collaboration",
+    partner: "Pearson VUE",
+    logo: "/partners/pearson-vue.jpg",
+    description:
+      "Officially authorized as a Pearson VUE testing center, enabling on-campus computer-based international IT certifications, academic tests, and global licensure exams.",
+  },
+  {
     year: "2025–2026",
     era: "Future Frontiers",
     title: "Kathmandu University Partnership & CTEVT Programmes",
     partner: "Kathmandu University & CTEVT",
     logo: "/universities/Kathmandu_University_Logo.webp",
     description:
-      "MoU with Kathmandu University for BSc Environmental Studies, University of Hertfordshire collaboration, and CTEVT vocational programmes.",
+      "MoU with Kathmandu University for BSc. Environmental Studies, University of Hertfordshire collaboration, and CTEVT vocational programmes.",
   },
 ];
 
@@ -76,7 +85,7 @@ export function CompactTimeline() {
   return (
     <div className="w-full py-8 sm:py-12 md:py-16">
       {/* Section Header */}
-      <div className="text-left w-full mb-6 sm:mb-8 md:mb-10">
+      <div className="text-left w-full mb-8 sm:mb-10 md:mb-12">
         <Reveal>
           <SplitText
             as="h2"
@@ -84,6 +93,17 @@ export function CompactTimeline() {
           >
             NAMI History
           </SplitText>
+          <p className="mt-3 sm:mt-4 font-body text-sm sm:text-base text-neutral-700 leading-relaxed w-full text-justify [text-align-last:left]">
+            Established in 2012, Naaya Aayam Multi-Disciplinary Institute (NAMI)
+            was founded with a visionary commitment to deliver transformative,
+            world-class education in Nepal. Over more than a decade of academic
+            excellence and institutional growth, NAMI has evolved from
+            pioneering UK-accredited international degree pathways to
+            establishing premier Cambridge A-Levels, national school divisions
+            (+2 NEB &amp; Primary), vocational CTEVT courses, and strategic
+            partnerships with Kathmandu University—shaping generations of
+            leaders equipped to make a lasting global impact.
+          </p>
         </Reveal>
       </div>
 

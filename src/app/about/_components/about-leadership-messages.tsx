@@ -89,7 +89,9 @@ export function AboutLeadershipMessages() {
           {LEADERSHIP_MESSAGES.map((leader, index) => {
             const isExpanded = expandedCard === leader.id;
             const isReversed = index % 2 !== 0;
-            const visibleParagraphs = isExpanded ? leader.message : leader.message.slice(0, 2);
+            const visibleParagraphs = isExpanded
+              ? leader.message
+              : leader.message.slice(0, 2);
 
             return (
               <div
@@ -118,9 +120,15 @@ export function AboutLeadershipMessages() {
                     </div>
 
                     <div className="mt-4 border-t border-border/80 pt-3">
-                      <p className="font-display text-lg sm:text-xl font-bold text-ink">{leader.name}</p>
-                      <p className="font-body text-xs sm:text-sm font-semibold text-accent">{leader.title}</p>
-                      <p className="mt-0.5 font-body text-xs text-ink-muted">{leader.credentials}</p>
+                      <p className="font-display text-lg sm:text-xl font-bold text-ink">
+                        {leader.name}
+                      </p>
+                      <p className="font-body text-xs sm:text-sm font-semibold text-accent">
+                        {leader.title}
+                      </p>
+                      <p className="mt-0.5 font-body text-xs text-ink-muted">
+                        {leader.credentials}
+                      </p>
                     </div>
                   </div>
 
@@ -157,7 +165,9 @@ export function AboutLeadershipMessages() {
                           onClick={() => toggleExpand(leader.id)}
                           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-accent text-white hover:bg-accent/90 transition-all duration-200 cursor-pointer shadow-xs"
                         >
-                          <span>{isExpanded ? "Read Less" : "Read Full Message"}</span>
+                          <span>
+                            {isExpanded ? "Read Less" : "Read Full Message"}
+                          </span>
                           <svg
                             aria-hidden="true"
                             className={cn(
@@ -169,7 +179,11 @@ export function AboutLeadershipMessages() {
                             strokeWidth={2.5}
                             viewBox="0 0 24 24"
                           >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19 9l-7 7-7-7"
+                            />
                           </svg>
                         </button>
                       </div>

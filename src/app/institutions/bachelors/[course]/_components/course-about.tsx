@@ -43,7 +43,9 @@ export function CourseAbout({
                 as="h2"
                 className="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-balance text-ink"
               >
-                {whatYoullStudy ? "Course Overview" : courseDetailCopy.aboutHeading}
+                {whatYoullStudy
+                  ? "Course Overview"
+                  : courseDetailCopy.aboutHeading}
               </SplitText>
             </div>
 

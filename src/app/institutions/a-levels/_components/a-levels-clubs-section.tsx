@@ -1,90 +1,41 @@
-"use client";
-
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, RevealItem } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/shared/section-header";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselControls,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { Icon } from "@/components/ui/icon";
 import { H3, P } from "@/components/ui/typography";
 import { ArrowRightIcon } from "@/lib/icons";
 import { A_LEVELS_CLUBS } from "./a-levels-clubs-copy";
 
 const CARD_SIZES =
-  "(min-width: 1280px) 350px, (min-width: 1024px) 340px, (min-width: 640px) 310px, 78vw";
+  "(min-width: 1280px) 420px, (min-width: 1024px) 380px, (min-width: 768px) 360px, 100vw";
 
 export function ALevelsClubsSection() {
   const total = A_LEVELS_CLUBS.length;
 
   if (total === 0) return null;
 
-  // Clone items if less than 8 for continuous infinite loop
-  const displayClubs =
-    total > 1 && total < 8
-      ? [
-          ...A_LEVELS_CLUBS.map((c) => ({ ...c, itemKey: `${c.slug}-1` })),
-          ...A_LEVELS_CLUBS.map((c) => ({ ...c, itemKey: `${c.slug}-2` })),
-        ]
-      : A_LEVELS_CLUBS.map((c) => ({ ...c, itemKey: c.slug }));
-
   return (
     <section
       className="gutter-x section-y border-t border-border"
       id="eca-clubs"
     >
-      <Carousel
-        aria-label="ECA & Clubs"
-        aria-roledescription="carousel"
-        autoplay={true}
-        autoplayIntervalMs={2500}
-        opts={{
-          align: "start",
-          duration: 35,
-          loop: true,
-          slidesToScroll: 1,
-        }}
-        pauseOnHover={false}
-      >
-        <div className="mx-auto max-w-page">
-          <SectionHeader
-            action={
-              <CarouselControls className="ms-auto">
-                <CarouselPrevious
-                  aria-label="Previous club"
-                  className="size-9 sm:size-11 [&_svg]:size-4 sm:[&_svg]:size-5"
-                />
-                <CarouselNext
-                  aria-label="Next club"
-                  className="size-9 sm:size-11 [&_svg]:size-4 sm:[&_svg]:size-5"
-                />
-              </CarouselControls>
-            }
-            description="Student-led clubs fostering community engagement, competitive sports, and artistic creativity."
-            eyebrow="Extracurricular & Co-Curricular"
-            layout="action"
-            title="ECA & Clubs"
-          />
-        </div>
+      <div className="mx-auto max-w-page">
+        <SectionHeader
+          description="Student-led clubs fostering community engagement, competitive sports, and artistic creativity."
+          eyebrow="Extracurricular & Co-Curricular"
+          title="ECA & Clubs"
+        />
 
-        <Reveal className="mx-auto mt-8 max-w-page sm:mt-10 lg:mt-12" y={24}>
-          <CarouselContent className="-ms-4 sm:-ms-5 lg:-ms-6">
-            {displayClubs.map((club) => {
+        <Reveal className="mt-8 sm:mt-10 lg:mt-12" y={24}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8 w-full">
+            {A_LEVELS_CLUBS.map((club) => {
               const clubHref =
                 `/institutions/a-levels/clubs/${club.slug}` as Route;
 
               return (
-                <CarouselItem
-                  className="basis-[78vw] ps-4 sm:basis-[310px] sm:ps-5 md:basis-[330px] lg:basis-[340px] lg:ps-6 xl:basis-[350px]"
-                  key={club.itemKey}
-                >
+                <RevealItem key={club.slug}>
                   <Link
                     className="group flex h-full min-h-[420px] sm:min-h-[440px] flex-col overflow-hidden rounded-2xl border border-[#BD1B21]/80 bg-[#BD1B21] shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#BD1B21]/20"
                     href={clubHref}
@@ -127,12 +78,12 @@ export function ALevelsClubsSection() {
                       </div>
                     </div>
                   </Link>
-                </CarouselItem>
+                </RevealItem>
               );
             })}
-          </CarouselContent>
+          </div>
         </Reveal>
-      </Carousel>
+      </div>
     </section>
   );
 }

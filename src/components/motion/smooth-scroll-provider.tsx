@@ -33,8 +33,12 @@ function scrollToTargetElement(target: HTMLElement, smooth = true) {
   if (smoother) {
     smoother.scrollTo(target, smooth, `top ${HEADER_OFFSET}px`);
   } else {
-    const y = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-    window.scrollTo({ top: Math.max(0, y), behavior: smooth ? "smooth" : "instant" });
+    const y =
+      target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    window.scrollTo({
+      top: Math.max(0, y),
+      behavior: smooth ? "smooth" : "instant",
+    });
   }
 }
 

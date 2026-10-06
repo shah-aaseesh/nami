@@ -168,21 +168,46 @@ const bands: SchoolBandsCopy = {
       "Student clubs: Sports Club, Art and Literature Club, Event Management Club, Social Service Club, and Science & Technology Club",
       "Sports competitions in futsal, basketball, table tennis, chess, carrom, shot put, tug of war, and annual Sports Meet",
       "National and international exposure trips fostering independence, adaptability, and cultural understanding",
-      "Modern facilities: Air-conditioned classrooms, 400-seat auditorium, computer labs, library, infirmary, and school canteen",
+      "Modern facilities: Air-conditioned classrooms, 250+ seat auditorium, computer labs, library, infirmary, and school canteen",
     ],
     streams: [
       {
         name: "Science Stream",
         note: "Offers Biology Group (A), Biology Group (B), and Physical Group (Computer Science) with well-equipped in-house laboratories and skilled technicians applying theory to practice.",
-        subjects: [
-          "Comp. English",
-          "Comp. Nepali",
-          "Physics",
-          "Chemistry",
-          "Mathematics",
-          "Biology (Group A/B)",
-          "Computer Science (Physical Group)",
-          "Social Studies (Biology Group B)",
+        subjectGroups: [
+          {
+            title: "Biology Group (A)",
+            subjects: [
+              "Comp. Nepali",
+              "Comp. English",
+              "Mathematics",
+              "Physics",
+              "Chemistry",
+              "Biology",
+            ],
+          },
+          {
+            title: "Biology Group (B)",
+            subjects: [
+              "Comp. Nepali",
+              "Comp. English",
+              "Social Studies",
+              "Physics",
+              "Chemistry",
+              "Biology",
+            ],
+          },
+          {
+            title: "Physical Group (Computer)",
+            subjects: [
+              "Comp. Nepali",
+              "Comp. English",
+              "Mathematics",
+              "Physics",
+              "Chemistry",
+              "Computer Science",
+            ],
+          },
         ],
         photo: {
           src: "/final photos/16.jpg",
@@ -194,16 +219,40 @@ const bands: SchoolBandsCopy = {
       {
         name: "Management Stream",
         note: "Offers Business Studies, Computer Science, and Hotel Management groups providing a solid foundational understanding of management facts and principles.",
-        subjects: [
-          "Comp. English",
-          "Comp. Nepali",
-          "Accounting",
-          "Economics",
-          "Social Studies",
-          "Mathematics (Optional CS)",
-          "Business Studies",
-          "Computer Science",
-          "Hotel Management",
+        subjectGroups: [
+          {
+            title: "Business Studies",
+            subjects: [
+              "Comp. Nepali",
+              "Comp. English",
+              "Social Studies",
+              "Accounting",
+              "Economics",
+              "Business Studies",
+            ],
+          },
+          {
+            title: "Computer Science",
+            subjects: [
+              "Comp. Nepali",
+              "Comp. English",
+              "Social Studies / Mathematics",
+              "Accounting",
+              "Economics",
+              "Computer Science",
+            ],
+          },
+          {
+            title: "Hotel Management",
+            subjects: [
+              "Comp. Nepali",
+              "Comp. English",
+              "Social Studies",
+              "Accounting",
+              "Economics",
+              "Hotel Management",
+            ],
+          },
         ],
         photo: {
           src: "/final photos/15.jpg",
@@ -270,11 +319,11 @@ const day: SchoolDayCopy = {
       },
     },
     {
-      title: "400-Seat Auditorium",
-      body: "A fully equipped auditorium with a 400-seat capacity and quality acoustic sound system for school assemblies, cultural fests, presentations, and events.",
+      title: "250+ Seat Auditorium",
+      body: "A fully equipped auditorium with a 250+ seat capacity and quality acoustic sound system for school assemblies, cultural fests, presentations, and events.",
       photo: {
         src: "/final photos/12.jpg",
-        alt: "A fully equipped 400-seat auditorium with acoustic sound system for assemblies, cultural fests, and events.",
+        alt: "A fully equipped 250+ seat auditorium with acoustic sound system for assemblies, cultural fests, and events.",
         width: 1600,
         height: 811,
       },
@@ -290,7 +339,7 @@ const day: SchoolDayCopy = {
       },
     },
     {
-      title: "Cafeteria & 3 Vegetarian Meals",
+      title: "Cafeteria",
       body: "Three nutritious, hygienic vegetarian meals (breakfast, lunch, and snack) provided for primary students, with a dedicated canteen for Grades 11 and 12.",
       photo: {
         src: "/nami/school/nami-school-cafeteria.jpg",
@@ -343,16 +392,17 @@ const parents: SectionCopy = {
 
 export const parentTestimonials: readonly Testimonial[] = [
   {
-    ...entryOf("parent-bishwo-rana"),
-    name: "Bishwo Rana",
-    programme: "Abigyah's Parents, Grade 7",
-    quote:
-      "Being part of the founding batch and watching the community grow has been special. I value the individual attention, open teacher communication, and the feeling of building something together.",
-    institution: "school",
+    ...entryOf("parent-dayana-shakya"),
+    name: "Dayana Shakya, PhD",
+    programme:
+      "Parent of Adhyant Bhatta (Grade 2) • Associate Professor, Kathmandu Medical College",
     graduatedYear: null,
+    quote:
+      "We are truly happy with our child’s experience at school. The teachers are so warm, caring, and approachable, and he genuinely looks forward to going to school each day. It has brought out his confidence and helped him grow in so many ways. He says the food is yummy, and the ECAs are wonderful too!",
+    institution: "school",
     portrait: {
       src: "/Testimonials Photos/parents/Dayana Shakya.jpeg",
-      alt: "Bishwo Rana",
+      alt: "Dayana Shakya, PhD",
       width: 334,
       height: 363,
     },
@@ -481,7 +531,7 @@ export const parentTestimonials: readonly Testimonial[] = [
 
 export const plusTwoVoices: SectionCopy = {
   navLabel: "Voices",
-  eyebrow: "From our +2 graduates.",
+  eyebrow: "From Our +2 Graduates",
   heading: "",
   cta: null,
   emptyState:
@@ -520,22 +570,21 @@ export const plusTwoTestimonials: readonly Testimonial[] = [
     },
   },
   {
-    ...entryOf("student-yunisha-shrestha"),
-    name: "Yunisha Shrestha",
-    programme: "Batch of 2026",
+    ...entryOf("student-yunisha-basnet"),
+    name: "Yunisha Basnet",
+    programme: "Management Stream (Class of 2026)",
     quote:
-      "My journey at NAMI was a memorable blend of learning, friendship, and personal growth. Supportive teachers guided and encouraged me throughout my studies, while the welcoming campus made my time at NAMI truly special.",
+      "My journey at NAMI has been a truly wonderful and memorable experience. The faculty members were very supportive, friendly, and understanding, always there whenever I needed guidance. The peaceful, green campus and the wonderful friends I made created memories that I will always cherish.",
     institution: "school",
     graduatedYear: null,
     portrait: {
       src: "/Testimonials Photos/+2/Yunisha Shrestha.jpeg",
-      alt: "Yunisha Shrestha",
+      alt: "Yunisha Basnet",
       width: 273,
       height: 349,
     },
   },
 ];
-
 
 const admission: SchoolAdmissionCopy = {
   eyebrow: "Admission Process",
@@ -576,7 +625,7 @@ const admission: SchoolAdmissionCopy = {
 };
 
 const gallery: InstitutionGalleryCopy = {
-  eyebrow: "The school, photographed",
+  eyebrow: "The School, Photographed",
   heading: "Ordinary days, as they actually look.",
   standfirst:
     "Assemblies, sports, classrooms and the weeks in between — the school's own record of what a child's day here looks like.",
@@ -584,7 +633,7 @@ const gallery: InstitutionGalleryCopy = {
 };
 
 const notices: InstitutionNoticesCopy = {
-  eyebrow: "Notice board",
+  eyebrow: "Notice Board",
   heading: "What the school is announcing.",
   standfirst:
     "Admission windows, examination dates, holidays and the standing notices that parents need in front of them.",

@@ -22,7 +22,13 @@ export function GallerySubmissionBanner() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                  <circle cx="12" cy="13" r="4" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle
+                    cx="12"
+                    cy="13"
+                    r="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
 
@@ -50,9 +56,24 @@ export function GallerySubmissionBanner() {
                   strokeWidth="2"
                   viewBox="0 0 24 24"
                 >
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeLinecap="round" strokeLinejoin="round" />
-                  <polyline points="17 8 12 3 7 8" strokeLinecap="round" strokeLinejoin="round" />
-                  <line strokeLinecap="round" strokeLinejoin="round" x1="12" x2="12" y1="3" y2="15" />
+                  <path
+                    d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <polyline
+                    points="17 8 12 3 7 8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <line
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    x1="12"
+                    x2="12"
+                    y1="3"
+                    y2="15"
+                  />
                 </svg>
               </Link>
             </div>

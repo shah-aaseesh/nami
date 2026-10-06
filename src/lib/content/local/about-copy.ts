@@ -5,7 +5,6 @@ import {
   auditoriumGathering,
   finalPhotoSeven,
   readingHall,
-  studentsOnCampus,
 } from "./images";
 
 const awards: readonly Award[] = [
@@ -61,16 +60,16 @@ export const aboutCopy: AboutCopy = {
       emptyState: null,
     },
     emblem: {
-      navLabel: "The red lotus",
-      eyebrow: "The emblem",
-      heading: "The red lotus.",
+      navLabel: "The Red Lotus",
+      eyebrow: "The Emblem",
+      heading: "The Red Lotus.",
       standfirst: null,
       cta: null,
       emptyState: null,
     },
     creed: {
-      navLabel: "Mission & vision",
-      eyebrow: "Mission & vision",
+      navLabel: "Mission & Vision",
+      eyebrow: "Mission & Vision",
       heading: "What NAMI stands for.",
       standfirst: null,
       cta: null,
@@ -95,7 +94,7 @@ export const aboutCopy: AboutCopy = {
         "NAMI is compiling its awards record — this space is reserved for it.",
     },
     stats: {
-      navLabel: "NAMI in numbers",
+      navLabel: "NAMI in Numbers",
       eyebrow: "Our Milestones",
       heading: "NAMI, by the Numbers",
       standfirst:

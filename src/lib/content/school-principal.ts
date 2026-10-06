@@ -1,7 +1,7 @@
-import type { ContentImage } from "./types";
 import { anishaPandayJoshiPortrait } from "./local/images";
 import type { RichText } from "./rich-text";
 import { richText } from "./rich-text";
+import type { ContentImage } from "./types";
 
 export type SchoolPrincipalCopy = {
   readonly slug: string;
@@ -24,4 +24,3 @@ export const schoolPrincipal: SchoolPrincipalCopy = {
     "Together with my team, we are dedicated to creating a centre of excellence in education, empowering students to become resilient lifelong learners and positive agents of change. As someone deeply passionate about enhancing the learning experiences of young minds and transforming children's lives through the power of education, I carry this devotion into my role as the Principal at NAMI International School.",
   ),
 };
-

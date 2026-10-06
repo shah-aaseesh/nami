@@ -160,7 +160,9 @@ export const admissionsSchema = z
     specialNeeds: z.boolean(),
 
     // Guardians list
-    guardians: z.array(guardianSchema).min(1, "At least one guardian is required"),
+    guardians: z
+      .array(guardianSchema)
+      .min(1, "At least one guardian is required"),
 
     qualifications: z.array(qualificationSchema),
     pendingQualifications: z.string().trim(),

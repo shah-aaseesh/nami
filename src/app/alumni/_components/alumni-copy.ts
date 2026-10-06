@@ -1,6 +1,5 @@
 import type { CareersMastheadCopy } from "@/app/careers/_components/careers-masthead";
 import type { SectionCopy } from "@/lib/content";
-import { convocationCeremony } from "@/lib/content/local/images";
 
 export type AlumniMetric = {
   readonly stat: string;
@@ -287,6 +286,12 @@ export const alumniEmployers: readonly AlumniEmployer[] = [
     sector: "Security & Technology",
     logoSrc: "/career logos/cypher.jpg.webp",
   },
+  {
+    id: "agni-group",
+    name: "Agni Group (Mahindra)",
+    sector: "Automotive & Electric Mobility",
+    logoSrc: null,
+  },
 ];
 
 export type AlumniStory = {
@@ -295,7 +300,11 @@ export type AlumniStory = {
   readonly avatar: string;
   readonly programme: string;
   readonly graduationYear: string;
-  readonly institution: "college" | "institute" | "higher-secondary";
+  readonly institution:
+    | "undergraduate"
+    | "graduate"
+    | "college"
+    | "higher-secondary";
   readonly institutionLabel: string;
   readonly currentRole: string;
   readonly company: string;
@@ -328,10 +337,10 @@ export const alumniStories: readonly AlumniStory[] = [
     id: "reesav-rokka",
     name: "Reesav Rokka",
     avatar: "/alumni stories/eesav rokka.png",
-    programme: "BSc (Hons) Computing",
+    programme: "BSc. (Hons) Computing",
     graduationYear: "Alumnus",
-    institution: "institute",
-    institutionLabel: "Bachelors (Northampton UK)",
+    institution: "undergraduate",
+    institutionLabel: "Undergraduate Programme",
     currentRole: "Senior IT Head",
     company: "Gokarneshwor Municipal Hospital",
     sector: "Healthcare Information Technology",
@@ -359,7 +368,7 @@ export const alumniStories: readonly AlumniStory[] = [
       careerMilestones: [
         {
           year: "Academic",
-          title: "BSc (Hons) Computing & Practical Foundation",
+          title: "BSc. (Hons) Computing & Practical Foundation",
           organization: "NAMI / University of Northampton",
           description:
             "Completed hands-on software development, systems engineering, collaborative projects, and communication-focused presentations.",
@@ -410,10 +419,10 @@ export const alumniStories: readonly AlumniStory[] = [
     id: "daniel-sapkota",
     name: "Daniel Sapkota",
     avatar: "/alumni stories/daniel sapkota.png",
-    programme: "BSc (Hons) Computing",
+    programme: "BSc. (Hons) Computing",
     graduationYear: "Alumnus",
-    institution: "institute",
-    institutionLabel: "Bachelors (Northampton UK)",
+    institution: "undergraduate",
+    institutionLabel: "Undergraduate Programme",
     currentRole: "Co-founder",
     company: "Lightcone",
     sector: "Fintech & Venture Capital",
@@ -441,7 +450,7 @@ export const alumniStories: readonly AlumniStory[] = [
       careerMilestones: [
         {
           year: "Academic",
-          title: "BSc Computing & Entrepreneurship Foundation",
+          title: "BSc. Computing & Entrepreneurship Foundation",
           organization: "NAMI / University of Northampton",
           description:
             "Cultivated engineering discipline and startup initiative under the close mentorship of Deepak Karna and faculty.",
@@ -499,10 +508,10 @@ export const alumniStories: readonly AlumniStory[] = [
     id: "abhishek-gautam",
     name: "Abhishek Gautam",
     avatar: "/alumni stories/abhishek sharma.png",
-    programme: "BSc (Hons) Computing",
+    programme: "BSc. (Hons) Computing",
     graduationYear: "Alumnus",
-    institution: "institute",
-    institutionLabel: "Bachelors (Northampton UK)",
+    institution: "undergraduate",
+    institutionLabel: "Undergraduate Programme",
     currentRole: "Network Security Engineer & Lecturer",
     company: "DNS & KFA College",
     sector: "Cybersecurity & Higher Education",
@@ -528,7 +537,7 @@ export const alumniStories: readonly AlumniStory[] = [
       careerMilestones: [
         {
           year: "Academic",
-          title: "BSc Computing & Practical Foundation",
+          title: "BSc. Computing & Practical Foundation",
           organization: "NAMI / University of Northampton",
           description:
             "Built technical proficiency through hands-on lab learning, collaborative assignments, and industry-oriented coursework.",
@@ -550,8 +559,7 @@ export const alumniStories: readonly AlumniStory[] = [
       ],
       interviewQnA: [
         {
-          question:
-            "How did you first discover NAMI and what drew you to it?",
+          question: "How did you first discover NAMI and what drew you to it?",
           answer:
             "While preparing for the IOE entrance exam in Kathmandu, a teacher at my training institute recommended NAMI. After comparing curricula with other universities, I was drawn to NAMI's practical, industry-oriented approach.",
         },
@@ -573,6 +581,327 @@ export const alumniStories: readonly AlumniStory[] = [
         "Infrastructure Resilience",
         "Higher Education Mentorship",
         "Complex Problem Solving",
+      ],
+    },
+  },
+  {
+    id: "denish-tuladhar",
+    name: "Denish Tuladhar",
+    avatar: "/alumni stories/Denish.png",
+    programme: "Bachelor of Business Administration (BBA)",
+    graduationYear: "Alumnus",
+    institution: "undergraduate",
+    institutionLabel: "Undergraduate Programme",
+    currentRole: "Marketing Executive",
+    company: "Agni Group (Mahindra BEV & SUV)",
+    sector: "Automotive Marketing & Electric Mobility",
+    location: "Kathmandu, Nepal",
+    summaryHighlights: [
+      "Marketing Executive at Agni Group leading marketing strategies, product launches, and digital campaigns for Mahindra's BEV and SUV portfolio in Nepal.",
+      "Awarded the Best Emerging Performer Award within just three months of joining Agni Group.",
+      "Previously spearheaded healthcare marketing, branding, strategic partnerships, and event management at KIST Teaching Hospital.",
+    ],
+    keyQuote:
+      "Receiving the Best Emerging Performer Award within just three months of joining Agni Group has been one of my proudest achievements. Looking back, NAMI was more than just a place where I earned my degree—it was where I built the foundation for the career I have today.",
+    pdfData: {
+      documentId: "NAMI-ALM-MKT-021",
+      title: "Alumni Spotlight Case Study: Denish Tuladhar",
+      publishedDate: "Alumni Relations Publication",
+      headline:
+        "Driving the Future of Electric Mobility: From Healthcare Marketing to Automotive Strategy",
+      storyParagraphs: [
+        "Denish Tuladhar first heard about NAMI through a friend who spoke highly of its academic standards and its unique three-year Bachelor's degree programme. Motivated by NAMI's reputation for providing quality education within a shorter duration, it allowed him to balance both his studies and his professional ambitions in an environment that offered the flexibility and rigor he was looking for.",
+        "His experience at NAMI was both enriching and transformative. The faculty members were approachable, knowledgeable, and always encouraged active participation. The learning environment emphasized teamwork, presentations, case studies, and real-world problem solving, which helped him build confidence, communication skills, and leadership abilities.",
+        "The most valuable aspect of his education at NAMI was its emphasis on research-based assignments, practical learning, and professional development. The curriculum encouraged analytical thinking, project-based learning, and collaboration, preparing him to adapt quickly to workplace challenges throughout his career.",
+        "After completing his studies, Denish began his career in healthcare marketing at KIST Teaching Hospital, where he worked on branding, digital marketing campaigns, strategic partnerships, and event management, giving him valuable exposure to integrated marketing and communication strategies.",
+        "Currently, Denish is working at Agni Group as a Marketing Executive, specializing in Mahindra's BEV and SUV segment. In this role, he develops and executes marketing strategies including product launch planning, digital campaigns, event management, content creation, influencer collaborations, dealership marketing, and brand-building initiatives across Nepal.",
+        "One of his proudest achievements has been receiving the Best Emerging Performer Award within just three months of joining Agni Group. He finds it immensely rewarding to contribute to Nepal's transition toward electric mobility and sustainable transportation.",
+      ],
+      careerMilestones: [
+        {
+          year: "Academic",
+          title: "Bachelor of Business Administration & Foundation",
+          organization: "NAMI / University of Northampton",
+          description:
+            "Completed research-based coursework, analytical case studies, team presentations, and business management projects.",
+        },
+        {
+          year: "Healthcare",
+          title: "Healthcare Marketing Specialist",
+          organization: "KIST Teaching Hospital",
+          description:
+            "Managed branding, digital campaigns, strategic partnerships, and hospital-wide public relations and event execution.",
+        },
+        {
+          year: "Automotive",
+          title: "Marketing Executive (Mahindra BEV & SUV)",
+          organization: "Agni Group",
+          description:
+            "Leads product launches, digital campaigns, dealership marketing, content creation, and electric mobility brand strategies across Nepal.",
+        },
+        {
+          year: "Honors",
+          title: "Best Emerging Performer Award",
+          organization: "Agni Group",
+          description:
+            "Awarded top organizational honors within three months of joining for high-impact marketing execution and campaign leadership.",
+        },
+      ],
+      interviewQnA: [
+        {
+          question:
+            "How did you first hear about NAMI, and what motivated you to choose NAMI for your studies?",
+          answer:
+            "I first heard about NAMI through a friend who spoke highly of its academic standards and its unique three-year Bachelor's degree programme. What motivated me to choose NAMI was its reputation for providing quality education within a shorter duration. It allowed me to balance both my studies and my professional life, and NAMI offered the flexible environment I was looking for.",
+        },
+        {
+          question:
+            "How would you describe the overall learning environment and experience at NAMI during your time as a student?",
+          answer:
+            "My experience at NAMI was both enriching and transformative. The faculty members were approachable, knowledgeable and always encouraged active participation. The learning environment emphasized teamwork, presentations, case studies and real-world problem solving, which helped me build confidence, communication skills and leadership abilities. Beyond academics, NAMI encouraged students to think critically and develop practical skills that prepared us for the professional world.",
+        },
+        {
+          question:
+            "Which aspects of your education at NAMI have been most valuable in shaping your academic and professional journey?",
+          answer:
+            "The most valuable aspect of my education at NAMI was its emphasis on research-based assignments, practical learning and professional development. The curriculum encouraged analytical thinking, project-based learning and collaboration, preparing me to adapt quickly to workplace challenges. These experiences have helped me become more confident in problem-solving, strategic thinking and decision-making throughout my career.",
+        },
+        {
+          question:
+            "Could you share some key milestones or achievements in your career since graduating from NAMI?",
+          answer:
+            "After completing my studies, I began my career in healthcare marketing at KIST Teaching Hospital, where I worked on branding, digital marketing campaigns, strategic partnerships and event management. This role gave me valuable exposure to integrated marketing and communication strategies. Currently, I am working at Agni Group as a Marketing Executive, specializing in Mahindra's BEV and SUV segment. One of my proudest achievements has been receiving the Best Emerging Performer Award within just three months of joining Agni Group.",
+        },
+        {
+          question:
+            "What does your current role involve, and what do you find most rewarding about your work?",
+          answer:
+            "In my current role at Agni Group, I am responsible for developing and executing marketing strategies for Mahindra's BEV and SUV portfolio. My work includes product launch planning, digital campaigns, event management, content creation, influencer collaborations, dealership marketing and brand-building initiatives across Nepal. The most rewarding part of my work is contributing to Nepal's transition toward electric mobility. It is exciting to work with innovative vehicles and create marketing campaigns that influence customer perceptions while helping shape the future of sustainable transportation.",
+        },
+        {
+          question:
+            "What advice would you like to offer current NAMI students who aspire to build successful careers in their chosen fields?",
+          answer:
+            "Never limit your learning to the classroom. Take every opportunity to participate in internships, workshops, competitions and networking events. Build strong communication skills, stay curious and continuously learn new technologies and industry trends. Don't wait for the perfect opportunity—gain real experience, sharpen your skills and then pursue the path you're truly passionate about. Success comes from being adaptable, disciplined, humble and willing to step outside your comfort zone.",
+        },
+        {
+          question:
+            "Is there a particular memory or experience from your time at NAMI that remains especially meaningful to you?",
+          answer:
+            "One of my most memorable experiences at NAMI was spending late nights researching journals and preparing assignments with my classmates. Those moments taught me discipline, time management, teamwork and the ability to perform under pressure. The friendships I built, the guidance I received from the faculty and the confidence I developed during those years continue to influence both my personal and professional life.",
+        },
+      ],
+      skillsAcquired: [
+        "EV & Automotive Marketing Strategy",
+        "Product Launch & Campaign Execution",
+        "Digital Marketing & Influencer Relations",
+        "Brand Strategy & Strategic Partnerships",
+        "Dealership & Integrated Event Marketing",
+        "Analytical & Research-Based Decision Making",
+      ],
+    },
+  },
+  {
+    id: "avni-adhikari",
+    name: "Avni Adhikari",
+    avatar: "/Testimonials Photos/+2/Avni Adhikari.png",
+    programme: "Secondary School (Science Stream)",
+    graduationYear: "Class of 2026",
+    institution: "higher-secondary",
+    institutionLabel: "Secondary School (+2)",
+    currentRole: "President, Arts & Literature Club",
+    company: "NAMI International School",
+    sector: "Science & Creative Arts",
+    location: "Kathmandu, Nepal",
+    summaryHighlights: [
+      "Secondary School Science stream alumna (Class of 2026) with distinction across physics, chemistry, and biology labs.",
+      "Former President of the Arts and Literature Club, leading student initiatives, literary activities, and cultural events.",
+      "Demonstrated remarkable resilience, student leadership, and community spirit throughout her academic journey.",
+    ],
+    keyQuote:
+      "NAMI will always be more than just the place where I completed my Plus Two. It is a chapter of my life filled with friendships, laughter, challenges, lessons, and so many memories that I will carry with me. And for all of it, I will always be grateful.",
+    pdfData: {
+      documentId: "NAMI-ALM-SCI-2026",
+      title: "Alumni Spotlight: Avni Adhikari — My Journey at NAMI",
+      publishedDate: "Alumni Relations Publication",
+      headline:
+        "A Chapter of Growth, Leadership & Resilience: Two Years in Science & Student Community",
+      storyParagraphs: [
+        "When I first walked through the doors of NAMI International School, I never imagined how meaningful the next two years would become. Like any new beginning, my first day came with a mix of excitement and nervousness. I was stepping into a new environment, meeting new people, and starting a new chapter of my life. I had no idea then that this place would give me so many memories to look back on.",
+        "Looking back, my +2 experience was about much more than just academics. It was about the friendships I made, the people I met, the challenges I faced, and all the small moments that made everyday college life special.",
+        "Some of my favorite memories were the days when we got to take a break from our usual routine. Our trip to Sukute Beach is definitely one of the memories I will always remember. Spending the day with my friends, laughing, having fun, and just enjoying being together made it such a special day.",
+        "Our Holi celebrations were another unforgettable part of my NAMI experience. The colors, music, laughter, and all the chaos made those moments so much fun. These are the kinds of memories that I know I will miss the most.",
+        "Another important part of my NAMI experience was being the President of the Arts and Literature Club. Taking on that responsibility gave me the chance to meet and work with people I probably wouldn't have gotten to know otherwise. From planning activities to being involved in different events, it pushed me to be more confident and responsible. Looking back, I'm really glad I got the opportunity to be a part of the club in that way.",
+        "And then there were our lab classes. Physics, Chemistry, and Biology labs were a whole different experience from sitting in a classroom and taking notes. From trying to get experiments right, working with our friends, making mistakes, and sometimes having absolutely no idea what was going on, the labs gave us some of the funniest and most memorable moments.",
+        "Of course, these two years were not always easy. We went through something much bigger than academics when the GEN-Z protests affected our NAMI community, and our college was completely burned down. Seeing a place that held so many memories for us being destroyed was heartbreaking. But what I remember even more is how quickly everyone came together and moved forward. NAMI continued despite everything, and it showed me that a college is not just a building. It is the people, the memories, and the spirit that make it special.",
+        "I also want to take a moment to thank all our teachers. Thank you for teaching me, guiding me, and being there for me throughout these two years. Beyond the lessons and exams, you have taught me things that I will carry with me throughout my life.",
+        "When I look back at my time at NAMI now, I realize how much I changed and grew during these two years. I learned to face challenges, value the people around me, step out of my comfort zone, and appreciate the little moments that make life special.",
+        "NAMI will always be more than just the place where I completed my Plus Two. It is a chapter of my life filled with friendships, laughter, challenges, lessons, and so many memories that I will carry with me. And for all of it, I will always be grateful.",
+      ],
+      careerMilestones: [
+        {
+          year: "2024–2026",
+          title: "Secondary School (+2 Science Stream)",
+          organization: "NAMI International School",
+          description:
+            "Completed comprehensive physics, chemistry, and biology coursework alongside practical laboratory inquiry.",
+        },
+        {
+          year: "Leadership",
+          title: "President, Arts & Literature Club",
+          organization: "NAMI International School",
+          description:
+            "Spearheaded creative initiatives, student literary publications, multidisciplinary workshops, and campus festivals.",
+        },
+        {
+          year: "Community",
+          title: "Student Solidarity & Campus Resilience",
+          organization: "NAMI Community",
+          description:
+            "Fostered peer support, active participation, and community resilience during campus rebuilding.",
+        },
+        {
+          year: "2026",
+          title: "Science Stream Alumna (Class of 2026)",
+          organization: "NAMI Alumni Network",
+          description:
+            "Graduated with honors, advancing into higher education with strong foundational competencies in science and leadership.",
+        },
+      ],
+      interviewQnA: [
+        {
+          question: "How did your journey at NAMI begin?",
+          answer:
+            "When I first walked through the doors of NAMI International School, I never imagined how meaningful the next two years would become. My first day came with a mix of excitement and nervousness. I was stepping into a new environment, meeting new people, and starting a new chapter of my life that gave me so many memories to look back on.",
+        },
+        {
+          question:
+            "What made your +2 experience special beyond regular academics?",
+          answer:
+            "My +2 experience was about much more than just academics. It was about the friendships I made, the people I met, the challenges I faced, and all the small moments that made everyday college life special—from our memorable trip to Sukute Beach to our unforgettable Holi celebrations filled with colors, music, and laughter.",
+        },
+        {
+          question:
+            "What was your experience leading the Arts and Literature Club?",
+          answer:
+            "Being the President of the Arts and Literature Club gave me the chance to meet and work with people I probably wouldn't have gotten to know otherwise. From planning activities to being involved in different events, it pushed me to be more confident and responsible. I'm really glad I got the opportunity to be a part of the club in that way.",
+        },
+        {
+          question: "How were your laboratory classes in the Science stream?",
+          answer:
+            "Physics, Chemistry, and Biology labs were a whole different experience from sitting in a classroom and taking notes. From trying to get experiments right, working with our friends, making mistakes, and sometimes having absolutely no idea what was going on, the labs gave us some of the funniest and most memorable moments.",
+        },
+        {
+          question: "How did the community respond to unexpected challenges?",
+          answer:
+            "When unexpected events affected our community, seeing a place with so many memories damaged was heartbreaking. But what I remember even more is how quickly everyone came together and moved forward. It showed me that a college is not just a building. It is the people, the memories, and the spirit that make it special.",
+        },
+        {
+          question:
+            "What message would you like to share with your teachers and mentors?",
+          answer:
+            "Thank you for teaching me, guiding me, and being there for me throughout these two years. Beyond the lessons and exams, you have taught me things that I will carry with me throughout my life.",
+        },
+        {
+          question: "How do you summarize your overall transformation at NAMI?",
+          answer:
+            "I learned to face challenges, value the people around me, step out of my comfort zone, and appreciate the little moments that make life special. NAMI will always be more than just where I completed Plus Two—it is a chapter filled with friendships, laughter, lessons, and memories for which I will always be grateful.",
+        },
+      ],
+      skillsAcquired: [
+        "Scientific Inquiry & Laboratory Research",
+        "Student Leadership & Club Governance",
+        "Arts & Literature Event Management",
+        "Team Collaboration & Problem Solving",
+        "Crisis Resilience & Community Solidarity",
+        "Public Speaking & Expressive Communication",
+      ],
+    },
+  },
+  {
+    id: "yunisha-basnet",
+    name: "Yunisha Basnet",
+    avatar: "/Testimonials Photos/+2/Yunisha Shrestha.jpeg",
+    programme: "Secondary School (Management Stream)",
+    graduationYear: "Class of 2026",
+    institution: "higher-secondary",
+    institutionLabel: "Secondary School (+2)",
+    currentRole: "Management Graduate",
+    company: "NAMI International School",
+    sector: "Business & Management Studies",
+    location: "Kathmandu, Nepal",
+    summaryHighlights: [
+      "Secondary School Management stream alumna (Class of 2026) recognized for active participation and academic dedication.",
+      "Experienced comprehensive guidance and mentorship from friendly, understanding faculty members throughout her studies.",
+      "Thrived in NAMI's peaceful, green campus environment, building lifelong friendships and collaborative learning habits.",
+    ],
+    keyQuote:
+      "Overall, my time at NAMI was a beautiful combination of learning, growth, friendship, and unforgettable memories. I am truly grateful for the experiences, the teachers who guided me, and the wonderful people I met during my journey.",
+    pdfData: {
+      documentId: "NAMI-ALM-MGT-2026",
+      title: "Alumni Spotlight: Yunisha Basnet — My Journey at NAMI",
+      publishedDate: "Alumni Relations Publication",
+      headline:
+        "A Journey of Growth, Camaraderie & Holistic Learning in Management",
+      storyParagraphs: [
+        "My journey at NAMI has been a truly wonderful and memorable experience. From the very first day I joined NAMI until the end of my session, I genuinely enjoyed every moment. The faculty members were very supportive, friendly, and understanding. My teachers helped me a lot with my studies and were always there whenever I needed guidance or had difficulties understanding something. Their constant support and encouragement made my learning experience much easier and more enjoyable.",
+        "Apart from academics, one of the best parts of my journey was the friends I made along the way. I met some really lovely people who made my time at NAMI even more special. We shared so many fun moments, helped each other, and created memories that I will always cherish.",
+        "I was also really impressed by the facilities at NAMI. The campus environment was peaceful, beautiful, and surrounded by greenery, which made it a refreshing place to study and spend time with friends. Overall, my time at NAMI was a beautiful combination of learning, growth, friendship, and unforgettable memories. I am truly grateful for the experiences, the teachers who guided me, and the wonderful people I met during my journey.",
+      ],
+      careerMilestones: [
+        {
+          year: "2024–2026",
+          title: "Secondary School (+2 Management Stream)",
+          organization: "NAMI International School",
+          description:
+            "Completed core business, management, accounting, and economics coursework with active classroom participation.",
+        },
+        {
+          year: "Academic",
+          title: "Collaborative Learning & Mentorship",
+          organization: "NAMI Faculty & Student Body",
+          description:
+            "Engaged in continuous academic mentorship, peer study circles, and experiential group assignments.",
+        },
+        {
+          year: "2026",
+          title: "Management Stream Alumna (Class of 2026)",
+          organization: "NAMI Alumni Network",
+          description:
+            "Graduated successfully, equipped with strong foundational skills in commerce, management, and leadership for undergraduate studies.",
+        },
+      ],
+      interviewQnA: [
+        {
+          question: "How would you describe your overall experience at NAMI?",
+          answer:
+            "My journey at NAMI has been a truly wonderful and memorable experience. From the very first day I joined NAMI until the end of my session, I genuinely enjoyed every moment. The faculty members were very supportive, friendly, and understanding, always helping me whenever I needed guidance.",
+        },
+        {
+          question:
+            "How did the faculty and teaching approach support your learning?",
+          answer:
+            "My teachers helped me a lot with my studies and were always there whenever I had difficulties understanding something. Their constant support and encouragement made my learning experience much easier and more enjoyable.",
+        },
+        {
+          question:
+            "What role did friendships and the campus environment play during your time at NAMI?",
+          answer:
+            "I met really lovely people who made my time at NAMI even more special—we shared so many fun moments, helped each other, and created memories that I will always cherish. The campus environment was peaceful, beautiful, and surrounded by greenery, which made it a refreshing place to study.",
+        },
+        {
+          question: "What is your key takeaway looking back at your +2 years?",
+          answer:
+            "My time at NAMI was a beautiful combination of learning, growth, friendship, and unforgettable memories. I am truly grateful for the experiences, the teachers who guided me, and the wonderful people I met during my journey.",
+        },
+      ],
+      skillsAcquired: [
+        "Business & Management Foundations",
+        "Financial Accounting & Analysis",
+        "Collaborative Peer Teamwork",
+        "Effective Communication & Presentation",
+        "Critical Thinking & Problem Solving",
+        "Self-Management & Leadership",
       ],
     },
   },

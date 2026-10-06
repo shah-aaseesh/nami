@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { createMetadata } from "@/lib/seo";
 import type {
   BachelorsProgramme,
   CourseKey,
 } from "../_components/bachelors-copy";
 import { bachelorsCopy } from "../_components/bachelors-copy";
-import { InstitutionEnrollCta } from "@/components/shared/institution-enroll-cta";
 import { CourseAbout } from "./_components/course-about";
 import { CourseCareer } from "./_components/course-career";
 import { CourseEligibility } from "./_components/course-eligibility";

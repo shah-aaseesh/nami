@@ -12,9 +12,7 @@ import {
   findInstitution,
   type InquiryCourse,
 } from "@/lib/content/institutions";
-import {
-  type AdmissionsFormData,
-} from "@/lib/schema";
+import type { AdmissionsFormData } from "@/lib/schema";
 
 const PAGE_WIDTH = 595.28;
 const PAGE_HEIGHT = 841.89;

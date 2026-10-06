@@ -235,11 +235,7 @@ export function InteractiveTimeline() {
           const isReversed = index % 2 !== 0;
 
           return (
-            <article
-              key={chapter.id}
-              id={chapter.id}
-              className="scroll-mt-36"
-            >
+            <article key={chapter.id} id={chapter.id} className="scroll-mt-36">
               <div
                 className={cn(
                   "grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center",
@@ -317,10 +313,15 @@ export function InteractiveTimeline() {
                         </p>
                         <ul className="space-y-3 font-body text-xs sm:text-sm text-ink/85">
                           {chapter.bullets.map((b) => (
-                            <li key={b.lead} className="flex items-start gap-2.5">
+                            <li
+                              key={b.lead}
+                              className="flex items-start gap-2.5"
+                            >
                               <span className="mt-1 size-2 rounded-full bg-accent shrink-0" />
                               <p className="leading-snug">
-                                <strong className="text-ink font-semibold">{b.lead} </strong>
+                                <strong className="text-ink font-semibold">
+                                  {b.lead}{" "}
+                                </strong>
                                 {b.text}
                               </p>
                             </li>

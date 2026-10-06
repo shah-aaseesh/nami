@@ -1,5 +1,5 @@
 import { pranilPandeyPortrait } from "./local/images";
-import { richText, type RichText } from "./rich-text";
+import { type RichText, richText } from "./rich-text";
 import type { ContentImage } from "./types";
 
 export type CeoMessageCopy = {

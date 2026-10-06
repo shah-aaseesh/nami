@@ -23,7 +23,9 @@ export function CourseEligibility({
             {course.entryLabel}
           </SplitText>
           <p className="mt-2 text-sm sm:text-base text-ink-muted leading-relaxed">
-            All formal admissions decisions and offer letters are issued in direct alignment with the academic quality frameworks of {course.awardingBody}.
+            All formal admissions decisions and offer letters are issued in
+            direct alignment with the academic quality frameworks of{" "}
+            {course.awardingBody}.
           </p>
         </div>
 
@@ -63,7 +65,10 @@ export function CourseEligibility({
 
               <tbody className="divide-y divide-border/60">
                 {course.entry.map((item) => (
-                  <tr key={item.label} className="hover:bg-muted/20 transition-colors">
+                  <tr
+                    key={item.label}
+                    className="hover:bg-muted/20 transition-colors"
+                  >
                     <th
                       className="py-3.5 px-4 sm:px-6 font-medium text-ink align-top"
                       scope="row"

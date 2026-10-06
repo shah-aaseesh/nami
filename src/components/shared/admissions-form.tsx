@@ -123,7 +123,10 @@ function stepsForCourse(course: InquiryCourse | undefined): readonly Step[] {
   if (!course || course.asksEmploymentHistory) {
     steps.push({ key: "employment", label: "Employment History" });
   }
-  steps.push({ key: "additional", label: "Additional Info & Signatures" });
+  steps.push({
+    key: "additional",
+    label: "Additional Information & Signatures",
+  });
   return steps;
 }
 
@@ -812,7 +815,7 @@ export function MultiStepForm() {
         return (
           <div className="space-y-8">
             <H6 as="h3" className="text-ink mb-6">
-              Additional Info & Signatures
+              Additional Information & Signatures
             </H6>
 
             <div className="space-y-4">
@@ -846,9 +849,10 @@ export function MultiStepForm() {
                     name="signature"
                     label={
                       isSchoolOrCollege
-                        ? "Applicant / Guardian Signature (Type Name)"
-                        : "Student Signature (Type Name)"
+                        ? "Applicant / Guardian Signature (Type Full Name)"
+                        : "Student Signature (Type Full Name)"
                     }
+                    placeholder="Type full name"
                     autoComplete="name"
                     required
                   />

@@ -62,7 +62,10 @@ export function CookieConsent() {
   const handleConsent = (type: "granted" | "denied") => {
     try {
       localStorage.setItem(STORAGE_KEY, type);
-      localStorage.setItem(`${STORAGE_KEY}_timestamp`, new Date().toISOString());
+      localStorage.setItem(
+        `${STORAGE_KEY}_timestamp`,
+        new Date().toISOString(),
+      );
 
       // Update Google Consent Mode v2 if gtag is initialized
       if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -112,7 +115,9 @@ export function CookieConsent() {
             Cookie & Privacy Preferences
           </H6>
           <P className="mt-1.5 text-xs text-ink-muted leading-relaxed text-justify [text-align-last:left]">
-            We use cookies to analyze site traffic, personalize content, and support our educational and advertising initiatives. You can read more in our{" "}
+            We use cookies to analyze site traffic, personalize content, and
+            support our educational and advertising initiatives. You can read
+            more in our{" "}
             <Link
               className="font-medium text-accent underline underline-offset-2 hover:text-accent/80"
               href={"/privacy" as Route}

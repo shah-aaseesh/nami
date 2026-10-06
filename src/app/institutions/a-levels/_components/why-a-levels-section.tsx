@@ -36,8 +36,8 @@ export function WhyALevelsSection() {
             <Reveal stagger={0.08}>
               <RevealItem>
                 <P className="text-base sm:text-lg font-body leading-relaxed text-ink text-justify [text-align-last:left] [hyphens:auto]">
-                  NAMI College offers the internationally recognised Cambridge
-                  A Level programme, providing students with a rigorous academic
+                  NAMI College offers the internationally recognised Cambridge A
+                  Level programme, providing students with a rigorous academic
                   pathway that is valued for university admissions both in Nepal
                   and internationally. The programme emphasises academic
                   excellence, critical thinking and independent learning,

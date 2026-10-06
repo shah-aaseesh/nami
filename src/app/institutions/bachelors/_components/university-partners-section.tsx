@@ -30,6 +30,7 @@ type UniversityPartner = {
   readonly leaderName: string;
   readonly leaderTitle: string;
   readonly leaderAffiliation: string;
+  readonly leaderPhoto?: string;
   readonly leaderQuote: string;
   readonly leaderMessage: readonly string[];
   readonly note?: string;
@@ -41,7 +42,7 @@ const UNIVERSITY_PARTNERS: readonly UniversityPartner[] = [
     badge: "Official UK Degree Awarding Partner",
     partnerStatus: "Direct Academic Partnership Since 2012",
     name: "University of Northampton, UK",
-    location: "Waterside Campus · Northamptonshire, England, United Kingdom",
+    location: "Waterside Campus, University Drive, Northampton - NN1 5PH",
     logo: "/universities/northampton.png",
     overview: [
       "The University of Northampton is a leading British public university located on its purpose-built £330 million Waterside Campus in England. Globally recognized as the UK's first Ashoka U Changemaker Campus and commended for teaching excellence under the British Teaching Excellence Framework (TEF), the university champions social innovation, enterprise, and high graduate outcomes.",
@@ -53,16 +54,37 @@ const UNIVERSITY_PARTNERS: readonly UniversityPartner[] = [
       { value: "TEF Rated", label: "Teaching Excellence" },
     ],
     programmes: [
-      { title: "BSc (Hons) Computing", award: "UoN, UK", duration: "3 Years" },
-      { title: "BSc (Hons) Software Engineering", award: "UoN, UK", duration: "3 Years" },
-      { title: "BSc (Hons) Network Engineering", award: "UoN, UK", duration: "3 Years" },
-      { title: "BSc (Hons) Environmental Science", award: "UoN, UK", duration: "3 Years" },
-      { title: "BBA (Hons) Business Administration", award: "UoN, UK", duration: "3 Years" },
+      {
+        title: "BSc. (Hons) Computing",
+        award: "UoN, UK",
+        duration: "3 Years",
+      },
+      {
+        title: "BSc. (Hons) Software Engineering",
+        award: "UoN, UK",
+        duration: "3 Years",
+      },
+      {
+        title: "BSc. (Hons) Network Engineering",
+        award: "UoN, UK",
+        duration: "3 Years",
+      },
+      {
+        title: "BSc. (Hons) Environmental Science",
+        award: "UoN, UK",
+        duration: "3 Years",
+      },
+      {
+        title: "BBA (Hons) Business Administration",
+        award: "UoN, UK",
+        duration: "3 Years",
+      },
     ],
     leaderRole: "Message from the Vice-Chancellor",
     leaderName: "Professor Anne-Marie Kilday",
-    leaderTitle: "Vice-Chancellor and Chief Executive",
+    leaderTitle: "Vice-Chancellor",
     leaderAffiliation: "University of Northampton, United Kingdom",
+    leaderPhoto: "/nami/anne-marie-kilday-outside-portrait-683x1024.jpg",
     leaderQuote:
       "Our partnership with NAMI reflects our shared conviction in widening access to world-class British higher education, equipping students in Nepal with the innovation and global competencies to lead transformative careers.",
     leaderMessage: [
@@ -88,9 +110,21 @@ const UNIVERSITY_PARTNERS: readonly UniversityPartner[] = [
       { value: "Session 2026", label: "Commencing Intake" },
     ],
     programmes: [
-      { title: "BSc in Environmental Studies (BES)", award: "KU Collaboration", duration: "4 Years · 8 Semesters" },
-      { title: "Himalayan Ecology & Field Practicums", award: "KU Academic Track", duration: "Applied Research" },
-      { title: "Climate Policy & Sustainability Governance", award: "Joint Initiatives", duration: "Policy Practicum" },
+      {
+        title: "BSc. in Environmental Studies (BES)",
+        award: "KU Collaboration",
+        duration: "4 Years · 8 Semesters",
+      },
+      {
+        title: "Himalayan Ecology & Field Practicums",
+        award: "KU Academic Track",
+        duration: "Applied Research",
+      },
+      {
+        title: "Climate Policy & Sustainability Governance",
+        award: "Joint Initiatives",
+        duration: "Policy Practicum",
+      },
     ],
     leaderRole: "Message from the Dean / Academic Leadership",
     leaderName: "Office of the Dean, School of Science",
@@ -109,31 +143,29 @@ const UNIVERSITY_PARTNERS: readonly UniversityPartner[] = [
 
 function UniversityCard({
   partner,
-  isReversed,
   defaultExpanded = false,
 }: {
   partner: UniversityPartner;
-  isReversed: boolean;
   defaultExpanded?: boolean;
 }) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const isRed = partner.id === "northampton";
+  const isUoN = partner.id === "northampton";
 
   return (
     <article
       id={`partner-${partner.id}`}
       className={cn(
         "group relative overflow-hidden rounded-3xl p-6 sm:p-8 lg:p-10 transition-all duration-300",
-        isRed
-          ? "bg-[#BD1B21] text-white shadow-xl border border-red-700/60"
+        isUoN
+          ? "bg-[#1B1D22] text-white shadow-2xl border border-zinc-800"
           : "bg-surface text-ink border border-border/80 shadow-xs hover:border-accent/40 hover:shadow-md",
       )}
     >
-      {/* Ambient background glow for the red card */}
-      {isRed && (
+      {/* Ambient background glow for UoN Waterside brand card */}
+      {isUoN && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-20 size-72 rounded-full bg-white/10 blur-3xl"
+          className="pointer-events-none absolute -right-20 -top-20 size-80 rounded-full bg-[#E0006C]/10 blur-3xl"
         />
       )}
 
@@ -141,7 +173,7 @@ function UniversityCard({
       <div
         className={cn(
           "relative flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b",
-          isRed ? "border-white/20" : "border-border/70",
+          isUoN ? "border-zinc-800" : "border-border/70",
         )}
       >
         <div className="max-w-2xl">
@@ -149,8 +181,8 @@ function UniversityCard({
             <span
               className={cn(
                 "px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-xs",
-                isRed
-                  ? "bg-white/20 text-white border border-white/30"
+                isUoN
+                  ? "bg-[#E0006C]/15 text-[#FF2A85] border border-[#E0006C]/30"
                   : "bg-accent/10 text-accent border border-accent/20",
               )}
             >
@@ -159,7 +191,7 @@ function UniversityCard({
             <span
               className={cn(
                 "text-xs font-medium",
-                isRed ? "text-white/80" : "text-ink-muted",
+                isUoN ? "text-zinc-300" : "text-ink-muted",
               )}
             >
               • {partner.partnerStatus}
@@ -169,7 +201,7 @@ function UniversityCard({
           <H3
             className={cn(
               "mt-3 font-display text-2xl sm:text-3xl font-bold tracking-tight",
-              isRed ? "!text-white" : "text-ink",
+              isUoN ? "!text-white" : "text-ink",
             )}
           >
             {partner.name}
@@ -178,7 +210,7 @@ function UniversityCard({
           <p
             className={cn(
               "mt-1 text-xs sm:text-sm font-medium",
-              isRed ? "text-white/80" : "text-ink-muted",
+              isUoN ? "text-zinc-300" : "text-ink-muted",
             )}
           >
             {partner.location}
@@ -189,8 +221,8 @@ function UniversityCard({
         <div
           className={cn(
             "relative h-16 sm:h-20 w-48 sm:w-64 shrink-0 flex items-center justify-center p-2.5 sm:p-3 rounded-2xl transition-transform duration-200 group-hover:scale-[1.02]",
-            isRed
-              ? "bg-white shadow-md border border-white/30"
+            isUoN
+              ? "bg-white shadow-md border border-zinc-200"
               : "bg-surface-raised/60 border border-border/80 shadow-xs",
           )}
         >
@@ -213,27 +245,24 @@ function UniversityCard({
             <p
               className={cn(
                 "text-xs sm:text-sm leading-relaxed text-justify [text-align-last:left] line-clamp-2 sm:line-clamp-3 font-normal",
-                isRed ? "!text-white/95" : "text-ink/80",
+                isUoN ? "!text-zinc-200" : "text-ink/80",
               )}
-              style={{ color: isRed ? "rgba(255, 255, 255, 0.95)" : undefined }}
             >
               {partner.overview[0]}
             </p>
 
             <div
               className={cn(
-                "mt-3 flex items-center gap-2 text-xs font-semibold",
-                isRed ? "!text-white" : "text-accent",
+                "mt-2 flex items-center gap-2 text-xs font-semibold",
+                isUoN ? "text-[#FF2A85]" : "text-accent",
               )}
-              style={{ color: isRed ? "#ffffff" : undefined }}
             >
               <span className="shrink-0">{partner.leaderRole}:</span>
               <span
                 className={cn(
                   "italic font-normal line-clamp-1",
-                  isRed ? "!text-white/85" : "text-ink-muted",
+                  isUoN ? "text-zinc-300" : "text-ink-muted",
                 )}
-                style={{ color: isRed ? "rgba(255, 255, 255, 0.85)" : undefined }}
               >
                 &ldquo;{partner.leaderQuote}&rdquo;
               </span>
@@ -246,8 +275,8 @@ function UniversityCard({
               onClick={() => setIsExpanded(true)}
               className={cn(
                 "inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer shadow-xs",
-                isRed
-                  ? "bg-white text-[#BD1B21] hover:bg-white/90 hover:shadow-md"
+                isUoN
+                  ? "bg-[#E0006C] text-white hover:bg-[#C2005D] hover:shadow-lg hover:shadow-pink-500/20"
                   : "bg-accent text-white hover:bg-accent/90",
               )}
             >
@@ -260,153 +289,61 @@ function UniversityCard({
                 strokeWidth={2.5}
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
           </div>
         </div>
       )}
 
-      {/* Expanded State: Full Editorial 2-Column Grid */}
+      {/* Expanded State: 2-Row Clean Layout */}
       {isExpanded && (
-        <div className="mt-8 animate-in fade-in-50 duration-300">
-          <div
-            className={cn(
-              "grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-14 items-start",
-              isReversed && "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1",
-            )}
-          >
-            {/* Left Column: Academic Overview, Metrics & Programmes */}
-            <div className="lg:col-span-6 flex flex-col justify-between h-full">
-              <div>
-                <h4
-                  className={cn(
-                    "font-display text-base sm:text-lg font-bold mb-3.5",
-                    isRed ? "!text-white" : "text-ink",
-                  )}
-                  style={{ color: isRed ? "#ffffff" : undefined }}
-                >
-                  Academic Standing &amp; Educational Model
-                </h4>
+        <div className="mt-8 animate-in fade-in-50 duration-300 space-y-8">
+          {/* Row 1: Academic Standing & Affiliated Degree Programmes */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+            {/* Left: Academic Standing Overview */}
+            <div className="lg:col-span-5">
+              <h4
+                className={cn(
+                  "font-display text-base sm:text-lg font-bold mb-3.5",
+                  isUoN ? "!text-white" : "text-ink",
+                )}
+              >
+                Academic Standing &amp; Educational Model
+              </h4>
 
-                <div className="space-y-4 text-xs sm:text-sm leading-relaxed text-justify [text-align-last:left]">
-                  {partner.overview.map((para, pIdx) => (
-                    <p
-                      key={pIdx}
-                      className={cn(
-                        "leading-relaxed font-normal",
-                        isRed ? "!text-white/95" : "text-ink/80",
-                      )}
-                      style={{ color: isRed ? "rgba(255, 255, 255, 0.95)" : undefined }}
-                    >
-                      {para}
-                    </p>
-                  ))}
-                </div>
-
-                {/* Metrics Callout Strip */}
-                <div
-                  className={cn(
-                    "mt-6 grid grid-cols-3 gap-3 p-4 rounded-2xl border",
-                    isRed
-                      ? "bg-black/25 border-white/20"
-                      : "bg-surface-raised/40 border-border/70",
-                  )}
-                >
-                  {partner.metrics.map((m, mIdx) => (
-                    <div key={mIdx} className="text-center">
-                      <p
-                        className={cn(
-                          "font-display text-sm sm:text-base font-bold",
-                          isRed ? "!text-white" : "text-ink",
-                        )}
-                        style={{ color: isRed ? "#ffffff" : undefined }}
-                      >
-                        {m.value}
-                      </p>
-                      <p
-                        className={cn(
-                          "text-[10px] sm:text-[11px] mt-0.5 leading-tight",
-                          isRed ? "!text-white/85" : "text-ink-muted",
-                        )}
-                        style={{ color: isRed ? "rgba(255, 255, 255, 0.85)" : undefined }}
-                      >
-                        {m.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Programmes List */}
-                <div
-                  className={cn(
-                    "mt-6 pt-5 border-t",
-                    isRed ? "border-white/20" : "border-border/70",
-                  )}
-                >
+              <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-justify [text-align-last:left]">
+                {partner.overview.map((para) => (
                   <p
+                    key={para.slice(0, 32)}
                     className={cn(
-                      "text-xs font-bold uppercase tracking-wider mb-3.5",
-                      isRed ? "!text-white" : "text-accent",
+                      "leading-relaxed font-normal",
+                      isUoN ? "!text-zinc-200" : "text-ink/80",
                     )}
-                    style={{ color: isRed ? "#ffffff" : undefined }}
                   >
-                    Affiliated Degree Programmes:
+                    {para}
                   </p>
-
-                  <div className="flex flex-wrap gap-2.5">
-                    {partner.programmes.map((prog, pIdx) => (
-                      <Link
-                        key={pIdx}
-                        href={"#programmes" as Route}
-                        className={cn(
-                          "group inline-flex items-center gap-2.5 px-4 py-2 rounded-xl border text-xs transition-all duration-200 cursor-pointer",
-                          isRed
-                            ? "bg-white border-white text-neutral-900 shadow-sm hover:shadow-md hover:bg-neutral-100 hover:scale-[1.02]"
-                            : "border-border/80 bg-surface-raised/80 hover:bg-surface hover:border-accent/50 text-ink hover:text-accent shadow-2xs",
-                        )}
-                      >
-                        <span
-                          className={cn(
-                            "size-2 rounded-full shrink-0 transition-transform group-hover:scale-125",
-                            isRed ? "bg-[#BD1B21]" : "bg-accent",
-                          )}
-                        />
-                        <span
-                          className={cn(
-                            "font-display font-bold",
-                            isRed ? "text-neutral-900" : "text-ink group-hover:text-accent",
-                          )}
-                        >
-                          {prog.title}
-                        </span>
-                        <span
-                          className={cn(
-                            "text-[11px] font-semibold",
-                            isRed ? "text-neutral-600" : "text-ink-muted group-hover:text-accent",
-                          )}
-                        >
-                          ({prog.award})
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
 
               {partner.note && (
                 <div
                   className={cn(
-                    "mt-6 p-3.5 rounded-xl border text-xs leading-relaxed",
-                    isRed
-                      ? "bg-white/15 border-white/25 !text-white/90"
+                    "mt-4 p-3 rounded-xl border text-xs leading-relaxed",
+                    isUoN
+                      ? "bg-zinc-800/80 border-zinc-700/80 text-zinc-300"
                       : "bg-accent/5 border-accent/20 text-ink-muted",
                   )}
-                  style={{ color: isRed ? "rgba(255, 255, 255, 0.9)" : undefined }}
                 >
                   <span
-                    className={cn("font-semibold", isRed ? "!text-white" : "text-accent")}
-                    style={{ color: isRed ? "#ffffff" : undefined }}
+                    className={cn(
+                      "font-semibold",
+                      isUoN ? "text-[#FF2A85]" : "text-accent",
+                    )}
                   >
                     Note:{" "}
                   </span>
@@ -415,107 +352,254 @@ function UniversityCard({
               )}
             </div>
 
-            {/* Right Column: Leadership Letter Card */}
-            <div className="lg:col-span-6 flex flex-col h-full">
-              <div
-                className={cn(
-                  "relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-9 flex flex-col justify-between h-full border shadow-2xs",
-                  isRed
-                    ? "bg-black/30 backdrop-blur-xs border-white/20 text-white"
-                    : "bg-surface-raised/50 border-border/90 text-ink",
-                )}
-              >
-                {/* Background Quote Mark */}
-                <svg
-                  aria-hidden="true"
+            {/* Right: Metrics Strip & Multi-Column Programmes */}
+            <div className="lg:col-span-7 flex flex-col justify-between h-full">
+              {/* Metrics Strip */}
+              <div>
+                <p
                   className={cn(
-                    "pointer-events-none select-none absolute right-4 top-4 size-24 sm:size-28",
-                    isRed ? "text-white/10" : "text-accent/8",
+                    "text-xs font-bold uppercase tracking-wider mb-2.5",
+                    isUoN ? "text-[#FF2A85]" : "text-accent",
                   )}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
                 >
-                  <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-                </svg>
-
-                <div>
-                  {/* Role Chip */}
-                  <div
-                    className={cn(
-                      "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border mb-4",
-                      isRed
-                        ? "bg-white/20 !text-white border-white/30"
-                        : "bg-accent/10 text-accent border-accent/20",
-                    )}
-                    style={{ color: isRed ? "#ffffff" : undefined }}
-                  >
-                    <span>{partner.leaderRole}</span>
-                  </div>
-
-                  {/* Featured Quote */}
-                  <blockquote
-                    className={cn(
-                      "relative pl-5 border-l-3 italic font-display text-base sm:text-lg leading-relaxed mb-5",
-                      isRed
-                        ? "border-white !text-white"
-                        : "border-accent text-ink",
-                    )}
-                    style={{ color: isRed ? "#ffffff" : undefined }}
-                  >
-                    &ldquo;{partner.leaderQuote}&rdquo;
-                  </blockquote>
-
-                  {/* Full Leader Address */}
-                  <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-justify [text-align-last:left]">
-                    {partner.leaderMessage.map((msg, mIdx) => (
-                      <p
-                        key={mIdx}
-                        className={cn(
-                          "leading-relaxed font-normal",
-                          isRed ? "!text-white/95" : "text-ink/80",
-                        )}
-                        style={{ color: isRed ? "rgba(255, 255, 255, 0.95)" : undefined }}
-                      >
-                        {msg}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Leader Credentials */}
+                  Key Partnership Metrics:
+                </p>
                 <div
                   className={cn(
-                    "mt-6 pt-4 border-t",
-                    isRed ? "border-white/20" : "border-border/70",
+                    "grid grid-cols-3 gap-3 p-4 rounded-2xl border",
+                    isUoN
+                      ? "bg-zinc-800/80 border-zinc-700/80"
+                      : "bg-surface-raised/40 border-border/70",
                   )}
                 >
-                  <p
+                  {partner.metrics.map((m) => (
+                    <div key={m.label} className="text-center">
+                      <p
+                        className={cn(
+                          "font-display text-sm sm:text-base font-bold",
+                          isUoN ? "!text-white" : "text-ink",
+                        )}
+                      >
+                        {m.value}
+                      </p>
+                      <p
+                        className={cn(
+                          "text-[10px] sm:text-[11px] mt-0.5 leading-tight",
+                          isUoN ? "text-zinc-300" : "text-ink-muted",
+                        )}
+                      >
+                        {m.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Affiliated Programmes - Multi Column Grid */}
+              <div
+                className={cn(
+                  "mt-6 pt-5 border-t",
+                  isUoN ? "border-zinc-800" : "border-border/70",
+                )}
+              >
+                <p
+                  className={cn(
+                    "text-xs font-bold uppercase tracking-wider mb-3",
+                    isUoN ? "text-[#FF2A85]" : "text-accent",
+                  )}
+                >
+                  Affiliated Degree Programmes:
+                </p>
+
+                <div className="grid grid-cols-1 min-[480px]:grid-cols-2 gap-2.5">
+                  {partner.programmes.map((prog) => (
+                    <Link
+                      key={prog.title}
+                      href={"#programmes" as Route}
+                      className={cn(
+                        "group flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl border text-xs transition-all duration-200 cursor-pointer",
+                        isUoN
+                          ? "bg-zinc-800/90 border-zinc-700/80 text-white shadow-xs hover:border-[#E0006C]/70 hover:bg-zinc-700/90 hover:scale-[1.01]"
+                          : "border-border/80 bg-surface-raised/80 hover:bg-surface hover:border-accent/50 text-ink hover:text-accent shadow-2xs",
+                      )}
+                    >
+                      <div className="flex items-center gap-2 min-w-0 flex-1">
+                        <span
+                          className={cn(
+                            "size-2 rounded-full shrink-0 transition-transform group-hover:scale-125",
+                            isUoN ? "bg-[#E0006C]" : "bg-accent",
+                          )}
+                        />
+                        <span
+                          className={cn(
+                            "font-display font-bold leading-tight line-clamp-1",
+                            isUoN
+                              ? "text-zinc-100"
+                              : "text-ink group-hover:text-accent",
+                          )}
+                        >
+                          {prog.title}
+                        </span>
+                      </div>
+                      <span
+                        className={cn(
+                          "text-[11px] font-semibold shrink-0 whitespace-nowrap",
+                          isUoN
+                            ? "text-[#FF2A85]"
+                            : "text-ink-muted group-hover:text-accent",
+                        )}
+                      >
+                        ({prog.award})
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 2: Full-Width Leadership Showcase */}
+          <div
+            className={cn(
+              "relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border shadow-2xs",
+              isUoN
+                ? "bg-zinc-800/70 backdrop-blur-xs border-zinc-700/80 text-white"
+                : "bg-surface-raised/50 border-border/90 text-ink",
+            )}
+          >
+            {/* Background Quote Mark */}
+            <svg
+              aria-hidden="true"
+              className={cn(
+                "pointer-events-none select-none absolute right-4 top-4 size-28 sm:size-36",
+                isUoN ? "text-[#E0006C]/10" : "text-accent/8",
+              )}
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+            </svg>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 items-start">
+              {/* Left Column: Big VC Portrait & Credentials */}
+              {partner.leaderPhoto ? (
+                <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center sm:items-start">
+                  <div className="relative aspect-[3/4] w-full min-h-[340px] sm:min-h-[400px] lg:min-h-[460px] rounded-2xl overflow-hidden border-2 border-[#E0006C]/50 shadow-2xl bg-zinc-900">
+                    <Image
+                      src={partner.leaderPhoto}
+                      alt={partner.leaderName}
+                      fill
+                      className="object-cover object-[center_55%]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 480px"
+                      priority
+                    />
+                  </div>
+                  <div className="mt-4 text-center sm:text-left px-1">
+                    <p
+                      className={cn(
+                        "font-display font-bold text-lg sm:text-xl leading-tight",
+                        isUoN ? "!text-white" : "text-ink",
+                      )}
+                    >
+                      {partner.leaderName}
+                    </p>
+                    <p
+                      className={cn(
+                        "font-body text-xs sm:text-sm font-semibold mt-1",
+                        isUoN ? "text-[#FF2A85]" : "text-accent",
+                      )}
+                    >
+                      {partner.leaderTitle}
+                    </p>
+                    <p
+                      className={cn(
+                        "font-body text-xs mt-0.5",
+                        isUoN ? "text-zinc-300" : "text-ink-muted",
+                      )}
+                    >
+                      {partner.leaderAffiliation}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="md:col-span-5 lg:col-span-4 flex flex-col justify-center">
+                  <div
                     className={cn(
-                      "font-display text-sm sm:text-base font-bold",
-                      isRed ? "!text-white" : "text-ink",
+                      "p-5 rounded-2xl border",
+                      isUoN
+                        ? "bg-zinc-800 border-zinc-700"
+                        : "bg-surface border-border/80",
                     )}
-                    style={{ color: isRed ? "#ffffff" : undefined }}
                   >
-                    {partner.leaderName}
-                  </p>
-                  <p
-                    className={cn(
-                      "font-body text-xs font-semibold mt-0.5",
-                      isRed ? "!text-white/90" : "text-accent",
-                    )}
-                    style={{ color: isRed ? "rgba(255, 255, 255, 0.9)" : undefined }}
-                  >
-                    {partner.leaderTitle}
-                  </p>
-                  <p
-                    className={cn(
-                      "font-body text-[11px]",
-                      isRed ? "!text-white/80" : "text-ink-muted",
-                    )}
-                    style={{ color: isRed ? "rgba(255, 255, 255, 0.8)" : undefined }}
-                  >
-                    {partner.leaderAffiliation}
-                  </p>
+                    <p
+                      className={cn(
+                        "font-display font-bold text-base",
+                        isUoN ? "!text-white" : "text-ink",
+                      )}
+                    >
+                      {partner.leaderName}
+                    </p>
+                    <p
+                      className={cn(
+                        "font-body text-xs font-semibold mt-1",
+                        isUoN ? "text-[#FF2A85]" : "text-accent",
+                      )}
+                    >
+                      {partner.leaderTitle}
+                    </p>
+                    <p
+                      className={cn(
+                        "font-body text-xs mt-0.5",
+                        isUoN ? "text-zinc-300" : "text-ink-muted",
+                      )}
+                    >
+                      {partner.leaderAffiliation}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Right Column: Role Chip, Featured Quote & Full Address */}
+              <div className="md:col-span-7 lg:col-span-8">
+                {/* Role Chip */}
+                <div
+                  className={cn(
+                    "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border mb-4",
+                    isUoN
+                      ? "bg-[#E0006C]/15 text-[#FF2A85] border-[#E0006C]/30"
+                      : "bg-accent/10 text-accent border-accent/20",
+                  )}
+                >
+                  <span>{partner.leaderRole}</span>
+                </div>
+
+                {/* Featured Quote */}
+                <blockquote
+                  className={cn(
+                    "relative pl-4 border-l-3 italic font-display text-base sm:text-lg leading-relaxed mb-6",
+                    isUoN
+                      ? "border-[#E0006C] text-zinc-100"
+                      : "border-accent text-ink",
+                  )}
+                >
+                  &ldquo;{partner.leaderQuote}&rdquo;
+                </blockquote>
+
+                {/* Message Paragraphs */}
+                <div
+                  className={cn(
+                    "space-y-4 text-xs sm:text-sm leading-relaxed text-justify [text-align-last:left]",
+                    isUoN ? "!text-zinc-200" : "text-ink/80",
+                  )}
+                >
+                  {partner.leaderMessage.map((msg) => (
+                    <p
+                      key={msg.slice(0, 32)}
+                      className="leading-relaxed font-normal"
+                    >
+                      {msg}
+                    </p>
+                  ))}
                 </div>
               </div>
             </div>
@@ -525,7 +609,7 @@ function UniversityCard({
           <div
             className={cn(
               "mt-8 pt-5 border-t flex justify-end",
-              isRed ? "border-white/20" : "border-border/60",
+              isUoN ? "border-zinc-800" : "border-border/60",
             )}
           >
             <button
@@ -533,8 +617,8 @@ function UniversityCard({
               onClick={() => setIsExpanded(false)}
               className={cn(
                 "inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer border shadow-xs",
-                isRed
-                  ? "bg-white text-[#BD1B21] hover:bg-white/90 border-white/30"
+                isUoN
+                  ? "bg-zinc-800 text-[#FF2A85] hover:bg-[#E0006C] hover:text-white border-zinc-700"
                   : "bg-accent/10 hover:bg-accent hover:text-white text-accent border-accent/20",
               )}
             >
@@ -547,7 +631,11 @@ function UniversityCard({
                 strokeWidth={2.5}
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
           </div>
@@ -559,13 +647,18 @@ function UniversityCard({
 
 export function UniversityPartnersSection() {
   return (
-    <section className="gutter-x section-y bg-surface-raised/20 border-y border-border" id="university-partners">
+    <section
+      className="gutter-x section-y bg-surface-raised/20 border-y border-border"
+      id="university-partners"
+    >
       <div className="mx-auto max-w-page">
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-14">
           <Reveal>
             <div className="flex items-center gap-5">
-              <Eyebrow className="text-accent">Academic Affiliations &amp; Degree Awarding</Eyebrow>
+              <Eyebrow className="text-accent">
+                Academic Affiliations &amp; Degree Awarding
+              </Eyebrow>
               <span className="h-px flex-1 bg-border" />
             </div>
           </Reveal>
@@ -588,7 +681,6 @@ export function UniversityPartnersSection() {
             <UniversityCard
               key={partner.id}
               partner={partner}
-              isReversed={index % 2 !== 0}
               defaultExpanded={index === 0}
             />
           ))}

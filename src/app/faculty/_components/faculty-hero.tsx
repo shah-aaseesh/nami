@@ -12,7 +12,9 @@ export function FacultyHero() {
           </div>
           <div className="mt-4 max-w-lg text-neutral-700 lg:col-span-5 lg:mt-0">
             <Standfirst className="text-ink-muted text-sm sm:text-base leading-relaxed">
-              Meet our esteemed board of directors, management leaders, and academic heads steering academic excellence, international standards, and student empowerment.
+              Meet our esteemed board of directors, management leaders, and
+              academic heads steering academic excellence, international
+              standards, and student empowerment.
             </Standfirst>
           </div>
         </div>
@@ -20,4 +22,3 @@ export function FacultyHero() {
     </section>
   );
 }
-

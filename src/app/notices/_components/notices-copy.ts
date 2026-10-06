@@ -3,21 +3,21 @@ import type { UpdateCategory, UpdateKind } from "@/lib/content";
 
 export const noticesTrail: readonly Crumb[] = [
   { name: "Home", path: "/" },
-  { name: "News & notices", path: "/notices" },
+  { name: "News & Notices", path: "/notices" },
 ];
 
 export const updateKindLabel: Record<UpdateKind, string> = {
   notice: "Notice",
   event: "Event",
   news: "News",
-  "press-release": "Press release",
+  "press-release": "Press Release",
 };
 
 const updateKindPlural: Record<UpdateKind, string> = {
   notice: "Notices",
   event: "Events",
   news: "News",
-  "press-release": "Press releases",
+  "press-release": "Press Releases",
 };
 
 export const updateCategoryLabel: Record<UpdateCategory, string> = {
@@ -31,12 +31,12 @@ export const updateCategoryLabel: Record<UpdateCategory, string> = {
 
 export const noticesCopy = {
   meta: {
-    title: "News and notices",
+    title: "News and Notices",
     description:
       "Everything NAMI publishes in one place — standing notices, upcoming events and the record of what the school, the college and the institute have hosted in Kathmandu, filterable by institution.",
   },
   masthead: {
-    eyebrow: "News & notices",
+    eyebrow: "News & Notices",
     heading: "What NAMI is announcing.",
     standfirst:
       "One board for notices, events and news from the school, the college and the institute.",

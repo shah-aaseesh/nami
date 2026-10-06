@@ -42,7 +42,10 @@ export default async function AboutPage() {
       <AboutLeadershipMessages />
 
       {/* History & Timeline Section */}
-      <section id="history" className="gutter-x bg-surface-raised/40 border-y border-border scroll-mt-24">
+      <section
+        id="history"
+        className="gutter-x bg-surface-raised/40 border-y border-border scroll-mt-24"
+      >
         <div className="mx-auto max-w-page">
           <CompactTimeline />
         </div>

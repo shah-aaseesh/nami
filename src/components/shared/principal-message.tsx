@@ -48,7 +48,9 @@ function PortraitCard({
               alt={portrait.alt}
               className={cn(
                 "object-cover object-top transition-opacity duration-300",
-                isExpanded && expandedPortrait ? "opacity-0 pointer-events-none" : "opacity-100",
+                isExpanded && expandedPortrait
+                  ? "opacity-0 pointer-events-none"
+                  : "opacity-100",
               )}
               fill
               loading="lazy"
@@ -74,8 +76,12 @@ function PortraitCard({
       </div>
 
       <figcaption className="shrink-0 border-t border-border bg-surface px-5 py-4">
-        <p className="font-body text-base font-semibold text-ink">{person.name}</p>
-        <p className="mt-0.5 font-body text-xs font-medium text-accent">{person.title}</p>
+        <p className="font-body text-base font-semibold text-ink">
+          {person.name}
+        </p>
+        <p className="mt-0.5 font-body text-xs font-medium text-accent">
+          {person.title}
+        </p>
       </figcaption>
     </figure>
   );
@@ -93,7 +99,10 @@ export function PrincipalMessage({
   const [isExpanded, setIsExpanded] = useState(!collapsible);
   const letter = paragraphsOf(message);
   const hasMore = collapsible && letter.length > COLLAPSED_PARAGRAPH_COUNT;
-  const visibleParagraphs = isExpanded || !collapsible ? letter : letter.slice(0, COLLAPSED_PARAGRAPH_COUNT);
+  const visibleParagraphs =
+    isExpanded || !collapsible
+      ? letter
+      : letter.slice(0, COLLAPSED_PARAGRAPH_COUNT);
 
   return (
     <section className="gutter-x section-y" id={id}>
@@ -111,14 +120,13 @@ export function PrincipalMessage({
 
         <div className="mt-8 sm:mt-10 flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 xl:gap-14">
           <div className="flex-1 flex flex-col justify-between">
-            <Reveal
-              className="space-y-4 sm:space-y-5"
-              stagger={0.08}
-            >
+            <Reveal className="space-y-4 sm:space-y-5" stagger={0.08}>
               {visibleParagraphs.map((paragraph, index) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: message is a static paragraph list
                 <RevealItem key={index}>
-                  <P className="text-justify [text-align-last:left] text-ink/90 leading-relaxed text-sm sm:text-base">{paragraph}</P>
+                  <P className="text-justify [text-align-last:left] text-ink/90 leading-relaxed text-sm sm:text-base">
+                    {paragraph}
+                  </P>
                 </RevealItem>
               ))}
             </Reveal>
@@ -142,7 +150,11 @@ export function PrincipalMessage({
                     strokeWidth={2.5}
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
               </div>

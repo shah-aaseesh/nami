@@ -65,7 +65,7 @@ const masthead: CollegeMastheadCopy = {
 };
 
 const cambridge: CollegeCambridgeCopy = {
-  eyebrow: "The qualification",
+  eyebrow: "The Qualification",
   heading: "An international benchmark, taught in small classes.",
   standfirst:
     "The A Level is administered by Cambridge Assessment International Education, University of Cambridge, United Kingdom.",
@@ -175,7 +175,7 @@ const subjects: CollegeSubjectsCopy = {
 };
 
 const awarding: InstitutionAwardingCopy = {
-  eyebrow: "Awarding body",
+  eyebrow: "Awarding Body",
   heading: "The examination board behind the certificate.",
   standfirst:
     "A Level certificates are issued by Cambridge, not by NAMI. What the college holds is the affiliation to teach the programme and the accreditation to examine it at the college.",
@@ -183,7 +183,7 @@ const awarding: InstitutionAwardingCopy = {
 };
 
 const gallery: InstitutionGalleryCopy = {
-  eyebrow: "The college",
+  eyebrow: "The College",
   heading: "Two years, photographed.",
   standfirst:
     "Trips, tournaments, service camps and the ordinary weeks between them — the college's own record of what an A Level here looks like.",
@@ -202,7 +202,7 @@ const alumni: SectionCopy = {
 };
 
 const notices: InstitutionNoticesCopy = {
-  eyebrow: "Notice board",
+  eyebrow: "Notice Board",
   heading: "What the college is announcing.",
   standfirst:
     "Registration windows, examination dates and standing notices for A Level students and their families.",
@@ -212,7 +212,7 @@ const notices: InstitutionNoticesCopy = {
 };
 
 const entry: CollegeEntryCopy = {
-  eyebrow: "Entry and support",
+  eyebrow: "Entry and Support",
   heading: "Who it is for, and how it is supported.",
   cta: {
     label: "Start an Application",

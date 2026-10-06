@@ -47,11 +47,11 @@ export const affiliations: readonly Affiliation[] = [
   {
     ...entryOf("kathmandu-university"),
     body: AWARDING_BODIES.kathmanduUniversity,
-    scope: "BSc Environmental Studies",
+    scope: "BSc. Environmental Studies",
     sinceYear: 2026,
     levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
-    note: "Program begins August 2026",
+    note: null,
     logo: "/universities/Kathmandu_University_Logo.webp",
   },
   {

@@ -14,7 +14,10 @@ type Milestone = {
   readonly category: string;
   readonly title: string;
   readonly leadSummary: string;
-  readonly highlights: readonly { readonly title: string; readonly desc: string }[];
+  readonly highlights: readonly {
+    readonly title: string;
+    readonly desc: string;
+  }[];
   readonly image: string;
   readonly imageAlt: string;
   readonly partnerLogo?: string;
@@ -227,7 +230,8 @@ export function SplitScrubberTimeline() {
     setActiveId(id);
     const element = document.getElementById(id);
     if (element) {
-      const topOffset = element.getBoundingClientRect().top + window.scrollY - 120;
+      const topOffset =
+        element.getBoundingClientRect().top + window.scrollY - 120;
       window.scrollTo({ top: topOffset, behavior: "smooth" });
     }
   };
@@ -292,7 +296,10 @@ export function SplitScrubberTimeline() {
             </div>
 
             {/* Vertical Year Stepper */}
-            <nav aria-label="Timeline Eras" className="mt-6 flex flex-col gap-2 relative">
+            <nav
+              aria-label="Timeline Eras"
+              className="mt-6 flex flex-col gap-2 relative"
+            >
               {/* Vertical connecting line */}
               <div
                 aria-hidden="true"
@@ -326,7 +333,9 @@ export function SplitScrubberTimeline() {
                             : "bg-neutral-300 group-hover:bg-accent/60",
                       )}
                     >
-                      {isActive && <span className="size-1.5 rounded-full bg-white animate-ping" />}
+                      {isActive && (
+                        <span className="size-1.5 rounded-full bg-white animate-ping" />
+                      )}
                     </div>
 
                     {/* Year & Era Text */}
@@ -335,7 +344,9 @@ export function SplitScrubberTimeline() {
                         <span
                           className={cn(
                             "font-display text-base font-bold transition-colors",
-                            isActive ? "text-accent" : "text-ink group-hover:text-accent",
+                            isActive
+                              ? "text-accent"
+                              : "text-ink group-hover:text-accent",
                           )}
                         >
                           {item.year}
@@ -478,7 +489,10 @@ export function SplitScrubberTimeline() {
                   {milestone.partnerLogo && (
                     <div className="relative z-10 mt-6 pt-4 border-t border-border/70 flex items-center justify-between">
                       <span className="text-xs font-semibold text-ink-muted">
-                        Official Entity / Partner: <strong className="text-ink font-semibold">{milestone.partnerName}</strong>
+                        Official Entity / Partner:{" "}
+                        <strong className="text-ink font-semibold">
+                          {milestone.partnerName}
+                        </strong>
                       </span>
                       <div className="relative h-8 sm:h-9 w-28 sm:w-36">
                         <Image

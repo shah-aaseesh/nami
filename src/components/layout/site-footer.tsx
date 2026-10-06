@@ -119,17 +119,19 @@ export async function SiteFooter() {
                         className="size-3.5 shrink-0 text-white"
                       />
                       <div className="flex flex-col">
-                        {contact.byEntity.school.phone.split(", ").map((num) => (
-                          <Link
-                            key={num}
-                            href={
-                              `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
-                            }
-                            className="transition-colors hover:text-white"
-                          >
-                            {num}
-                          </Link>
-                        ))}
+                        {contact.byEntity.school.phone
+                          .split(", ")
+                          .map((num) => (
+                            <Link
+                              key={num}
+                              href={
+                                `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                              }
+                              className="transition-colors hover:text-white"
+                            >
+                              {num}
+                            </Link>
+                          ))}
                       </div>
                     </div>
                     <Link
@@ -234,17 +236,19 @@ export async function SiteFooter() {
                         className="size-3.5 shrink-0 text-white"
                       />
                       <div className="flex flex-col">
-                        {contact.byEntity.college.phone.split(", ").map((num) => (
-                          <Link
-                            key={num}
-                            href={
-                              `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
-                            }
-                            className="transition-colors hover:text-white"
-                          >
-                            {num}
-                          </Link>
-                        ))}
+                        {contact.byEntity.college.phone
+                          .split(", ")
+                          .map((num) => (
+                            <Link
+                              key={num}
+                              href={
+                                `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                              }
+                              className="transition-colors hover:text-white"
+                            >
+                              {num}
+                            </Link>
+                          ))}
                       </div>
                     </div>
                     <Link
@@ -349,17 +353,19 @@ export async function SiteFooter() {
                         className="size-3.5 shrink-0 text-white"
                       />
                       <div className="flex flex-col">
-                        {contact.byEntity.institute.phone.split(", ").map((num) => (
-                          <Link
-                            key={num}
-                            href={
-                              `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
-                            }
-                            className="transition-colors hover:text-white"
-                          >
-                            {num}
-                          </Link>
-                        ))}
+                        {contact.byEntity.institute.phone
+                          .split(", ")
+                          .map((num) => (
+                            <Link
+                              key={num}
+                              href={
+                                `tel:${(num.split("/")[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                              }
+                              className="transition-colors hover:text-white"
+                            >
+                              {num}
+                            </Link>
+                          ))}
                       </div>
                     </div>
                     <Link
@@ -385,7 +391,9 @@ export async function SiteFooter() {
                           icon={MailIcon}
                           className="size-3.5 shrink-0 text-white"
                         />
-                        <span>{contact.byEntity.institute.admissionsEmail}</span>
+                        <span>
+                          {contact.byEntity.institute.admissionsEmail}
+                        </span>
                       </Link>
                     )}
                   </div>
@@ -450,7 +458,10 @@ export async function SiteFooter() {
           </Reveal>
         </div>
 
-        <div className="field-ink gutter-x py-4 sm:py-5 border-t border-neutral-800">
+        <div
+          id="site-footer-bottom-bar"
+          className="field-ink gutter-x py-4 sm:py-5 border-t border-neutral-800"
+        >
           <div className="mx-auto max-w-page flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <p className="font-body text-xs text-neutral-300">
               © {new Date().getFullYear()} {group.name}

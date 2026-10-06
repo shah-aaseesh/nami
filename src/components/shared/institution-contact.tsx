@@ -10,6 +10,9 @@ import {
   GlobeIcon,
   InstagramIcon,
   LinkedInIcon,
+  LocationIcon,
+  MailIcon,
+  PhoneIcon,
   TikTokIcon,
   WhatsappIcon,
   YouTubeIcon,
@@ -70,102 +73,138 @@ export async function InstitutionContact({
     .slice(0, 4);
 
   return (
-    <section className="gutter-x section-y border-t border-border/40" id={id}>
+    <section
+      className="gutter-x section-y-compact border-t border-border/40"
+      id={id}
+    >
       <div className="mx-auto max-w-page">
         <SectionHeader
           eyebrow="Get in Touch with NAMI"
           title="Contact & Location"
         />
 
-        <div className="mx-auto max-w-6xl">
-          <Reveal
-            className="mt-10 grid grid-cols-1 gap-8 sm:mt-12 md:grid-cols-2 md:gap-12 lg:gap-16 items-center"
-            y={16}
-          >
-            {/* Left: Contact Details (vertically centered, text-left) */}
-            <div className="flex flex-col justify-center text-left space-y-4 sm:space-y-5">
-              <p className="font-body text-base sm:text-lg text-ink leading-relaxed">
-                <span className="font-medium text-ink">Address: </span>
-                <span className="text-ink-muted">
-                  {campus.streetAddress}, {campus.locality}, {campus.city}
-                </span>
-              </p>
-
-              <p className="font-body text-base sm:text-lg text-ink">
-                <span className="font-medium text-ink">Phone: </span>
-                <Link
-                  className="text-ink-muted transition-colors hover:text-accent"
-                  href={
-                    `tel:${(entityContact.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
-                  }
-                >
-                  {entityContact.phone}
-                </Link>
-              </p>
-
-              <div className="font-body text-base sm:text-lg text-ink flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="font-medium text-ink">Email: </span>
-                <Link
-                  className="text-ink-muted transition-colors hover:text-accent"
-                  href={`mailto:${entityContact.email}` as Route}
-                >
-                  {entityContact.email}
-                </Link>
-                {entityContact.admissionsEmail && (
-                  <>
-                    <span className="text-ink-muted/50 hidden sm:inline">•</span>
-                    <Link
-                      className="text-ink-muted transition-colors hover:text-accent"
-                      href={`mailto:${entityContact.admissionsEmail}` as Route}
-                    >
-                      {entityContact.admissionsEmail}
-                    </Link>
-                  </>
-                )}
+        <Reveal
+          className="mt-6 sm:mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 items-stretch"
+          y={16}
+        >
+          {/* Left: Contact Info Card */}
+          <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-between rounded-2xl border border-border/80 bg-surface-raised/60 p-5 sm:p-6 lg:p-7 shadow-xs space-y-5">
+            <div className="space-y-4 sm:space-y-4.5">
+              {/* Address */}
+              <div className="flex items-start gap-3.5">
+                <div className="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <Icon className="size-4.5 sm:size-5" icon={LocationIcon} />
+                </div>
+                <div className="min-w-0">
+                  <span className="block text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                    Campus Address
+                  </span>
+                  <p className="mt-0.5 font-medium text-ink text-sm sm:text-base leading-snug">
+                    {campus.streetAddress ? `${campus.streetAddress}, ` : ""}
+                    {campus.locality}, {campus.city}
+                  </p>
+                </div>
               </div>
 
-              {socials.length > 0 ? (
-                <div className="pt-2 sm:pt-3">
-                  <ul className="flex items-center gap-3">
-                    {socials.map((social) => {
-                      const IconComponent =
-                        SOCIAL_ICONS[
-                          social.platform as keyof typeof SOCIAL_ICONS
-                        ] ?? GlobeIcon;
-
-                      return (
-                        <li key={social.platform}>
-                          <Link
-                            aria-label={`${entity.name} on ${social.label}`}
-                            className="flex size-10 sm:size-11 items-center justify-center rounded-full border border-border/70 text-ink-muted transition-colors hover:border-ink hover:bg-ink hover:text-white"
-                            href={social.href as Route}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            <Icon className="size-5" icon={IconComponent} />
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
+              {/* Phone */}
+              <div className="flex items-start gap-3.5">
+                <div className="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <Icon className="size-4.5 sm:size-5" icon={PhoneIcon} />
                 </div>
-              ) : null}
+                <div className="min-w-0">
+                  <span className="block text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                    Phone Numbers
+                  </span>
+                  <Link
+                    className="mt-0.5 block font-medium text-ink hover:text-accent transition-colors text-sm sm:text-base leading-snug"
+                    href={
+                      `tel:${(entityContact.phone.split(/[/,]/)[0] ?? "").replace(/[^+\d]/g, "")}` as Route
+                    }
+                  >
+                    {entityContact.phone}
+                  </Link>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-3.5">
+                <div className="flex size-9 sm:size-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <Icon className="size-4.5 sm:size-5" icon={MailIcon} />
+                </div>
+                <div className="min-w-0">
+                  <span className="block text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                    Email Inquiries
+                  </span>
+                  <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 font-medium text-ink text-sm sm:text-base leading-snug">
+                    <Link
+                      className="hover:text-accent transition-colors"
+                      href={`mailto:${entityContact.email}` as Route}
+                    >
+                      {entityContact.email}
+                    </Link>
+                    {entityContact.admissionsEmail && (
+                      <>
+                        <span className="text-ink-muted/50 hidden sm:inline">
+                          •
+                        </span>
+                        <Link
+                          className="hover:text-accent transition-colors"
+                          href={
+                            `mailto:${entityContact.admissionsEmail}` as Route
+                          }
+                        >
+                          {entityContact.admissionsEmail}
+                        </Link>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Right: Map */}
-            <div className="overflow-hidden rounded-xl border border-border/70 bg-neutral-100 shadow-sm">
-              <iframe
-                className="block aspect-4/3 w-full h-[260px] sm:h-[300px] lg:h-[320px]"
-                height={320}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                src={mapSrc(campus)}
-                title={`${entity.name} location map`}
-                width={500}
-              />
-            </div>
-          </Reveal>
-        </div>
+            {/* Socials */}
+            {socials.length > 0 && (
+              <div className="pt-3 border-t border-border/70 flex items-center justify-between gap-3">
+                <span className="text-xs font-semibold text-ink-muted">
+                  Follow {entity.name}
+                </span>
+                <ul className="flex items-center gap-2">
+                  {socials.map((social) => {
+                    const IconComponent =
+                      SOCIAL_ICONS[
+                        social.platform as keyof typeof SOCIAL_ICONS
+                      ] ?? GlobeIcon;
+
+                    return (
+                      <li key={social.platform}>
+                        <Link
+                          aria-label={`${entity.name} on ${social.label}`}
+                          className="flex size-8.5 sm:size-9 items-center justify-center rounded-full border border-border/80 bg-surface text-ink-muted transition-all hover:scale-105 hover:border-ink hover:bg-ink hover:text-white"
+                          href={social.href as Route}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          <Icon className="size-4" icon={IconComponent} />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Right: Map Container */}
+          <div className="lg:col-span-6 xl:col-span-7 overflow-hidden rounded-2xl border border-border/80 bg-neutral-100 shadow-xs min-h-[260px] sm:min-h-[300px] h-full flex">
+            <iframe
+              className="w-full h-full min-h-[260px] sm:min-h-[300px] block border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src={mapSrc(campus)}
+              title={`${entity.name} location map`}
+            />
+          </div>
+        </Reveal>
       </div>
     </section>
   );

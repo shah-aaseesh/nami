@@ -156,29 +156,29 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     asksEmploymentHistory: true,
     proposedCourses: [
       {
-        value: "BSc (Hons) Computer Science",
-        label: "BSc (Hons) Computer Science",
+        value: "BSc. (Hons) Computer Science",
+        label: "BSc. (Hons) Computer Science",
       },
       {
-        value: "BSc (Hons) Software Engineering",
-        label: "BSc (Hons) Software Engineering",
+        value: "BSc. (Hons) Software Engineering",
+        label: "BSc. (Hons) Software Engineering",
       },
       {
-        value: "BSc (Hons) Networking Engineering",
-        label: "BSc (Hons) Networking Engineering",
+        value: "BSc. (Hons) Networking Engineering",
+        label: "BSc. (Hons) Networking Engineering",
       },
       {
-        value: "BSc (Hons) Environmental Science",
-        label: "BSc (Hons) Environmental Science",
+        value: "BSc. (Hons) Environmental Science",
+        label: "BSc. (Hons) Environmental Science",
       },
       {
-        value: "BSc (Hons) Business Administration",
-        label: "BSc (Hons) Business Administration",
+        value: "BSc. (Hons) Business Administration",
+        label: "BSc. (Hons) Business Administration",
       },
       { value: "MSc Computer Science", label: "MSc Computer Science" },
       {
-        value: "BSc Environmental Studies (KU)",
-        label: "BSc Environmental Studies (KU)",
+        value: "BSc. Environmental Studies (KU)",
+        label: "BSc. Environmental Studies (KU)",
       },
     ],
   },
@@ -192,7 +192,10 @@ export const INQUIRY_COURSES: readonly InquiryCourse[] = [
     asksPendingQualifications: false,
     asksEmploymentHistory: false,
     proposedCourses: [
-      { value: "General Cook Commis II", label: "General Cook Commis II (484 Hours)" },
+      {
+        value: "General Cook Commis II",
+        label: "General Cook Commis II (484 Hours)",
+      },
       { value: "Hotel Assistant", label: "Hotel Assistant (390 Hours)" },
       { value: "Barista", label: "Barista (390 Hours)" },
       { value: "Bartender", label: "Bartender (390 Hours)" },

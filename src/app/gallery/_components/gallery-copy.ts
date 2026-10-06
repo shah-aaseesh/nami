@@ -871,7 +871,7 @@ export const eventAlbums: readonly EventAlbum[] = [
     category: "Sports & Games",
     date: "Annual Faculty Cup",
     description:
-      "BSc (Hons) Computing, BBA, and MBA cohorts competing in inter-faculty futsal, basketball, and table tennis championships.",
+      "BSc. (Hons) Computing, BBA, and MBA cohorts competing in inter-faculty futsal, basketball, and table tennis championships.",
     coverImage: basketballPrizeGiving,
     photos: [
       {

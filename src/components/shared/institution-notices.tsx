@@ -50,12 +50,15 @@ export async function InstitutionNotices({
             </Link>
           }
           description={copy.standfirst}
+          descriptionClassName="!text-sm sm:!text-base text-ink-muted leading-relaxed"
           layout="action"
           title={copy.eyebrow}
         />
 
         {notices.length === 0 ? (
-          <P className="mt-8 max-w-xl text-ink-muted">{copy.emptyState}</P>
+          <P className="mt-6 max-w-2xl text-sm sm:text-base text-ink-muted leading-relaxed">
+            {copy.emptyState}
+          </P>
         ) : (
           <Reveal className="mt-6 sm:mt-8" stagger={0.08}>
             <UpdateBoard

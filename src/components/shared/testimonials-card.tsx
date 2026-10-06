@@ -77,7 +77,10 @@ export function TestimonialCard({
         <span className="min-w-0">
           <H6
             as="span"
-            className={cn("block", isSmall ? "text-sm font-semibold" : "text-base")}
+            className={cn(
+              "block",
+              isSmall ? "text-sm font-semibold" : "text-base",
+            )}
           >
             {testimonial.name}
           </H6>

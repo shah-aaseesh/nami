@@ -67,56 +67,266 @@ export const INSTITUTION_TABS: readonly InstitutionTab[] = [
   { id: "bachelors", label: "Bachelors & Masters", badgeLabel: "Degree" },
 ];
 
-export const INSTITUTION_SUBCATEGORIES: Record<GalleryInstitution, readonly SubcategoryItem[]> = {
+export const INSTITUTION_SUBCATEGORIES: Record<
+  GalleryInstitution,
+  readonly SubcategoryItem[]
+> = {
   all: [
-    { id: "all", label: "All Moments", shortLabel: "All Highlights", iconType: "grid", thumbnail: "/nami/gallery-hero.jpg" },
-    { id: "academics", label: "Academics & Labs", shortLabel: "Academics", iconType: "math", thumbnail: "/gallery/Bachelors/Academic/ai.jpeg" },
-    { id: "clubs", label: "Clubs & Activities", shortLabel: "Clubs", iconType: "social", thumbnail: "/gallery/A-levels/Events/farewell.jpeg" },
-    { id: "events", label: "Events & Festivals", shortLabel: "Events", iconType: "events", thumbnail: "/gallery/Higher Secondary/Events/HOLI.jpeg" },
-    { id: "sports", label: "Sports & Athletics", shortLabel: "Sports", iconType: "sports", thumbnail: "/gallery/A-levels/Sports/xyz.jpeg" },
-    { id: "achievements", label: "Convocations & Wins", shortLabel: "Honors", iconType: "convocation", thumbnail: "/gallery/Bachelors/Events/graduation.jpeg" },
+    {
+      id: "all",
+      label: "All Moments",
+      shortLabel: "All Highlights",
+      iconType: "grid",
+      thumbnail: "/nami/gallery-hero.jpg",
+    },
+    {
+      id: "academics",
+      label: "Academics & Labs",
+      shortLabel: "Academics",
+      iconType: "math",
+      thumbnail: "/gallery/Bachelors/Academic/ai.jpeg",
+    },
+    {
+      id: "clubs",
+      label: "Clubs & Activities",
+      shortLabel: "Clubs",
+      iconType: "social",
+      thumbnail: "/gallery/A-levels/Events/farewell.jpeg",
+    },
+    {
+      id: "events",
+      label: "Events & Festivals",
+      shortLabel: "Events",
+      iconType: "events",
+      thumbnail: "/gallery/Higher Secondary/Events/HOLI.jpeg",
+    },
+    {
+      id: "sports",
+      label: "Sports & Athletics",
+      shortLabel: "Sports",
+      iconType: "sports",
+      thumbnail: "/gallery/A-levels/Sports/xyz.jpeg",
+    },
+    {
+      id: "achievements",
+      label: "Convocations & Wins",
+      shortLabel: "Honors",
+      iconType: "convocation",
+      thumbnail: "/gallery/Bachelors/Events/graduation.jpeg",
+    },
   ],
   primary: [
-    { id: "all", label: "All Primary Activities", shortLabel: "All Primary", iconType: "grid", thumbnail: "/nami/level-school.jpg" },
-    { id: "tech-3di", label: "3Di School New Zealand", shortLabel: "3Di School", iconType: "tech", thumbnail: "/collaborators/3di.png" },
-    { id: "sports-playnepal", label: "Play Nepal Sports", shortLabel: "Play Nepal", iconType: "sports", thumbnail: "/collaborators/play-nepal.png" },
-    { id: "academics-math", label: "UnMath Programme", shortLabel: "UnMath", iconType: "math", thumbnail: "/collaborators/unmath.png" },
-    { id: "mero-coding", label: "Mero Coding Hub", shortLabel: "Mero Coding", iconType: "tech", thumbnail: "/collaborators/mero-coding.png" },
-    { id: "samatva-wellness", label: "Samatva Wellness & Vaav", shortLabel: "Samatva", iconType: "culture", thumbnail: "/collaborators/samatva-wellness.png" },
-    { id: "others", label: "Other School Activities", shortLabel: "Others", iconType: "arts", thumbnail: "/gallery/Primary School/School Life/CLAYMATION.jpg" },
+    {
+      id: "all",
+      label: "All Primary Activities",
+      shortLabel: "All Primary",
+      iconType: "grid",
+      thumbnail: "/nami/level-school.jpg",
+    },
+    {
+      id: "tech-3di",
+      label: "3Di School New Zealand",
+      shortLabel: "3Di School",
+      iconType: "tech",
+      thumbnail: "/collaborators/3di.png",
+    },
+    {
+      id: "sports-playnepal",
+      label: "Play Nepal Sports",
+      shortLabel: "Play Nepal",
+      iconType: "sports",
+      thumbnail: "/collaborators/play-nepal.png",
+    },
+    {
+      id: "academics-math",
+      label: "UnMath Programme",
+      shortLabel: "UnMath",
+      iconType: "math",
+      thumbnail: "/collaborators/unmath.png",
+    },
+    {
+      id: "mero-coding",
+      label: "Mero Coding Hub",
+      shortLabel: "Mero Coding",
+      iconType: "tech",
+      thumbnail: "/collaborators/mero-coding.png",
+    },
+    {
+      id: "samatva-wellness",
+      label: "Samatva Wellness & Vaav",
+      shortLabel: "Samatva",
+      iconType: "culture",
+      thumbnail: "/collaborators/samatva-wellness.png",
+    },
+    {
+      id: "others",
+      label: "Other School Activities",
+      shortLabel: "Others",
+      iconType: "arts",
+      thumbnail: "/gallery/Primary School/School Life/CLAYMATION.jpg",
+    },
   ],
   "higher-secondary": [
-    { id: "all", label: "All (+2) Activities", shortLabel: "All (+2)", iconType: "grid", thumbnail: "/nami/level-plus-two.jpg" },
-    { id: "sports-club", label: "Sports Club", shortLabel: "Sports Club", iconType: "sports", thumbnail: "/gallery/Higher Secondary/Sports/Basketball Tournament—2082.jpeg" },
-    { id: "science-tech", label: "Science & Tech Club", shortLabel: "Science & Tech", iconType: "science", thumbnail: "/gallery/Higher Secondary/Academic/KIST FAIR- 2081.jpeg" },
-    { id: "social-service", label: "Social Service Club", shortLabel: "Social Service", iconType: "social", thumbnail: "/gallery/Higher Secondary/Events/Social Service Club.jpeg" },
-    { id: "event-management", label: "Event Management Club", shortLabel: "Events Club", iconType: "events", thumbnail: "/gallery/Higher Secondary/Events/HOLI.jpeg" },
-    { id: "art-literature", label: "Art & Literature Club", shortLabel: "Art & Lit", iconType: "arts", thumbnail: "/gallery/Higher Secondary/Events/intra-school art competition .jpeg" },
-    { id: "academic-tours", label: "Academics & Tours", shortLabel: "Study Tours", iconType: "math", thumbnail: "/gallery/Higher Secondary/School Life/Educational Tour.jpeg" },
+    {
+      id: "all",
+      label: "All (+2) Activities",
+      shortLabel: "All (+2)",
+      iconType: "grid",
+      thumbnail: "/nami/level-plus-two.jpg",
+    },
+    {
+      id: "sports-club",
+      label: "Sports Club",
+      shortLabel: "Sports Club",
+      iconType: "sports",
+      thumbnail:
+        "/gallery/Higher Secondary/Sports/Basketball Tournament—2082.jpeg",
+    },
+    {
+      id: "science-tech",
+      label: "Science & Tech Club",
+      shortLabel: "Science & Tech",
+      iconType: "science",
+      thumbnail: "/gallery/Higher Secondary/Academic/KIST FAIR- 2081.jpeg",
+    },
+    {
+      id: "social-service",
+      label: "Social Service Club",
+      shortLabel: "Social Service",
+      iconType: "social",
+      thumbnail: "/gallery/Higher Secondary/Events/Social Service Club.jpeg",
+    },
+    {
+      id: "event-management",
+      label: "Event Management Club",
+      shortLabel: "Events Club",
+      iconType: "events",
+      thumbnail: "/gallery/Higher Secondary/Events/HOLI.jpeg",
+    },
+    {
+      id: "art-literature",
+      label: "Art & Literature Club",
+      shortLabel: "Art & Lit",
+      iconType: "arts",
+      thumbnail:
+        "/gallery/Higher Secondary/Events/intra-school art competition .jpeg",
+    },
+    {
+      id: "academic-tours",
+      label: "Academics & Tours",
+      shortLabel: "Study Tours",
+      iconType: "math",
+      thumbnail: "/gallery/Higher Secondary/School Life/Educational Tour.jpeg",
+    },
   ],
   "a-levels": [
-    { id: "all", label: "All A-Levels Activities", shortLabel: "All A-Levels", iconType: "grid", thumbnail: "/nami/level-a-level.jpg" },
-    { id: "sports", label: "Sports Club", shortLabel: "Sports Club", iconType: "sports", thumbnail: "/gallery/A-levels/Sports/karate.jpeg" },
-    { id: "social-services", label: "Social Services Club", shortLabel: "Social Services", iconType: "social", thumbnail: "/nami/hero-mustang.jpg" },
-    { id: "arts-crafts", label: "Arts & Crafts Club", shortLabel: "Arts & Crafts", iconType: "arts", thumbnail: "/gallery/A-levels/Events/xyz.jpeg" },
-    { id: "academics", label: "Cambridge Academics", shortLabel: "Academics", iconType: "math", thumbnail: "/gallery/A-levels/Academic/xyz1.jpeg" },
-    { id: "student-life", label: "Student Life & Fests", shortLabel: "Student Life", iconType: "events", thumbnail: "/gallery/A-levels/Events/farewell.jpeg" },
+    {
+      id: "all",
+      label: "All A-Levels Activities",
+      shortLabel: "All A-Levels",
+      iconType: "grid",
+      thumbnail: "/nami/level-a-level.jpg",
+    },
+    {
+      id: "sports",
+      label: "Sports Club",
+      shortLabel: "Sports Club",
+      iconType: "sports",
+      thumbnail: "/gallery/A-levels/Sports/karate.jpeg",
+    },
+    {
+      id: "social-services",
+      label: "Social Services Club",
+      shortLabel: "Social Services",
+      iconType: "social",
+      thumbnail: "/nami/hero-mustang.jpg",
+    },
+    {
+      id: "arts-crafts",
+      label: "Arts & Crafts Club",
+      shortLabel: "Arts & Crafts",
+      iconType: "arts",
+      thumbnail: "/gallery/A-levels/Events/xyz.jpeg",
+    },
+    {
+      id: "academics",
+      label: "Cambridge Academics",
+      shortLabel: "Academics",
+      iconType: "math",
+      thumbnail: "/gallery/A-levels/Academic/xyz1.jpeg",
+    },
+    {
+      id: "student-life",
+      label: "Student Life & Fests",
+      shortLabel: "Student Life",
+      iconType: "events",
+      thumbnail: "/gallery/A-levels/Events/farewell.jpeg",
+    },
   ],
   bachelors: [
-    { id: "all", label: "All Degree Activities", shortLabel: "All Degree", iconType: "grid", thumbnail: "/nami/level-bachelor-master.jpg" },
-    { id: "websurfer", label: "WebSurfer Nepal", shortLabel: "WebSurfer", iconType: "tech", thumbnail: "/mou bachelors/websurfer-logo-brighter1920x658-removebg-preview.png" },
-    { id: "startup-discovery", label: "Startup Discovery Asia", shortLabel: "Startup Asia", iconType: "business", thumbnail: "/mou bachelors/Startup_Discovery-removebg-preview.png" },
-    { id: "machan", label: "Machan Wildlife Resort", shortLabel: "Machan Resort", iconType: "science", thumbnail: "/mou bachelors/machian-removebg-preview.png" },
-    { id: "suraj-interior", label: "Suraj Interior & Design", shortLabel: "Suraj Interior", iconType: "arts", thumbnail: "/mou bachelors/Suraj-removebg-preview.png" },
-    { id: "cross-web", label: "Cross Web IT Solutions", shortLabel: "Cross Web", iconType: "tech", thumbnail: "/mou bachelors/Cross_web-removebg-preview.png" },
-    { id: "others", label: "Other Degree Activities", shortLabel: "Others", iconType: "convocation", thumbnail: "/gallery/Bachelors/Events/graduation.jpeg" },
+    {
+      id: "all",
+      label: "All Degree Activities",
+      shortLabel: "All Degree",
+      iconType: "grid",
+      thumbnail: "/nami/level-bachelor-master.jpg",
+    },
+    {
+      id: "websurfer",
+      label: "WebSurfer Nepal",
+      shortLabel: "WebSurfer",
+      iconType: "tech",
+      thumbnail:
+        "/mou bachelors/websurfer-logo-brighter1920x658-removebg-preview.png",
+    },
+    {
+      id: "startup-discovery",
+      label: "Startup Discovery Asia",
+      shortLabel: "Startup Asia",
+      iconType: "business",
+      thumbnail: "/mou bachelors/Startup_Discovery-removebg-preview.png",
+    },
+    {
+      id: "machan",
+      label: "Machan Wildlife Resort",
+      shortLabel: "Machan Resort",
+      iconType: "science",
+      thumbnail: "/mou bachelors/machian-removebg-preview.png",
+    },
+    {
+      id: "suraj-interior",
+      label: "Suraj Interior & Design",
+      shortLabel: "Suraj Interior",
+      iconType: "arts",
+      thumbnail: "/mou bachelors/Suraj-removebg-preview.png",
+    },
+    {
+      id: "cross-web",
+      label: "Cross Web IT Solutions",
+      shortLabel: "Cross Web",
+      iconType: "tech",
+      thumbnail: "/mou bachelors/Cross_web-removebg-preview.png",
+    },
+    {
+      id: "others",
+      label: "Other Degree Activities",
+      shortLabel: "Others",
+      iconType: "convocation",
+      thumbnail: "/gallery/Bachelors/Events/graduation.jpeg",
+    },
   ],
 };
 
 export type CategoryFilterTab = {
   readonly id: GalleryCategory;
   readonly label: string;
-  readonly iconType: "grid" | "mortarboard" | "users" | "calendar" | "sports" | "trophy";
+  readonly iconType:
+    | "grid"
+    | "mortarboard"
+    | "users"
+    | "calendar"
+    | "sports"
+    | "trophy";
 };
 
 export const CATEGORY_TABS: readonly CategoryFilterTab[] = [
@@ -859,7 +1069,13 @@ function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
   switch (iconType) {
     case "grid":
       return (
-        <svg className="size-6 sm:size-7 text-[#BD1B21]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-[#BD1B21]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <rect height="7" rx="1.5" width="7" x="3" y="3" />
           <rect height="7" rx="1.5" width="7" x="14" y="3" />
           <rect height="7" rx="1.5" width="7" x="14" y="14" />
@@ -868,7 +1084,13 @@ function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
       );
     case "tech":
       return (
-        <svg className="size-6 sm:size-7 text-sky-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-sky-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <rect height="14" rx="2" width="20" x="2" y="3" />
           <line x1="8" x2="16" y1="21" y2="21" />
           <line x1="12" x2="12" y1="17" y2="21" />
@@ -877,14 +1099,26 @@ function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
       );
     case "sports":
       return (
-        <svg className="size-6 sm:size-7 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-emerald-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <circle cx="12" cy="12" r="10" />
           <path d="M2.5 12h19M12 2.5a14 14 0 0 1 0 19M12 2.5a14 14 0 0 0 0 19" />
         </svg>
       );
     case "math":
       return (
-        <svg className="size-6 sm:size-7 text-amber-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-amber-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
           <path d="M9 7h6M12 10v6M9 13h6" />
@@ -892,7 +1126,13 @@ function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
       );
     case "arts":
       return (
-        <svg className="size-6 sm:size-7 text-rose-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-rose-500"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <circle cx="13.5" cy="6.5" fill="currentColor" r=".5" />
           <circle cx="17.5" cy="10.5" fill="currentColor" r=".5" />
           <circle cx="8.5" cy="7.5" fill="currentColor" r=".5" />
@@ -902,20 +1142,38 @@ function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
       );
     case "culture":
       return (
-        <svg className="size-6 sm:size-7 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-purple-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z" />
         </svg>
       );
     case "trips":
       return (
-        <svg className="size-6 sm:size-7 text-teal-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-teal-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <circle cx="12" cy="12" r="10" />
           <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
         </svg>
       );
     case "science":
       return (
-        <svg className="size-6 sm:size-7 text-cyan-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-cyan-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M10 2v7.31L4.62 18.27A2 2 0 0 0 6.34 21h11.32a2 2 0 0 0 1.72-2.73L14 9.31V2" />
           <line x1="8.5" x2="15.5" y1="2" y2="2" />
           <line x1="7" x2="17" y1="14" y2="14" />
@@ -923,13 +1181,25 @@ function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
       );
     case "social":
       return (
-        <svg className="size-6 sm:size-7 text-pink-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-pink-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
         </svg>
       );
     case "events":
       return (
-        <svg className="size-6 sm:size-7 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-indigo-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <rect height="18" rx="2" ry="2" width="18" x="3" y="4" />
           <line x1="16" x2="16" y1="2" y2="6" />
           <line x1="8" x2="8" y1="2" y2="6" />
@@ -938,21 +1208,39 @@ function BubbleIcon({ iconType }: { readonly iconType: SubcategoryIconType }) {
       );
     case "business":
       return (
-        <svg className="size-6 sm:size-7 text-blue-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-blue-700"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <rect height="14" rx="2" ry="2" width="20" x="2" y="7" />
           <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
         </svg>
       );
     case "convocation":
       return (
-        <svg className="size-6 sm:size-7 text-yellow-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-yellow-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
           <path d="M6 12v5c3 3 9 3 12 0v-5" />
         </svg>
       );
     case "music":
       return (
-        <svg className="size-6 sm:size-7 text-violet-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg
+          className="size-6 sm:size-7 text-violet-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M9 18V5l12-2v13" />
           <circle cx="6" cy="18" r="3" />
           <circle cx="18" cy="16" r="3" />
@@ -966,9 +1254,12 @@ const LOAD_MORE_STEP = 6;
 
 export function GalleryMoments() {
   const [mounted, setMounted] = useState(false);
-  const [activeInstitution, setActiveInstitution] = useState<GalleryInstitution>("all");
+  const [activeInstitution, setActiveInstitution] =
+    useState<GalleryInstitution>("all");
   const [activeSubcategory, setActiveSubcategory] = useState<string>("all");
-  const [visibleCount, setVisibleCount] = useState<number>(INITIAL_MOMENTS_COUNT);
+  const [visibleCount, setVisibleCount] = useState<number>(
+    INITIAL_MOMENTS_COUNT,
+  );
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
 
@@ -988,12 +1279,17 @@ export function GalleryMoments() {
     setVisibleCount(INITIAL_MOMENTS_COUNT);
   };
 
-  const currentSubcategories = INSTITUTION_SUBCATEGORIES[activeInstitution] ?? INSTITUTION_SUBCATEGORIES.all;
+  const currentSubcategories =
+    INSTITUTION_SUBCATEGORIES[activeInstitution] ??
+    INSTITUTION_SUBCATEGORIES.all;
 
   const filteredMoments = GALLERY_MOMENTS.filter((item) => {
     // 1. Institution check
     if (activeInstitution !== "all") {
-      if (item.institution !== "all" && item.institution !== activeInstitution) {
+      if (
+        item.institution !== "all" &&
+        item.institution !== activeInstitution
+      ) {
         return false;
       }
     }
@@ -1028,11 +1324,17 @@ export function GalleryMoments() {
         return true;
       }
       if (activeInstitution === "all") {
-        if (item.category !== activeSubcategory && item.subcategory !== activeSubcategory) {
+        if (
+          item.category !== activeSubcategory &&
+          item.subcategory !== activeSubcategory
+        ) {
           return false;
         }
       } else {
-        if (item.subcategory !== activeSubcategory && item.category !== activeSubcategory) {
+        if (
+          item.subcategory !== activeSubcategory &&
+          item.category !== activeSubcategory
+        ) {
           return false;
         }
       }
@@ -1092,10 +1394,14 @@ export function GalleryMoments() {
     };
   }, [lightboxIndex, isVideoModalOpen]);
 
-  const currentImage = lightboxIndex !== null ? imageMoments[lightboxIndex] : null;
+  const currentImage =
+    lightboxIndex !== null ? imageMoments[lightboxIndex] : null;
 
   return (
-    <section className="gutter-x section-y-masthead pb-16 sm:pb-24" id="our-gallery">
+    <section
+      className="gutter-x section-y-masthead pb-16 sm:pb-24"
+      id="our-gallery"
+    >
       <div className="mx-auto max-w-page">
         {/* 1. Section Heading */}
         <div className="text-center">
@@ -1222,7 +1528,8 @@ export function GalleryMoments() {
               No moments found
             </h3>
             <p className="mt-2 text-sm text-ink-muted">
-              Try selecting "All" in the focus ribbon to explore all moments for this institution.
+              Try selecting "All" in the focus ribbon to explore all moments for
+              this institution.
             </p>
             <button
               className="mt-5 rounded-full bg-[#BD1B21] px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-[#a0161b] transition-colors cursor-pointer"
@@ -1264,7 +1571,10 @@ export function GalleryMoments() {
                         {/* Quotation Icon */}
                         <div className="relative z-10">
                           <div className="flex size-10 items-center justify-center rounded-lg bg-white/10 backdrop-blur-xs">
-                            <Icon className="size-5 text-white" icon={QuoteIcon} />
+                            <Icon
+                              className="size-5 text-white"
+                              icon={QuoteIcon}
+                            />
                           </div>
                         </div>
 
@@ -1309,7 +1619,10 @@ export function GalleryMoments() {
                         {/* Centered Circular Play Button */}
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="flex size-14 sm:size-16 items-center justify-center rounded-full border-2 border-white/90 bg-black/40 text-white backdrop-blur-xs shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-[#BD1B21] group-hover:border-[#BD1B21]">
-                            <Icon className="size-6 text-white translate-x-0.5" icon={PlayIcon} />
+                            <Icon
+                              className="size-6 text-white translate-x-0.5"
+                              icon={PlayIcon}
+                            />
                           </div>
                         </div>
                       </button>
@@ -1351,8 +1664,18 @@ export function GalleryMoments() {
 
                       {/* Expand icon on hover */}
                       <div className="absolute top-3 right-3 flex size-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-xs opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105 shadow-md">
-                        <svg className="size-4.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" strokeLinecap="round" strokeLinejoin="round" />
+                        <svg
+                          className="size-4.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
                     </button>
@@ -1366,11 +1689,16 @@ export function GalleryMoments() {
               <div className="mt-10 sm:mt-12 flex justify-center">
                 <button
                   type="button"
-                  onClick={() => setVisibleCount((prev) => prev + LOAD_MORE_STEP)}
+                  onClick={() =>
+                    setVisibleCount((prev) => prev + LOAD_MORE_STEP)
+                  }
                   className="group inline-flex items-center gap-2.5 rounded-full bg-[#BD1B21] px-8 py-3.5 text-sm font-semibold text-white shadow-md shadow-[#BD1B21]/20 transition-all duration-200 hover:bg-[#a0161b] hover:shadow-lg hover:shadow-[#BD1B21]/30 hover:scale-[1.02] cursor-pointer active:scale-95"
                 >
                   <span>See More Moments</span>
-                  <Icon className="size-4 transition-transform duration-200 group-hover:translate-y-0.5" icon={ChevronDownIcon} />
+                  <Icon
+                    className="size-4 transition-transform duration-200 group-hover:translate-y-0.5"
+                    icon={ChevronDownIcon}
+                  />
                 </button>
               </div>
             )}

@@ -57,7 +57,8 @@ export function GalleryHero() {
             {/* 4. Standfirst Copy */}
             <RevealItem>
               <p className="max-w-md font-body text-sm sm:text-base text-[#525252] leading-relaxed">
-                A glimpse into the vibrant life at NAMI College where every moment shapes a brighter future.
+                A glimpse into the vibrant life at NAMI College where every
+                moment shapes a brighter future.
               </p>
             </RevealItem>
           </Reveal>
@@ -104,7 +105,10 @@ export function GalleryHero() {
               viewBox="0 0 100 100"
             >
               <path d="M0,0 Q60,25 20,50 T0,100 L0,100 Z" fill="#FAF9F6" />
-              <path d="M0,0 Q65,25 25,50 T0,100 L12,100 Q40,75 35,50 Q45,25 0,0 Z" fill="#8B1519" />
+              <path
+                d="M0,0 Q65,25 25,50 T0,100 L12,100 Q40,75 35,50 Q45,25 0,0 Z"
+                fill="#8B1519"
+              />
             </svg>
           </div>
 

@@ -2,8 +2,8 @@ import type { RichText, SectionCopy } from "@/lib/content";
 import { richText } from "@/lib/content";
 
 export const mascotSection: SectionCopy = {
-  navLabel: "The mascot",
-  eyebrow: "The mascot",
+  navLabel: "The Mascot",
+  eyebrow: "The Mascot",
   heading: "The swan carries the same five values.",
   standfirst: null,
   cta: null,

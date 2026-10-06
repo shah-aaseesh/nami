@@ -107,6 +107,23 @@ const MILESTONES: readonly Milestone[] = [
     partnerName: "NAMI International School",
   },
   {
+    year: "2024",
+    era: "Global Testing",
+    category: "Pearson VUE Authorized",
+    title: "Pearson VUE-Authorized Test Center Collaboration",
+    summary:
+      "NAMI established an officially authorized Pearson VUE computer-based testing centre in Kathmandu, empowering students and IT professionals to sit for globally accredited certification examinations.",
+    points: [
+      "On-campus Pearson VUE-Authorized Computer-Based Testing Centre",
+      "Global IT, academic, and professional licensure certifications",
+      "High-security testing infrastructure meeting international standards",
+    ],
+    image: "/partners/pearson-vue.jpg",
+    imageAlt: "Pearson VUE-Authorized Test Center at NAMI",
+    partnerLogo: "/partners/pearson-vue.jpg",
+    partnerName: "Pearson VUE Authorized Testing",
+  },
+  {
     year: "2025–2026",
     era: "Future Frontiers",
     category: "KU, UK & CTEVT",
@@ -190,7 +207,9 @@ export function CompactTimeline() {
                   <span
                     className={cn(
                       "font-display text-sm sm:text-base font-bold transition-colors",
-                      isSelected ? "text-accent" : "text-ink/80 group-hover:text-ink",
+                      isSelected
+                        ? "text-accent"
+                        : "text-ink/80 group-hover:text-ink",
                     )}
                   >
                     {item.year}
@@ -281,7 +300,10 @@ export function CompactTimeline() {
             {active.partnerLogo && (
               <div className="mt-6 pt-4 border-t border-border/70 flex items-center justify-between">
                 <span className="text-xs font-semibold text-ink-muted">
-                  Official Body / Partner: <strong className="text-ink font-semibold">{active.partnerName}</strong>
+                  Official Body / Partner:{" "}
+                  <strong className="text-ink font-semibold">
+                    {active.partnerName}
+                  </strong>
                 </span>
                 <div className="relative h-8 sm:h-9 w-28 sm:w-36">
                   <Image

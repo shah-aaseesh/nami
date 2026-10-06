@@ -33,9 +33,10 @@ export function AlumniStories({
 
   const wingFilters = [
     { id: "all", label: "All Alumni" },
-    { id: "institute", label: "Northampton UK" },
+    { id: "undergraduate", label: "Undergraduate Program" },
+    { id: "graduate", label: "Graduate Program" },
     { id: "college", label: "A-Levels" },
-    { id: "higher-secondary", label: "+2" },
+    { id: "higher-secondary", label: "Secondary School" },
   ] as const;
 
   return (
@@ -248,13 +249,13 @@ export function AlumniStories({
                   The Journey & Educational Experience
                 </h4>
                 <div className="space-y-3 text-xs sm:text-sm text-ink/85 leading-relaxed font-body text-justify [text-align-last:left] [hyphens:auto]">
-                  {activeStory.pdfData.storyParagraphs.map((paragraph, idx) => (
-                    <p key={idx}>
-                      {paragraph.split(/(\*\*.*?\*\*)/g).map((part, pIdx) => {
+                  {activeStory.pdfData.storyParagraphs.map((paragraph) => (
+                    <p key={paragraph.slice(0, 32)}>
+                      {paragraph.split(/(\*\*.*?\*\*)/g).map((part) => {
                         if (part.startsWith("**") && part.endsWith("**")) {
                           return (
                             <strong
-                              key={pIdx}
+                              key={part}
                               className="font-semibold text-ink"
                             >
                               {part.slice(2, -2)}

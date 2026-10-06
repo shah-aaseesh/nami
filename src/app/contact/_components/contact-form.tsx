@@ -48,18 +48,17 @@ export function ContactForm({
     () => topics.map((topic) => ({ value: topic, label: topic })),
     [topics],
   );
-  const { control, trigger, getFieldState, reset } =
-    useForm<ContactFormData>({
-      resolver: zodResolver(contactSchema),
-      mode: "onTouched",
-      defaultValues: {
-        name: "",
-        email: "",
-        phone: "",
-        topic: "",
-        message: "",
-      },
-    });
+  const { control, trigger, getFieldState, reset } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    mode: "onTouched",
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      topic: "",
+      message: "",
+    },
+  });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -106,7 +105,8 @@ export function ContactForm({
             Thank you! Your message has been sent.
           </H5>
           <P className="text-emerald-800 text-sm sm:text-base">
-            We have received your inquiry and our team will get back to you shortly.
+            We have received your inquiry and our team will get back to you
+            shortly.
           </P>
         </div>
       )}

@@ -69,7 +69,7 @@ export const homeCopy: HomeCopy = {
     },
     programmes: {
       navLabel: "Programmes",
-      eyebrow: "What you can study",
+      eyebrow: "What You Can Study",
       heading:
         "British degrees, Cambridge A Levels, NEB — taught in Kathmandu.",
       standfirst: null,
@@ -85,7 +85,7 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     partners: {
-      navLabel: "Industry partners",
+      navLabel: "Industry Partners",
       eyebrow: "Industry",
       heading: "The people our students work with before they graduate.",
       standfirst:
@@ -94,15 +94,15 @@ export const homeCopy: HomeCopy = {
       emptyState: null,
     },
     campusLife: {
-      navLabel: "College life",
-      eyebrow: "Beyond the timetable",
+      navLabel: "College Life",
+      eyebrow: "Beyond the Timetable",
       heading: "Where ideas get built.",
       standfirst: null,
       cta: null,
       emptyState: null,
     },
     stats: {
-      navLabel: "NAMI in numbers",
+      navLabel: "NAMI in Numbers",
       eyebrow: "Our Milestones",
       heading: "NAMI, by the Numbers",
       standfirst:

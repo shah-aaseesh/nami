@@ -6,12 +6,7 @@ import { useMemo, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Display, Eyebrow, H3, H5, P } from "@/components/ui/typography";
-import {
-  BookIcon,
-  DiplomaIcon,
-  DownloadIcon,
-  ImageIcon,
-} from "@/lib/icons";
+import { BookIcon, DiplomaIcon, DownloadIcon, ImageIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 // Custom Document / PDF Icon
@@ -56,10 +51,7 @@ function SearchIcon(props: React.ComponentProps<"svg">) {
   );
 }
 
-export type DocumentCategory =
-  | "all"
-  | "publications"
-  | "admissions";
+export type DocumentCategory = "all" | "publications" | "admissions";
 
 export type OfficialDocument = {
   readonly id: string;
@@ -97,7 +89,7 @@ const DOCUMENTS: readonly OfficialDocument[] = [
     categoryLabel: "Admissions Form",
     institution: "Institute",
     description:
-      "Official admission application form for University of Northampton (UK) undergraduate and postgraduate programmes at NAMI (BSc Computing, Software Engineering, Network Engineering, Environmental Science, BBA, MBA).",
+      "Official admission application form for University of Northampton (UK) undergraduate and postgraduate programmes at NAMI (BSc. Computing, Software Engineering, Network Engineering, Environmental Science, BBA, MBA).",
     fileSrc: "/Nami_applicationform_bachelors.pdf",
     fileType: "PDF",
     fileSize: "111 KB",
@@ -182,7 +174,9 @@ export default function DocumentsPage() {
                 Documents & Publications
               </Display>
               <P className="mt-3 max-w-2xl text-ink-muted text-base sm:text-lg">
-                Access and download official institutional publications, prospectus books, curriculum guidelines, and printable admission application forms across NAMI institutions.
+                Access and download official institutional publications,
+                prospectus books, curriculum guidelines, and printable admission
+                application forms across NAMI institutions.
               </P>
             </div>
 
@@ -261,7 +255,8 @@ export default function DocumentsPage() {
               <FilePdfIcon className="size-10 text-ink-muted/40 mx-auto mb-3" />
               <H5 className="text-ink font-semibold">No documents found</H5>
               <P className="mt-1 text-xs sm:text-sm text-ink-muted">
-                No documents match your search criteria. Try a different search term or category.
+                No documents match your search criteria. Try a different search
+                term or category.
               </P>
               <Button
                 variant="outline"
@@ -360,9 +355,12 @@ export default function DocumentsPage() {
           {/* Online Application Notice Banner */}
           <div className="mt-12 sm:mt-16 rounded-2xl border border-border bg-primary-100/30 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-              <H5 className="text-ink font-semibold">Prefer applying completely online?</H5>
+              <H5 className="text-ink font-semibold">
+                Prefer applying completely online?
+              </H5>
               <P className="mt-1 text-xs sm:text-sm text-ink-muted">
-                You can fill out the dynamic digital inquiry and application form directly in your browser without printing.
+                You can fill out the dynamic digital inquiry and application
+                form directly in your browser without printing.
               </P>
             </div>
             <Link

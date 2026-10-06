@@ -40,11 +40,16 @@ export function AlumniNetworkCta({
                     onClick={() => setIsModalOpen(true)}
                     type="button"
                   >
-                    <Icon className="size-4.5 text-primary-700" icon={SparklesIcon} />
+                    <Icon
+                      className="size-4.5 text-primary-700"
+                      icon={SparklesIcon}
+                    />
                     <span>Share Your Story</span>
                   </button>
                 }
-                description={<span className="text-white/85">{copy.standfirst}</span>}
+                description={
+                  <span className="text-white/85">{copy.standfirst}</span>
+                }
                 eyebrow={
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-3 py-0.5 text-xs font-semibold tracking-wider text-white uppercase">
                     <span className="size-1.5 rounded-full bg-white animate-pulse" />

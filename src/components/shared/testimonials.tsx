@@ -64,10 +64,7 @@ export function Testimonials({
       : testimonials.map((t) => ({ ...t, itemKey: t.id }));
 
   return (
-    <section
-      className={cn("gutter-x section-y-compact", className)}
-      id={id}
-    >
+    <section className={cn("gutter-x section-y-compact", className)} id={id}>
       <div className="mx-auto max-w-page">
         {testimonials.length > 1 ? (
           <Carousel
@@ -98,10 +95,7 @@ export function Testimonials({
 
             <Reveal className="mt-6 sm:mt-8" y={24}>
               <CarouselContent
-                className={cn(
-                  "-ms-4",
-                  size === "sm" ? "lg:-ms-5" : "lg:-ms-6",
-                )}
+                className={cn("-ms-4", size === "sm" ? "lg:-ms-5" : "lg:-ms-6")}
               >
                 {displayTestimonials.map((testimonial) => (
                   <CarouselItem

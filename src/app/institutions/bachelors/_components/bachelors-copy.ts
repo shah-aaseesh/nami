@@ -91,7 +91,7 @@ const academicHeadPortrait: ContentImage = {
   height: 2000,
 };
 
-const readingRoom: ContentImage = {
+const _readingRoom: ContentImage = {
   src: "/nami/level-bachelor-master.jpg",
   alt: "NAMI's library, metal shelving stacked with books and a newspaper rack standing behind the library help desk.",
   width: 1200,
@@ -100,7 +100,7 @@ const readingRoom: ContentImage = {
 
 const degreeComputerScience: ContentImage = {
   src: "/final photos/degree (1).jpg",
-  alt: "NAMI BSc (Hons) Computer Science lecture and interactive computing workshop.",
+  alt: "NAMI BSc. (Hons) Computer Science lecture and interactive computing workshop.",
   width: 1500,
   height: 1000,
 };
@@ -126,28 +126,28 @@ const degreeClimateAITeam: ContentImage = {
   height: 853,
 };
 
-const scienceLaboratory: ContentImage = {
+const _scienceLaboratory: ContentImage = {
   src: "/nami/campus-science-lab.jpg",
   alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
   width: 1280,
   height: 853,
 };
 
-const readingHall: ContentImage = {
+const _readingHall: ContentImage = {
   src: "/nami/campus-library.jpg",
   alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
   width: 1280,
   height: 853,
 };
 
-const plantationProgramme: ContentImage = {
+const _plantationProgramme: ContentImage = {
   src: "/nami/event-plantation-2022.jpg",
   alt: "Staff and volunteers crouched on the grass settling a sapling into the ground, one of them wearing a Nepal Prakriti Pathshala shirt from Wildlife Conservation Nepal.",
   width: 800,
   height: 753,
 };
 
-const auditoriumGathering: ContentImage = {
+const _auditoriumGathering: ContentImage = {
   src: "/nami/campus-auditorium.jpg",
   alt: "Students and staff seated on sofas and stacking chairs in the NAMI auditorium, maroon acoustic panelling on the wall behind them.",
   width: 999,
@@ -202,8 +202,8 @@ const masthead: BachelorsMastheadCopy = {
 };
 
 const awarding: InstitutionAwardingCopy = {
-  eyebrow: "Awarding universities",
-  heading: "Partner universities awarding our degrees.",
+  eyebrow: "Awarding Universities",
+  heading: "Partner Universities awarding our degrees.",
   standfirst:
     "Taught at NAMI in Kathmandu, awarded by our accredited university partners.",
   sinceLabel: "Since",
@@ -272,17 +272,17 @@ const programmes: BachelorsProgrammesCopy = {
   items: [
     {
       key: "computer-science",
-      qualification: "BSc (Hons)",
+      qualification: "BSc. (Hons)",
       title: "Computer Science",
-      fullTitle: "BSc (Hons) Computer Science",
+      fullTitle: "BSc. (Hons) Computer Science",
       metaDescription:
-        "BSc (Hons) Computer Science at NAMI, Kathmandu — a three-year degree awarded by the University of Northampton, UK, with majors in Computing, Software Engineering and Computer Networks Engineering.",
+        "BSc. (Hons) Computer Science at NAMI, Kathmandu — a three-year degree awarded by the University of Northampton, UK, with majors in Computing, Software Engineering and Computer Networks Engineering.",
       image: degreeComputerScience,
       awardingBody: northamptonAward,
       startingFrom: null,
       format: "Three-year degree",
       keyFacts: [
-        { label: "Programme Name", value: "BSc (Hons) Computer Science" },
+        { label: "Programme Name", value: "BSc. (Hons) Computer Science" },
         { label: "Level", value: "Undergraduate Degree" },
         { label: "Duration", value: "3 years" },
         { label: "Intake", value: "September / January" },
@@ -292,7 +292,7 @@ const programmes: BachelorsProgrammesCopy = {
         { label: "Total Credits", value: "360" },
       ],
       whatYoullStudy:
-        "Our BSc Computer Science degree gives you the opportunity to explore different ideas and develop innovative solutions to current issues in the computing industry. This three-year Computer Science university degree will give you an insight into the computing industry, investigating the wide-reaching influences that computers and computing technology have on the world. Studying this course will also contribute towards helping you find your ideal path for a career in Computing.",
+        "Our BSc. Computer Science degree gives you the opportunity to explore different ideas and develop innovative solutions to current issues in the computing industry. This three-year Computer Science university degree will give you an insight into the computing industry, investigating the wide-reaching influences that computers and computing technology have on the world. Studying this course will also contribute towards helping you find your ideal path for a career in Computing.",
       shortDescription:
         "Three-year honours degree with majors in Software Engineering, Computing Systems, and Networks.",
       summary: [
@@ -454,7 +454,7 @@ const programmes: BachelorsProgrammesCopy = {
               prerequisites:
                 "Students undertaking this module should have successfully completed all level 4 and at least 100 credits at level 5.",
               description:
-                "This project module provides the opportunity for the student to undertake independent research, development, and self-management of a Computing related project leading to completing a dissertation. An essential outcome for this module is that the student’s project deliverable includes the design and development of a system, or a software application, or a novel functional approach that relates to the main areas of student study, and that can be used, applied or demonstrated in some way. Students on the BSc Business Computing may engage on a research centered project resulting in a report of analysis of an appropriate topic.",
+                "This project module provides the opportunity for the student to undertake independent research, development, and self-management of a Computing related project leading to completing a dissertation. An essential outcome for this module is that the student’s project deliverable includes the design and development of a system, or a software application, or a novel functional approach that relates to the main areas of student study, and that can be used, applied or demonstrated in some way. Students on the BSc. Business Computing may engage on a research centered project resulting in a report of analysis of an appropriate topic.",
             },
             {
               code: "CSY3058",
@@ -498,11 +498,11 @@ const programmes: BachelorsProgrammesCopy = {
     },
     {
       key: "environmental-science",
-      qualification: "BSc (Hons)",
+      qualification: "BSc. (Hons)",
       title: "Environmental Science",
-      fullTitle: "BSc (Hons) Environmental Science",
+      fullTitle: "BSc. (Hons) Environmental Science",
       metaDescription:
-        "BSc (Hons) Environmental Science at NAMI, Kathmandu — a three-year degree awarded by the University of Northampton, UK, combining ecology and physical science with field and laboratory work.",
+        "BSc. (Hons) Environmental Science at NAMI, Kathmandu — a three-year degree awarded by the University of Northampton, UK, combining ecology and physical science with field and laboratory work.",
       image: degreeClimateAI,
       awardingBody: northamptonAward,
       startingFrom: null,
@@ -683,13 +683,13 @@ const programmes: BachelorsProgrammesCopy = {
         "Bachelors in Environmental Studies (BES) at NAMI, Kathmandu — a four-year undergraduate programme awarded by Kathmandu University, focusing on the social, economic, and ecological dimensions of environmental issues.",
       image: degreeClimateAITeam,
       awardingBody: "Kathmandu University",
-      startingFrom: "August 2026",
+      startingFrom: null,
       format: "4 years | 8 semesters",
       shortDescription:
         "Four-year bachelor's degree focusing on the social, economic, and ecological dimensions of environmental issues.",
       summary: [
         "The Bachelors in Environmental Studies (BES) at NAMI, awarded by Kathmandu University, is a four-year undergraduate programme designed with focus on the social, economic, and ecological dimensions of environmental issues. Through an interdisciplinary curriculum bridging ecological science, socio-economic dynamics, and governance, students gain a holistic understanding of how living and non-living systems interact and develop sustainable solutions.",
-        "Understanding Our Environment: Environment is not only the \"surrounding\" — it is the sum total of all the living and non-living entities affecting each other including humans. Environment is the ultimate resource for all living beings, but with human need and greed, the status of the environment is undergoing degradation, requiring multi-disciplinary intervention.",
+        'Understanding Our Environment: Environment is not only the "surrounding" — it is the sum total of all the living and non-living entities affecting each other including humans. Environment is the ultimate resource for all living beings, but with human need and greed, the status of the environment is undergoing degradation, requiring multi-disciplinary intervention.',
         "A Multi-Disciplinary Curriculum: The environment has become the focus of many disciplines and discourses, encompassing biology, physics, chemistry, geography, sociology, economics, management, laws, governance and policies, ethics, and philosophy. Because environmental issues are now part of every career path and employment, holistic multi-disciplinary knowledge is essential.",
         "Practical & Field-Based Learning: At NAMI, environmental education is deeply immersive. Students participate in comprehensive field trips, in-house laboratory projects, GIS and remote sensing analysis, Environmental Impact Assessments (IEE/EIA), community-based learning, and internships at leading NGOs, INGOs, and research organisations.",
         "Course Highlights & Specialisations: BES is an eight-semester (four-year) programme. Featured courses include Green Entrepreneurship, Conservation and Protected Areas, Environmental Pollution, Indigenous Traditional Knowledge (ITK) and Practices, Environmental Arts and Design, Nature-Based Solutions and Innovation, Environmental Tourism, and Final Year Projects.",
@@ -721,7 +721,8 @@ const programmes: BachelorsProgrammesCopy = {
       stages: [
         {
           key: "bes-stage-1",
-          label: "Year 1 — Build Your Foundation in Environmental Science & Systems",
+          label:
+            "Year 1 — Build Your Foundation in Environmental Science & Systems",
           note: "Focus: Understand ecological systems and scientific fundamentals. Modules span Semester I & Semester II (32 credits total), covering introductory environmental studies, development practices, ecosystems of the world and Nepal, chemistry, biodiversity, economics, Nepali/English communication, and in-house projects.",
           modules: [
             {
@@ -812,7 +813,8 @@ const programmes: BachelorsProgrammesCopy = {
         },
         {
           key: "bes-stage-2",
-          label: "Year 2 — Environmental Dynamics & Natural Resource Management",
+          label:
+            "Year 2 — Environmental Dynamics & Natural Resource Management",
           note: "Focus: Deepen scientific analysis and resource governance. Modules span Semester I & Semester II (34 credits total), covering climate dynamics, environmental physics, natural resource management, environmental statistics, sustainable development principles, pollution theory, geology, occupational health, and energy.",
           modules: [
             {
@@ -1262,7 +1264,7 @@ const partners: CareerPlacementCopy = {
 
 const alumni: SectionCopy = {
   navLabel: "Voices",
-  eyebrow: "Student voices",
+  eyebrow: "Student Voices",
   heading: "In their own words, on what the degree is actually worth.",
   standfirst:
     "Hear directly from our students on the British system of learning, practical innovation, and personal growth at NAMI.",
@@ -1271,7 +1273,7 @@ const alumni: SectionCopy = {
 };
 
 const gallery: InstitutionGalleryCopy = {
-  eyebrow: "The college",
+  eyebrow: "The College",
   heading: "Degree years, photographed.",
   standfirst:
     "Convocations, panels, field days and the ordinary weeks between them — the institute’s own record of what a degree here looks like.",
@@ -1279,7 +1281,7 @@ const gallery: InstitutionGalleryCopy = {
 };
 
 const notices: InstitutionNoticesCopy = {
-  eyebrow: "Notice board",
+  eyebrow: "Notice Board",
   heading: "What the institute is announcing.",
   standfirst:
     "Registration windows, submission deadlines and standing notices for undergraduate and postgraduate students.",
@@ -1292,7 +1294,7 @@ export const bachelorsCopy = {
   meta: {
     title: "Naaya Aayam Multi-Disciplinary Institute",
     description:
-      "Naaya Aayam Multi-Disciplinary Institute teaches partner-university degrees at New Baneshwor, Kathmandu — BSc (Hons) Computer Science, BSc (Hons) Environmental Science, and Bachelor in Business Administration awarded by the University of Northampton, UK, and BSc Environmental Studies awarded by Kathmandu University from August 2026.",
+      "Naaya Aayam Multi-Disciplinary Institute teaches partner-university degrees at New Baneshwor, Kathmandu — BSc. (Hons) Computer Science, BSc. (Hons) Environmental Science, and Bachelor in Business Administration awarded by the University of Northampton, UK, and BSc. Environmental Studies awarded by Kathmandu University.",
   },
   levelSlug: "bachelors",
   masthead,

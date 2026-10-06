@@ -1,9 +1,6 @@
 import type { ContentImage } from "@/lib/content";
 
-export type ALevelsClubSlug =
-  | "social-services"
-  | "sports"
-  | "arts-and-crafts";
+export type ALevelsClubSlug = "social-services" | "sports" | "arts-and-crafts";
 
 export type ALevelsClubActivity = {
   readonly title: string;

@@ -200,7 +200,7 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
       {
         title: "Theatrical Drama & Monologue Showcase",
         description:
-          "Full-stage plays and Shakespearean/Nepali drama staged inside the 300-seat school auditorium.",
+          "Full-stage plays and Shakespearean/Nepali drama staged inside the 250+ seat school auditorium.",
         tag: "Performance",
       },
       {

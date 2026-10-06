@@ -17,7 +17,10 @@ export function AboutOverview({
   const paragraphs = paragraphsOf(overview);
 
   return (
-    <section className="gutter-x pt-3 sm:pt-5 lg:pt-6 pb-10 sm:pb-12 lg:pb-14" id="overview">
+    <section
+      className="gutter-x pt-3 sm:pt-5 lg:pt-6 pb-10 sm:pb-12 lg:pb-14"
+      id="overview"
+    >
       <div className="mx-auto max-w-page">
         {/* Section Heading */}
         <div>

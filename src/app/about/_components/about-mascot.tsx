@@ -53,13 +53,13 @@ export function AboutMascot({
             <div className="relative flex w-full items-center justify-center py-6 lg:py-0">
               <div className="absolute -inset-8 -z-10 rounded-full bg-accent/5 blur-3xl" />
               <Image
-                alt={image?.alt ?? "NAMI Mascot"}
-                className="h-auto w-full max-w-sm object-contain mix-blend-multiply drop-shadow-2xl transition-transform duration-700 hover:scale-105 lg:max-w-md"
-                height={image?.height ?? 408}
+                alt={image?.alt ?? "NAMI College Mascot - The Swan"}
+                className="h-auto w-full max-w-sm object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105 lg:max-w-md"
+                height={image?.height ?? 800}
                 loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 450px"
-                src={image?.src ?? "/swan.png"}
-                width={image?.width ?? 612}
+                src={image?.src ?? "/final photos/Mascot final.png"}
+                width={image?.width ?? 800}
               />
             </div>
           </Reveal>

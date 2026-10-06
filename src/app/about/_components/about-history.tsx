@@ -26,7 +26,7 @@ const NAMI_TIMELINE: readonly MilestoneItem[] = [
     description:
       "Naaya Aayam Multi-Disciplinary Institute (NAMI) was established in Kathmandu by visionary entrepreneurs and educationists with the goal of providing world-class tertiary education in Nepal. NAMI partnered with the University of Northampton, UK, to offer internationally accredited undergraduate and postgraduate degree programmes.",
     highlights: [
-      "BSc (Hons) in Computing, Software Engineering, Network Engineering & Environmental Science",
+      "BSc. (Hons) in Computing, Software Engineering, Network Engineering & Environmental Science",
       "Bachelor of Business Administration (BBA) & Master's degrees",
       "Direct UK university curriculum and international faculty moderation",
     ],
@@ -99,11 +99,12 @@ const NAMI_TIMELINE: readonly MilestoneItem[] = [
     period: "KU Partnership, Hertfordshire & Vocational Training",
     tag: "Innovation & Growth",
     tagColor: "teal",
-    title: "Kathmandu University Partnership, UK Collaborations & CTEVT Programmes",
+    title:
+      "Kathmandu University Partnership, UK Collaborations & CTEVT Programmes",
     description:
       "NAMI entered a new era of academic diversification through a strategic partnership with Kathmandu University (KU) for the Bachelor of Science in Environmental Studies (BES), academic collaboration with the University of Hertfordshire (UK), and CTEVT-approved skill-based vocational programmes.",
     highlights: [
-      "BSc in Environmental Studies in academic partnership with Kathmandu University (KU)",
+      "BSc. in Environmental Studies in academic partnership with Kathmandu University (KU)",
       "University of Hertfordshire, UK collaboration and Pearson VUE Testing Centre",
       "CTEVT short-term skill-oriented vocational and technical training programmes",
       "Expanded industry MoUs and experiential learning research initiatives",
@@ -113,7 +114,10 @@ const NAMI_TIMELINE: readonly MilestoneItem[] = [
   },
 ];
 
-const TAG_STYLES: Record<MilestoneItem["tagColor"], { badge: string; dot: string }> = {
+const TAG_STYLES: Record<
+  MilestoneItem["tagColor"],
+  { badge: string; dot: string }
+> = {
   brand: {
     badge: "bg-accent/10 text-accent border-accent/20",
     dot: "bg-accent",
@@ -134,7 +138,10 @@ const TAG_STYLES: Record<MilestoneItem["tagColor"], { badge: string; dot: string
 
 export function AboutHistory() {
   return (
-    <section className="gutter-x section-y bg-surface-raised/40 border-y border-border/70" id="history">
+    <section
+      className="gutter-x section-y bg-surface-raised/40 border-y border-border/70"
+      id="history"
+    >
       <div className="mx-auto max-w-page">
         {/* Section Header */}
         <div className="max-w-3xl">
@@ -159,8 +166,9 @@ export function AboutHistory() {
           <div className="mt-4 sm:mt-5">
             <Reveal>
               <P className="text-base sm:text-lg text-ink-muted leading-relaxed">
-                From our founding in 2012 to becoming one of Nepal&apos;s most comprehensive educational groups,
-                discover how NAMI has evolved across academic entities, international university partnerships,
+                From our founding in 2012 to becoming one of Nepal&apos;s most
+                comprehensive educational groups, discover how NAMI has evolved
+                across academic entities, international university partnerships,
                 and innovative learning pathways.
               </P>
             </Reveal>
@@ -258,8 +266,16 @@ export function AboutHistory() {
                             </p>
                             <ul className="space-y-2 font-body text-xs sm:text-sm text-ink/80">
                               {item.highlights.map((highlight) => (
-                                <li key={highlight} className="flex items-start gap-2.5">
-                                  <span className={cn("size-1.5 rounded-full mt-2 shrink-0", tagStyle.dot)} />
+                                <li
+                                  key={highlight}
+                                  className="flex items-start gap-2.5"
+                                >
+                                  <span
+                                    className={cn(
+                                      "size-1.5 rounded-full mt-2 shrink-0",
+                                      tagStyle.dot,
+                                    )}
+                                  />
                                   <span>{highlight}</span>
                                 </li>
                               ))}
@@ -270,7 +286,9 @@ export function AboutHistory() {
                         {/* Partner Logo if applicable */}
                         {item.logo && (
                           <div className="mt-5 pt-4 border-t border-border/60 flex items-center justify-between">
-                            <span className="text-xs text-ink-muted font-medium">Affiliation / Entity Badge:</span>
+                            <span className="text-xs text-ink-muted font-medium">
+                              Affiliation / Entity Badge:
+                            </span>
                             <div className="relative h-8 sm:h-10 w-28 sm:w-36">
                               <Image
                                 src={item.logo}

@@ -81,7 +81,7 @@ export const institution: InstitutionProfile = {
         "+2 NEB, Science and Management",
         "Cambridge A Level",
       ],
-      streetAddress: "Jorpati Marg, House No. 142",
+      streetAddress: null,
       mapUrl:
         "https://www.google.com/maps/search/?api=1&query=NAMI+College%2C+Jorpati%2C+Gokarneshwor%2C+Kathmandu",
       embedMapUrl:

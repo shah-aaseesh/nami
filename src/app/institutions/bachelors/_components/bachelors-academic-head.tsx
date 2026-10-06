@@ -39,7 +39,10 @@ export function BachelorsAcademicHeadSection({
     <section className="gutter-x section-y" id={id}>
       <div className="mx-auto max-w-page">
         <Reveal className="flex flex-col gap-4">
-          <H6 as="p" className="text-accent tracking-widest uppercase font-body">
+          <H6
+            as="p"
+            className="text-accent tracking-widest uppercase font-body"
+          >
             {eyebrow}
           </H6>
           <span className="block h-1 w-16 rounded-full bg-accent" />
@@ -103,7 +106,9 @@ export function BachelorsAcademicHeadSection({
                 </div>
 
                 <figcaption className="shrink-0 border-t border-border bg-surface px-5 py-4">
-                  <p className="font-body text-base font-bold text-ink">{person.name}</p>
+                  <p className="font-body text-base font-bold text-ink">
+                    {person.name}
+                  </p>
                   <p className="mt-0.5 font-body text-xs font-semibold text-accent uppercase tracking-wide">
                     {person.title}
                   </p>
@@ -130,7 +135,9 @@ export function BachelorsAcademicHeadSection({
                 </div>
 
                 <figcaption className="shrink-0 border-t border-border bg-surface px-5 py-4">
-                  <p className="font-body text-base font-bold text-ink">{person.name}</p>
+                  <p className="font-body text-base font-bold text-ink">
+                    {person.name}
+                  </p>
                   <p className="mt-0.5 font-body text-xs font-semibold text-accent uppercase tracking-wide">
                     {person.title}
                   </p>

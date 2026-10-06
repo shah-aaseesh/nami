@@ -3,12 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowReloadHorizontalIcon,
-  SentIcon,
   SparklesIcon,
   Tick02Icon,
 } from "@hugeicons/core-free-icons";
-import type { Route } from "next";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
@@ -16,13 +13,19 @@ import { z } from "zod";
 import { buttonVariants } from "@/components/ui/button";
 import {
   CheckboxField,
+  FileField,
   SelectField,
   TextareaField,
   TextField,
 } from "@/components/ui/form";
 import { Icon } from "@/components/ui/icon";
 import { H3, H4, P } from "@/components/ui/typography";
-import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, CloseIcon } from "@/lib/icons";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CheckIcon,
+  CloseIcon,
+} from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 const alumniStorySchema = z.object({
@@ -30,14 +33,27 @@ const alumniStorySchema = z.object({
   email: z.string().trim().email("Please enter a valid email address"),
   phone: z.string().trim().optional(),
   linkedin: z.string().trim().optional(),
+  photo: z.any().optional(),
   wing: z.string().min(1, "Please select your academic wing"),
   program: z.string().trim().min(2, "Please enter your programme name"),
   graduationYear: z.string().trim().min(4, "Please enter your graduation year"),
-  currentRole: z.string().trim().min(2, "Please enter your current role or profession"),
-  currentOrg: z.string().trim().min(2, "Please enter your current organisation or university"),
-  location: z.string().trim().min(2, "Please enter your current city and country"),
-  storyHeadline: z.string().trim().min(5, "Please give a short headline or key takeaway"),
-  experience: z.string().trim().min(20, "Please share a few sentences about your experience (min 20 characters)"),
+  currentRole: z.string().trim().optional(),
+  currentOrg: z.string().trim().optional(),
+  location: z
+    .string()
+    .trim()
+    .min(2, "Please enter your current city and country"),
+  storyHeadline: z
+    .string()
+    .trim()
+    .min(5, "Please give a short headline or key takeaway"),
+  experience: z
+    .string()
+    .trim()
+    .min(
+      20,
+      "Please share a few sentences about your experience (min 20 characters)",
+    ),
   advice: z.string().trim().optional(),
   consent: z.boolean().refine((val) => val === true, {
     message: "You must agree to share your experience with NAMI",
@@ -47,9 +63,16 @@ const alumniStorySchema = z.object({
 export type AlumniStoryFormData = z.infer<typeof alumniStorySchema>;
 
 const WING_OPTIONS = [
+  {
+    value: "Undergraduate Program",
+    label: "Undergraduate Program (BSc. / BBA)",
+  },
+  { value: "Graduate Program", label: "Graduate Program (MSc / MBA)" },
   { value: "Cambridge A Levels", label: "Cambridge A Levels (NAMI College)" },
-  { value: "Northampton UK Degree", label: "BSc / MSc / BBA / MBA (Northampton UK)" },
-  { value: "NEB +2 Science/Management", label: "NEB +2 (Science / Management)" },
+  {
+    value: "Secondary School",
+    label: "Secondary School (NEB +2 / Science & Management)",
+  },
   { value: "School", label: "NAMI International School" },
 ] as const;
 
@@ -60,7 +83,10 @@ const STEPS = [
   { id: 4, title: "Story & Reflection", short: "Story" },
 ] as const;
 
-function createAlumniMailto(email: string, values: AlumniStoryFormData): string {
+function _createAlumniMailto(
+  email: string,
+  values: AlumniStoryFormData,
+): string {
   const subject = `Alumni Experience Submission — ${values.fullName} (${values.graduationYear})`;
   const body = [
     `ALUMNI EXPERIENCE & SPOTLIGHT SUBMISSION`,
@@ -98,7 +124,7 @@ function createAlumniMailto(email: string, values: AlumniStoryFormData): string 
 }
 
 export function AlumniFormModal({
-  email,
+  email: _email,
   isOpen,
   onClose,
 }: {
@@ -108,8 +134,8 @@ export function AlumniFormModal({
 }) {
   const [mounted, setMounted] = useState(false);
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [submittedData, setSubmittedData] = useState<AlumniStoryFormData | null>(null);
-  const [mailtoLink, setMailtoLink] = useState<string | null>(null);
+  const [submittedData, setSubmittedData] =
+    useState<AlumniStoryFormData | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -133,32 +159,28 @@ export function AlumniFormModal({
     };
   }, [isOpen, onClose]);
 
-  const {
-    control,
-    handleSubmit,
-    trigger,
-    reset,
-    formState: { isSubmitting },
-  } = useForm<AlumniStoryFormData>({
-    resolver: zodResolver(alumniStorySchema),
-    mode: "onTouched",
-    defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-      linkedin: "",
-      wing: "",
-      program: "",
-      graduationYear: "",
-      currentRole: "",
-      currentOrg: "",
-      location: "",
-      storyHeadline: "",
-      experience: "",
-      advice: "",
-      consent: false,
-    },
-  });
+  const { control, handleSubmit, trigger, reset } =
+    useForm<AlumniStoryFormData>({
+      resolver: zodResolver(alumniStorySchema),
+      mode: "onTouched",
+      defaultValues: {
+        fullName: "",
+        email: "",
+        phone: "",
+        linkedin: "",
+        photo: undefined,
+        wing: "",
+        program: "",
+        graduationYear: "",
+        currentRole: "",
+        currentOrg: "",
+        location: "",
+        storyHeadline: "",
+        experience: "",
+        advice: "",
+        consent: false,
+      },
+    });
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -170,7 +192,7 @@ export function AlumniFormModal({
     } else if (currentStep === 2) {
       isValidStep = await trigger(["wing", "program", "graduationYear"]);
     } else if (currentStep === 3) {
-      isValidStep = await trigger(["currentRole", "currentOrg", "location"]);
+      isValidStep = await trigger(["location", "currentRole", "currentOrg"]);
     }
 
     if (isValidStep) {
@@ -206,9 +228,12 @@ export function AlumniFormModal({
       role="dialog"
     >
       {/* Backdrop */}
-      <div
-        className="fixed inset-0"
+      <button
+        type="button"
+        aria-label="Close modal backdrop"
+        className="fixed inset-0 bg-transparent border-0 cursor-default"
         onClick={onClose}
+        tabIndex={-1}
       />
 
       {/* Modal Container */}
@@ -281,7 +306,10 @@ export function AlumniFormModal({
                         )}
                       >
                         {isDone ? (
-                          <Icon className="size-3.5 text-white" icon={CheckIcon} />
+                          <Icon
+                            className="size-3.5 text-white"
+                            icon={CheckIcon}
+                          />
                         ) : (
                           step.id
                         )}
@@ -317,21 +345,31 @@ export function AlumniFormModal({
                 Thank You, {submittedData.fullName}!
               </H3>
               <P className="mx-auto mt-2.5 max-w-md text-ink-muted text-sm sm:text-base">
-                Your alumni spotlight has been successfully submitted to the NAMI Alumni Relations team. We will review your story and feature it on the network.
+                Your alumni spotlight has been successfully submitted to the
+                NAMI Alumni Relations team. We will review your story and
+                feature it on the network.
               </P>
 
               <div className="my-6 max-w-md mx-auto p-5 rounded-2xl border border-border bg-neutral-50/80 text-left space-y-2.5 text-xs sm:text-sm">
                 <div className="flex justify-between border-b border-border/60 pb-2">
                   <span className="text-ink-muted">Academic Wing:</span>
-                  <span className="font-medium text-ink">{submittedData.wing}</span>
+                  <span className="font-medium text-ink">
+                    {submittedData.wing}
+                  </span>
                 </div>
                 <div className="flex justify-between border-b border-border/60 pb-2">
                   <span className="text-ink-muted">Programme:</span>
-                  <span className="font-medium text-ink">{submittedData.program} ({submittedData.graduationYear})</span>
+                  <span className="font-medium text-ink">
+                    {submittedData.program} ({submittedData.graduationYear})
+                  </span>
                 </div>
                 <div className="flex justify-between pt-0.5">
                   <span className="text-ink-muted">Current Role:</span>
-                  <span className="font-medium text-ink">{submittedData.currentRole} at {submittedData.currentOrg}</span>
+                  <span className="font-medium text-ink">
+                    {submittedData.currentRole
+                      ? `${submittedData.currentRole}${submittedData.currentOrg ? ` at ${submittedData.currentOrg}` : ""}`
+                      : submittedData.currentOrg || "Alumnus"}
+                  </span>
                 </div>
               </div>
 
@@ -361,10 +399,7 @@ export function AlumniFormModal({
               </div>
             </div>
           ) : (
-            <form
-              noValidate
-              onSubmit={handleSubmit(onSubmit)}
-            >
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
               {/* STEP 1: Personal & Contact */}
               {currentStep === 1 && (
                 <div className="space-y-5 animate-in fade-in duration-200">
@@ -407,6 +442,14 @@ export function AlumniFormModal({
                         placeholder="e.g. linkedin.com/in/aarav"
                       />
                     </div>
+                    <FileField
+                      accept="image/png,image/jpeg,image/webp,image/jpg"
+                      className="file:border-0 file:bg-primary-100 file:text-primary-800 file:text-xs file:font-semibold file:px-3 file:py-1 file:rounded-full file:mr-3 hover:file:bg-primary-200 cursor-pointer pt-2 text-xs sm:text-sm text-ink-muted"
+                      control={control}
+                      description="Upload a clear portrait or graduation photograph (JPG, PNG, WebP)"
+                      label="Student / Alumnus Photograph (Optional)"
+                      name="photo"
+                    />
                   </div>
                 </div>
               )}
@@ -436,7 +479,7 @@ export function AlumniFormModal({
                       control={control}
                       label="Programme / Degree"
                       name="program"
-                      placeholder="e.g. BSc (Hons) Computing or A-Levels"
+                      placeholder="e.g. BSc. (Hons) Computing or A-Levels"
                       required
                     />
                     <TextField
@@ -465,17 +508,15 @@ export function AlumniFormModal({
                   <div className="space-y-4">
                     <TextField
                       control={control}
-                      label="Current Designation / Role"
+                      label="Current Designation / Role (Optional)"
                       name="currentRole"
                       placeholder="e.g. Senior Software Engineer / Founder"
-                      required
                     />
                     <TextField
                       control={control}
-                      label="Company / Organization / University"
+                      label="Company / Organization / University (Optional)"
                       name="currentOrg"
                       placeholder="e.g. Leapfrog Technology / Oxford University"
-                      required
                     />
                     <TextField
                       control={control}
@@ -496,7 +537,8 @@ export function AlumniFormModal({
                       Step 4: Your Story & Reflection
                     </H4>
                     <p className="text-xs text-ink-muted mt-0.5">
-                      Share your fondest memories, key takeaways, and words of inspiration.
+                      Share your fondest memories, key takeaways, and words of
+                      inspiration.
                     </p>
                   </div>
 
@@ -595,7 +637,9 @@ export function AlumniFormModal({
                       type="submit"
                     >
                       <Icon className="size-4" icon={SparklesIcon} />
-                      <span>{submitting ? "Submitting..." : "Submit Spotlight"}</span>
+                      <span>
+                        {submitting ? "Submitting..." : "Submit Spotlight"}
+                      </span>
                     </button>
                   )}
                 </div>

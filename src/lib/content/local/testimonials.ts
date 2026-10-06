@@ -247,21 +247,6 @@ export const testimonials: readonly Testimonial[] = [
     },
   },
   {
-    ...entryOf("suraj-karki"),
-    name: "Suraj Karki",
-    programme: "BBA — Level 6 (Year III)",
-    quote:
-      "My teachers are kind. I like playing with friends at school. I love the food at school. NAMI is clean and nice. NAMI makes me happy every day.",
-    institution: "institute",
-    graduatedYear: null,
-    portrait: {
-      src: "/NAMI_Institute Testimonials/Suraj_Karki.png",
-      alt: "Suraj Karki",
-      width: 400,
-      height: 400,
-    },
-  },
-  {
     ...entryOf("dipa-chaulagain"),
     name: "Dipa Chaulagain",
     programme: "BSc. Computer Science — Level 5 (Year II)",

@@ -11,8 +11,8 @@ import { Testimonials } from "@/components/shared/testimonials";
 import { content } from "@/lib/content";
 import { institutionPath } from "@/lib/content/institutions";
 import { createMetadata } from "@/lib/seo";
-import { bachelorsCopy } from "./_components/bachelors-copy";
 import { BachelorsAcademicHeadSection } from "./_components/bachelors-academic-head";
+import { bachelorsCopy } from "./_components/bachelors-copy";
 import { BachelorsCourseRail } from "./_components/bachelors-course-rail";
 import { MouPartnersSection } from "./_components/mou-partners-section";
 import { PearsonVueBanner } from "./_components/pearson-vue-banner";
@@ -76,7 +76,8 @@ export default async function BachelorsPage() {
           message={bachelorsCopy.academicHead.message}
           person={{
             name: academicHead.name,
-            portrait: bachelorsCopy.academicHead.portrait ?? academicHead.portrait,
+            portrait:
+              bachelorsCopy.academicHead.portrait ?? academicHead.portrait,
             title: academicHead.title,
           }}
         />
@@ -103,11 +104,7 @@ export default async function BachelorsPage() {
         tone="surface"
       />
 
-      <Testimonials
-        id="alumni"
-        items={alumni}
-        section={bachelorsCopy.alumni}
-      />
+      <Testimonials id="alumni" items={alumni} section={bachelorsCopy.alumni} />
 
       <MouPartnersSection id="mou-partners" />
 

@@ -5,13 +5,13 @@ import type { EntityRole } from "@/lib/content";
 function getGalleryCopy(institution: EntityRole) {
   const isSchool = institution === "school";
   return {
-    eyebrow: isSchool ? "ECA/CLUBS" : "The college",
+    eyebrow: isSchool ? "ECA & Clubs" : "The College",
     heading: isSchool
       ? "School life, photographed."
       : "College life, photographed.",
     standfirst:
       "Convocations, panels, field days, sports, classrooms and the ordinary weeks between them — our own record of what a day here looks like.",
-    ctaLabel: "See more",
+    ctaLabel: "See More",
     ctaAccessibleLabel: isSchool
       ? "See more school photographs"
       : "See more college photographs",

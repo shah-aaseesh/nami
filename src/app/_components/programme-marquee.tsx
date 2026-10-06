@@ -24,12 +24,12 @@ const ACADEMIC_TRACKS: readonly MarqueeItem[] = [
 
   // Bachelor's
   { id: "bachelors-level", text: "Bachelor's Degrees", isLevel: true },
-  { id: "ug-cs", text: "BSc (Hons) Computer Science" },
-  { id: "ug-se", text: "BSc (Hons) Software Engineering" },
-  { id: "ug-net", text: "BSc (Hons) Networking Engineering" },
-  { id: "ug-env-sci", text: "BSc (Hons) Environmental Science" },
+  { id: "ug-cs", text: "BSc. (Hons) Computer Science" },
+  { id: "ug-se", text: "BSc. (Hons) Software Engineering" },
+  { id: "ug-net", text: "BSc. (Hons) Networking Engineering" },
+  { id: "ug-env-sci", text: "BSc. (Hons) Environmental Science" },
   { id: "ug-bba", text: "BBA (Hons) Business Administration" },
-  { id: "ug-env-stud", text: "BSc Environmental Studies" },
+  { id: "ug-env-stud", text: "BSc. Environmental Studies" },
 
   // Master's
   { id: "masters-level", text: "Master's Degree", isLevel: true },

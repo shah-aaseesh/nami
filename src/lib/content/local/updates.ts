@@ -243,7 +243,7 @@ const published: readonly Update[] = [
     institution: "institute",
     title: "Welcome Undergraduates Orientation 2022",
     excerpt:
-      "NAMI welcomes the new batch of BSc Computing, BSc Environmental Science, and BBA. The orientation was held at Diamond Hill Resort with a fun-packed orientation session, skillful activities, and a gaming session.",
+      "NAMI welcomes the new batch of BSc. Computing, BSc. Environmental Science, and BBA. The orientation was held at Diamond Hill Resort with a fun-packed orientation session, skillful activities, and a gaming session.",
     publishedAt: isoDate("2022-11-14"),
     happensAt: null,
     venue: "Diamond Hill Resort, Panauti",

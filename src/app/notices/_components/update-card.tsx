@@ -84,7 +84,7 @@ function FormattedNoticeContent({ text }: { readonly text: string }) {
 
           for (const line of lines) {
             if (line.startsWith("•") || line.startsWith("-")) {
-              bullets.push(line.replace(/^[•\-]\s*/, ""));
+              bullets.push(line.replace(/^[•-]\s*/, ""));
             } else {
               headings.push(line);
             }
@@ -250,9 +250,7 @@ export function UpdateCard({
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 font-body text-xs text-ink-muted">
               <span className="inline-flex items-center gap-1.5">
                 <Icon className="size-3.5" icon={CalendarIcon} />
-                <time dateTime={stamp}>
-                  {fullDate.format(new Date(stamp))}
-                </time>
+                <time dateTime={stamp}>{fullDate.format(new Date(stamp))}</time>
               </span>
 
               {item.venue === null ? null : (

@@ -43,7 +43,7 @@ const UNIVERSITY_PARTNERS: readonly UniversityPartner[] = [
     partnerStatus: "Direct Academic Partnership Since 2012",
     name: "University of Northampton, UK",
     location: "Waterside Campus, University Drive, Northampton - NN1 5PH",
-    logo: "/universities/northampton.png",
+    logo: "/logos/universities/northampton.png",
     overview: [
       "The University of Northampton is a leading British public university located on its purpose-built £330 million Waterside Campus in England. Globally recognized as the UK's first Ashoka U Changemaker Campus and commended for teaching excellence under the British Teaching Excellence Framework (TEF), the university champions social innovation, enterprise, and high graduate outcomes.",
       "Since 2012, NAMI has operated in direct academic partnership with the University of Northampton to deliver accredited undergraduate and postgraduate degrees in Kathmandu. Programmes follow identical curricula, assessment frameworks, and moderation from external UK examiners, granting graduates authentic British degrees recognized internationally.",
@@ -84,7 +84,8 @@ const UNIVERSITY_PARTNERS: readonly UniversityPartner[] = [
     leaderName: "Professor Anne-Marie Kilday",
     leaderTitle: "Vice-Chancellor",
     leaderAffiliation: "University of Northampton, United Kingdom",
-    leaderPhoto: "/nami/anne-marie-kilday-outside-portrait-683x1024.jpg",
+    leaderPhoto:
+      "/sections/nami/anne-marie-kilday-outside-portrait-683x1024.jpg",
     leaderQuote:
       "Our partnership with NAMI reflects our shared conviction in widening access to world-class British higher education, equipping students in Nepal with the innovation and global competencies to lead transformative careers.",
     leaderMessage: [
@@ -99,7 +100,7 @@ const UNIVERSITY_PARTNERS: readonly UniversityPartner[] = [
     partnerStatus: "Collaborative Academic Partnership from 2026",
     name: "Kathmandu University (KU)",
     location: "Main Campus · Dhulikhel, Kavrepalanchok, Nepal",
-    logo: "/universities/Kathmandu_University_Logo.webp",
+    logo: "/logos/universities/Kathmandu_University_Logo.webp",
     overview: [
       "Established in 1991, Kathmandu University is an autonomous, premier non-government public institution dedicated to academic excellence, scientific research, and professional training in Nepal. Ranked consistently among Nepal's top national universities, KU is celebrated for research integrity, dedicated faculty, and high pedagogical standards.",
       "NAMI has entered into a strategic collaboration with Kathmandu University to offer the Bachelor in Environmental Studies (BES) programme. Combining classroom rigour with field-based ecological assessments, GIS spatial modeling, and sustainability policy analysis, the programme prepares graduates to tackle critical Himalayan and global environmental challenges.",

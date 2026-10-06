@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-const MARK_SRC = "/logo/nami-white.svg";
+const MARK_SRC = "/logos/brand/nami-white.svg";
 const MARK_WIDTH = 800;
 const MARK_HEIGHT = 465;
 

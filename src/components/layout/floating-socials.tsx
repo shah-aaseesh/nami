@@ -46,25 +46,25 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
         {
           key: "primary-app",
           label: "Primary School",
-          href: "/Nami International School (Primary) Admission form.pdf" as Route,
+          href: "/documents/Nami International School (Primary) Admission form.pdf" as Route,
           isPdf: true,
         },
         {
           key: "plus2-app",
           label: "+2 NEB",
-          href: "/Application_form_nami_international_school_plus_2.pdf" as Route,
+          href: "/documents/Application_form_nami_international_school_plus_2.pdf" as Route,
           isPdf: true,
         },
         {
           key: "alevels-app",
           label: "A-Levels",
-          href: "/NAMI_College_A_Level_Application_Form.pdf" as Route,
+          href: "/documents/NAMI_College_A_Level_Application_Form.pdf" as Route,
           isPdf: true,
         },
         {
           key: "bachelors-app",
           label: "Bachelors",
-          href: "/Nami_applicationform_bachelors.pdf" as Route,
+          href: "/documents/Nami_applicationform_bachelors.pdf" as Route,
           isPdf: true,
         },
       ],
@@ -94,7 +94,7 @@ export async function FloatingSocials({ className }: FloatingSocialsProps) {
         {
           key: "bachelors-brochure",
           label: "Bachelors",
-          href: "/Nami book.pdf" as Route,
+          href: "/documents/Nami book.pdf" as Route,
           isPdf: true,
         },
       ],

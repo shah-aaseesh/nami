@@ -20,7 +20,7 @@ export function PearsonVueBanner() {
                 className="h-auto w-full max-h-24 object-contain"
                 height={120}
                 sizes="(max-width: 640px) 200px, 240px"
-                src="/partners/pearson-vue.jpg"
+                src="/sections/misc/pearson-vue.jpg"
                 width={240}
               />
             </div>

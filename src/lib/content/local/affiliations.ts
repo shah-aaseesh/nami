@@ -12,7 +12,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("school"),
     campusSlug: slug("gokarneshwor"),
     note: null,
-    logo: "/universities/neb.png",
+    logo: "/logos/universities/neb.png",
   },
   {
     ...entryOf("neb-plus-two"),
@@ -22,7 +22,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("school"),
     campusSlug: slug("gokarneshwor"),
     note: null,
-    logo: "/universities/neb.png",
+    logo: "/logos/universities/neb.png",
   },
   {
     ...entryOf("cambridge"),
@@ -32,7 +32,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("college"),
     campusSlug: slug("gokarneshwor"),
     note: "Independent CAIE examination centre since 2024",
-    logo: "/universities/cambridge.png",
+    logo: "/logos/universities/cambridge.png",
   },
   {
     ...entryOf("northampton"),
@@ -42,7 +42,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
     note: null,
-    logo: "/universities/northampton.png",
+    logo: "/logos/universities/northampton.png",
   },
   {
     ...entryOf("kathmandu-university"),
@@ -52,7 +52,7 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
     note: null,
-    logo: "/universities/Kathmandu_University_Logo.webp",
+    logo: "/logos/universities/Kathmandu_University_Logo.webp",
   },
   {
     ...entryOf("hertfordshire"),
@@ -62,6 +62,6 @@ export const affiliations: readonly Affiliation[] = [
     levelSlug: slug("bachelors"),
     campusSlug: slug("new-baneshwor"),
     note: null,
-    logo: "/logo/uni of hertforshire.png",
+    logo: "/logos/brand/uni of hertforshire.png",
   },
 ];

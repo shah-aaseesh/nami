@@ -13,9 +13,9 @@ interface HomepageVideoPlayerProps {
 
 export function HomepageVideoPlayer({
   className,
-  poster = "/Homepage video thumbnails.png",
+  poster = "/videos/Homepage video thumbnails.png",
   title = "NAMI College Video",
-  src = "/Final%20First%20Video.mp4",
+  src = "/videos/Final%20First%20Video.mp4",
 }: HomepageVideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoSrc, setVideoSrc] = useState(src);
@@ -34,10 +34,10 @@ export function HomepageVideoPlayer({
           className="size-full object-cover"
           controls
           onError={() => {
-            if (videoSrc === "/Final%20First%20Video.mp4") {
-              setVideoSrc("/Final First Video.mp4");
-            } else if (videoSrc !== "/nami-video.mp4") {
-              setVideoSrc("/nami-video.mp4");
+            if (videoSrc === "/videos/Final%20First%20Video.mp4") {
+              setVideoSrc("/videos/Final First Video.mp4");
+            } else if (videoSrc !== "/videos/nami-video.mp4") {
+              setVideoSrc("/videos/nami-video.mp4");
             }
           }}
           playsInline

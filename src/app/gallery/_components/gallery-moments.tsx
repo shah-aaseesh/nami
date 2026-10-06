@@ -77,7 +77,7 @@ export const INSTITUTION_SUBCATEGORIES: Record<
       label: "All Moments",
       shortLabel: "All Highlights",
       iconType: "grid",
-      thumbnail: "/nami/gallery-hero.jpg",
+      thumbnail: "/sections/nami/gallery-hero.jpg",
     },
     {
       id: "academics",
@@ -121,42 +121,42 @@ export const INSTITUTION_SUBCATEGORIES: Record<
       label: "All Primary Activities",
       shortLabel: "All Primary",
       iconType: "grid",
-      thumbnail: "/nami/level-school.jpg",
+      thumbnail: "/sections/nami/level-school.jpg",
     },
     {
       id: "tech-3di",
       label: "3Di School New Zealand",
       shortLabel: "3Di School",
       iconType: "tech",
-      thumbnail: "/collaborators/3di.png",
+      thumbnail: "/logos/collaborators/3di.png",
     },
     {
       id: "sports-playnepal",
       label: "Play Nepal Sports",
       shortLabel: "Play Nepal",
       iconType: "sports",
-      thumbnail: "/collaborators/play-nepal.png",
+      thumbnail: "/logos/collaborators/play-nepal.png",
     },
     {
       id: "academics-math",
       label: "UnMath Programme",
       shortLabel: "UnMath",
       iconType: "math",
-      thumbnail: "/collaborators/unmath.png",
+      thumbnail: "/logos/collaborators/unmath.png",
     },
     {
       id: "mero-coding",
       label: "Mero Coding Hub",
       shortLabel: "Mero Coding",
       iconType: "tech",
-      thumbnail: "/collaborators/mero-coding.png",
+      thumbnail: "/logos/collaborators/mero-coding.png",
     },
     {
       id: "samatva-wellness",
       label: "Samatva Wellness & Vaav",
       shortLabel: "Samatva",
       iconType: "culture",
-      thumbnail: "/collaborators/samatva-wellness.png",
+      thumbnail: "/logos/collaborators/samatva-wellness.png",
     },
     {
       id: "others",
@@ -172,7 +172,7 @@ export const INSTITUTION_SUBCATEGORIES: Record<
       label: "All (+2) Activities",
       shortLabel: "All (+2)",
       iconType: "grid",
-      thumbnail: "/nami/level-plus-two.jpg",
+      thumbnail: "/sections/nami/level-plus-two.jpg",
     },
     {
       id: "sports-club",
@@ -225,7 +225,7 @@ export const INSTITUTION_SUBCATEGORIES: Record<
       label: "All A-Levels Activities",
       shortLabel: "All A-Levels",
       iconType: "grid",
-      thumbnail: "/nami/level-a-level.jpg",
+      thumbnail: "/sections/nami/level-a-level.jpg",
     },
     {
       id: "sports",
@@ -239,7 +239,7 @@ export const INSTITUTION_SUBCATEGORIES: Record<
       label: "Social Services Club",
       shortLabel: "Social Services",
       iconType: "social",
-      thumbnail: "/nami/hero-mustang.jpg",
+      thumbnail: "/sections/nami/hero-mustang.jpg",
     },
     {
       id: "arts-crafts",
@@ -269,7 +269,7 @@ export const INSTITUTION_SUBCATEGORIES: Record<
       label: "All Degree Activities",
       shortLabel: "All Degree",
       iconType: "grid",
-      thumbnail: "/nami/level-bachelor-master.jpg",
+      thumbnail: "/sections/nami/level-bachelor-master.jpg",
     },
     {
       id: "websurfer",
@@ -277,35 +277,35 @@ export const INSTITUTION_SUBCATEGORIES: Record<
       shortLabel: "WebSurfer",
       iconType: "tech",
       thumbnail:
-        "/mou bachelors/websurfer-logo-brighter1920x658-removebg-preview.png",
+        "/logos/mou/websurfer-logo-brighter1920x658-removebg-preview.png",
     },
     {
       id: "startup-discovery",
       label: "Startup Discovery Asia",
       shortLabel: "Startup Asia",
       iconType: "business",
-      thumbnail: "/mou bachelors/Startup_Discovery-removebg-preview.png",
+      thumbnail: "/logos/mou/Startup_Discovery-removebg-preview.png",
     },
     {
       id: "machan",
       label: "Machan Wildlife Resort",
       shortLabel: "Machan Resort",
       iconType: "science",
-      thumbnail: "/mou bachelors/machian-removebg-preview.png",
+      thumbnail: "/logos/mou/machian-removebg-preview.png",
     },
     {
       id: "suraj-interior",
       label: "Suraj Interior & Design",
       shortLabel: "Suraj Interior",
       iconType: "arts",
-      thumbnail: "/mou bachelors/Suraj-removebg-preview.png",
+      thumbnail: "/logos/mou/Suraj-removebg-preview.png",
     },
     {
       id: "cross-web",
       label: "Cross Web IT Solutions",
       shortLabel: "Cross Web",
       iconType: "tech",
-      thumbnail: "/mou bachelors/Cross_web-removebg-preview.png",
+      thumbnail: "/logos/mou/Cross_web-removebg-preview.png",
     },
     {
       id: "others",
@@ -400,7 +400,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     institutionLabel: "Primary",
     subcategory: "tech-3di",
     type: "image",
-    src: "/nami/level-school.jpg",
+    src: "/sections/nami/level-school.jpg",
     alt: "Primary school faculty teaching in interactive modern classroom",
   },
   {
@@ -458,7 +458,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     institutionLabel: "Primary",
     subcategory: "others",
     type: "image",
-    src: "/nami/event-plantation-2022.jpg",
+    src: "/sections/nami/event-plantation-2022.jpg",
     alt: "Students walking through university campus garden with books",
   },
 
@@ -482,8 +482,8 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     institutionLabel: "Bachelors / Masters",
     subcategory: "others",
     type: "video",
-    src: "/nami/event-elite-2023.jpg",
-    videoUrl: "/nami-video.mp4",
+    src: "/sections/nami/event-elite-2023.jpg",
+    videoUrl: "/videos/nami-video.mp4",
     alt: "Student musician playing acoustic guitar and singing on stage",
   },
   {
@@ -744,7 +744,7 @@ export const GALLERY_MOMENTS: readonly GalleryMoment[] = [
     institutionLabel: "A-Levels",
     subcategory: "social-services",
     type: "image",
-    src: "/nami/hero-mustang.jpg",
+    src: "/sections/nami/hero-mustang.jpg",
     alt: "A-Levels students on community and ecological trip in Mustang",
   },
 
@@ -1563,7 +1563,7 @@ export function GalleryMoments() {
                             alt=""
                             className="size-full object-contain"
                             height={180}
-                            src="/lotus.png"
+                            src="/sections/misc/lotus.png"
                             width={180}
                           />
                         </div>
@@ -1840,7 +1840,7 @@ export function GalleryMoments() {
                   className="size-full object-cover"
                   controls
                   playsInline
-                  src="/nami-video.mp4"
+                  src="/videos/nami-video.mp4"
                 />
               </div>
             </div>

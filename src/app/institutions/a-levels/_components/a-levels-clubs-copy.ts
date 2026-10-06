@@ -50,7 +50,7 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
     metaDescription:
       "NAMI College A-Levels Social Services Club engages students in community relief camps, blood donation drives, and public welfare campaigns.",
     coverImage: {
-      src: "/nami/campus-service-camp.jpg",
+      src: "/sections/nami/campus-service-camp.jpg",
       alt: "NAMI College A-Levels students organizing community service materials during an outreach camp.",
       width: 1190,
       height: 793,
@@ -140,7 +140,7 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
         height: 1339,
       },
       {
-        src: "/nami/campus-service-camp.jpg",
+        src: "/sections/nami/campus-service-camp.jpg",
         alt: "A-Levels student volunteers on rural outreach expedition",
         caption: "Sindhupalchowk rural outreach expedition",
         width: 1190,
@@ -160,7 +160,7 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
     metaDescription:
       "NAMI College A-Levels Sports Club offers competitive training, 3x3 basketball tournaments, futsal championships, and athletics.",
     coverImage: {
-      src: "/nami/campus-basketball-award.jpg",
+      src: "/sections/nami/campus-basketball-award.jpg",
       alt: "NAMI College A-Levels basketball championship awards ceremony in the campus auditorium.",
       width: 1500,
       height: 1000,
@@ -353,7 +353,7 @@ export const A_LEVELS_CLUBS: readonly ALevelsClub[] = [
         height: 2252,
       },
       {
-        src: "/nami/event-mascot.jpg",
+        src: "/mascot/event-mascot.jpg",
         alt: "Festive stage installation and mascot design",
         caption: "Stage mascot & decorative installations",
         width: 1000,

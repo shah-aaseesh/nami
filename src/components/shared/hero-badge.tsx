@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 const BADGE_RADIUS = 66;
 const BADGE_ARC = `M 80,80 m 0,-${BADGE_RADIUS} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,${BADGE_RADIUS * 2} a ${BADGE_RADIUS},${BADGE_RADIUS} 0 1,1 0,-${BADGE_RADIUS * 2}`;
 const MARK_SRC: Readonly<Record<string, string>> = {
-  college: "/logo/nami-college.png",
-  institute: "/logo/nami-color.svg",
-  school: "/logo/International School-ai.png",
+  college: "/logos/brand/nami-college.png",
+  institute: "/logos/brand/nami-color.svg",
+  school: "/logos/brand/International School-ai.png",
 };
 const MARK_WIDTH = 200;
 const MARK_HEIGHT = 200;
@@ -48,7 +48,7 @@ export function HeroBadge({
     motto ? leadClause(motto) : null,
   ].filter((part): part is string => part !== null);
   const accessibleLabel = accessibleLabelParts.join(", ");
-  const logoSrc = MARK_SRC[entity.role] ?? "/logo/nami-color.svg";
+  const logoSrc = MARK_SRC[entity.role] ?? "/logos/brand/nami-color.svg";
 
   return (
     <div

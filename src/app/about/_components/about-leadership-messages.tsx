@@ -25,7 +25,7 @@ const LEADERSHIP_MESSAGES: readonly LeaderMessage[] = [
     name: "Capt. Rameshwar Thapa",
     title: "Chairperson, NAMI Group of Companies",
     credentials: "Founder Chairman · Aviator & Strategic Entrepreneur",
-    portrait: "/team/rameshwar-thapa.webp",
+    portrait: "/leadership/rameshwar-thapa.webp",
     quote:
       "Our founding conviction remains steadfast: to offer access to world-class education within Nepal and nurture leaders who transform communities locally and globally.",
     message: [
@@ -41,7 +41,7 @@ const LEADERSHIP_MESSAGES: readonly LeaderMessage[] = [
     name: "Mr. Pranil Pandey, FCCA",
     title: "Chief Executive Officer, NAMI Group of Companies",
     credentials: "FCCA (UK) · Master's in Management",
-    portrait: "/team/pranil.jpeg",
+    portrait: "/leadership/pranil.jpeg",
     quote:
       "At NAMI, we align world-class academic frameworks with experiential learning, cultivating future-ready professionals and compassionate global citizens.",
     message: [

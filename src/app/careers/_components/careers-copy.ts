@@ -37,7 +37,7 @@ const vacanciesSection: SectionCopy = {
 };
 
 const partnersPanel: ContentImage = {
-  src: "/nami/event-climate-panel.jpg",
+  src: "/sections/nami/event-climate-panel.jpg",
   alt: "Faculty and guest scholars during an academic panel symposium in the NAMI conference auditorium.",
   width: 800,
   height: 533,
@@ -191,7 +191,7 @@ export const careersCopy = {
       "Join an inspiring community of educators, scholars, and professionals dedicated to transformative teaching, research excellence, and world-class learning in Kathmandu.",
     cta: "Explore open positions",
     image: {
-      src: "/nami/event-climate-panel.jpg",
+      src: "/sections/nami/event-climate-panel.jpg",
       alt: "NAMI faculty and scholars during an academic symposium in the NAMI conference auditorium.",
       width: 800,
       height: 533,

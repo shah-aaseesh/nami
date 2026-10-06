@@ -153,7 +153,7 @@ export function SiteNavPanel({
         {/* Banner */}
         <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mt-2 shadow-lg">
           <Image
-            src="/nami/campus-library.jpg"
+            src="/sections/nami/campus-library.jpg"
             alt="College Library"
             fill
             sizes="336px"

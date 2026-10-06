@@ -578,14 +578,14 @@ export const SCHOOL_CLUBS: readonly SchoolClub[] = [
         height: 900,
       },
       {
-        src: "/nami/school/nami-school-science-lab.jpg",
+        src: "/sections/nami/nami-school-science-lab.jpg",
         alt: "Junior science laboratory practical demonstration",
         caption: "Hands-on laboratory apparatus & experiments",
         width: 1000,
         height: 750,
       },
       {
-        src: "/nami/school/nami-school-computer-lab.jpg",
+        src: "/sections/nami/nami-school-computer-lab.jpg",
         alt: "Digital ICT and coding workstations",
         caption: "ICT coding & digital literacy workshops",
         width: 1000,

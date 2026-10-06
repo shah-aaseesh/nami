@@ -37,7 +37,7 @@ export function AboutEmblem({
                   height={408}
                   loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 450px"
-                  src="/lotus.png"
+                  src="/sections/misc/lotus.png"
                   width={612}
                 />
               </div>

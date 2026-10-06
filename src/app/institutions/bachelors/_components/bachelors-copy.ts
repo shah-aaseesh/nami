@@ -85,35 +85,35 @@ export type BachelorsMastheadCopy = {
 };
 
 const academicHeadPortrait: ContentImage = {
-  src: "/team/nischal-khadka.webp",
+  src: "/leadership/nischal-khadka.webp",
   alt: "Studio portrait of Mr. Nischal Khadka, Academic Head at NAMI, arms folded in a dark navy suit and patterned blue tie against a mottled blue-grey backdrop.",
   width: 1507,
   height: 2000,
 };
 
 const _readingRoom: ContentImage = {
-  src: "/nami/level-bachelor-master.jpg",
+  src: "/sections/nami/level-bachelor-master.jpg",
   alt: "NAMI's library, metal shelving stacked with books and a newspaper rack standing behind the library help desk.",
   width: 1200,
   height: 900,
 };
 
 const degreeComputerScience: ContentImage = {
-  src: "/final photos/degree (1).jpg",
+  src: "/sections/general/degree (1).jpg",
   alt: "NAMI BSc. (Hons) Computer Science lecture and interactive computing workshop.",
   width: 1500,
   height: 1000,
 };
 
 const degreeClimateAI: ContentImage = {
-  src: "/final photos/degree (2).jpg",
+  src: "/sections/general/degree (2).jpg",
   alt: "NAMI ClimateAI Launchpad - Environmental Science and AI innovation initiative.",
   width: 1500,
   height: 1000,
 };
 
 const degreeBusinessAdmin: ContentImage = {
-  src: "/final photos/degree (3).jpg",
+  src: "/sections/general/degree (3).jpg",
   alt: "NAMI Bachelor of Business Administration (BBA) auditorium seminar and conference.",
   width: 1500,
   height: 1000,
@@ -127,28 +127,28 @@ const degreeClimateAITeam: ContentImage = {
 };
 
 const _scienceLaboratory: ContentImage = {
-  src: "/nami/campus-science-lab.jpg",
+  src: "/sections/nami/campus-science-lab.jpg",
   alt: "A NAMI chemistry laboratory, reagent bottles ranked on shelves above long benches fitted with sinks, burettes and retort stands.",
   width: 1280,
   height: 853,
 };
 
 const _readingHall: ContentImage = {
-  src: "/nami/campus-library.jpg",
+  src: "/sections/nami/campus-library.jpg",
   alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
   width: 1280,
   height: 853,
 };
 
 const _plantationProgramme: ContentImage = {
-  src: "/nami/event-plantation-2022.jpg",
+  src: "/sections/nami/event-plantation-2022.jpg",
   alt: "Staff and volunteers crouched on the grass settling a sapling into the ground, one of them wearing a Nepal Prakriti Pathshala shirt from Wildlife Conservation Nepal.",
   width: 800,
   height: 753,
 };
 
 const _auditoriumGathering: ContentImage = {
-  src: "/nami/campus-auditorium.jpg",
+  src: "/sections/nami/campus-auditorium.jpg",
   alt: "Students and staff seated on sofas and stacking chairs in the NAMI auditorium, maroon acoustic panelling on the wall behind them.",
   width: 999,
   height: 666,
@@ -156,31 +156,31 @@ const _auditoriumGathering: ContentImage = {
 
 const heroSlides: readonly ContentImage[] = [
   {
-    src: "/final photos/26.jpg",
+    src: "/hero/careers/careers-hero.jpg",
     alt: "NAMI Higher Education student sports tournament and campus life.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/20.jpg",
+    src: "/hero/about/about-hero.jpg",
     alt: "NAMI Higher Education faculty, students, and graduation ceremony.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/21.jpg",
+    src: "/hero/a-levels/a-levels-hero.jpg",
     alt: "NAMI Higher Education campus facilities and learning environment.",
     width: 1280,
     height: 853,
   },
   {
-    src: "/final photos/22.jpg",
+    src: "/hero/bachelors/bachelors-hero.jpg",
     alt: "NAMI Higher Education academic campus and community.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/23.jpg",
+    src: "/hero/school/school-hero.jpg",
     alt: "NAMI Higher Education practical laboratories and campus life.",
     width: 1500,
     height: 1000,
@@ -1249,7 +1249,7 @@ const programmes: BachelorsProgrammesCopy = {
 };
 
 const placementPanel: ContentImage = {
-  src: "/final photos/24.jpg",
+  src: "/hero/student-life/student-life-hero.jpg",
   alt: "Industry partner panel discussion and career placement session at NAMI.",
   width: 1280,
   height: 853,

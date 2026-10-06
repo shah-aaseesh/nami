@@ -62,7 +62,7 @@ export function SiteCtaBand({
                 className="size-20 sm:size-24 object-contain"
                 height={96}
                 priority
-                src="/newsletter-qr.png"
+                src="/sections/misc/newsletter-qr.png"
                 unoptimized
                 width={96}
               />

@@ -17,61 +17,61 @@ export type SchoolHeroCopy = {
 
 const heroSlides: readonly SharedHeroSlide[] = [
   {
-    src: "/final photos/27.jpg",
+    src: "/hero/contact/contact-hero.jpg",
     alt: "NAMI International School campus and student life.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/28.jpg",
+    src: "/hero/gallery/gallery-hero.jpg",
     alt: "NAMI International School learning environment and activities.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/29.jpg",
+    src: "/hero/notices/notices-hero.jpg",
     alt: "NAMI International School classroom and academic sessions.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/30.jpg",
+    src: "/hero/documents/documents-hero.jpg",
     alt: "NAMI International School student activities and sports.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/31.jpg",
+    src: "/hero/faculty/faculty-hero.jpg",
     alt: "NAMI International School events and community.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/32.jpg",
+    src: "/sections/general/32.jpg",
     alt: "NAMI International School facilities and grounds.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/33.jpg",
+    src: "/sections/general/33.jpg",
     alt: "NAMI International School cultural and creative programmes.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/34.jpg",
+    src: "/sections/general/34.jpg",
     alt: "NAMI International School academic excellence and practical sessions.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/35.jpg",
+    src: "/sections/general/35.jpg",
     alt: "NAMI International School student leadership and collaboration.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/36.jpg",
+    src: "/sections/general/36.jpg",
     alt: "NAMI International School holistic education and celebration.",
     width: 1500,
     height: 1000,
@@ -125,7 +125,7 @@ const bands: SchoolBandsCopy = {
           "Sanskrit",
         ],
         photo: {
-          src: "/final photos/9.jpg",
+          src: "/sections/general/9.jpg",
           alt: "Primary students exploring books and interactive materials in the school library.",
           width: 1600,
           height: 1200,
@@ -147,7 +147,7 @@ const bands: SchoolBandsCopy = {
           "Sanskrit",
         ],
         photo: {
-          src: "/final photos/10.jpg",
+          src: "/sections/general/10.jpg",
           alt: "Middle school students learning collaboratively in interactive digital classrooms.",
           width: 1600,
           height: 1066,
@@ -210,7 +210,7 @@ const bands: SchoolBandsCopy = {
           },
         ],
         photo: {
-          src: "/final photos/16.jpg",
+          src: "/sections/general/16.jpg",
           alt: "NAMI Science Stream laboratory with chemistry workstations and apparatus.",
           width: 1280,
           height: 853,
@@ -255,7 +255,7 @@ const bands: SchoolBandsCopy = {
           },
         ],
         photo: {
-          src: "/final photos/15.jpg",
+          src: "/sections/general/15.jpg",
           alt: "NAMI Management stream classroom and facilities.",
           width: 1280,
           height: 853,
@@ -264,7 +264,7 @@ const bands: SchoolBandsCopy = {
     ],
   },
   photo: {
-    src: "/nami/campus-library.jpg",
+    src: "/sections/nami/campus-library.jpg",
     alt: "A NAMI reading hall, long study desks ranked beneath ceiling fans with a projection screen at the far end and a silence notice on the wall.",
     width: 1280,
     height: 853,
@@ -282,7 +282,7 @@ const day: SchoolDayCopy = {
       title: "School Library",
       body: "A well-resourced school library for study, research, and leisure reading, with dedicated classroom libraries in the primary grades.",
       photo: {
-        src: "/final photos/8.jpg",
+        src: "/sections/general/8.jpg",
         alt: "A well-resourced school library for study, research, and leisure reading.",
         width: 1280,
         height: 960,
@@ -292,7 +292,7 @@ const day: SchoolDayCopy = {
       title: "Science Laboratories",
       body: "In-house, well-equipped Biology, Chemistry, and Physics laboratories staffed with skilled technicians to apply scientific theories to practical experiments.",
       photo: {
-        src: "/nami/school/nami-school-science-lab.jpg",
+        src: "/sections/nami/nami-school-science-lab.jpg",
         alt: "Students in white lab coats and safety goggles running a titration into a conical flask at a laboratory bench, reagent bottles ranked on the shelves behind them.",
         width: 1000,
         height: 666,
@@ -302,7 +302,7 @@ const day: SchoolDayCopy = {
       title: "Computer Laboratories",
       body: "Modern computer laboratories in both junior and senior wings, each furnished with computer workstations on high-speed internet.",
       photo: {
-        src: "/final photos/14.jpg",
+        src: "/sections/general/14.jpg",
         alt: "Modern computer laboratories equipped with high-speed workstations for interactive learning.",
         width: 1280,
         height: 960,
@@ -312,7 +312,7 @@ const day: SchoolDayCopy = {
       title: "Digital Classrooms & Interactive Boards",
       body: "Interactive smart boards in every classroom used as an everyday active teaching tool, with air-conditioned spaces for comfortable learning year-round.",
       photo: {
-        src: "/nami/school/nami-school-digital-classroom.jpeg",
+        src: "/sections/nami/nami-school-digital-classroom.jpeg",
         alt: "A teacher mid-lesson at a wall-mounted interactive board, presenting a red quadrilateral she has drawn on its touchscreen.",
         width: 1125,
         height: 1066,
@@ -322,7 +322,7 @@ const day: SchoolDayCopy = {
       title: "250+ Seat Auditorium",
       body: "A fully equipped auditorium with a 250+ seat capacity and quality acoustic sound system for school assemblies, cultural fests, presentations, and events.",
       photo: {
-        src: "/final photos/12.jpg",
+        src: "/sections/general/12.jpg",
         alt: "A fully equipped 250+ seat auditorium with acoustic sound system for assemblies, cultural fests, and events.",
         width: 1600,
         height: 811,
@@ -332,7 +332,7 @@ const day: SchoolDayCopy = {
       title: "Sports Facilities & Courts",
       body: "Indoor spaces for table tennis and badminton, outdoor facilities for mini-football, basketball, and cricksal, plus swimming and futsal coaching.",
       photo: {
-        src: "/final photos/11.jpg",
+        src: "/sections/general/11.jpg",
         alt: "Indoor and outdoor sports facilities, courts, and athletic coaching at NAMI.",
         width: 1600,
         height: 1066,
@@ -342,7 +342,7 @@ const day: SchoolDayCopy = {
       title: "Cafeteria",
       body: "Three nutritious, hygienic vegetarian meals (breakfast, lunch, and snack) provided for primary students, with a dedicated canteen for Grades 11 and 12.",
       photo: {
-        src: "/nami/school/nami-school-cafeteria.jpg",
+        src: "/sections/nami/nami-school-cafeteria.jpg",
         alt: "The school cafeteria, wooden tables and chairs ranked across a polished floor beside a glazed partition, with a stainless steel serving counter and a water dispenser against the orange wall.",
         width: 1000,
         height: 1333,
@@ -352,7 +352,7 @@ const day: SchoolDayCopy = {
       title: "Infirmary & Nursing Support",
       body: "A fully equipped school infirmary with qualified nursing staff on duty throughout school hours to ensure student health and well-being.",
       photo: {
-        src: "/nami/school/nami-school-infirmity.jpg",
+        src: "/sections/nami/nami-school-infirmity.jpg",
         alt: "The school infirmary, two single beds made up with pale blue linen and folded blankets beneath a wall fan and a curtained window.",
         width: 1000,
         height: 1333,
@@ -362,7 +362,7 @@ const day: SchoolDayCopy = {
       title: "Counselling Services",
       body: "Dedicated psycho-social counselling and career guidance to ensure every child feels safe, respected, heard, and supported in their personal and academic growth.",
       photo: {
-        src: "/nami/school/nami-school-cafeteria.jpg",
+        src: "/sections/nami/nami-school-cafeteria.jpg",
         alt: "Students and teachers collaborating in a welcoming campus environment.",
         width: 1000,
         height: 1333,
@@ -372,7 +372,7 @@ const day: SchoolDayCopy = {
       title: "School Transportation",
       body: "Safe and reliable bus service covering extensive pickup and drop-off routes across Kathmandu Valley.",
       photo: {
-        src: "/final photos/13.jpg",
+        src: "/sections/general/13.jpg",
         alt: "Safe and reliable NAMI International School transportation fleet covering extensive routes across Kathmandu.",
         width: 1280,
         height: 483,
@@ -401,7 +401,7 @@ export const parentTestimonials: readonly Testimonial[] = [
       "We are truly happy with our child’s experience at school. The teachers are so warm, caring, and approachable, and he genuinely looks forward to going to school each day. It has brought out his confidence and helped him grow in so many ways. He says the food is yummy, and the ECAs are wonderful too!",
     institution: "school",
     portrait: {
-      src: "/Testimonials Photos/parents/Dayana Shakya.jpeg",
+      src: "/testimonials/parents/Dayana Shakya.jpeg",
       alt: "Dayana Shakya, PhD",
       width: 334,
       height: 363,
@@ -416,7 +416,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/evana khanal.png",
+      src: "/testimonials/school/evana khanal.png",
       alt: "Evana Khanal",
       width: 400,
       height: 400,
@@ -431,7 +431,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/parents/Arun Poudyal.jpeg",
+      src: "/testimonials/parents/Arun Poudyal.jpeg",
       alt: "Arun Poudyal",
       width: 344,
       height: 351,
@@ -446,7 +446,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/Hriden Jung Karki.png",
+      src: "/testimonials/school/Hriden Jung Karki.png",
       alt: "Hriden Jung Karki",
       width: 400,
       height: 400,
@@ -461,7 +461,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/parents/Milan Phuyal.jpeg",
+      src: "/testimonials/parents/Milan Phuyal.jpeg",
       alt: "Mr. Milan Phuyal",
       width: 257,
       height: 292,
@@ -476,7 +476,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/Himanshu Raya.png",
+      src: "/testimonials/school/Himanshu Raya.png",
       alt: "Himanshu Raya",
       width: 400,
       height: 400,
@@ -491,7 +491,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/parents/Pooja Shrestha.jpeg",
+      src: "/testimonials/parents/Pooja Shrestha.jpeg",
       alt: "Pooja Shrestha",
       width: 189,
       height: 255,
@@ -506,7 +506,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/Aarushi Poudyal.png",
+      src: "/testimonials/school/Aarushi Poudyal.png",
       alt: "Aarushi Poudyal",
       width: 400,
       height: 400,
@@ -521,7 +521,7 @@ export const parentTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/parents/Enu shrestha.jpeg",
+      src: "/testimonials/parents/Enu shrestha.jpeg",
       alt: "Enu Shrestha (Yuvan Krien Shrestha)",
       width: 219,
       height: 214,
@@ -548,7 +548,7 @@ export const plusTwoTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/+2/Nirakar Bhandari.jpeg",
+      src: "/testimonials/plus-two/Nirakar Bhandari.jpeg",
       alt: "Nirakar Bhandari",
       width: 301,
       height: 334,
@@ -563,7 +563,7 @@ export const plusTwoTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/+2/Avni Adhikari.png",
+      src: "/testimonials/plus-two/Avni Adhikari.png",
       alt: "Avni Adhikari",
       width: 1175,
       height: 1338,
@@ -578,7 +578,7 @@ export const plusTwoTestimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/+2/Yunisha Shrestha.jpeg",
+      src: "/testimonials/plus-two/Yunisha Shrestha.jpeg",
       alt: "Yunisha Basnet",
       width: 273,
       height: 349,

@@ -117,7 +117,7 @@ export default function CtevtAffiliationPage() {
                 alt="CTEVT Logo"
                 className="h-24 w-auto object-contain"
                 height={96}
-                src="/logo/ctevt-logo-removebg-preview.png"
+                src="/logos/brand/ctevt-logo-removebg-preview.png"
                 width={120}
               />
               <span className="mt-3 text-xs font-semibold text-accent uppercase tracking-wider text-center">
@@ -397,7 +397,7 @@ export default function CtevtAffiliationPage() {
 
               <div className="shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto">
                 <a
-                  href="/CTEVT.jpeg"
+                  href="/hero/ctevt/ctevt-hero.jpeg"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold bg-accent text-white hover:bg-accent/90 transition-all duration-200 shadow-sm text-center"

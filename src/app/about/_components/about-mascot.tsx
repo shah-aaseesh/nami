@@ -58,7 +58,7 @@ export function AboutMascot({
                 height={image?.height ?? 800}
                 loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 450px"
-                src={image?.src ?? "/final photos/Mascot final.png"}
+                src={image?.src ?? "/mascot/Mascot final.png"}
                 width={image?.width ?? 800}
               />
             </div>

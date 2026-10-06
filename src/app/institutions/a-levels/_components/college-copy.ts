@@ -20,7 +20,7 @@ export type CollegeMastheadCopy = {
 };
 
 const principalPortrait: ContentImage = {
-  src: "/team/philip-badikar-hilario.webp",
+  src: "/leadership/philip-badikar-hilario.webp",
   alt: "Studio portrait of Mr. Philip Badikar Hilario, A Level Principal at NAMI College, arms folded in a charcoal suit and black tie against a mottled blue-grey backdrop.",
   width: 1538,
   height: 2000,
@@ -28,19 +28,19 @@ const principalPortrait: ContentImage = {
 
 const heroSlides: readonly ContentImage[] = [
   {
-    src: "/final photos/17.jpg",
+    src: "/sections/general/17.jpg",
     alt: "NAMI College practical laboratory and science equipment.",
     width: 1500,
     height: 1000,
   },
   {
-    src: "/final photos/18.jpg",
+    src: "/sections/general/18.jpg",
     alt: "NAMI College campus facilities and learning environment.",
     width: 1280,
     height: 853,
   },
   {
-    src: "/final photos/19.jpg",
+    src: "/sections/general/19.jpg",
     alt: "NAMI College campus grounds and facilities.",
     width: 1500,
     height: 1000,

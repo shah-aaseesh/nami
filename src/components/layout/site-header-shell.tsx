@@ -55,7 +55,7 @@ function getInstitutionalLogo(pathname: string, defaultName: string) {
     pathname.startsWith("/institutions/school/")
   ) {
     return {
-      src: "/logo/International School-ai.png",
+      src: "/logos/brand/International School-ai.png",
       name: "NAMI International School",
     };
   }
@@ -64,12 +64,12 @@ function getInstitutionalLogo(pathname: string, defaultName: string) {
     pathname.startsWith("/institutions/a-levels/")
   ) {
     return {
-      src: "/logo/nami-college.png",
+      src: "/logos/brand/nami-college.png",
       name: "NAMI College",
     };
   }
   return {
-    src: "/logo/nami-color.svg",
+    src: "/logos/brand/nami-color.svg",
     name: defaultName,
   };
 }

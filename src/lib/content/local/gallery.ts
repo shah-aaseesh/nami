@@ -21,98 +21,98 @@ import {
 } from "./images";
 
 const campusSports: ContentImage = {
-  src: "/nami/campus-sports.jpg",
+  src: "/sections/nami/campus-sports.jpg",
   alt: "Students on the NAMI sports ground during a college tournament or sports day.",
   width: 1500,
   height: 1000,
 };
 
 const campusInfirmary: ContentImage = {
-  src: "/nami/campus-infirmary.jpg",
+  src: "/sections/nami/campus-infirmary.jpg",
   alt: "The NAMI infirmary, a small treatment room kept ready for students.",
   width: 600,
   height: 400,
 };
 
 const campusChristmasTree: ContentImage = {
-  src: "/nami/campus-christmas-tree.jpg",
+  src: "/sections/nami/campus-christmas-tree.jpg",
   alt: "NAMI students decorating a tall outdoor Christmas tree with balloons and ornaments in the courtyard outside the Academic Block, one student on a ladder reaching into the upper branches.",
   width: 1064,
   height: 709,
 };
 
 const schoolAuditoriumAssembly: ContentImage = {
-  src: "/nami/school/nami-international-school-auditorium.jpg",
+  src: "/sections/nami/nami-international-school-auditorium.jpg",
   alt: "Rows of NAMI International School pupils seated in stacking chairs inside the auditorium, hands folded in namaste, red triangular acoustic panelling on the wall behind them.",
   width: 1000,
   height: 1333,
 };
 
 const schoolMinifootballGoal: ContentImage = {
-  src: "/nami/school/nami-minifootball.jpg",
+  src: "/sections/nami/nami-minifootball.jpg",
   alt: "A NAMI International School playground corner with a mini football goal frame on the lawn, potted plants on the boundary wall and a painted tyre-guard fence around the young trees.",
   width: 993,
   height: 1051,
 };
 
 const schoolNationalDressDay: ContentImage = {
-  src: "/nami/school/nami-school-national-dress-day.jpg",
+  src: "/sections/nami/nami-school-national-dress-day.jpg",
   alt: "Nine NAMI International School pupils in Nepali national dress standing in namaste on a foam-mat classroom floor, notice boards and a wall clock behind them.",
   width: 1000,
   height: 750,
 };
 
 const schoolBusFleet: ContentImage = {
-  src: "/nami/school/nami-school-bus.jpg",
+  src: "/sections/nami/nami-school-bus.jpg",
   alt: "Two liveried NAMI International School minibuses parked nose-to-tail in the school forecourt, the entrance signage and boundary wall visible behind them.",
   width: 1000,
   height: 602,
 };
 
 const schoolCafeteria: ContentImage = {
-  src: "/nami/school/nami-school-cafeteria.jpg",
+  src: "/sections/nami/nami-school-cafeteria.jpg",
   alt: "The NAMI International School cafeteria, rows of empty wooden tables and chairs beneath ceiling-mounted air conditioners, a serving counter and water dispenser along the far wall.",
   width: 1000,
   height: 1333,
 };
 
 const schoolComputerLab: ContentImage = {
-  src: "/nami/school/nami-school-computer-lab.jpg",
+  src: "/sections/nami/nami-school-computer-lab.jpg",
   alt: "NAMI International School students in blazers and ties working at desktop computers in the computer lab, dark curtains drawn behind the last row of monitors.",
   width: 712,
   height: 666,
 };
 
 const schoolDigitalClassroom: ContentImage = {
-  src: "/nami/school/nami-school-digital-classroom.jpeg",
+  src: "/sections/nami/nami-school-digital-classroom.jpeg",
   alt: "A teacher gesturing at a wall-mounted interactive display in a NAMI International School classroom, a red rectangle drawn on the whiteboard app behind her raised hand.",
   width: 1125,
   height: 1066,
 };
 
 const schoolInfirmaryWard: ContentImage = {
-  src: "/nami/school/nami-school-infirmity.jpg",
+  src: "/sections/nami/nami-school-infirmity.jpg",
   alt: "A NAMI International School infirmary room, two made-up beds with floral linen and side rails, a wall-mounted fan beside the blinds.",
   width: 1000,
   height: 1333,
 };
 
 const schoolLibraryReadingNook: ContentImage = {
-  src: "/nami/school/nami-school-library.jpg",
+  src: "/sections/nami/nami-school-library.jpg",
   alt: "A boy reading on a hexagonal yellow cushioned nook built into the NAMI International School library shelving, picture books ranked in the honeycomb compartments beside him.",
   width: 1000,
   height: 1333,
 };
 
 const schoolPlayground: ContentImage = {
-  src: "/nami/school/nami-school-play-ground.jpg",
+  src: "/sections/nami/nami-school-play-ground.jpg",
   alt: "The NAMI International School playground, children on a spring rider and swings beside a slide and tunnel set, a tyre and seesaw on the grass in front of the boundary wall.",
   width: 993,
   height: 1051,
 };
 
 const schoolScienceLabPractical: ContentImage = {
-  src: "/nami/school/nami-school-science-lab.jpg",
+  src: "/sections/nami/nami-school-science-lab.jpg",
   alt: "A NAMI International School teacher in a lab coat and safety goggles guiding three uniformed students through a titration at the science lab bench, reagent bottles ranked on the shelves behind them.",
   width: 1000,
   height: 666,

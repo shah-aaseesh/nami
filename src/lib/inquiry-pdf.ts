@@ -117,7 +117,7 @@ async function loadLogo(): Promise<{
   readonly scale: number;
 } | null> {
   try {
-    const response = await fetch("/logo/nami-color.svg");
+    const response = await fetch("/logos/brand/nami-color.svg");
     if (!response.ok) return null;
     const svg = new DOMParser().parseFromString(
       await response.text(),

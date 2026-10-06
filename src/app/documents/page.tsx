@@ -76,7 +76,7 @@ const DOCUMENTS: readonly OfficialDocument[] = [
     institution: "NAMI Group",
     description:
       "Comprehensive institutional profile of Naaya Aayam Multi-Disciplinary Institute, highlighting governance, academic credentials, UK degree partnerships, Cambridge affiliation, campus infrastructure, and founding philosophy.",
-    fileSrc: "/Nami book.pdf",
+    fileSrc: "/documents/Nami book.pdf",
     fileType: "PDF",
     fileSize: "4.15 MB",
     updatedDate: "Official Edition",
@@ -90,7 +90,7 @@ const DOCUMENTS: readonly OfficialDocument[] = [
     institution: "Institute",
     description:
       "Official admission application form for University of Northampton (UK) undergraduate and postgraduate programmes at NAMI (BSc. Computing, Software Engineering, Network Engineering, Environmental Science, BBA, MBA).",
-    fileSrc: "/Nami_applicationform_bachelors.pdf",
+    fileSrc: "/documents/Nami_applicationform_bachelors.pdf",
     fileType: "PDF",
     fileSize: "111 KB",
     updatedDate: "Academic Intake 2026",
@@ -104,7 +104,7 @@ const DOCUMENTS: readonly OfficialDocument[] = [
     institution: "College",
     description:
       "Official admission form for Cambridge Assessment International Education (CAIE) AS and A Level programmes across Science, Business, and Humanities streams at NAMI College.",
-    fileSrc: "/NAMI_College_A_Level_Application_Form.pdf",
+    fileSrc: "/documents/NAMI_College_A_Level_Application_Form.pdf",
     fileType: "PDF",
     fileSize: "255 KB",
     updatedDate: "Academic Intake 2026",
@@ -118,7 +118,7 @@ const DOCUMENTS: readonly OfficialDocument[] = [
     institution: "School",
     description:
       "Official enrollment form for National Examinations Board (NEB) Grade XI & XII (+2 Science & Management) at NAMI International School.",
-    fileSrc: "/Application_form_nami_international_school_plus_2.pdf",
+    fileSrc: "/documents/Application_form_nami_international_school_plus_2.pdf",
     fileType: "PDF",
     fileSize: "3.03 MB",
     updatedDate: "Academic Intake 2026",
@@ -131,7 +131,8 @@ const DOCUMENTS: readonly OfficialDocument[] = [
     institution: "School",
     description:
       "Official enrollment and student record application form for primary learners (Grades I through VII) at NAMI International School.",
-    fileSrc: "/Nami International School (Primary) Admission form.pdf",
+    fileSrc:
+      "/documents/Nami International School (Primary) Admission form.pdf",
     fileType: "PDF",
     fileSize: "135 KB",
     updatedDate: "Academic Intake 2026",

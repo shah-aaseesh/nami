@@ -60,7 +60,7 @@ export function HomePopup() {
               height={1200}
               priority
               sizes="(max-width: 640px) 92vw, (max-width: 768px) 480px, 520px"
-              src="/popup ad 2.jpeg"
+              src="/sections/misc/popup ad 2.jpeg"
               width={1200}
             />
           </Link>

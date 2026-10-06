@@ -119,7 +119,7 @@ function VocationalCard({
           alt="CTEVT — Council for Technical Education and Vocational Training"
           className="h-28 sm:h-36 max-h-[82%] w-auto max-w-[85%] object-contain transition-transform duration-500 ease-out group-hover:scale-105"
           height={144}
-          src="/logo/ctevt-logo-removebg-preview.png"
+          src="/logos/brand/ctevt-logo-removebg-preview.png"
           width={180}
         />
 

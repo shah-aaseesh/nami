@@ -21,7 +21,7 @@ const MILESTONES: readonly Milestone[] = [
     era: "The Foundation",
     title: "Establishment of NAMI & UK Degree Programmes",
     partner: "University of Northampton (UK)",
-    logo: "/universities/northampton.png",
+    logo: "/logos/universities/northampton.png",
     description:
       "Established in Kathmandu in direct academic partnership with the University of Northampton, UK, offering accredited Bachelor's and Master's degrees.",
   },
@@ -30,7 +30,7 @@ const MILESTONES: readonly Milestone[] = [
     era: "Campus Scaling",
     title: "NAMI College Incorporation & Expansion",
     partner: "NAMI College",
-    logo: "/logo/nami-college.png",
+    logo: "/logos/brand/nami-college.png",
     description:
       "Formally incorporated with dedicated multi-storey academic wings, advanced science laboratories, and campus resource centers.",
   },
@@ -39,7 +39,7 @@ const MILESTONES: readonly Milestone[] = [
     era: "Cambridge A-Levels",
     title: "Launch of Cambridge International GCE A-Levels",
     partner: "Cambridge Assessment International",
-    logo: "/universities/cambridge.png",
+    logo: "/logos/universities/cambridge.png",
     description:
       "Accredited to offer gold-standard Cambridge GCE A-Levels in Science and Non-Science streams with global university placement guidance.",
   },
@@ -48,7 +48,7 @@ const MILESTONES: readonly Milestone[] = [
     era: "National Board",
     title: "Launch of NAMI International School & NEB +2",
     partner: "National Examinations Board (NEB)",
-    logo: "/universities/neb.png",
+    logo: "/logos/universities/neb.png",
     description:
       "Expanded into the national curriculum with NAMI International School, offering NEB-affiliated 10+2 Science and Management programmes.",
   },
@@ -57,7 +57,7 @@ const MILESTONES: readonly Milestone[] = [
     era: "Comprehensive K-12",
     title: "Primary Wing Launch & CAIE Home Centre Status",
     partner: "NAMI International School",
-    logo: "/logo/International School-ai.png",
+    logo: "/logos/brand/International School-ai.png",
     description:
       "Opened Primary School (Grades 1–7) and earned independent Cambridge International Home Examination Centre status in Nepal.",
   },
@@ -66,7 +66,7 @@ const MILESTONES: readonly Milestone[] = [
     era: "Global Testing",
     title: "Pearson VUE-Authorized Test Center Collaboration",
     partner: "Pearson VUE",
-    logo: "/partners/pearson-vue.jpg",
+    logo: "/sections/misc/pearson-vue.jpg",
     description:
       "Officially authorized as a Pearson VUE testing center, enabling on-campus computer-based international IT certifications, academic tests, and global licensure exams.",
   },
@@ -75,7 +75,7 @@ const MILESTONES: readonly Milestone[] = [
     era: "Future Frontiers",
     title: "Kathmandu University Partnership & CTEVT Programmes",
     partner: "Kathmandu University & CTEVT",
-    logo: "/universities/Kathmandu_University_Logo.webp",
+    logo: "/logos/universities/Kathmandu_University_Logo.webp",
     description:
       "MoU with Kathmandu University for BSc. Environmental Studies, University of Hertfordshire collaboration, and CTEVT vocational programmes.",
   },

@@ -42,7 +42,7 @@ export const schoolCollaborators: readonly SchoolCollaborator[] = [
       "Hands-on design and technology platform exploring creativity and software through practical projects.",
     description:
       "3Di School provides a hands-on design and technology platform where students explore creativity, software, and emerging technologies through practical projects.",
-    logo: "/collaborators/3di.png",
+    logo: "/logos/collaborators/3di.png",
     accent: "bg-[#BD1B21]/10 text-[#BD1B21] border-[#BD1B21]/20",
     borderHover: "hover:border-[#BD1B21]/50",
   },
@@ -54,7 +54,7 @@ export const schoolCollaborators: readonly SchoolCollaborator[] = [
       "Structured physical movement and team habits promoting active fitness and emotional well-being.",
     description:
       "Play Nepal helps students develop focus, physical confidence, teamwork, and active habits through joyful and structured movement. Their sessions also support students' emotional well-being and confidence.",
-    logo: "/collaborators/play-nepal.png",
+    logo: "/logos/collaborators/play-nepal.png",
     accent: "bg-[#284540]/10 text-[#284540] border-[#284540]/20",
     borderHover: "hover:border-[#284540]/50",
   },
@@ -66,7 +66,7 @@ export const schoolCollaborators: readonly SchoolCollaborator[] = [
       "Joyful experiential math education connecting core concepts to creativity and real-world situations.",
     description:
       "The UnMath Programme helps students experience mathematics with greater joy and confidence by connecting mathematical concepts to creativity and real-life situations. It supports engaging and meaningful math learning.",
-    logo: "/collaborators/unmath.png",
+    logo: "/logos/collaborators/unmath.png",
     accent: "bg-[#F7CD00]/20 text-[#8F4800] border-[#F7CD00]/40",
     borderHover: "hover:border-[#F7CD00]/60",
   },
@@ -78,7 +78,7 @@ export const schoolCollaborators: readonly SchoolCollaborator[] = [
       "Foundational coding and problem-solving skills empowering students to build interactive tech projects.",
     description:
       "Mero Coding introduces students to the fundamentals of coding and computational thinking. It helps students develop problem-solving, logical thinking, and creativity through coding activities. Students learn to create simple projects while building confidence with technology.",
-    logo: "/collaborators/mero-coding.png",
+    logo: "/logos/collaborators/mero-coding.png",
     accent: "bg-[#0284C7]/10 text-[#0369A1] border-[#0284C7]/20",
     borderHover: "hover:border-[#0284C7]/50",
   },
@@ -90,7 +90,7 @@ export const schoolCollaborators: readonly SchoolCollaborator[] = [
       "Holistic wellness and mindfulness sessions nurturing mental and emotional balance.",
     description:
       "NAMI International School collaborates with Samatva Wellness to support student well-being through regular wellness classes and workshops.",
-    logo: "/collaborators/samatva-wellness.png",
+    logo: "/logos/collaborators/samatva-wellness.png",
     accent: "bg-[#9CC21A]/15 text-[#284540] border-[#9CC21A]/30",
     borderHover: "hover:border-[#9CC21A]/60",
   },

@@ -11,7 +11,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/stakeholder/Divesh Bhatija.png",
+      src: "/testimonials/stakeholders/Divesh Bhatija.png",
       alt: "Mr. Divesh Bhatija",
       width: 1323,
       height: 1189,
@@ -26,7 +26,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/teachers/Ren Yuanyuan.png",
+      src: "/testimonials/teachers/Ren Yuanyuan.png",
       alt: "Ren Yuanyuan",
       width: 1103,
       height: 1426,
@@ -41,7 +41,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/stakeholder/Chandrika Limbu.png",
+      src: "/testimonials/stakeholders/Chandrika Limbu.png",
       alt: "Miss Chandrika Limbu",
       width: 1254,
       height: 1254,
@@ -56,7 +56,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/teachers/Ramkrishna Koirala.png",
+      src: "/testimonials/teachers/Ramkrishna Koirala.png",
       alt: "RamKrishna Koirala",
       width: 1141,
       height: 1379,
@@ -71,7 +71,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/stakeholder/Rajesh Thumbapo.png",
+      src: "/testimonials/stakeholders/Rajesh Thumbapo.png",
       alt: "Rajesh Tumbapo",
       width: 1254,
       height: 1254,
@@ -86,7 +86,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/teachers/Indu.png",
+      src: "/testimonials/teachers/Indu.png",
       alt: "Miss Indu Poudel",
       width: 1107,
       height: 1421,
@@ -101,7 +101,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/teachers/Pratibha Phuyal.png",
+      src: "/testimonials/teachers/Pratibha Phuyal.png",
       alt: "प्रतिभा फुयाल",
       width: 1155,
       height: 1362,
@@ -116,7 +116,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
     institution: null,
     graduatedYear: null,
     portrait: {
-      src: "/Testimonials Photos/teachers/Prishita Rokaya.png",
+      src: "/testimonials/teachers/Prishita Rokaya.png",
       alt: "Prishita Rokaya",
       width: 1269,
       height: 1240,
@@ -135,7 +135,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/dhirendra Singh Khadka.png",
+      src: "/testimonials/bachelors/dhirendra Singh Khadka.png",
       alt: "Dhirendra Singh Khadka",
       width: 400,
       height: 400,
@@ -150,7 +150,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/rashmi kc.png",
+      src: "/testimonials/bachelors/rashmi kc.png",
       alt: "Rashmi KC",
       width: 400,
       height: 400,
@@ -165,7 +165,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/smrit Chaulagai.png",
+      src: "/testimonials/bachelors/smrit Chaulagai.png",
       alt: "Smrit Chaulagain",
       width: 400,
       height: 400,
@@ -180,7 +180,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/Subham_Khadka.png",
+      src: "/testimonials/bachelors/Subham_Khadka.png",
       alt: "Subham Khadka",
       width: 400,
       height: 400,
@@ -195,7 +195,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/anish_babu.png",
+      src: "/testimonials/bachelors/anish_babu.png",
       alt: "Anish Babu Pokharel",
       width: 400,
       height: 400,
@@ -210,7 +210,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/renasha dahal.png",
+      src: "/testimonials/bachelors/renasha dahal.png",
       alt: "Renasha Dahal",
       width: 400,
       height: 400,
@@ -225,7 +225,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/Aarya_Adhikari.png",
+      src: "/testimonials/bachelors/Aarya_Adhikari.png",
       alt: "Aarya Adhikari",
       width: 400,
       height: 400,
@@ -240,7 +240,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/Rhythm_Manandhar.png",
+      src: "/testimonials/bachelors/Rhythm_Manandhar.png",
       alt: "Rhythm Manandhar",
       width: 400,
       height: 400,
@@ -255,7 +255,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "institute",
     graduatedYear: null,
     portrait: {
-      src: "/NAMI_Institute Testimonials/Dipa_Chaulagain.png",
+      src: "/testimonials/bachelors/Dipa_Chaulagain.png",
       alt: "Dipa Chaulagain",
       width: 400,
       height: 400,
@@ -272,7 +272,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/evana khanal.png",
+      src: "/testimonials/school/evana khanal.png",
       alt: "Evana Khanal",
       width: 400,
       height: 400,
@@ -287,7 +287,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/Aarushi Poudyal.png",
+      src: "/testimonials/school/Aarushi Poudyal.png",
       alt: "Aarushi Poudyal",
       width: 400,
       height: 400,
@@ -302,7 +302,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/Himanshu Raya.png",
+      src: "/testimonials/school/Himanshu Raya.png",
       alt: "Himanshu Raya",
       width: 400,
       height: 400,
@@ -317,7 +317,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "school",
     graduatedYear: null,
     portrait: {
-      src: "/School Testimonials/Hriden Jung Karki.png",
+      src: "/testimonials/school/Hriden Jung Karki.png",
       alt: "Hriden Jung Karki",
       width: 400,
       height: 400,
@@ -334,7 +334,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "college",
     graduatedYear: null,
     portrait: {
-      src: "/A-levels/Rufash.png",
+      src: "/testimonials/a-levels/Rufash.png",
       alt: "Rufash K.C.",
       width: 400,
       height: 400,
@@ -349,7 +349,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "college",
     graduatedYear: null,
     portrait: {
-      src: "/A-levels/Adarsh Karna.png",
+      src: "/testimonials/a-levels/Adarsh Karna.png",
       alt: "Adarsh Karna",
       width: 400,
       height: 400,
@@ -364,7 +364,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "college",
     graduatedYear: null,
     portrait: {
-      src: "/A-levels/Angel.png",
+      src: "/testimonials/a-levels/Angel.png",
       alt: "Angel Gurung",
       width: 400,
       height: 400,
@@ -379,7 +379,7 @@ export const testimonials: readonly Testimonial[] = [
     institution: "college",
     graduatedYear: null,
     portrait: {
-      src: "/A-levels/Shreeyash.png",
+      src: "/testimonials/a-levels/Shreeyash.png",
       alt: "Shreeyash Dhungana",
       width: 400,
       height: 400,

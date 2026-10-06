@@ -50,8 +50,8 @@ export async function About({
           <div className="lg:col-span-6 flex flex-col">
             <Reveal className="h-full flex flex-col" y={16}>
               <HomepageVideoPlayer
-                poster="/Homepage video thumbnails.png"
-                src="/Final%20First%20Video.mp4"
+                poster="/videos/Homepage video thumbnails.png"
+                src="/videos/Final%20First%20Video.mp4"
                 title={section.heading ?? "NAMI College"}
               />
             </Reveal>

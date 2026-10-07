@@ -35,7 +35,7 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("stakeholder-chandrika-limbu"),
     name: "Miss Chandrika Limbu",
-    programme: "3DI Facilitator",
+    programme: "3Di Facilitator",
     quote:
       "When I first entered NAMI International School, I immediately felt its peaceful and welcoming environment. It feels like a place where children are encouraged to learn and grow. The teachers are caring, supportive, and easy to connect with. The enthusiastic students bring energy to every lesson, making teaching here truly enjoyable.",
     institution: null,
@@ -65,9 +65,9 @@ export const stakeholderTestimonials: readonly Testimonial[] = [
   {
     ...entryOf("stakeholder-rajesh-tumbapo"),
     name: "Rajesh Tumbapo",
-    programme: "Team PlayNepal",
+    programme: "Team Play Nepal",
     quote:
-      "As a PE Trainer representing PlayNepal at NAMI for nearly three years, the supportive environment, friendly staff, wonderful colleagues, enthusiastic students, and caring parents have made my journey truly memorable. I’m grateful to be part of the NAMI family.",
+      "As a PE Trainer representing Play Nepal at NAMI for nearly three years, the supportive environment, friendly staff, wonderful colleagues, enthusiastic students, and caring parents have made my journey truly memorable. I’m grateful to be part of the NAMI family.",
     institution: null,
     graduatedYear: null,
     portrait: {
@@ -298,7 +298,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Himanshu Raya",
     programme: "Grade 5",
     quote:
-      "At Nami, I learned to adapt to new challenges and become more confident through public speaking and teamwork.",
+      "At NAMI, I learned to adapt to new challenges and become more confident through public speaking and teamwork.",
     institution: "school",
     graduatedYear: null,
     portrait: {
@@ -313,7 +313,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Hriden Jung Karki",
     programme: "Grade 5",
     quote:
-      "At Nami, we learn through fun activities. In Science, we played football to understand force. Football is my favourite sport so it was my best experience.",
+      "At NAMI, we learn through fun activities. In Science, we played football to understand force. Football is my favourite sport so it was my best experience.",
     institution: "school",
     graduatedYear: null,
     portrait: {
@@ -345,7 +345,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Adarsh Karna",
     programme: "A Level — Batch 2025",
     quote:
-      "One thing I learned in Nami is that freedom to make decisions is the best way a student can learn, grow and build a strong self-confidence.",
+      "One thing I learned at NAMI is that freedom to make decisions is the best way a student can learn, grow and build a strong self-confidence.",
     institution: "college",
     graduatedYear: null,
     portrait: {
@@ -360,7 +360,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Angel Gurung",
     programme: "A Level — Batch 2025",
     quote:
-      "One thing I will never forget about Nami college is the friendships and enjoyable moments which made school memorable. but education should always remain a priority because it shapes my future opportunities. Guidance and encouragement of my teachers also taught me to enjoy student life while staying focused on my studies. Nami college taught me the value of balance as while we create happy memories, our responsibility as a student should be consistent to a bright and successful future.",
+      "One thing I will never forget about NAMI College is the friendships and enjoyable moments which made school memorable. But education should always remain a priority because it shapes my future opportunities. Guidance and encouragement of my teachers also taught me to enjoy student life while staying focused on my studies. NAMI College taught me the value of balance as while we create happy memories, our responsibility as a student should be consistent to a bright and successful future.",
     institution: "college",
     graduatedYear: null,
     portrait: {
@@ -375,7 +375,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Shreeyash Dhungana",
     programme: "A Level — Batch 2022",
     quote:
-      "One thing about Nami that will forever stay with me is the fun I had studying here. 2 years in this college passed so quickly I wish I could go back in time and live all those moments once again. Awkward orientation in Chitwan to that emotional farewell in Kurintar. One of the best moments in my life.",
+      "One thing about NAMI that will forever stay with me is the fun I had studying here. Two years in this college passed so quickly I wish I could go back in time and live all those moments once again. Awkward orientation in Chitwan to that emotional farewell in Kurintar. One of the best moments in my life.",
     institution: "college",
     graduatedYear: null,
     portrait: {

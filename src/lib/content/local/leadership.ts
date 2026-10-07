@@ -211,7 +211,7 @@ A Fellow Chartered Certified Accountant (FCCA, UK), Mr. Pandey holds a Master’
   {
     ...entryOf("leader-karun-regmi"),
     name: "Mr. Karun Regmi",
-    title: "Head, Business Development And Marketing & Branding",
+    title: "Head, Business Development and Marketing & Branding",
     group: "management",
     brief:
       "Head of Business Development and Marketing & Branding at NAMI, bringing multidisciplinary expertise in marketing strategy, brand communications, banking operations, and media content development. Holds an MBS from Tribhuvan University.",

@@ -63,3 +63,4 @@ next-env.d.ts
 !/public/nami-video.mp4
 *.mov
 *.avi
+*.zip

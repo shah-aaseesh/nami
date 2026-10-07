@@ -27,8 +27,8 @@ export function SchoolFaqSection({
           <div className="flex flex-col justify-between h-full lg:col-span-5 space-y-6 sm:space-y-8">
             <div>
               <h3 className="font-display text-3xl sm:text-3xl lg:text-4xl font-semibold sm:font-normal text-ink leading-tight tracking-tight">
-                Answers To <span className="text-[#BD1B21]">Your Most</span>{" "}
-                <span className="text-[#284540]">Common Questions</span>
+                Answers to <span className="text-[#BD1B21]">your most</span>{" "}
+                <span className="text-[#284540]">common questions</span>
               </h3>
 
               <p className="mt-4 font-body text-sm sm:text-[15px] leading-relaxed text-ink-muted text-justify [text-align-last:left] [hyphens:auto]">

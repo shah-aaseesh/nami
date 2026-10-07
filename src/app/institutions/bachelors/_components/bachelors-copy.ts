@@ -190,7 +190,7 @@ const heroSlides: readonly ContentImage[] = [
 const masthead: BachelorsMastheadCopy = {
   heroLabel: "NAMI at New Baneshwor",
   slides: heroSlides,
-  motto: "Transform yourself to lead the world",
+  motto: "Transform Yourself to Lead the World",
   heading: "NAAYA AAYAM MULTI-DISCIPLINARY INSTITUTE",
   standfirst:
     "British & KU degree programmes in Kathmandu, partnered with the University of Northampton (UK).",

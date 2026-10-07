@@ -26,7 +26,7 @@ export const institution: InstitutionProfile = {
       establishedYear: 2019,
     },
   },
-  motto: "Transform yourself to lead the world",
+  motto: "Transform Yourself to Lead the World",
   overview: richText(
     "Naaya Aayam Multi-Disciplinary Institute (NAMI) is an educational entity with the aim of contributing meaningfully to Nepal's social and economic development through the delivery of quality education. Established in 2012, NAMI is dedicated to providing world-class education in Nepal.",
     "The institution places strong emphasis on holistic development, integrating rigorous academic learning with extracurricular activities, leadership development and community engagement. By fostering an inclusive and supportive learning environment, NAMI prepares students not only for academic success but also for meaningful contributions to society and the global workforce. Its dedicated faculty, modern facilities and collaborative partnerships further enhance the educational experience, making NAMI a preferred choice for students seeking quality education in Nepal.",

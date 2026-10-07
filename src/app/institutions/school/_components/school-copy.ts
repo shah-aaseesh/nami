@@ -644,7 +644,7 @@ const notices: InstitutionNoticesCopy = {
 
 export const schoolFaqs = [
   {
-    question: "What is the Philosophy of the school?",
+    question: "What is the philosophy of the school?",
     answer:
       "The school follows a progressive education approach, emphasizing holistic development for each individual.",
   },
@@ -654,7 +654,7 @@ export const schoolFaqs = [
       "Parents are encouraged to take on roles such as class representatives and guest speakers, and occasionally accompany students on trips and picnics.",
   },
   {
-    question: "Which Curriculum do Grades I-VII follow?",
+    question: "Which curriculum do Grades I-VII follow?",
     answer:
       "NAMI International School has adopted the Nepal Government's curriculum to align with progressive education principles. The school implements this curriculum using the progressive pedagogical approach, emphasising creative thinking and inquiry-based learning.",
   },
